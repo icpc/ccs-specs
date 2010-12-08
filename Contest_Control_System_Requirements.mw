@@ -303,7 +303,7 @@ below).
 
 ==== Judge’s Data ====
 
-For each contest problem the CCS must accept an external file containing the
+For each contest problem the CCS must accept a set of files containing the
 judge’s test data to be used for that problem.
 
 The CCS must support the ability for the judges to use arbitrary file names for
