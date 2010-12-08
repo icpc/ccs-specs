@@ -306,11 +306,6 @@ below).
 For each contest problem the CCS must accept a set of files containing the
 judge’s test data to be used for that problem.
 
-The CCS must support the ability for the judges to use arbitrary file names for
-the test data files for each contest problem. In other words, the CCS may not
-require the judges to name the test data files according to any particular
-convention, such as the first problem’s data file being “A.DAT”, etc.
-
 The CCS must support the ability to change the contents of the judge’s data
 file for any particular contest problem dynamically during the contest without
 the necessity of stopping the contest. The CCS must arrange that when the
