@@ -154,11 +154,23 @@ It must be possible to make such changes without stopping the contest.
 
 === Judge’s Responses ===
 
+==== Run Responses ===
+
 The CCS must provide the ability to configure the response messages which the
 judging system returns to a team for a run submission, including the ability to add
 new response messages, delete old messages, and change the text of existing
 messages. It must be possible to make any of these configuration changes
 dynamically during a contest without stopping the contest.
+
+==== Clarification Responses ===
+
+The CCS must provide the ability to configure a "default answer" to clarification
+requests, so that human judges can choose to reply to a clarification request by selecting
+the default answer rather than being required to enter a specific answer.  For example,
+if the Contest Administrator configures "No response, read the problem statement" as
+the "default answer" for clarification requests, then this answer should automatically be
+sent as a clarification reply whenever a human judge chooses "default answer" as the 
+response to a given clarification request.
 
 === Programming Languages ===
 
