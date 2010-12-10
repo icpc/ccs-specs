@@ -887,11 +887,13 @@ shown in the table below.
 |-
 | 2 || Rank in contest || 1 || integer
 |-
-| 3 || Number of problems the team has solved || 4 || integer
+| 3 || Award || gold || string
 |-
-| 4 || Total Time || 534.0 || float
+| 4 || Number of problems the team has solved || 4 || integer
 |-
-| 5 || Time of the last submission || 233.0 || float
+| 5 || Total Time || 534.0 || float
+|-
+| 6 || Time of the last submission || 233.0 || float
 |}
 
 Note that the Reservation ID (External ID) for a team can be found in the
