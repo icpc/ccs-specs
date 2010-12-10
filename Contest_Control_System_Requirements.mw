@@ -145,6 +145,7 @@ data regarding submitted runs, submitted clarification requests, answers to
 clarification requests, run judgments, and similar data defining and/or affecting
 the standings of the contest.
 
+ 
 == Contest Configuration ==
 
 === Team Registration ===
@@ -207,7 +208,6 @@ below), etc. – must be configurable on a per-problem basis.
 The CCS may not impose an upper limit on the number of different contest
 problems.
 
- 
 == Team Interface ==
 
 === Secure Access ===
