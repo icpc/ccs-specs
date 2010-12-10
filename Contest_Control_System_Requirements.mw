@@ -216,8 +216,7 @@ they did possess those credentials.
 === Run Submission ===
 
 For purposes of this standard, the terms run and submission, and any
-combination thereof, refer interchangeably to a single program source code file
-(or set of source code files) submitted as a single unit at one time to the judging
+combination thereof, refer to a set of source code files submitted as a single unit at one time to the judging
 system by a team as a proposed solution to a given problem.
 
 The CCS must provide each team with the ability to submit a run over the
