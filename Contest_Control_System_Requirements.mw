@@ -162,7 +162,7 @@ new response messages, delete old messages, and change the text of existing
 messages. It must be possible to make any of these configuration changes
 dynamically during a contest without stopping the contest.
 
-==== Clarification Responses ===
+==== Clarification Responses ====
 
 The CCS must provide the ability to configure a "default answer" to clarification
 requests, so that human judges can choose to reply to a clarification request by selecting
