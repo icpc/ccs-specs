@@ -896,6 +896,5 @@ shown in the table below.
 | 6 || Time of the last submission || 233 || integer
 |}
 
-Note that the Reservation ID (External ID) for a team can be found in the
-initialization file which the CCS is required to accept (see the section on
-Configuration, above).
+The Reservation ID (External ID) for a team can be found in the
+[[#teams.tsv|teams.tsv]].
