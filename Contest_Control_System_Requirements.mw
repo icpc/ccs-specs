@@ -375,10 +375,6 @@ in this subsection without being shown the identity of the team which
 submitted a run. (Thus for example it must be possible for the CCS to
 suppress a team’s identity in the list of submitted runs.)
 
-It is optional whether the CCS maintains a record of previous judgment(s)
-applied to a given run when a human judge alters a judgment previously
-applied to a run.
-
 ==== Handling Clarifications ====
 
 The CCS must provide a human judge with the ability to perform each of the
