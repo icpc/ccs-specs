@@ -79,6 +79,7 @@ transitioning to the running state as described above.
 The use of the phrase
 “stopping the contest” means performing any operation that prohibits teams from performing the functions specified in this standard.
 
+ 
 == General Requirements ==
 
 === Advance Configuration ===
@@ -145,7 +146,6 @@ data regarding submitted runs, submitted clarification requests, answers to
 clarification requests, run judgments, and similar data defining and/or affecting
 the standings of the contest.
 
- 
 == Contest Configuration ==
 
 === Team Registration ===
