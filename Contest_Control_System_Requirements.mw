@@ -870,6 +870,76 @@ CCS for evaluation for the subsequent year’s testing cycle.
 
 == Appendix: File formats ==
 
+All files should be encoded in utf-8.
+
+=== contest.tsv ===
+
+The format of this file must a text file containing one line for each team in
+the contest, with each line containing four (4) tab-delimited fields as
+shown in the table below.
+
+{| class="wikitable"
+! Field
+! Description
+! Example
+! Type
+|-
+| 1 || Contest ID || || integer
+|-
+| 2 || Contest name || || string
+|-
+| 3 || Contest short name || || string
+|-
+| 4 || Contest date/time || || string YYYY-MM-DD hh:mm:ss
+|}
+
+=== group.tsv ===
+
+The format of this file must a text file containing one line for each team in
+the contest, with each line containing three (3) tab-delimited fields as
+shown in the table below.
+
+{| class="wikitable"
+! Field
+! Description
+! Example
+! Type
+|-
+| 1 || Group ID || || integer
+|-
+| 2 || Contest ID || || integer
+|-
+| 3 || Group name || || string
+|}
+
+At the World Finals, groups are used for Super Regionals.
+
+=== teams.tsv ===
+
+The format of this file must a text file containing one line for each team in
+the contest, with each line containing three (3) tab-delimited fields as
+shown in the table below.
+
+{| class="wikitable"
+! Field
+! Description
+! Example
+! Type
+|-
+| 1 || Team number || || integer
+|-
+| 2 || Reservation ID || || integer
+|-
+| 3 || Group ID || || integer
+|-
+| 4 || Team name || || string
+|-
+| 5 || Institution name || || string
+|-
+| 6 || Institution short name || || string
+|-
+| 7 || Country || || string ISO 3166-1 alpha-3
+|}
 
 === export.tsv ===
 
