@@ -154,7 +154,7 @@ It must be possible to make such changes without stopping the contest.
 
 === Judge’s Responses ===
 
-==== Run Responses ===
+==== Run Responses ====
 
 The CCS must provide the ability to configure the response messages which the
 judging system returns to a team for a run submission, including the ability to add
