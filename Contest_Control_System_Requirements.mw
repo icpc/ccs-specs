@@ -1,5 +1,3 @@
-
-
  
  
 == Introduction ==
@@ -896,3 +894,6 @@ running the World Finals the following year. If the CCS fails the evaluation tes
 the test report will indicate what requirement or requirements the CCS failed to
 satisfy. In that event the submitters may resubmit an updated version of the
 CCS for evaluation for the subsequent year’s testing cycle.
+
+
+== Appendix: File formats ==
