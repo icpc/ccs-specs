@@ -684,6 +684,9 @@ The CCS must provide the ability to manually update the external scoring data
 file after the contest ends, to insure that the file contents reflect the data after
 completion of all contest judging.
 
+'''Comment''':  we need to make sure the export data includes a specification of assignment
+of medals according to the "World Finals Rules".
+
 
 === Contest Standings Upload ===
 
