@@ -898,3 +898,5 @@ shown in the table below.
 
 The Reservation ID (External ID) for a team can be found in the
 [[#teams.tsv|teams.tsv]].
+
+Award is a string with value "gold", "silver", "bronze", "ranked" och "honorable" as appropriate.
