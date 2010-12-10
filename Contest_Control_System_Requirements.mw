@@ -201,10 +201,14 @@ dynamically during a contest without the necessity of stopping the contest.
 
 === Contest Problems ===
 
+==== Separate Configuration ====
+
 The CCS must provide the ability to configure each of the contest problems
 separately. This means that all aspects of the description of a contest problem –
 for example the title, input data specification, runtime limit, problem validator (see
 below), etc. – must be configurable on a per-problem basis.
+
+==== Number of Problems ====
 
 The CCS may not impose an upper limit on the number of different contest
 problems.
