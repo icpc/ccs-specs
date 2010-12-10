@@ -113,8 +113,7 @@ order to be used by the ACM-ICPC.
 
 === Platform ===
 
-The CCS must run natively on the computer platform specified by the
-Programming Environment of the World Finals1. This means for example that it
+The CCS must run natively on the computer platform of the World Finals. This means for example that it
 is not acceptable that the CCS requires utilization of a virtual machine in order to
 manage the World Finals contest.
 
