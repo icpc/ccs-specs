@@ -873,14 +873,11 @@ CCS for evaluation for the subsequent year’s testing cycle.
 
 === export.tsv ===
 
-The format of this file must be compatible with
-the specifications for uploading contest standings to the ICPC Contest
-Management system, as follows: a text file containing one line for each team in
-the contest, with each line containing five (5) comma-delimited fields as
+The format of this file must a text file containing one line for each team in
+the contest, with each line containing six (6) comma-delimited fields as
 shown in the table below.
 
 {| class="wikitable"
-|+ ICPC Standings Upload File Field Descriptions
 ! Field
 ! Description
 ! Example
