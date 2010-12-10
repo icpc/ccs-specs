@@ -891,13 +891,11 @@ shown in the table below.
 |-
 | 4 || Number of problems the team has solved || 4 || integer
 |-
-| 5 || Total Time || 534.0 || float
+| 5 || Total Time || 534 || integer
 |-
-| 6 || Time of the last submission || 233.0 || float
+| 6 || Time of the last submission || 233 || integer
 |}
 
 Note that the Reservation ID (External ID) for a team can be found in the
 initialization file which the CCS is required to accept (see the section on
-Configuration, above). Note also the required types of each data field – in
-particular, that both the Total Time and Time of Last Submission fields are
-floats and must contain a decimal point.
+Configuration, above).
