@@ -872,9 +872,7 @@ All files should be encoded in utf-8.
 
 === contest.tsv ===
 
-The format of this file must a text file containing one line for each team in
-the contest, with each line containing four (4) tab-delimited fields as
-shown in the table below.
+A text file consisting of one line with tab separated fields as defined below.
 
 {| class="wikitable"
 ! Field
@@ -893,9 +891,7 @@ shown in the table below.
 
 === groups.tsv ===
 
-The format of this file must a text file containing one line for each team in
-the contest, with each line containing three (3) tab-delimited fields as
-shown in the table below.
+A text file consisting of one line for each group (super regionals at the WF) that needs to be tracked separately with regards to results. Each line has tab separated fields as defined below.
 
 {| class="wikitable"
 ! Field
@@ -910,13 +906,9 @@ shown in the table below.
 | 3 || Group name || || string
 |}
 
-At the World Finals, groups are used for Super Regionals.
-
 === teams.tsv ===
 
-The format of this file must a text file containing one line for each team in
-the contest, with each line containing seven (7) tab-delimited fields as
-shown in the table below.
+A text file consisting on one line for each team in the contest. Each line has tab separated fields as defined below.
 
 {| class="wikitable"
 ! Field
@@ -941,9 +933,7 @@ shown in the table below.
 
 === export.tsv ===
 
-The format of this file must a text file containing one line for each team in
-the contest, with each line containing six (6) tab-delimited fields as
-shown in the table below.
+A text file consisting on one line for each team in the contest, sorted in rank order. Each line has tab separated fields as defined below.
 
 {| class="wikitable"
 ! Field
