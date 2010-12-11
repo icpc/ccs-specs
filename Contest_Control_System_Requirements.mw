@@ -163,9 +163,7 @@ standings output as described below.
 
 ==== Registration Data Editing ====
 
-The CCS must allow dynamic editing during the contest of the data obtained from
-the initialization file, so that errors and/or omissions can be corrected on-the-fly.
-It must be possible to make such changes without stopping the contest.
+The CCS must allow updating of the team registration data without restarting or stopping the contest.
 
 === Judge’s Responses ===
 
