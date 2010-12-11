@@ -893,7 +893,7 @@ shown in the table below.
 | 4 || Contest date/time || || string YYYY-MM-DD hh:mm:ss
 |}
 
-=== group.tsv ===
+=== groups.tsv ===
 
 The format of this file must a text file containing one line for each team in
 the contest, with each line containing three (3) tab-delimited fields as
