@@ -953,7 +953,7 @@ shown in the table below.
 ! Example
 ! Type
 |-
-| 1 || Reservation Id aka External Id || 435343 || integer
+| 1 || Reservation ID || 435343 || integer
 |-
 | 2 || Rank in contest || 1 || integer
 |-
@@ -966,7 +966,7 @@ shown in the table below.
 | 6 || Time of the last submission || 233 || integer
 |}
 
-The Reservation ID (External ID) for a team can be found in the
+The Reservation ID for a team can be found in the
 [[#teams.tsv|teams.tsv]].
 
 Award is a string with value "gold", "silver", "bronze", "ranked" och "honorable" as appropriate.
