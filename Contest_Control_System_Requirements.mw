@@ -478,10 +478,6 @@ applies; (3) the judgment applied to the run; and (4) for runs with YES
 judgments, the color of balloon which applies to that problem (see
 Configuring Problems, below).
 
-It is optional whether the CCS also provides the ability to send external
-notifications for runs which receive NO judgments, in addition to sending
-external notifications for runs which receive YES judgments.
-
 The primary purpose of the requirement for external notifications is to support
 “balloon runners” at the World Finals. For example, the CCS could send an
 external notification for each YES run to a designated printer; runners at the
