@@ -28,16 +28,19 @@ appropriate contest administrative personnel.
 Every operation or specification identified in this standard using the words "shall" or
 "must" is required; any system not meeting that requirement will not be
 considered as a candidate for running the World Finals.
-Use of the word "should" in regard to an operation or specification in this standard means
-that the operation or specification is optional a
 
- unless it is
-specifically listed as “optional”. 
+Use of the word "should" in regard to an operation or specification in this standard means
+that the operation or specification is optional, in the sense that failure to meet or provide
+the specification or operation will not automatically disqualify a CCS from being considered as
+a candidate for running the World Finals. Note however that use of the word "should" identifies 
+an operation or specification that is ''desirable'' and ''preferred'' for running the World Finals; 
+see below for information regarding criteria used for choosing the actual CCS to be used for
+running a given World Finals.
 
 A contest control system (CCS) may be submitted to the Director of
 Operations for the ICPC World Finals for consideration as a candidate to run the
 World Finals. The items which must be submitted in order to be considered are
-described in the Certification Process section of this standard. Any submitted CCS
+described under [[Certification Process]] in this standard. Any submitted CCS
 which meets all of the requirements defined in this standard will be certified as being
 accepted as a candidate to run the World Finals. A CCS which fails to meet any
 one, or more, of the requirements listed in this document will be rejected and will not
@@ -47,7 +50,9 @@ Operations and/or his/her designee.
 
 The choice of the CCS actually used to run the World Finals each year will be
 made by the Director of Operations from among those CCS’s which have been
-accepted as candidates prior to the acceptance deadline.
+accepted as candidates prior to the acceptance deadline.  Significant weight will be
+given to those accepted candidates which also implement a large number of those operations
+and specifications identified as optional (by the use of the word "should") in the standard.
 
 === Rationale ===
 
