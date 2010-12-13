@@ -17,10 +17,12 @@ acting under the auspices of the [[Competitive Learning Institute (CLI)]].
 === Overview === 
 
 For purposes of this standard, the term contest control system (CCS) means
-software which automatically manages the operation of a programming contest,
-including run submission by teams, judging of submissions, handling clarification
+software which automatically manages the operation of a programming contest.
+Operations to be managed by the CCS include but are not necessarily limited to:
+run submission by teams, judging of submissions, handling clarification
 requests from teams and clarification responses from judges, calculation of
-standings according to a specified algorithm, and overall CCS configuration by
+standings according to a specified algorithm, generating external representations
+of contest results, and overall CCS configuration by
 appropriate contest administrative personnel.
 
 Any operation or specification listed in this standard is required unless it is
