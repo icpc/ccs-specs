@@ -1,15 +1,20 @@
  
  
+This document specifies a standard for operation, verification and validation
+of Programming Contest Control Systems that wish to be considered for managing
+the operation of the [http://icpc.baylor.edu ACM International Collegiate Programming Contest]
+[http://cm.baylor.edu/ICPCWiki/Wiki.jsp?page=World%20Finals World Finals]. 
+The document defines a set of operations, capabilities, and features which
+any candidate system must provide, including a set of testability criteria which must
+be satisfied and a set of documentation which must be provided.
+
+The primary authors of the document are John Clevenger and Fredrik Niemela,
+acting under the auspices of the [[Competitive Learning Institute (CLI)]].
+
+
 == Introduction ==
 
 === Overview === 
-
-This document specifies a standard for operational verification and validation
-of Programming Contest Control Systems that wish to be considered for managing
-the operation of the ACM International Collegiate Programming Contest World
-Finals. The document defines a set of operations, capabilities, and features which
-any candidate system must provide, including a set of testability criteria which must
-be satisfied and a set of documentation which must be provided.
 
 For purposes of this standard, the term contest control system (CCS) means
 software which automatically manages the operation of a programming contest,
