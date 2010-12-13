@@ -701,6 +701,13 @@ must be able to be specified by contest personnel.
 
 === Event Feed API ===
 
+It is a requirement that the CCS provide an ''external event feed API''.  
+This means that the CCS must have a mechanism for external processes to connect to the
+CCS and obtain dynamic real-time updates regarding the current state of the contest.
+
+The details of the required mechanism for the external event feed API are currently under 
+development; see [this page] for additional information.
+
 === Human Readable Results ===
 
 == Testability Requirements ==
