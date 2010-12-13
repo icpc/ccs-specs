@@ -25,11 +25,14 @@ standings according to a specified algorithm, generating external representation
 of contest results, and overall CCS configuration by
 appropriate contest administrative personnel.
 
-Any operation or specification listed in this standard is required unless it is
-specifically listed as “optional”. The words “shall”, “should”, and “must” in any
-specification in this standard each mean the same thing: that the specified item is a
-requirement and that any system not meeting that requirement will not be
+Every operation or specification identified in this standard using the words "shall" or
+"must" is required; any system not meeting that requirement will not be
 considered as a candidate for running the World Finals.
+Use of the word "should" in regard to an operation or specification in this standard means
+that the operation or specification is optional a
+
+ unless it is
+specifically listed as “optional”. 
 
 A contest control system (CCS) may be submitted to the Director of
 Operations for the ICPC World Finals for consideration as a candidate to run the
