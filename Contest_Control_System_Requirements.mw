@@ -791,7 +791,7 @@ submitted to the World Finals Director of Operations. The archive file must
 contain all of the following items:
 
 * The complete set of files, modules, or packages making up the executable components of the CCS;
-* PDF’s for each of the documents listed under Documentation Requirements (above);
+* PDF’s for each of the documents listed under [[Contest_Control_System#Documentation_Requirements| Documentation Requirements]];
 * A short ASCII text file named “License” stating that the CCS, including all its components, are in the public domain, or else stating that the CCS and all of its components are the property of the submitting individual or agency and granting a non-exclusive irrevocable license to the ACM ICPC to use the CCS in any way that it deems appropriate; and
 * A short ASCII text file named “ReadMe” containing instructions on how to properly unpack the archive file to set up the installation process.
 
