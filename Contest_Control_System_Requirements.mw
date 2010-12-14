@@ -256,46 +256,27 @@ problems.
 
 === Secure Authentication ===
 
-==== Authentication ====
+==== Authentication Mechanism ====
 
-The CCS must support a secure authentication mechanism for each registered
-team to gain access to the contest, and must enforce the rule that only teams
-who supply correct authentication credentials may invoke contest-related functions.
+:The CCS must support a secure authentication mechanism for each registered team to gain access to the contest, and must enforce the rule that only teams who supply correct authentication credentials may invoke contest-related functions.
 
-Further, the CCS must support a secure mechanism which insures that teams may only invoke 
-functions corresponding to their authentication credentials. 
-(In other words, it must not be possible for a team connected with
-authentication credentials for a given team to invoke functions as if they were
-some other team, such as submitting a run on behalf of some other team).
+:Further, the CCS must support a secure mechanism which insures that teams may only invoke functions corresponding to their authentication credentials. (In other words, it must not be possible for a team connected with authentication credentials for a given team to invoke functions as if they were some other team, such as submitting a run on behalf of some other team).
 
 ==== Changes To Authentication Data ====
 
-The CCS must allow team authentication credential information to be changed dynamically by
-contest administration personnel during a contest without the necessity of
-stopping the contest.
+:The CCS must allow team authentication credential information to be changed dynamically by contest administration personnel during a contest without the necessity of stopping the contest.
 
 ==== Revocation Of Authentication ====
 
-The CCS must support a mechanism for each team to disconnect (remove previously-supplied
-authentication credentials) from the contest, with the effect that
-no other user of the computer system not possessing that team’s authentication
-credentials will be able to invoke CCS functions as if
-they did possess those credentials.
+:The CCS must support a mechanism for each team to disconnect (remove previously-supplied authentication credentials) from the contest, with the effect that no other user of the computer system not possessing that team’s authentication credentials will be able to invoke CCS functions as if they did possess those credentials.
 
 ==== Underlying Implementation ====
 
-The CCS may optionally rely on the underlying operating system account
-login/password mechanism for purposes of meeting the requirements of this
-section, provided that it is the case that the CCS enforces all of the requirements of
-this section, including but not limited to the requirement that teams not be
-allowed to invoke functions as if they were some team other than that
-specified by their login credentials.
+:The CCS may optionally rely on the underlying operating system account login/password mechanism for purposes of meeting the requirements of this section, provided that it is the case that the CCS enforces all of the requirements of this section, including but not limited to the requirement that teams not be allowed to invoke functions as if they were some team other than that specified by their login credentials.
 
 === Run Submission ===
 
-For purposes of this standard, the terms ''run'' and ''submission'', and any
-combination thereof, refer to a set of source code files submitted as a single unit at one time to the judging
-system by a team as a proposed solution to a given problem.
+:For purposes of this standard, the terms ''run'' and ''submission'', and any combination thereof, refer to a set of source code files submitted as a single unit at one time to the judging system by a team as a proposed solution to a given problem.
 
 ==== Network Submission ====
 
@@ -363,20 +344,17 @@ regarding a contest problem.
 
 === Submitted Clarification Status ===
 
-The CCS must provide each team with a capability for reviewing the status of
-each clarification request the team has submitted, including: the clarification
-submission time; the problem identified in the submission if identification of a
-specific problem was required by the CCS; and the response from the judges to
-the clarification if any response has occurred yet.
+==== Team Review ====
 
-The CCS must insure that no team can see the submitted clarification status of
-any other team.
+:The CCS must provide each team with a capability for reviewing the status of each clarification request the team has submitted, including: the clarification submission time; the problem identified in the submission if identification of a specific problem was required by the CCS; and the response from the judges to the clarification if any response has occurred yet.
+
+==== Clarification Security ====
+
+:The CCS must insure that no team can see the submitted clarification status of any other team.
 
 === Broadcast Messages ===
 
-The CCS must provide each team with a capability for viewing any broadcast
-messages sent by the judges (see Broadcast Messages under Judging,
-below).
+:The CCS must provide each team with a capability for viewing any broadcastmessages sent by the judges (see '''Broadcast Messages''' under Judging, below).
 
 == Judge Interface ==
  
