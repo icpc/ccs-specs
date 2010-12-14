@@ -391,6 +391,16 @@ regarding a contest problem.
 
 :* View the output produced by the program when run against the specified input data;
 
+:* View the source code contained in any specific submitted run;
+
+:* View the compiler output resulting from compiling any specific run utilizing the compiler arguments configured in the CCS;
+
+:* View the Validator output resulting from invoking the external validator associated with the contest problem for any specific submitted run;
+
+:* View the judge's input data file associated with the contest problem for any specific submitted run;
+
+:* View the "judge's output" (the "correct answer" file) associated with the contest problem for any specific submitted run; 
+
 :* Choose a judgment from a pre-configured list of judge’s responses (see Configuring Judgment Responses, below) and assign that judgment to the submitted run, or return the run to the system without altering any stored aspect of its state (such as any judgment value assigned by the automated judging system); and
 
 :* Choose whether or not a judgment assigned to a run should be able to be seen by the team which submitted the run (see Team Judgment Notifications, below).
