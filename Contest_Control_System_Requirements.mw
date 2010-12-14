@@ -377,7 +377,7 @@ regarding a contest problem.
 
 ===== Validator Provisioning =====
 
-:It is optional whether the CCS provides code for any external validators. It is encouraged that the CCS provides at least a default “diff” capability which simply compares the output of a submitted run with the correct output as supplied by the judges and returns a judgment based on the results of the diff, but this functionality is optional and not required.
+:The CCS should provide at least a default “diff” validator capability which compares the output of a submitted run with the correct output as supplied by the judges and returns a judgment based on the results of the diff.
 
 === Human Judge Interface ===
 
