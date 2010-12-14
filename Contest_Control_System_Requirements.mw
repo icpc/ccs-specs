@@ -213,12 +213,20 @@ response to a given clarification request.
 
 === Programming Languages ===
 
+==== Supported Languages ====
+
 The CCS must provide the ability to compile and execute (or interpret, as
 appropriate for the language) submitted source code files for each of the
 languages specified by the [http://cm.baylor.edu/ICPCWiki/Wiki.jsp?page=Programming%20Environment Programming Environment of the World Finals].
-Each language compiler or interpreter must be able to be invoked with any of the
-options specified by the compiler or interpreter’s documentation, and the
-specification of compiler/interpreter options must be able to be changed
+
+==== Language Options ====
+
+Each supported language compiler or interpreter must be able to be invoked with any of the
+options specified by the compiler or interpreter’s documentation.
+
+==== Changing Language Options ====
+
+Specification of compiler/interpreter options for each supported language must be able to be changed
 dynamically during a contest without the necessity of stopping the contest.
 
 === Contest Problems ===
