@@ -306,15 +306,27 @@ regarding a contest problem.
 
 ==== Judge’s Data ====
 
+===== Judge's Data File =====
+
 :For each contest problem the CCS must accept a set of files containing the judge’s test data to be used for that problem.
 
+===== Changes To Judge's Data =====
+
 :The CCS must support the ability to change the contents of the judge’s data file for any particular contest problem dynamically during the contest without the necessity of stopping the contest. The CCS must arrange that when the contents of a particular problem’s test data file is changed, all runs subsequently executed by the CCS use the updated file contents as their input data source.
+
+===== Data File Size =====
 
 :The CCS must not enforce any size limit on the judge’s test data files, other than that imposed by the available disk space in the file system on the machine.
 
 ==== Execution Time ====
 
-:The CCS must provide the ability to specify a run-time limit for each contest problem, and must use the specified time to terminate automatically the execution of a submitted run when it exceeds the pre-configured execution time limit for the corresponding problem. The execution time limit must be separately-configurable for each different contest problem. The execution time limit granularity must be at least in units of seconds, or optionally finer.
+===== Per-Problem Time Limit =====
+
+:The CCS must provide the ability to specify a separate run-time limit for each contest problem, and must use the specified time to terminate automatically the execution of a submitted run when it exceeds the pre-configured execution time limit for the corresponding problem.
+
+===== Time Limit Granularity =====
+
+:The execution time limit granularity must be at least in units of seconds, or optionally finer.
 
 ==== Libraries ====
 
@@ -322,9 +334,13 @@ regarding a contest problem.
 
 ==== Security ====
 
-:The CCS must provide a mechanism which insures that only a user with valid contest judging credentials is able to access and use either the human judge interface or the automated judging interface described below).
+===== Judge Authentication =====
 
-:The CCS must provide a mechanism which automatically prevents a submitted program from performing operations defined by the judges as being prohibited in the contest. Examples of prohibited operations include, but are not limited to, invoking prohibited system calls, using prohibited libraries, and accessing prohibited external resources such as prohibited files or language interpreters.
+:The CCS must provide a mechanism which insures that only a user with valid contest judging credentials is able to access and use either the human judge interface or the automated judging interface.
+
+===== Prohibited Operations =====
+
+:The CCS must provide a mechanism which automatically prevents a submitted program from performing operations which are defined by the judges as being prohibited in the contest. Examples of prohibited operations include, but are not limited to, invoking prohibited system calls, using prohibited libraries, and accessing prohibited external resources such as prohibited files or language interpreters.
 
 === Automated Judging ===
 
@@ -339,11 +355,23 @@ regarding a contest problem.
 
 ==== External Validators ====
 
-:The CCS must provide a mechanism for invoking a problem-specific external validator program as part of the automated judging process. The interface between the CCS and the external validator must conform to the International Collegiate Programming Contest Validator Interface Standard.
+===== Per-Problem Invocation =====
+
+:The CCS must provide a mechanism for invoking a problem-specific external validator program as part of the automated judging process. 
+
+===== Validator Interface =====
+
+:The interface between the CCS and the external validator must conform to the International Collegiate Programming Contest Validator Interface Standard.
+
+===== Machine Residency =====
 
 :Each external validator must be able to be loaded directly onto the World Finals machines (as opposed for example requiring off-machine access to some code repository).
 
+===== Validator Creation =====
+
 :It is not a requirement that the CCS be capable of compiling, interpreting, or otherwise creating the executable form of an external validator; it is assumed that each external validator will be provided in an executable form which can be executed as a stand-alone program on the specified World Finals platform.
+
+===== Validator Provisioning =====
 
 :It is optional whether the CCS provides code for any external validators. It is encouraged that the CCS provides at least a default “diff” capability which simply compares the output of a submitted run with the correct output as supplied by the judges and returns a judgment based on the results of the diff, but this functionality is optional and not required.
 
@@ -360,7 +388,11 @@ regarding a contest problem.
 :* Choose a judgment from a pre-configured list of judge’s responses (see Configuring Judgment Responses, below) and assign that judgment to the submitted run, or return the run to the system without altering any stored aspect of its state (such as any judgment value assigned by the automated judging system); and
 :* Choose whether or not a judgment assigned to a run should be able to be seen by the team which submitted the run (see Team Judgment Notifications, below).
 
+==== Simultaneous Judging ====
+
 :It must be possible for multiple human judges, working on different computers, to simultaneously perform the operations specified in this subsection (on different run submissions).
+
+==== Anonymous Judging ====
 
 :It must be possible for human judges to perform all judging functions specified in this subsection without being shown the identity of the team which submitted a run. (Thus for example it must be possible for the CCS to suppress a team’s identity in the list of submitted runs.)
 
