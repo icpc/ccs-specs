@@ -246,36 +246,42 @@ problems.
 
 == Team Interface ==
 
-=== Secure Access ===
+=== Secure Authentication ===
 
-==== Logging In ====
+==== Authentication ====
 
-The CCS must support a password-protected mechanism for each registered
-team to “log in” to the contest, and must enforce the rule that only teams
-correctly logged-in to the contest may invoke contest-related functions, and
-further that teams may only invoke functions corresponding to their login
-credentials. (In other words, it must not be possible for a team logged in with
+The CCS must support a secure authentication mechanism for each registered
+team to gain access to the contest, and must enforce the rule that only teams
+who supply correct authentication credentials may invoke contest-related functions.
+
+Further, the CCS must support a secure mechanism which insures that teams may only invoke 
+functions corresponding to their authentication credentials. 
+(In other words, it must not be possible for a team connected with
 authentication credentials for a given team to invoke functions as if they were
 some other team, such as submitting a run on behalf of some other team).
 
-The CCS must allow each team to be assigned a different login account and
-password, and must allow the passwords to be changed dynamically by
+==== Changes To Authentication Data ====
+
+The CCS must allow team authentication credential information to be changed dynamically by
 contest administration personnel during a contest without the necessity of
 stopping the contest.
 
+==== Revocation Of Authentication ====
+
+The CCS must support a mechanism for each team to disconnect (remove previously-supplied
+authentication credentials) from the contest, with the effect that
+no other user of the computer system not possessing that team’s authentication
+credentials will be able to invoke CCS functions as if
+they did possess those credentials.
+
+==== Underlying Implementation ====
+
 The CCS may optionally rely on the underlying operating system account
 login/password mechanism for purposes of meeting the requirements of this
-section, provide that it is the case that the CCS enforces the requirements of
+section, provided that it is the case that the CCS enforces all of the requirements of
 this section, including but not limited to the requirement that teams not be
 allowed to invoke functions as if they were some team other than that
 specified by their login credentials.
-
-==== Logging Out ====
-
-The CCS must allow each team to “log out” of the CCS, with the effect that
-no other user of the computer system not possessing that team’s login
-credentials (login ID and password) will be able to invoke CCS functions as if
-they did possess those credentials.
 
 === Run Submission ===
 
