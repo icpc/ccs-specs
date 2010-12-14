@@ -293,32 +293,38 @@ specified by their login credentials.
 
 === Run Submission ===
 
-For purposes of this standard, the terms run and submission, and any
+For purposes of this standard, the terms ''run'' and ''submission'', and any
 combination thereof, refer to a set of source code files submitted as a single unit at one time to the judging
 system by a team as a proposed solution to a given problem.
 
-The CCS must provide each team with the ability to submit a run over the
-network to the judging system. The team must be able to specify, for each run
-submission: (a) the contest problem to which the submission applies; (b) the
-programming language used in the submission; (c) the source code file or files
-comprising the submission. The CCS must allow teams to specify arbitrarily
-many files in a given submission and must allow teams to make submissions for
-any defined contest problem and written in any defined contest programming
-language.
+==== Network Submission ====
 
-The CCS must arrange that each submission is uniquely identified as to which
-team submitted it, and must insure that no team can submit a run without having
-first provided the appropriate team credentials (login ID and password).
+:The CCS must provide each team with the ability to submit a run over the network to the judging system. 
 
-The CCS must associate and maintain with each run submission a timestamp
-indicating the contest-relative time at which the run was submitted. The
-granularity of the timestamp must be at least down to the level of minutes,
-although timestamps with even finer granularity are allowed. (Note that
-timestamp granularities which are too fine may be compromised by factors such
-as network delays.)
+==== Submission Contents ====
 
-The CCS must insure that no team can see the run submissions of any other
-team.
+:A team must be able to specify, for each run submission: (a) the contest problem to which the submission applies; (b) the programming language used in the submission; (c) the source code file or files comprising the submission. The CCS must allow teams to specify arbitrarily many files in a given submission and must allow teams to make submissions for any defined contest problem and written in any defined contest programming language.
+
+==== Submission Identification ====
+
+:The CCS must arrange that each submission is uniquely identified as to which team submitted it, and must insure that no team can submit a run without having first provided the appropriate team authentication credentials.
+
+==== Submission Tracking ====
+
+:The CCS must associate and maintain with each run submission a timestamp indicating the time at which the run was submitted. The granularity of the timestamp must be at least down to the level of minutes, although timestamps with even finer granularity are allowed. (Note that timestamp granularities which are too fine may be compromised by factors such as network delays.)
+
+'''Comment''': it has been suggested that the term "minutes" in the preceding 
+paragraph should be replaced with "seconds".  This has to be resolved. 
+ 
+Arguments against the change:
+* The World Finals does not use seconds in computing time penalty; the only reference to time units in the World Finals rules is:  "The time consumed for a solved problem is the time elapsed from the beginning of the contest to the submittal of the first accepted run plus 20 penalty minutes for every previously rejected run for that problem. "
+
+Argument in favor of the change:
+*
+
+==== Submission Visibility ====
+
+The CCS must insure that no team can see the run submissions of any other team.
 
 === Clarification Submission ===
 
