@@ -327,30 +327,29 @@ system by a team as a proposed solution to a given problem.
 
 === Clarification Submission ===
 
-For purposes of this standard, the terms clarification, clarification request, and
-clar all refer to a message sent from a team to the judges asking for clarification
+For purposes of this standard, the terms ''clarification'', ''clarification request'', and
+''clar'' all refer to a message sent from a team to the judges asking for clarification
 regarding a contest problem.
 
-The CCS must provide each team with the ability to submit a clarification
-request to the judges over the network. The text content of the clarification
-request must be able to be specified by the team. The CCS may optionally
-require the team to identify the problem about which a clarification is being
-requested, but this is not a requirement (since the team can identify the problem
-within the text of the clarification message).
+==== Clarification Mechanism ====
 
-The CCS must arrange that each clarification request is uniquely identified as to
-which team submitted it, and must insure that no team can submit a clarification
-request without having first provided the appropriate team credentials (login ID
-and password).
+:The CCS must provide each team with the ability to submit a clarification request to the judges over the network. 
 
-The CCS must associate and maintain with each clarification request a
-timestamp indicating the contest-relative time at which the clarification request
-was submitted. The granularity of the timestamp must be at least down to the
-level of minutes, although timestamps with finer granularity are allowed.
+==== Clarification Content ====
 
-The CCS must insure that no team can see the clarification requests of any
-other team, except as provided in the section on Human Judge Interface,
-below.
+:The text content of a clarification request must be able to be specified by the team. The CCS may optionally require the team to identify the problem about which a clarification is being requested, but this is not a requirement (since the team can identify the problem within the text of the clarification message).
+
+==== Clarification Authentication ====
+
+:The CCS must arrange that each clarification request is uniquely identified as to which team submitted it, and must insure that no team can submit a clarification request without having first provided the appropriate team authentication credentials.
+
+==== Clarification Tracking ====
+
+:The CCS must associate and maintain with each clarification request a timestamp indicating the contest-relative time at which the clarification request was submitted. The granularity of the timestamp must be at least down to the level of minutes, although timestamps with finer granularity are allowed.
+
+==== Clarification Security ====
+
+:The CCS must insure that no team can see the clarification requests of any other team, except as provided in the section on [#Human Judge Interface], below.
 
 === Submitted Run Status ===
 
