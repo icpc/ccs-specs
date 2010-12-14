@@ -230,12 +230,20 @@ separately. This means that all aspects of the description of a contest problem 
 for example the title, input data specification, runtime limit, problem validator (see
 below), etc. – must be configurable on a per-problem basis.
 
+==== Problem Enabling/Disabling ====
+
+The CCS must provide a mechanism to enable and disable each contest problem separately.
+
+'''Comment''': This section needs to expand on the meaning of "disabling" a problem.
+For example, it needs to explicitly identify, for a "disabled problem", how the disabling
+affects (1) a Team's ability to submit runs for that problem; (2) a judge's ability to judge
+that problem; and (3) how the disabled problem affects scoring (or not).  
+
 ==== Number of Problems ====
 
 The CCS may not impose an upper limit on the number of different contest
 problems.
 
- 
 == Team Interface ==
 
 === Secure Access ===
