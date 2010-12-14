@@ -378,7 +378,7 @@ contents of a particular problem’s test data file is changed, all runs
 subsequently executed by the CCS use the updated file contents as their
 input data source.
 
-The CCS must not enforce any particular size limit on any of the judge’s test
+The CCS must not enforce any size limit on the judge’s test
 data files, other than that imposed by the available disk space in the file
 system on the machine.
 
