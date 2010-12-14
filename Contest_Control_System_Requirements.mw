@@ -353,13 +353,13 @@ regarding a contest problem.
 
 === Submitted Run Status ===
 
-The CCS must provide each team with a capability for reviewing the status of
-each run the team has submitted, including: the run submission time; the
-language and problem specified in the submission; and the response(s) from
-the judging system to the submission if any responses have occurred yet.
+==== Team Review ====
 
-The CCS must insure that no team can see the submitted run status or the
-judgments given to the submissions of any other team.
+:The CCS must provide each team with a capability for reviewing the status of each run the team has submitted, including: the run submission time; the language and problem specified in the submission; and the response(s) from the judging system to the submission if any responses have occurred yet.
+
+==== Submission Security ====
+
+:The CCS must insure that no team can see the submitted run status or the judgments given to the submissions of any other team.
 
 === Submitted Clarification Status ===
 
