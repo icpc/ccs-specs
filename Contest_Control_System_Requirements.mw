@@ -344,6 +344,28 @@ regarding a contest problem.
 
 :The CCS must provide a mechanism which automatically prevents a submitted program from performing operations which are defined by the judges as being prohibited in the contest. Examples of prohibited operations include, but are not limited to, invoking prohibited system calls, using prohibited libraries, and accessing prohibited external resources such as prohibited files or language interpreters.
 
+==== Judge Responses ====
+
+The CCS must answer each submitted run with one of the following responses:
+
+* '''Compile Error'''
+* '''Security Violation'''
+* '''Run-time Error'''
+* '''Time-limit Exceeded'''
+* '''Wrong Answer'''
+* '''Accepted'''
+
+To determine which answer to use, the following rules must be applied in order:
+
+# If the submitted program fails to compile, the response must be '''Compile Error'''.
+# If the submitted program tries to perform any prohibited operation, the answer must be '''Security Violation'''.
+# If the submitted program crashes before the time-limit, the answer must be '''Run-time Error'''.
+# If the submitted program runs longer than the time-limit, the answer must be '''Time-limit Exceeded'''.
+# If the output of the submitted program is not accepted by the output validator, the answer must be '''Wrong Answer'''.
+# Otherwise the answer must be '''Accepted'''.
+
+'''Comment''': Do we also need "Other - contact staff"? Argument against: Exceptional circumstances should not be reported to the team through the scoring mechanism, but rather using the message passing mechanism, i.e. clarifications.
+
 === Automated Judging ===
 
 ==== Automatic Invocation ====
