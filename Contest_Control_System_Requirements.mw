@@ -385,11 +385,14 @@ regarding a contest problem.
 
 :The CCS must provide a human judge with the ability to perform each of the following operations:
 
-:* See a list of all submitted runs, where the list includes (for each run) the contest-relative time at which the run was submitted, the problem for which the run was submitted, and the language specified in the run submission;
-:* Determine whether or not any specific run has already had a judgment applied to it, either by another human judge or by the automated judging system (see Automated Judging, below), and if so what judgment was assigned;
+:* See a list of all submitted runs, where the list includes (for each run) the contest-relative time at which the run was submitted, the problem for which the run was submitted, the language specified in the run submission, and any judgments applied to the run by either a human judge or by the automated judging system;
+
 :* Compile and execute the program contained in any specific run submission, with the corresponding contest problem data automatically supplied to the program;
+
 :* View the output produced by the program when run against the specified input data;
+
 :* Choose a judgment from a pre-configured list of judge’s responses (see Configuring Judgment Responses, below) and assign that judgment to the submitted run, or return the run to the system without altering any stored aspect of its state (such as any judgment value assigned by the automated judging system); and
+
 :* Choose whether or not a judgment assigned to a run should be able to be seen by the team which submitted the run (see Team Judgment Notifications, below).
 
 ==== Simultaneous Judging ====
