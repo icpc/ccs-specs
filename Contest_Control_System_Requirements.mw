@@ -389,6 +389,8 @@ To determine which answer to use, the following rules must be applied in order:
 
 :Each external validator must be able to be loaded directly onto the World Finals machines (as opposed for example requiring off-machine access to some code repository).
 
+'''Comment''': this should be (implicitly?) defined in the [[Problem format]] specification.
+
 ===== Validator Creation =====
 
 :It is not a requirement that the CCS be capable of compiling, interpreting, or otherwise creating the executable form of an external validator; it is assumed that each external validator will be provided in an executable form which can be executed as a stand-alone program on the specified World Finals platform.
