@@ -391,7 +391,7 @@ regarding a contest problem.
 
 :* View the output produced by the program when run against the specified input data;
 
-:* View the source code contained in any specific submitted run;
+:* Download and view the source code contained in any specific submitted run;
 
 :* View the compiler output resulting from compiling any specific run utilizing the compiler arguments configured in the CCS;
 
