@@ -306,186 +306,100 @@ regarding a contest problem.
 
 ==== Judge’s Data ====
 
-For each contest problem the CCS must accept a set of files containing the
-judge’s test data to be used for that problem.
+:For each contest problem the CCS must accept a set of files containing the judge’s test data to be used for that problem.
 
-The CCS must support the ability to change the contents of the judge’s data
-file for any particular contest problem dynamically during the contest without
-the necessity of stopping the contest. The CCS must arrange that when the
-contents of a particular problem’s test data file is changed, all runs
-subsequently executed by the CCS use the updated file contents as their
-input data source.
+:The CCS must support the ability to change the contents of the judge’s data file for any particular contest problem dynamically during the contest without the necessity of stopping the contest. The CCS must arrange that when the contents of a particular problem’s test data file is changed, all runs subsequently executed by the CCS use the updated file contents as their input data source.
 
-The CCS must not enforce any size limit on the judge’s test
-data files, other than that imposed by the available disk space in the file
-system on the machine.
+:The CCS must not enforce any size limit on the judge’s test data files, other than that imposed by the available disk space in the file system on the machine.
 
 ==== Execution Time ====
 
-The CCS must provide the ability to specify a run-time limit for each contest
-problem, and must use the specified time to terminate automatically the
-execution of a submitted run when it exceeds the pre-configured execution
-time limit for the corresponding problem. The execution time limit must be
-separately-configurable for each different contest problem. The execution
-time limit granularity must be at least in units of seconds, or optionally finer.
+:The CCS must provide the ability to specify a run-time limit for each contest problem, and must use the specified time to terminate automatically the execution of a submitted run when it exceeds the pre-configured execution time limit for the corresponding problem. The execution time limit must be separately-configurable for each different contest problem. The execution time limit granularity must be at least in units of seconds, or optionally finer.
 
 ==== Libraries ====
 
-The CCS must insure that when a program submitted by a team is compiled
-and linked (as appropriate to the language), any libraries which are linked
-with or otherwise utilized by the program are strictly those provided by or
-specified by the judges. For example, the CCS must not allow a program
-compiled and linked with libraries from a team’s machine to be utilized for
-judging purposes.
+:The CCS must insure that when a program submitted by a team is compiled and linked (as appropriate to the language), any libraries which are linked with or otherwise utilized by the program are strictly those provided by or specified by the judges. For example, the CCS must not allow a program compiled and linked with libraries from a team’s machine to be utilized for judging purposes.
 
 ==== Security ====
 
-The CCS must provide a mechanism which insures that only a user with valid
-contest judging credentials is able to access and use either the human judge
-interface or the automated judging interface (described below).
+:The CCS must provide a mechanism which insures that only a user with valid contest judging credentials is able to access and use either the human judge interface or the automated judging interface described below).
 
-The CCS must provide a mechanism which automatically prevents a
-submitted program from performing operations defined by the judges as being
-prohibited in the contest. Examples of prohibited operations include, but are
-not limited to, invoking prohibited system calls, using prohibited libraries, and
-accessing prohibited external resources such as prohibited files or language
-interpreters.
+:The CCS must provide a mechanism which automatically prevents a submitted program from performing operations defined by the judges as being prohibited in the contest. Examples of prohibited operations include, but are not limited to, invoking prohibited system calls, using prohibited libraries, and accessing prohibited external resources such as prohibited files or language interpreters.
 
 === Automated Judging ===
 
 ==== Automatic Invocation ====
 
-The CCS must provide the ability to invoke an automated judging mechanism
-when a team submits a run. This mechanism must automatically (that is,
-without human intervention) detect each newly submitted run, and for each
-such run must automatically:
+:The CCS must provide the ability to invoke an automated judging mechanism when a team submits a run. This mechanism must automatically (that is, without human intervention) detect each newly submitted run, and for each such run must automatically:
 
-* Compile and execute (as appropriate for the language) the program contained in the submitted run, with the corresponding contest problem data automatically supplied to the program;
-* Enforce any configured runtime limit specified for the corresponding problem by terminating the execution of the submitted program if it exceeds the configured runtime limit;
-* Invoke an external program, known for purposes of this standard as a [[#External Validators|validator]], passing to it the output generated by the program specified in the submitted run and getting back from it an indication of what judgment is to be applied to the run (see the section on External Validators, below);
-* Assign an appropriate judgment to the run.
+:* Compile and execute (as appropriate for the language) the program contained in the submitted run, with the corresponding contest problem data automatically supplied to the program;
+:* Enforce any configured runtime limit specified for the corresponding problem by terminating the execution of the submitted program if it exceeds the configured runtime limit;
+:* Invoke an external program, known for purposes of this standard as a [[#External Validators|validator]], passing to it the output generated by the program specified in the submitted run and getting back from it an indication of what judgment is to be applied to the run (see the section on External Validators, below);
+:* Assign an appropriate judgment to the run.
 
 ==== External Validators ====
 
-The CCS must provide a mechanism for invoking a problem-specific external
-validator program as part of the automated judging process. The interface
-between the CCS and the external validator must conform to the International
-Collegiate Programming Contest Validator Interface Standard.
+:The CCS must provide a mechanism for invoking a problem-specific external validator program as part of the automated judging process. The interface between the CCS and the external validator must conform to the International Collegiate Programming Contest Validator Interface Standard.
 
-Each external validator must be able to be loaded directly onto the World
-Finals machines (as opposed for example requiring off-machine access to
-some code repository).
+:Each external validator must be able to be loaded directly onto the World Finals machines (as opposed for example requiring off-machine access to some code repository).
 
-It is not a requirement that the CCS be capable of compiling, interpreting, or
-otherwise creating the executable form of an external validator; it is assumed
-that each external validator will be provided in an executable form which can
-be executed as a stand-alone program on the specified World Finals platform.
+:It is not a requirement that the CCS be capable of compiling, interpreting, or otherwise creating the executable form of an external validator; it is assumed that each external validator will be provided in an executable form which can be executed as a stand-alone program on the specified World Finals platform.
 
-It is optional whether the CCS provides code for any external validators. It is
-encouraged that the CCS provides at least a default “diff” capability which
-simply compares the output of a submitted run with the correct output as
-supplied by the judges and returns a judgment based on the results of the diff,
-but this functionality is optional and not required.
+:It is optional whether the CCS provides code for any external validators. It is encouraged that the CCS provides at least a default “diff” capability which simply compares the output of a submitted run with the correct output as supplied by the judges and returns a judgment based on the results of the diff, but this functionality is optional and not required.
 
 === Human Judge Interface ===
 
 ==== Assigning Judgments ====
 
-The CCS must provide a human judge with the ability to perform each of the
-following operations:
+:The CCS must provide a human judge with the ability to perform each of the following operations:
 
-* See a list of all submitted runs, where the list includes (for each run) the contest-relative time at which the run was submitted, the problem for which the run was submitted, and the language specified in the run submission;
-* Determine whether or not any specific run has already had a judgment applied to it, either by another human judge or by the automated judging system (see Automated Judging, below), and if so what judgment was assigned;
-* Compile and execute the program contained in any specific run submission, with the corresponding contest problem data automatically supplied to the program;
-* View the output produced by the program when run against the specified input data;
-* Choose a judgment from a pre-configured list of judge’s responses (see Configuring Judgment Responses, below) and assign that judgment to the submitted run, or return the run to the system without altering any stored aspect of its state (such as any judgment value assigned by the automated judging system); and
-* Choose whether or not a judgment assigned to a run should be able to be seen by the team which submitted the run (see Team Judgment Notifications, below).
+:* See a list of all submitted runs, where the list includes (for each run) the contest-relative time at which the run was submitted, the problem for which the run was submitted, and the language specified in the run submission;
+:* Determine whether or not any specific run has already had a judgment applied to it, either by another human judge or by the automated judging system (see Automated Judging, below), and if so what judgment was assigned;
+:* Compile and execute the program contained in any specific run submission, with the corresponding contest problem data automatically supplied to the program;
+:* View the output produced by the program when run against the specified input data;
+:* Choose a judgment from a pre-configured list of judge’s responses (see Configuring Judgment Responses, below) and assign that judgment to the submitted run, or return the run to the system without altering any stored aspect of its state (such as any judgment value assigned by the automated judging system); and
+:* Choose whether or not a judgment assigned to a run should be able to be seen by the team which submitted the run (see Team Judgment Notifications, below).
 
-It must be possible for multiple human judges, working on different
-computers, to simultaneously perform the operations specified in this
-subsection (on different run submissions).
+:It must be possible for multiple human judges, working on different computers, to simultaneously perform the operations specified in this subsection (on different run submissions).
 
-It must be possible for human judges to perform all judging functions specified
-in this subsection without being shown the identity of the team which
-submitted a run. (Thus for example it must be possible for the CCS to
-suppress a team’s identity in the list of submitted runs.)
+:It must be possible for human judges to perform all judging functions specified in this subsection without being shown the identity of the team which submitted a run. (Thus for example it must be possible for the CCS to suppress a team’s identity in the list of submitted runs.)
 
 ==== Handling Clarifications ====
 
-The CCS must provide a human judge with the ability to perform each of the
-following operations:
+:The CCS must provide a human judge with the ability to perform each of the following operations:
 
-* See a list of all clarification requests, where the list includes (for each clar) the team which submitted the request, the contest-relative time at which the clar was submitted, and an indication of whether or not an answer to the clar has been sent to the team which submitted it;
-* Determine, for any specific clarification request, what answer was returned to the team if the clar has already been answered;
-* Compose an answer to the clar and send it, along with the text of the original clarification request, to the team;
-* Optionally choose to also send the clarification request text and answer to all teams in the contest.
+:* See a list of all clarification requests, where the list includes (for each clar) the team which submitted the request, the contest-relative time at which the clar was submitted, and an indication of whether or not an answer to the clar has been sent to the team which submitted it;
+:* Determine, for any specific clarification request, what answer was returned to the team if the clar has already been answered;
+:* Compose an answer to the clar and send it, along with the text of the original clarification request, to the team;
+:* Optionally choose to also send the clarification request text and answer to all teams in the contest.
 
 ==== Issuing Broadcast Messages ====
 
-The CCS must provide the ability for a human judge to compose a message
-and broadcast that message over the contest network to all teams in the
-contest.
+:The CCS must provide the ability for a human judge to compose a message and broadcast that message over the contest network to all teams in the contest.
 
 === Team Judgment Notifications ===
 
 ==== Internal Notifications ====
 
-The CCS must provide a mechanism for sending a judging response
-message to each team for each submitted run as soon as a judgment
-determination is made for that run. The judging response message must be
-transmitted automatically over the network at the time a judging decision is
-made (whether by the automated judging capability or by a human judge).
+:The CCS must provide a mechanism for sending a judging response message to each team for each submitted run as soon as a judgment determination is made for that run. The judging response message must be transmitted automatically over the network at the time a judging decision is made (whether by the automated judging capability or by a human judge).
 
 ==== External Notifications ====
 
-The CCS must have an ability to send a message, called an external
-notification, to a human at a destination outside the CCS indicating the
-judgment status of at least those runs which have received a YES judgment.
-Each external notification must include at least (1) identification of the team to
-whom the notification is directed; (2) the problem to which the judgment
-applies; (3) the judgment applied to the run; and (4) for runs with YES
-judgments, the color of balloon which applies to that problem (see
-Configuring Problems, below).
+:The CCS must have an ability to send a message, called an external notification, to a human at a destination outside the CCS indicating the judgment status of at least those runs which have received a YES judgment. Each external notification must include at least (1) identification of the team to whom the notification is directed; (2) the problem to which the judgment applies; (3) the judgment applied to the run; and (4) for runs with YES judgments, the color of balloon which applies to that problem (see Configuring Problems, below).
 
-The primary purpose of the requirement for external notifications is to support
-“balloon runners” at the World Finals. For example, the CCS could send an
-external notification for each YES run to a designated printer; runners at the
-printer would use the notification to identify a team which should receive a
-balloon of a certain color. Alternatively, the CCS could send external
-notifications to a designated email account; runners could monitor that
-account to determine which teams should receive which color balloons.
+:The primary purpose of the requirement for external notifications is to support “balloon runners” at the World Finals. For example, the CCS could send an external notification for each YES run to a designated printer; runners at the printer would use the notification to identify a team which should receive a balloon of a certain color. Alternatively, the CCS could send external notifications to a designated email account; runners could monitor that account to determine which teams should receive which color balloons.
 
 ==== Disabling Notifications ====
 
-Various sections of this standard require that notifications regarding the
-judgment applied to a submitted run be able to be sent to the submitting team
-in several ways, including: from a human judge, from the automated judging
-system, and via an external notification (as described in the preceding
-subsection).
+:Various sections of this standard require that notifications regarding the judgment applied to a submitted run be able to be sent to the submitting team in several ways, including: from a human judge, from the automated judging system, and via an external notification (as described in the preceding subsection).
 
-For each potential source of a judgment notification sent to teams, the CCS
-must have an ability to disable separately the ability of teams to receive any
-notifications from that source. This disabling of judgment notifications must
-override any attempt of any other CCS component to send a judgment
-notification to teams. For example, the function where an automated judging
-operation issues a judgment notification to a team must be able to be
-suppressed, and the control which suppresses this automated judgment
-notification must be independent from the control which suppresses judgment
-notifications from the human judge and also separate from the control which
-suppresses external judgment notifications.
+:For each potential source of a judgment notification sent to teams, the CCS must have an ability to disable separately the ability of teams to receive any notifications from that source. This disabling of judgment notifications must override any attempt of any other CCS component to send a judgment notification to teams. For example, the function where an automated judging operation issues a judgment notification to a team must be able to be suppressed, and the control which suppresses this automated judgment notification must be independent from the control which suppresses judgment notifications from the human judge and also separate from the control which suppresses external judgment notifications.
 
-In other words, the CCS must support the ability for the contest personnel to
-independently control whether judgment notifications from any specific source
-are actually made available to the teams.
+:In other words, the CCS must support the ability for the contest personnel to independently control whether judgment notifications from any specific source are actually made available to the teams.
 
-Changing the state (disabling or enabling) of one or more specific judgment
-notification sources must be able to be done while the contest is under way,
-without the need to stop the contest.
+:Changing the state (disabling or enabling) of one or more specific judgment notification sources must be able to be done while the contest is under way, without the need to stop the contest.
 
-Changing the state (disabling or enabling) of one or more specific judgment
-notification sources must be able to be done on a per-problem basis, so that
-the state of notification (enabled vs. disabled) for any given contest problem is
-independent of the corresponding state for another contest problem.
+:Changing the state (disabling or enabling) of one or more specific judgment notification sources must be able to be done on a per-problem basis, so that the state of notification (enabled vs. disabled) for any given contest problem is independent of the corresponding state for another contest problem.
 
 == Scoring ==
  
