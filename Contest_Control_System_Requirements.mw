@@ -177,80 +177,51 @@ the standings of the contest.
 
 ==== Initialization File Loading ====
 
-The CCS must be able to read an ICPC Contest Management System (CMS)-generated
-initialization file containing a list of teams registered for the World Finals, and
-use the data in this file to create automatically whatever internal representation is
-necessary to allow each team (and only the teams) specified in the registration
-list to participate in the World Finals contest.  The format of the CMS-generated
-initialization file is given in the Appendices.  Uses of the data in the initialization
-file include but are not limited to: controlling login and/or other CCS access by
-limiting it to teams listed in the file; and posting team and school name data in the
-standings output as described below.
+:The CCS must be able to read an ICPC Contest Management System (CMS)-generated initialization file containing a list of teams registered for the World Finals, and use the data in this file to create automatically whatever internal representation is necessary to allow each team (and only the teams) specified in the registration list to participate in the World Finals contest.  The format of the CMS-generated initialization file is given in the Appendices.  Uses of the data in the initialization file include but are not limited to: controlling login and/or other CCS access by limiting it to teams listed in the file; and posting team and school name data in the standings output as described below.
 
 ==== Registration Data Editing ====
 
-The CCS must allow updating of the team registration data without restarting or stopping the contest.
+:The CCS must allow updating of the team registration data without restarting or stopping the contest.
 
 === Judge’s Responses ===
 
 ==== Run Responses ====
 
-The CCS must provide the ability to configure the response messages which the
-judging system returns to a team for a run submission, including the ability to add
-new response messages, delete old messages, and change the text of existing
-messages. It must be possible to make any of these configuration changes
-dynamically during a contest without stopping the contest.
+:The CCS must provide the ability to configure the response messages which the judging system returns to a team for a run submission, including the ability to add new response messages, delete old messages, and change the text of existing messages. It must be possible to make any of these configuration changes dynamically during a contest without stopping the contest.
 
 ==== Clarification Responses ====
 
-The CCS must provide the ability to configure a "default answer" to clarification
-requests, so that human judges can choose to reply to a clarification request by selecting
-the default answer rather than being required to enter a specific answer.  For example,
-if the Contest Administrator configures "No response, read the problem statement" as
-the "default answer" for clarification requests, then this answer should automatically be
-sent as a clarification reply whenever a human judge chooses "default answer" as the 
-response to a given clarification request.
+:The CCS must provide the ability to configure a "default answer" to clarification requests, so that human judges can choose to reply to a clarification request by selecting the default answer rather than being required to enter a specific answer.  For example, if the Contest Administrator configures "No response, read the problem statement" as the "default answer" for clarification requests, then this answer should automatically be sent as a clarification reply whenever a human judge chooses "default answer" as the response to a given clarification request.
 
 === Programming Languages ===
 
 ==== Supported Languages ====
 
-The CCS must provide the ability to compile and execute (or interpret, as
-appropriate for the language) submitted source code files for each of the
-languages specified by the [http://cm.baylor.edu/ICPCWiki/Wiki.jsp?page=Programming%20Environment Programming Environment of the World Finals].
+:The CCS must provide the ability to compile and execute (or interpret, as appropriate for the language) submitted source code files for each of the languages specified by the[http://cm.baylor.edu/ICPCWiki/Wiki.jsp?page=Programming%20Environment Programming Environment of the World Finals].
 
 ==== Language Options ====
 
-Each supported language compiler or interpreter must be able to be invoked with any of the
-options specified by the compiler or interpreter’s documentation.
+:Each supported language compiler or interpreter must be able to be invoked with any of the options specified by the compiler or interpreter’s documentation.
 
 ==== Changing Language Options ====
 
-Specification of compiler/interpreter options for each supported language must be able to be changed
-dynamically during a contest without the necessity of stopping the contest.
+:Specification of compiler/interpreter options for each supported language must be able to be changed dynamically during a contest without the necessity of stopping the contest.
 
 === Contest Problems ===
 
 ==== Separate Configuration ====
 
-The CCS must provide the ability to configure each of the contest problems
-separately. This means that all aspects of the description of a contest problem –
-for example the title, input data specification, runtime limit, problem validator (see
-below), etc. – must be configurable on a per-problem basis.
+:The CCS must provide the ability to configure each of the contest problems separately. This means that all aspects of the description of a contest problem – for example the title, input data specification, runtime limit, problem validator (see below), etc. – must be configurable on a per-problem basis.
 
 ==== Problem Enabling/Disabling ====
 
-The CCS must provide a mechanism to enable and disable each contest problem separately.
+:The CCS must provide a mechanism to enable and disable each contest problem separately.
 
-'''Comment''': This section needs to expand on the meaning of "disabling" a problem.
-For example, it needs to explicitly identify, for a "disabled problem", how the disabling
-affects (1) a Team's ability to submit runs for that problem; (2) a judge's ability to judge
-that problem; and (3) how the disabled problem affects scoring (or not).  
+:'''Comment''': This section needs to expand on the meaning of "disabling" a problem. For example, it needs to explicitly identify, for a "disabled problem", how the disabling affects (1) a Team's ability to submit runs for that problem; (2) a judge's ability to judge that problem; and (3) how the disabled problem affects scoring (or not).  
 
 ==== Number of Problems ====
 
-The CCS may not impose an upper limit on the number of different contest
-problems.
+:The CCS may not impose an upper limit on the number of different contest problems.
 
 == Team Interface ==
 
