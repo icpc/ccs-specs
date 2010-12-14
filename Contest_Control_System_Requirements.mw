@@ -108,69 +108,36 @@ Stopping the contest also means causing the contest clock to stop advancing.
 
 === Advance Configuration ===
 
-All variable aspects of the CCS must be configurable prior to the start of a World
-Finals contest. That is, the CCS may not require that any changes be made to
-the CCS configuration once the contest has started. Note that this does not alter
-any requirements which state that the CCS must allow certain configuration
-changes to be able to be made after the contest starts; it means that the contest
-administration personnel shall not be required to make any changes once the
-contest starts.
+:All variable aspects of the CCS must be configurable prior to the start of a World Finals contest. That is, the CCS may not require that any changes be made to the CCS configuration once the contest has started. Note that this does not alter any requirements which state that the CCS must allow certain configuration changes to be able to be made after the contest starts; it means that the contest administration personnel shall not be required to make any changes once the contest starts.
 
 === World Finals Machine Residency ===
 
-All components of the CCS, including any software tools or hardware devices on
-which the CCS relies for its operation, must be able to be loaded onto and run
-solely from machines located at the World Finals site. A CCS which requires
-access to software components and/or a machine not physically under the
-control of, and physically located at the site of, the World Finals will not be
-considered as a candidate for running the World Finals. (Note that machine as it
-is used in this paragraph may refer to either a physical piece of hardware or a
-virtual machine. In either case, however, the CCS must be able to be run on
-machines not requiring off-site access.)
+:All components of the CCS, including any software tools or hardware devices on which the CCS relies for its operation, must be able to be loaded onto and run solely from machines located at the World Finals site. A CCS which requires access to software components and/or a machine not physically under the control of, and physically located at the site of, the World Finals will not be considered as a candidate for running the World Finals. (Note that machine as it is used in this paragraph may refer to either a physical piece of hardware or a virtual machine. In either case, however, the CCS must be able to be run on machines not requiring off-site access.)
 
 === Licensing ===
 
 ==== Free Use ====
 
-The CCS must either be in the public domain and freely useable, or the CCS
-must be the property of the person, company, or other entity which submits it for
-consideration and must be accompanied by a license granting to the ACM-ICPC
-the non-exclusive use of the CCS both for purposes of evaluation and testing and
-for actual use in the ICPC World Finals.
+:The CCS must either be in the public domain and freely useable, or the CCS must be the property of the person, company, or other entity which submits it for consideration and must be accompanied by a license granting to the ACM-ICPC the non-exclusive use of the CCS both for purposes of evaluation and testing and for actual use in the ICPC World Finals.
 
 ==== No Third-Party Licenses ====
 
-The CCS may not be based on or require obtaining any third-party license in
-order to be used by the ACM-ICPC.
+:The CCS may not be based on or require obtaining any third-party license in order to be used by the ACM-ICPC.
 
 === Platform ===
 
-The CCS must run natively on the computer platform of the World Finals. This means for example that it
-is not acceptable that the CCS requires utilization of a virtual machine in order to
-manage the World Finals contest.
+:The CCS must run natively on the computer platform of the World Finals. This means for example that it is not acceptable that the CCS requires utilization of a virtual machine in order to manage the World Finals contest.
 
 === Data Persistency ===
 
 ==== Contest Configuration Persistency ====
 
-The CCS must support persistence of the contest configuration. This means that
-following a shutdown of the CCS, or a power failure on the machine(s) on which
-the CCS runs, it must be possible to automatically restore the configuration
-information already entered into the CCS without the necessity of reentering that
-configuration data.
+:The CCS must support persistence of the contest configuration. This means that following a shutdown of the CCS, or a power failure on the machine(s) on which the CCS runs, it must be possible to automatically restore the configuration information already entered into the CCS without the necessity of reentering that configuration data.
 
 ==== Contest State Persistency ====
 
-The CCS must also support persistence of the contest state once the contest has
-been started. This means that following a shutdown of the CCS, or a power
-failure on the machine(s) on which the CCS runs, it must be possible to
-automatically restore the contest state to what it was prior to the shutdown or
-power failure. The contest state for purposes of this requirement includes all
-data regarding submitted runs, submitted clarification requests, answers to
-clarification requests, run judgments, and similar data defining and/or affecting
-the standings of the contest.
+:The CCS must also support persistence of the contest state once the contest has been started. This means that following a shutdown of the CCS, or a power failure on the machine(s) on which the CCS runs, it must be possible to automatically restore the contest state to what it was prior to the shutdown or power failure. The contest state for purposes of this requirement includes all data regarding submitted runs, submitted clarification requests, answers to clarification requests, run judgments, and similar data defining and/or affecting the standings of the contest.
 
- 
 == Contest Configuration ==
 
 === Team Registration ===
