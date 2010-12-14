@@ -668,8 +668,8 @@ The CCS implementers
 should assume that the scripting interfaces will be invoked multiple times in rapid
 succession, in arbitrary order with arbitrary parameters, by external scripts; care
 should therefore be taken by the implementers to avoid any design or
-implementation characteristics which limit or prohibit the ability of an external [[Test
-Harness]] framework to operate in this manner.
+implementation characteristics which limit or prohibit the ability of an external [[Test Harness]] 
+framework to operate in this manner.
 
 == Documentation Requirements ==
  
