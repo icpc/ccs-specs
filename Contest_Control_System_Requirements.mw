@@ -382,11 +382,6 @@ The CCS must not enforce any particular size limit on any of the judge’s test
 data files, other than that imposed by the available disk space in the file
 system on the machine.
 
-The CCS must not require that every contest problem have input data. That
-is, it must be possible to identify to the CCS which problems require judge’s
-input data and which do not, and the CCS must require input test data only for
-those problems specified as requiring input data.
-
 ==== Execution Time ====
 
 The CCS must provide the ability to specify a run-time limit for each contest
