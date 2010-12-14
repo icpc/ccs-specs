@@ -354,7 +354,13 @@ regarding a contest problem.
 
 === Broadcast Messages ===
 
-:The CCS must provide each team with a capability for viewing any broadcastmessages sent by the judges (see '''Broadcast Messages''' under Judging, below).
+==== Team Review ===
+
+:The CCS must provide each team with a capability for viewing any broadcast messages sent by the judges (see '''Broadcast Messages''' under Judging, below).
+
+==== Notification Of New Broadcasts ====
+
+:The CCS must provide a mechanism to notify teams of the existence of a new broadcast message (that is, a message which has been broadcast since the last time the team checked for broadcast messages as provided under Team Review, above).
 
 == Judge Interface ==
  
