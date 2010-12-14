@@ -268,7 +268,7 @@ regarding a contest problem.
 
 ==== Clarification Security ====
 
-:The CCS must insure that no team can see the clarification requests of any other team, except as provided in the section on [#Human Judge Interface], below.
+:The CCS must insure that no team can see the clarification requests of any other team, except as provided in the section [[Contest_Control_System#Human_Judge_Interface | Human Judge Interface]].
 
 === Submitted Run Status ===
 
