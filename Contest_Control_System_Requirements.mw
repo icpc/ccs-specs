@@ -663,7 +663,7 @@ This means that the CCS must have a mechanism for external processes to connect 
 CCS and obtain dynamic real-time updates regarding the current state of the contest.
 
 The details of the required mechanism for the external event feed API are currently under 
-development; see [this page] for additional information.
+development; see [[External Event Feed API|Event Feed API]] for additional information.
 
 === Human Readable Results ===
 
