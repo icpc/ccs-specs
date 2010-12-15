@@ -743,39 +743,26 @@ regarding a contest problem.
 
 :The System Manager’s Guide must describe the steps required to use each of the “Testability Interfaces” described in the section on Testability. For example, the guide must describe how to invoke the command-line tool which supports submitting runs from a team, as well as describing the use of all other required testability interfaces.
 
+ 
+ 
 == Certification Process ==
  
 === Items Which Must Be Submitted ===
 
-In order for a given CCS to be considered as a candidate for running the ICPC
-World Finals contest, a single archive file (e.g. .zip, .tar, .tar.gz, .tgz, etc.) must be
-submitted to the World Finals Director of Operations. The archive file must
-contain all of the following items:
+:In order for a given CCS to be considered as a candidate for running the ICPC World Finals contest, a single archive file (e.g. .zip, .tar, .tar.gz, .tgz, etc.) must be submitted to the World Finals Director of Operations. The archive file must contain all of the following items:
 
-* The complete set of files, modules, or packages making up the executable components of the CCS;
-* PDF’s for each of the documents listed under [[Contest_Control_System#Documentation_Requirements| Documentation Requirements]];
-* A short ASCII text file named “License” stating that the CCS, including all its components, are in the public domain, or else stating that the CCS and all of its components are the property of the submitting individual or agency and granting a non-exclusive irrevocable license to the ACM ICPC to use the CCS in any way that it deems appropriate; and
-* A short ASCII text file named “ReadMe” containing instructions on how to properly unpack the archive file to set up the installation process.
+:* The complete set of files, modules, or packages making up the executable components of the CCS;
+:* PDF’s for each of the documents listed under [[Contest_Control_System#Documentation_Requirements| Documentation Requirements]];
+:* A short ASCII text file named “License” stating that the CCS, including all its components, are in the public domain, or else stating that the CCS and all of its components are the property of the submitting individual or agency and granting a non-exclusive irrevocable license to the ACM ICPC to use the CCS in any way that it deems appropriate; and
+:* A short ASCII text file named “ReadMe” containing instructions on how to properly unpack the archive file to set up the installation process.
 
 === Certification Schedule ===
 
-To be considered for evaluation as a candidate to run the ICPC World Finals, a
-CCS must be submitted in the form described above not later than the end of
-May in the year preceding the year in which the Finals will take place.
+:To be considered for evaluation as a candidate to run the ICPC World Finals, a CCS must be submitted in the form described above not later than the end of May in the year preceding the year in which the Finals will take place.
 
-Upon receiving a complete submission for a CCS prior to the deadline, the
-World Finals Director of Operations or his/her designee will schedule an
-evaluation test. The evaluation test may require anywhere from several weeks
-up to 3 months to complete.
+:Upon receiving a complete submission for a CCS prior to the deadline, the World Finals Director of Operations or his/her designee will schedule an evaluation test. The evaluation test may require anywhere from several weeks up to 3 months to complete.
 
-Upon completion of testing, the Director of Operations will issue a test report to
-the individual or agency which submitted the CCS. If the CCS passes the
-evaluation test it will be placed on the list of candidates to be considered for
-running the World Finals the following year. If the CCS fails the evaluation test,
-the test report will indicate what requirement or requirements the CCS failed to
-satisfy. In that event the submitters may resubmit an updated version of the
-CCS for evaluation for the subsequent year’s testing cycle.
-
+:Upon completion of testing, the Director of Operations will issue a test report to the individual or agency which submitted the CCS. If the CCS passes the evaluation test it will be placed on the list of candidates to be considered for running the World Finals the following year. If the CCS fails the evaluation test, the test report will indicate what requirement or requirements the CCS failed to satisfy. In that event the submitters may resubmit an updated version of the CCS for evaluation for the subsequent year’s testing cycle.
 
 == Appendix: File formats ==
 
