@@ -868,11 +868,11 @@ A text file consisting of one line for each group (super regionals at the WF) th
 ! Example
 ! Type
 |-
-| 1 || Group ID || || integer
+| 1 || Group ID ||902|| integer
 |-
-| 2 || Contest ID || || integer
+| 2 || Contest ID ||532 || integer
 |-
-| 3 || Group name || || string
+| 3 || Group name ||North America  || string
 |}
 
 === teams.tsv ===
