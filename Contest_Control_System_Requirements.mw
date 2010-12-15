@@ -910,7 +910,7 @@ A text file consisting on one line for each team in the contest, sorted in rank 
 ! Example
 ! Type
 |-
-| 1 || Reservation ID || 435343 || integer
+| 1 || Reservation ID || 24314|| integer
 |-
 | 2 || Rank in contest || 1 || integer
 |-
