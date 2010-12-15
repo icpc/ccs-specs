@@ -629,115 +629,119 @@ regarding a contest problem.
 
 :The requirements of this subsection are intended to provide a method by which the World Finals Director of Operations can perform automated testing on the CCS during the Certification Process (see [[Contest_Control_System#Certification Process| Certification Process]]). The CCS implementers should assume that the scripting interfaces will be invoked multiple times in rapid succession, in arbitrary order with arbitrary parameters, by external scripts; care should therefore be taken by the implementers to avoid any design or implementation characteristics which limit or prohibit the ability of an external [[Test Harness]] framework to operate in this manner.
 
+ 
+ 
 == Documentation Requirements ==
  
 === Team Guide ===
 
-The CCS must include a “Team Guide” document in PDF format. The Team
-Guide must provide all the necessary instructions showing how a contest team
-utilizes the functions of the team interface, including how to:
+:The CCS must include a “Team Guide” document in PDF format. The Team Guide must provide all the necessary instructions showing how a contest team utilizes the functions of the team interface, including how to:
 
-* log into the CCS;
-* specify the parameters for and how to submit a run;
-* specify the data for and how to submit a clarification request;
-* examine the status of previously submitted runs and clarification requests;
-* log out of the CCS.
+:* log into the CCS;
 
-The Team Guide must also describe the way in which judge’s responses to
-submitted runs and clarifications are received by teams.
+:* specify the parameters for and how to submit a run;
+
+:* specify the data for and how to submit a clarification request;
+
+:* examine the status of previously submitted runs and clarification requests;
+
+:* log out of the CCS.
+
+:The Team Guide must also describe the way in which judge’s responses to submitted runs and clarifications are received by teams.
 
 === Judge’s Guide ===
 
-The CCS must include a “Judge’s Guide” document in PDF format. The Judge’s
-Guide must provide all the necessary instructions showing how a human contest
-judge utilizes the functions of the human judge interface, including how to:
+:The CCS must include a “Judge’s Guide” document in PDF format. The Judge’s Guide must provide all the necessary instructions showing how a human contest judge utilizes the functions of the human judge interface, including how to:
 
-* log into the CCS;
-* see a list of all submitted runs and select any run from the list;
-* determine whether or not the selected run has already had a judgment applied to it and if so what judgment was assigned;
-* compile and execute the program specified in the selected run, with the corresponding contest problem data automatically supplied to the program;
-* view the output produced by the program when run against the specified input data;
-* choose a judgment and assign that judgment to the submitted run, or return the run to the system without altering any stored aspect of its state;
-* choose whether or not a notification should be sent over the network to the team which submitted the run apprising them of the judgment assigned to the run;
-* see a list of all clarification requests and select any clar from the list;
-* Determine what answer was returned to the team if the clar has already been answered;
-* Compose an answer to the clar and send it, along with the text of the original clarification request, to the team;
-* Optionally choose to also send the clarification request text and answer to all teams in the contest;
-* compose a message and broadcast that message over the contest network to all teams in the contest; and
-* Log out of the CCS.
+:* log into the CCS;
+
+:* see a list of all submitted runs and select any run from the list;
+
+:* determine whether or not the selected run has already had a judgment applied to it and if so what judgment was assigned;
+
+:* compile and execute the program specified in the selected run, with the corresponding contest problem data automatically supplied to the program;
+
+:* view the output produced by the program when run against the specified input data;
+
+:* choose a judgment and assign that judgment to the submitted run, or return the run to the system without altering any stored aspect of its state;
+
+:* choose whether or not a notification should be sent over the network to the team which submitted the run apprising them of the judgment assigned to the run;
+
+:* see a list of all clarification requests and select any clar from the list;
+
+:* Determine what answer was returned to the team if the clar has already been answered;
+
+:* Compose an answer to the clar and send it, along with the text of the original clarification request, to the team;
+
+:* Optionally choose to also send the clarification request text and answer to all teams in the contest;
+
+:* compose a message and broadcast that message over the contest network to all teams in the contest; and
+
+:* Log out of the CCS.
+
+:'''Comment''': the above list needs to be updated to match updated Judge's topics, including the new section on "Rejudging"
 
 === Contest Administrator’s Guide ===
 
-The CCS must include a “Contest Administrator’s Guide” document in PDF
-format. The Administrator’s Guide must provide all the necessary instructions
-showing how contest personnel utilize the functions of the CCS to set up and
-manage a contest, including how to:
+:The CCS must include a “Contest Administrator’s Guide” document in PDF format. The Administrator’s Guide must provide all the necessary instructions showing how contest personnel utilize the functions of the CCS to set up and manage a contest, including how to:
 
-* load the initialization file giving ICPC team registration data;
-* specify the judgment responses which judges can select;
-* configure the available languages for the contest (that is, the mechanism for compilation and execution of programs for each programming language allowed by the World Finals);
-* specify and/or change team and judge passwords;
-* configure each contest problem description, including the name of the problem as seen by teams when they submit runs and/or reference a problem in a clarification request;
-* load and subsequently update/change the judge’s data file associated with each contest problem;
-* specify problem runtime limits;
-* install and configure external validators for each problem;
-* associate a balloon color with each problem;
-* configure the destination of external notifications (e.g. printers and/or email addresses);
-* enable or disable as desired, on a per-problem and per-source basis, the availability to teams of judgment notifications from each of the different notification sources defined in this standard;
-* specify the update period for updating contest scoring data when judging events affecting the scoring data occur, if updating occurs periodically rather than immediately every time a judging event occurs;
-* specify the name and location of the external scoring data file generated by the CCS;
-* invoke generation of the external scoring data file;
-* disable team's ability to see "full rankings" (if the CCS provides such scoreboard display);
-* disable spectators’ ability to see "full rankings" (if the CCS provides such scoreboard display);
-* disable updating of the scoreboard display seen by teams;
-* disable updating of the scoreboard display seen by spectators;
-* allow the World Finals Director and/or his/her designee to view current standings when team and/or spectator scoreboard updates are disabled;
-* start, stop, and adjust the "contest time" clock;
-* specify the file name and location for the “external standings” file generated by the CCS; and
-* any other configuration required by the CCS in order to properly manage and run the World Finals.
+:* load the initialization file giving ICPC team registration data;
 
-In the event that a configuration item listed above is provided by utilizing services
-of the underlying operating system rather than facilities directly implemented
-and/or controlled by the CCS itself, the Administrator’s Guide must explicitly state
-this fact, and reference the System Manager’s Guide (see below) as the source
-of information on handling that portion of configuration and preparation for the
-contest.
+:* specify the judgment responses which judges can select;
+
+:* configure the available languages for the contest (that is, the mechanism for compilation and execution of programs for each programming language allowed by the World Finals);
+
+:* specify and/or change team and judge passwords;
+
+:* configure each contest problem description, including the name of the problem as seen by teams when they submit runs and/or reference a problem in a clarification request;
+
+:* load and subsequently update/change the judge’s data file associated with each contest problem;
+
+:* specify problem runtime limits;
+
+:* install and configure external validators for each problem;
+
+:* associate a balloon color with each problem;
+
+:* configure the destination of external notifications (e.g. printers and/or email addresses);
+
+:* enable or disable as desired, on a per-problem and per-source basis, the availability to teams of judgment notifications from each of the different notification sources defined in this standard;
+
+:* specify the update period for updating contest scoring data when judging events affecting the scoring data occur, if updating occurs periodically rather than immediately every time a judging event occurs;
+
+:* specify the name and location of the external scoring data file generated by the CCS;
+
+:* invoke generation of the external scoring data file;
+
+:* disable team's ability to see "full rankings" (if the CCS provides such scoreboard display);
+
+:* disable spectators’ ability to see "full rankings" (if the CCS provides such scoreboard display);
+
+:* disable updating of the scoreboard display seen by teams;
+
+:* disable updating of the scoreboard display seen by spectators;
+
+:* allow the World Finals Director and/or his/her designee to view current standings when team and/or spectator scoreboard updates are disabled;
+
+:* start, stop, and adjust the "contest time" clock;
+
+:* specify the file name and location for the “external standings” file generated by the CCS; and
+
+:* any other configuration required by the CCS in order to properly manage and run the World Finals.
+
+:In the event that a configuration item listed above is provided by utilizing services of the underlying operating system rather than facilities directly implemented and/or controlled by the CCS itself, the administrator’s Guide must explicitly state this fact, and reference the System Manager’s Guide (see below) as the source of information on handling that portion of configuration and preparation for the contest.
 
 === System Manager’s Guide ===
 
-The CCS must include a “System Manager’s Guide” document in PDF format.
-The System Manager’s Guide must describe the steps required to install and
-start the CCS on the OS platform specified for use in the World Finals. In the
-event that the CCS consists of multiple modules and/or packages, the guide
-must contain a description of the relationship between the modules or packages,
-including any specific installation and/or startup steps required for each module
-or package.
+:The CCS must include a “System Manager’s Guide” document in PDF format. The System Manager’s Guide must describe the steps required to install and start the CCS on the OS platform specified for use in the World Finals. In the event that the CCS consists of multiple modules and/or packages, the guide must contain a description of the relationship between the modules or packages, including any specific installation and/or startup steps required for each module or package.
 
-The System Manager’s Guide must provide instructions to contest personnel
-explaining situations (if any) where the CCS utilizes functions of the underlying
-operating system (OS) platform to meet requirements laid out in this standard.
-For example, if the CCS relies on the use of OS account and password
-management to implement requirements related to contest security and
-credentials, or print services provided by the OS to implement requirements
-related to external notifications, this must be described in the System Manager’s
-Guide.
+:The System Manager’s Guide must provide instructions to contest personnel explaining situations (if any) where the CCS utilizes functions of the underlying operating system (OS) platform to meet requirements laid out in this standard. For example, if the CCS relies on the use of OS account and password management to implement requirements related to contest security and credentials, or print services provided by the OS to implement requirements related to external notifications, this must be described in the System Manager’s Guide.
 
-The System Manager’s Guide must explicitly list any operating system
-dependencies of the CCS, including but not limited to which OS platform and
-version are required and which optional OS packages must be installed for the
-CCS to function properly.
+:The System Manager’s Guide must explicitly list any operating system dependencies of the CCS, including but not limited to which OS platform and version are required and which optional OS packages must be installed for the CCS to function properly.
 
-The System Manager’s Guide must explicitly list any software dependencies of
-the CCS. For example, any tools such as Java, PERL, WebServer, Browser,
-database systems, etc., which are required for correct operation of the CCS
-must be listed in the guide, including specific version numbers of each tool which
-the CCS requires for its correct operation.
+:The System Manager’s Guide must explicitly list any software dependencies of the CCS. For example, any tools such as Java, PERL, WebServer, Browser, database systems, etc., which are required for correct operation of the CCS must be listed in the guide, including specific version numbers of each tool which the CCS requires for its correct operation.
 
-The System Manager’s Guide must describe the steps required to use each of
-the “Testability Interfaces” described in the section on Testability. For example,
-the guide must describe how to invoke the command-line tool which supports
-submitting runs from a team, as well as describing the use of all other required
-testability interfaces.
+:The System Manager’s Guide must describe the steps required to use each of the “Testability Interfaces” described in the section on Testability. For example, the guide must describe how to invoke the command-line tool which supports submitting runs from a team, as well as describing the use of all other required testability interfaces.
 
 == Certification Process ==
  
