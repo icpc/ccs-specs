@@ -362,6 +362,7 @@ regarding a contest problem.
 
 :'''Comment''': Do we also need "Other - contact staff"? 
 ::Argument against: Exceptional circumstances should not be reported to the team through the scoring mechanism, but rather using the message passing mechanism, i.e. clarifications.
+::Argument for:  if such a message is NOT available, and there IS an occurence of an "exceptional circumstance", even if the circumstance IS reported to the team via the clarification mechanism, by definition of the above rules the team must ALSO get either Comile Error, Security Violation, Run-time Error, Time-limit exceeded, Wrong Answer, or Accepted.  If the condition is exceptional, none of those are appropriate -- so there must be some OTHER response to send the team.
 
 === Automated Judging ===
 
