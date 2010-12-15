@@ -490,253 +490,355 @@ regarding a contest problem.
 
 :Changing the state (disabling or enabling) of one or more specific judgment notification sources must be able to be done on a per-problem basis, so that the state of notification (enabled vs. disabled) for any given contest problem is independent of the corresponding state for another contest problem.
 
-=== Rejudging ===
-
-==== Run Selection ====
-
-:The CCS must support the ability to ''rejudge'' a set of run submissions.  This means that a human judge must be able to select any of the following as the set of runs to be rejudged:
-
-:* A specific (single) run.
-
-:* All runs which have been submitted for a specific problem.
-
-:* All runs which have been submitted using a specific language.
-
-:* All runs which have been submitted for a specific problem and also used a specific language.
-
-:* All runs which have been assigned any specific one of the allowable run judgments as defined in [[Judge Responses]].
-
-:* All runs which have been assigned any specific one of the allowable run judgments as defined in [[Judge Responses]] and which were submitted for a specific problem.
-
-:* All runs which have been assigned any specific one of the allowable run judgments as defined in [[Judge Responses]] and which used a specific language.
-
-:* All runs which have been assigned any specific one of the allowable run judgments as defined in [[Judge Responses]] and which were submitted for a specific problem and also used a specific language.
-
-:* All runs which received any judgment other than "Accepted" for a specific problem (that is, all ''rejected'' runs for a specific problem).
-
-==== Changing Judgments ====
-
-===== Judgment Choices =====
-
-:The CCS must support the ability for a human judge to assign, to any run in a set of rejudged runs, an updated judgment value chosen from among any of the allowable run judgments as defined in [[Judgments]].
-
-===== Judgment Change Security =====
-
-:The CCS must support a separate authentication mechanism which encapsulates the ability to change a run judgment.  Authentication credentials for using this change-judgment mechanism are to be provided to the World Finals Director of Judging and/or his/her designee, pursuant to the ICPC World Finals rules identifying the World Finals Judges as being [http://cm.baylor.edu/ICPCWiki/Wiki.jsp?page=World%20Finals%20Rules#section-World+Finals+Rules-ScoringOfTheFinals solely responsible for determining the correctness of submitted runs].
-
 == Scoring ==
  
 
 === Scoring Data Generation ===
 
-:The CCS must be capable of automatically generating up-to-date scoring data.6 The scoring data must contain all information required to compute the current contest standings using the World Finals scoring algorithm.7 In particular, the World Finals scoring algorithm includes the following requirements which must be considered by the CCS when generating scoring data:
+The CCS must be capable of automatically generating up-to-date scoring data.6
+The scoring data must contain all information required to compute the current
+contest standings using the World Finals scoring algorithm.7 In particular, the
+World Finals scoring algorithm includes the following requirements which must
+be considered by the CCS when generating scoring data:
 
-:* Teams are ranked according to the most problems solved.
+* Teams are ranked according to the most problems solved.
+* Teams placing in the first twelve places who solve the same number of problems are ranked first by least total time and, if need be, by the earliest time of submittal of the last accepted run.
+* The total time is the sum of the time consumed for each problem solved. The time consumed for a solved problem is the time elapsed from the beginning of the contest to the submittal of the first accepted run plus 20 penalty minutes for every previously rejected run for that problem.
+* There is no time consumed for a problem that is not solved.
 
-:* Teams placing in the first twelve places who solve the same number of problems are ranked first by least total time and, if need be, by the earliest time of submittal of the last accepted run.
+The scoring data must be updated automatically either:
+# Immediately when any judging event occurs which potentially changes the contest standings; or 
+# periodically, taking into account any judging events which have occurred since
+the last update to the scoring data.
 
-:* The total time is the sum of the time consumed for each problem solved. The time consumed for a solved problem is the time elapsed from the beginning of the contest to the submittal of the first accepted run plus 20 penalty minutes for every previously rejected run for that problem.
+If the CCS updates the scoring data periodically (as opposed to immediately
+when a judging event occurs), then the update period must be able to be
+controlled by contest personnel and be able to be specified to a granularity of at
+least one minute. Further, it must be possible to change the scoring data update
+period while the contest is running, without the necessity of stopping the contest
+or the necessity of shutting down the CCS.
 
-:* There is no time consumed for a problem that is not solved.
-
-:The scoring data must be updated automatically either:
-
-:# Immediately when any judging event occurs which potentially changes the contest standings; or 
-:# periodically, taking into account any judging events which have occurred since the last update to the scoring data.
-
-:If the CCS updates the scoring data periodically (as opposed to immediately when a judging event occurs), then the update period must be able to be controlled by contest personnel and be able to be specified to a granularity of at least one minute. Further, it must be possible to change the scoring data update period while the contest is running, without the necessity of stopping the contest or the necessity of shutting down the CCS.
-
-:The scoring data generated by the CCS must include for each team both the Team Name and the School Name as specified in the initialization file described under Contest Configuration: [[#Team_Registration| Team Registration]].
+The scoring data generated by the CCS must include for each team both the
+Team Name and the School Name as specified in the initialization file described
+under Contest Configuration: [[#Team_Registration| Team Registration]].
 
 === Scoreboard Display ===
 
-:The preceding sections list requirements related to the generation of data needed to compute the current World Finals contest standings. The generation of scoring data is separate from the display of contest standings, which refers to formatting the data on a display in a useful way (for example, as a web page in a browser). This section pertains to requirements regarding display of contest standings – that is, requirements related to using the scoring data to generate a “scoreboard display”.
+The preceding sections list requirements related to the generation of data
+needed to compute the current World Finals contest standings. The generation
+of scoring data is separate from the display of contest standings, which refers to
+formatting the data on a display in a useful way (for example, as a web page in a
+browser). This section pertains to requirements regarding display of contest
+standings – that is, requirements related to using the scoring data to generate a
+“scoreboard display”.
 
-:The CCS must provide the ability to transform the scoring data defined in the preceding sections into an easily-readable “contest standings” format suitable for displaying on a web page or other similar output form. The output generated by this transformation is referred to in this standard as the contest standings display or, equivalently, the scoreboard display. The interpretation of “easily-readable” is left to general but unspecified human-computer interface guidelines and ultimately requires the approval of the World Finals Director of Operations.
+The CCS must provide the ability to transform the scoring data defined in the
+preceding sections into an easily-readable “contest standings” format suitable for
+displaying on a web page or other similar output form. The output generated by
+this transformation is referred to in this standard as the contest standings display
+or, equivalently, the scoreboard display. The interpretation of “easily-readable” is
+left to general but unspecified human-computer interface guidelines and
+ultimately requires the approval of the World Finals Director of Operations.
 
-:The CCS must provide a mechanism for teams to view the current scoreboard display. This mechanism is not required to be imbedded in any particular CCS code (for example, an acceptable method of meeting the requirement of this paragraph is to provide for the ability to access an on-site web server displaying the current scoreboard display).
+The CCS must provide a mechanism for teams to view the current scoreboard
+display. This mechanism is not required to be imbedded in any particular CCS
+code (for example, an acceptable method of meeting the requirement of this
+paragraph is to provide for the ability to access an on-site web server displaying
+the current scoreboard display).
 
-:The content of the scoreboard display must include a representation of the World Finals standings calculated according to the World Finals scoring algorithm, including that the display shows rankings for teams below the top twelve only according to the number of problems solved and that the display not show any additional data (such as the number of runs submitted or the times of solution for any given problem). Specifically, all teams below the top twelve who have solved the same number of problems must be shown as having the same rank, and that rank should be numerically one less than the total number of teams who have solved more than that number of problems.
+The content of the scoreboard display must include a representation of the World
+Finals standings calculated according to the World Finals scoring algorithm,
+including that the display shows rankings for teams below the top twelve only
+according to the number of problems solved and that the display not show any
+additional data (such as the number of runs submitted or the times of solution for
+any given problem). Specifically, all teams below the top twelve who have solved
+the same number of problems must be shown as having the same rank, and that
+rank should be numerically one less than the total number of teams who have
+solved more than that number of problems.
 
-:The CCS may optionally also include a scoreboard display showing all teams ranked with separate numerical rankings, as if the contest standings were computed by applying to all teams the algorithm used to rank the top twelve teams, and including additional data for each team such as the number of runs submitted for each problem and the time at which each problem was solved. However, if the CCS provides such an optional “full ranking” display, it must be possible to disable at any time the team’s ability to see such a display and also separately to disable the spectator’s (that is, the general public, whether physically on-site or being viewed remotely) ability to see such a display. Further, if the CCS provides such an optional display it must be possible to disable the ability of teams to see the display, and to disable the ability of spectators to see the display, without the necessity of stopping the contest.
+The CCS may optionally also include a scoreboard display showing all teams
+ranked with separate numerical rankings, as if the contest standings were
+computed by applying to all teams the algorithm used to rank the top twelve
+teams, and including additional data for each team such as the number of runs
+submitted for each problem and the time at which each problem was solved.
+However, if the CCS provides such an optional “full ranking” display, it must be
+possible to disable at any time the team’s ability to see such a display and also
+separately to disable the spectator’s (that is, the general public, whether
+physically on-site or being viewed remotely) ability to see such a display. Further,
+if the CCS provides such an optional display it must be possible to disable the
+ability of teams to see the display, and to disable the ability of spectators to see
+the display, without the necessity of stopping the contest.
 
 === Scoreboard Display Updating ===
 
-:The CCS must provide a way to disable the updating of the scoreboard display seen by the teams and by the spectators. This disabling function must be able to be invoked at any time during the contest, and must be able to be done without stopping the contest or affecting team, judging, or contest administration operations in any other way.
+The CCS must provide a way to disable the updating of the scoreboard display
+seen by the teams and by the spectators. This disabling function must be able to
+be invoked at any time during the contest, and must be able to be done without
+stopping the contest or affecting team, judging, or contest administration
+operations in any other way.
 
-:It must be possible to reenable scoreboard display updating at any time after it has been disabled, again without stopping the contest or affecting contest operations in any way.
+It must be possible to reenable scoreboard display updating at any time after it
+has been disabled, again without stopping the contest or affecting contest
+operations in any way.
 
-:During times when the scoreboard display updating is disabled, the CCS must provide a method for both teams and spectators to view the scoreboard display which was most recently viewable prior to the disable operation taking place. (This is generally referred to as the ability to ''freeze'' the scoreboard display).
+During times when the scoreboard display updating is disabled, the CCS must
+provide a method for both teams and spectators to view the scoreboard display
+which was most recently viewable prior to the disable operation taking place.
+(This is generally referred to as the ability to freeze the scoreboard display).
 
-:During times when the scoreboard display updating is disabled the CCS must provide the ability for the World Finals Contest Director and/or his/her designee to look at the up-to-date standings – that is, the standings as they would appear to teams and spectators if scoreboard updating were not disabled.
+During times when the scoreboard display updating is disabled the CCS must
+provide the ability for the World Finals Contest Director and/or his/her designee
+to look at the up-to-date standings – that is, the standings as they would appear
+to teams and spectators if scoreboard updating were not disabled.
 
 === Contest Time ===
 
-:The CCS must provide a way to start and stop the logical contest clock – that is, the mechanism which counts “elapsed time” in the contest. Specifically, it must be possible to automatically adjust contest scoring, and the resulting scoreboard display, to ignore one or more selected periods of real wall-clock time in computing the elapsed time used for the penalty-time component of the contest standings scoring algorithm.
+The CCS must provide a way to start and stop the logical contest clock – that is,
+the mechanism which counts “elapsed time” in the contest. Specifically, it must
+be possible to automatically adjust contest scoring, and the resulting scoreboard
+display, to ignore one or more selected periods of real wall-clock time in
+computing the elapsed time used for the penalty-time component of the contest
+standings scoring algorithm.
 
-:The CCS must insure that teams cannot submit runs during any time when the logical contest clock is stopped, including before the contest is started, during times when the contest is stopped before it is completed, and after the contest is completed.
+The CCS must insure that teams cannot submit runs during any time when the
+logical contest clock is stopped, including before the contest is started, during
+times when the contest is stopped before it is completed, and after the contest is
+completed.
 
- 
- 
+
+
 == Data Export ==
 
 === External Scoring Data File ===
 
-:The CCS must provide the ability to save the scoring data in an external file in one of the following formats:
+The CCS must provide the ability to save the scoring data in an external file in
+one of the following formats:
 
-:# XML 1.1 or greater, or
-:# a tab- or comma-delimited file acceptable for loading into a Microsoft Excel spreadsheet.
+# XML 1.1 or greater, or
+# a tab- or comma-delimited file acceptable for loading into a Microsoft Excel spreadsheet.
 
-:The scoring data file must contain at least the following information for each contest team:
+The scoring data file must contain at least the following information for each
+contest team:
 
-:* the team name;
-:* the unique team Reservation ID defined in the ICPC Registration data (see Reservation Id in [[#teams.tsv| teams.tsv]])
-:* the team's relative rank in the contest, computed as if the ICPC World Finals ranking algorithm used for the top 12 places were applied to all teams in the contest;
-:* the total number of points accumulated by the team as used to determine the ranking computed in the previous step;
-:* the total number of problems not solved by the team;
-:* the following information for each problem not solved by the team:
-:** the total number of submissions for the problem;
-:* the total number of problems solved by the team;
-:* the following information for each problem solved by the team:
-:** the total number of incorrect submissions for the problem prior to the submission which solved the problem,
-:** the contest-relative time at which the problem was solved.
+* the team name;
+* the unique team Reservation ID defined in the ICPC Registration data (see Reservation Id in [[#teams.tsv| teams.tsv]])
+* the team's relative rank in the contest, computed as if the ICPC World Finals ranking algorithm used for the top 12 places were applied to all teams in the contest;
+* the total number of points accumulated by the team as used to determine the ranking computed in the previous step;
+* the total number of problems not solved by the team;
+* the following information for each problem not solved by the team:
+** the total number of submissions for the problem;
+* the total number of problems solved by the team;
+* the following information for each problem solved by the team:
+** the total number of incorrect submissions for the problem prior to the submission which solved the problem,
+** the contest-relative time at which the problem was solved.
 
-:If the CCS saves the scoring data file in XML format, then the documentation (see [[#Documentation_Requirements| Documentation Requirements]], below) must include a specification in a XML Schema file for the XML file. If the CCS saves the scoring data file in tab- or comma-delimited format, then the documentation must include a description of a header row identifying the contents of each column in the file.
+If the CCS saves the scoring data file in XML format, then the documentation
+(see [[#Documentation_Requirements| Documentation Requirements]], below) must include a specification in a 
+XML Schema file for the XML file. If the CCS saves the scoring data file in tab- or
+comma-delimited format, then the documentation must include a description of a
+header row identifying the contents of each column in the file.
 
-:The CCS must automatically save an updated copy of the external scoring data file whenever the scoring data itself is updated as described above. The file name and location where the external scoring data file is stored must be able to be specified in advance by contest personnel.
+The CCS must automatically save an updated copy of the external scoring data
+file whenever the scoring data itself is updated as described above. The file
+name and location where the external scoring data file is stored must be able to
+be specified in advance by contest personnel.
 
-:The CCS must provide the ability to manually update the external scoring data file after the contest ends, to insure that the file contents reflect the data after completion of all contest judging.
+The CCS must provide the ability to manually update the external scoring data
+file after the contest ends, to insure that the file contents reflect the data after
+completion of all contest judging.
 
-:'''Comment''':  we need to make sure the export data includes a specification of assignment of medals according to the "World Finals Rules".
+'''Comment''':  we need to make sure the export data includes a specification of assignment
+of medals according to the "World Finals Rules".
 
 === Contest Standings Upload ===
 
-:The CCS must be capable of generating an external file containing the final standings of the World Finals contest computed as described in the World Finals rules and the section on Scoring. The format of this file must be as defined in [[#export.tsv|the appendix]].
+The CCS must be capable of generating an external file containing the final
+standings of the World Finals contest computed as described in the World Finals
+rules and the section on Scoring. The format of this file must be as defined in [[#export.tsv|the appendix]].
 
-:The name and location of the external standings file generated by the CCS must be able to be specified by contest personnel.
+The name and location of the external standings file generated by the CCS
+must be able to be specified by contest personnel.
 
 === Event Feed API ===
 
-:It is a requirement that the CCS provide an ''external event feed API''.  This means that the CCS must have a mechanism for external processes to connect to the CCS and obtain dynamic real-time updates regarding the current state of the contest.
+It is a requirement that the CCS provide an ''external event feed API''.  
+This means that the CCS must have a mechanism for external processes to connect to the
+CCS and obtain dynamic real-time updates regarding the current state of the contest.
 
-:The details of the required mechanism for the external event feed API are currently under development; see [[External Event Feed API|Event Feed API]] for additional information.
+The details of the required mechanism for the external event feed API are currently under 
+development; see [[External Event Feed API|Event Feed API]] for additional information.
 
 === Human Readable Results ===
 
-:'''Comment''': This section needs to be developed.
-
- 
- 
 == Testability Requirements ==
 
 === Scriptable Submissions ===
 
-:The CCS must provide a mechanism by which team submissions of both runs and clarification requests can be scripted for automated testing. In other words, the CCS must provide a command-line based interface allowing an external program to submit a run to the CCS and to submit a clarification request to the CCS.
+The CCS must provide a mechanism by which team submissions of both runs
+and clarification requests can be scripted for automated testing. In other words,
+the CCS must provide a command-line based interface allowing an external
+program to submit a run to the CCS and to submit a clarification request to the
+CCS.
 
-:The run submission and clarification submission command-line interfaces must provide mechanisms for specifying all parameters that would be specified by a team utilizing the corresponding interactive interface, including that the command-line interfaces must accept and perform validation of user credentials before accepting a run or a clarification request.
+The run submission and clarification submission command-line interfaces must
+provide mechanisms for specifying all parameters that would be specified by a
+team utilizing the corresponding interactive interface, including that the
+command-line interfaces must accept and perform validation of user credentials
+before accepting a run or a clarification request.
 
-:The requirements of this subsection are intended to provide a method by which the World Finals Director of Operations can perform automated testing on the CCS during the Certification Process (see[[Contest_Control_System#Certification Process| Certification Process]]). The CCS implementers should assume that the scripting interfaces will be invoked multiple times in rapid succession, in arbitrary order with arbitrary parameters, by external scripts; care should therefore be taken by the implementers to avoid any design or implementation characteristics which limit or prohibit the ability of an external [[Test Harness]] framework to operate in this manner.
+The requirements of this subsection are intended to provide a method by which
+the World Finals Director of Operations can perform automated testing on the
+CCS during the Certification Process (see [[Contest_Control_System#Certification Process| Certification Process]]).
+The CCS implementers
+should assume that the scripting interfaces will be invoked multiple times in rapid
+succession, in arbitrary order with arbitrary parameters, by external scripts; care
+should therefore be taken by the implementers to avoid any design or
+implementation characteristics which limit or prohibit the ability of an external [[Test Harness]] 
+framework to operate in this manner.
 
- 
- 
 == Documentation Requirements ==
-
+ 
 === Team Guide ===
 
-:The CCS must include a “Team Guide” document in PDF format. The Team Guide must provide all the necessary instructions showing how a contest team utilizes the functions of the team interface, including how to:
+The CCS must include a “Team Guide” document in PDF format. The Team
+Guide must provide all the necessary instructions showing how a contest team
+utilizes the functions of the team interface, including how to:
 
-:* log into the CCS;
-:* specify the parameters for and how to submit a run;
-:* specify the data for and how to submit a clarification request;
-:* examine the status of previously submitted runs and clarification requests;
-:* log out of the CCS.
+* log into the CCS;
+* specify the parameters for and how to submit a run;
+* specify the data for and how to submit a clarification request;
+* examine the status of previously submitted runs and clarification requests;
+* log out of the CCS.
 
-:The Team Guide must also describe the way in which judge’s responses to submitted runs and clarifications are received by teams.
+The Team Guide must also describe the way in which judge’s responses to
+submitted runs and clarifications are received by teams.
 
 === Judge’s Guide ===
 
-:The CCS must include a “Judge’s Guide” document in PDF format. The Judge’s Guide must provide all the necessary instructions showing how a human contest judge utilizes the functions of the human judge interface, including how to:
+The CCS must include a “Judge’s Guide” document in PDF format. The Judge’s
+Guide must provide all the necessary instructions showing how a human contest
+judge utilizes the functions of the human judge interface, including how to:
 
-:* log into the CCS;
-:* see a list of all submitted runs and select any run from the list;
-:* determine whether or not the selected run has already had a judgment applied to it and if so what judgment was assigned;
-:* compile and execute the program specified in the selected run, with the corresponding contest problem data automatically supplied to the program;
-:* view the output produced by the program when run against the specified input data;
-:* choose a judgment and assign that judgment to the submitted run, or return the run to the system without altering any stored aspect of its state;
-:* choose whether or not a notification should be sent over the network to the team which submitted the run apprising them of the judgment assigned to the run;
-:* see a list of all clarification requests and select any clar from the list;
-:* Determine what answer was returned to the team if the clar has already been answered;
-:* Compose an answer to the clar and send it, along with the text of the original clarification request, to the team;
-:* Optionally choose to also send the clarification request text and answer to all teams in the contest;
-:* compose a message and broadcast that message over the contest network to all teams in the contest; and
-:* Log out of the CCS.
-
-:'''Comment''': the preceding list needs to be updated to match the updated version of requirements listed in [#Judging].
+* log into the CCS;
+* see a list of all submitted runs and select any run from the list;
+* determine whether or not the selected run has already had a judgment applied to it and if so what judgment was assigned;
+* compile and execute the program specified in the selected run, with the corresponding contest problem data automatically supplied to the program;
+* view the output produced by the program when run against the specified input data;
+* choose a judgment and assign that judgment to the submitted run, or return the run to the system without altering any stored aspect of its state;
+* choose whether or not a notification should be sent over the network to the team which submitted the run apprising them of the judgment assigned to the run;
+* see a list of all clarification requests and select any clar from the list;
+* Determine what answer was returned to the team if the clar has already been answered;
+* Compose an answer to the clar and send it, along with the text of the original clarification request, to the team;
+* Optionally choose to also send the clarification request text and answer to all teams in the contest;
+* compose a message and broadcast that message over the contest network to all teams in the contest; and
+* Log out of the CCS.
 
 === Contest Administrator’s Guide ===
 
-:The CCS must include a “Contest Administrator’s Guide” document in PDF format. The Administrator’s Guide must provide all the necessary instructions showing how contest personnel utilize the functions of the CCS to set up and manage a contest, including how to:
+The CCS must include a “Contest Administrator’s Guide” document in PDF
+format. The Administrator’s Guide must provide all the necessary instructions
+showing how contest personnel utilize the functions of the CCS to set up and
+manage a contest, including how to:
 
-:* load the initialization file giving ICPC team registration data;
-:* specify the judgment responses which judges can select;
-:* configure the available languages for the contest (that is, the mechanism for compilation and execution of programs for each programming language allowed by the World Finals);
-:* specify and/or change team and judge passwords;
-:* configure each contest problem description, including the name of the problem as seen by teams when they submit runs and/or reference a problem in a clarification request;
-:* load and subsequently update/change the judge’s data file associated with each contest problem;
-:* specify problem runtime limits;
-:* install and configure external validators for each problem;
-:* associate a balloon color with each problem;
-:* configure the destination of external notifications (e.g. printers and/or email addresses);
-:* enable or disable as desired, on a per-problem and per-source basis, the availability to teams of judgment notifications from each of the different notification sources defined in this standard;
-:* specify the update period for updating contest scoring data when judging events affecting the scoring data occur, if updating occurs periodically rather than immediately every time a judging event occurs;
-:* specify the name and location of the external scoring data file generated by the CCS;
-:* invoke generation of the external scoring data file;
-:* disable team's ability to see "full rankings" (if the CCS provides such scoreboard display);
-:* disable spectators’ ability to see "full rankings" (if the CCS provides such scoreboard display);
-:* disable updating of the scoreboard display seen by teams;
-:* disable updating of the scoreboard display seen by spectators;
-:* allow the World Finals Director and/or his/her designee to view current standings when team and/or spectator scoreboard updates are disabled;
-:* start, stop, and adjust the "contest time" clock;
-:* specify the file name and location for the “external standings” file generated by the CCS; and
-:* any other configuration required by the CCS in order to properly manage and run the World Finals.
+* load the initialization file giving ICPC team registration data;
+* specify the judgment responses which judges can select;
+* configure the available languages for the contest (that is, the mechanism for compilation and execution of programs for each programming language allowed by the World Finals);
+* specify and/or change team and judge passwords;
+* configure each contest problem description, including the name of the problem as seen by teams when they submit runs and/or reference a problem in a clarification request;
+* load and subsequently update/change the judge’s data file associated with each contest problem;
+* specify problem runtime limits;
+* install and configure external validators for each problem;
+* associate a balloon color with each problem;
+* configure the destination of external notifications (e.g. printers and/or email addresses);
+* enable or disable as desired, on a per-problem and per-source basis, the availability to teams of judgment notifications from each of the different notification sources defined in this standard;
+* specify the update period for updating contest scoring data when judging events affecting the scoring data occur, if updating occurs periodically rather than immediately every time a judging event occurs;
+* specify the name and location of the external scoring data file generated by the CCS;
+* invoke generation of the external scoring data file;
+* disable team's ability to see "full rankings" (if the CCS provides such scoreboard display);
+* disable spectators’ ability to see "full rankings" (if the CCS provides such scoreboard display);
+* disable updating of the scoreboard display seen by teams;
+* disable updating of the scoreboard display seen by spectators;
+* allow the World Finals Director and/or his/her designee to view current standings when team and/or spectator scoreboard updates are disabled;
+* start, stop, and adjust the "contest time" clock;
+* specify the file name and location for the “external standings” file generated by the CCS; and
+* any other configuration required by the CCS in order to properly manage and run the World Finals.
 
-:'''Comment''': the preceding list needs to be updated to match the updated version of requirements listed in the rest of the document (based on rearrangement/changes to "Configuring the Contest").
-
-
-:In the event that a configuration item listed above is provided by utilizing services of the underlying operating system rather than facilities directly implemented and/or controlled by the CCS itself, the Administrator’s Guide must explicitly state this fact, and reference the System Manager’s Guide (see below) as the source of information on handling that portion of configuration and preparation for the contest.
+In the event that a configuration item listed above is provided by utilizing services
+of the underlying operating system rather than facilities directly implemented
+and/or controlled by the CCS itself, the Administrator’s Guide must explicitly state
+this fact, and reference the System Manager’s Guide (see below) as the source
+of information on handling that portion of configuration and preparation for the
+contest.
 
 === System Manager’s Guide ===
 
-:The CCS must include a “System Manager’s Guide” document in PDF format. The System Manager’s Guide must describe the steps required to install and start the CCS on the OS platform specified for use in the World Finals. In the event that the CCS consists of multiple modules and/or packages, the guide must contain a description of the relationship between the modules or packages, including any specific installation and/or startup steps required for each module or package.
+The CCS must include a “System Manager’s Guide” document in PDF format.
+The System Manager’s Guide must describe the steps required to install and
+start the CCS on the OS platform specified for use in the World Finals. In the
+event that the CCS consists of multiple modules and/or packages, the guide
+must contain a description of the relationship between the modules or packages,
+including any specific installation and/or startup steps required for each module
+or package.
 
-:The System Manager’s Guide must provide instructions to contest personnel explaining situations (if any) where the CCS utilizes functions of the underlying operating system (OS) platform to meet requirements laid out in this standard. For example, if the CCS relies on the use of OS account and password management to implement requirements related to contest security and credentials, or print services provided by the OS to implement requirements related to external notifications, this must be described in the System Manager’s Guide.
+The System Manager’s Guide must provide instructions to contest personnel
+explaining situations (if any) where the CCS utilizes functions of the underlying
+operating system (OS) platform to meet requirements laid out in this standard.
+For example, if the CCS relies on the use of OS account and password
+management to implement requirements related to contest security and
+credentials, or print services provided by the OS to implement requirements
+related to external notifications, this must be described in the System Manager’s
+Guide.
 
-:The System Manager’s Guide must explicitly list any operating system dependencies of the CCS, including but not limited to which OS platform and version are required and which optional OS packages must be installed for the CCS to function properly.
+The System Manager’s Guide must explicitly list any operating system
+dependencies of the CCS, including but not limited to which OS platform and
+version are required and which optional OS packages must be installed for the
+CCS to function properly.
 
-:The System Manager’s Guide must explicitly list any software dependencies of the CCS. For example, any tools such as Java, PERL, WebServer, Browser, database systems, etc., which are required for correct operation of the CCS must be listed in the guide, including specific version numbers of each tool which the CCS requires for its correct operation.
+The System Manager’s Guide must explicitly list any software dependencies of
+the CCS. For example, any tools such as Java, PERL, WebServer, Browser,
+database systems, etc., which are required for correct operation of the CCS
+must be listed in the guide, including specific version numbers of each tool which
+the CCS requires for its correct operation.
 
-:The System Manager’s Guide must describe the steps required to use each of the “Testability Interfaces” described in the section on Testability. For example, the guide must describe how to invoke the command-line tool which supports submitting runs from a team, as well as describing the use of all other required testability interfaces.
+The System Manager’s Guide must describe the steps required to use each of
+the “Testability Interfaces” described in the section on Testability. For example,
+the guide must describe how to invoke the command-line tool which supports
+submitting runs from a team, as well as describing the use of all other required
+testability interfaces.
 
- 
- 
 == Certification Process ==
-
+ 
 === Items Which Must Be Submitted ===
 
-:In order for a given CCS to be considered as a candidate for running the ICPC World Finals contest, a single archive file (e.g. .zip, .tar, .tar.gz, .tgz, etc.) must be submitted to the World Finals Director of Operations. The archive file must contain all of the following items:
+In order for a given CCS to be considered as a candidate for running the ICPC
+World Finals contest, a single archive file (e.g. .zip, .tar, .tar.gz, .tgz, etc.) must be
+submitted to the World Finals Director of Operations. The archive file must
+contain all of the following items:
 
-:* The complete set of files, modules, or packages making up the executable components of the CCS;
-:* PDF’s for each of the documents listed under [[Contest_Control_System#Documentation_Requirements| Documentation Requirements]];
-:* A short ASCII text file named “License” stating that the CCS, including all its components, are in the public domain, or else stating that the CCS and all of its components are the property of the submitting individual or agency and granting a non-exclusive irrevocable license to the ACM ICPC to use the CCS in any way that it deems appropriate; and
-:* A short ASCII text file named “ReadMe” containing instructions on how to properly unpack the archive file to set up the installation process.
+* The complete set of files, modules, or packages making up the executable components of the CCS;
+* PDF’s for each of the documents listed under [[Contest_Control_System#Documentation_Requirements| Documentation Requirements]];
+* A short ASCII text file named “License” stating that the CCS, including all its components, are in the public domain, or else stating that the CCS and all of its components are the property of the submitting individual or agency and granting a non-exclusive irrevocable license to the ACM ICPC to use the CCS in any way that it deems appropriate; and
+* A short ASCII text file named “ReadMe” containing instructions on how to properly unpack the archive file to set up the installation process.
 
 === Certification Schedule ===
 
-:To be considered for evaluation as a candidate to run the ICPC World Finals, a CCS must be submitted in the form described above not later than the end of May in the year preceding the year in which the Finals will take place.
+To be considered for evaluation as a candidate to run the ICPC World Finals, a
+CCS must be submitted in the form described above not later than the end of
+May in the year preceding the year in which the Finals will take place.
 
-:Upon receiving a complete submission for a CCS prior to the deadline, the World Finals Director of Operations or his/her designee will schedule an evaluation test. The evaluation test may require anywhere from several weeks up to 3 months to complete.
+Upon receiving a complete submission for a CCS prior to the deadline, the
+World Finals Director of Operations or his/her designee will schedule an
+evaluation test. The evaluation test may require anywhere from several weeks
+up to 3 months to complete.
 
-:Upon completion of testing, the Director of Operations will issue a test report to the individual or agency which submitted the CCS. If the CCS passes the evaluation test it will be placed on the list of candidates to be considered for running the World Finals the following year. If the CCS fails the evaluation test, the test report will indicate what requirement or requirements the CCS failed to satisfy. In that event the submitters may resubmit an updated version of the CCS for evaluation for the subsequent year’s testing cycle.
+Upon completion of testing, the Director of Operations will issue a test report to
+the individual or agency which submitted the CCS. If the CCS passes the
+evaluation test it will be placed on the list of candidates to be considered for
+running the World Finals the following year. If the CCS fails the evaluation test,
+the test report will indicate what requirement or requirements the CCS failed to
+satisfy. In that event the submitters may resubmit an updated version of the
+CCS for evaluation for the subsequent year’s testing cycle.
+
 
 == Appendix: File formats ==
 
