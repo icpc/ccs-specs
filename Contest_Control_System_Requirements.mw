@@ -885,19 +885,19 @@ A text file consisting on one line for each team in the contest. Each line has t
 ! Example
 ! Type
 |-
-| 1 || Team number || || integer
+| 1 || Team number || 22 || integer
 |-
-| 2 || Reservation ID || || integer
+| 2 || Reservation ID || 24314 || integer
 |-
-| 3 || Group ID || || integer
+| 3 || Group ID || 4 || integer
 |-
-| 4 || Team name || || string
+| 4 || Team name ||Hoos || string
 |-
-| 5 || Institution name || || string
+| 5 || Institution name ||University of Virginia  || string
 |-
-| 6 || Institution short name || || string
+| 6 || Institution short name || U Virginia  || string
 |-
-| 7 || Country || || string ISO 3166-1 alpha-3
+| 7 || Country || US || string ISO 3166-1 alpha-3
 |}
 
 === export.tsv ===
