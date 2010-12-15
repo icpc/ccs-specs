@@ -899,7 +899,7 @@ A text file consisting on one line for each team in the contest. Each line has t
 |-
 | 6 || Institution short name || U Virginia  || string
 |-
-| 7 || Country || US || string ISO 3166-1 alpha-3
+| 7 || Country || USA || string ISO 3166-1 alpha-3
 |}
 
 === export.tsv ===
