@@ -490,8 +490,40 @@ regarding a contest problem.
 
 :Changing the state (disabling or enabling) of one or more specific judgment notification sources must be able to be done on a per-problem basis, so that the state of notification (enabled vs. disabled) for any given contest problem is independent of the corresponding state for another contest problem.
 
- 
- 
+=== Rejudging ===
+
+==== Run Selection ====
+
+:The CCS must support the ability to ''rejudge'' a set of run submissions.  This means that a human judge must be able to select any of the following as the set of runs to be rejudged:
+
+:* A specific (single) run.
+
+:* All runs which have been submitted for a specific problem.
+
+:* All runs which have been submitted using a specific language.
+
+:* All runs which have been submitted for a specific problem and also used a specific language.
+
+:* All runs which have been assigned any specific one of the allowable run judgments as defined in [[#Judge Responses]].
+
+:* All runs which have been assigned any specific one of the allowable run judgments as defined in [[#Judge Responses]] and which were submitted for a specific problem.
+
+:* All runs which have been assigned any specific one of the allowable run judgments as defined in [[#Judge Responses]] and which used a specific language.
+
+:* All runs which have been assigned any specific one of the allowable run judgments as defined in [[#Judge Responses]] and which were submitted for a specific problem and also used a specific language.
+
+:* All runs which received any judgment other than "Accepted" for a specific problem (that is, all ''rejected'' runs for a specific problem).
+
+==== Changing Judgments ====
+
+===== Judgment Choices =====
+
+:The CCS must support the ability for a human judge to assign, to any run in a set of rejudged runs, an updated judgment value chosen from among any of the allowable run judgments as defined in [[#Judgments]].
+
+===== Judgment Change Security =====
+
+:The CCS must support a separate authentication mechanism which encapsulates the ability to change a run judgment.  Authentication credentials for using this change-judgment mechanism are to be provided to the World Finals Director of Judging and/or his/her designee, pursuant to the ICPC World Finals rules identifying the World Finals Judges as being [http://cm.baylor.edu/ICPCWiki/Wiki.jsp?page=World%20Finals%20Rules#section-World+Finals+Rules-ScoringOfTheFinals solely responsible for determining the correctness of submitted runs].
+
 == Scoring ==
  
 
