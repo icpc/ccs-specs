@@ -524,6 +524,8 @@ regarding a contest problem.
    
 :The CCS must support a separate authentication mechanism which encapsulates the ability to change a run judgment. Authentication credentials for using this change-judgment mechanism are to be provided to the World Finals Director of Judging and/or his/her designee, pursuant to the ICPC World Finals rules identifying the World Finals Judges as being [http://cm.baylor.edu/ICPCWiki/Wiki.jsp?page=World%20Finals%20Rules#section-World+Finals+Rules-ScoringOfTheFinals solely responsible for determining the correctness of submitted runs].
 
+ 
+ 
 == Scoring ==
  
 
@@ -638,8 +640,6 @@ The CCS must insure that teams cannot submit runs during any time when the
 logical contest clock is stopped, including before the contest is started, during
 times when the contest is stopped before it is completed, and after the contest is
 completed.
-
-
 
 == Data Export ==
 
