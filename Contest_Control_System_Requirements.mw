@@ -514,8 +514,8 @@ regarding a contest problem.
   
 ===== Judgment Choices ===== 
  
-:The CCS must support the ability for a human judge to assign, to any run in a set of rejudged runs, an updated judgment value chosen from among any of the allowable run judgments as defined in [[#Judgments]]. 
-   
+:The CCS must support the ability for a human judge to assign, to any run in a set of rejudged runs, an updated judgment value chosen from among any of the allowable run judgments as defined in [[#Judge Responses|Judge Responses]].
+
 ===== Judgment Change Security ===== 
    
 :The CCS must support a separate authentication mechanism which encapsulates the ability to change a run judgment. Authentication credentials for using this change-judgment mechanism are to be provided to the World Finals Director of Judging and/or his/her designee, pursuant to the ICPC World Finals rules identifying the World Finals Judges as being [http://cm.baylor.edu/ICPCWiki/Wiki.jsp?page=World%20Finals%20Rules#section-World+Finals+Rules-ScoringOfTheFinals solely responsible for determining the correctness of submitted runs].
