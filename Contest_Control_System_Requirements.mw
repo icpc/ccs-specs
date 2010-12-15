@@ -615,15 +615,15 @@ completed.
 The CCS must provide the ability to save the scoring data in an external file in
 one of the following formats:
 
-* XML 1.1 or greater, or
-* a tab- or comma-delimited file acceptable for loading into a Microsoft Excel spreadsheet.
+# XML 1.1 or greater, or
+# a tab- or comma-delimited file acceptable for loading into a Microsoft Excel spreadsheet.
 
 The scoring data file must contain at least the following information for each
 contest team:
 
 * the team name;
-* the unique team External ID defined in the ICPC Registration data defined in the initialization file described in Contest Configuration section (above);
-* the team’s relative rank in the contest, computed as if the ICPC World Finals ranking algorithm used for the top 12 places were applied to all teams in the contest;
+* the unique team Reservation ID defined in the ICPC Registration data (see Reservation Id in [[#teams.tsv| teams.tsv]])
+* the team's relative rank in the contest, computed as if the ICPC World Finals ranking algorithm used for the top 12 places were applied to all teams in the contest;
 * the total number of points accumulated by the team as used to determine the ranking computed in the previous step;
 * the total number of problems not solved by the team;
 * the following information for each problem not solved by the team:
@@ -634,8 +634,8 @@ contest team:
 ** the contest-relative time at which the problem was solved.
 
 If the CCS saves the scoring data file in XML format, then the documentation
-(see Documentation Requirements, below) must include a specification of the
-XML Schema for the file. If the CCS saves the scoring data file in tab- or
+(see [[#Documentation_Requirements| Documentation Requirements]], below) must include a specification in a 
+XML Schema file for the XML file. If the CCS saves the scoring data file in tab- or
 comma-delimited format, then the documentation must include a description of a
 header row identifying the contents of each column in the file.
 
@@ -650,7 +650,6 @@ completion of all contest judging.
 
 '''Comment''':  we need to make sure the export data includes a specification of assignment
 of medals according to the "World Finals Rules".
-
 
 === Contest Standings Upload ===
 
