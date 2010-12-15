@@ -849,13 +849,13 @@ A text file consisting of one line with tab separated fields as defined below.
 ! Example
 ! Type
 |-
-| 1 || Contest ID || || integer
+| 1 || Contest ID || 532|| integer
 |-
-| 2 || Contest name || || string
+| 2 || Contest name ||The 2003 ACM Programming Contest World Finals  || string
 |-
-| 3 || Contest short name || || string
+| 3 || Contest short name ||The 2003 World Finals  || string
 |-
-| 4 || Contest date/time || || string YYYY-MM-DD hh:mm:ss
+| 4 || Contest date/time || 2003-03-25 00:00:00 || string YYYY-MM-DD hh:mm:ss
 |}
 
 === groups.tsv ===
