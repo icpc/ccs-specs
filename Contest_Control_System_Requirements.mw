@@ -504,13 +504,13 @@ regarding a contest problem.
 
 :* All runs which have been submitted for a specific problem and also used a specific language.
 
-:* All runs which have been assigned any specific one of the allowable run judgments as defined in [[#Judge Responses]].
+:* All runs which have been assigned any specific one of the allowable run judgments as defined in [[Judge Responses]].
 
-:* All runs which have been assigned any specific one of the allowable run judgments as defined in [[#Judge Responses]] and which were submitted for a specific problem.
+:* All runs which have been assigned any specific one of the allowable run judgments as defined in [[Judge Responses]] and which were submitted for a specific problem.
 
-:* All runs which have been assigned any specific one of the allowable run judgments as defined in [[#Judge Responses]] and which used a specific language.
+:* All runs which have been assigned any specific one of the allowable run judgments as defined in [[Judge Responses]] and which used a specific language.
 
-:* All runs which have been assigned any specific one of the allowable run judgments as defined in [[#Judge Responses]] and which were submitted for a specific problem and also used a specific language.
+:* All runs which have been assigned any specific one of the allowable run judgments as defined in [[Judge Responses]] and which were submitted for a specific problem and also used a specific language.
 
 :* All runs which received any judgment other than "Accepted" for a specific problem (that is, all ''rejected'' runs for a specific problem).
 
@@ -518,7 +518,7 @@ regarding a contest problem.
 
 ===== Judgment Choices =====
 
-:The CCS must support the ability for a human judge to assign, to any run in a set of rejudged runs, an updated judgment value chosen from among any of the allowable run judgments as defined in [[#Judgments]].
+:The CCS must support the ability for a human judge to assign, to any run in a set of rejudged runs, an updated judgment value chosen from among any of the allowable run judgments as defined in [[Judgments]].
 
 ===== Judgment Change Security =====
 
