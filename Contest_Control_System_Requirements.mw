@@ -506,9 +506,9 @@ be considered by the CCS when generating scoring data:
 * The total time is the sum of the time consumed for each problem solved. The time consumed for a solved problem is the time elapsed from the beginning of the contest to the submittal of the first accepted run plus 20 penalty minutes for every previously rejected run for that problem.
 * There is no time consumed for a problem that is not solved.
 
-The scoring data must be updated automatically either (1) immediately when any
-judging event occurs which potentially changes the contest standings; or (2)
-periodically, taking into account any judging events which have occurred since
+The scoring data must be updated automatically either:
+# Immediately when any judging event occurs which potentially changes the contest standings; or 
+# periodically, taking into account any judging events which have occurred since
 the last update to the scoring data.
 
 If the CCS updates the scoring data periodically (as opposed to immediately
