@@ -530,25 +530,13 @@ regarding a contest problem.
 
 === Scoreboard Display Updating ===
 
-The CCS must provide a way to disable the updating of the scoreboard display
-seen by the teams and by the spectators. This disabling function must be able to
-be invoked at any time during the contest, and must be able to be done without
-stopping the contest or affecting team, judging, or contest administration
-operations in any other way.
+:The CCS must provide a way to disable the updating of the scoreboard display seen by the teams and by the spectators. This disabling function must be able to be invoked at any time during the contest, and must be able to be done without stopping the contest or affecting team, judging, or contest administration operations in any other way.
 
-It must be possible to reenable scoreboard display updating at any time after it
-has been disabled, again without stopping the contest or affecting contest
-operations in any way.
+:It must be possible to reenable scoreboard display updating at any time after it has been disabled, again without stopping the contest or affecting contest operations in any way.
 
-During times when the scoreboard display updating is disabled, the CCS must
-provide a method for both teams and spectators to view the scoreboard display
-which was most recently viewable prior to the disable operation taking place.
-(This is generally referred to as the ability to freeze the scoreboard display).
+:During times when the scoreboard display updating is disabled, the CCS must provide a method for both teams and spectators to view the scoreboard display which was most recently viewable prior to the disable operation taking place. (This is generally referred to as the ability to ''freeze'' the scoreboard display).
 
-During times when the scoreboard display updating is disabled the CCS must
-provide the ability for the World Finals Contest Director and/or his/her designee
-to look at the up-to-date standings – that is, the standings as they would appear
-to teams and spectators if scoreboard updating were not disabled.
+:During times when the scoreboard display updating is disabled the CCS must provide the ability for the World Finals Contest Director and/or his/her designee to look at the up-to-date standings – that is, the standings as they would appear to teams and spectators if scoreboard updating were not disabled.
 
 === Contest Time ===
 
