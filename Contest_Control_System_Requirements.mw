@@ -198,6 +198,10 @@ Stopping the contest also means causing the contest clock to stop advancing.
 
 :Further, the CCS must support a secure mechanism which insures that teams may only invoke functions corresponding to their authentication credentials. (In other words, it must not be possible for a team connected with authentication credentials for a given team to invoke functions as if they were some other team, such as submitting a run on behalf of some other team).
 
+==== Creation of Authentication Data ====
+
+: If the CCS uses a login/password mechanism, it should generate login/password information for all teams when the team information is imported. It should also output the complete list of username/password pairs in a file using the [[#userdata.tsv]] format.
+
 ==== Changes To Authentication Data ====
 
 :The CCS must allow team authentication credential information to be changed dynamically by contest administration personnel during a contest without the necessity of stopping the contest.
