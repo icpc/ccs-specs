@@ -863,3 +863,22 @@ The Reservation ID for a team can be found in the
 [[#teams.tsv|teams.tsv]].
 
 Award is a string with value "gold", "silver", "bronze", "ranked" och "honorable" as appropriate.
+
+=== userdata.tsv ===
+
+A text file consisting on one line for each team in the contest, its username and password for the CCS.
+
+{| class="wikitable"
+! Field
+! Description
+! Example
+! Type
+|-
+| 1 || Team Number || 42 || integer
+|-
+| 2 || Institution name || University of Virginia  || string
+|-
+| 3 || Username || team-001 || string
+|-
+| 4 || Password || B!5MWJiy || string
+|}
