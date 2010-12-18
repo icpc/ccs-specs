@@ -696,7 +696,7 @@ regarding a contest problem.
 
 :* configure the available languages for the contest (that is, the mechanism for compilation and execution of programs for each programming language allowed by the World Finals);
 
-:* specify and/or change team and judge passwords;
+:* specify and/or change team and judge passwords (if used by the CCS);
 
 :* configure each contest problem description, including the name of the problem as seen by teams when they submit runs and/or reference a problem in a clarification request;
 
