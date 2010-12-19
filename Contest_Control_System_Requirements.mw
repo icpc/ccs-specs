@@ -471,11 +471,17 @@ regarding a contest problem.
 
 ==== External Notifications ====
 
-:The CCS must have an ability to send a message, called an ''external notification'', to a human at a destination outside the CCS indicating the judgment status of at least those runs which have received a YES judgment. Each external notification must include at least:
-# Identification of the team to whom the notification is directed
-# The problem to which the judgment applies
-# The judgment applied to the run
-# For runs with YES judgments, the color of balloon which applies to that problem (see Configuring Problems, below).
+:The CCS must have an ability to send a message, called an external notification, for every run which have received a YES judgment.  The external notification is sent to a human at a destination outside the CCS and must include at least
+:# A sequence number of the external notification. 
+:# Identification of the team that submitted the run.
+:# The contest time at which the run was submitted. 
+:# The problem to which the judgment applies.
+:# The color of balloon which applies to that problem (see Configuring Problems, below). 
+:# A list of all problems solved by the team so far, along with their balloon colors.
+
+:The sequence numbers assigned to the external notifications are used to detect if a notification is missing (e.g., due to printer malfunction). The CCS must provide at least one of the two following features: (1) the CCS must be able to resend a previously sent message with a given sequence number upon request; (2) the CCS must have an interface listing all external notifications, and allowing a user to access the data included in any one of them. Such a complete list of notifications must be protected in such a way that teams cannot access it.
+
+:It is optional whether the CCS also provides the ability to send external notifications for runs which receive NO judgments, but it must be possible to configure the CCS to only send external notifications for YES runs.
 
 :The primary purpose of the requirement for external notifications is to support “balloon runners” at the World Finals. For example, the CCS could send an external notification for each YES run to a designated printer; runners at the printer would use the notification to identify a team which should receive a balloon of a certain color. Alternatively, the CCS could send external notifications to a designated email account; runners could monitor that account to determine which teams should receive which color balloons.
 
