@@ -330,7 +330,7 @@ regarding a contest problem.
 
 ===== Time Limit Granularity =====
 
-:The execution time limit granularity must be at least in units of seconds, or optionally finer.
+:The execution time limit granularity must be at least in units of seconds.
 
 ==== Libraries ====
 
