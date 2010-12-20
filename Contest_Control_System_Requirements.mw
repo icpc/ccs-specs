@@ -118,9 +118,7 @@ Stopping the contest also means causing the contest clock to stop advancing.
 
 ==== Free Use ====
 
-:The CCS must either be in the public domain and freely useable, or the CCS must be the property of the person, company, or other entity which submits it for consideration and must be accompanied by a license granting to the ACM-ICPC the non-exclusive use of the CCS both for purposes of evaluation and testing and for actual use in the ICPC World Finals.
-
-'''FIXME''': "In the PD or the property of the entity which submits it" excludes open source (unless the property of the submitter). We should only require that the ICPC gets the license it needs. The license should include use at the ''next'' WF as well though.
+:The CCS must either be freely useable, or must be accompanied by a license granting to the ACM-ICPC the non-exclusive, non-revocable, non-tranbsferable rights of use of the CCS both for purposes of evaluation and testing and for actual use in the ICPC World Finals.
 
 ==== No Third-Party Licenses ====
 
