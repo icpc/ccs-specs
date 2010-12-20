@@ -857,7 +857,7 @@ A text file consisting on one line for each team in the contest, sorted in rank 
 The Reservation ID for a team can be found in the
 [[#teams.tsv|teams.tsv]].
 
-Award is a string with value "gold", "silver", "bronze", "ranked" och "honorable" as appropriate.
+Award is a string with value "gold", "silver", "bronze", "ranked" or "honorable" as appropriate.
 
 === userdata.tsv ===
 
