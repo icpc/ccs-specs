@@ -242,7 +242,7 @@ Stopping the contest also means causing the contest clock to stop advancing.
 
 ==== Submission Visibility ====
 
-:The CCS must insure that no team can see the run submissions of any other team.
+:The CCS must insure that no team can learn anything about the run submissions of any other team (other than what can be deduced from the scoreboard).
 
 === Clarification Submission ===
 
