@@ -799,7 +799,7 @@ The second line has the following format.
 |-
 | 3 || Contest short name ||The 2003 World Finals  || string
 |-
-| 4 || Contest date/time || 2003-03-25 00:00:00 || string YYYY-MM-DD hh:mm:ss
+| 4 || Contest date/time || 2003-03-25 00:00:00 -05|| string YYYY-MM-DD hh:mm:ss+/-zz (date, time with timezone)
 |}
 
 === groups.tsv ===
