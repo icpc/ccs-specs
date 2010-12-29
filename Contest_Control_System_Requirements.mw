@@ -766,14 +766,27 @@ regarding a contest problem.
 
  
  
-== Appendix: File formats ==
+== Appendix: File formats (version 1) ==
 
 All files should be encoded in utf-8.
 
 === contest.tsv ===
 
-A text file consisting of one line with tab separated fields as defined below.
+A text file consisting of two line with tab separated fields as defined below.
 
+The first line has the following format
+{| class="wikitable"
+! Field
+! Description
+! Example
+! Type
+|-
+| 1 || Label || file_version|| fixed string (always same value)
+|-
+| 2 || Version number || 1  || integer
+|}
+
+The second line has the following format.
 {| class="wikitable"
 ! Field
 ! Description
@@ -791,8 +804,22 @@ A text file consisting of one line with tab separated fields as defined below.
 
 === groups.tsv ===
 
-A text file consisting of one line for each group (super regionals at the WF) that needs to be tracked separately with regards to results. Each line has tab separated fields as defined below.
+A text file consisting of a version line and one line for each group (super regionals at the WF) that needs to be tracked separately with regards to results. Each line has tab separated fields as defined below.
 
+
+The first line has the following format
+{| class="wikitable"
+! Field
+! Description
+! Example
+! Type
+|-
+| 1 || Label || file_version|| fixed string (always same value)
+|-
+| 2 || Version number || 1  || integer
+|}
+
+Then follow several lines with the following format (one per team group).
 {| class="wikitable"
 ! Field
 ! Description
@@ -808,8 +835,22 @@ A text file consisting of one line for each group (super regionals at the WF) th
 
 === teams.tsv ===
 
-A text file consisting on one line for each team in the contest. Each line has tab separated fields as defined below.
+A text file consisting of a version line and one line for each team in the contest. Each line has tab separated fields as defined below.
 
+The first line has the following format
+{| class="wikitable"
+! Field
+! Description
+! Example
+! Type
+|-
+| 1 || Label || file_version|| fixed string (always same value)
+|-
+| 2 || Version number || 1  || integer
+|}
+
+
+Then follow several lines with the following format (one per team).
 {| class="wikitable"
 ! Field
 ! Description
@@ -833,8 +874,21 @@ A text file consisting on one line for each team in the contest. Each line has t
 
 === export.tsv ===
 
-A text file consisting on one line for each team in the contest, sorted in rank order. Each line has tab separated fields as defined below.
+A text file consisting of a version  line and one line for each team in the contest, sorted in rank order. Each line has tab separated fields as defined below.
 
+The first line has the following format
+{| class="wikitable"
+! Field
+! Description
+! Example
+! Type
+|-
+| 1 || Label || file_version|| fixed string (always same value)
+|-
+| 2 || Version number || 1  || integer
+|}
+
+Then follow several lines with the following format (one per team).
 {| class="wikitable"
 ! Field
 ! Description
@@ -861,7 +915,19 @@ Award is a string with value "gold", "silver", "bronze", "ranked" or "honorable"
 
 === userdata.tsv ===
 
-A text file consisting on one line for each team in the contest, its username and password for the CCS.
+A text file consisting of a version line and  one line for each team in the contest, its username and password for the CCS.
+
+The first line has the following format
+{| class="wikitable"
+! Field
+! Description
+! Example
+! Type
+|-
+| 1 || Label || file_version|| fixed string (always same value)
+|-
+| 2 || Version number || 1  || integer
+|}
 
 {| class="wikitable"
 ! Field
