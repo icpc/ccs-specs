@@ -228,7 +228,7 @@ Stopping the contest also means causing the contest clock to stop advancing.
 
 :The CCS must arrange that each submission is uniquely identified as to which team submitted it, and must insure that no team can submit a run without having first provided the appropriate team authentication credentials.
 
-==== Submission Tracking ====
+==== Run Timestamping ====
 
 :The CCS must associate and maintain with each run submission a timestamp indicating the time at which the run was submitted. The granularity of the timestamp must be at least down to the level of minutes, although timestamps with even finer granularity are allowed. (Note that timestamp granularities which are too fine may be compromised by factors such as network delays.)
 
