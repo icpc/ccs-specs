@@ -176,6 +176,12 @@ Stopping the contest also means causing the contest clock to stop advancing.
 
 :The CCS must provide the ability to configure each of the contest problems separately. This means that all aspects of the description of a contest problem – for example the title, input data specification, runtime limit, problem validator (see below), etc. – must be configurable on a per-problem basis.
 
+==== Input/Output Methods ====
+
+:The CCS must be able to operate in such a way that submitted runs
+receive problem input data on their standard input stream, and are
+expected to write to their standard output stream.
+
 ==== Problem Enabling/Disabling ====
 
 :The CCS must provide a mechanism to enable and disable each contest problem separately.
