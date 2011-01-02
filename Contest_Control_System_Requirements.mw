@@ -262,7 +262,7 @@ regarding a contest problem.
 
 :The CCS must arrange that each clarification request is uniquely identified as to which team submitted it, and must insure that no team can submit a clarification request without having first provided the appropriate team authentication credentials.
 
-==== Clarification Tracking ====
+==== Clarification Timestamping ====
 
 :The CCS must associate and maintain with each clarification request a timestamp indicating the contest-relative time at which the clarification request was submitted. The granularity of the timestamp must be at least down to the level of minutes, although timestamps with finer granularity are allowed.
 
