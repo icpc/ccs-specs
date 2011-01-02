@@ -236,15 +236,7 @@ Stopping the contest also means causing the contest clock to stop advancing.
 
 ==== Run Timestamping ====
 
-:The CCS must associate and maintain with each run submission a timestamp indicating the time at which the run was submitted. The granularity of the timestamp must be at least down to the level of minutes, although timestamps with even finer granularity are allowed. (Note that timestamp granularities which are too fine may be compromised by factors such as network delays.)
-
-:'''Comment''': it has been suggested that the term "minutes" in the preceding paragraph should be replaced with "seconds".  This has to be resolved. 
- 
-:Arguments against the change:
-::* The World Finals does not use seconds in computing time penalty; the only reference to time units in the World Finals rules is:  "The time consumed for a solved problem is the time elapsed from the beginning of the contest to the submittal of the first accepted run plus 20 penalty minutes for every previously rejected run for that problem. "
-
-:Arguments in favor of the change:
-::*
+:The CCS must associate and maintain with each run submission a timestamp indicating the time at which the run was submitted. The granularity of the timestamp should be as fine as reasonable, but at least down to the level of seconds.
 
 ==== Submission Security ====
 
