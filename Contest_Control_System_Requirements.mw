@@ -369,9 +369,9 @@ regarding a contest problem.
 :# If the submitted program crashes before the time-limit, the answer must be '''Run-time Error'''.
 :# If the submitted program runs longer than the time-limit, the answer must be '''Time-limit Exceeded'''.
 :# If the output of the submitted program is not accepted by the output validator, the answer must be '''Wrong Answer'''.
-:# Otherwise the answer must be '''Accepted'''.
+:# If the output of the submitted program is accepted by the output validator, the answer must be '''Accepted'''.
 
-:If an error that the CCS can not recover from during the judging process the answer must be '''Judging Error'''
+:Otherwise, or if an error occurs that the CCS can not recover from during the judging process the answer must be '''Judging Error'''.
 
 :Runs judged as '''Judging Error''' are considered pending for scoring purposes.
 
