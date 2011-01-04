@@ -607,7 +607,7 @@ regarding a contest problem.
 
 :It is a requirement that the CCS provide an ''external event feed API''.  This means that the CCS must have a mechanism for external processes to connect to the CCS and obtain dynamic real-time updates regarding the current state of the contest.
 
-:The details of the required mechanism for the external event feed API are currently under development; see [[External Event Feed API|Event Feed API]] for additional information.
+:'''Comment''': The details of the required mechanism for the external event feed API are currently under development; see [[External Event Feed API|Event Feed API]] for additional information.
 
 === Human Readable Results ===
 
