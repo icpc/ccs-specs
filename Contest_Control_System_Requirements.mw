@@ -870,6 +870,47 @@ Then follow several lines with the following format (one per team).
 
 === scoreboard.tsv ===
 
+A text file consisting of a version  line and one line for each team in the contest, sorted in rank order. Each line has tab separated fields as defined below.
+
+The first line has the following format
+{| class="wikitable"
+! Field
+! Description
+! Example
+! Type
+|-
+| 1 || Label || file_version || fixed string (always same value)
+|-
+| 2 || Version number || 1 || integer
+|}
+
+Then follow several lines with the following format (one per team).
+{| class="wikitable"
+! Field !! Descriptionc !! Example !! Type
+|-
+| 1 || Team name || Hoos || string
+|-
+| 2 || Reservation ID || 24314|| integer
+|-
+| 3 || Rank in contest || 1 || integer
+|-
+| 4 || Number of problems the team has solved || 4 || integer
+|-
+| 5 || Total Time || 534 || integer
+|-
+| 6 || Time of the last submission || 233 || integer
+|-
+| 6 + 2''i'' - 1 || Number of submissions for problem ''i'' || 2 || integer
+|-
+| 6 + 2''i'' || Time when problem was solved || 233 || integer
+|-
+|}
+
+The Reservation ID for a team can be found in the
+[[#teams.tsv|teams.tsv]].
+
+The time when problem was solved must be < 0 when the problem was not solved.
+
 === results.tsv ===
 
 A text file consisting of a version  line and one line for each team in the contest, sorted in rank order. Each line has tab separated fields as defined below.
