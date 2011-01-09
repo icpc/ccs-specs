@@ -342,6 +342,8 @@ regarding a contest problem.
 
 :The CCS must provide a mechanism which automatically prevents a submitted program from performing operations which are defined by the judges as being prohibited in the contest. Examples of prohibited operations include, but are not limited to, invoking prohibited system calls, using prohibited libraries, and accessing prohibited external resources such as prohibited files or language interpreters.
 
+:'''Comment''': These need to be defined better/at all. [[User:Niemela|Fredrik Niemelä]] 00:36, 10 January 2011 (CET)
+
 ==== Judge Responses ====
 
 :The CCS must answer each submitted run with one of the following responses:
