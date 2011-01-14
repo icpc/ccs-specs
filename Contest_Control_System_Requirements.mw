@@ -570,13 +570,13 @@ regarding a contest problem.
 
 == Data Export ==
 
-=== External Scoring Data File ===
+=== Scoreboard ===
 
 :The CCS must be capable of generating an external file containing the current scoreboard. The format of this file must be as defined in [[#scoreboard.tsv|the appendix]].
 
 :The CCS must automatically save an updated copy of the external scoring data file whenever the scoring data itself is updated as described above.
 
-=== Contest Standings Upload ===
+=== Final results ===
 
 :The CCS must be capable of generating an external file containing the final standings of the World Finals contest computed as described in the World Finals rules and the section on Scoring. The format of this file must be as defined in [[#export.tsv|the appendix]].
 
@@ -586,7 +586,9 @@ regarding a contest problem.
 
 :'''Comment''': The details of the required mechanism for the external event feed API are currently under development; see [[External Event Feed API|Event Feed API]] for additional information.
 
-=== Human Readable Results ===
+=== Human readable scoreboard ===
+
+=== Human Readable Final Results ===
 
 :'''Comment''': This section is currently under development.
 
