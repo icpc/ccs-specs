@@ -491,10 +491,10 @@ regarding a contest problem.
 
 :The CCS must support these filters to be any combination of filters of the following type.
 
-:* A specific (single) run.
-:* All runs which have been submitted for a specific problem.
-:* All runs which have been submitted using a specific language.
-:* All runs which have been assigned any specific one of the allowable run judgments as defined in [[#Judge Responses|Judge Responses]], or all runs that received any judment other than "Accepted" (that is, all rejected runs).
+:# A specific (single) run.
+:# All runs which have been submitted for a specific problem.
+:# All runs which have been submitted using a specific language.
+:# All runs which have been assigned any specific one of the allowable run judgments as defined in [[#Judge Responses|Judge Responses]], or all runs that received any judgment other than "Accepted" (that is, all rejected runs).
 
 :Thus, for example, it must be possible to select "all rejected runs for problem B", "all time-limit exceeded runs using Java for problem C", or "all runs in C++".
 
