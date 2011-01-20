@@ -597,15 +597,11 @@ regarding a contest problem.
 
 :The CCS must include a “Team Guide” document in PDF format. The Team Guide must provide all the necessary instructions showing how a contest team utilizes the functions of the team interface, including how to:
 
-:* log into the CCS;
-
-:* specify the parameters for and how to submit a run;
-
-:* specify the data for and how to submit a clarification request;
-
-:* examine the status of previously submitted runs and clarification requests;
-
-:* log out of the CCS.
+:# log into the CCS;
+:# specify the parameters for and how to submit a run;
+:# specify the data for and how to submit a clarification request;
+:# examine the status of previously submitted runs and clarification requests;
+:# log out of the CCS.
 
 :The Team Guide must also describe the way in which judge’s responses to submitted runs and clarifications are received by teams.
 
