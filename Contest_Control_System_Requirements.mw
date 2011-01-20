@@ -607,33 +607,20 @@ regarding a contest problem.
 
 === Judge’s Guide ===
 
-:The CCS must include a “Judge’s Guide” document in PDF format. The Judge’s Guide must provide all the necessary instructions showing how a human contest judge utilizes the functions of the human judge interface, including how to:
-
-:* log into the CCS;
-
-:* see a list of all submitted runs and select any run from the list;
-
-:* determine whether or not the selected run has already had a judgment applied to it and if so what judgment was assigned;
-
-:* compile and execute the program specified in the selected run, with the corresponding contest problem data automatically supplied to the program;
-
-:* view the output produced by the program when run against the specified input data;
-
-:* choose a judgment and assign that judgment to the submitted run, or return the run to the system without altering any stored aspect of its state;
-
-:* choose whether or not a notification should be sent over the network to the team which submitted the run apprising them of the judgment assigned to the run;
-
-:* see a list of all clarification requests and select any clar from the list;
-
-:* Determine what answer was returned to the team if the clar has already been answered;
-
-:* Compose an answer to the clar and send it, along with the text of the original clarification request, to the team;
-
-:* Optionally choose to also send the clarification request text and answer to all teams in the contest;
-
-:* compose a message and broadcast that message over the contest network to all teams in the contest; and
-
-:* Log out of the CCS.
+:The CCS must include a “Judge’s Guide” document in PDF format. The Judge’s Guide must provide all the necessary instructions showing how a human contest judge utilizes the functions of the human judge interface, including how to: 
+:# log into the CCS; 
+:# see a list of all submitted runs and select any run from the list; 
+:# determine whether or not the selected run has already had a judgment applied to it and if so what judgment was assigned; 
+:# compile and execute the program specified in the selected run, with the corresponding contest problem data automatically supplied to the program; 
+:# view the output produced by the program when run against the specified input data; 
+:# choose a judgment and assign that judgment to the submitted run, or return the run to the system without altering any stored aspect of its state; 
+:# choose whether or not a notification should be sent over the network to the team which submitted the run apprising them of the judgment assigned to the run; 
+:# see a list of all clarification requests and select any clar from the list; 
+:# Determine what answer was returned to the team if the clar has already been answered; 
+:# Compose an answer to the clar and send it, along with the text of the original clarification request, to the team; 
+:# Optionally choose to also send the clarification request text and answer to all teams in the contest; 
+:# compose a message and broadcast that message over the contest network to all teams in the contest; and
+:# Log out of the CCS.
 
 :'''Comment''': the above list needs to be updated to match updated Judge's topics, including the new section on "Rejudging"
 
