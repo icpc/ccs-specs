@@ -413,21 +413,14 @@ regarding a contest problem.
 
 :The CCS must provide a human judge with the ability to perform each of the following operations:
 
-:* See a list of all submitted runs, where the list includes (for each run) the contest-relative time at which the run was submitted, the problem for which the run was submitted, the language specified in the run submission, and any judgments applied to the run by either a human judge or by the automated judging system;
-
-:* Compile and execute the program contained in any specific run submission, with the corresponding contest problem data automatically supplied to the program;
-
-:* View the output produced by the program when run against the specified input data;
-
-:* Download and view the source code contained in any specific submitted run;
-
-:* View the compiler output resulting from compiling any specific run utilizing the compiler arguments configured in the CCS;
-
-:* View the Validator output resulting from invoking the external validator associated with the contest problem for any specific submitted run;
-
-:* View the judge's input data file associated with the contest problem for any specific submitted run;
-
-:* View the "judge's output" (the "correct answer" file) associated with the contest problem for any specific submitted run;
+:# See a list of all submitted runs, where the list includes (for each run) the contest-relative time at which the run was submitted, the problem for which the run was submitted, the language specified in the run submission, and any judgments applied to the run by either a human judge or by the automated judging system; 
+:# Compile and execute the program contained in any specific run submission, with the corresponding contest problem data automatically supplied to the program; 
+:# View the output produced by the program when run against the specified input data; 
+:# Download and view the source code contained in any specific submitted run; 
+:# View the compiler output resulting from compiling any specific run utilizing the compiler arguments configured in the CCS; 
+:# View the Validator output resulting from invoking the external validator associated with the contest problem for any specific submitted run; 
+:# View the judge's input data file associated with the contest problem for any specific submitted run; 
+:# View the "judge's output" (the "correct answer" file) associated with the contest problem for any specific submitted run;
 
 ==== Simultaneous Judging ====
 
