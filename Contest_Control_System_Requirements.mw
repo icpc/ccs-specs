@@ -514,17 +514,14 @@ regarding a contest problem.
 
 :The CCS must be capable of automatically generating up-to-date scoring data.6 The scoring data must contain all information required to compute the current contest standings using the World Finals scoring algorithm.7 In particular, the World Finals scoring algorithm includes the following requirements which must be considered by the CCS when generating scoring data:
 
-:* Teams are ranked according to the most problems solved.
-
-:* Teams placing in the first twelve places who solve the same number of problems are ranked first by least total time and, if need be, by the earliest time of submittal of the last accepted run.
-
-:* The total time is the sum of the time consumed for each problem solved. The time consumed for a solved problem is the time elapsed from the beginning of the contest to the submittal of the first accepted run plus 20 penalty minutes for every previously rejected run for that problem.
-
-:* There is no time consumed for a problem that is not solved.
+:# Teams are ranked according to the most problems solved.
+:# Teams placing in the first twelve places who solve the same number of problems are ranked first by least total time and, if need be, by the earliest time of submittal of the last accepted run.
+:# The total time is the sum of the time consumed for each problem solved. The time consumed for a solved problem is the time elapsed from the beginning of the contest to the submittal of the first accepted run plus 20 penalty minutes for every previously rejected run for that problem.
+:# There is no time consumed for a problem that is not solved.
 
 :The scoring data must be updated automatically either:
-::# Immediately when any judging event occurs which potentially changes the contest standings; or 
-::# periodically, taking into account any judging events which have occurred since the last update to the scoring data.
+:# Immediately when any judging event occurs which potentially changes the contest standings; or 
+:# periodically, taking into account any judging events which have occurred since the last update to the scoring data.
 
 :If the CCS updates the scoring data periodically (as opposed to immediately when a judging event occurs), then the update period must be able to be controlled by contest personnel and be able to be specified to a granularity of at least one minute. Further, it must be possible to change the scoring data update period while the contest is running, without the necessity of stopping the contest or the necessity of shutting down the CCS.
 
