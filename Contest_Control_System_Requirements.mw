@@ -565,7 +565,7 @@ regarding a contest problem.
 
 === Final results ===
 
-:The CCS must be capable of generating an external file containing the final standings of the World Finals contest computed as described in the World Finals rules and the section on Scoring. The format of this file ([[#results.tsv| results.tsv]]) must be as defined in the [[#results.tsv|Appendix]].
+:The CCS must be capable of generating an external file containing the final standings of the World Finals contest computed as described in the World Finals rules and the section on Scoring. The format of this file ([[#results.tsv|results.tsv]]) must be as defined in the [[#results.tsv|Appendix]].
 
 === Event Feed ===
 
