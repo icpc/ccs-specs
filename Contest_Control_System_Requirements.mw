@@ -297,7 +297,7 @@ regarding a contest problem.
 
 ==== Clarification Timestamping ====
 
-:The CCS must associate and maintain with each clarification request a timestamp indicating the contest-relative time at which the clarification request was submitted. The granularity of the timestamp should be as fine as reasonable, but at least down to the level of seconds.
+:The CCS must associate and maintain two timestamps indicating the time at which each clarification was submitted. The first is the contest time (aka contest clock), and must be at the granularity of seconds. The second is a timestamp of the current wall clock time, and must have finer granularity than seconds.
 
 ==== Clarification Security ====
 
