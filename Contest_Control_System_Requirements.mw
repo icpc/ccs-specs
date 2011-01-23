@@ -329,7 +329,7 @@ regarding a contest problem.
 
 ==== Libraries ====
 
-:The CCS must insure that when a program submitted by a team is compiled and linked (as appropriate to the language), any libraries which are linked with or otherwise utilized by the program are strictly those provided by or specified by the judges. For example, the CCS must not allow a program compiled and linked with libraries from a team’s machine to be utilized for judging purposes.
+:The CCS must ensure that when a program submitted by a team is compiled and linked (as appropriate to the language), any libraries which are linked with or otherwise utilized by the program are strictly those provided by or specified by the judges. For example, the CCS must not allow a program compiled and linked with libraries from a team’s machine to be utilized for judging purposes.
 
 ==== Security ====
 
