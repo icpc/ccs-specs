@@ -307,7 +307,7 @@ regarding a contest problem.
 
 ==== Team Review ====
 
-:The CCS must provide each team with a capability for reviewing the status of each run the team has submitted, including: the run submission time; the language and problem specified in the submission; and the response(s) from the judging system to the submission if any responses have occurred yet.
+:The CCS must provide each team with a capability for reviewing the status of each run the team has submitted, including: the contest time of the submission; the language and problem specified in the submission; and the response(s) from the judging system to the submission if any responses have occurred yet.
 
 ==== Submission Security ====
 
