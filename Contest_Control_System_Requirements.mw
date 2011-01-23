@@ -86,7 +86,8 @@ and ''running''.
 
 There exists a logical notion called the ''contest clock'' associated with the contest.  
 The contest clock advances, at the same rate as wall-clock time, whenever the contest is "running".  
-The contest clock does not advance during times when the contest is "stopped".
+The contest clock does not advance during times when the contest is "stopped". The contest clock time
+is also referred to as "contest time".
 (The "time" represented by the contest clock is used in computing the standings in the contest;
 see [[#Scoring]], below.)
 
@@ -95,8 +96,6 @@ functions, including ability to submit runs and clarification requests, see the 
 previous submissions and clarification requests, and perform all other team-related
 functions specified in this standard. Likewise, when the contest is running, judges
 may invoke any judging operations specified in this standard. 
-
-When the contest is stopped, teams may not use their machines, and hence may not perform any of the team-related functions specified in this standard.
 
 The use of the phrase “starting the contest” in this standard refers to
 transitioning to the running state as described above, whether initially at the beginning
