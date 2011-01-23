@@ -560,9 +560,9 @@ regarding a contest problem.
 
 === Contest Time ===
 
-:The CCS must provide a way to start and stop the logical contest clock – that is, the mechanism which counts “elapsed time” in the contest. Specifically, it must be possible to automatically adjust contest scoring, and the resulting scoreboard display, to ignore one or more selected periods of real wall-clock time in computing the elapsed time used for the penalty-time component of the contest standings scoring algorithm.
+:The CCS must provide a way to start and stop the logical contest clock (i.e. contest time) – that is, the mechanism which counts “elapsed time” in the contest. Specifically, it must be possible to automatically adjust contest scoring, and the resulting scoreboard display, to ignore one or more selected periods of real wall-clock time in computing the elapsed time used for the penalty-time component of the contest standings scoring algorithm.
 
-:The CCS must insure that teams cannot submit runs during any time when the logical contest clock is stopped, including before the contest is started, during times when the contest is stopped before it is completed, and after the contest is completed.
+:The CCS must insure that teams cannot submit runs during any time when the contest clock is stopped, including before the contest is started, during times when the contest is stopped before it is completed, and after the contest is completed.
 
 == Data Export ==
 
