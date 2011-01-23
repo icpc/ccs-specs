@@ -142,6 +142,15 @@ Stopping the contest also means causing the contest clock to stop advancing.
 
 :The CCS must also support persistence of the contest state once the contest has been started. This means that following a shutdown of the CCS, or a power failure on the machine(s) on which the CCS runs, it must be possible to automatically restore the contest state to what it was prior to the shutdown or power failure. The contest state for purposes of this requirement includes all data regarding submitted runs, submitted clarification requests, answers to clarification requests, run judgments, and similar data defining and/or affecting the standings of the contest.
 
+==== Contest Time, Timestamps, and Time Granularity ====
+
+TBD
+:The CCS must 
+
+:The CCS must associate and maintain the contest-relative time (here-by "contest-time") that a run or clarification was submitted. This is the total time since the beginning of the contest (subject to any subsequent stops and restarts) that the submission was received at the server, with second granularity.
+
+:All contest events (runs, clarifications, judgements, etc.) must be timestamped with the current wall-clock time when they arrive at the server. Timestamps must have finer granularity than seconds.
+
 == Contest Configuration ==
 
 === Team Registration ===
