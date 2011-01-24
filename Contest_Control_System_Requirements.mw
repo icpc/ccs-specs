@@ -183,11 +183,19 @@ Stopping the contest also means causing the contest clock to stop advancing.
 
 :The CCS must be able to operate in such a way that submitted runs receive problem input data on their standard input stream, and are expected to write to their standard output stream.
 
-==== Problem Enabling/Disabling ====
+==== Problem Enabling, Pausing, and Disabling ====
 
-:The CCS must provide a mechanism to enable and disable each contest problem separately.
+:Each contest problem can be in one of three mutually exclusive states: enabled, paused, and disabled.  The CCS must provide a mechanism to enable, pause and disable each contest problem separately without the need of stopping the contest.
 
-:'''Comment''': This section needs to expand on the meaning of "disabling" a problem. For example, it needs to explicitly identify, for a "disabled problem", how the disabling affects (1) a Team's ability to submit runs for that problem; (2) a judge's ability to judge that problem; and (3) how the disabled problem affects scoring (or not).  
+:When a problem is disabled:
+:# Teams should not be able to submit solutions to the problem. The problem name should be removed or disabled from submit interfaces where present.
+:# Automatic judging of the problem should be disabled.
+:# Submissions on the problem should not affect the scoreboard at all.
+
+:When a problem is paused:
+:# Teams are able to submit to the problem as if it was enabled.
+:# Automatic judging of the problem should be disabled.
+:# Submissions on the problem should be included in the scoreboard.
 
 ==== Number of Problems ====
 
