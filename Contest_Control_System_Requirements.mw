@@ -846,7 +846,7 @@ Then follow several lines with the following format (one per team).
 The Reservation ID for a team can be found in the
 [[#teams.tsv|teams.tsv]].
 
-The time when problem was solved must be < 0 when the problem was not solved.
+The time when problem was solved must be < 0 when the problem was not solved. Same for time of last submission if there were none.
 
 === results.tsv ===
 
