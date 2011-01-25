@@ -243,7 +243,7 @@ Stopping the contest also means causing the contest clock to stop advancing.
 
 :The CCS must allow team authentication credential information to be changed dynamically by contest administration personnel during a contest without the necessity of stopping the contest.
 
-==== Revocation Of Authentication ====
+==== Logging Out ====
 
 :The CCS must support a mechanism for each team to disconnect (remove previously-supplied authentication credentials) from the contest, with the effect that no other user of the computer system not possessing that team’s authentication credentials will be able to invoke CCS functions as if they did possess those credentials.
 
