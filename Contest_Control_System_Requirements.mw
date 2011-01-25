@@ -509,15 +509,24 @@ regarding a contest problem.
 
 :Thus, for example, it must be possible to select "all rejected runs for problem B", "all time-limit exceeded runs using Java for problem C", or "all runs in C++".
 
-==== Changing Judgments ==== 
-  
-===== Judgment Choices ===== 
- 
-:The CCS must support the ability for a human judge to assign, to any run in a set of rejudged runs, an updated judgment value chosen from among any of the allowable run judgments as defined in [[#Judge Responses|Judge Responses]].
+==== Rejudgment Mode ====
 
-===== Judgment Change Security ===== 
-   
-:The CCS must support a separate authentication mechanism which encapsulates the ability to change a run judgment. Authentication credentials for using this change-judgment mechanism are to be provided to the World Finals Director of Judging and/or his/her designee, pursuant to the ICPC World Finals rules identifying the World Finals Judges as being solely responsible for [http://cm.baylor.edu/ICPCWiki/Wiki.jsp?page=World%20Finals%20Rules#section-World+Finals+Rules-ScoringOfTheFinals determining the correctness of submitted runs].
+:When selecting which runs to rejudge, it must be possible to specify whether these runs are to be rejudged automatically or whether they are to be rejudged manually.
+
+==== Automatic Rejudging ====
+
+:When a set of runs is selected to be rejudged automatically, the CCS should rejudge them automatically, by the process described in [[#Automated_Judging|Automated Judging]].
+
+==== Manual Rejudging ====
+
+:When a set of runs is selected to be rejudged manually, the CCS must support the ability for a human judge to assign, to each of the selected runs, an updated judgment value chosen from among any of the allowable run judgments as defined in [[#Judge_Responses|Judge Responses]].  The CCS must support a separate authentication mechanism which encapsulates the ability to change a run judgment.
+
+==== Notification of Rejudgment ====
+
+:It must be possible to configure the extent to which the CCS sends [[#Team_Judgment_Notifications|Notifications]] about rejudged runs.  In particular, the following three options should be available.
+:# Send no notifications about the rejudged runs.
+:# Only send a notification if the judgment of the run was changed.
+:# Send notifications for all the rejudged runs.
 
 == Scoring ==
 
