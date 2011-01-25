@@ -147,7 +147,7 @@ Stopping the contest also means causing the contest clock to stop advancing.
 
 ==== Initialization File Loading ====
 
-:The CCS must be able to read an ICPC Contest Management System (CMS)-generated initialization file containing a list of teams registered for the World Finals, and use the data in this file to create automatically whatever internal representation is necessary to allow each team (and only the teams) specified in the registration list to participate in the World Finals contest.  The format and content of the CMS-generated initialization file is given in the [[#Appendix:_File_formats| Appendix]].  Uses of the data in the initialization file include but are not limited to: controlling login and/or other CCS access by limiting it to teams listed in the file; and posting team and school name data in the standings output as described below.
+:The CCS must be able to read an ICPC Contest Management System (CMS)-generated initialization file containing a list of teams registered for the World Finals, and use the data in this file to create automatically whatever internal representation is necessary to allow each team (and only the teams) specified in the registration list to participate in the World Finals contest.  The format and content of the CMS-generated initialization file is given in the [[#Appendix:_File_formats| Appendix]].
 
 ==== Registration Data Editing ====
 
