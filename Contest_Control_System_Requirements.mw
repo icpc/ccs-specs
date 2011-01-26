@@ -153,6 +153,12 @@ Stopping the contest also means causing the contest clock to stop advancing.
 
 :The CCS must allow updating of the team registration data without restarting or stopping the contest.
 
+=== Account Disabling ===
+
+:The CCS must have a mechanism to disable any account used by users of the system (either human users or other systems), without the need for starting or stopping the contest.  For example, this includes [[#Secure_Authentication|team accounts]], judge accounts, and the [[Event_Feed|Event feed]].
+
+:If a user is currently logged in when the associated account is being disabled, that user should become logged out of the system.
+
 === Judge’s Responses ===
 
 ==== Clarification Responses ====
