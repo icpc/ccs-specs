@@ -251,11 +251,11 @@ Stopping the contest also means causing the contest clock to stop advancing.
 
 :The CCS may optionally rely on the underlying operating system account login/password mechanism for purposes of meeting the requirements of this section, provided that it is the case that the CCS enforces all of the requirements of this section, including but not limited to the requirement that teams not be allowed to invoke functions as if they were some team other than that specified by their login credentials.
 
-=== Run Submission ===
+=== Submitting a Run ===
 
 :For purposes of this standard, the terms ''run'' and ''submission'', and any combination thereof, refer to a set of source code files submitted as a single unit at one time to the judging system by a team as a proposed solution to a given problem.
 
-==== Network Submission ====
+==== Submission Mechanism ====
 
 :The CCS must provide each team with the ability to submit a run over the network to the judging system. 
 
@@ -267,15 +267,19 @@ Stopping the contest also means causing the contest clock to stop advancing.
 
 :The CCS must arrange that each submission is uniquely identified as to which team submitted it, and must insure that no team can submit a run without having first provided the appropriate team authentication credentials.
 
-==== Run Timestamping ====
+==== Submission Timestamping ====
 
 :The CCS must associate and maintain two timestamps indicating when each run was submitted. The first is the contest time (aka contest clock), and must be at the granularity of seconds. The second is a timestamp of the current wall clock time, and must have finer granularity than seconds.
+
+==== Team Viewing of Submission Status ====
+
+:The CCS must provide each team with a capability for reviewing the status of each run the team has submitted, including: the contest time of the submission; the language and problem specified in the submission; and the response(s) from the judging system to the submission if any responses have occurred yet.
 
 ==== Submission Security ====
 
 :The CCS must insure that no team can learn anything about the run submissions of any other team (other than what can be deduced from the scoreboard).
 
-=== Clarification Submission ===
+=== Submitting a Clarification ===
 
 For purposes of this standard, the terms ''clarification'', ''clarification request'', and
 ''clar'' all refer to a message sent from a team to the judges asking for clarification
@@ -289,7 +293,7 @@ regarding a contest problem.
 
 :The text content of a clarification request must be able to be specified by the team. The CCS may optionally require the team to identify the problem about which a clarification is being requested, but this is not a requirement (since the team can identify the problem within the text of the clarification message).
 
-==== Clarification Authentication ====
+==== Clarification Identification ====
 
 :The CCS must arrange that each clarification request is uniquely identified as to which team submitted it, and must insure that no team can submit a clarification request without having first provided the appropriate team authentication credentials.
 
@@ -297,33 +301,18 @@ regarding a contest problem.
 
 :The CCS must associate and maintain two timestamps indicating when each clarification was submitted. The first is the contest time (aka contest clock), and must be at the granularity of seconds. The second is a timestamp of the current wall clock time, and must have finer granularity than seconds.
 
+==== Team Viewing of Clarification Status ====
+
+:The CCS must provide each team with a capability for reviewing the status of each clarification request the team has submitted, including: the contest time of the clarification request; the problem identified in the clarification request if identification of a specific problem was required by the CCS; and the response from the judges to the clarification if any response has occurred yet.
+
 ==== Clarification Security ====
 
 :The CCS must insure that no team can see the clarification requests of any other team, except as provided in the section [[Contest_Control_System#Human_Judge_Interface | Human Judge Interface]].
 
-=== Submitted Run Status ===
-
-==== Team Review ====
-
-:The CCS must provide each team with a capability for reviewing the status of each run the team has submitted, including: the contest time of the submission; the language and problem specified in the submission; and the response(s) from the judging system to the submission if any responses have occurred yet.
-
-==== Submission Security ====
-
-:The CCS must insure that no team can see the submitted run status or the judgments given to the submissions of any other team.
-
-=== Submitted Clarification Status ===
-
-==== Team Review ====
-
-:The CCS must provide each team with a capability for reviewing the status of each clarification request the team has submitted, including: the contest time of the submission; the problem identified in the submission if identification of a specific problem was required by the CCS; and the response from the judges to the clarification if any response has occurred yet.
-
-==== Clarification Security ====
-
-:The CCS must insure that no team can see the submitted clarification status of any other team.
 
 === Broadcast Messages ===
 
-==== Team Review ====
+==== Team Viewing of Broadcast Messages ====
 
 :The CCS must provide each team with a capability for viewing any broadcast messages sent by the judges (see [[Contest_Control_System#Issuing_Broadcast_Messages| Issuing Broadcast Messages]] under Judging).
 
