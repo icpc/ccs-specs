@@ -437,10 +437,6 @@ regarding a contest problem.
 
 :It must be possible for multiple human judges, working on different computers, to simultaneously perform the operations specified in this subsection (on different run submissions).
 
-==== Anonymous Judging ====
-
-:It must be possible for human judges to perform all judging functions specified in this subsection without being shown the identity of the team which submitted a run. (Thus for example it must be possible for the CCS to suppress a team’s identity in the list of submitted runs.)
-
 ==== Handling Clarifications ====
 
 ===== Viewing and Responding to Clarifications =====
