@@ -111,6 +111,30 @@ CCS meets all the requirements listed in this standard.
 
 :The CCS must also support persistence of the contest state once the contest has been started. This means that following a shutdown of the CCS, or a power failure on the machine(s) on which the CCS runs, it must be possible to automatically restore the contest state to what it was prior to the shutdown or power failure. The contest state for purposes of this requirement includes all data regarding submitted runs, submitted clarification requests, answers to clarification requests, run judgments, and similar data defining and/or affecting the standings of the contest.
 
+=== Secure Authentication ===
+
+==== Authentication Mechanism ====
+
+:The CCS must support a secure authentication mechanism for each registered team to gain access to the contest, and must enforce the rule that only teams who supply correct authentication credentials may invoke contest-related functions.
+
+:Further, the CCS must support a secure mechanism which insures that teams may only invoke functions corresponding to their authentication credentials. (In other words, it must not be possible for a team connected with authentication credentials for a given team to invoke functions as if they were some other team, such as submitting a run on behalf of some other team).
+
+==== Creation of Authentication Data ====
+
+: If the CCS uses a login/password mechanism, it should generate login/password information for all teams when the team information is imported. It should also output the complete list of username/password pairs in a file using the [[#userdata.tsv]] format.
+
+==== Changes To Authentication Data ====
+
+:The CCS must allow team authentication credential information to be changed dynamically by contest administration personnel during a contest without the necessity of stopping the contest.
+
+==== Logging Out ====
+
+:The CCS must support a mechanism for each team to disconnect (remove previously-supplied authentication credentials) from the contest, with the effect that no other user of the computer system not possessing that team’s authentication credentials will be able to invoke CCS functions as if they did possess those credentials.
+
+==== Underlying Implementation ====
+
+:The CCS may optionally rely on the underlying operating system account login/password mechanism for purposes of meeting the requirements of this section, provided that it is the case that the CCS enforces all of the requirements of this section, including but not limited to the requirement that teams not be allowed to invoke functions as if they were some team other than that specified by their login credentials.
+
 == Contest Configuration ==
 
 === Team Registration ===
@@ -269,30 +293,6 @@ Stopping the contest also means causing the contest clock to stop advancing.
 :# Send notifications for all the rejudged runs.
 
 == Team Interface ==
-
-=== Secure Authentication ===
-
-==== Authentication Mechanism ====
-
-:The CCS must support a secure authentication mechanism for each registered team to gain access to the contest, and must enforce the rule that only teams who supply correct authentication credentials may invoke contest-related functions.
-
-:Further, the CCS must support a secure mechanism which insures that teams may only invoke functions corresponding to their authentication credentials. (In other words, it must not be possible for a team connected with authentication credentials for a given team to invoke functions as if they were some other team, such as submitting a run on behalf of some other team).
-
-==== Creation of Authentication Data ====
-
-: If the CCS uses a login/password mechanism, it should generate login/password information for all teams when the team information is imported. It should also output the complete list of username/password pairs in a file using the [[#userdata.tsv]] format.
-
-==== Changes To Authentication Data ====
-
-:The CCS must allow team authentication credential information to be changed dynamically by contest administration personnel during a contest without the necessity of stopping the contest.
-
-==== Logging Out ====
-
-:The CCS must support a mechanism for each team to disconnect (remove previously-supplied authentication credentials) from the contest, with the effect that no other user of the computer system not possessing that team’s authentication credentials will be able to invoke CCS functions as if they did possess those credentials.
-
-==== Underlying Implementation ====
-
-:The CCS may optionally rely on the underlying operating system account login/password mechanism for purposes of meeting the requirements of this section, provided that it is the case that the CCS enforces all of the requirements of this section, including but not limited to the requirement that teams not be allowed to invoke functions as if they were some team other than that specified by their login credentials.
 
 === Submitting a Run ===
 
