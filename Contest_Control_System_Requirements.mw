@@ -329,6 +329,10 @@ regarding a contest problem.
 
 == Judge Interface ==
 
+=== Simultaneous Judging ===
+
+:It must be possible for multiple human judges, working on different computers, to simultaneously perform the operations specified in this subsection (on different run submissions).
+
 === Viewing Runs ===
 
 :The CCS must provide a human judge with the ability to perform each of the following operations:
@@ -341,10 +345,6 @@ regarding a contest problem.
 :# View the Validator output resulting from invoking the external validator associated with the contest problem for any specific submitted run; 
 :# View the judge's input data file associated with the contest problem for any specific submitted run; 
 :# View the "judge's output" (the "correct answer" file) associated with the contest problem for any specific submitted run;
-
-=== Simultaneous Judging ===
-
-:It must be possible for multiple human judges, working on different computers, to simultaneously perform the operations specified in this subsection (on different run submissions).
 
 === Handling Clarifications ===
 
