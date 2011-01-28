@@ -232,6 +232,42 @@ Stopping the contest also means causing the contest clock to stop advancing.
 :# Automatic judging of the problem should be disabled.
 :# Submissions on the problem should be included in the scoreboard.
 
+=== Rejudging === 
+
+==== Run Selection ==== 
+
+:The CCS must support the ability to rejudge a set of run submissions.  This means that a human judge must be able to provide the CCS with a filter of runs to be rejudged, based upon which the CCS automatically selects all runs matching the filter, and sets them to be rejudged.
+
+:The CCS must support these filters to be any combination of filters of the following type.
+
+:# A specific (single) run.
+:# All runs which have been submitted for a specific problem.
+:# All runs which have been submitted using a specific language.
+:# All runs which have been assigned any specific one of the allowable run judgments as defined in [[#Judge Responses|Judge Responses]], or all runs that received any judgment other than "Accepted" (that is, all rejected runs).
+
+:Thus, for example, it must be possible to select "all rejected runs for problem B", "all time-limit exceeded runs using Java for problem C", or "all runs in C++".
+
+==== Rejudgment Mode ====
+
+:When selecting which runs to rejudge, it must be possible to specify whether these runs are to be rejudged automatically or whether they are to be rejudged manually.
+
+==== Automatic Rejudging ====
+
+:When a set of runs is selected to be rejudged automatically, the CCS should rejudge them automatically, by the process described in [[#Automated_Judging|Automated Judging]].
+
+==== Manual Rejudging ====
+
+:When a set of runs is selected to be rejudged manually, the CCS must support the ability for a human judge to assign, to each of the selected runs, an updated judgment value chosen from among any of the allowable run judgments as defined in [[#Judge_Responses|Judge Responses]].
+
+:The CCS must support a separate authentication mechanism which encapsulates the ability to change a run judgment, and any manual changes to run judgments must be logged.
+
+==== Notification of Rejudgment ====
+
+:It must be possible to configure the extent to which the CCS sends [[#Team_Judgment_Notifications|Notifications]] about rejudged runs.  In particular, the following three options should be available.
+:# Send no notifications about the rejudged runs.
+:# Only send a notification if the judgment of the run was changed.
+:# Send notifications for all the rejudged runs.
+
 == Team Interface ==
 
 === Secure Authentication ===
@@ -382,42 +418,6 @@ regarding a contest problem.
 :Changing the state (disabling or enabling) of one or more specific judgment notification sources must be able to be done while the contest is under way, without the need to stop the contest.
 
 :Changing the state (disabling or enabling) of one or more specific judgment notification sources must be able to be done on a per-problem basis, so that the state of notification (enabled vs. disabled) for any given contest problem is independent of the corresponding state for another contest problem.
-
-=== Rejudging === 
-
-==== Run Selection ==== 
-
-:The CCS must support the ability to rejudge a set of run submissions.  This means that a human judge must be able to provide the CCS with a filter of runs to be rejudged, based upon which the CCS automatically selects all runs matching the filter, and sets them to be rejudged.
-
-:The CCS must support these filters to be any combination of filters of the following type.
-
-:# A specific (single) run.
-:# All runs which have been submitted for a specific problem.
-:# All runs which have been submitted using a specific language.
-:# All runs which have been assigned any specific one of the allowable run judgments as defined in [[#Judge Responses|Judge Responses]], or all runs that received any judgment other than "Accepted" (that is, all rejected runs).
-
-:Thus, for example, it must be possible to select "all rejected runs for problem B", "all time-limit exceeded runs using Java for problem C", or "all runs in C++".
-
-==== Rejudgment Mode ====
-
-:When selecting which runs to rejudge, it must be possible to specify whether these runs are to be rejudged automatically or whether they are to be rejudged manually.
-
-==== Automatic Rejudging ====
-
-:When a set of runs is selected to be rejudged automatically, the CCS should rejudge them automatically, by the process described in [[#Automated_Judging|Automated Judging]].
-
-==== Manual Rejudging ====
-
-:When a set of runs is selected to be rejudged manually, the CCS must support the ability for a human judge to assign, to each of the selected runs, an updated judgment value chosen from among any of the allowable run judgments as defined in [[#Judge_Responses|Judge Responses]].
-
-:The CCS must support a separate authentication mechanism which encapsulates the ability to change a run judgment, and any manual changes to run judgments must be logged.
-
-==== Notification of Rejudgment ====
-
-:It must be possible to configure the extent to which the CCS sends [[#Team_Judgment_Notifications|Notifications]] about rejudged runs.  In particular, the following three options should be available.
-:# Send no notifications about the rejudged runs.
-:# Only send a notification if the judgment of the run was changed.
-:# Send notifications for all the rejudged runs.
 
 == Judging ==
 
