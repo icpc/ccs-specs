@@ -424,7 +424,7 @@ regarding a contest problem.
 
 :# See a list of all clarification requests, where the list includes (for each clar) the team which submitted the request, the contest-relative time at which the clar was submitted, and an indication of whether or not an answer to the clar has been sent to the team which submitted it;
 :# Determine, for any specific clarification request, what answer was returned to the team if the clar has already been answered;
-:# Compose an answer to the clar and send it, along with the text of the original clarification request, to the team;=
+:# Compose an answer to the clar and send it, along with the text of the original clarification request, to the team;
 :# Optionally choose to also send the clarification request text and answer to all teams in the contest.
 
 ==== Default Answer ====
