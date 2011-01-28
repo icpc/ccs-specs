@@ -435,11 +435,11 @@ regarding a contest problem.
 
 :The CCS must provide the ability for a human judge to compose a message and broadcast that message over the contest network to all teams in the contest.
 
-=== Scoreboard display ===
+=== Scoreboard Display ===
 
-:During times when the scoreboard display updating is disabled the CCS must provide the ability for the World Finals Contest Director and/or his/her designee to look at the up-to-date standings – that is, the standings as they would appear to teams and spectators if scoreboard updating were not disabled.
+:The CCS must provide a mechanism for judges to view the current scoreboard. The scoreboard should be updated at least every 30 seconds.
 
-:'''Comment:''' This needs to be reworded slightly to fit into this section.[[User:Niemela|Fredrik Niemelä]] 19:13, 28 January 2011 (CET)
+:During times when the scoreboard updating is disabled, judges should still be able to view the current (updated) scoreboard.
 
 == Judging ==
 
