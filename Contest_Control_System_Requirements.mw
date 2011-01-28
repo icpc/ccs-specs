@@ -113,6 +113,8 @@ CCS meets all the requirements listed in this standard.
 
 === Secure Authentication ===
 
+:'''Comment:''' This section needs to be reworded to fit here. It should apply to admins and judges as well as teams.
+
 ==== Authentication Mechanism ====
 
 :The CCS must support a secure authentication mechanism for each registered team to gain access to the contest, and must enforce the rule that only teams who supply correct authentication credentials may invoke contest-related functions.
