@@ -331,6 +331,8 @@ regarding a contest problem.
 
 :The CCS must provide a mechanism for sending a judging response message to each team for each submitted run as soon as a judgment determination is made for that run. The judging response message must be transmitted automatically over the network at the time a judging decision is made (whether by the automated judging capability or by a human judge).
 
+:'''Comment:''' This needs to be reworded slightly to fit into this section.
+
 == Judge Interface ==
 
 === Simultaneous Judging ===
