@@ -828,7 +828,7 @@ Then follow several lines with the following format (one per team).
 |-
 | 2 || Reservation ID || 24314|| integer
 |-
-| 3 || Rank in contest || 1 || integer
+| 3 || Position in contest || 1 || integer
 |-
 | 4 || Number of problems the team has solved || 4 || integer
 |-
