@@ -427,10 +427,6 @@ regarding a contest problem.
 :# Compose an answer to the clar and send it, along with the text of the original clarification request, to the team;
 :# Optionally choose to also send the clarification request text and answer to all teams in the contest.
 
-==== Default Answer ====
-
-:The CCS must provide the ability for a judge to select a pre-configured "default answer" as the reply to a clarification.  The text of the "default answer" must be able to be changed without having to stop the contest.
-
 === Issuing Broadcast Messages ===
 
 :The CCS must provide the ability for a human judge to compose a message and broadcast that message over the contest network to all teams in the contest.
