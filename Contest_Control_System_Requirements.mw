@@ -207,7 +207,7 @@ Stopping the contest also means causing the contest clock to stop advancing.
 
 ==== Judge’s Data ====
 
-===== Judge's Data File =====
+===== Judge's Data Files =====
 
 :For each contest problem the CCS must accept a set of files containing the judge’s test data to be used for that problem.
 
