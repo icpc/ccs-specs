@@ -153,12 +153,6 @@ Stopping the contest also means causing the contest clock to stop advancing.
 
 :The CCS must allow updating of the team registration data without restarting or stopping the contest.
 
-=== Account Disabling ===
-
-:The CCS must have a mechanism to disable any account used by users of the system (either human users or other systems), without the need for starting or stopping the contest.  For example, this includes [[#Secure_Authentication|team accounts]], judge accounts, and the [[Event_Feed|Event feed]].
-
-:If a user is currently logged in when the associated account is being disabled, that user should become logged out of the system.
-
 === Clarification Default Answer ===
 
 :The CCS must provide the ability to configure a "default answer" (e.g., "No response, read problem statement.") to clarification requests, so that human judges can choose to reply to a clarification request by selecting the default answer rather than being required to enter a specific answer.
@@ -187,20 +181,6 @@ Stopping the contest also means causing the contest clock to stop advancing.
 
 :The CCS must be able to operate in such a way that submitted runs receive problem input data on their standard input stream, and are expected to write to their standard output stream.
 
-==== Problem Enabling, Pausing, and Disabling ====
-
-:Each contest problem can be in one of three mutually exclusive states: enabled, paused, and disabled.  The CCS must provide a mechanism to enable, pause and disable each contest problem separately without the need of stopping the contest.
-
-:When a problem is disabled:
-:# Teams should not be able to submit solutions to the problem. The problem name should be removed or disabled from submit interfaces where present.
-:# Automatic judging of the problem should be disabled.
-:# Submissions on the problem should not affect the scoreboard at all.
-
-:When a problem is paused:
-:# Teams are able to submit to the problem as if it was enabled.
-:# Automatic judging of the problem should be disabled.
-:# Submissions on the problem should be included in the scoreboard.
-
 ==== Number of Problems ====
 
 :The CCS may not impose an upper limit on the number of different contest problems.
@@ -228,6 +208,29 @@ Stopping the contest also means causing the contest clock to stop advancing.
 ===== Time Limit Granularity =====
 
 :The execution time limit granularity must be at least in units of seconds.
+
+
+== Admin Interface ==
+
+=== Account Disabling ===
+
+:The CCS must have a mechanism to disable any account used by users of the system (either human users or other systems), without the need for starting or stopping the contest.  For example, this includes [[#Secure_Authentication|team accounts]], judge accounts, and the [[Event_Feed|Event feed]].
+
+:If a user is currently logged in when the associated account is being disabled, that user should become logged out of the system.
+
+=== Problem Enabling, Pausing, and Disabling ===
+
+:Each contest problem can be in one of three mutually exclusive states: enabled, paused, and disabled.  The CCS must provide a mechanism to enable, pause and disable each contest problem separately without the need of stopping the contest.
+
+:When a problem is disabled:
+:# Teams should not be able to submit solutions to the problem. The problem name should be removed or disabled from submit interfaces where present.
+:# Automatic judging of the problem should be disabled.
+:# Submissions on the problem should not affect the scoreboard at all.
+
+:When a problem is paused:
+:# Teams are able to submit to the problem as if it was enabled.
+:# Automatic judging of the problem should be disabled.
+:# Submissions on the problem should be included in the scoreboard.
 
 == Team Interface ==
 
