@@ -159,11 +159,9 @@ Stopping the contest also means causing the contest clock to stop advancing.
 
 :If a user is currently logged in when the associated account is being disabled, that user should become logged out of the system.
 
-=== Judge’s Responses ===
+=== Clarification Default Answer ===
 
-==== Clarification Responses ====
-
-:The CCS must provide the ability to configure a "default answer" (e.g., "No response, read problem statement") to clarification requests, so that human judges can choose to reply to a clarification request by selecting the default answer rather than being required to enter a specific answer.
+:The CCS must provide the ability to configure a "default answer" (e.g., "No response, read problem statement.") to clarification requests, so that human judges can choose to reply to a clarification request by selecting the default answer rather than being required to enter a specific answer.
 
 === Programming Languages ===
 
