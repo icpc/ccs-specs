@@ -254,7 +254,7 @@ Stopping the contest also means causing the contest clock to stop advancing.
 :# Submissions on the problem should not affect the scoreboard at all.
 
 :When a problem is paused:
-:# Teams are able to submit to the problem as if it was enabled.
+:# Teams are able to submit solutions to the problem as if it was enabled.
 :# Automatic judging of the problem should be disabled.
 :# Submissions on the problem should be included in the scoreboard.
 
