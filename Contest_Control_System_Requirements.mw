@@ -249,14 +249,14 @@ Stopping the contest also means causing the contest clock to stop advancing.
 :Each contest problem can be in one of three mutually exclusive states: enabled, paused, and disabled.  The CCS must provide a mechanism to enable, pause and disable each contest problem separately without the need of stopping the contest.
 
 :When a problem is disabled:
-:# Teams should not be able to submit solutions to the problem. The problem name should be removed or disabled from submit interfaces where present.
-:# Automatic judging of the problem should be disabled.
-:# Submissions on the problem should not affect the scoreboard at all.
+:# Teams must not be able to submit solutions to the problem. The problem name should be removed or disabled from submit interfaces where present.
+:# Automatic judging of the problem must be disabled.
+:# Submissions on the problem must not affect the scoreboard at all.
 
 :When a problem is paused:
-:# Teams are able to submit solutions to the problem as if it was enabled.
-:# Automatic judging of the problem should be disabled.
-:# Submissions on the problem should be included in the scoreboard.
+:# Teams must be able to submit solutions to the problem as if it was enabled.
+:# Automatic judging of the problem must be disabled.
+:# Submissions on the problem must be included in the scoreboard.
 
 === Rejudging === 
 
