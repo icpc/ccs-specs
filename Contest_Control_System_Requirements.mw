@@ -316,10 +316,6 @@ It must be possible to specify, for each team, an integer amount of penalty time
 
 :A team must be able to specify, for each run submission: (a) the contest problem to which the submission applies; (b) the programming language used in the submission; (c) the source code file or files comprising the submission. The CCS must allow teams to specify arbitrarily many files in a given submission and must allow teams to make submissions for any defined contest problem and written in any defined contest programming language.
 
-==== Submission Identification ====
-
-:The CCS must arrange that each submission is uniquely identified as to which team submitted it, and must insure that no team can submit a run without having first provided the appropriate team authentication credentials.
-
 ==== Submission Timestamping ====
 
 :The CCS must associate and maintain two timestamps indicating when each run was submitted. The first is the contest time (aka contest clock), and must be at the granularity of seconds. The second is a timestamp of the current wall clock time, and must have finer granularity than seconds.
