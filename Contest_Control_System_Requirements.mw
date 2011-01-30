@@ -161,7 +161,7 @@ CCS meets all the requirements listed in this standard.
 
 ==== Language Options ====
 
-:Each supported language compiler or interpreter must be able to be invoked with any of the options specified by the compiler or interpreter’s documentation.
+:For each supported language compiler or interpreter it must be possible to configure the CCS to invoke it with any of the options specified in the compiler or interpreter's documentation.
 
 ==== Changing Language Options ====
 
