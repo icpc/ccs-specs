@@ -224,6 +224,10 @@ The contest should automatically start when the configured start time is reached
 
 It must be possible to specify time intervals that will be disregarded for the purpose of scoring. The time during all such intervals will not be counted towards a teams penalty time for solved problems.
 
+==== Changing contest length ====
+
+It must be possible to change the length of the contest at any time during the contest.
+
 ==== Adding penalty time ====
 
 It must be possible to specify, for each team, an integer amount of penalty time to be added to that teams total penalty time.
