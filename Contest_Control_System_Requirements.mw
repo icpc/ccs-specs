@@ -224,6 +224,10 @@ The contest should automatically start when the configured start time is reached
 
 It must be possible to specify time intervals that will be disregarded for the purpose of scoring. The time during all such intervals will not be counted towards a teams penalty time for solved problems.
 
+==== Adding penalty time ====
+
+It must be possible to specify, for each team, an integer amount of penalty time to be added to that teams total penalty time.
+
 === Problem Enabling, Pausing, and Disabling ===
 
 :Each contest problem can be in one of three mutually exclusive states: enabled, paused, and disabled.  The CCS must provide a mechanism to enable, pause and disable each contest problem separately without the need of stopping the contest.
