@@ -595,25 +595,25 @@ regarding a contest problem.
 
 === Team Guide ===
 
-:The CCS must include a “Team Guide” document in PDF format. The Team Guide must provide all the necessary instructions showing how a contest team utilizes the functions of the team interface.
+:The CCS must include a “Team Guide” document in PDF format. The Team Guide must provide all the necessary instructions showing how a contest team uses the functions of the team interface.
 
 :The Team Guide must also describe the way in which judge’s responses to submitted runs and clarifications are received by teams.
 
 === Judge’s Guide ===
 
-:The CCS must include a “Judge’s Guide” document in PDF format. The Judge’s Guide must provide all the necessary instructions showing how a human contest judge utilizes the functions of the human judge interface. 
+:The CCS must include a “Judge’s Guide” document in PDF format. The Judge’s Guide must provide all the necessary instructions showing how a human contest judge uses the functions of the human judge interface. 
 
 === Contest Administrator’s Guide ===
 
-:The CCS must include a “Contest Administrator’s Guide” document in PDF format. The Administrator’s Guide must provide all the necessary instructions showing how contest personnel utilize the functions of the CCS to set up and manage a contest.
+:The CCS must include a “Contest Administrator’s Guide” document in PDF format. The Administrator’s Guide must provide all the necessary instructions showing how contest personnel use the functions of the CCS to set up and manage a contest.
 
-:In the event that a configuration item is provided by utilizing services of the underlying operating system rather than facilities directly implemented and/or controlled by the CCS itself, the administrator’s Guide must explicitly state this fact, and reference the System Manager’s Guide (see below) as the source of information on handling that portion of configuration and preparation for the contest.
+:In the event that a configuration item is provided by using services of the underlying operating system rather than facilities directly implemented or controlled by the CCS itself, the administrator’s Guide must explicitly state this fact, and reference the System Manager’s Guide (see below) as the source of information on handling that portion of configuration and preparation for the contest.
 
 === System Manager’s Guide ===
 
 :The CCS must include a “System Manager’s Guide” document in PDF format. The System Manager’s Guide must describe the steps required to install and start the CCS on the OS platform specified for use in the World Finals. In the event that the CCS consists of multiple modules and/or packages, the guide must contain a description of the relationship between the modules or packages, including any specific installation and/or startup steps required for each module or package.
 
-:The System Manager’s Guide must provide instructions to contest personnel explaining situations (if any) where the CCS utilizes functions of the underlying operating system (OS) platform to meet requirements laid out in this standard. For example, if the CCS relies on the use of OS account and password management to implement requirements related to contest security and credentials, or print services provided by the OS to implement requirements related to external notifications, this must be described in the System Manager’s Guide.
+:The System Manager’s Guide must provide instructions to contest personnel explaining situations (if any) where the CCS uses functions of the underlying operating system (OS) platform to meet requirements laid out in this standard. For example, if the CCS relies on the use of OS account and password management to implement requirements related to contest security and credentials, or print services provided by the OS to implement requirements related to external notifications, this must be described in the System Manager’s Guide.
 
 :The System Manager’s Guide must explicitly list any operating system dependencies of the CCS, including but not limited to which OS platform and version are required and which optional OS packages must be installed for the CCS to function properly.
 
