@@ -342,10 +342,6 @@ regarding a contest problem.
 
 :The text content of a clarification request must be able to be specified by the team. The CCS may optionally require the team to identify the problem about which a clarification is being requested, but this is not a requirement (since the team can identify the problem within the text of the clarification message).
 
-==== Clarification Identification ====
-
-:The CCS must arrange that each clarification request is uniquely identified as to which team submitted it, and must insure that no team can submit a clarification request without having first provided the appropriate team authentication credentials.
-
 ==== Clarification Timestamping ====
 
 :The CCS must associate and maintain two timestamps indicating when each clarification was submitted. The first is the contest time (aka contest clock), and must be at the granularity of seconds. The second is a timestamp of the current wall clock time, and must have finer granularity than seconds.
