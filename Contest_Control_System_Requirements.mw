@@ -193,16 +193,23 @@ CCS meets all the requirements listed in this standard.
 
 :The CCS must not enforce any size limit on the judge’s test data files, other than that imposed by the available disk space in the file system on the machine.
 
-==== Execution Time ====
+==== Limits ====
 
-===== Per-Problem Time Limit =====
+===== Execution Time Limit =====
 
-:The CCS must provide the ability to specify a separate run-time limit for each contest problem, and must use the specified time to terminate automatically the execution of a submitted run when it exceeds the pre-configured execution time limit for the corresponding problem.
+:The CCS must provide the ability to specify a separate run-time limit for each contest problem.  The execution time limit granularity must be at least in units of seconds.
 
-===== Time Limit Granularity =====
+===== Memory Limit =====
 
-:The execution time limit granularity must be at least in units of seconds.
+:The CCS must provide the ability to specify a separate memory limit for each contest problem.
 
+===== Output Size Limit =====
+
+:The CCS must provide the ability to specify a output size limit for each contest problem (i.e., a limit on the amount of data that submissions are allowed to write to their output streams).
+
+===== Compilation Time Limit =====
+
+:The CCS must provide the ability to specify a compilation time limit for submissions.
 
 == Admin Interface ==
 
