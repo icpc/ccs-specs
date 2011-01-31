@@ -461,11 +461,11 @@ regarding a contest problem.
 
 :To determine which answer to use, the following rules must be applied in order:
 
-:# If the submitted program fails to compile, the response must be '''Compile Error'''.
+:# If the submitted program fails to compile or compilation exceeds the [[#Compilation_Time_Limit|compilation time limit]], the response must be '''Compile Error'''.
 :# If the submitted program tries to perform any prohibited operation, the answer must be '''Security Violation'''.
-:# If the submitted program crashes before the time-limit, the answer must be '''Run-time Error'''.
+:# If the submitted program exceeds the [[#Memory_Limit|memory limit]] or crashes before the [[#Execution_Time_Limit|execution time limit]], the answer must be '''Run-time Error'''.
 :# If the submitted program runs longer than the time-limit, the answer must be '''Time-limit Exceeded'''.
-:# If the output of the submitted program is not accepted by the output validator, the answer must be '''Wrong Answer'''.
+:# If the output of the submitted program exceeds the [[#Output_Size_Limit|output size limit]] or if the output of the submitted program is not accepted by the output validator, the answer must be '''Wrong Answer'''.
 :# If the output of the submitted program is accepted by the output validator, the answer must be '''Accepted'''.
 
 :Otherwise, or if an error occurs that the CCS can not recover from during the judging process the answer must be '''Judging Error'''.
