@@ -244,7 +244,7 @@ CCS meets all the requirements listed in this standard.
 :Each contest problem can be in one of three mutually exclusive states: enabled, paused, and disabled.  The CCS must provide a mechanism to enable, pause and disable each contest problem separately without the need of stopping the contest.
 
 :When a problem is disabled:
-:# Teams must not be able to submit solutions to the problem. The problem name should be removed or disabled from submit interfaces where present.
+:# Teams must not be able to submit solutions to the problem. The problem name must be removed or disabled from submit interfaces where present.
 :# Automatic judging of the problem must be disabled.
 :# Submissions on the problem must not affect the scoreboard at all.
 
