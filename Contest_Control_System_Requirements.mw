@@ -275,7 +275,7 @@ CCS meets all the requirements listed in this standard.
 
 ==== Automatic Rejudging ====
 
-:When a set of runs is selected to be rejudged automatically, the CCS should rejudge them automatically, by the process described in [[#Automated_Judging|Automated Judging]].
+:When a set of runs is selected to be rejudged automatically, the CCS must rejudge them automatically, by the process described in [[#Automated_Judging|Automated Judging]].
 
 ==== Manual Rejudging ====
 
