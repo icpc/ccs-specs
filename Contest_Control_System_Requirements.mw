@@ -223,7 +223,7 @@ CCS meets all the requirements listed in this standard.
 
 === Starting the Contest ===
 
-The contest should automatically start when the configured start time is reached. It must also be possible to start the contest at the current time.
+:The contest should automatically start when the configured start time is reached. It must also be possible to start the contest at the current time.
 
 === Adjusting for Exceptional Circumstances ===
 
