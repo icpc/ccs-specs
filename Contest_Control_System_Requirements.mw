@@ -97,9 +97,7 @@ CCS meets all the requirements listed in this standard.
 
 === Platform ===
 
-:The CCS must run natively on the computer platform of the World Finals. This means for example that it is not acceptable that the CCS requires utilization of a virtual machine in order to manage the World Finals contest.
-
-:The CCS must run on the computer hardware set aside for the CCS at the World Finals and posted at the ICPC web site. Normally this will consist of 10+2 machines identical to the team machines and 2 servers.
+:The CCS must run on the computer platform set aside for the CCS at the World Finals and posted at the ICPC web site. Normally this will consist of 10+2 machines identical to the team machines and 2 servers.
 
 === Data Persistency ===
 
