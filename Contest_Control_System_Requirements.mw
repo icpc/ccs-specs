@@ -290,7 +290,7 @@ CCS meets all the requirements listed in this standard.
 :# Only send a notification if the judgment of the run was changed.
 :# Send notifications for all the rejudged runs.
 
-=== Scoreboard Display Updating ===
+=== Freezing the Scoreboard ===
 
 :The CCS must provide a way to disable the updating of the scoreboard display seen by the teams and by the spectators. This disabling function must be able to be invoked at any time during the contest, and must be able to be done without stopping the contest or affecting team, judging, or contest administration operations in any other way.
 
