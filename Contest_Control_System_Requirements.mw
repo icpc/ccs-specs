@@ -338,7 +338,7 @@ CCS meets all the requirements listed in this standard.
 
 === Submitting a Clarification ===
 
-For purposes of this standard, the terms ''clarification'', ''clarification request'', and
+:For purposes of this standard, the terms ''clarification'', ''clarification request'', and
 ''clar'' all refer to a message sent from a team to the judges asking for clarification
 regarding a contest problem.
 
@@ -361,7 +361,6 @@ regarding a contest problem.
 ==== Clarification Security ====
 
 :The CCS must insure that no team can see the clarification requests of any other team, except as provided in the section [[Contest_Control_System#Human_Judge_Interface | Human Judge Interface]].
-
 
 === Broadcast Messages ===
 
