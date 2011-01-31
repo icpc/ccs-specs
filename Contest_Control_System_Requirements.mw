@@ -195,6 +195,8 @@ CCS meets all the requirements listed in this standard.
 
 ==== Limits ====
 
+:For each of the limits described in this section, the CCS should have a reasonable default value that is used when a value is not specified.
+
 ===== Execution Time Limit =====
 
 :The CCS must provide the ability to specify a separate run-time limit for each contest problem.  The execution time limit granularity must be at least in units of seconds.
@@ -205,7 +207,7 @@ CCS meets all the requirements listed in this standard.
 
 ===== Output Size Limit =====
 
-:The CCS must provide the ability to specify a output size limit for each contest problem (i.e., a limit on the amount of data that submissions are allowed to write to their output streams).
+:The CCS must provide the ability to specify a separate output size limit for each contest problem (i.e., a limit on the amount of data that submissions are allowed to write to their output streams).
 
 ===== Compilation Time Limit =====
 
