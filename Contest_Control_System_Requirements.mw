@@ -517,9 +517,7 @@ regarding a contest problem.
 :# "First for problem" if this is the earliest submitted run that is accepted for this problem.
 :# "First for team" if this is first notification of acceptance for that team. 
 
-:Note that run judgements may not come in the same order as
-submissions, meaning that the first notification of acceptance does
-not have to be for the earliest submitted accepted run. 
+:Note that run judgements may not come in the same order as submissions, meaning that the first notification of acceptance does not have to be for the earliest submitted accepted run. 
 
 :The sequence numbers assigned to the external notifications are used to detect if a notification is missing (e.g., due to printer malfunction). The CCS must provide at least one of the two following features: (1) the CCS must be able to resend a previously sent message with a given sequence number upon request; (2) the CCS must have an interface listing all external notifications, and allowing a user to access the data included in any one of them. Such a complete list of notifications must be protected in such a way that teams cannot access it.
 
