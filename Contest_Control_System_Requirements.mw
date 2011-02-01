@@ -88,13 +88,7 @@ CCS meets all the requirements listed in this standard.
 
 === Licensing ===
 
-==== Free Use ====
-
-:The CCS must either be freely useable, or must be accompanied by a license granting to the ACM-ICPC the non-exclusive, non-revocable, non-transferable rights of use of the CCS both for purposes of evaluation and testing and for actual use in the ICPC World Finals.
-
-==== No Third-Party Licenses ====
-
-:The CCS may not be based on or require obtaining any third-party license in order to be used by the ACM-ICPC.
+:The CCS must either be freely useable, or must be accompanied by a license granting to the ACM-ICPC the non-exclusive, non-revocable, non-transferable rights of use of the CCS both for purposes of evaluation and testing and for actual use in the ICPC World Finals for at least the two years following the submission. The CCS may not require obtaining any third-party license in order to be used by the ACM-ICPC.
 
 === Platform ===
 
