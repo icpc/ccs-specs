@@ -82,9 +82,9 @@ CCS meets all the requirements listed in this standard.
 
 :All variable aspects of the CCS must be configurable prior to the start of a World Finals contest. That is, the CCS may not require that any changes be made to the CCS configuration once the contest has started. Note that this does not alter any requirements which state that the CCS must allow certain configuration changes to be able to be made after the contest starts; it means that the contest administration personnel shall not be required to make any changes once the contest starts.
 
-=== World Finals Machine Residency ===
+=== No outside contact ===
 
-:All components of the CCS, including any software tools or hardware devices on which the CCS relies for its operation, must be able to be loaded onto and run solely from machines located at the World Finals site. A CCS must not require access to software components and/or a machine not physically under the control of and physically located at the site of the World Finals. (Note that machine as it is used in this paragraph may refer to either a physical piece of hardware or a virtual machine. In either case, however, the CCS must be able to be run on machines not requiring off-site access.)
+:The CCS must be able to run at the world finals site with no contact to anything outside the contest network.
 
 === Licensing ===
 
