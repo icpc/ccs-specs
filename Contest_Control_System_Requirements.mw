@@ -245,7 +245,7 @@ CCS meets all the requirements listed in this standard.
 :When a problem is disabled:
 :# Teams must not be able to submit solutions to the problem. The problem name must be removed or disabled from submit interfaces where present.
 :# Automatic judging of the problem must be disabled.
-:# Submissions on the problem must not affect the scoreboard at all.
+:# Submissions on the problem must not affect the scoreboard at all, including submissions received prior to disabling.
 
 :When a problem is paused:
 :# Teams must be able to submit solutions to the problem as if it was enabled.
