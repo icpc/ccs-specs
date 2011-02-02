@@ -208,6 +208,10 @@ CCS meets all the requirements listed in this standard.
 
 :The CCS must provide the ability to specify a compilation time limit for submissions.
 
+=== Configuration Change ===
+
+:The CCS must allow updating of any configuration data without restarting or stopping the contest.
+
 == Admin Interface ==
 
 === Account Disabling ===
