@@ -502,7 +502,7 @@ regarding a contest problem.
 
 :The CCS should provide at least a default “diff” validator capability which compares the output of a submitted run with the correct output as supplied by the judges and returns a judgment based on the results of the diff.
 
-=== External Notifications ===
+=== Balloon Notifications ===
 
 :The CCS must have an ability to send a message, called an external notification, for every run which have received a YES judgment.  The external notification is sent to a human at a destination outside the CCS and must include at least
 :# A sequence number of the external notification. 
