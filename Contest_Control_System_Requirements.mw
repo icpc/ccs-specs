@@ -258,7 +258,7 @@ When a run is set to be rejudged it's current judgement is no longer valid and a
 
 ==== Run Selection ==== 
 
-:The CCS must support the ability to rejudge a set of run submissions.  This means that it must be possible to provide the CCS with a filter of runs to be rejudged, based upon which the CCS automatically selects all runs matching the filter, and sets them to be rejudged.
+:The CCS must support the ability to rejudge a set of run submissions.  This means that it must be possible to provide the CCS with a filter of runs to be rejudged, based upon which the CCS automatically selects all runs matching the filter, and automatically rejudges them.
 
 :The CCS must support these filters to be any combination of filters of the following type.
 
