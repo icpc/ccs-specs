@@ -254,6 +254,8 @@ CCS meets all the requirements listed in this standard.
 
 === Rejudging === 
 
+When a run is set to be rejudged it's current judgement is no longer valid and a new judgement will be obtained in the same manner as for a newly arrived run.
+
 ==== Run Selection ==== 
 
 :The CCS must support the ability to rejudge a set of run submissions.  This means that a human judge must be able to provide the CCS with a filter of runs to be rejudged, based upon which the CCS automatically selects all runs matching the filter, and sets them to be rejudged.
