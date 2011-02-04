@@ -270,10 +270,6 @@ When a run is set to be rejudged it's current judgement is no longer valid and a
 
 :Thus, for example, it must be possible to select "all rejected runs for problem B", "all time-limit exceeded runs using Java for problem C", or "all runs in C++".
 
-==== Rejudgment Mode ====
-
-:When selecting which runs to rejudge, it must be possible to specify whether these runs are to be rejudged automatically or whether they are to be rejudged manually.
-
 ==== Automatic Rejudging ====
 
 :When a set of runs is selected to be rejudged automatically, the CCS must rejudge them automatically, by the process described in [[#Automated_Judging|Automated Judging]].
