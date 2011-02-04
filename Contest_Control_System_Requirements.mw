@@ -522,8 +522,6 @@ regarding a contest problem.
 
 :It is optional whether the CCS also provides the ability to send external notifications for runs which receive NO judgments, but it must be possible to configure the CCS to only send external notifications for YES runs.
 
-:The primary purpose of the requirement for external notifications is to support “balloon runners” at the World Finals. For example, the CCS could send an external notification for each YES run to a designated printer; runners at the printer would use the notification to identify a team which should receive a balloon of a certain color. Alternatively, the CCS could send external notifications to a designated email account; runners could monitor that account to determine which teams should receive which color balloons.
-
 :'''Comment:''' Should this section be removed? [[User:Niemela|Fredrik Niemelä]] 23:40, 26 January 2011 (CET)
 
 == Scoring ==
