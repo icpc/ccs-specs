@@ -504,7 +504,8 @@ regarding a contest problem.
 
 === Balloon Notifications ===
 
-:The CCS must have an ability to send a message, called an external notification, for every run which have received a YES judgment.  The external notification is sent to a human at a destination outside the CCS and must include at least
+:The CCS must have an ability to send a message, called an external notification, for every run which have received a YES judgment. The external notification must include at least
+
 :# A sequence number of the external notification. 
 :# Identification of the team that submitted the run.
 :# The contest time at which the run was submitted. 
