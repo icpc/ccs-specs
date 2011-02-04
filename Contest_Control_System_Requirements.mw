@@ -522,8 +522,6 @@ regarding a contest problem.
 
 :It is optional whether the CCS also provides the ability to send notifications for runs which receive rejected judgments, but it must be possible to configure the CCS to only send notifications for accepted runs.
 
-:'''Comment:''' Should this section be removed? [[User:Niemela|Fredrik Niemelä]] 23:40, 26 January 2011 (CET)
-
 == Scoring ==
 
 === Scoring Data Generation ===
