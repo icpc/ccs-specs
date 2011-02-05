@@ -535,6 +535,22 @@ regarding a contest problem.
 
 :When a number of teams are tied for the same position/rank, they all occupy the same position/rank and a suitable number of subsequent positions/ranks are left empty.  For instance, if four teams are tied for 17th position, they are all in 17th position and positions 18, 19 and 20 are unoccupied.
 
+=== Scoreboard ===
+
+:The ''current scoreboard'' lists the teams sorted by position (with alphabetical order on team name as tie breaker).  It includes for each team their position, number of problems solved, total penalty time, and list of problems solved (including the time the problem was solved an how many attempts it took).
+
+:The CCS must be capable of generating an external file containing the current scoreboard. The format of this file must be as defined in [[#scoreboard.tsv|the appendix]].
+
+:The CCS must automatically save an updated copy of the external scoring data file whenever the scoring data itself is updated as described above.
+
+=== Final results ===
+
+:The ''final results'' lists the teams sorted by rank (with alphabetical order on team name as tie breaker).  It includes for each team their rank and:
+:# The number of problems solved, if the team is ranked (i.e., if they solved more than the median number of problems).
+:# The total penalty time and last accepted submission, if the team is in rank up to 12+B. 
+
+:The CCS must be capable of generating an external file containing the final results of the World Finals contest. The format of this file must be as defined in the [[#results.tsv|Appendix]].
+
 == Data Export ==
 
 === Scoreboard ===
