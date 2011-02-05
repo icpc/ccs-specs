@@ -787,7 +787,7 @@ The time when problem was solved must be < 0 when the problem was not solved. Sa
 
 === results.tsv ===
 
-A text file consisting of a version  line and one line for each team in the contest, sorted in rank order. Each line has tab separated fields as defined below.
+A text file consisting of a version  line and one line for each team in the contest, sorted in rank order with alphabetical order on team name as tie breaker. Each line has tab separated fields as defined below.
 
 The first line has the following format
 {| class="wikitable"
