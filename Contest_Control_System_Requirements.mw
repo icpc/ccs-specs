@@ -522,16 +522,18 @@ regarding a contest problem.
 
 :The CCS must be capable of automatically generating up-to-date scoring data according to the following:
 
-:# For purposes of scoring, the contest time of a submission is the number of minutes elapsed from the beginning of the contest when the submission was made, skipping removed time intervals if specified (see [[#Removing_time_intervals|Removing Time Intervals]]).  This is rounded ''down'' to the nearest minute, so 59.99 seconds is 0 minutes.
-:# The contest time that a team solved a problem is the contest time of the team's first accepted submission to that problem.
-:# A team's penalty time on a problem is the contest time that the team solved the problem, plus 20 minutes for each previous rejected run by that team on that problem, or 0 if the team has not solved the problem.
-:# A team's total penalty time is the sum of the penalty times for all problems.
-:# A team's last accepted submission is the contest time of the problem that the team solved last.
-:# Teams should be sorted on problems solved (descending), penalty time (ascending), last accepted submission (ascending) and then alphabetical.
-:# Teams should be ranked on problems solved (descending), penalty time (ascending), last accepted submission (ascending) if the resulting rank is not larger than 12+B, where B is the number of extra bronzes awarded. The default value of B is 0.
-:# A teams position is the rank it would had got if the ranking rules for the first 12+B teams were applied to all.
-:# Teams that solved fewer problems that the median team should not be ranked at all.
-:# All other teams should be ranked on problems solved (descending).
+:# For purposes of scoring, the ''contest time of a submission'' is the number of minutes elapsed from the beginning of the contest when the submission was made, skipping removed time intervals if specified (see [[#Removing_time_intervals|Removing Time Intervals]]).  This is rounded ''down'' to the nearest minute, so 59.99 seconds is 0 minutes.
+:# The ''contest time that a team solved a problem'' is the contest time of the team's first accepted submission to that problem.
+:# A team's ''penalty time on a problem'' is the contest time that the team solved the problem, plus 20 minutes for each previous rejected run by that team on that problem, or 0 if the team has not solved the problem.
+:# A team's ''total penalty time'' is the sum of the penalty times for all problems.
+:# A team's ''last accepted submission'' is the contest time of the problem that the team solved last.
+:# The ''position'' of a team is determined by sorting the teams by number of problems solved (descending), total penalty time (ascending), last accepted submission (ascending).
+:# The ''rank'' of a team is the determined as follows:
+:## For teams in positions up to and including 12+B, the rank equals the position.  Here, B is the number of extra bronzes awarded (the default value of B is 0).
+:## Teams that solved fewer problems than the median team should not be ranked at all.
+:## For the remaining teams, the rank is determined by sorting the teams by number of problems solved (descending).
+
+:When a number of teams are tied for the same position/rank, they all occupy the same position/rank and a suitable number of subsequent positions/ranks are left empty.  For instance, if four teams are tied for 17th position, they are all in 17th position and positions 18, 19 and 20 are unoccupied.
 
 == Data Export ==
 
