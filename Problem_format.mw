@@ -16,12 +16,14 @@ identifier for the problem.
                *.in - input files
                *.ans - answer files
                *.txt - optional data file description
-       solutions/
+       test_submissions/
                accepted/
                        - single file or directory per solution
-               rejected/
+               wrong_answer/
                        - single file or directory per solution
                time_limit_exceeded/
+                       - single file or directory per solution
+               run_time_error/
                        - single file or directory per solution
        input_validators/
                - single file or directory per validator
