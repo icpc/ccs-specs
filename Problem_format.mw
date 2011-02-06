@@ -84,11 +84,11 @@ All input and answer files must have the filename extension .in and
 input file may be present. Input, answer and description files are
 matched by the base name.
 
-=== <short-name>/solutions/*/ ===
+=== <short-name>/test_submissions/*/ ===
 
 Every file or directory in these directories represent a separate
 solution. Same requirements as for submissions with regards to
-filenames.
+filenames. subdirectories that would be empty can be left out.
 
 === <short-name>/*_validators/ ===
 
