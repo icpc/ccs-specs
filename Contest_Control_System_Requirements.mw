@@ -172,10 +172,6 @@ CCS meets all the requirements listed in this standard.
 
 :For each contest problem the CCS must accept a set of files containing the judge’s test data to be used for that problem.
 
-===== Changes To Judge's Data =====
-
-:The CCS must support the ability to change the contents of the judge’s data file for any particular contest problem dynamically during the contest without the necessity of stopping the contest. The CCS must arrange that when the contents of a particular problem’s test data file is changed, all runs subsequently executed by the CCS use the updated file contents as their input data source.
-
 ===== Data File Size =====
 
 :The CCS must not enforce any size limit on the judge’s test data files, other than that imposed by the available disk space in the file system on the machine.
