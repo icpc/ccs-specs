@@ -25,8 +25,8 @@ identifier for the problem.
                        - single file or directory per solution
                run_time_error/
                        - single file or directory per solution
-       input_validators/
-               - single file or directory per validator
+       input_checkers/
+               - single file or directory per checker
        output_validators/
                - single file or directory per validator
 
