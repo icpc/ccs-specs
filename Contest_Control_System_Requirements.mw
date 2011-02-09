@@ -140,7 +140,7 @@ CCS meets all the requirements listed in this standard.
 
 === Clarification Default Answer ===
 
-:The CCS must provide the ability to configure a "default answer" (e.g., "No response, read problem statement.") to clarification requests, so that human judges can choose to reply to a clarification request by selecting the default answer rather than being required to enter a specific answer.  The text of the "default answer" must be able to be changed without having to stop the contest.
+:The CCS must provide the ability to configure a "default answer" (e.g., "No response, read problem statement.") to clarification requests, so that human judges can choose to reply to a clarification request by selecting the default answer rather than being required to enter a specific answer.
 
 === Programming Languages ===
 
