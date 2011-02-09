@@ -112,12 +112,12 @@ should be ignored and a warning to that effect shown.
        any value in problem.cfg is invalid
        there are no *.in in judge_data/
        there are no solutions in test_submissions/accepted/
-       there are no validators in input_validators/
+       there are no checkers in input_checkers/
        validator begins with "custom" and there are no validators in output_validators/
 
  For each *.in in public_data and judge_data:
-       For each validator in input_validators/:
-               If the validator does not accept the input file: Error!
+       For each checker in input_checkers/:
+               If the checker does not accept the input file: Error!
 
  For each solution in test_submissions/accepted/:
        For each *.in in public_data and judge_data:
