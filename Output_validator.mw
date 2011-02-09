@@ -1,0 +1,157 @@
+== Summary ==
+
+This document describes a standard for Output Validators for Programming Contest Control Systems. It is designed especially with ACM ICPC-style contests in mind. This includes being well suited for use in the ICPC World Finals, but also being useful in other ICPC-related activities (such as regional contests, local training contests, or even evaluation of programming assignments in courses). The standard has many similarities to the existing PC2 Validator Standard , but there are some crucial differences. For the reader curious in how (and why) this standard differs from the PC2 standard, this is discussed in Section 7.
+
+== Overview ==
+
+A validator program must be an application (executable or interpreted) capable of being invoked with a command line call. The details of this invocation are described in Section 3. The validator program has two ways of reporting back to the Contest Control System that invoked it:
+
+# The validator must give a judgment (see Section 4).
+# The validator may give additional feedback, e.g., an explanation of the judgment to human judges. This is described in Section 5.
+
+Some additional requirements are discussed in Section 6.
+
+== Invocation ==
+
+The contest control system is responsible for invoking the validator and passing it at least four command line parameters. 
+
+The usage of the validator is as follows:
+
+ >validator input judgeanswer teamoutput feedback [...]
+
+The four parameters are as follows:
+
+;input: a string specifying the name of the input data ﬁle which was used to test the program whose results are being validated.
+
+;judgeanswer: a string specifying the name of an arbitrary “answer ﬁle” which acts as input to the validator program. The answer ﬁle may, but is not necessarily required to, contain the “correct answer” for the problem. For example, it might contain the output which was produced by a judge’s solution for the problem when run with input ﬁle as input. Alternatively, the “answer ﬁle” might contain information, in arbitrary format, which instructs the validator in some way about how to accomplish its task. The meaning of the contents of the answer ﬁle is not deﬁned by this standard.
+
+;teamoutput: a string specifying the name of the output ﬁle which was produced by the program being validated when it was run using the data ﬁle named in “input” (that is, this is the name of the ﬁle containing the output to be “validated”).
+
+;feedback: a string which speciﬁes the name of a “feedback ﬁle” which the validator can produce, in order to report additional information on the validation of the output ﬁle.
+
+The three ﬁles pointed to by input, judgeanswer, and teamoutput must exist (though they are allowed to be empty) and the validator program must be allowed to open them for reading. The feedback ﬁle should not exist (but if it does exist, it must be empty).
+
+== Reporting a judgment ==
+
+A validator program is required to report its judgment by exiting with speciﬁc exit codes:
+
+* If the output is a correct output for the input ﬁle (i.e., the submission that produced the output is to be Accepted), the validator exits with exit code 42.
+* If the output is incorrect (i.e., the submission that produced the output is to be judged as Wrong Answer), the validator exits with exit code 43.
+
+Any other exit code (including 0!) indicates that the validator did not operate properly, and the contest control system invoking the validator must take measures to report this to contest personnel. The purpose of these somewhat exotic exit codes is to avoid conﬂict with other exit codes that results when the validator crashes. For instance, if the validator is written in Java, any unhandled exception results in the program crashing with an exit code of 1, making it unsuitable to assign a judgment meaning to this exit code.
+
+== Reporting Additional Feedback ==
+
+=== Purpose ===
+
+The purpose of the feedback ﬁle is to allow the validator program to report more information to the contest
+control system than just the accept/reject verdict. Using the feedback ﬁle is optional for a validator program,
+so if one just wants to write a bare-bones minimal validator, the feedback ﬁle can be ignored.
+
+A feedback ﬁle is a plain text ﬁle with a simple structure. It is divided into “sections”, each of which
+contains plain text. The purpose of the sections is to be able to provide different kinds of information to the
+contest control system, in a simple but organized way. For instance, there may be a “JudgeMessage”
+section, which gives a message that is presented to a judge reviewing the current submission (typically
+indicated to help the judge veriﬁed why the submission was judged as incorrect, by specifying exactly what
+was wrong with its output). Other examples of sections that may be useful in some contexts (though not in
+the ICPC) are a “Score” section, giving the submission a score based on other factors than correctness, or
+a “TeamMessage” section, giving a message to the team that submitted the solution, providing additional
+feedback on the submission.
+
+A contest control system that implements this standard must support the “JudgeMessage” section
+described above (I.e., content of the “JudgeMessage” section, if produced by the validator, must be provided by the contest control system to a
+human judge examaning the submission). Having the Contest Control System support other sections is optional.
+
+Note that a validator may choose to ignore the feedback ﬁle entirely. In particular, the contest control
+system must not assume that the validator program creates a feedback ﬁle at all.
+
+=== Feedback File Format Speciﬁcation ===
+
+The format of a feedback ﬁle is as follows.
+
+==== Sections ====
+
+The start of a section is indicated by a line of the form “***SectionName***”, where SectionName
+can be any non-empty string of upper and lower case characters from the English alphabet, as well as digits.
+Section names are not case sensitive, e.g., JudgeMessage is the same section as juDGEmessage. A
+section start line should not contain any whitespace, but trailing whitespace is allowed (and should be
+handled by the contest control system).
+
+==== File Structure ====
+
+The ﬁrst line of the feedback ﬁle must be the start of a section, The lines following the start of a section,
+up until the next section start or end of ﬁle, are considered the content of that section. Each section name
+should appear at most once in the feedback ﬁle.
+
+==== Encoding ====
+
+If characters outside the 7-bit ASCII set need to be used in the feedback ﬁle, it should use a UTF-8 encoding.
+
+==== Examples ====
+
+An example of a feedback ﬁle containing only a JudgeMessage:
+
+ ***JudgeMessage***
+ Team failed at test case 14.
+ Team output: "31", Judge answer: "30".
+
+An example of a feedback ﬁle containing more sections:
+
+ ***JudgeMessage***
+ Team failed at test case 3.
+ Team output: "impossible", Judge answer: "42"
+ Team failed at test case 14
+ Team output: "31", Judge answer: "30".
+ ***TeamMessage***
+ Two test cases failed.
+
+== Additional Requirements ==
+
+A CCS supporting this standard must safeguard against faulty validators. For instance, if a validator were
+to produce an excessively large feedback ﬁle, or a feedback ﬁle not adhering to the speciﬁcations above, the
+CCS should handle this graciously and report it to the contest personnel. Reasons for such misbehaviour
+of the validator program could be for instance a security bug in the validator program, enabling malicious
+submissions to produce feedback ﬁles of their own choosing.
+
+A valididator program is allowed to write any kind of debug information to its standard output and
+standard error pipes. The content of these should be ignored by the contest control system.
+
+== Discussion ==
+
+In this section we brieﬂy discuss the underlying goals and motivation which guided the design decisions
+of this standard, and compare this standard to the PC2 Validator Standard, explaining what we feel are the
+advantages of this standard.
+
+=== Rationale ===
+
+The fundamental goal of this standard was to make the validator interface:
+
+(a) as easy as possible to implement from the point of view of the person writing the validator,
+
+while
+
+(b) being sufﬁciently versatile to handle all usual demands on validation.
+
+The rationale for item (a) is as follows. When running programming contests, the programs that get
+written most often (apart from actual problem solutions) are problem-speciﬁc validators. Most validators
+are small programs which are written and used for a single contest. As such, they are generally not nearly as
+well tested as the contest control system used. Therefore, it makes sense to make the standard imposed on
+them as easy and light-weight as possible, and to make the contest control system robust against potential
+bugs in the validator programs.
+
+The conviction that (a) and (b) are highly desirable goals for a validator standard comes from extensive
+experience of writing validators for ACM ICPC contests, including the World Finals.
+
+=== Comparison With The PC2 Validator Standard ===
+
+Apart from minor differences, there are two signiﬁcant differences between this standard and the PC2
+Validator Standard:
+
+'''1'''. The use of the program’s exit code to give the accept/reject result of the validation.
+
+;Motivation: this directly relates to the goal of making the validator interface as lightweight as possible; exiting with a speciﬁed exit code is one line of code in essentially all programming languages used. In addition, separating the accept/reject decision and feedback into two separate channels makes good sense from a security viewpoint; the feedback ﬁle can contain parts of the team’s output ﬁle, and having the accept/reject decision reported over a different channel makes the system less vulnerable to tampering with the accept/reject message.
+
+'''2'''. The simpliﬁed format of the “feedback ﬁle” (Called “result ﬁle” in the PC2 standard; feedback is a more appropriate term here as the purpose of the ﬁle is to produce additional
+information about the judgment).
+
+;Motivation: We feel that the use of XML in the PC2 standard is overkill, and the lightweight format suggested here is both better suited for human readability and nicer to implement.
