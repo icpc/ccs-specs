@@ -152,10 +152,6 @@ CCS meets all the requirements listed in this standard.
 
 :For each supported language compiler or interpreter it must be possible to configure the CCS to invoke it with any of the options specified in the compiler or interpreter's documentation.
 
-==== Changing Language Options ====
-
-:Specification of compiler/interpreter options for each supported language must be able to be changed dynamically during a contest without the necessity of stopping the contest.
-
 === Contest Problems ===
 
 ==== Separate Configuration ====
