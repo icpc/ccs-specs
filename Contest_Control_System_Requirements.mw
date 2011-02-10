@@ -650,6 +650,40 @@ A YAML file consisting of a mapping with the following keys:
 
 === languages.yaml ===
 
+A YAML file consisting of a sequence of mappings with the following keys:
+
+{| class="wikitable"
+! Key !! Description
+|-
+| language || Name of language 
+|-
+| compiler || Path to compiler
+|-
+| compiler-args || Argument list for compiler. {files} denotes where to include the file list
+|-
+| runner || Path to runner. Optional, relevant for interpreted languages and languages running on a VM
+|-
+| runner-args || Argument list for runner
+|}
+
+==== Example ====
+
+ ---
+ - language: 
+   compiler:   
+   compiler-args:
+   runner:
+   runner-args:
+ 
+ - language: 
+   compiler:   
+   compiler-args:
+   runner:
+   runner-args:
+ ...
+
+'''Comment:''' we need to add some sample values in the example. [[User:Niemela|Fredrik Niemelä]] 04:30, 10 February 2011 (CET)
+
 === problemset.yaml ===
 
 === contest.tsv ===
