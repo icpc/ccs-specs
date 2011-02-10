@@ -730,38 +730,6 @@ A  YAML file consisting of a sequence of mappings with the following keys:
    rgb:        #ffffff
  ...
 
-=== contest.tsv ===
-
-A text file consisting of two line with tab separated fields as defined below.
-
-The first line has the following format
-{| class="wikitable"
-! Field
-! Description
-! Example
-! Type
-|-
-| 1 || Label || file_version|| fixed string (always same value)
-|-
-| 2 || Version number || 1  || integer
-|}
-
-The second line has the following format.
-{| class="wikitable"
-! Field
-! Description
-! Example
-! Type
-|-
-| 1 || Contest ID || 532|| integer
-|-
-| 2 || Contest name ||The 2003 ACM Programming Contest World Finals  || string
-|-
-| 3 || Contest short name ||The 2003 World Finals  || string
-|-
-| 4 || Contest date/time || 2003-03-25 00:00:00 -05|| string YYYY-MM-DD hh:mm:ss+/-zz (date, time with timezone)
-|}
-
 === groups.tsv ===
 
 A text file consisting of a version line and one line for each group (super regionals at the WF) that needs to be tracked separately with regards to results. Each line has tab separated fields as defined below.
