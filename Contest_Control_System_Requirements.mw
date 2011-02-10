@@ -616,6 +616,12 @@ regarding a contest problem.
 
 All files should be encoded in utf-8.
 
+=== contest.yaml ===
+
+=== languages.yaml ===
+
+=== problemset.yaml ===
+
 === contest.tsv ===
 
 A text file consisting of two line with tab separated fields as defined below.
