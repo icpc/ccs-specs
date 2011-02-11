@@ -500,7 +500,7 @@ The next two sections define how to assign a judgment to a program for problems 
 
 ==== Machine Residency ====
 
-:Each external validator must be able to be loaded directly onto the World Finals machines (as opposed for example requiring off-machine access to some code repository).
+:It must be possible to load each external validator directly onto the World Finals machines (as opposed for example requiring off-machine access to some code repository).
 
 '''Comment''': this should be (implicitly?) defined in the [[Problem format]] specification.
 
