@@ -423,7 +423,7 @@ regarding a contest problem.
 
 ==== Prohibited Operations ====
 
-:The CCS must detect if submitted programs tries to perform prohibited operations. If detected the submission must be judges as '''Security Violation'''.
+:The CCS must provide a mechanism which automatically prevents a submitted program from performing prohibited operations.
 
 :The prohibited operations are:
 :# Using libraries except those explicitly allowed
