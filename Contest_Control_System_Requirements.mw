@@ -281,13 +281,13 @@ When a run is set to be rejudged it's current judgement is no longer valid and a
 
 :Various sections of this standard require that notifications regarding the judgment applied to a submitted run be able to be sent to the submitting team in several ways, including: from a human judge, from the automated judging system, and via an external notification (as described in the preceding subsection).
 
-:For each potential source of a judgment notification sent to teams, the CCS must have an ability to disable separately the ability of teams to receive any notifications from that source. This disabling of judgment notifications must override any attempt of any other CCS component to send a judgment notification to teams. For example, the function where an automated judging operation issues a judgment notification to a team must be able to be suppressed, and the control which suppresses this automated judgment notification must be independent from the control which suppresses judgment notifications from the human judge and also separate from the control which suppresses external judgment notifications.
+:For each potential source of a judgment notification sent to teams, the CCS must have an ability to disable separately the ability of teams to receive any notifications from that source. This disabling of judgment notifications must override any attempt of any other CCS component to send a judgment notification to teams. For example, it must be possible to suppress the function where an automated judging operation issues a judgment notification to a team, and the control which suppresses this automated judgment notification must be independent from the control which suppresses judgment notifications from the human judge and also separate from the control which suppresses external judgment notifications.
 
 :In other words, the CCS must support the ability for the contest personnel to independently control whether judgment notifications from any specific source are actually made available to the teams.
 
-:Changing the state (disabling or enabling) of one or more specific judgment notification sources must be able to be done while the contest is under way, without the need to stop the contest.
+:It must be possible to change the state (disabling or enabling) of one or more specific judgment notification sources while the contest is under way, without the need to stop the contest.
 
-:Changing the state (disabling or enabling) of one or more specific judgment notification sources must be able to be done on a per-problem basis, so that the state of notification (enabled vs. disabled) for any given contest problem is independent of the corresponding state for another contest problem.
+:It must be possible to change the state (disabling or enabling) of one or more specific judgment notification sources on a per-problem basis, so that the state of notification (enabled vs. disabled) for any given contest problem is independent of the corresponding state for another contest problem.
 
 == Team Interface ==
 
