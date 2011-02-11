@@ -273,11 +273,9 @@ When a run is set to be rejudged it's current judgement is no longer valid and a
 
 === Freezing the Scoreboard ===
 
-:The CCS must provide a way to disable the updating of the scoreboard display seen by the teams and by the spectators. This disabling function must be able to be invoked at any time during the contest, and must be able to be done without stopping the contest or affecting team, judging, or contest administration operations in any other way.
+:The CCS must provide a way for admins to "freeze the scoreboard", i.e., to disable the updating of the scoreboard display seen by the teams and by the spectators.  An admin must be able to invoke this freeze function at any time during the contest, without stopping the contest or affecting team, judging, or contest administration operations in any other way.
 
-:It must be possible to reenable scoreboard display updating at any time after it has been disabled, again without stopping the contest or affecting contest operations in any way.
-
-:'''Comment:''' This section needs to be reworded to fit here.[[User:Niemela|Fredrik Niemelä]] 19:13, 28 January 2011 (CET)
+:It must be possible to re-enable scoreboard display updating at any time after it has been disabled, again without stopping the contest or affecting contest operations in any way.
 
 === Disabling Notifications ===
 
