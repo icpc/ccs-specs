@@ -423,9 +423,19 @@ regarding a contest problem.
 
 ==== Prohibited Operations ====
 
-:The CCS must provide a mechanism which automatically prevents a submitted program from performing operations which are defined by the judges as being prohibited in the contest. Examples of prohibited operations include, but are not limited to, invoking prohibited system calls, using prohibited libraries, and accessing prohibited external resources such as prohibited files or language interpreters.
+:The CCS must detect if submitted programs tries to perform prohibited operations. If detected the submission must be judges as '''Security Violation'''.
 
-:'''Comment''': These need to be defined better/at all. [[User:Niemela|Fredrik Niemelä]] 00:36, 10 January 2011 (CET)
+:The prohibited operations are:
+:# Using libraries except those explicitly allowed
+:# Executing other programs
+:# Creating new processes
+:# Creating new threads
+:# Reading any files
+:# Creating files
+:# Sending signals to other programs
+:# Side-stepping time or memory limits
+:# Sending or receiving network traffic
+:# Sleeping
 
 === Judge Responses ===
 
