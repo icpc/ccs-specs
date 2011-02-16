@@ -30,6 +30,28 @@ identifier for the problem.
        output_validators/
                - single file or directory per validator
 
+=== Sample Directory / Filenames ===
+
+This is a sample list of directories/files for a problem named ''squares''
+
+ squares/problem.cfg
+ squares/problem_statement/problem.tex
+ squares/sample_data/squares.in 
+ squares/sample_data/squares2.in 
+ squares/sample_data/squares.ans
+ squares/sample_data/squares2.ans
+ squares/judge_data/squares.in 
+ squares/judge_data/squares2.in 
+ squares/judge_data/squares.ans
+ squares/judge_data/squares2.ans
+ squares/judge_data/squares.txt
+ squares/test_submissions/accepted/squares.cpp
+ squares/test_submissions/wrong_answer/wrong.cpp
+ squares/test_submissions/time_limit_exceeded/tle.c
+ squares/test_submissions/run_time_error/rte.c
+ squares/input_validators/validator1
+ squares/output_validators/ovalidator1
+
 === problem.cfg ===
 
 FIle in .cfg (a.k.a. .ini) format, i.e. key/value pairs.
