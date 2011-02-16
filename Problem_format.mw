@@ -37,12 +37,10 @@ This is a sample list of directories/files for a problem named ''squares''
  squares/problem.cfg
  squares/problem_statement/problem.tex
  squares/sample_data/squares.in 
- squares/sample_data/squares2.in 
  squares/sample_data/squares.ans
- squares/sample_data/squares2.ans
- squares/judge_data/squares.in 
+ squares/judge_data/squares1.in 
  squares/judge_data/squares2.in 
- squares/judge_data/squares.ans
+ squares/judge_data/squares1.ans
  squares/judge_data/squares2.ans
  squares/judge_data/squares.txt
  squares/test_submissions/accepted/squares.cpp
