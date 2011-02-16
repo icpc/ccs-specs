@@ -90,6 +90,24 @@ FIle in .cfg (a.k.a. .ini) format, i.e. key/value pairs.
 |
 |}
 
+===Sample problem.cfg===
+ 
+As an standard .ini file blank lines and lines starting with # will be ignored
+
+ name=Squares to Circles
+ short-name=squares
+ source=ICPC Mid-Atlantic Regional Contest
+ author=Judge X
+ # license  optional, defaults to "cc by-sa"  
+ rights-owner=ICPC
+ time-limit-multiplier=2
+ time-limit-safety-margin=3
+ # memory-limit  optional, defaults to 2GB  
+ # output-limit  optional, defaults to 8MB  
+ validator=ignore-space-change , float-absolute-tolerance X
+ # validator=custom --limits 3,8,44 --haltfirst
+
+
 === problem.tex ===
 
 Latex file that only includes the problem text itself, including input
