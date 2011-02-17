@@ -1,6 +1,6 @@
 == Summary ==
 
-This document describes a standard for Output Validators for Programming Contest Control Systems. It is designed especially with ACM ICPC-style contests in mind. This includes being well suited for use in the ICPC World Finals, but also being useful in other ICPC-related activities (such as regional contests, local training contests, or even evaluation of programming assignments in courses). The standard has many similarities to the existing PC2 Validator Standard , but there are some crucial differences. For the reader curious in how (and why) this standard differs from the PC2 standard, this is discussed in Section 7.
+This document describes a standard for Output Validators for Programming Contest Control Systems. It is designed especially with ACM ICPC-style contests in mind. This includes being well suited for use in the ICPC World Finals, but also being useful in other ICPC-related activities (such as regional contests, local training contests, or even evaluation of programming assignments in courses).
 
 == Overview ==
 
