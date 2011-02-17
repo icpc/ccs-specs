@@ -64,7 +64,7 @@ FIle in .cfg (a.k.a. .ini) format, i.e. key/value pairs.
 |-
 | name || mandatory || Hello World
 |-
-| short-name || mandatory || hello
+| short_name || mandatory || hello
 |-
 | source || mandatory || ICPC World Finals 2011
 |-
@@ -72,24 +72,24 @@ FIle in .cfg (a.k.a. .ini) format, i.e. key/value pairs.
 |-
 | license || optional, defaults to "cc by-sa"  ||
 |-
-| rights-owner || mandatory || ICPC
+| rights_owner || mandatory || ICPC
 |-
-| time-limit-multiplier || optional, defaults to 3 || 
+| time_limit_multiplier || optional, defaults to 3 || 
 |-
-| time-limit-safety-margin || optional, defaults to 5 || 
+| time_limit_safety_margin || optional, defaults to 5 || 
 |-
-| memory-limit || optional, defaults to 2GB || 
+| memory_limit || optional, defaults to 2GB || 
 |-
-| output-limit || optional, defaults to 8MB || 
+| output_limit || optional, defaults to 8MB || 
 |-
 | validator 
 | set of values from the following:<br>
-"ignore-case" - ignore case differences<br>
-"ignore-space-change" - only cares if there is *some* whitespace, ignores amount and type of whitespace<br>
-"float-relative-tolerance X" - accepts token if it is a floating point number end the relative error is <= X<br>
-"float-absolute-tolerance X" - accepts token if it is a floating point number end the absolute error is <= X<br>
-"float-tolerance X" - accepts token if "float-relative-tolerance X" or "float-absolute-tolerance X" would<br>
-"custom" - use a custom output validator. Must be first value, values following will be given as arguments to validator<br>
+"ignore_case" - ignore case differences<br>
+"ignore_space_change" - only cares if there is *some* whitespace, ignores amount and type of whitespace<br>
+"float_relative_tolerance X" - accepts token if it is a floating point number and the relative error is <= X<br>
+"float_absolute_tolerance X" - accepts token if it is a floating point number and the absolute error is <= X<br>
+"float_tolerance X" - accepts token if either "float_relative_tolerance X" or "float_absolute_tolerance X" would accept<br>
+"custom" - use a custom output validator. Must be first value, values following will be given as command-line arguments to validator<br>
 |
 |}
 
