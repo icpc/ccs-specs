@@ -492,7 +492,7 @@ The next two sections define how to assign a judgment to a program for problems 
 
 ==== Default Validator ====
 
-:The CCS should provide at least a default “diff” validator capability which compares the output of a submitted run with the correct output as supplied by the judges and returns a judgment based on the results of the diff.
+:The CCS must provide a default "diff" capable of handling the various options specified in the [[Problem_format#problem.cfg|problem format standard]].
 
 === Balloon Notifications ===
 
