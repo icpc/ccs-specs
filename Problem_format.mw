@@ -107,7 +107,7 @@ As an standard .ini file blank lines and lines starting with # will be ignored
  time_limit_safety-margin=10
  # memory_limit  optional, defaults to 2GB  
  # output_limit  optional, defaults to 8MB  
- validator = ignore_space_change float_absolute_tolerance 0.001
+ validator = space_change_sensitive float_absolute_tolerance 0.001
  # validator = custom --limits 3,8,44 --haltfirst
 
 === problem.tex ===
