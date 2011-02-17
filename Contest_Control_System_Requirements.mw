@@ -470,15 +470,7 @@ The next two sections define how to assign a judgment to a program for problems 
 
 === Validators ===
 
-==== Per-Problem Invocation ====
-
-:The CCS must provide a mechanism for invoking a problem-specific external validator program as part of the automated judging process. 
-
-==== Validator Interface ====
-
-:The interface between the CCS and each external validator must conform to the [http://www.ecs.csus.edu/pc2/doc/valistandard.html International Collegiate Programming Contest Validator Interface Standard].
-
-:'''Comment''': Some consideration is being given to updating/modifying the Validator Standard referenced above; contributors interested in this discussion should check appropriate threads on the CLICCS mailing list.
+:The CCS must support problem-specific output validators as described in the [[Problem_format|problem format standard]].  As described there, the output validators must adhere to the [[Output_validator|output validator standard]].
 
 ==== Machine Residency ====
 
