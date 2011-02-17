@@ -441,8 +441,8 @@ regarding a contest problem.
 
 :* '''Compile Error'''
 :* '''Security Violation'''
-:* '''Run-time Error'''
-:* '''Time-limit Exceeded'''
+:* '''Run-Time Error'''
+:* '''Time Limit Exceeded'''
 :* '''Wrong Answer'''
 :* '''Accepted'''
 :* '''Judging Error'''
