@@ -456,8 +456,8 @@ The next two sections define how to assign a judgment to a program for problems 
 :To determine which answer to use, the following rules must be applied in order:
 
 :# If the submitted program fails to compile or compilation exceeds the [[#Compilation_Time_Limit|compilation time limit]], the response must be '''Compile Error'''.
-:# If the submitted program exceeds the [[#Memory_Limit|memory limit]] or crashes before the [[#Execution_Time_Limit|execution time limit]] is exceeded, the answer must be '''Run-time Error'''.
-:# If the submitted program runs longer than the [[#Execution_Time_Limit|execution time limit]], the answer must be '''Time-limit Exceeded'''.
+:# If the submitted program exceeds the [[#Memory_Limit|memory limit]] or crashes before the [[#Execution_Time_Limit|execution time limit]] is exceeded, the answer must be '''Run-Time Error'''.
+:# If the submitted program runs longer than the [[#Execution_Time_Limit|execution time limit]], the answer must be '''Time Limit Exceeded'''.
 :# If the output of the submitted program exceeds the [[#Output_Size_Limit|output size limit]] or if the output of the submitted program is not accepted by the output validator, the answer must be '''Wrong Answer'''.
 :# If the output of the submitted program is accepted by the output validator, the answer must be '''Accepted'''.
 
