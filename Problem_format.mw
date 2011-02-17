@@ -84,8 +84,8 @@ FIle in .cfg (a.k.a. .ini) format, i.e. key/value pairs.
 |-
 | validator 
 | set of values from the following:<br>
-"ignore_case" - ignore case differences<br>
-"ignore_space_change" - only cares if there is *some* whitespace, ignores amount and type of whitespace<br>
+"case_sensitive" - upper/lower case differences are significant.  If this parameter is not specified, any changes in case are to be ignored.<br>
+"space_change_sensitive" - whitespace differences are significant.  If this parameter is not specified, any non-zero amounts of whitespace are considered identical.<br>
 "float_relative_tolerance X" - accepts token if it is a floating point number and the relative error is <= X<br>
 "float_absolute_tolerance X" - accepts token if it is a floating point number and the absolute error is <= X<br>
 "float_tolerance X" - accepts token if either "float_relative_tolerance X" or "float_absolute_tolerance X" would accept<br>
