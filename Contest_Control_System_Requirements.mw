@@ -154,47 +154,29 @@ CCS meets all the requirements listed in this standard.
 
 === Contest Problems ===
 
-==== Separate Configuration ====
-
-:The CCS must provide the ability to configure each of the contest problems separately. This means that all aspects of the description of a contest problem – for example the title, input data specification, runtime limit, problem validator (see below), etc. – must be configurable on a per-problem basis.
+:Problems (including judge data, validators, execution time limit, etc) are configured using the [[Problem_format|ICPC problem format]].  The CCS must have full support for this standard and its [[#Verification|verification process]].
 
 ==== Input/Output Methods ====
 
 :The CCS must be able to operate in such a way that submitted runs receive problem input data on their standard input stream, and are expected to write to their standard output stream.
 
+'''Comment:''' Should this be in the problem format standard? [[User:Austrin|Austrin]] 03:04, 17 February 2011 (CET)
+
 ==== Number of Problems ====
 
 :The CCS may not impose an upper limit on the number of different contest problems.
 
-==== Judge’s Data ====
-
-===== Judge's Data Files =====
-
-:For each contest problem the CCS must accept a set of files containing the judge’s test data to be used for that problem.
-
-===== Data File Size =====
+==== Data File Size ====
 
 :The CCS must not enforce any size limit on the judge’s test data files, other than that imposed by the available disk space in the file system on the machine.
 
-==== Limits ====
+'''Comment:''' This should either be removed or moved to the problem format standard. [[User:Austrin|Austrin]] 03:04, 17 February 2011 (CET)
 
-:For each of the limits described in this section, the CCS should have a reasonable default value that is used when a value is not specified.
-
-===== Execution Time Limit =====
-
-:The CCS must provide the ability to specify a separate execution time limit for each contest problem.  The execution time limit granularity must be at least in units of seconds.
-
-===== Memory Limit =====
-
-:The CCS must provide the ability to specify a separate memory limit for each contest problem.
-
-===== Output Size Limit =====
-
-:The CCS must provide the ability to specify a separate output size limit for each contest problem (i.e., a limit on the amount of data that submissions are allowed to write to their output streams).
-
-===== Compilation Time Limit =====
+==== Compilation Time Limit ====
 
 :The CCS must provide the ability to specify a compilation time limit for submissions.
+
+'''Comment:''' This is to be specified in the contest configuration and should therefore moved... somewhere... [[User:Austrin|Austrin]] 03:04, 17 February 2011 (CET)
 
 === Configuration Change ===
 
