@@ -74,9 +74,9 @@ FIle in .cfg (a.k.a. .ini) format, i.e. key/value pairs.
 |-
 | rights_owner || mandatory || ICPC
 |-
-| time_limit_multiplier || optional, defaults to 3 || 
+| time_limit_multiplier || optional, defaults to 5 || 
 |-
-| time_limit_safety_margin || optional, defaults to 5 || 
+| time_limit_safety_margin || optional, defaults to 10 || 
 |-
 | memory_limit || optional, defaults to 2GB || 
 |-
