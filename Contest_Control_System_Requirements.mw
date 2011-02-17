@@ -421,7 +421,7 @@ regarding a contest problem.
 
 ==== Prohibited Operations ====
 
-:The CCS must provide a mechanism which automatically prevents a submitted program from performing prohibited operations.
+:The CCS must automatically prevent a submitted program from performing prohibited operations.
 
 :The prohibited operations are:
 :# Using libraries except those explicitly allowed
