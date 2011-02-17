@@ -182,7 +182,7 @@ CCS meets all the requirements listed in this standard.
 
 ===== Execution Time Limit =====
 
-:The CCS must provide the ability to specify a separate run-time limit for each contest problem.  The execution time limit granularity must be at least in units of seconds.
+:The CCS must provide the ability to specify a separate execution time limit for each contest problem.  The execution time limit granularity must be at least in units of seconds.
 
 ===== Memory Limit =====
 
