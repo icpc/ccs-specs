@@ -173,12 +173,12 @@ should be ignored and a warning to that effect shown.
 
  For each solution in test_submissions/time_limit_exceeded/:
        For each *.in in data/*/:
-               Run the solution on the input for at least t*time-limit-safety-margin seconds.
+               Run the solution on the input for at least t * time_limit_safety_margin seconds.
  Let t_slow be the shortest time any of the solutions ran on any of the inputs.
 
- If t_slow is less than t*time-limit-safety-margin: Error!
+ If t_slow is less than t * time_limit_safety_margin: Error!
 
- The time-limit should be at least t*time-limit-multiplier and at most 1 second more.
+ The execution time limit should be at least t * time_limit_multiplier and at most 1 second more.
 
  For each solution in test_submissions/wrong_answer/:
        For each *.in in data/*/:
