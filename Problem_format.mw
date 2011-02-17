@@ -37,13 +37,17 @@ This is a sample list of directories/files for a problem named ''squares''
 
  squares/problem.cfg
  squares/problem_statement/problem.tex
- squares/sample_data/squares.in 
- squares/sample_data/squares.ans
- squares/judge_data/squares1.in 
- squares/judge_data/squares2.in 
- squares/judge_data/squares1.ans
- squares/judge_data/squares2.ans
- squares/judge_data/squares.txt
+ squares/data/sample/squares_sample1.in 
+ squares/data/sample/squares_sample1.ans
+ squares/data/sample/squares_sample2.in 
+ squares/data/sample/squares_sample2.ans
+ squares/data/secret/squares1.in 
+ squares/data/secret/squares1.ans
+ squares/data/secret/squares1.txt
+ squares/data/secret/squares2_cornercases.in 
+ squares/data/secret/squares2_cornercases.ans
+ squares/data/secret/squares3_bigcases.in
+ squares/data/secret/squares3_bigcases.ans
  squares/test_submissions/accepted/squares.cpp
  squares/test_submissions/wrong_answer/wrong.cpp
  squares/test_submissions/time_limit_exceeded/tle.c
