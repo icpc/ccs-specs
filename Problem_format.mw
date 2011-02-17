@@ -9,13 +9,14 @@ identifier for the problem.
        problem_statement/
                problem.tex - problem statement
                - any files that description.tex needs to include, e.g. images
-       sample_data/
-               *.in - sample input files
-               *.ans - sample answer files
-       judge_data/
-               *.in - input files
-               *.ans - answer files
-               *.txt - optional data file description
+       data/
+               sample/
+                       *.in - sample input files
+                       *.ans - sample answer files
+               secret/
+                       *.in - input files
+                       *.ans - answer files
+                       *.txt - optional data file description
        test_submissions/
                accepted/
                        - single file or directory per solution
