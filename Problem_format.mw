@@ -120,7 +120,7 @@ and output. Files needed by this file must all be in
 <problem>/problem_statement/ , problem.tex should include auxiliary files as if
 working directory is <problem>/problem_statement/ .
 
-=== <short-name>/*_data/ ===
+=== <short-name>/data/*/* ===
 
 All input and answer files must have the filename extension .in and
 .ans respectively. Optionally a text file describing the purpose of an
