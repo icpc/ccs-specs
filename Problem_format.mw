@@ -59,6 +59,8 @@ This is a sample list of directories/files for a problem named ''squares''
 
 FIle in .cfg (a.k.a. .ini) format, i.e. key/value pairs.
 
+'''Comment:''' what's the point of the short_name in the .cfg file and how is it different from the <short-name> that is the name of the base directory for the problem? [[User:Austrin|Austrin]] 03:24, 17 February 2011 (CET)
+
 {| class="wikitable"
 ! Key !! Comments !! Example
 |-
