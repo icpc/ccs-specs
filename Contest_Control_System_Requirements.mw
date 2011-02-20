@@ -563,6 +563,8 @@ Describes a balloon for a problem
 
 :'''Comment:''' TODO. Connect to some port, authenticate in some way, get summary somehow. [[User:Migo|Mikael Goldmann]]
 
+:'''Comment:''' Is the program that consumes the notifications responsible for tracking which have been send and which have not? [[User:Douglas Lane|Douglas Lane]] 17:06, 20 February 2011 (CET)
+
 == Scoring ==
 
 === Scoring Data Generation ===
