@@ -516,25 +516,35 @@ A notification should be sent the first time a team solves a particular problem.
 =====Example=====
  <?xml version="1.0" encoding="UTF-8" ?>
  <notifications>
-   <notification>
-     <team-id>34</team-id>
-     <team>U Waterloo</team>
-     <time>132.04213</time>
-     <nr>214</nr>
-     <balloon>
-       <problem-id>B</problem-id>
-       <problem>Bulls and bears</problem>
-       <rgb>ff0000</rgb>
-       <color>Red</color>
-     </balloon>
-     <first-by-team>true</first-by-team>
-     <balloons>
-       &lt;!-- balloons that team already has --&gt;
-       <ballon>..</ballon>
-       <ballon>..</ballon>
-     </balloons>
-   </notification>
-  ...more notifications
+ 	<notification>
+ 		<team-id>34</team-id>
+ 		<team>U Waterloo</team>
+ 		<time>132.04213</time>
+ 		<nr>214</nr>
+ 		<balloon>
+ 			<problem-id>B</problem-id>
+ 			<problem>Bulls and bears</problem>
+ 			<rgb>ff0000</rgb>
+ 			<color>Red</color>
+ 		</balloon>
+ 		<first-by-team>true</first-by-team>
+ 		<balloons>
+ 			<!-- balloons that team already has -->
+ 			<balloon>
+ 				<problem-id>D</problem-id>
+ 				<problem>Down the hill</problem>
+ 				<rgb>33cc00</rgb>
+ 				<color>Green</color>
+ 			</balloon>
+ 			<balloon>
+ 				<problem-id>F</problem-id>
+ 				<problem>Failing to make the grade</problem>
+ 				<rgb>ffff00</rgb>
+ 				<color>Yellow</color>
+ 			</balloon>
+ 		</balloons>
+ 	</notification>
+ 	<!-- ...more notifications -->
  </notifications>
 
 =====Elements=====
