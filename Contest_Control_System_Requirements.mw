@@ -462,7 +462,7 @@ The next two sections define how to assign a judgment to a program for problems 
 
 :A '''Judging Error''' happens if an error occurs that the CCS can not recover from during the judging process. Runs judged as '''Judging Error''' are considered pending for scoring purposes.
 
-:A '''Security Violation''' happens if the submitted program tries to perform a prohibited operation.
+:A '''Security Violation''' happens if the submitted program tries to perform a [[#Prohibited_Operations|prohibited operation]].
 
 === Judgment Timestamping ===
 
