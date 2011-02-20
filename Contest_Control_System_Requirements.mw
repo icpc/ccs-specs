@@ -560,7 +560,8 @@ Describes a balloon for a problem
 ;color : color name (string)
 
 ====Access to notifications====
-TODO. Conenct to some port, authenticate in some way, get summary somehow.
+
+:'''Comment:''' TODO. Connect to some port, authenticate in some way, get summary somehow. [[User:Migo|Mikael Goldmann]]
 
 == Scoring ==
 
