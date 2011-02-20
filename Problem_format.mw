@@ -144,6 +144,8 @@ makefile, if so it will be used. If not, the validator will be
 compiled as if it was a solution. Input and output validators must
 adhere to the input and output validator standard respectively.
 
+:'''Comment:''' When a makefile is present, is there a naming standard for validators? for solutions? [[User:Douglas Lane|Douglas Lane]] 07:26, 20 February 2011 (CET)
+
 :'''Comment:''' Can the validator be an executable or a shell/perl/etc. script ? [[User:Douglas Lane|Douglas Lane]] 20:44, 16 February 2011 (CET)
 
 === Verification ===
