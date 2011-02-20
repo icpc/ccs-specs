@@ -112,7 +112,7 @@ As an standard .ini file blank lines and lines starting with # will be ignored
  validator = space_change_sensitive float_absolute_tolerance 0.001
  # validator = custom --limits 3,8,44 --haltfirst
 
-=== problem.tex ===
+=== <short-name>/problem_statement/problem.tex ===
 
 Latex file that only includes the problem text itself, including input
 and output specifications, but not sample input and output. A template
@@ -120,7 +120,6 @@ will be provided that \imports this file as well as the sample input
 and output. Files needed by this file must all be in
 <problem>/problem_statement/ , problem.tex should include auxiliary files as if
 working directory is <problem>/problem_statement/ .
-
 
 :'''Comment:''' Are other format acceptable? Ex. .txt, .html, .pdf or .odt ? [[User:Douglas Lane|Douglas Lane]] 17:32, 17 February 2011 (CET)
 
