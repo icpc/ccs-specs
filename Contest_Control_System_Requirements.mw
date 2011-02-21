@@ -361,6 +361,10 @@ regarding a contest problem.
 :# View the validator output resulting from invoking the external validator associated with the contest problem for any specific submitted run; 
 :# View and download the judge's input data file associated with the contest problem for any specific submitted run; 
 :# View and download the "judge's output" (the "correct answer" file) associated with the contest problem for any specific submitted run;
+:# View a diff between team output for the submission and judge answer file for the problem
+:# View previous submission by the same team on the same problem
+:# View diffs between source code for this and previous submissions
+:# View diffs between answer file diff for this and previous submissions
 
 === Handling Clarifications ===
 
