@@ -242,7 +242,7 @@ When a run is set to be rejudged it's current judgement is no longer valid and a
 
 ==== Manual Rejudging ====
 
-:The CCS may support the ability to assign, to a single run, an updated judgment chosen from among any of the allowable run judgments as defined in [[Contest_Control_System#Judge Responses|Judge Responses]].
+:The CCS must support the ability to assign, to a single run, an updated judgment chosen from among any of the allowable run judgments as defined in [[Contest_Control_System#Judge Responses|Judge Responses]].
 
 :If this feature is supported, the CCS must require a separate authentication which encapsulates the ability to change a run judgment, and any manual changes to run judgments must be logged.
 
