@@ -469,10 +469,6 @@ The next two sections define how to assign a judgment to a program for problems 
 
 :The CCS must support problem-specific output validators as described in the [[Problem_format|problem format standard]].  As described there, the output validators must adhere to the [[Output_validator|output validator standard]].
 
-==== Validator Creation ====
-
-:It is not a requirement that the CCS be capable of compiling, interpreting, or otherwise creating the executable form of an external validator; it is assumed that each external validator will be provided in an executable form which can be executed as a stand-alone program on the specified World Finals platform.
-
 ==== Default Validator ====
 
 :The CCS must provide a default "diff" capable of handling the various options specified in the [[Problem_format#problem.cfg|problem format standard]].
