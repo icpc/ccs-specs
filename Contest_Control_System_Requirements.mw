@@ -271,7 +271,12 @@ When a run is set to be rejudged its current judgement is no longer valid and a 
 
 ==== Submission Contents ====
 
-:A team must be able to specify, for each run submission: (a) the contest problem to which the submission applies; (b) the programming language used in the submission; (c) the source code file or files comprising the submission. The CCS must allow teams to specify arbitrarily many files in a given submission and must allow teams to make submissions for any defined contest problem and written in any defined contest programming language.
+:A team must be able to specify, for each run submission: 
+# the contest problem to which the submission applies
+# the programming language used in the submission; 
+# the source code file or files comprising the submission. 
+
+:The CCS must allow teams to specify arbitrarily many files in a given submission and must allow teams to make submissions for any defined contest problem and written in any defined contest programming language.
 
 ==== Submission Timestamping ====
 
