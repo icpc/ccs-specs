@@ -248,7 +248,7 @@ When a run is set to be rejudged its current judgement is no longer valid and a 
 
 ==== Notification of Rejudgment ====
 
-:It must be possible to configure the extent to which the CCS sends [[#Team_Judgment_Notifications|Notifications]] about rejudged runs.  In particular, the following three options should be available.
+:It must be possible to configure the extent to which the CCS sends [[#Team_Judgment_Notifications|Notifications]] about rejudged runs.  In particular, at least the following three options must be available:
 :# Send no notifications about the rejudged runs.
 :# Only send a notification if the judgment of the run was changed.
 :# Send notifications for all the rejudged runs.
