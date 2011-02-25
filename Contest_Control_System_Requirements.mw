@@ -713,7 +713,7 @@ A YAML file consisting of a mapping with the following keys:
 |-
 | duration || Duration as h:mm:ss
 |-
-| scoreboard-freeze || Time when scoreboard will be frozen in ISO 8601 format 
+| scoreboard-freeze || Time when scoreboard will be frozen in contest time as h:mm:ss
 |-
 | default-clars || Sequence of pre-defined clarification messages. The first will be pre-selected
 |}
@@ -726,7 +726,7 @@ A YAML file consisting of a mapping with the following keys:
  short-name:        ICPC WF 2011
  start-time:        2011-02-04 01:23Z
  duration:          5:00:00
- scoreboard-freeze: 2011-02-04 05:23Z
+ scoreboard-freeze: 4:00:00
  
  default-clars:
    - No comment, read problem statement
