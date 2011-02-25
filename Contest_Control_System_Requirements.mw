@@ -585,6 +585,8 @@ Describes a balloon for a problem
 
 :The ''current scoreboard'' lists the teams sorted by position (with alphabetical order on team name as tie breaker).  It includes for each team their position, number of problems solved, total penalty time, and list of problems solved (including the time the problem was solved an how many attempts it took).
 
+==== Scoreboard Data File ====
+
 :The CCS must be capable of generating an external file containing the current scoreboard. The format of this file must be as defined in [[#scoreboard.tsv|the appendix]].
 
 :The CCS must automatically save an updated copy of the external scoring data file whenever the scoring data itself is updated as described above.
