@@ -255,11 +255,9 @@ When a run is set to be rejudged its current judgement is no longer valid and a 
 
 === Freezing the Scoreboard ===
 
-:The scoreboard should automatically freeze when the configured scoreboard freeze time is reached. It must also be possible to manually freeze the scoreboard at the current time.
+:The scoreboard should automatically freeze when the configured scoreboard freeze time is reached. It must also be possible to manually freeze the scoreboard at the current time. All submissions received after the freeze time should be treated as pending on a frozen scoreboard.
 
 :It must be possible to re-enable scoreboard display updating at any time after it has been disabled, again without stopping the contest or affecting contest operations in any way.
-
-:All submissions received after the freeze time should be treated as pending on a frozen scoreboard.
 
 == Team Interface ==
 
