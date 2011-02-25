@@ -480,7 +480,9 @@ The next two sections define how to assign a judgment to a program for problems 
 
 :Note that run judgements may not come in the same order as submissions, meaning that the first notification of acceptance does not have to be for the earliest submitted accepted run. 
 
-:The sequence numbers assigned to the external notifications are used to detect if a notification is missing (e.g., due to printer malfunction). The CCS must provide at least one of the two following features: (1) the CCS must be able to resend a previously sent message with a given sequence number upon request; (2) the CCS must have an interface listing all notifications, and allowing a user to access the data included in any one of them. Such a complete list of notifications must be protected in such a way that teams cannot access it.
+:The sequence numbers assigned to the external notifications are used to detect if a notification is missing (e.g., due to printer malfunction). The CCS must provide at least one of the two following features: 
+# the CCS must be able to resend a previously sent message with a given sequence number upon request 
+# the CCS must have an interface listing all notifications, and allowing a user to access the data included in any one of them. Such a complete list of notifications must be protected in such a way that teams cannot access it.
 
 :It is optional whether the CCS also provides the ability to send notifications for runs which receive rejected judgments, but it must be possible to configure the CCS to only send notifications for accepted runs.
 
