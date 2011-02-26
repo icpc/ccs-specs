@@ -892,7 +892,7 @@ The first line has the following format
 
 Then follow several lines with the following format (one per team).
 {| class="wikitable"
-! Field !! Descriptionc !! Example !! Type
+! Field !! Description !! Example !! Type
 |-
 | 1 || Institution name || University of Virginia || string
 |-
@@ -915,7 +915,9 @@ Then follow several lines with the following format (one per team).
 The Reservation ID for a team can be found in the
 [[#teams.tsv|teams.tsv]].
 
-The time when problem was solved must be < 0 when the problem was not solved. Same for time of last accepted submission if there were none.
+The time when problem was solved must be < 0 if the problem was not solved. 
+
+The time of last accepted submission must be < 0 if team has not solved a problem.
 
 === results.tsv ===
 
