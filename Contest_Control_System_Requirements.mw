@@ -224,7 +224,7 @@ CCS meets all the requirements listed in this standard.
 
 === Rejudging === 
 
-When a run is set to be rejudged its current judgement is no longer valid and a new judgement will be obtained in the same manner as for a newly arrived run.
+:When a run is set to be rejudged its current judgement is no longer valid and a new judgement will be obtained in the same manner as for a newly arrived run.
 
 ==== Automatic Rejudging ==== 
 
