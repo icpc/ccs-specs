@@ -491,7 +491,6 @@ Like the event feed, the balloon notifications are provided as an xml document t
 
 A notification should be sent the first time a team solves a particular problem. If a previously accepted run is rejected due to rejudging, no notification is sent, nor is a notification sent if and when the team subsequently solves the problem.
 
-
 =====Example=====
  <?xml version="1.0" encoding="UTF-8" ?>
  <notifications>
