@@ -499,6 +499,7 @@ A notification should be sent the first time a team solves a particular problem.
  		<team-id>34</team-id>
  		<team>U Waterloo</team>
  		<time>132.04213</time>
+ 		<timestamp>1298733213.102</timestamp>
  		<nr>214</nr>
  		<balloon>
  			<problem-id>B</problem-id>
