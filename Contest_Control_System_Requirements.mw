@@ -908,7 +908,7 @@ Then follow several lines with the following format (one per team).
 |-
 | 6 + 2''i'' - 1 || Number of submissions for problem ''i'' || 2 || integer
 |-
-| 6 + 2''i'' || Time when problem was solved || 233 || integer
+| 6 + 2''i'' || Time when problem ''i'' was solved || 233 || integer
 |-
 |}
 
