@@ -486,7 +486,7 @@ The next two sections define how to assign a judgment to a program for problems 
 
 :It is optional whether the CCS also provides the ability to send notifications for runs which receive rejected judgments, but it must be possible to configure the CCS to only send notifications for accepted runs.
 
-====Notification feed====
+====Balloon notification feed====
 Like the event feed, the balloon notifications are provided as an xml document that can be processed as a stream using e.g., a SAX parser.
 
 A notification should be sent the first time a team solves a particular problem. If a previously accepted run is rejected due to rejudging, no notification is sent, nor is a notification sent if and when the team subsequently solves the problem.
