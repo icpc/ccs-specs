@@ -4,7 +4,7 @@ identifier for the problem.
 
 === Directory structure ===
 
- <short-name>/
+ <short_name>/
        problem.cfg - problem configuration file
        problem_statement/
                problem.tex - problem statement
@@ -112,7 +112,7 @@ As an standard .ini file blank lines and lines starting with # will be ignored
  validator = space_change_sensitive float_absolute_tolerance 0.001
  # validator = custom --limits 3,8,44 --haltfirst
 
-=== <short-name>/problem_statement/problem.tex ===
+=== <short_name>/problem_statement/problem.tex ===
 
 Latex file that only includes the problem text itself, including input
 and output specifications, but not sample input and output. A template
@@ -123,20 +123,20 @@ working directory is <problem>/problem_statement/ .
 
 :'''Comment:''' Are other format acceptable? Ex. .txt, .html, .pdf or .odt ? [[User:Douglas Lane|Douglas Lane]] 17:32, 17 February 2011 (CET)
 
-=== <short-name>/data/*/* ===
+=== <short_name>/data/*/* ===
 
 All input and answer files must have the filename extension .in and
 .ans respectively. Optionally a text file describing the purpose of an
 input file may be present. Input, answer and description files are
 matched by the base name.
 
-=== <short-name>/test_submissions/*/ ===
+=== <short_name>/test_submissions/*/ ===
 
 Every file or directory in these directories represent a separate
 solution. Same requirements as for submissions with regards to
 filenames. subdirectories that would be empty can be left out.
 
-=== <short-name>/*_validators/ ===
+=== <short_name>/*_validators/ ===
 
 Every file or directory in these directories represent a separate
 validator. A validator in the form of a directory may include a
