@@ -138,9 +138,15 @@ CCS meets all the requirements listed in this standard.
 
 :The CCS must be able to read an ICPC Contest Management System (CMS)-generated initialization file containing a list of teams registered for the World Finals, and use the data in this file to create automatically whatever internal representation is necessary to allow each team (and only the teams) specified in the registration list to participate in the World Finals contest.  The format and content of the CMS-generated initialization file is given in the [[#Appendix:_File_formats| Appendix]].
 
-=== Clarification Default Answer ===
+=== Clarifications ===
+
+==== Clarification Default Answer ====
 
 :The CCS must provide the ability to configure a "default answer" (e.g., "No response, read problem statement.") to clarification requests, so that human judges can choose to reply to a clarification request by selecting the default answer rather than being required to enter a specific answer.
+
+==== Clarification Categories ====
+
+:It must be possible to configure "categories" that clarification requests can be assigned to. A request belongs to exactly one category.  Examples of categories are "Unassigned", "Judges", "Systems". The name of the default category, that a request is assigned to initially should  also be configurable.
 
 === Programming Languages ===
 
