@@ -360,7 +360,7 @@ CCS meets all the requirements listed in this standard.
 :# View a diff between team output for the submission and judge answer file for the problem
 :# View previous submissions by the same team on the same problem
 
-In addition, any additional analytical capabilities allowing the judges to track differences between submissions are appreciated.
+:In addition, any additional analytical capabilities allowing the judges to track differences between submissions are appreciated.
 
 === Handling Clarifications ===
 
