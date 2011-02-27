@@ -370,6 +370,8 @@ CCS meets all the requirements listed in this standard.
 :# Determine, for any specific clarification request, what answer was returned to the team if the clar has already been answered;
 :# Compose an answer to the clar and send it, along with the text of the original clarification request, to the team;
 :# Optionally choose to also send the clarification request text and answer to all teams in the contest.
+:# Change category of a clarification.
+:# Select a filter that only shows requests from a user-specified set of of categories.
 
 === Issuing Broadcast Messages ===
 
