@@ -19,15 +19,19 @@ The usage of the validator is as follows:
 
  >validator input judgeanswer teamoutput feedback [...]
 
+:'''Comment''' Should this be phrased four ''required'' parameters [[User:Douglas Lane|Douglas Lane]] 22:52, 28 February 2011 (CET)
+
+:'''Comment''' A sentence should be given for the meaning (optional params) as indicated by the ellipsis [[User:Douglas Lane|Douglas Lane]] 22:52, 28 February 2011 (CET)
+
 The four parameters are as follows:
 
 ;input: a string specifying the name of the input data ﬁle which was used to test the program whose results are being validated.
 
-;judgeanswer: a string specifying the name of an arbitrary “answer ﬁle” which acts as input to the validator program. The answer ﬁle may, but is not necessarily required to, contain the “correct answer” for the problem. For example, it might contain the output which was produced by a judge’s solution for the problem when run with input ﬁle as input. Alternatively, the “answer ﬁle” might contain information, in arbitrary format, which instructs the validator in some way about how to accomplish its task. The meaning of the contents of the answer ﬁle is not deﬁned by this standard.
+;judgeanswer: a string specifying the name of an arbitrary “answer ﬁle” which acts as input to the validator program. The answer ﬁle may, but is not necessarily required to, contain the “correct answer” for the problem. For example, it might contain the output which was produced by a judge’s solution for the problem when run with input ﬁle as input. Alternatively, the “answer ﬁle” might contain information, in arbitrary format, which instructs the validator in some way about how to accomplish its task. The meaning of the contents of the answer ﬁle is not defined by this standard.
 
 ;teamoutput: a string specifying the name of the output ﬁle which was produced by the program being validated when it was run using the data ﬁle named in “input” (that is, this is the name of the ﬁle containing the output to be “validated”).
 
-;feedback: a string which speciﬁes the name of a “feedback ﬁle” which the validator can produce, in order to report additional information on the validation of the output ﬁle.
+;feedback: a string which specifies the name of a “feedback ﬁle” which the validator can produce, in order to report additional information on the validation of the output ﬁle.
 
 The three ﬁles pointed to by input, judgeanswer, and teamoutput must exist (though they are allowed to be empty) and the validator program must be allowed to open them for reading. The feedback ﬁle should not exist (but if it does exist, it must be empty).
 
