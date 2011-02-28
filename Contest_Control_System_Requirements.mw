@@ -467,6 +467,8 @@ The next two sections define how to assign a judgment to a program for problems 
 
 :The CCS must support problem-specific output validators as described in the [[Problem_format|problem format standard]].  As described there, the output validators must adhere to the [[Output_validator|output validator standard]].
 
+:'''Comment''' TODO: This section is incomplete it does not describe in general how validators work with the CCS, nor detail about the interface between the CCS and the validators [[User:Douglas Lane|Douglas Lane]] 23:43, 28 February 2011 (CET)
+
 ==== Default Validator ====
 
 :The CCS must provide a default "diff" capable of handling the various options specified in the [[Problem_format#problem.cfg|problem format standard]].
