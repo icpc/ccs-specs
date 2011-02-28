@@ -633,6 +633,8 @@ A problem is pending judgement if any submission on it is pending judgement. A s
 
 :'''Comment''': This section is under development and has yet to be written/completed [[User:Douglas Lane|Douglas Lane]] 20:39, 27 January 2011 (CET)
 
+:'''Comment''': TODO: Incorporate or reference information from the [[Test Harness]] article [[User:Douglas Lane|Douglas Lane]] 23:26, 28 February 2011 (CET)
+
 === Scriptable Submissions ===
 
 :The CCS must provide a mechanism by which team submissions of both runs and clarification requests can be scripted for automated testing. In other words, the CCS must provide a command-line based interface allowing an external program to submit a run to the CCS and to submit a clarification request to the CCS.
