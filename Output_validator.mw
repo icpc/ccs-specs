@@ -123,3 +123,5 @@ submissions to produce feedback ﬁles of their own choosing.
 
 A valididator program is allowed to write any kind of debug information to its standard output and
 standard error pipes. The content of these should be ignored by the contest control system.
+
+:'''Comment''' Change "should be ignored" to "can be ignored" to allow the CCS to use that information. [[User:Douglas Lane|Douglas Lane]] 23:00, 28 February 2011 (CET)
