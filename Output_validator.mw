@@ -83,7 +83,9 @@ The start of a section is indicated by a line of the form â€œ***SectionName***â€
 can be any non-empty string of upper and lower case characters from the English alphabet, as well as digits.
 Section names are not case sensitive, e.g., JudgeMessage is the same section as juDGEmessage. A
 section start line should not contain any whitespace, but trailing whitespace is allowed (and should be
-handled by the contest control system).
+handled by the [[CCS]]).
+
+:'''Comment''' Does handled mean: the trailing whitespace be ignored by the [[CCS]]?  And that [[CCS]] requirement should be put into the [[CCS]] article. [[User:Douglas Lane|Douglas Lane]] 23:14, 28 February 2011 (CET)
 
 ==== File Structure ====
 
