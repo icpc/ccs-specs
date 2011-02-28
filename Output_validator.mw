@@ -6,10 +6,10 @@ This document describes a standard for Output Validators for Programming Contest
 
 A validator program must be an application (executable or interpreted) capable of being invoked with a command line call. The details of this invocation are described in Section 3. The validator program has two ways of reporting back to the Contest Control System that invoked it:
 
-# The validator must give a judgment (see Section 4).
-# The validator may give additional feedback, e.g., an explanation of the judgment to human judges. This is described in Section 5.
+# The validator must give a judgment (see Section 4 [[#Reporting a judgment|Reporting a judgment]]).
+# The validator may give additional feedback, e.g., an explanation of the judgment to human judges. This is described in Section 5 [[#Reporting Additional Feedback|Reporting Additional Feedback]].
 
-Some additional requirements are discussed in Section 6.
+Some additional requirements are discussed in Section 6 [[#Additional Requirements|Additional Requirements]].
 
 == Invocation ==
 
