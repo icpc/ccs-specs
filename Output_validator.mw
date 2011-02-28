@@ -115,11 +115,13 @@ An example of a feedback ﬁle containing more sections:
 
 == Additional Requirements ==
 
-A CCS supporting this standard must safeguard against faulty validators. For instance, if a validator were
-to produce an excessively large feedback ﬁle, or a feedback ﬁle not adhering to the speciﬁcations above, the
-CCS should handle this graciously and report it to the contest personnel. Reasons for such misbehaviour
+A [[CCS]] supporting this standard must safeguard against faulty validators. For instance, if a validator were
+to produce an excessively large feedback ﬁle, or a feedback ﬁle not adhering to the specifications above, the
+[[CCS]] should handle this graciously and report it to the contest personnel. Reasons for such misbehaviour
 of the validator program could be for instance a security bug in the validator program, enabling malicious
 submissions to produce feedback ﬁles of their own choosing.
+
+:'''Comment''' This first paragraph contains [[CCS]] requirements, as such should be put into the [[CCS]] article [[User:Douglas Lane|Douglas Lane]] 23:11, 28 February 2011 (CET)
 
 A valididator program is allowed to write any kind of debug information to its standard output and
 standard error pipes. The content of these should be ignored by the contest control system.
