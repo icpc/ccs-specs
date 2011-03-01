@@ -290,7 +290,7 @@ CCS meets all the requirements listed in this standard.
 
 ==== Team Viewing of Submission Status ====
 
-:The CCS must provide each team with a capability for reviewing the status of each run the team has submitted, including: the contest time of the submission; the language and problem specified in the submission; and the response(s) from the judging system to the submission if any responses have occurred yet.
+:The CCS must provide each team with a capability for reviewing the status of each run the team has submitted, including: the contest time of the submission; the language and problem specified in the submission; and the most recent judgment (if any) for the submission.
 
 ==== Submission Security ====
 
