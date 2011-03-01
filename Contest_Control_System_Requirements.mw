@@ -230,9 +230,14 @@ CCS meets all the requirements listed in this standard.
 
 === Rejudging === 
 
-:When a run is set to be rejudged its current judgement is no longer valid and a new judgement will be obtained in the same manner as for a newly arrived run.
+==== Automatic Rejudging ====
 
-==== Automatic Rejudging ==== 
+:Rejudging a set of runs must be done in the following steps:
+:# A user selects a set of runs to be rejudged, as described in [[#Run_Selection|Run Selection]].
+:# The selected runs are run and judged in the same manner as for a newly arrived run.  For each selected run a new judgment is determined, ''but not assigned to the run''.
+:# A user ''commits'' the results of the rejudging, whereupon all the selected runs are assigned the judgments determined in the previous step.
+
+==== Run Selection ==== 
 
 :The CCS must support the ability to rejudge a set of run submissions.  This means that it must be possible to provide the CCS with a filter of runs to be rejudged, based upon which the CCS automatically selects all runs matching the filter, and automatically rejudges them.
 
@@ -246,18 +251,11 @@ CCS meets all the requirements listed in this standard.
 
 :Thus, for example, it must be possible to select "all rejected runs for problem B", "all Time Limit Exceeded runs using Java for problem C", or "all runs in C++".
 
-==== Manual Rejudging ====
+=== Manual Override of Judgments ===
 
-:The CCS must support the ability to assign, to a single run, an updated judgment chosen from among any of the allowable run judgments as defined in [[Contest_Control_System#Judge Responses|Judge Responses]].
+:The CCS must support the ability to assign, to a single run, an updated judgment chosen from among any of the allowed run judgments as defined in [[Contest_Control_System#Judge Responses|Judge Responses]].
 
 :The CCS must require a separate authentication every time a judgment is changed manually and all such changes must be logged.
-
-==== Notification of Rejudgment ====
-
-:It must be possible to configure the extent to which the CCS sends [[#Team_Judgment_Notifications|Notifications]] about rejudged runs.  In particular, at least the following three options must be available:
-:# Send no notifications about the rejudged runs.
-:# Only send a notification if the judgment of the run was changed.
-:# Send notifications for all the rejudged runs.
 
 === Freezing the Scoreboard ===
 
