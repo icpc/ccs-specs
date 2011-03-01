@@ -236,6 +236,7 @@ CCS meets all the requirements listed in this standard.
 :# A user selects a set of runs to be rejudged, as described in [[#Run_Selection|Run Selection]].
 :# The selected runs are run and judged in the same manner as for a newly arrived run.  For each selected run a new judgment is determined, ''but not assigned to the run''.
 :# A user ''commits'' the results of the rejudging, whereupon all the selected runs are assigned the judgments determined in the previous step.
+:If the results of a rejudge have not been committed when a new rejudge is started, the results of the old rejudge are discarded.
 
 ==== Run Selection ==== 
 
