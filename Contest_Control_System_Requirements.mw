@@ -330,12 +330,6 @@ CCS meets all the requirements listed in this standard.
 
 :The CCS must provide a mechanism to notify teams of the existence of a new broadcast message (that is, a message which has been broadcast since the last time the team checked for broadcast messages as provided under Team Review, above).
 
-=== Judgement Notifications ===
-
-:The CCS must provide a mechanism for sending a judging response message to each team for each submitted run as soon as a judgment determination is made for that run. The judging response message must be transmitted automatically over the network at the time a judging decision is made.
-
-:'''Comment:''' This needs to be reworded slightly to fit into this section.[[User:Niemela|Fredrik Niemelä]] 19:08, 28 January 2011 (CET)
-
 === Scoreboard Display ===
 
 :The CCS must provide a mechanism for teams to view the current scoreboard. The scoreboard should be updated at least every 30 seconds.
