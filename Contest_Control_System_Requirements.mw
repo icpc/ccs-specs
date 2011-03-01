@@ -715,31 +715,20 @@ A YAML file consisting of a mapping with the following keys:
 | scoreboard-freeze || Time when scoreboard will be frozen in contest time as h:mm:ss
 |-
 | default-clars || Sequence of pre-defined clarification messages. The first will be pre-selected
+|-
+| languages || Sequence of mappings with keys as defined below
+|-
+| problemset || Sequence of mappings with keys as defined below
 |}
 
-==== Example ====
+==== languages ====
 
- # Contest configuration
- ---
- name:              ACM-ICPC World Finals 2011
- short-name:        ICPC WF 2011
- start-time:        2011-02-04 01:23Z
- duration:          5:00:00
- scoreboard-freeze: 4:00:00
- 
- default-clars:
-   - No comment, read problem statement
-   - This will be answered during the answers to questions session
- ...
-
-=== languages.yaml ===
-
-A YAML file consisting of a sequence of mappings with the following keys:
+A sequence of mappings with the following keys:
 
 {| class="wikitable"
 ! Key !! Description
 |-
-| language || Name of language 
+| name || Name of language 
 |-
 | compiler || Path to compiler
 |-
@@ -750,27 +739,9 @@ A YAML file consisting of a sequence of mappings with the following keys:
 | runner-args || Argument list for runner
 |}
 
-==== Example ====
+==== problemset ====
 
- ---
- - language: 
-   compiler:   
-   compiler-args:
-   runner:
-   runner-args:
- 
- - language: 
-   compiler:   
-   compiler-args:
-   runner:
-   runner-args:
- ...
-
-'''Comment:''' we need to add some sample values in the example. [[User:Niemela|Fredrik Niemelä]] 04:30, 10 February 2011 (CET)
-
-=== problemset.yaml ===
-
-A  YAML file consisting of a sequence of mappings with the following keys:
+A sequence of mappings with the following keys:
 
 {| class="wikitable"
 ! Key !! Description
@@ -786,33 +757,59 @@ A  YAML file consisting of a sequence of mappings with the following keys:
 
 ==== Example ====
 
- # Problem set configuration
+ # Contest configuration
  ---
- - letter:     A
-   short-name: apl
-   color:      yellow
-   rgb:        #ffff00
+ name:              ACM-ICPC World Finals 2011
+ short-name:        ICPC WF 2011
+ start-time:        2011-02-04 01:23Z
+ duration:          5:00:00
+ scoreboard-freeze: 4:00:00
  
- - letter:     B
-   short-name: barcodes
-   color:      red
-   rgb:        #ff0000
+ default-clars:
+   - No comment, read problem statement
+   - This will be answered during the answers to questions session
  
- - letter:     C
-   short-name: biobots
-   color:      green
-   rgb:        #00ff00
+ languages:
+   - name: 
+     compiler:   
+     compiler-args:
+     runner:
+     runner-args:
+   
+   - name: 
+     compiler:   
+     compiler-args:
+     runner:
+     runner-args:
  
- - letter:     D
-   short-name: castles
-   color:      blue
-   rgb:        #0000ff
- 
- - letter:     E
-   short-name: channel
-   color:      white
-   rgb:        #ffffff
+ problemset:
+   - letter:     A
+     short-name: apl
+     color:      yellow
+     rgb:        #ffff00
+   
+   - letter:     B
+     short-name: barcodes
+     color:      red
+     rgb:        #ff0000
+   
+   - letter:     C
+     short-name: biobots
+     color:      green
+     rgb:        #00ff00
+   
+   - letter:     D
+     short-name: castles
+     color:      blue
+     rgb:        #0000ff
+   
+   - letter:     E
+     short-name: channel
+     color:      white
+     rgb:        #ffffff
  ...
+
+'''Comment:''' we need to add some sample values for languages in the example. [[User:Niemela|Fredrik Niemelä]] 04:30, 10 February 2011 (CET)
 
 === groups.tsv ===
 
