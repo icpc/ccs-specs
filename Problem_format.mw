@@ -4,8 +4,8 @@ identifier for the problem.
 
 === Directory structure ===
 
- <short-name>/
-       problem.cfg - problem configuration file
+ <short_name>/
+       problem.yaml - problem configuration file
        problem_statement/
                problem.tex - problem statement
                - any files that description.tex needs to include, e.g. images
@@ -35,7 +35,7 @@ identifier for the problem.
 
 This is a sample list of directories/files for a problem named ''squares''
 
- squares/problem.cfg
+ squares/problem.yaml
  squares/problem_statement/problem.tex
  squares/data/sample/squares_sample1.in 
  squares/data/sample/squares_sample1.ans
@@ -55,18 +55,14 @@ This is a sample list of directories/files for a problem named ''squares''
  squares/input_validators/validator1
  squares/output_validators/ovalidator1
 
-=== problem.cfg ===
+=== problem.yaml ===
 
-FIle in .cfg (a.k.a. .ini) format, i.e. key/value pairs.
-
-'''Comment:''' what's the point of the short_name in the .cfg file and how is it different from the <short-name> that is the name of the base directory for the problem? [[User:Austrin|Austrin]] 03:24, 17 February 2011 (CET)
+A YAML file consisting of a mapping with the following keys:
 
 {| class="wikitable"
 ! Key !! Comments !! Example
 |-
 | name || mandatory || Hello World
-|-
-| short_name || mandatory || hello
 |-
 | source || mandatory || ICPC World Finals 2011
 |-
@@ -95,24 +91,23 @@ FIle in .cfg (a.k.a. .ini) format, i.e. key/value pairs.
 |
 |}
 
-===Sample problem.cfg===
+==== Sample problem.yaml ===
  
-As an standard .ini file blank lines and lines starting with # will be ignored
-
- name = Squares to Circles
- short_name = squares
- source = ICPC Mid-Atlantic Regional Contest
- author = Judge X
+ # Problem configuration
+ name: Squares to Circles
+ short_name: squares
+ source: ICPC Mid-Atlantic Regional Contest
+ author: Judge X
  # license  optional, defaults to "cc by-sa"  
- rights_owner = ICPC
- time_limit_multiplier=5
- time_limit_safety-margin=10
+ rights_owner: ICPC
+ time_limit_multiplier: 5
+ time_limit_safety-margin: 10
  # memory_limit  optional, defaults to 2GB  
  # output_limit  optional, defaults to 8MB  
- validator = space_change_sensitive float_absolute_tolerance 0.001
+ validator: space_change_sensitive float_absolute_tolerance 0.001
  # validator = custom --limits 3,8,44 --haltfirst
 
-=== <short-name>/problem_statement/problem.tex ===
+=== <short_name>/problem_statement/problem.tex ===
 
 Latex file that only includes the problem text itself, including input
 and output specifications, but not sample input and output. A template
@@ -123,20 +118,20 @@ working directory is <problem>/problem_statement/ .
 
 :'''Comment:''' Are other format acceptable? Ex. .txt, .html, .pdf or .odt ? [[User:Douglas Lane|Douglas Lane]] 17:32, 17 February 2011 (CET)
 
-=== <short-name>/data/*/* ===
+=== <short_name>/data/*/* ===
 
 All input and answer files must have the filename extension .in and
 .ans respectively. Optionally a text file describing the purpose of an
 input file may be present. Input, answer and description files are
 matched by the base name.
 
-=== <short-name>/test_submissions/*/ ===
+=== <short_name>/test_submissions/*/ ===
 
 Every file or directory in these directories represent a separate
 solution. Same requirements as for submissions with regards to
 filenames. subdirectories that would be empty can be left out.
 
-=== <short-name>/*_validators/ ===
+=== <short_name>/*_validators/ ===
 
 Every file or directory in these directories represent a separate
 validator. A validator in the form of a directory may include a
@@ -158,8 +153,8 @@ should be ignored and a warning to that effect shown.
        there are no *.in in data/sample/
 
  Error if:
-       there is no problem.cfg
-       any value in problem.cfg is invalid
+       there is no problem.yaml
+       any value in problem.yaml is invalid
        there are no *.in in data/secret/
        there are .in files without corresponding .ans files in data/*/
        there are no solutions in test_submissions/accepted/
