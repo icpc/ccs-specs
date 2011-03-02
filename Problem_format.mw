@@ -5,7 +5,7 @@ identifier for the problem.
 === Directory structure ===
 
  <short_name>/
-       problem.cfg - problem configuration file
+       problem.yaml - problem configuration file
        problem_statement/
                problem.tex - problem statement
                - any files that description.tex needs to include, e.g. images
