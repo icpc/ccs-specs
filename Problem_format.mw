@@ -157,8 +157,8 @@ should be ignored and a warning to that effect shown.
        there are no *.in in data/sample/
 
  Error if:
-       there is no problem.cfg
-       any value in problem.cfg is invalid
+       there is no problem.yaml
+       any value in problem.yaml is invalid
        there are no *.in in data/secret/
        there are .in files without corresponding .ans files in data/*/
        there are no solutions in test_submissions/accepted/
