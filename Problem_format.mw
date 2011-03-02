@@ -95,7 +95,6 @@ A YAML file consisting of a mapping with the following keys:
  
  # Problem configuration
  name: Squares to Circles
- short_name: squares
  source: ICPC Mid-Atlantic Regional Contest
  author: Judge X
  # license  optional, defaults to "cc by-sa"  
