@@ -95,21 +95,20 @@ A YAML file consisting of a mapping with the following keys:
 |
 |}
 
-===Sample problem.cfg===
+===Sample problem.yaml===
  
-As an standard .ini file blank lines and lines starting with # will be ignored
-
- name = Squares to Circles
- short_name = squares
- source = ICPC Mid-Atlantic Regional Contest
- author = Judge X
+ # Problem configuration
+ name: Squares to Circles
+ short_name: squares
+ source: ICPC Mid-Atlantic Regional Contest
+ author: Judge X
  # license  optional, defaults to "cc by-sa"  
- rights_owner = ICPC
- time_limit_multiplier=5
- time_limit_safety-margin=10
+ rights_owner: ICPC
+ time_limit_multiplier: 5
+ time_limit_safety-margin: 10
  # memory_limit  optional, defaults to 2GB  
  # output_limit  optional, defaults to 8MB  
- validator = space_change_sensitive float_absolute_tolerance 0.001
+ validator: space_change_sensitive float_absolute_tolerance 0.001
  # validator = custom --limits 3,8,44 --haltfirst
 
 === <short_name>/problem_statement/problem.tex ===
