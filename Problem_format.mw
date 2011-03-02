@@ -115,8 +115,6 @@ and output. Files needed by this file must all be in
 <problem>/problem_statement/ , problem.tex should include auxiliary files as if
 working directory is <problem>/problem_statement/ .
 
-:'''Comment:''' Are other format acceptable? Ex. .txt, .html, .pdf or .odt ? [[User:Douglas Lane|Douglas Lane]] 17:32, 17 February 2011 (CET)
-
 === <short_name>/data/*/* ===
 
 All input and answer files must have the filename extension .in and
