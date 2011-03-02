@@ -91,7 +91,7 @@ A YAML file consisting of a mapping with the following keys:
 |
 |}
 
-==== Sample problem.yaml ===
+==== Sample problem.yaml ====
  
  # Problem configuration
  name: Squares to Circles
