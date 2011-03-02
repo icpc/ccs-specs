@@ -95,7 +95,7 @@ FIle in .cfg (a.k.a. .ini) format, i.e. key/value pairs.
 |
 |}
 
-===Sample problem.cfg===
+==== Sample problem.cfg ====
  
 As an standard .ini file blank lines and lines starting with # will be ignored
 
