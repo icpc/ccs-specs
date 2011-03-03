@@ -325,9 +325,9 @@ CCS meets all the requirements listed in this standard.
 
 :The CCS must provide each team with a capability for viewing any broadcast messages sent by the judges (see [[Contest_Control_System#Issuing_Broadcast_Messages| Issuing Broadcast Messages]] under Judging).
 
-==== Notification of New Broadcasts ====
+=== Notifications ===
 
-:The CCS must provide a mechanism to notify teams of the existence of a new broadcast message (that is, a message which has been broadcast since the last time the team checked for broadcast messages as provided under Team Review, above).
+: The CCS must notify teams when a judgement, clarification or broadcast message has been recieved. This notification may not steal focus.
 
 === Scoreboard Display ===
 
