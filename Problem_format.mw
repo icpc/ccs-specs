@@ -100,7 +100,7 @@ A YAML file consisting of a mapping with the following keys:
  # license  optional, defaults to "cc by-sa"  
  rights_owner: ICPC
  time_limit_multiplier: 5
- time_limit_safety-margin: 10
+ time_limit_safety_margin: 10
  # memory_limit  optional, defaults to 2GB  
  # output_limit  optional, defaults to 8MB  
  validator: space_change_sensitive float_absolute_tolerance 0.001
