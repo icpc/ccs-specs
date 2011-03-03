@@ -307,7 +307,7 @@ CCS meets all the requirements listed in this standard.
 
 ==== Clarification Content ====
 
-:The team must be able to specify the text content of a clarification request. The CCS may optionally require the team to identify the problem about which a clarification is being requested, but this is not a requirement (since the team can identify the problem within the text of the clarification message).
+:The team must be able to specify the text content and category of a clarification request.
 
 ==== Clarification Timestamping ====
 
