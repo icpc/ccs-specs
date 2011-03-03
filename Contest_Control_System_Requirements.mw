@@ -412,7 +412,6 @@ CCS meets all the requirements listed in this standard.
 :# Sending signals to other programs
 :# Side-stepping time or memory limits
 :# Sending or receiving network traffic
-:# Sleeping
 
 === Judge Responses ===
 
