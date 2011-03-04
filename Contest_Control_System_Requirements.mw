@@ -722,6 +722,8 @@ A YAML file consisting of a mapping with the following keys:
 |-
 | default-clars || Sequence of pre-defined clarification messages. The first will be pre-selected
 |-
+| compile-time-limit || Wall time limit for compilation in minutes. Optional, defaults to 2
+|-
 | languages || Sequence of mappings with keys as defined below
 |-
 | problemset || Sequence of mappings with keys as defined below
@@ -770,6 +772,7 @@ A sequence of mappings with the following keys:
  start-time:        2011-02-04 01:23Z
  duration:          5:00:00
  scoreboard-freeze: 4:00:00
+ compile-time-limit: 2
  
  default-clars:
    - No comment, read problem statement
