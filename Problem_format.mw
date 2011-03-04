@@ -188,3 +188,15 @@ should be ignored and a warning to that effect shown.
        For each *.in in data/*/:
                Run the solution on the input
                If the solution is not judged Run-Time Error: Error!
+
+=== Moved from CCS standard ===
+
+This should be worked into the problem format:
+
+==== Input/Output Methods ====
+
+The CCS must be able to operate in such a way that submitted runs receive problem input data on their standard input stream, and are expected to write to their standard output stream.
+
+==== Data File Size ====
+
+The CCS must not enforce any size limit on the judge’s test data files, other than that imposed by the available disk space in the file system on the machine.
