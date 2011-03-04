@@ -164,21 +164,9 @@ CCS meets all the requirements listed in this standard.
 
 :Problems (including judge data, validators, execution time limit, etc) are configured using the [[Problem_format|ICPC problem format]].  The CCS must have full support for this standard and its [[#Verification|verification process]].
 
-==== Input/Output Methods ====
-
-:The CCS must be able to operate in such a way that submitted runs receive problem input data on their standard input stream, and are expected to write to their standard output stream.
-
-'''Comment:''' Should this be in the problem format standard? [[User:Austrin|Austrin]] 03:04, 17 February 2011 (CET)
-
 ==== Number of Problems ====
 
 :The CCS may not impose an upper limit on the number of different contest problems.
-
-==== Data File Size ====
-
-:The CCS must not enforce any size limit on the judge’s test data files, other than that imposed by the available disk space in the file system on the machine.
-
-'''Comment:''' This should either be removed or moved to the problem format standard. [[User:Austrin|Austrin]] 03:04, 17 February 2011 (CET)
 
 === Configuration Change ===
 
