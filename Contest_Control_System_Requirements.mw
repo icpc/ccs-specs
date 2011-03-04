@@ -196,7 +196,7 @@ CCS meets all the requirements listed in this standard.
 
 ==== Adding penalty time ====
 
-:It must be possible to specify, for each team, an integer amount of penalty time to be added to that teams total penalty time.
+:It must be possible to specify, for each team, an integer amount of penalty time to be added into that team's total penalty time.
 
 === Problem Enabling, Pausing, and Disabling ===
 
