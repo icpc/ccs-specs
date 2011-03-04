@@ -180,12 +180,6 @@ CCS meets all the requirements listed in this standard.
 
 '''Comment:''' This should either be removed or moved to the problem format standard. [[User:Austrin|Austrin]] 03:04, 17 February 2011 (CET)
 
-==== Compilation Time Limit ====
-
-:The CCS must provide the ability to specify a compilation time limit for submissions.
-
-'''Comment:''' This is to be specified in the contest configuration and should therefore moved... somewhere... [[User:Austrin|Austrin]] 03:04, 17 February 2011 (CET)
-
 === Configuration Change ===
 
 :The CCS must allow updating of any configuration data without restarting or stopping the contest.
