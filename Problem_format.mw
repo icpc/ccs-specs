@@ -80,6 +80,8 @@ A YAML file consisting of a mapping with the following keys:
 |-
 | output_limit || optional, defaults to 8MB ||4M
 |-
+| compile_time_limit || optional, defaults to 2 minutes || 2
+|-
 | validator 
 | set of values from the following (delimited by spaces):<br>
 "case_sensitive" - upper/lower case differences are significant.  If this parameter is not specified, any changes in case are to be ignored.<br>
@@ -103,6 +105,7 @@ A YAML file consisting of a mapping with the following keys:
  time_limit_safety_margin: 10
  # memory_limit  optional, defaults to 2GB  
  # output_limit  optional, defaults to 8MB  
+ # compile_time_limit  optional, defaults to 2 minutes
  validator: space_change_sensitive float_absolute_tolerance 0.001
  # validator = custom --limits 3,8,44 --haltfirst
 
