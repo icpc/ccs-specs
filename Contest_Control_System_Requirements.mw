@@ -575,16 +575,16 @@ Describes a balloon for a problem
 The scoreboard should include at least the following information.
 
 For each team:
-* university name and logo, country flag,
-* team position,
-* number of problems solved,
-* total penalty time.
+# university name and logo, country flag,
+# team position,
+# number of problems solved,
+# total penalty time.
 
 For each team and problem:
-* number of submission from that team on that problem,
-* whether the problem is solved, unsolved or a judgement is pending,
-* if problem is solved, the contest time it was solved,
-* if problem is pending, how many submissions are pending on that problem,
+# number of submission from that team on that problem,
+# whether the problem is solved, unsolved or a judgement is pending,
+# if problem is solved, the contest time it was solved,
+# if problem is pending, how many submissions are pending on that problem,
 
 A problem is pending judgement if any submission on it is pending judgement. A submission is pending judgement if it has no judgement or if the judgement is '''Judging Error'''.
 
