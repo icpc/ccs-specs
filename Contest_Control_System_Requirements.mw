@@ -146,7 +146,7 @@ CCS meets all the requirements listed in this standard.
 
 ==== Clarification Categories ====
 
-:It must be possible to configure "categories" that clarification requests can be assigned to. A request belongs to exactly one category.  Examples of categories are "Unassigned", "Judges", "Systems". The name of the default category, that a request is assigned to initially should  also be configurable.
+:It must be possible to configure "categories" that clarification requests can be assigned to. A request belongs to exactly one category.  Examples of categories are "General", "SysOps", "Operations".
 
 :In addition, the CCS must construct one category per problem, i.e., categories named "Problem A", "Problem B", etc up to the number of problems.
 
