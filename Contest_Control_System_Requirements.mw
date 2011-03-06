@@ -702,7 +702,9 @@ A YAML file consisting of a mapping with the following keys:
 |-
 | scoreboard-freeze || Time when scoreboard will be frozen in contest time as h:mm:ss
 |-
-| default-clars || Sequence of pre-defined clarification messages. The first will be pre-selected
+| default-clars || Sequence of pre-defined clarification answers. The first will be pre-selected
+|-
+| clar-categories || Sequence of categories for clarifications.
 |-
 | languages || Sequence of mappings with keys as defined below
 |-
