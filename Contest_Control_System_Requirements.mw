@@ -152,6 +152,8 @@ CCS meets all the requirements listed in this standard.
 
 :In addition, the CCS must construct one category per problem, i.e., categories named "Problem A", "Problem B", etc up to the number of problems.
 
+:Clarification Categories are configured in the [[#contest.yaml|contest.yaml]] configuration file.
+
 === Programming Languages ===
 
 ==== Supported Languages ====
