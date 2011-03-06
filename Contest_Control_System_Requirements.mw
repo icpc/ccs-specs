@@ -754,8 +754,8 @@ A sequence of mappings with the following keys:
  scoreboard-freeze: 4:00:00
  
  default-clars:
-   - No comment, read problem statement
-   - This will be answered during the answers to questions session
+   - No comment, read problem statement.
+   - This will be answered during the answers to questions session.
  
  languages:
    - name: 
