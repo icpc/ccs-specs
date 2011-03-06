@@ -758,7 +758,7 @@ A sequence of mappings with the following keys:
  default-clars:
    - No comment, read problem statement.
    - This will be answered during the answers to questions session.
-
+ 
  clar-categories:
    - General
    - SysOps
