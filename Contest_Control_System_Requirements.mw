@@ -252,6 +252,16 @@ CCS meets all the requirements listed in this standard.
 
 :It must be possible to re-enable scoreboard display updating at any time after it has been disabled, again without stopping the contest or affecting contest operations in any way.
 
+=== Finalizing the Contest ===
+
+:The CCS must provide a way for admins to finalize the contest. It must not be possible to finalize a contest if one or more of the following applies:
+:# The contest is still running (i.e., the contest time is not over).
+:# There are unjudged runs.
+:# There are runs judged as [[#Exception Judgments|Judging Error]].
+:# There are unanswered clarifications.
+
+:When finalizing it must be possible to specify B, the number of extra bronzes awarded, as defined in [[#Scoring Data Generation|Scoring Data Generation]].
+
 == Team Interface ==
 
 === Submitting a Run ===
