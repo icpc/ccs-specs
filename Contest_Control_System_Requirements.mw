@@ -106,9 +106,9 @@ CCS meets all the requirements listed in this standard.
 
 === Secure Authentication ===
 
-:The CCS must support a secure authentication mechanism for each registered user (being either a [[#Team_Interface|team]], an [[#Admin_Interface|admin]], or a [[#Judge_Interface|judge]]) to gain access to the contest, and must enforce the rule that only users who supply correct authentication credentials may invoke contest-related functions.
-
-:Further, the CCS must support a secure mechanism which insures that users may only invoke functions corresponding to their authentication credentials.  (In other words, it must not be possible for, e.g., a team to invoke functions as if they were some other team, or as if they were a judge.)
+:The CCS must support a secure authentication mechanism, allowing each registered user (being either a [[#Team_Interface|team]], an [[#Admin_Interface|admin]], or a [[#Judge_Interface|judge]]) to gain access to the contest, and must insure that:
+:# Only users who supply correct authentication credentials may invoke contest-related functions.
+:# Users may only invoke functions corresponding to their authentication credentials.  (In other words, it must not be possible for, e.g., a team to invoke functions as if they were some other team, or as if they were a judge.)
 
 ==== Creation of Authentication Data ====
 
@@ -116,13 +116,13 @@ CCS meets all the requirements listed in this standard.
 
 ==== Changes To Authentication Data ====
 
-:The CCS must allow user authentication credential information to be changed dynamically by contest administration personnel during a contest without the necessity of stopping the contest.
+:The CCS must allow user authentication credential information to be changed dynamically by contest administration personnel while the contest is running.
 
 :'''Comment:''' This should be moved to Admin Interface section. [[User:Austrin|Austrin]] 03:36, 9 March 2011 (CET)
 
 ==== Logging Out ====
 
-:The CCS must support a mechanism for each user to disconnect (remove previously-supplied authentication credentials) from the contest, with the effect that no other user of the computer system not possessing that team’s authentication credentials will be able to invoke CCS functions as if they did possess those credentials.
+:The CCS must support a mechanism for each user to disconnect from the contest, with the effect that no other user of the computer system not possessing that team’s authentication credentials will be able to invoke CCS functions as if they did possess those credentials.
 
 ==== Underlying Implementation ====
 
