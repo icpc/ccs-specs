@@ -106,29 +106,27 @@ CCS meets all the requirements listed in this standard.
 
 === Secure Authentication ===
 
-:'''Comment:''' This section needs to be reworded to fit here. It should apply to admins and judges as well as teams.[[User:Niemela|Fredrik Niemelä]] 19:07, 28 January 2011 (CET)
+:The CCS must support a secure authentication mechanism for each registered user (being either a [[#Team_Interface|team]], an [[#Admin_Interface|admin]], or a [[#Judge_Interface|judge]]) to gain access to the contest, and must enforce the rule that only users who supply correct authentication credentials may invoke contest-related functions.
 
-==== Authentication Mechanism ====
-
-:The CCS must support a secure authentication mechanism for each registered team to gain access to the contest, and must enforce the rule that only teams who supply correct authentication credentials may invoke contest-related functions.
-
-:Further, the CCS must support a secure mechanism which insures that teams may only invoke functions corresponding to their authentication credentials. (In other words, it must not be possible for a team connected with authentication credentials for a given team to invoke functions as if they were some other team, such as submitting a run on behalf of some other team).
+:Further, the CCS must support a secure mechanism which insures that users may only invoke functions corresponding to their authentication credentials.  (In other words, it must not be possible for, e.g., a team to invoke functions as if they were some other team, or as if they were a judge.)
 
 ==== Creation of Authentication Data ====
 
-: If the CCS uses a login/password mechanism, it should generate login/password information for all teams when the team information is imported. It should also output the complete list of username/password pairs in a file using the [[#userdata.tsv]] format.
+: If the CCS uses a login/password mechanism, it should generate login/password information for all users.  It should also, for each type of user, output the complete list of username/password pairs in a file using the [[#userdata.tsv]] format.
 
 ==== Changes To Authentication Data ====
 
-:The CCS must allow team authentication credential information to be changed dynamically by contest administration personnel during a contest without the necessity of stopping the contest.
+:The CCS must allow user authentication credential information to be changed dynamically by contest administration personnel during a contest without the necessity of stopping the contest.
+
+:'''Comment:''' This should be moved to Admin Interface section. [[User:Austrin|Austrin]] 03:36, 9 March 2011 (CET)
 
 ==== Logging Out ====
 
-:The CCS must support a mechanism for each team to disconnect (remove previously-supplied authentication credentials) from the contest, with the effect that no other user of the computer system not possessing that team’s authentication credentials will be able to invoke CCS functions as if they did possess those credentials.
+:The CCS must support a mechanism for each user to disconnect (remove previously-supplied authentication credentials) from the contest, with the effect that no other user of the computer system not possessing that team’s authentication credentials will be able to invoke CCS functions as if they did possess those credentials.
 
 ==== Underlying Implementation ====
 
-:The CCS may optionally rely on the underlying operating system account login/password mechanism for purposes of meeting the requirements of this section, provided that it is the case that the CCS enforces all of the requirements of this section, including but not limited to the requirement that teams not be allowed to invoke functions as if they were some team other than that specified by their login credentials.
+:The CCS may optionally rely on the underlying operating system account login/password mechanism for purposes of meeting the requirements of this section, provided that it is the case that the CCS enforces all of the requirements of this section, including but not limited to the requirement that users not be allowed to invoke functions as if they were some user other than that specified by their login credentials.
 
 == Contest Configuration ==
 
