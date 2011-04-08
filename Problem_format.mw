@@ -76,11 +76,11 @@ A YAML file consisting of a mapping with the following keys:
 |-
 | time_limit_safety_margin || optional, defaults to 10||10
 |-
-| memory_limit || optional, defaults to 2GB ||3G
+| memory_limit || optional, in Mb, defaults to 2048 || 3072
 |-
-| output_limit || optional, defaults to 8MB ||4M
+| output_limit || optional, in Mb, defaults to 8 || 4
 |-
-| compile_time_limit || optional, defaults to 2 minutes || 2
+| compile_time_limit || optional, in seconds, defaults to 120 || 60
 |-
 | validator 
 | set of values from the following (delimited by spaces):<br>
@@ -98,15 +98,15 @@ A YAML file consisting of a mapping with the following keys:
  # Problem configuration
  name: Squares to Circles
  source: ICPC Mid-Atlantic Regional Contest
- author: Judge X
+ author: John von Judge 
  # license  optional, defaults to "cc by-sa"  
  rights_owner: ICPC
  time_limit_multiplier: 5
  time_limit_safety_margin: 10
- # memory_limit  optional, defaults to 2GB  
- # output_limit  optional, defaults to 8MB  
- # compile_time_limit  optional, defaults to 2 minutes
- validator: space_change_sensitive float_absolute_tolerance 0.001
+ # memory_limit  optional, in Mb, defaults to 2048  
+ # output_limit  optional, in Mb, defaults to 8 
+ # compile_time_limit  optional, in seconds, defaults to 120
+ validator: space_change_sensitive float_absolute_tolerance 1e-6
  # validator = custom --limits 3,8,44 --haltfirst
 
 === <short_name>/problem_statement/problem.tex ===
