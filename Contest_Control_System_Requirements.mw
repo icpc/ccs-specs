@@ -562,6 +562,12 @@ Describes a balloon for a problem
 ;rgb : 3-byte RGB value encoded in hex (string)
 ;color : color name (string)
 
+:'''Comment:''' Standardize types and constants, put into their own section in article [[User:Douglas Lane|Douglas Lane]] 18:56, 13 April 2011 (CEST)
+:Examples for discussion<br>
+::bool, values: "true", "false"  (lower case strings) ?<br> 
+::character in problem-id: a single upper case letter<br>
+::rgb: hex is an integer<br>
+
 ====Access to notifications====
 
 :'''Comment:''' TODO. Connect to some port, authenticate in some way, get summary somehow. [[User:Migo|Mikael Goldmann]]
