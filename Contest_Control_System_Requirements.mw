@@ -182,10 +182,6 @@ CCS meets all the requirements listed in this standard.
 
 :Problems (including judge data, validators, execution time limit, etc) are configured using the [[Problem_format|ICPC problem format]].  The CCS must have full support for this standard and its [[#Verification|verification process]].
 
-==== Number of Problems ====
-
-:The CCS may not impose an upper limit on the number of different contest problems.
-
 === Configuration Change ===
 
 :The CCS must allow updating of any configuration data without restarting or stopping the contest.
