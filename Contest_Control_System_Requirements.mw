@@ -130,6 +130,20 @@ CCS meets all the requirements listed in this standard.
 
 :The CCS may optionally rely on the underlying operating system account login/password mechanism for purposes of meeting the requirements of this section, provided that it is the case that the CCS enforces all of the requirements of this section, including but not limited to the requirement that users not be allowed to invoke functions as if they were some user other than that specified by their login credentials.
 
+=== Limitations ===
+
+==== Number of Problems ====
+
+:The CCS must not impose an upper limit on the number of different contest problems.
+
+==== Number of Teams ====
+
+:The CCS must not impose an upper limit on the number of teams.
+
+==== Test Data Files ====
+
+:The CCS must not impose an upper limit on the number of test data files for a problem, or their sizes.
+
 == Contest Configuration ==
 
 === Team Registration ===
