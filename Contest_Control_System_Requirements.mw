@@ -215,7 +215,7 @@ CCS meets all the requirements listed in this standard.
 
 === Problem Enabling, Pausing, and Disabling ===
 
-:Each contest problem can be in one of three mutually exclusive states: enabled, paused, and disabled.  The CCS must provide a mechanism to enable, pause and disable each contest problem separately without the need of stopping the contest.
+:Each contest problem can be in one of three mutually exclusive states: enabled, paused, and disabled.  The CCS must provide a mechanism to enable, pause and disable each contest problem separately, or all at once, without the need of stopping the contest.
 
 :When a problem is disabled:
 :# Teams must not be able to submit solutions, but must be able to submit clarification requests, to the problem. The problem name must be removed or disabled from solution submit interfaces where present.
