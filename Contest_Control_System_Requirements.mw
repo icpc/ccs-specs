@@ -205,6 +205,8 @@ CCS meets all the requirements listed in this standard.
 
 :It must be possible to, potentially retroactively, specify time intervals that will be disregarded for the purpose of scoring. The time during all such intervals will not be counted towards a teams penalty time for solved problems.
 
+:Note that removing a time interval changes the wall-clock time when the contest ends, as the duration of the contest in contest.yaml is specified in contest time. 
+
 =====Example=====
 :Assume the contest starts at Noon and run 1 comes after 5 minutes, run 2 after 10 minutes, run 3 after 15 minutes, run 4 after 20 minutes and 5 after 25 :minutes. At this point the contest times of the runs are 5, 10, 15, 20, and 25 respectively.
 
