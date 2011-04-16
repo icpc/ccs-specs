@@ -363,7 +363,8 @@ CCS meets all the requirements listed in this standard.
 
 :The CCS must provide a human judge with the ability to perform each of the following operations:
 
-:# See a list of all submitted runs, where the list includes (for each run) the contest-relative time at which the run was submitted, the problem for which the run was submitted, the language specified in the run submission, and any judgments applied
+:# See a list of all submitted runs, where the list includes (for each run) the contest-relative time at which the run was submitted, the problem for which the run was submitted, the language specified in the run submission, and any judgments applied.
+:# It must be possible to filter the list of runs by problem, team, language, and judgment applied.
 :# View and download the output produced by the program when run against the specified input data 
 :# View and download the source code contained in any specific submitted run
 :# View the compiler output resulting from compiling any specific run utilizing the compiler arguments configured in the CCS
