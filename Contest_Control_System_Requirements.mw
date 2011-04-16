@@ -211,7 +211,7 @@ CCS meets all the requirements listed in this standard.
 
 ==== Removing time intervals ====
 
-:It must be possible to, potentially retroactively, specify time intervals that will be disregarded for the purpose of scoring. The time during all such intervals will not be counted towards a teams penalty time for solved problems.
+:It must be possible to, potentially retroactively, specify time intervals that will be disregarded for the purpose of scoring. The time during all such intervals will not be counted towards a team's penalty time for solved problems.
 
 :Note that removing a time interval changes the wall-clock time when the contest ends, as the duration of the contest in contest.yaml is specified in contest time. 
 
