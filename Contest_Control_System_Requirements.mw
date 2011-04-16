@@ -278,6 +278,11 @@ CCS meets all the requirements listed in this standard.
 
 === Suspension of notification of accepted runs ===
 
+:It must be possible to suspend the notification of accepted rund. When this function has been invoked, the following should happen:
+
+:# Any run that changes to Accepted should be shown as pending in the team interface.
+:# A broadcast message saying that notification of accepted runs has been suspended must be sent to all teams.
+
 === Finalizing the Contest ===
 
 :The CCS must provide a way for admins to finalize the contest. It must not be possible to finalize a contest if one or more of the following applies:
