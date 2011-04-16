@@ -306,7 +306,7 @@ CCS meets all the requirements listed in this standard.
 
 ==== Submission Timestamping ====
 
-:The CCS must associate and maintain two timestamps indicating when each run was submitted. The first is the contest time (aka contest clock), and must be at the granularity of seconds. The second is a timestamp of the current wall clock time, and must have finer granularity than seconds.
+:The CCS must associate and maintain a timestamp indicating the wall clock time when each run was submitted. The timestamp must have finer granularity than seconds.
 
 ==== Team Viewing of Submission Status ====
 
