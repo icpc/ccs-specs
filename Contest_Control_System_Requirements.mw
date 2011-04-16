@@ -324,10 +324,6 @@ CCS meets all the requirements listed in this standard.
 
 :The CCS must allow teams to specify arbitrarily many files in a given submission and must allow teams to make submissions for any defined contest problem and written in any defined contest programming language.
 
-==== Submission Timestamping ====
-
-:The CCS must associate and maintain a timestamp indicating the wall clock time when each run was submitted. The timestamp must have finer granularity than seconds.
-
 ==== Team Viewing of Submission Status ====
 
 :The CCS must provide each team with a capability for reviewing the status of each run the team has submitted, including: the contest time of the submission; the language and problem specified in the submission; and the most recent judgment (if any) for the submission.
@@ -347,10 +343,6 @@ CCS meets all the requirements listed in this standard.
 ==== Clarification Content ====
 
 :The team must be able to specify the text content and category of a clarification request.
-
-==== Clarification Timestamping ====
-
-:The CCS must associate and maintain a timestamp indicating the wall clock time when each clarification request was submitted. The timestamp must have finer granularity than seconds.
 
 ==== Team Viewing of Clarification Status ====
 
