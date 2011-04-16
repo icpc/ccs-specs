@@ -151,13 +151,7 @@ CCS meets all the requirements listed in this standard.
 
 == Contest Configuration ==
 
-=== Team Registration ===
-
-==== Initialization File Loading ====
-
-:The CCS must be able to read an ICPC Contest Management System (CMS)-generated initialization file containing a list of teams registered for the World Finals, and use the data in this file to create automatically whatever internal representation is necessary to allow each team (and only the teams) specified in the registration list to participate in the World Finals contest.  The format and content of the CMS-generated initialization file is given in the [[#Appendix:_File_formats| Appendix]].
-
-=== Contest configuration File ===
+=== Importing Contest Configuration File ===
 
 :The CCS must be able to read the contest configuration file (contest.yaml) containing the contest configuration.
 
@@ -184,6 +178,12 @@ CCS meets all the requirements listed in this standard.
 === Contest Problems ===
 
 :Problems (including judge data, validators, execution time limit, etc) are configured using the [[Problem_format|ICPC problem format]].  The CCS must have full support for this standard and its [[#Verification|verification process]].
+
+=== Team Registration ===
+
+==== Importing Team Registration File ====
+
+:The CCS must be able to read an ICPC Contest Management System (CMS)-generated initialization file containing a list of teams registered for the World Finals, and use the data in this file to create automatically whatever internal representation is necessary to allow each team (and only the teams) specified in the registration list to participate in the World Finals contest.  The format and content of the CMS-generated initialization file is given in the [[#Appendix:_File_formats| Appendix]].
 
 === Configuration Change ===
 
