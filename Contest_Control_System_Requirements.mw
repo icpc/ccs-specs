@@ -114,7 +114,7 @@ CCS meets all the requirements listed in this standard.
 
 ==== Changes To Authentication Data ====
 
-:The CCS must allow user authentication credential information to be changed dynamically by contest administration personnel while the contest is running.
+:The CCS must allow user authentication credential information to be changed dynamically by contest administration staff while the contest is running.
 
 :'''Comment:''' This should be moved to Admin Interface section. [[User:Austrin|Austrin]] 03:36, 9 March 2011 (CET)
 
