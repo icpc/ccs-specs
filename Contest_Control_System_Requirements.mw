@@ -189,7 +189,7 @@ CCS meets all the requirements listed in this standard.
 
 === Configuration Change ===
 
-:The CCS must allow updating of any configuration data without restarting or stopping the contest.
+:The CCS must allow updating of configuration data without restarting or stopping the contest.
 
 == Admin Interface ==
 
