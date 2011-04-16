@@ -662,7 +662,7 @@ Describes a balloon for a problem
 :# if problem is solved, the contest time it was solved,
 :# if problem is pending, how many submissions are pending on that problem,
 
-:A problem is pending judgement if any submission on it is pending judgement. A submission is pending judgement if it has no judgement or if the judgement is '''Judging Error'''.
+:A problem is pending judgement if any submission on it is pending judgement and there is not an earlier accepted submission on that problem. A submission is pending judgement if it has no judgement or if the judgement is '''Judging Error'''.
 
 == Data Export ==
 
