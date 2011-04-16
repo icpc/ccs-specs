@@ -203,7 +203,7 @@ CCS meets all the requirements listed in this standard.
 
 ==== Removing time intervals ====
 
-:It must be possible to specify time intervals that will be disregarded for the purpose of scoring. The time during all such intervals will not be counted towards a teams penalty time for solved problems.
+:It must be possible to, potentially retroactively, specify time intervals that will be disregarded for the purpose of scoring. The time during all such intervals will not be counted towards a teams penalty time for solved problems.
 
 ==== Changing contest length ====
 
