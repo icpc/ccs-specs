@@ -462,6 +462,7 @@ CCS meets all the requirements listed in this standard.
 :* '''Wrong Answer'''
 :* '''Accepted'''
 :* '''Judging Error'''
+:* '''Does not Count'''
 
 === Assigning a Judgment ===
 
