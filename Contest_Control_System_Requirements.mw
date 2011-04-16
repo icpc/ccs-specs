@@ -114,12 +114,6 @@ CCS meets all the requirements listed in this standard.
 
 :'''Comment:''' userdata.tsv does not quite fit other users than teams, some small change needed here. [[User:Austrin|Austrin]] 03:46, 9 March 2011 (CET)
 
-==== Changes To Authentication Data ====
-
-:The CCS must allow user authentication credential information to be changed dynamically by contest administration staff while the contest is running.
-
-:'''Comment:''' This should be moved to Admin Interface section. [[User:Austrin|Austrin]] 03:36, 9 March 2011 (CET)
-
 ==== Logging Out ====
 
 :The CCS must support a mechanism for each user to disconnect from the contest, with the effect that no other user of the computer system not possessing that team’s authentication credentials will be able to invoke CCS functions as if they did possess those credentials.
