@@ -199,6 +199,10 @@ CCS meets all the requirements listed in this standard.
 
 :If a user is currently logged in when the associated account is being disabled, that user must become logged out of the system.
 
+==== Changes To Authentication Data ====
+
+:The CCS must allow user authentication credential information to be changed dynamically by contest administration staff while the contest is running.
+
 === Starting the Contest ===
 
 :The contest should automatically start when the configured start time is reached. It must also be possible to start the contest at the current time.
