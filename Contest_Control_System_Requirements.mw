@@ -276,6 +276,8 @@ CCS meets all the requirements listed in this standard.
 
 :It must be possible to re-enable scoreboard display updating at any time after it has been disabled, again without stopping the contest or affecting contest operations in any way.
 
+=== Suspension of notification of accepted runs ===
+
 === Finalizing the Contest ===
 
 :The CCS must provide a way for admins to finalize the contest. It must not be possible to finalize a contest if one or more of the following applies:
