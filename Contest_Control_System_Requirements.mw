@@ -20,12 +20,9 @@ acting under the auspices of the [[Competitive Learning Institute (CLI)]].
 
 For purposes of this standard, the term contest control system (CCS) means
 software which automatically manages the operation of a programming contest.
-Operations to be managed by the CCS include but are not necessarily limited to:
-run submissions by teams, judging of submissions, handling clarification
+Operations to be managed by the CCS include: run submissions by teams, judging of submissions, handling clarification
 requests from teams and clarification responses from judges, calculation of
-standings according to a specified algorithm, generating external representations
-of contest results, and overall CCS configuration by
-appropriate contest administrative personnel.
+standings, generating external representations of contest results, and overall CCS configuration.
 
 Every operation or specification identified in this standard using the words "shall" or
 "must" is required; any system not meeting that requirement will not be
@@ -44,9 +41,7 @@ Operations for the ICPC World Finals for consideration as a candidate to run the
 World Finals. The items which must be submitted in order to be considered are
 described under [[#Certification Process| Certification Process]] in this standard. Any submitted CCS
 which meets all of the requirements defined in this standard will be certified as being
-accepted as a candidate to run the World Finals. A CCS which fails to meet any
-one, or more, of the requirements listed in this document will be rejected and will not
-be considered as a candidate for running the World Finals. Meeting or failing to
+accepted as a candidate to run the World Finals. Meeting or failing to
 meet each requirement will be determined by a test specified by the Director of
 Operations and/or his/her designee.
 
