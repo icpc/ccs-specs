@@ -456,11 +456,11 @@ CCS meets all the requirements listed in this standard.
 :The CCS must answer each submitted run with one of the following responses:
 
 :* '''Compile Error'''
-:* '''Security Violation'''
 :* '''Run-Time Error'''
 :* '''Time Limit Exceeded'''
 :* '''Wrong Answer'''
 :* '''Accepted'''
+:* '''Security Violation'''
 :* '''Judging Error'''
 
 :When manually overriding the judgement the following could also be used:
