@@ -279,7 +279,7 @@ CCS meets all the requirements listed in this standard.
 
 === Manual Override of Judgments ===
 
-:The CCS must support the ability to assign, to a single run, an updated judgment chosen from among any of the allowed run judgments as defined in [[Contest_Control_System#Judge Responses|Judge Responses]].
+:The CCS must support the ability to assign, to a single run, an updated judgment chosen from among any of the allowed run judgments as defined in [[Contest_Control_System#Judge Responses|Judge Responses]], or else to mark the run as deleted.  Deleted runs have no effect on scoring.
 
 :The CCS must require a separate authentication every time a judgment is changed manually and all such changes must be logged.
 
