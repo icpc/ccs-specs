@@ -139,6 +139,7 @@ CCS meets all the requirements listed in this standard.
 :*The id sequences are separate for runs, clarifications, and notifications i.e., there are both a run 1, a clarification 1, and a notification 1.
 :* Ids always increase by one.
 :* Run j cannot have a timestamp smaller than run (j-1). The same holds for the ids of clarifications and notifications.
+:* Timstamps must have granularity finer than seconds.
 
 === Limitations ===
 
