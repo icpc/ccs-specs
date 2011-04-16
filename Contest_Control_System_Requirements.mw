@@ -128,6 +128,11 @@ CCS meets all the requirements listed in this standard.
 
 :The CCS may optionally rely on the underlying operating system account login/password mechanism for purposes of meeting the requirements of this section, provided that it is the case that the CCS enforces all of the requirements of this section, including but not limited to the requirement that users not be allowed to invoke functions as if they were some user other than that specified by their login credentials.
 
+
+=== Network Security ===
+
+:All communication between CCS modules which takes place over the contest network must be encrypted.
+
 === Timestamps and Ids for Runs, Clarifications and Notifications ===
 :A timestamp and an integral sequence number, called an Id, is assigned to runs, clarifications, and balloon notifications. Runs and clarifications are assigned an id and a timestamp at the time they enter the system, and balloon notifications are assigned an id and a timestamp at the time they are generated.
 
