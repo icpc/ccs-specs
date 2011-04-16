@@ -644,6 +644,10 @@ Describes a balloon for a problem
 
 :When a number of teams are tied for the same position/rank, they all occupy the same position/rank and a suitable number of subsequent positions/ranks are left empty.  For instance, if four teams are tied for 17th position, they are all in 17th position and positions 18, 19 and 20 are unoccupied.
 
+:A problem is pending judgement if any submission on it is pending judgement and there is not an earlier accepted submission on that problem. A submission is pending judgement if it has no judgement or if the judgement is '''Judging Error'''.
+
+:Runs marked as '''Deleted''' have no effect on scoring.
+
 === Scoreboard ===
 
 :The ''current scoreboard'' lists the teams sorted by position (with alphabetical order on team name as tie breaker).  
