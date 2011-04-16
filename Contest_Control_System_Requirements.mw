@@ -744,9 +744,9 @@ A YAML file consisting of a mapping with the following keys:
 |-
 | short-name || Short name of contest
 |-
-| start-time || Date and time in ISO 8601 format
+| start-time || Date and time in ISO 8601 format (wall-clock time that the contest starts)
 |-
-| duration || Duration as h:mm:ss
+| duration || Duration as h:mm:ss (length of contest, in contest time)
 |-
 | scoreboard-freeze || Time when scoreboard will be frozen in contest time as h:mm:ss
 |-
