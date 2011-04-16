@@ -516,9 +516,11 @@ The next two sections define how to assign a judgment to a program for problems 
 
 === Balloon Notifications ===
 
-:The CCS must have an ability to send a message, called a balloon notification, for every run which have received an accepted judgment. The notification must include at least
+:The CCS must have an ability to send a message, called a balloon notification, for every run which have received an accepted judgment.
+The notification must include at least
 
 :# A sequence number of the notification. 
+:# Notification type new/revocation/update
 :# Identification of the team that submitted the run.
 :# The contest time at which the run was submitted. 
 :# A timestamp
