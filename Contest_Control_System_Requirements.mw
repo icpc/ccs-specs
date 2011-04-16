@@ -396,10 +396,6 @@ CCS meets all the requirements listed in this standard.
 
 :The CCS must provide the ability for a human judge to compose a message and broadcast that message over the contest network to all teams in the contest. It must be possible to do this even when the contest is not running.
 
-=== Verifying Rejudgment Results ===
-
-:When a set of runs are being rejudged as described in [[#Rejudging|Rejudging]], the CCS must provide a way for the judges to see the changes in judgments that would result if the rejudge is committed.
-
 === Scoreboard Display ===
 
 :The CCS must provide a mechanism for judges to view the current scoreboard. The scoreboard should be updated at least every 30 seconds.
