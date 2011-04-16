@@ -134,14 +134,13 @@ CCS meets all the requirements listed in this standard.
 :All communication between CCS modules which takes place over the contest network must be encrypted.
 
 === Timestamps and Ids for Runs, Clarifications and Notifications ===
-:A timestamp and an integral sequence number, called an Id, is assigned to runs, clarifications, and balloon notifications. Runs and clarifications are assigned an id and a timestamp at the time they enter the system, and balloon notifications are assigned an id and a timestamp at the time they are generated.
+:A timestamp and an integral sequence number, called an Id, are assigned to runs, clarifications, and balloon notifications. Runs and clarifications are assigned an id and a timestamp at the time they enter the system, and balloon notifications are assigned an id and a timestamp at the time they are generated.
 
-:*The id sequences are separate for runs and clarifications, i.e., there are both a run 1, a clarification 1, and a notification 1.
+:*The id sequences are separate for runs, clarifications, and notifications i.e., there are both a run 1, a clarification 1, and a notification 1.
 :* Ids always increase by one.
 :* Run j cannot have a timestamp smaller than run (j-1).
 :* Clarification j cannot have a timestamp smaller than clarfication (j-1).
 :* Notiification j cannot have a timestamp smaller than notification (j-1).
-
 
 === Limitations ===
 
