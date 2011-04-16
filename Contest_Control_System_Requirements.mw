@@ -195,7 +195,7 @@ CCS meets all the requirements listed in this standard.
 
 === Account Disabling ===
 
-:The CCS must have a mechanism to disable any account used by users of the system (either human users or other systems), without the need for starting or stopping the contest.  For example, this includes [[#Secure_Authentication|team accounts]], judge accounts, and the [[Event_Feed|Event feed]].
+:The CCS must have a mechanism to disable any account (either an account for a human user or for another system), without the need for starting or stopping the contest. For example, this includes [[#Secure_Authentication|team accounts]] and judge accounts.
 
 :If a user is currently logged in when the associated account is being disabled, that user must become logged out of the system.
 
