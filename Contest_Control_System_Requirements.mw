@@ -1,5 +1,7 @@
 '''Specification/Document Status''': This document is currently a work in progress (''draft'') specification.
 To learn more about this document's status/schedule contact the primary authors.
+
+Items known to still need discussion/resolution are listed in the [[List of issues]].
  
 This document specifies a standard for operation, verification and validation
 of Programming Contest Control Systems that wish to be considered for managing
@@ -11,8 +13,6 @@ be satisfied and a set of documentation which must be provided.
 
 The primary authors of the document are John Clevenger and Fredrik Niemelä,
 acting under the auspices of the [[Competitive Learning Institute (CLI)]].
-
-Items known to still need discussion/resolution are listed [[here]].
 
 == Introduction ==
 
