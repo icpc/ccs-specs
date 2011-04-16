@@ -155,23 +155,23 @@ CCS meets all the requirements listed in this standard.
 
 :The CCS must be able to read the contest configuration file (contest.yaml) containing the contest configuration.
 
-==== Predefined Clarification Answers ====
+=== Predefined Clarification Answers ===
 
 :The CCS must provide the ability to configure predefined answers to clarification requests (e.g., "No response, read problem statement." and "This will be answered after the practice session."), so that judges can choose to reply to a clarification request by selecting a predefined answer rather than being required to enter a specific answer.  One of the predefined answers should be the "default" answer.
 
-==== Clarification Categories ====
+=== Clarification Categories ===
 
 :It must be possible to configure "categories" that clarification requests can be assigned to. A request belongs to exactly one category.  Examples of categories are "General", "SysOps", "Operations".
 
 :In addition, the CCS must construct one category per problem, i.e., categories named "Problem A", "Problem B", etc. for each problem.
 
-==== Programming Languages ====
+=== Programming Languages ===
 
-===== Supported Languages =====
+==== Supported Languages ====
 
 :The CCS must provide the ability to compile and execute (or interpret, as appropriate for the language) submitted source code files for each of the languages specified by the [http://cm.baylor.edu/ICPCWiki/Wiki.jsp?page=Programming%20Environment Programming Environment of the World Finals].
 
-===== Language Options =====
+==== Language Options ====
 
 :For each supported language compiler or interpreter it must be possible to configure the CCS to invoke it with any of the options specified in the compiler or interpreter's documentation.
 
