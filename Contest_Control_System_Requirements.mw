@@ -462,7 +462,10 @@ CCS meets all the requirements listed in this standard.
 :* '''Wrong Answer'''
 :* '''Accepted'''
 :* '''Judging Error'''
-:* '''Does not Count'''
+
+:When manually overriding the judgement the following could also be used:
+
+:* '''Deleted'''
 
 === Assigning a Judgment ===
 
