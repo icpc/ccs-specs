@@ -153,7 +153,7 @@ CCS meets all the requirements listed in this standard.
 
 === Importing Contest Configuration File ===
 
-:The CCS must be able to read the contest configuration file (contest.yaml) containing the contest configuration.
+:The CCS must be able to read the contest configuration file (contest.yaml) containing the contest configuration and use the data in that file to configure the CCS.
 
 === Predefined Clarification Answers ===
 
