@@ -518,7 +518,7 @@ The next two sections define how to assign a judgment to a program for problems 
 
 :The CCS must have an ability to send a message, called a balloon notification, for every run which have received an accepted judgment. It also must send revocations or updates resulting from rejudging.
 
-:The notification must include at least
+:The notification includes the following
 
 :# A sequence number of the notification. 
 :# Notification type: new / revocation / update
@@ -535,6 +535,8 @@ The next two sections define how to assign a judgment to a program for problems 
 :As submission ids increase with time, the notion of "first" is based on the id of a submission. A revocation can occur when a previously accepted run is rejected due to rejudging. Similarly, rejudging of one run can change whether another run was "first" to solve a problem or not, requiring an update. If a previously revoked balloon should be awarded, this also should result in an update notification.
 
 :Note that run judgements may not come in the same order as submissions, meaning that the first notification of acceptance does not have to be for the earliest submitted accepted run. 
+
+The format of balloon notifications is defined in TODO.
 
 :The sequence numbers assigned to the external notifications are used to detect if a notification is missing (e.g., due to printer malfunction). The CCS must provide at least one of the two following features: 
 :# the CCS must be able to resend a previously sent message with a given sequence number upon request 
