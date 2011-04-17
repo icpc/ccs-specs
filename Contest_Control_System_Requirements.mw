@@ -291,6 +291,10 @@ CCS meets all the requirements listed in this standard.
 
 :The scoreboard should automatically freeze when the configured scoreboard freeze time is reached. It must also be possible to manually freeze the scoreboard at the current time. All submissions received after the freeze time should be treated as pending on a frozen scoreboard.
 
+:'''Comment''' Need to define standard messages for Standard Scoreboard Disclaimer [[User:Douglas Lane|Douglas Lane]] 04:09, 17 April 2011 (CEST)
+* Warning these are unofficial results
+* Warning scoreboard frozen for last hour of contest (or something like that)
+
 :It must be possible to re-enable scoreboard display updating at any time after it has been disabled, again without stopping the contest or affecting contest operations in any way.
 
 === Suspension of notification of accepted runs ===
