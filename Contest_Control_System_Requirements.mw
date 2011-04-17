@@ -423,7 +423,7 @@ CCS meets all the requirements listed in this standard.
 
 === Issuing Broadcast Messages ===
 
-:The CCS must provide the ability for a human judge to compose a message and broadcast that message over the contest network to all teams in the contest. It must be possible to do this even when the contest is not running.
+:The CCS must provide the ability for a human judge to compose a message and broadcast that message to all teams in the contest. It must be possible to do this even when the contest is not running.
 
 === Scoreboard Display ===
 
