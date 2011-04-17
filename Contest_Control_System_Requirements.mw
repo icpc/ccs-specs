@@ -312,6 +312,8 @@ CCS meets all the requirements listed in this standard.
 
 == Team Interface ==
 
+:This section describes all the required capabilities for users authenticated as team.
+
 === Submitting a Run ===
 
 :For purposes of this standard, the terms ''run'' and ''submission'', and any combination thereof, refer to a set of source code files submitted as a single unit at one time to the judging system by a team as a proposed solution to a given problem.
