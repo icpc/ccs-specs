@@ -550,8 +550,6 @@ A validator program is required to report its judgment by exiting with specific 
 * If the output is incorrect (i.e., the submission that produced the output is to be judged as Wrong Answer), the validator exits with exit code '''43'''
 * Under all other conditions (exit codes) the validator must reprort the judgement '''Judging Error'''.
 
-:'''Comment''' If the team's run can not be executed, which judgement is given, Juding Error ? [[User:Douglas Lane|Douglas Lane]] 18:05, 17 April 2011 (CEST)
-
 :A [[CCS]] supporting this standard must safeguard against faulty validators. For instance, if a validator were to produce an excessively large feedback ﬁle, or a feedback ﬁle not adhering to the specifications above, the [[CCS]] should handle this graciously and report it to the contest personnel. Reasons for such misbehaviour of the validator program could be for instance a security bug in the validator program, enabling malicious submissions to produce feedback files of their own choosing.
 
 :A valididator program is allowed to write any kind of debug information to standard output and standard error. The content of these can be ignored by the CCS.
