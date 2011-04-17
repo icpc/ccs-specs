@@ -9,8 +9,6 @@ A validator program must be an application (executable or interpreted) capable o
 # The validator must give a judgment (see Section 4 [[#Reporting a judgment|Reporting a judgment]]).
 # The validator may give additional feedback, e.g., an explanation of the judgment to human judges. This is described in Section 5 [[#Reporting Additional Feedback|Reporting Additional Feedback]].
 
-Some additional requirements are discussed in Section 6 [[#Additional Requirements|Additional Requirements]].
-
 == Invocation ==
 
 The contest control system is responsible for invoking the validator and passing it at least four command line parameters. 
