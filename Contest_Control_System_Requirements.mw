@@ -964,7 +964,7 @@ Then follow several lines with the following format (one per team).
 
 Region Winner is a string with the name of the region if the team is the region winner, otherwise empty.
 
-:'''Comment''' [[TBD]] Mail changes to this to Jeff and Mikael [[User:Douglas Lane|Douglas Lane]] 02:34, 17 April 2011 (CEST)
+:'''Comment''' [[TBD]] Mail changes (Region Winner and last submission now an integer) to this to Jeff and Mikael [[User:Douglas Lane|Douglas Lane]] 02:34, 17 April 2011 (CEST)
 
 The Reservation ID for a team can be found in the
 [[#teams.tsv|teams.tsv]].
