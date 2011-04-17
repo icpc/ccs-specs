@@ -558,12 +558,6 @@ The next two sections define how to assign a judgment to a program for problems 
 
 :It is optional whether the CCS also provides the ability to send notifications for runs which receive rejected judgments, but it must be possible to configure the CCS to only send notifications for accepted runs.
 
-====Access to notifications====
-
-:'''Comment:''' TODO. Connect to some port, authenticate in some way, get summary somehow. [[User:Migo|Mikael Goldmann]]
-
-:'''Comment:''' Is the program that consumes the notifications responsible for tracking which have been send and which have not? [[User:Douglas Lane|Douglas Lane]] 17:06, 20 February 2011 (CET)
-
 == Scoring ==
 
 === Scoring Data Generation ===
