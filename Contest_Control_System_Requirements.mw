@@ -625,10 +625,6 @@ The next two sections define how to assign a judgment to a program for problems 
 
 '''Comment:''' This does not currently quite match the file format described in the appendix, some fixing is needed. [[User:Austrin|Austrin]] 11:04, 5 February 2011 (CET)
 
-'''Comment:''' When/how is Event Feed [[Event_Feed#finalized| <finalized>]] generated? [[User:Douglas Lane|Douglas Lane]] 16:56, 20 February 2011 (CET)
-
-'''Comment:''' When/how is [[#results.tsv|results.tsv]] generated? [[User:Douglas Lane|Douglas Lane]] 16:56, 20 February 2011 (CET)
-
 == Testability Requirements ==
 
 :'''Comment''': This section is under development and has yet to be written/completed [[User:Douglas Lane|Douglas Lane]] 20:39, 27 January 2011 (CET)
