@@ -684,16 +684,6 @@ The next two sections define how to assign a judgment to a program for problems 
 :# A short ASCII text file named “License” containing the license, conforming to the the [[#License|License]] section, under which the CCS is made available to the ACM ICPC; and
 :# A short ASCII text file named “ReadMe” containing instructions on how to properly unpack the archive file to set up the installation process.
 
-=== Certification Schedule ===
-
-:To be considered for evaluation as a candidate to run the ICPC World Finals, a CCS must be submitted in the form described above not later than the end of May in the year preceding the year in which the Finals will take place.
-
-:Upon receiving a complete submission for a CCS prior to the deadline, the World Finals Director of Operations or his/her designee will schedule an evaluation test. The evaluation test may require anywhere from several weeks up to 3 months to complete.
-
-:Upon completion of testing, the Director of Operations will issue a test report to the individual or agency which submitted the CCS. If the CCS passes the evaluation test it will be placed on the list of candidates to be considered for running the World Finals the following year. If the CCS fails the evaluation test, the test report will indicate what requirement or requirements the CCS failed to satisfy. In that event the submitters may resubmit an updated version of the CCS for evaluation for the subsequent year’s testing cycle.
-
- 
- 
 == Appendix: File formats ==
 
 All files should be encoded in utf-8.
