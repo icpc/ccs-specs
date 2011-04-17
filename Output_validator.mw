@@ -11,17 +11,14 @@ A validator program must be an application (executable or interpreted) capable o
 
 == Invocation ==
 
-The contest control system is responsible for invoking the validator and passing it at least four command line parameters. 
+The CCS will invoke the validator and passing it at least four command line parameters. 
 
 The usage of the validator is as follows:
 
- >validator input judgeanswer teamoutput feedback [...]
+ validator input judgeanswer teamoutput feedback 
 
-:'''Comment''' Should this be phrased four ''required'' parameters [[User:Douglas Lane|Douglas Lane]] 22:52, 28 February 2011 (CET)
 
-:'''Comment''' A sentence should be given for the meaning (optional params) as indicated by the ellipsis [[User:Douglas Lane|Douglas Lane]] 22:52, 28 February 2011 (CET)
-
-The four parameters are as follows:
+The four parameters are:
 
 ;input: a string specifying the name of the input data ﬁle which was used to test the program whose results are being validated.
 
