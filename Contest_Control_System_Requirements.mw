@@ -375,6 +375,8 @@ CCS meets all the requirements listed in this standard.
 
 == Judge Interface ==
 
+:This section describes all the required capabilities for users authenticated as judge.
+
 === Simultaneous Judging ===
 
 :It must be possible for multiple human judges, working on different computers, to simultaneously perform the operations specified in this subsection (on different run submissions).
