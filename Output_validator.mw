@@ -115,6 +115,13 @@ An example of a feedback ﬁle containing more sections:
  ***TeamMessage***
  Two test cases failed.
 
+'''Comment''' These examples and the format in general needs to be fleshed out a bit more [[User:Douglas Lane|Douglas Lane]] 04:38, 17 April 2011 (CEST)
+Notes:
+# There is no example if the team passed a test case
+# What happens if the team output and judge answer is a multi-line output ?
+# Should there be a summary indicating if a team passed all test cases ?
+# If the output validator provides more detail or comments about the judgement where are those printed ?
+
 == Additional Requirements ==
 
 A [[CCS]] supporting this standard must safeguard against faulty validators. For instance, if a validator were
