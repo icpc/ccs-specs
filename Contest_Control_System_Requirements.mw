@@ -497,8 +497,8 @@ The next two sections define how to assign a judgment to a program for problems 
 
 :If the problem has multiple judge input files the judgment is assigned as follows:
 
-:# For each input file, in alphabetical order, apply the [[#Judging With a Single Input File|decision process for a single input file]].
-:# If any file is not judged as '''Accepted''', the response must be that of the first file that was not judged '''Accepted'''.
+:# For each input file apply the [[#Judging With a Single Input File|decision process for a single input file]].
+:# If any file is not judged as '''Accepted''', the response must be that of the first file, in alphabetical order, that was not judged '''Accepted'''.
 :# Otherwise the response must be '''Accepted'''.
 
 :Note that the CCS is only required to judge as many files as needed to determine the first file, if any, that is not judged AC.
