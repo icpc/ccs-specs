@@ -189,7 +189,7 @@ CCS meets all the requirements listed in this standard.
 
 :The CCS must allow updating of configuration data without restarting or stopping the CCS.  This includes that the CCS must support reading a new contest.yaml file during the contest and reset the configuration data according to the new file contents.
 
-:The CCS must automatically create and save an updated contest.yaml file whenever any contest configuration item changes.  The default location for the saved file must be able to be specified as part of the contest configuration.
+:The CCS must support the ability to create and save an updated contest.yaml file whenever any contest configuration item changes.  The default location for the saved file must be able to be specified as part of the contest configuration.
 
 == Admin Interface ==
 
