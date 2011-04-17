@@ -197,6 +197,8 @@ CCS meets all the requirements listed in this standard.
 
 == Admin Interface ==
 
+:This section describes all the required capabilities for users authenticated as admin.
+
 === Account Disabling ===
 
 :The CCS must have a mechanism to disable any account (either an account for a human user or for another system), without the need for starting or stopping the contest. For example, this includes [[#Secure_Authentication|team accounts]] and judge accounts.
