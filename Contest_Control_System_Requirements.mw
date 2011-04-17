@@ -641,6 +641,10 @@ The next two sections define how to assign a judgment to a program for problems 
 
 == Documentation Requirements ==
 
+=== Standard Compliance ===
+
+:The CCS must include a ''Standard Compliance'' document in PDF format, that for each section in this standard document confirmes that the CCS conformes and, if relevant, explains how the requested functionality can be achieved.
+
 === Team Guide ===
 
 :The CCS must include a “Team Guide” document in PDF format. The Team Guide must provide all the necessary instructions showing how a contest team uses the functions of the team interface.
