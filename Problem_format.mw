@@ -37,18 +37,22 @@ This is a sample list of directories/files for a problem named ''squares''
 
  squares/problem.yaml
  squares/problem_statement/problem.tex
+ squares/problem_statement/square1.png
+ squares/problem_statement/square2.png
  squares/data/sample/squares_sample1.in 
  squares/data/sample/squares_sample1.ans
  squares/data/sample/squares_sample2.in 
  squares/data/sample/squares_sample2.ans
  squares/data/secret/squares1.in 
  squares/data/secret/squares1.ans
- squares/data/secret/squares1.txt
+ squares/data/secret/squares_desc.txt
  squares/data/secret/squares2_cornercases.in 
  squares/data/secret/squares2_cornercases.ans
  squares/data/secret/squares3_bigcases.in
  squares/data/secret/squares3_bigcases.ans
  squares/test_submissions/accepted/squares.cpp
+ squares/test_submissions/accepted/Squares.java
+ squares/test_submissions/accepted/squares.c
  squares/test_submissions/wrong_answer/wrong.cpp
  squares/test_submissions/time_limit_exceeded/tle.c
  squares/test_submissions/run_time_error/rte.c
