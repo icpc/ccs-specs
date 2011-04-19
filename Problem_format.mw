@@ -158,6 +158,12 @@ adhere to the input and output validator standard respectively.
 Solutions or validators in languages that is not supported by the CCS
 should be ignored and a warning to that effect shown.
 
+Verification Checks (in order)
+# Check files (all files present as required + check problem.yaml)
+# Check compile (check that all programs compile)
+# Check input (run input validators)
+# Check solutions (run all solutions check that they get the expected verdicts)
+
  Warn if:
        there is no problem.tex
        there are no *.in in data/sample/
