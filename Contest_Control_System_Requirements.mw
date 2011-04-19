@@ -553,6 +553,8 @@ The next two sections define how to assign a judgment to a program for problems 
 
 :The CCS will execute the Team's program then execute the [[Output validator]].
 
+:'''Comment''' TODO: For security reasons should validators not be allowed to do [[#Prohibited_Operations|Prohibited Operations]]? [[User:Douglas Lane|Douglas Lane]] 18:44, 13 April 2011 (CEST)
+
 ==== Additional Requirements ====
 
 :A [[CCS]] supporting this standard must safeguard against faulty validators. For instance, if a validator were to produce excessively large feedback ﬁles, or crash, the [[CCS]] should handle this graciously and report it to the contest personnel. Reasons for such misbehaviour of the validator program could be for instance a security bug in the validator program, enabling malicious submissions to produce feedback ﬁles of their own choosing.
