@@ -32,13 +32,9 @@ The four parameters are:
 
 The three ﬁles pointed to by input, judgeanswer, and teamoutput must exist (though they are allowed to be empty) and the validator program must be allowed to open them for reading. The directory pointed to by feedbackdir ﬁle must also exist.
 
-:'''Comment''' What specific action happens if any of the 3 required files is missing?  What happens if a problem does not require an input file (we use - to indicate no file is required) [[User:Douglas Lane|Douglas Lane]] 22:56, 28 February 2011 (CET)
-
 == Reporting a judgment ==
 
 A validator program is required to report its judgment by exiting with speciﬁc exit codes:
-
-:'''Comment''' This should reference a requirement in the [[CCS]] [[User:Douglas Lane|Douglas Lane]] 23:22, 28 February 2011 (CET)
 
 * If the output is a correct output for the input ﬁle (i.e., the submission that produced the output is to be Accepted), the validator exits with exit code 42.
 * If the output is incorrect (i.e., the submission that produced the output is to be judged as Wrong Answer), the validator exits with exit code 43.
