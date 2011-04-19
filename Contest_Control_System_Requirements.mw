@@ -553,45 +553,11 @@ The next two sections define how to assign a judgment to a program for problems 
 
 :The CCS will execute the Team's program then execute the [[Output validator]].
 
-====Invocation====
+==== Additional Requirements ====
 
-The contest control system is responsible for invoking the validator and passing it at least four command line parameters. 
+:A [[CCS]] supporting this standard must safeguard against faulty validators. For instance, if a validator were to produce excessively large feedback ﬁles, or crash, the [[CCS]] should handle this graciously and report it to the contest personnel. Reasons for such misbehaviour of the validator program could be for instance a security bug in the validator program, enabling malicious submissions to produce feedback ﬁles of their own choosing.
 
-The usage of the validator is as follows:
-
- validator input judgeanswer teamoutput feedback
-
-{| class="wikitable"
-! parameter !! Description
-|-
-|input||Judge's input data filename 
-|-
-|judgeanswer|| Judge's answer (correct output) filename
-|-
-|teamoutput|| Team's output filename
-|-
-|feedback|| Validator feedback filename
-|}
-
-See [[Output_validator#Invocation]] for more details about the command line parameters.
-
-==== Reporting a judgment ====
-
-A validator program is required to report its judgment by exiting with specific exit codes:
-
-* If the output is a correct output for the input ﬁle (i.e., the submission that produced the output is to be Accepted), the validator exits with exit code '''42'''.
-* If the output is incorrect (i.e., the submission that produced the output is to be judged as Wrong Answer), the validator exits with exit code '''43'''
-* Under all other conditions (exit codes) the validator must report the judgement '''Judging Error'''.
-
-:A [[CCS]] supporting this standard must safeguard against faulty validators. For instance, if a validator were to produce an excessively large feedback ﬁle, or a feedback ﬁle not adhering to the specifications above, the [[CCS]] should handle this graciously and report it to the contest personnel. Reasons for such misbehaviour of the validator program could be for instance a security bug in the validator program, enabling malicious submissions to produce feedback files of their own choosing.
-
-:A valididator program is allowed to write any kind of debug information to standard output and standard error. The content of these can be ignored by the CCS.
-
-:'''Comment''' TODO: For security reasons should validators not be allowed to do [[#Prohibited_Operations|Prohibited Operations]]? [[User:Douglas Lane|Douglas Lane]] 18:44, 13 April 2011 (CEST)
-
-:'''Comment''' How does a judgement phrase/acronym get returned from the validator?  Is this a matter of documentation or should we provide a standardized line in the feedback file? [[User:Douglas Lane|Douglas Lane]] 18:18, 17 April 2011 (CEST)
-
-:'''Comment''' If a validator returns exit code 43 (incorrect) is the default judgement Wrong Answer if no judgement is returned i the feedback file? [[User:Douglas Lane|Douglas Lane]] 18:18, 17 April 2011 (CEST)
+:A valididator program is allowed to write any kind of debug information to its standard output and standard error pipes. The content of these can be ignored by the contest control system.
 
 ==== Default Validator ====
 
