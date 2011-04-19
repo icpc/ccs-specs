@@ -47,75 +47,36 @@ Any other exit code (including 0!) indicates that the validator did not operate 
 
 == Reporting Additional Feedback ==
 
-=== Purpose ===
+The purpose of the feedback directory is to allow the validator program to report more information to the contest
+control system than just the accept/reject verdict. Using the feedback directory is optional for a validator program,
+so if one just wants to write a bare-bones minimal validator, it can be ignored.
 
-The purpose of the feedback ﬁle is to allow the validator program to report more information to the contest
-control system than just the accept/reject verdict. Using the feedback ﬁle is optional for a validator program,
-so if one just wants to write a bare-bones minimal validator, the feedback ﬁle can be ignored.
-
-A feedback ﬁle is a plain text ﬁle with a simple structure. It is divided into “sections”, each of which
-contains plain text. The purpose of the sections is to be able to provide different kinds of information to the
-contest control system, in a simple but organized way. For instance, there may be a “JudgeMessage”
-section, which gives a message that is presented to a judge reviewing the current submission (typically
-indicated to help the judge veriﬁed why the submission was judged as incorrect, by specifying exactly what
-was wrong with its output). Other examples of sections that may be useful in some contexts (though not in
-the ICPC) are a “Score” section, giving the submission a score based on other factors than correctness, or
-a “TeamMessage” section, giving a message to the team that submitted the solution, providing additional
+The validator is free to create different files in the feedback directory, in order to provide different kinds of information to the
+contest control system, in a simple but organized way. For instance, there may be a “judgemessage.txt”
+file, the contents of which gives a message that is presented to a judge reviewing the current submission (typically
+used to help the judge verify why the submission was judged as incorrect, by specifying exactly what
+was wrong with its output). Other examples of files that may be useful in some contexts (though not in
+the ICPC) are a score.txt file, giving the submission a score based on other factors than correctness, or
+a teammessage.txt file, giving a message to the team that submitted the solution, providing additional
 feedback on the submission.
 
-A contest control system that implements this standard must support the “JudgeMessage” section
-described above (I.e., content of the “JudgeMessage” section, if produced by the validator, must be provided by the contest control system to a
-human judge examaning the submission). Having the Contest Control System support other sections is optional.
+A contest control system that implements this standard must support the judgemessage.txt file
+described above (I.e., content of the "judgemessage.txt" file, if produced by the validator, must be provided by the contest control system to a
+human judge examining the submission). Having the Contest Control System support other files is optional.
 
-Note that a validator may choose to ignore the feedback ﬁle entirely. In particular, the contest control
-system must not assume that the validator program creates a feedback ﬁle at all.
+Note that a validator may choose to ignore the feedback directory entirely. In particular, the contest control
+system must not assume that the validator program creates any files there at all.
 
-=== Feedback File Format Speciﬁcation ===
+=== Examples ===
 
-The format of a feedback ﬁle is as follows.
+An example of a judgemessage.txt file:
 
-==== Sections ====
-
-The start of a section is indicated by a line of the form “***SectionName***”, where SectionName
-can be any non-empty string of upper and lower case characters from the English alphabet, as well as digits.
-Section names are not case sensitive, e.g., JudgeMessage is the same section as juDGEmessage. A
-section start line should not contain any whitespace, but trailing whitespace is allowed (and should be
-handled by the [[CCS]]).
-
-:'''Comment''' Does handled mean: the trailing whitespace be ignored by the [[CCS]]?  And that [[CCS]] requirement should be put into the [[CCS]] article. [[User:Douglas Lane|Douglas Lane]] 23:14, 28 February 2011 (CET)
-
-==== File Structure ====
-
-The ﬁrst line of the feedback ﬁle must be the start of a section, The lines following the start of a section,
-up until the next section start or end of ﬁle, are considered the content of that section. Each section name
-should appear at most once in the feedback ﬁle.
-
-==== Encoding ====
-
-If characters outside the 7-bit ASCII set need to be used in the feedback ﬁle, it should use a UTF-8 encoding.
-
-==== Examples ====
-
-An example of a feedback ﬁle containing only a JudgeMessage:
-
- ***JudgeMessage***
  Team failed at test case 14.
  Team output: "31", Judge answer: "30".
+ Team failed at test case 18.
+ Team output: "hovercraft", Judge answer: "7".
+ Summary: 2 test cases failed.
 
-An example of a feedback ﬁle containing more sections:
+An example of a teammessage.txt file:
 
- ***JudgeMessage***
- Team failed at test case 3.
- Team output: "impossible", Judge answer: "42"
- Team failed at test case 14
- Team output: "31", Judge answer: "30".
- ***TeamMessage***
- Two test cases failed.
-
-'''Comment''' These examples and the format in general needs to be fleshed out a bit more [[User:Douglas Lane|Douglas Lane]] 04:38, 17 April 2011 (CEST)
-
-* Notes [[User:Douglas Lane|Douglas Lane]] 04:39, 17 April 2011 (CEST)
-# There is no example if the team passed a test case
-# What happens if the team output and judge answer is a multi-line output ?
-# Should there be a summary indicating if a team passed all test cases ?
-# If the output validator provides more detail or comments about the judgement where are those printed ?
+ Almost all test cases failed, are you even trying to solve the problem?
