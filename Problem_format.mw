@@ -8,7 +8,7 @@ identifier for the problem.
        problem.yaml - problem configuration file
        problem_statement/
                problem.tex - problem statement
-               - any files that description.tex needs to include, e.g. images
+               - any files that problem.tex needs to include, e.g. images
        data/
                sample/
                        *.in - sample input files
