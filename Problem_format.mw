@@ -101,7 +101,7 @@ A YAML file consisting of a mapping with the following keys:
 "float_relative_tolerance X" - accepts token if it is a floating point number and the relative error is <= X<br>
 "float_absolute_tolerance X" - accepts token if it is a floating point number and the absolute error is <= X<br>
 "float_tolerance X" - accepts token if either "float_relative_tolerance X" or "float_absolute_tolerance X" would accept<br>
-"custom" - use a custom output validator. Must be first value, values following will be given as command-line arguments to validator<br>
+"custom" - use a custom output validator. Must be the first value. All following values will be passed as command-line arguments to each of the output validators<br>
 |
 |}
 
