@@ -282,8 +282,6 @@ Remove time interval from 12:10 to 12:20
 :# Automatic judging of the problem must be disabled.
 :# Submissions on the problem must not affect the scoreboard at all, including submissions received prior to disabling.
 
-:'''Comment''' What effect does pausing or disabling have on Clarification submissions? [[User:Douglas Lane|Douglas Lane]] 18:23, 17 April 2011 (CEST)
-
 === Rejudging === 
 
 ==== Automatic Rejudging ====
