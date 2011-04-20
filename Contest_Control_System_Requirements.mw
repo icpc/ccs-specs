@@ -221,39 +221,7 @@ CCS meets all the requirements listed in this standard.
 
 :Note that removing a time interval changes the wall-clock time when the contest ends, as the duration of the contest in contest.yaml is specified in contest time. 
 
-:All runs' contest-time in the removed time interval are assigned the contest-time for the beginning of the interval.
-
-=====Example=====
-:Contest starts at noon.
-
-{| class="wikitable"
-!Run Id!!Wall Time!!Contest-time
-|-
-||1|| 12:05|| 5 minutes
-|-
-||2|| 12:10|| 10 minutes
-|-
-||3|| 12:15|| 15 minutes
-|-
-||4|| 12:20|| 20 minutes
-|-
-|}
-
-Remove time interval from 12:10 to 12:20
-
-{| class="wikitable" 
-|+ Results
-!Run Id!!Contest-time
-|-
-||1||5 minutes
-|-
-||2||10 minutes
-|-
-||3||'''10 minutes'''
-|-
-||4||10 minutes
-|-
-|}
+:Removing the interval between wall-clock time A and B means that all runs received between A and B will have the same contest-time and that the contest-time for all runs received after B will have a contest-time that is B-A lower than if the interval was not removed.
 
 ==== Changing contest length ====
 
