@@ -517,7 +517,7 @@ The next two sections define how to assign a judgment to a program for problems 
 
 :The CCS will execute the Team's program then execute the [[Output validator]].
 
-:'''Comment''' TODO: For security reasons should validators not be allowed to do [[#Prohibited_Operations|Prohibited Operations]]? [[User:Douglas Lane|Douglas Lane]] 18:44, 13 April 2011 (CEST)
+'''Comment''' TODO: For security reasons should validators not be allowed to do [[#Prohibited_Operations|Prohibited Operations]]? [[User:Douglas Lane|Douglas Lane]] 18:44, 13 April 2011 (CEST)
 
 ==== Additional Requirements ====
 
