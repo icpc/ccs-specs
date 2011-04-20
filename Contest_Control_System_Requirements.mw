@@ -303,9 +303,7 @@ CCS meets all the requirements listed in this standard.
 
 === Finalizing the Contest ===
 
-Finalizing is the procedure to authorize the final results at the end of a contest.  The
-[[#results.tsv]] and [[#scoreboard.tsv]] files will be generated and the
-[[Event_Feed#finalized]] element will be sent to [[Event Feed]]s.
+:Finalizing is the procedure to authorize the final results at the end of a contest.  The [[#results.tsv]] and [[#scoreboard.tsv]] files will be generated and the [[Event_Feed#finalized]] element will be sent to [[Event Feed]]s.
 
 :The CCS must provide a way for admins to finalize the contest. It must not be possible to finalize a contest if one or more of the following applies:
 :# The contest is still running (i.e., the contest time is not over).
@@ -313,9 +311,9 @@ Finalizing is the procedure to authorize the final results at the end of a conte
 :# There are runs judged as [[#Exception Judgments|Judging Error]].
 :# There are unanswered clarifications.
 
-The following fields need to be entered before Finalizing the contest:
-# B, an integer, the number of extra bronzes awarded, as defined in [[#Scoring Data Generation|Scoring Data Generation]].
-# a comment, string, that indicates who approves the Final Results, for Example Finalized by John Doe and Jane Doe.
+:The following fields need to be entered before Finalizing the contest:
+:# B, an integer, the number of extra bronzes awarded, as defined in [[#Scoring Data Generation|Scoring Data Generation]].
+:# a comment, string, that indicates who approves the Final Results, for Example Finalized by John Doe and Jane Doe.
 
 == Team Interface ==
 
