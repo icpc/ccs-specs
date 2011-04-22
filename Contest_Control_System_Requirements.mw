@@ -518,7 +518,7 @@ The next two sections define how to assign a judgment to a program for problems 
 
 ==== Additional Requirements ====
 
-:A [[CCS]] supporting this standard must safeguard against faulty validators. For instance, if a validator were to produce excessively large feedback ﬁles, or crash, the [[CCS]] should handle this graciously and report it to the contest personnel. Reasons for such misbehaviour of the validator program could be for instance a security bug in the validator program, enabling malicious submissions to produce feedback ﬁles of their own choosing.
+:A [[CCS]] supporting this standard must safeguard against faulty validators. For instance, if a validator were to produce excessively large feedback ﬁles, or crash, the [[CCS]] should handle this graciously and report it to contest staff. Reasons for such misbehaviour of the validator program could be for instance a security bug in the validator program, enabling malicious submissions to produce feedback ﬁles of their own choosing.
 
 :A valididator program is allowed to write any kind of debug information to its standard output and standard error pipes. The content of these can be ignored by the contest control system.
 
