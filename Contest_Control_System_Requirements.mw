@@ -112,7 +112,7 @@ CCS meets all the requirements listed in this standard.
 
 ==== Creation of Authentication Data ====
 
-: If the CCS uses a login/password mechanism, it should generate login/password information for all users.  It should also, for each type of user, output the complete list of username/password pairs in a file using the [[#userdata.tsv]] format.
+: If the CCS uses a login/password mechanism, it should generate login/password information for all users.  It should also, for each type of user, output the complete list of username/password pairs in a file using the [[#userdata.tsv|userdata.tsv]] format.
 
 '''Comment:''' userdata.tsv does not quite fit other users than teams, some small change needed here. [[User:Austrin|Austrin]] 03:46, 9 March 2011 (CET)
 
