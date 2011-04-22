@@ -300,6 +300,8 @@ CCS meets all the requirements listed in this standard.
 
 :Finalizing is the procedure to authorize the final results at the end of a contest.  The [[#results.tsv]] and [[#scoreboard.tsv]] files will be generated and the [[Event_Feed#finalized]] element will be sent to [[Event Feed]]s.
 
+:When the contest is over, but not finalized, all scoreboards must show a warning that the results are not final.
+
 :The CCS must provide a way for admins to finalize the contest. It must not be possible to finalize a contest if one or more of the following applies:
 :# The contest is still running (i.e., the contest time is not over).
 :# There are unjudged runs.
