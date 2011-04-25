@@ -53,7 +53,7 @@ This is a sample list of directories/files for a problem named ''squares''
  squares/data/sample/squares_sample2.ans
  squares/data/secret/squares1.in 
  squares/data/secret/squares1.ans
- squares/data/secret/squares_desc.txt
+ squares/data/secret/squares1.txt
  squares/data/secret/squares2_cornercases.in 
  squares/data/secret/squares2_cornercases.ans
  squares/data/secret/squares3_bigcases.in
