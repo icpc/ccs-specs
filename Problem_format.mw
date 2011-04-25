@@ -95,7 +95,7 @@ A YAML file consisting of a mapping with the following keys:
 | compile_time_limit || optional, in seconds, defaults to 120 || 60
 |-
 | validator 
-| set of values from the following (delimited by spaces):<br>
+| optional, set of values from the following (delimited by spaces):<br>
 "case_sensitive" - upper/lower case differences are significant.  If this parameter is not specified, any changes in case are to be ignored.<br>
 "space_change_sensitive" - whitespace differences are significant.  If this parameter is not specified, any non-zero amounts of whitespace are considered identical.<br>
 "float_relative_tolerance X" - accepts token if it is a floating point number and the relative error is <= X<br>
