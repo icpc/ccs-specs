@@ -64,7 +64,7 @@ This is a sample list of directories/files for a problem named ''squares''
  squares/test_submissions/wrong_answer/wrong.cpp
  squares/test_submissions/time_limit_exceeded/tle.c
  squares/test_submissions/run_time_error/rte.c
- squares/input_validators/validator1
+ squares/input_format_validators/validator1
  squares/output_validators/ovalidator1
 
 === problem.yaml ===
