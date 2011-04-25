@@ -175,12 +175,12 @@ Verification Checks (in order)
        there are .in files without corresponding .ans files in data/*/
        there are .ans files without corresponding .in files in data/*/
        there are no solutions in test_submissions/accepted/
-       there are no validators in input_validators/
+       there are no validators in input_format_validators/
        validator begins with "custom" and there are no validators in output_validators/
        there are validators in output_validators/ and validator does not begin with "custom"
 
  For each *.in in public_data and judge_data:
-       For each validator in input_validators/:
+       For each validator in input_format_validators/:
                If the validator does not accept the input file: Error!
 
  For each solution in test_submissions/accepted/:
