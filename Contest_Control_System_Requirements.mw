@@ -180,8 +180,6 @@ CCS meets all the requirements listed in this standard.
 
 :Problems (including judge data, validators, execution time limit, etc) are configured using the [[Problem_format|ICPC problem format]]. The CCS must have full support for this standard. All problems that are added or changed must be verified as defined in the problem standard.
 
-'''Comment''': This needs to be cleaned up to describe more detail about the Program Verification process [[User:Douglas Lane|Douglas Lane]] 21:31, 18 April 2011 (CEST)
-
 === Team Registration ===
 
 ==== Importing Team Registration File ====
