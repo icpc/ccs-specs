@@ -974,7 +974,7 @@ The first line has the following format
 ! Example
 ! Type
 |-
-| 1 || Label || file_version|| fixed string (always same value)
+| 1 || Label || userdata || fixed string (always same value)
 |-
 | 2 || Version number || 1  || integer
 |}
