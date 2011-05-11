@@ -965,7 +965,7 @@ Award is a string with value "gold", "silver", "bronze", "ranked" or "honorable"
 
 === userdata.tsv ===
 
-A text file consisting of a version line and  one line for each team in the contest, its username and password for the CCS.
+A text file created by a CCS consisting of a version line and one line of information for each account in the contest.
 
 The first line has the following format
 {| class="wikitable"
@@ -985,11 +985,15 @@ The first line has the following format
 ! Example
 ! Type
 |-
-| 1 || Team Number || 42 || integer
+| 1 || Account Type || team || string
 |-
-| 2 || Institution name || University of Virginia  || string
+| 2 || Account Number || 42 || integer
 |-
-| 3 || Username || team-001 || string
+| 3 || Institution name || University of Virginia  || string
 |-
-| 4 || Password || B!5MWJiy || string
+| 4 || Username || team-001 || string
+|-
+| 5 || Password || B!5MWJiy || string
 |}
+
+Account Types include: team, judge, admin, analyst, etc.
