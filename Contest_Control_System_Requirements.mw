@@ -114,8 +114,6 @@ CCS meets all the requirements listed in this standard.
 
 : If the CCS uses a login/password mechanism, it should generate login/password information for all users.  It should also, for each type of user, output a complete list of username/password pairs in a file using the [[#userdata.tsv|userdata.tsv]] format.
 
-'''Comment:''' userdata.tsv does not quite fit other users than teams, some small change needed here. [[User:Austrin|Austrin]] 03:46, 9 March 2011 (CET)
-
 ==== Logging Out ====
 
 :The CCS must support a mechanism for each user to disconnect from the contest, with the effect that no other user of the computer system not possessing that team’s authentication credentials will be able to invoke CCS functions as if they did possess those credentials.
