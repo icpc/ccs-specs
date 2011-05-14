@@ -995,3 +995,5 @@ The first line has the following format
 |}
 
 Account Types include: team, judge, admin, analyst, etc.
+
+'''Comment''': It would make sense to require that account numbers for teams are the same as team numbers in teams.tsv.  (Mikael 10:40, 14 May 2011 (CEST))
