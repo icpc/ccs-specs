@@ -35,8 +35,6 @@ Notes
 
 Input Validators are programs which verify the input data files (<tt>sample/*.in, secret/*.in</tt>) 
 
-:'''Comment''' Do input validators also verify *.ans files ? [[User:Douglas Lane|Douglas Lane]] 21:06, 18 April 2011 (CEST)
-
 Output Validators are programs that verify that the <tt>accepted/</tt> solutions create correct solutions (<tt>secret/*.ans</tt>)
 
 === Sample Directory / Filenames ===
