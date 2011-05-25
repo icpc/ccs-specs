@@ -421,6 +421,7 @@ CCS meets all the requirements listed in this standard.
 :The CCS must provide a human judge with the ability to perform each of the following operations:
 
 :# See a list of all clarification requests, where the list includes (for each clar) the team which submitted the request, the contest-relative time at which the clar was submitted, and an indication of whether or not an answer to the clar has been sent to the team which submitted it
+:# Sort the list of clarification requests by time.
 :# Filter the list of clarification requests by: 
 :## A user-specified set of [[#Clarification Categories|categories]]
 :## A team
