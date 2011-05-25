@@ -178,6 +178,7 @@ Verification Checks (in order)
        there are no validators in input_format_validators/
        validator begins with "custom" and there are no validators in output_validators/
        there are validators in output_validators/ and validator does not begin with "custom"
+       any validator (input format or output) does not compile
 
  For each *.in in public_data and judge_data:
        For each validator in input_format_validators/:
