@@ -431,7 +431,7 @@ The exact phrase displayed on the frozen scoreboard should be:
 
 :The CCS must provide a mechanism for judges to view the current scoreboard. The scoreboard should be updated at least every 30 seconds.
 
-:During times when the scoreboard is frozen, judges must still be able to view the current (updated) scoreboard.
+:During times when the scoreboard is frozen, administrators must be able to view the current (updated) scoreboard as well as the frozen scoreboard.
 
 == Judging ==
 
