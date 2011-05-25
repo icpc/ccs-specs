@@ -454,10 +454,10 @@ CCS meets all the requirements listed in this standard.
 
 :These actions must be performed on a machine that is not accessible to any team (possibly just a different virtual machine, e.g. if the machines used in the contest are thin clients connecting to a shared server).
 
-=== Prevention of Judging Resource Starvation ===
-:The CCS must use judging resources efficiently and fairly. At a minimum it needs to ensure:
-:#Submissions should not be left in queue if there are unused judging resources
-:#The system must prevent a single or a group of team from starving other teams out of judgement resources
+=== Prevention of Auto-judge Machine Starvation ===
+:The CCS must use auto-judge machines efficiently and fairly. At a minimum it needs to ensure:
+:#Submissions should not be left in queue if there are unused auto-judge machines
+:#The system must prevent a single or a group of team from starving other teams out of auto-judge machines
 
 === Prohibited Operations ===
 
