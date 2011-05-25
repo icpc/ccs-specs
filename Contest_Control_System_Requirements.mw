@@ -563,7 +563,7 @@ The next two sections define how to assign a judgment to a program for problems 
 
 :Note that run judgements may not come in the same order as submissions, meaning that the first notification of acceptance does not have to be for the earliest submitted accepted run. 
 
-:The format of balloon notifications is defined in '''TODO'''.
+:The format of balloon notifications is defined in [[Event_Feed#notification|Event Feed Notifications]].
 
 :The sequence numbers assigned to the external notifications are used to detect if a notification is missing (e.g., due to printer malfunction). The CCS must provide at least one of the two following features: 
 :# the CCS must be able to resend a previously sent message with a given sequence number upon request 
