@@ -624,7 +624,7 @@ The next two sections define how to assign a judgment to a program for problems 
 
 === Scoreboard Data File ===
 
-:The CCS must be capable of generating an external file containing the current scoreboard. The format of this file must be as defined in [[#scoreboard.tsv|the appendix]].
+:The CCS must be capable of generating an external file containing the current scoreboard. The format of this file must be as defined in [[#scoreboard.tsv|scoreboard.tsv]].
 
 :The CCS must automatically save an updated copy of the external scoring data file whenever the scoring data itself is updated as described above.
 
