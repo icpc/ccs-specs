@@ -30,7 +30,7 @@ The four parameters are:
 
 ;feedbackdir: a string which specifies the name of a “feedback directory” in which the validator can produce "feedback files" in order to report additional information on the validation of the output ﬁle.  The feedbackdir must end with a path separator (typically '/' or '\' depending on operating system), so that simply appending a filename to feedbackdir gives the path to a file in the feedback directory.
 
-The three ﬁles pointed to by input, judgeanswer, and teamoutput must exist (though they are allowed to be empty) and the validator program must be allowed to open them for reading. The directory pointed to by feedbackdir ﬁle must also exist.
+The three ﬁles pointed to by input, judgeanswer, and teamoutput must exist (though they are allowed to be empty) and the validator program must be allowed to open them for reading. The directory pointed to by feedbackdir must also exist.
 
 == Reporting a judgment ==
 
