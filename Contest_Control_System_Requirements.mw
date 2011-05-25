@@ -465,7 +465,7 @@ CCS meets all the requirements listed in this standard.
 :* '''Wrong Answer'''
 :* '''Accepted'''
 :* '''Security Violation'''
-:* '''Judging Error'''
+:* '''Judging System Error'''
 
 :When manually overriding the judgement the following could also be used:
 
