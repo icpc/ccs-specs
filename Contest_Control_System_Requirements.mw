@@ -632,9 +632,9 @@ The next two sections define how to assign a judgment to a program for problems 
 
 :The ''final results'' lists the ranked teams sorted by rank (with alphabetical order on team name as tie breaker), followed by the unranked teams (sorted alphabetically by team name).  It includes for each ranked team their rank and:
 :# The number of problems solved, if the team is ranked (i.e., if they solved more than the median number of problems).
-:# The total penalty time and time of last accepted submission, if the team is in rank 1 through 12+B (where B is the number of extra bronze medals as defined in [[#Scoring_Data_Generation|Scoring Data Generation]]). 
+:# The total penalty time and time of last accepted submission, if the team is in rank 1 through 12+B (where B is as defined in [[#Scoring_Data_Generation|Scoring Data Generation]]). 
 
-:The CCS must be capable of generating an external file containing the final results of the World Finals contest. The format of this file must be as defined in the [[#results.tsv|Appendix]].
+:The CCS must be capable of generating an external file containing the final results of the World Finals contest. The format of this file must be as defined in the [[#results.tsv|results.tsv]].
 
 == Testability Requirements ==
 
