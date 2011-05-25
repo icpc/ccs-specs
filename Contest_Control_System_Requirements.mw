@@ -795,8 +795,6 @@ A sequence of mappings with the following keys:
      rgb:        #ffffff
  ...
 
-'''Comment:''' we need to add some sample values for languages in the example. [[User:Niemela|Fredrik Niemelä]] 04:30, 10 February 2011 (CET)
-
 === groups.tsv ===
 
 A text file consisting of a version line and one line for each group (super regionals at the WF) that needs to be tracked separately with regards to results. Each line has tab separated fields as defined below.
