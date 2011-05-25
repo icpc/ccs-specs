@@ -445,7 +445,7 @@ CCS meets all the requirements listed in this standard.
 
 === Automatic Invocation ===
 
-:The CCS must provide the ability to invoke an automated judging mechanism when a team submits a run. This mechanism must automatically (that is, without human intervention) detect each newly submitted run, and for each such run must automatically:
+:The CCS must provide the ability to invoke an automated judging mechanism when a team submits a run. This mechanism must automatically (that is, without human intervention) detect each newly submitted run, and for each such run must automatically
 
 :# Compile (if appropriate for the language) the program contained in the submitted run, enforcing the [[#Compilation_Time_Limit|compilation time limit]].
 :# Execute the program contained in the submitted run, with the corresponding contest problem data automatically supplied to the program.
