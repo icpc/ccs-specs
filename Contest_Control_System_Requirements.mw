@@ -457,7 +457,7 @@ CCS meets all the requirements listed in this standard.
 === Prevention of judgement resource starvation ===
 The CCS must use judgement resources efficiently and fairly. At a minimum it needs to:
 #Ensure all judgement resources available are used if needed
-##The system must not reserve judgement resources for specific problems, teams, groups of teams or similar
+#*The system must not reserve judgement resources for specific problems, teams, groups of teams or similar
 #The system must prevent a single or a group of team from starving other teams out of judgement resources
 
 === Prohibited Operations ===
