@@ -145,7 +145,7 @@ filenames. subdirectories that would be empty can be left out.
 
 === <short_name>/*_validators/ ===
 
-:Every file or directory in these directories represent a separate validator. A validator in the form of a directory may include two scripts "build" and "run".
+:These directories contain validators. A validator is either a file or a directory. A validator in the form of a directory may include two scripts "build" and "run".
 
 :If the "build" script is present, the validator must be compiled by executing the build script.  Otherwise, the validator will be compiled as if it was a submission.
 
