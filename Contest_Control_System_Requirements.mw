@@ -583,6 +583,12 @@ The next two sections define how to assign a judgment to a program for problems 
 :## For teams in positions up to and including 12+B, the rank equals the position (B is provided when [[#Finalizing_the_Contest|finalizing the contest]], the default value is 0).
 :## Teams that solved fewer problems than the median team are not ranked at all.
 :## For the remaining teams, the rank is determined by sorting the teams by number of problems solved (descending).
+:# The ''award'' of a team is:
+:## ''gold'' if rank is 1 through 4.
+:## ''silver'' if rank is 5 through 8.
+:## ''bronze'' if rank is 9 through 12+B.
+:## ''ranked'' if rank is not 1 through 12+B but the team is ranked.
+:## ''honorable'' otherwise.
 
 :When a number of teams are tied for the same position/rank, they all occupy the same position/rank and a suitable number of subsequent positions/ranks are left empty.  For instance, if four teams are tied for 17th position, they are all in 17th position and positions 18, 19 and 20 are unoccupied.
 
