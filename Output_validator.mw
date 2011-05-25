@@ -77,3 +77,7 @@ An example of a judgemessage.txt file:
 An example of a teammessage.txt file:
 
  Almost all test cases failed, are you even trying to solve the problem?
+
+=== Validator standard output and standard error ===
+
+:A valididator program is allowed to write any kind of debug information to its standard output and standard error pipes.
