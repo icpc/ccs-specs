@@ -597,8 +597,6 @@ The next two sections define how to assign a judgment to a program for problems 
 
 :It is a requirement that the CCS provide an ''external event feed API''.  This means that the CCS must have a mechanism for external processes to connect to the CCS and obtain dynamic real-time updates regarding the current state of the contest.
 
-'''Comment''': The details of the required mechanism for the external event feed API are currently under development; see [[Event Feed|Event Feed]] for additional information.
-
 === Scoreboard Data File ===
 
 :The CCS must be capable of generating an external file containing the current scoreboard. The format of this file must be as defined in [[#scoreboard.tsv|the appendix]].
