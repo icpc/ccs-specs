@@ -313,7 +313,7 @@ CCS meets all the requirements listed in this standard.
 :# There are unanswered clarifications.
 
 :The following fields need to be entered before Finalizing the contest:
-:# B, an integer, as used in [[#Scoring Data Generation|Scoring Data Generation]].
+:# B, a non-negative integer, as used in [[#Scoring Data Generation|Scoring Data Generation]].
 :# a comment, string, that indicates who approves the Final Results, for Example Finalized by John Doe and Jane Doe.
 
 == Team Interface ==
