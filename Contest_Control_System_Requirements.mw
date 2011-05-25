@@ -277,6 +277,12 @@ CCS meets all the requirements listed in this standard.
 
 :The CCS must require a separate authentication every time a judgment is changed manually and all such changes must be logged.
 
+=== Scoreboard Display ===
+
+:The CCS must provide a mechanism for judges to view the current scoreboard. The scoreboard should be updated at least every 30 seconds.
+
+:During times when the scoreboard is frozen, judges must still be able to view the current (updated) scoreboard.
+
 === Freezing the Scoreboard ===
 
 :The scoreboard should automatically freeze when the configured scoreboard freeze time is reached. It must also be possible to manually freeze the scoreboard at the current time. All submissions received after the freeze time should be treated as pending on a frozen scoreboard.
