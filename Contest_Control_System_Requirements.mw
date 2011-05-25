@@ -752,17 +752,19 @@ A sequence of mappings with the following keys:
    - Operations
  
  languages:
-   - name: 
-     compiler:   
-     compiler-args:
-     runner:
-     runner-args:
+   - name: C++
+     compiler: /usr/bin/g++  
+     compiler-args: -O2 -Wall -o a.out -static {files} 
+
+   - name: C
+     compiler: /usr/bin/gcc
+     compiler-args: -O2 -Wall -std=gnu99 -o a.out -static {files} -lm
    
-   - name: 
-     compiler:   
-     compiler-args:
-     runner:
-     runner-args:
+   - name: Java
+     compiler: /usr/bin/javac
+     compiler-args: -O {files}
+     runner: /usr/bin/java
+     runner-args: 
  
  problemset:
    - letter:     A
