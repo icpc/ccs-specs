@@ -974,7 +974,7 @@ Region Winner is a string with the name of the region if the team is the region 
 The Reservation ID for a team can be found in the
 [[#teams.tsv|teams.tsv]].
 
-Award is a string with value "gold", "silver", "bronze", "ranked" or "honorable" as appropriate, see [[#Scoring Data Generation]] for details.
+Award is a string with value "gold", "silver", "bronze", "ranked" or "honorable" as appropriate, see [[#Scoring Data Generation|Scoring Data Generation]] for details.
 
 === userdata.tsv ===
 
