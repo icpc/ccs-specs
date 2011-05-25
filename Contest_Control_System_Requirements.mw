@@ -499,7 +499,7 @@ The next two sections define how to assign a judgment to a program for problems 
 
 :The preceding sections define how to assign a judgment to a submitted program.  However, the following two exceptions apply:
 
-:# If, during any point of the judging process an error occurs that the CCS can not recover from, '''Judging Error''' must be the judgment.
+:# If, during any point of the judging process an error occurs that the CCS can not recover from, '''Judging System Error''' must be the judgment.
 :# If, during any point of the judging process the submitted program tries to perform a [[#Prohibited_Operations|prohibited operation]], '''Security Violation''' must be the judgment.
 
 === Validators ===
