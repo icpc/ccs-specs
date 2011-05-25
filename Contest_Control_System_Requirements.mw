@@ -613,8 +613,6 @@ The next two sections define how to assign a judgment to a program for problems 
 
 :The CCS must be capable of generating an external file containing the final results of the World Finals contest. The format of this file must be as defined in the [[#results.tsv|Appendix]].
 
-'''Comment:''' This does not currently quite match the file format described in the appendix, some fixing is needed. [[User:Austrin|Austrin]] 11:04, 5 February 2011 (CET)
-
 == Testability Requirements ==
 
 '''Comment''': This section is under development and has yet to be written/completed [[User:Douglas Lane|Douglas Lane]] 20:39, 27 January 2011 (CET)
