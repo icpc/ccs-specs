@@ -283,6 +283,10 @@ CCS meets all the requirements listed in this standard.
 
 :It must be possible to re-enable scoreboard display updating at any time after it has been disabled, again without stopping the contest or affecting contest operations in any way.
 
+The exact phrase displayed on the frozen scoreboard should be:
+
+  The scoreboard was frozen with XX minutes remaining - solutions submitted in the last XX minutes of the contest are still shown as pending.
+
 === Suspension of notification of accepted runs ===
 
 :It must be possible to suspend the notification of accepted rund. When this function has been invoked, the following should happen:
