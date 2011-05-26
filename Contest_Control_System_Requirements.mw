@@ -975,8 +975,9 @@ Then follow several lines with the following format (one per team).
 
 Region Winner is a string with the name of the region if the team is the region winner, otherwise empty.
 
-The Reservation ID for a team can be found in the
-[[#teams.tsv|teams.tsv]].
+The Reservation ID for a team can be found in the [[#teams.tsv|teams.tsv]].
+
+If the team is not ranked (has no assigned rank) then the Rank in contest field is empty.
 
 Award is a string with value "gold", "silver", "bronze", "ranked" or "honorable" as appropriate, see [[#Scoring Data Generation|Scoring Data Generation]] for details.
 
