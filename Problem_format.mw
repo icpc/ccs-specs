@@ -97,6 +97,10 @@ If the "run" script is present, the validator must be run by executing the run s
 
 Input and output validators must adhere to the input and output validator standard respectively.
 
+Input Validators are programs which verify the input data files (<tt>sample/*.in, secret/*.in</tt>).
+
+Output Validators are programs that verify that the <tt>accepted/</tt> solutions create correct solutions (<tt>secret/*.ans</tt>).
+
 === Verification ===
 
 Solutions or validators in languages that is not supported by the CCS
