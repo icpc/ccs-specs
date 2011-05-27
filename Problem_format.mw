@@ -177,10 +177,6 @@ Typical problem.yaml:
  source: ICPC Mid-Atlantic Regional Contest
  author: John von Judge 
  rights_owner: ICPC
- 
- limits:
-    time_multiplier: 5
-    time_safety_margin: 2
 
 Maximal problem.yaml:
 
