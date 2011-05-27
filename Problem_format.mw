@@ -101,13 +101,13 @@ A YAML file consisting of a mapping with the following keys:
 | validation_filesize_limit || optional, in Mb, defaults to 8 || 4
 |-
 | validator 
-| optional, set of values from the following (delimited by spaces):<br>
-"case_sensitive" - upper/lower case differences are significant.  If this parameter is not specified, any changes in case are to be ignored.<br>
-"space_change_sensitive" - whitespace differences are significant.  If this parameter is not specified, any non-zero amounts of whitespace are considered identical.<br>
-"float_relative_tolerance X" - accepts token if it is a floating point number and the relative error is <= X<br>
-"float_absolute_tolerance X" - accepts token if it is a floating point number and the absolute error is <= X<br>
-"float_tolerance X" - accepts token if either "float_relative_tolerance X" or "float_absolute_tolerance X" would accept<br>
-"custom" - use a custom output validator. Must be the first value. All following values will be passed as command-line arguments to each of the output validators<br>
+| optional, set of values from the following (delimited by spaces):
+* "case_sensitive" - upper/lower case differences are significant.  If this parameter is not specified, any changes in case are to be ignored.
+* "space_change_sensitive" - whitespace differences are significant.  If this parameter is not specified, any non-zero amounts of whitespace are considered identical.
+* "float_relative_tolerance X" - accepts token if it is a floating point number and the relative error is <= X
+* "float_absolute_tolerance X" - accepts token if it is a floating point number and the absolute error is <= X
+* "float_tolerance X" - accepts token if either "float_relative_tolerance X" or "float_absolute_tolerance X" would accept
+* "custom" - use a custom output validator. Must be the first value. All following values will be passed as command-line arguments to each of the output validators
 |
 |}
 
