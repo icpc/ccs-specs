@@ -96,6 +96,10 @@ Every file or directory in these directories represent a separate
 solution.  Same requirements as for submissions with regards to
 filenames. It is mandatory to provide at least one accepted solution.  Everything else is optional, and empty subdirectories can be omitted.
 
+==== Input/Output Methods ====
+
+Submissions must operate in such a way that they receive problem input data on their standard input stream, and write to their standard output stream.
+
 === Validators ===
 
 Validators are provided in <tt><short_name>/*_validators/</tt>. A validator is either a file or a directory. A validator in the form of a directory may include two scripts "build" and "run".
