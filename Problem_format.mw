@@ -52,19 +52,37 @@ problem.yaml is a YAML file consisting of a mapping with the following keys:
 
 ==== Sample problem.yaml ====
  
+Minimal problem.yaml:
+
  # Problem configuration
  name: Squares to Circles
  source: ICPC Mid-Atlantic Regional Contest
  author: John von Judge 
- # license  optional, defaults to "cc by-sa"  
  rights_owner: ICPC
- time_limit_multiplier: 5
- time_limit_safety_margin: 10
- # memory_limit  optional, in Mb, defaults to 2048  
- # output_limit  optional, in Mb, defaults to 8 
- # compile_time_limit  optional, in seconds, defaults to 120
+ 
+ limits:
+    time_multiplier: 5
+    time_safety_margin: 2
+ 
  validator: space_change_sensitive float_absolute_tolerance 1e-6
- # validator = custom --limits 3,8,44 --haltfirst
+
+Maximal problem.yaml:
+
+ # Problem configuration
+ name: Squares to Circles
+ source: ICPC Mid-Atlantic Regional Contest
+ author: John von Judge 
+ license: cc by-sa  
+ rights_owner: ICPC
+ 
+ limits:
+    time_multiplier: 5
+    time_safety_margin: 2
+    memory: 4096  
+    output: 16 
+    compile_time: 240
+ 
+ validator: space_change_sensitive float_absolute_tolerance 1e-6
 
 === Problem Statements ===
 
