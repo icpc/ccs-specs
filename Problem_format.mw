@@ -75,12 +75,11 @@ and output. Files needed by this file must all be in
 <problem>/problem_statement/ , problem.tex should include auxiliary files as if
 working directory is <problem>/problem_statement/ .
 
-=== <short_name>/data/*/* ===
+=== Test data ===
 
-All input and answer files must have the filename extension .in and
-.ans respectively. Optionally a text file describing the purpose of an
-input file may be present. Input, answer and description files are
-matched by the base name.
+The test data is provided in subdirectories to '''<short_name>/data/'''. The sample data in '''<short_name>/data/sample/''' and the secret data in '''<short_name>/data/secret/'''.
+
+All input and answer files have the filename extension .in and .ans respectively. Optionally a text file describing the purpose of an input file may be present. Input, answer and description files are matched by the base name.
 
 === <short_name>/submissions/*/ ===
 
