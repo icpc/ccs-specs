@@ -8,7 +8,6 @@ All problems must have a "short name" consisting solely of lower case letters a-
 
 Metadata about the problem (e.g., name, source, license, limits) are provided in a file <short-name>/problem.yaml.
 
-
 problem.yaml is a YAML file consisting of a mapping with the following keys:
 
 {| class="wikitable"
