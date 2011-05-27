@@ -1,5 +1,4 @@
-'''Specification/Document Status''': This document is currently a work in progress (''draft'') specification.
-To learn more about this document's status/schedule contact the primary authors.
+== Introduction ==
 
 This document specifies a standard for operation, verification and validation
 of Programming Contest Control Systems that wish to be considered for managing
@@ -9,16 +8,17 @@ The document defines a set of operations, capabilities, and features which
 any candidate system must provide, including a set of testability criteria which must
 be satisfied and a set of documentation which must be provided.
 
+The current version of the standard is ''Draft 1.0'', published May 27, 2011 at the 
+''Competitive Learning Institute Symposium'' in Orlando, Florida, USA.
+
 The primary authors of the document are John Clevenger and Fredrik Niemelä,
 acting under the auspices of the [[Competitive Learning Institute (CLI)]].
 Contributors to the document include Samir Ashoo, Per Austrin, Troy Boudreau, Tim deBoer, Emma Enström, Mikael Goldman, Gunnar Kreitz, 
 Doug Lane, Pehr Söderman, and Mattias de Zalenski.
 
-== Introduction ==
-
 === Overview === 
 
-For purposes of this standard, the term contest control system (CCS) means
+For purposes of this standard, the term ''contest control system'' (CCS) means
 software which automatically manages the operation of a programming contest.
 Operations to be managed by the CCS include: run submissions by teams, judging of submissions, handling clarification
 requests from teams and clarification responses from judges, calculation of
