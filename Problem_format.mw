@@ -80,7 +80,7 @@ working directory is <tt><problem>/problem_statement/</tt>.
 
 === Test data ===
 
-The test data is provided in subdirectories to '''<short_name>/data/'''. The sample data in '''<short_name>/data/sample/''' and the secret data in '''<short_name>/data/secret/'''.
+The test data is provided in subdirectories to <tt><short_name>/data/</tt>. The sample data in <tt><short_name>/data/sample/</tt> and the secret data in <tt><short_name>/data/secret/</tt>.
 
 All input and answer files have the filename extension .in and .ans respectively. Optionally a text file describing the purpose of an input file may be present. Input, answer and description files are matched by the base name.
 
