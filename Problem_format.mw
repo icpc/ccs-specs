@@ -66,14 +66,14 @@ A YAML file consisting of a mapping with the following keys:
 
 === Problem Statements ===
 
-The problem statement of the problem is provided in the directory <short-name>/problem_statement/.
+The problem statement of the problem is provided in the directory '''<short-name>/problem_statement/'''.
 
 This directory must contain a Latex file problem.tex that only includes the problem text itself, including input
 and output specifications, but not sample input and output. A template
 will be provided that \imports this file as well as the sample input
 and output. Files needed by this file must all be in
-<problem>/problem_statement/ , problem.tex should include auxiliary files as if
-working directory is <problem>/problem_statement/ .
+'''<problem>/problem_statement/''' , problem.tex should include auxiliary files as if
+working directory is '''<problem>/problem_statement/'''.
 
 === Test data ===
 
