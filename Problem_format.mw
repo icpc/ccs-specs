@@ -172,10 +172,6 @@ Verification Checks (in order)
                Run the solution on the input
                If the solution is not judged Run-Time Error: Error!
 
-=== Moved from CCS standard ===
-
-This should be worked into the problem format:
-
 === Appendix: Directory structure ===
 
  <short_name>/
