@@ -256,5 +256,9 @@ This is a sample list of directories/files for a problem named ''squares''
  squares/submissions/wrong_answer/wrong.cpp
  squares/submissions/time_limit_exceeded/tle.c
  squares/submissions/run_time_error/rte.c
- squares/input_format_validators/validator1
- squares/output_validators/ovalidator1
+ squares/input_format_validators/squares_input_checker1.py
+ squares/input_format_validators/squares_input_checker2/check.c
+ squares/input_format_validators/squares_input_checker2/data.h
+ squares/output_validators/squares_validator/validator.f
+ squares/output_validators/squares_validator/build
+ squares/output_validators/squares_validator/run
