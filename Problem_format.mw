@@ -81,11 +81,18 @@ The test data is provided in subdirectories to '''<short_name>/data/'''. The sam
 
 All input and answer files have the filename extension .in and .ans respectively. Optionally a text file describing the purpose of an input file may be present. Input, answer and description files are matched by the base name.
 
-=== <short_name>/submissions/*/ ===
+=== Example Submissions ===
+
+Correct and incorrect solutions to the problem are provided in a directory <short-name>/submissions/.  The submissions/ directory has subdirectories corresponding to the judgement that the programs are supposed to receive:
+
+# submissions/accepted/: Solutions correctly solving the problem
+# submissions/wrong_answer/: Submissions producing incorrect answers
+# submissions/time_limit_exceeded/: Submissions that are supposed to be too slow
+# submissions/run_time_error/: Submissions that are supposed to crash
 
 Every file or directory in these directories represent a separate
-solution. Same requirements as for submissions with regards to
-filenames. subdirectories that would be empty can be left out.
+solution.  Same requirements as for submissions with regards to
+filenames. It is mandatory to provide at least one accepted solution.  Everything else is optional, and empty subdirectories can be omitted.
 
 === Validators ===
 
