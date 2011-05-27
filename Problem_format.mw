@@ -141,9 +141,9 @@ problem.yaml is a YAML file consisting of a mapping with the following keys:
 |-
 | rights_owner || mandatory || ICPC
 |-
-| time_limit_multiplier || optional, defaults to 5 ||3
+| time_limit_multiplier || optional, defaults to 5 ||3.5
 |-
-| time_limit_safety_margin || optional, defaults to 10||5
+| time_limit_safety_margin || optional, defaults to 2||1.5
 |-
 | memory_limit || optional, in Mb, defaults to 2048 || 3072
 |-
