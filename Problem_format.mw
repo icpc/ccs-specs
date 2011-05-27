@@ -170,7 +170,7 @@ problem.yaml is a YAML file consisting of a mapping with the following keys:
 
 ===== Sample problem.yaml =====
  
-Minimal problem.yaml:
+Typical problem.yaml:
 
  # Problem configuration
  name: Squares to Circles
