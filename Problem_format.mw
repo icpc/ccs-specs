@@ -193,6 +193,9 @@ Maximal problem.yaml:
     memory: 4096  
     output: 16 
     compile_time: 240
+    validation_time: 240
+    validation_memory: 3072
+    validation_filesize: 4
  
  validator: space_change_sensitive float_absolute_tolerance 1e-6
 
