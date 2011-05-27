@@ -196,12 +196,6 @@ The CCS must be able to operate in such a way that submitted runs receive proble
        output_validators/
                - single file or directory per validator
 
-Notes
-
-Input Validators are programs which verify the input data files (<tt>sample/*.in, secret/*.in</tt>) 
-
-Output Validators are programs that verify that the <tt>accepted/</tt> solutions create correct solutions (<tt>secret/*.ans</tt>)
-
 ==== Sample Directory / Filenames ====
 
 This is a sample list of directories/files for a problem named ''squares''
