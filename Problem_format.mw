@@ -64,9 +64,11 @@ A YAML file consisting of a mapping with the following keys:
  validator: space_change_sensitive float_absolute_tolerance 1e-6
  # validator = custom --limits 3,8,44 --haltfirst
 
-=== <short_name>/problem_statement/problem.tex ===
+=== Problem Statements ===
 
-Latex file that only includes the problem text itself, including input
+The problem statement of the problem is provided in the directory <short-name>/problem_statement/.
+
+This directory must contain a Latex file problem.tex that only includes the problem text itself, including input
 and output specifications, but not sample input and output. A template
 will be provided that \imports this file as well as the sample input
 and output. Files needed by this file must all be in
