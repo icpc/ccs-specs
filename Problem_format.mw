@@ -202,6 +202,7 @@ Maximal problem.yaml:
  
  validator: space_change_sensitive float_absolute_tolerance 1e-6
 
+==== Directory structure ====
 
  <short_name>/
        problem.yaml - problem configuration file
@@ -229,8 +230,6 @@ Maximal problem.yaml:
                - single file or directory per validator
        output_validators/
                - single file or directory per validator
-
-==== Directory structure ====
 
 ===== Sample Directory / Filenames =====
 
