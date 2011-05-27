@@ -181,8 +181,6 @@ Typical problem.yaml:
  limits:
     time_multiplier: 5
     time_safety_margin: 2
- 
- validator: space_change_sensitive float_absolute_tolerance 1e-6
 
 Maximal problem.yaml:
 
