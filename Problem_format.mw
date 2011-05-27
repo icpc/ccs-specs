@@ -98,7 +98,7 @@ filenames. It is mandatory to provide at least one accepted solution.  Everythin
 
 === Validators ===
 
-Validators are provided in '''<short_name>/*_validators/'''. A validator is either a file or a directory. A validator in the form of a directory may include two scripts "build" and "run".
+Validators are provided in <tt><short_name>/*_validators/</tt>. A validator is either a file or a directory. A validator in the form of a directory may include two scripts "build" and "run".
 
 If the "build" script is present, the validator must be compiled by executing the build script.  Otherwise, the validator will be compiled as if it was a submission.
 
