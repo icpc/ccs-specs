@@ -102,17 +102,25 @@ Submissions must operate in such a way that they receive problem input data on t
 
 === Validators ===
 
-Validators are provided in <tt><short_name>/*_validators/</tt>. A validator is either a file or a directory. A validator in the form of a directory may include two scripts "build" and "run".
+==== Input Format Validators ====
+
+Input Format Validators, for verifying the correctness of the input files, are provided in <tt><short_name>/input_format_validators/</tt>.  They must adhere to the Input Format Validator standard.
+
+==== Output Validators ====
+
+Output Validators are used if the problem requires more complicated output validation than what is provided by the default diff variant described below.  They are provided in <tt><short_name>/output_validators/</tt>, and must adhere to the Output Validator standard.
+
+==== File Conventions For Validators ====
+
+A validator is either a file or a directory. A validator in the form of a directory may include two scripts "build" and "run".
 
 If the "build" script is present, the validator must be compiled by executing the build script.  Otherwise, the validator will be compiled as if it was a submission.
 
 If the "run" script is present, the validator must be run by executing the run script.  Otherwise, the validator will be run as if it was a submission (except that it is given the command-line arguments specified in problem.yaml, if there are any).
 
-Input and output validators must adhere to the input and output validator standard respectively.
+==== Default Diff Capabilities ====
 
-Input Validators are programs which verify the input data files (<tt>sample/*.in, secret/*.in</tt>).
-
-Output Validators are programs that verify that the <tt>accepted/</tt> solutions create correct solutions (<tt>secret/*.ans</tt>).
+TODO: describe the default diff capabilities.
 
 === Verification ===
 
