@@ -152,7 +152,7 @@ CCS meets all the requirements listed in this standard.
 
 ==== Other Required Specifications ====
 
-:Here are a number of specifications that the [[CCS]] must implement.
+:Here are a number of specifications that the CCS must implement.
 
 :# [[Event Feed]] Specification
 :# [[Problem format]] specification  - problem load file specification
