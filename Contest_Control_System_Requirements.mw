@@ -157,10 +157,7 @@ CCS meets all the requirements listed in this standard.
 :# [[Event Feed]] Specification
 :# [[Problem format]] specification  - problem load file specification
 :# [[Output validator]] specification - validate/test team run output, CCS must implement a default  output validator
-
-===== Optional Required Specifications =====
-
-:# [[Input format validator]] specification (optional)
+:# [[Input format validator]] specification
 
 == Contest Configuration ==
 
