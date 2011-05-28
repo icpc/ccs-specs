@@ -505,7 +505,7 @@ CCS meets all the requirements listed in this standard.
 
 === Assigning a Judgment ===
 
-The next two sections define how to assign a judgment to a program for problems with a single input file and with multiple input files, respectively.  Note however that the '''Judging System Error''' and '''Security Violation''' judgments constitute exceptions to this, as defined in [[#Exceptional Judgments|Exceptional Judgments]].
+:The next two sections define how to assign a judgment to a program for problems with a single input file and with multiple input files, respectively.  Note however that the '''Judging System Error''' and '''Security Violation''' judgments constitute exceptions to this, as defined in [[#Exceptional Judgments|Exceptional Judgments]].
 
 ==== Judging With a Single Input File ====
 
