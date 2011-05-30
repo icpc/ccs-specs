@@ -649,47 +649,6 @@ CCS meets all the requirements listed in this standard.
 
 :The CCS must be capable of generating an external file containing the final results of the World Finals contest. The format of this file must be as defined in the [[#results.tsv|results.tsv]].
 
-=== Final Standings HTML File ===
-
-:The CCS must be capable of generating an external file containing the final standings of the World Finals contest.  The Final Standings
-file is posted on the ICPC Web site.  It is identical to the full standings with the following exceptions:
-# For the non-metal ranked teams do not show the penalty points nor the first solved time.
-
-==== Full Standings HTML File ====
-
-:The CCS must be capable of generating an external file containing the full standings of the World Finals contest.  The Full Standings contains the following sections.
-
-==== Medal Winners ====
-
-:All medal winners appear in rank order and have the following fields:
-# Medal letter (G, S, B)
-# rank number
-# team name
-# number solved
-# time (penalty points)
-# last solved time - time for last problem solved by team
-
-==== Ranked Teams ====
-:All ranked non-medal winners appear in team name order and have the following fields:
-# rank number
-# team name
-
-==== Honorable Mention ====
-:All non-ranked non-medal winners appear in team name order and have the following fields:
-# team name
-
-==== Region Winners ====
-:For each region the top team for that region will appear in region name order and have the following fields:
-# region name
-# team name
-
-==== First Team to solve ====
-:For each problem, list the team that solved that problem first/fastest will appear in time orde and have the following fields:
-# Problem letter
-# Problem name
-# Team name
-# time
-
 == Testability Requirements ==
 
 === Scriptable Submissions ===
