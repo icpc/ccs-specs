@@ -12,7 +12,7 @@ Metadata about the problem (e.g., name, source, license, limits) are provided in
 
 The problem statement of the problem is provided in the directory <tt><short-name>/problem_statement/</tt>.
 
-This directory must contain one LaTeX file per language, named <tt>problem./<language/>.tex</tt>, that contains the problem text itself, including input
+This directory must contain one LaTeX file per language, named <tt>problem.<language>.tex</tt>, that contains the problem text itself, including input
 and output specifications, but not sample input and output. Language must be given as an ISO 639-1 alpha-3 language code. 
 
 A template will be provided that \imports this file as well as the sample input
