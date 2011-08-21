@@ -203,10 +203,10 @@ Maximal problem.yaml:
     time_safety_margin: 2
     memory: 4096  
     output: 16 
-    compile_time: 240
+    compilation_time: 240
     validation_time: 240
     validation_memory: 3072
-    validation_filesize: 4
+    validation_output: 4
  
  validator: space_change_sensitive float_absolute_tolerance 1e-6
 
