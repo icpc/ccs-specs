@@ -142,21 +142,7 @@ problem.yaml is a YAML file consisting of a mapping with the following keys:
 |-
 | rights_owner || mandatory || ICPC
 |-
-| time_limit_multiplier || optional, defaults to 5 ||3.5
-|-
-| time_limit_safety_margin || optional, defaults to 2||1.5
-|-
-| memory_limit || optional, in Mb, defaults to 2048 || 3072
-|-
-| output_limit || optional, in Mb, defaults to 8 || 4
-|-
-| compile_time_limit || optional, in seconds, defaults to 60 || 120
-|-
-| validation_time_limit || optional, in seconds, defaults to 60 || 120
-|-
-| validation_memory_limit || optional, in Mb, defaults to 2048 || 3072
-|-
-| validation_filesize_limit || optional, in Mb, defaults to 8 || 4
+| limits || Sequence of mappings with keys as defined below
 |-
 | validator 
 | optional, set of values from the following (delimited by spaces):
@@ -167,6 +153,30 @@ problem.yaml is a YAML file consisting of a mapping with the following keys:
 * "float_tolerance X" - accepts token if either "float_relative_tolerance X" or "float_absolute_tolerance X" would accept
 * "custom" - use a custom output validator. Must be the first value. All following values will be passed as command-line arguments to each of the output validators
 |
+|}
+
+==== limits ====
+
+A sequence of mappings with the following keys:
+
+{| class="wikitable"
+! Key !! Comments !! Example
+|-
+| time_multiplier || optional, defaults to 5 ||3.5
+|-
+| time_safety_margin || optional, defaults to 2||1.5
+|-
+| memory || optional, in Mb, defaults to 2048 || 3072
+|-
+| output || optional, in Mb, defaults to 8 || 4
+|-
+| compilation_time || optional, in seconds, defaults to 60 || 120
+|-
+| validation_time || optional, in seconds, defaults to 60 || 120
+|-
+| validation_memory || optional, in Mb, defaults to 2048 || 3072
+|-
+| validation_output || optional, in Mb, defaults to 8 || 4
 |}
 
 ===== Sample problem.yaml =====
