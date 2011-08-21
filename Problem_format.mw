@@ -142,7 +142,7 @@ problem.yaml is a YAML file consisting of a mapping with the following keys:
 |-
 | rights_owner || mandatory || ICPC
 |-
-| limits || Sequence of mappings with keys as defined below
+| limits || Sequence of mappings with keys as defined below ||
 |-
 | validator 
 | optional, set of values from the following (delimited by spaces):
