@@ -793,7 +793,7 @@ A sequence of mappings with the following keys:
    - name: C++
      compiler: /usr/bin/g++  
      compiler-args: -O2 -Wall -o a.out -static {files} 
-
+ 
    - name: C
      compiler: /usr/bin/gcc
      compiler-args: -O2 -Wall -std=gnu99 -o a.out -static {files} -lm
