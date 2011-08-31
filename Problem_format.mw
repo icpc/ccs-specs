@@ -17,7 +17,7 @@ and output specifications, but not sample input and output. Language must be giv
 
 A template will be provided that \imports this file as well as the sample input
 and output. Files needed by this file must all be in
-<tt><problem>/problem_statement/</tt> , problem.tex should include auxiliary files as if
+<tt><problem>/problem_statement/</tt> , problem.tex should reference auxiliary files as if
 working directory is <tt><problem>/problem_statement/</tt>.
 
 === Test data ===
