@@ -142,6 +142,10 @@ problem.yaml is a YAML file consisting of a mapping with the following keys:
 |-
 | rights_owner || mandatory || ICPC
 |-
+| keywords || optional ||
+|-
+| difficulty || optional || 
+|-
 | limits || Sequence of mappings with keys as defined below ||
 |-
 | validator 
