@@ -155,6 +155,7 @@ CCS meets all the requirements listed in this standard.
 :Here are a number of specifications that the CCS must implement.
 
 :# [[Event Feed]] Specification
+:# [[Run Forwarding Feed]] Specification
 :# [[Problem format]] specification  - problem load file specification
 :# [[Output validator]] specification - validate/test team run output, CCS must implement a default  output validator
 :# [[Input format validator]] specification
