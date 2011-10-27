@@ -662,15 +662,15 @@ CCS meets all the requirements listed in this standard.
 
 === Run Forwarding Interface ===
 
-:A CCS must provide a dynamic run forwarding interface through which an external program can obtain in real time a copy of each run submitted by a team. In addition, a CCS must be capable of connecting to an external program which implements a run forwarding interface and accepting in real time the run submissions provided by that run forwarding interface.  
+:A CCS must provide a dynamic run forwarding interface ([[Run Forwarding Feed]]) through which an external program can obtain in real time a copy of each run submitted by a team. In addition, a CCS must be capable of connecting to an external program which implements a run forwarding interface and accepting in real time the run submissions provided by that run forwarding interface.  
 
-:The run forwarding interface of a CCS must function according to the following specifications:
+:The run forwarding interface ([[Run Forwarding Feed]]) of a CCS must function according to the following specifications:
 
-#  The CCS must listen, on a port specified in the appropriate entry in the contest.yaml file, for a connection from an external program to its run forwarding interface.
+#  The CCS must listen, on a port specified in the appropriate entry in the [[Contest_Control_System#contest.yaml|contest.yaml]] file, for a connection from an external program to its run forwarding interface.
 # Whenever a connection is made on the run forwarding interface port, the CCS must transmit out on the port all of the data comprising each run submitted by a team as the contest progresses. The transmitted data must be in the same form as that required by this Standard for compliance with a CCS command-line submission interface.
 # The CCS must be capable of accepting multiple independent connections on the run forwarding interface, and must treat each connection in the same way by sending all runs submitted by a team to each connected external program.  
 
-:A CCS must, at startup time, examine the contest.yaml file for a specification of a remote machine (IP address and port) to which it should connect to receive forwarded runs, and if such a specification is present the CCS must open a connection to the specified run forwarding interface. The CCS must accept each run received from the remote run forwarding interface, and must process each received run in exactly the same manner as if the run had been submitted by a team through the CCS's command-line run submission interface.  It is allowable to assume that no two programs implementing a run forwarding interface (that is, listening for run forwarding connections) are running on the same machine (i.e., sharing the same port address space at the same IP address).
+:A CCS must, at startup time, examine the [[Contest_Control_System#contest.yaml|contest.yaml]] file for a specification of a remote machine (IP address and port) to which it should connect to receive forwarded runs, and if such a specification is present the CCS must open a connection to the specified run forwarding interface. The CCS must accept each run received from the remote run forwarding interface, and must process each received run in exactly the same manner as if the run had been submitted by a team through the CCS's command-line run submission interface.  It is allowable to assume that no two programs implementing a run forwarding interface (that is, listening for run forwarding connections) are running on the same machine (i.e., sharing the same port address space at the same IP address).
 
 == Documentation Requirements ==
 
