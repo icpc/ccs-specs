@@ -186,7 +186,6 @@ A sequence of mappings with the following keys:
 Typical problem.yaml:
 
  # Problem configuration
- name: Squares to Circles
  source: ICPC Mid-Atlantic Regional Contest
  author: John von Judge 
  rights_owner: ICPC
@@ -194,7 +193,6 @@ Typical problem.yaml:
 Maximal problem.yaml:
 
  # Problem configuration
- name: Squares to Circles
  source: ICPC Mid-Atlantic Regional Contest
  author: John von Judge 
  license: cc by-sa  
