@@ -6,7 +6,7 @@ All problems must have a "short name" consisting solely of lower case letters a-
 
 === Problem Metadata ===
 
-Metadata about the problem (e.g., name, source, license, limits) are provided in a file <tt><short-name>/problem.yaml</tt>.  The format of this file is defined in the Appendix.
+Metadata about the problem (e.g., source, license, limits) are provided in a file <tt><short-name>/problem.yaml</tt>.  The format of this file is defined in the Appendix.
 
 === Problem Statements ===
 
