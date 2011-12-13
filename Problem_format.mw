@@ -16,7 +16,7 @@ This directory must contain one LaTeX file per language, named <tt>problem.<lang
 and output specifications, but not sample input and output. Language must be given as an ISO 639-1 alpha-2 language code. Optionally, the language code can be left out, the default is then English.
 
 A template will be provided that \imports this file as well as the sample input
-and output. Files needed by this file must all be in
+and output. The format of the problem statement is described in [[Problem Statement Template]].  Files needed by this file must all be in
 <tt><problem>/problem_statement/</tt> , problem.tex should reference auxiliary files as if the
 working directory is <tt><problem>/problem_statement/</tt>.
 
