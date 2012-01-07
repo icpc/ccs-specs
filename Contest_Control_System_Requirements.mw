@@ -942,9 +942,9 @@ Then follow several lines with the following format (one per team).
 ! Example
 ! Type
 |-
-| 1 || Team number || 22 || integer
+| 1 || Team ID || 22 || integer
 |-
-| 2 || Reservation ID || 24314 || integer
+| 2 || External ID || 24314 || integer
 |-
 | 3 || Group ID || 4 || integer
 |-
