@@ -117,7 +117,7 @@ CCS meets all the requirements listed in this standard.
 
 === Secure Authentication ===
 
-:The CCS must support a secure authentication mechanism, allowing each registered user (being either a [[#Team_Interface|team]], an [[#Admin_Interface|admin]], or a [[#Judge_Interface|judge]]) to gain access to the contest, and must insure that:
+:The CCS must support a secure authentication mechanism, allowing each registered user (being either a [[#Team_Interface|team]], an [[#Admin_Interface|admin]], or a [[#Judge_Interface|judge]]) to gain access to the contest, and must ensure that:
 :# Only users who supply correct authentication credentials may invoke contest-related functions.
 :# Users may only invoke functions corresponding to their authentication credentials.  (In other words, it must not be possible for, e.g., a team to invoke functions as if they were some other team, or as if they were a judge.)
 
