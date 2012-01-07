@@ -1101,6 +1101,6 @@ The archive may contain other files and folders. These must be ignored by the CC
 === flags.tar.gz ===
 The file contains the flags for (at least) all countries present, in a tar archive and compressed using gzip.
 
-The archive must contain a folder named "flags", including the flags for (at least) all countries in the contest. The flags must be in .png format and contain an alpha channel. Each logo must be named after the three letter iso code of the country. Example: CAN.png. This folder may not contain any other files. 
+The archive must contain a folder named "flags", including the flags for (at least) all countries in the contest. The flags must be in .png format and contain an alpha channel. Each logo must be named after the three letter iso code of the country, in upper case. Example: CAN.png. This folder may not contain any other files. Each flag should be a minimum 400x400 pixels. 
 
 The archive may contain other files and folders. These must be ignored by the CCS when importing the flags.
