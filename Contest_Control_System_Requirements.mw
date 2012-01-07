@@ -1043,7 +1043,7 @@ Award is a string with value "gold", "silver", "bronze", "ranked" or "honorable"
 
 === userdata.tsv ===
 
-A text file created by a CCS consisting of a version line and one line of information for each account in the contest.
+A text file consisting of a version line and one line for each account in the contest. Each line has tab separated fields as defined below.
 
 The first line has the following format
 {| class="wikitable"
