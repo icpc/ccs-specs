@@ -713,7 +713,7 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 ::-f <folder containing the files in the submission. The folder must contain all files for the submission, and no other files.>
 
-::-p, -u and -f are mandatory for all submissions. -t is optional. File names must be identical to those used in the submission. The CCS may implement additional switches.
+::-p, -u and -f are mandatory for all submissions. -t is optional. File names must be identical to those used in the submission. The submissions should be sent in timestamp order. The CCS may implement additional switches.
 
 ==== Timestamp Handling ====
 :The CCS must provide a configuration mechanism for specifying whether timestamps provided on runs submitted through the command-line run submission interface should be used or ignored.  When the configuration specifies that timestamps should be ignored, the CCS should apply a timestamp to the submitted run as specified in [[XX]].  When the configuration specifies that timestamps should not be ignored, the CCS should treat the specified timestamp as the time at which the run was submitted, regardless of the actual current time.
