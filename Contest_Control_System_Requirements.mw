@@ -721,7 +721,9 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 ::-t <contest-time for submission> 
 
-::-p, -u, -w, -m and -d are mandatory for all submissions. The -t is optional. File names must be identical to those used in the submission. The submissions can be expected to arrive in timestamp order. The CCS may implement additional switches
+::-p, -u, -w, -m and -d are mandatory for all submissions. The -t is optional.   The CCS may implement additional switches.
+
+The Test harness will submit runs timestamp order.
 
 ==== Timestamp Handling ====
 :When the CCS is running in [[Contest_Control_System#Test Mode| REAL]] mode, timestamps provided via the [[Contest_Control_System#Command Line Submission interface| Run Submission Interface]] should be ignored and the CCS should apply a timestamp to the submitted run as specified in the section describing [[Contest_Control_System#Timestamps and Ids for Runs, Clarifications and Notifications| timestamp]]s.  
