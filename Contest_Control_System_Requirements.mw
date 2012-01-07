@@ -703,7 +703,7 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 :The requirements of this subsection are intended to provide a method by which the World Finals Director of Operations can perform automated testing on the CCS during the Certification Process (see [[Contest_Control_System#Certification Process| Certification Process]]). The CCS implementers should assume that the scripting interfaces will be invoked multiple times in rapid succession, in arbitrary order with arbitrary parameters, by external scripts; care should therefore be taken by the implementers to avoid any design or implementation characteristics which limit or prohibit the ability of an external [[Test Harness]] framework to operate in this manner.
 
-==== Command Line Submission interface ====
+==== Command Line Run Submission interface ====
 
 :The CCS must provide a command line interface that supports the ability to submit a run.
 
