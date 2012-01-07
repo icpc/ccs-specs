@@ -100,7 +100,7 @@ CCS meets all the requirements listed in this standard.
 
 ==== Contest Configuration Persistency ====
 
-:The CCS must support persistence of the contest configuration. This means that following a shutdown of the CCS, or a power failure on the machine(s) on which the CCS runs, it must be possible to quickly restore the configuration information already entered into the CCS without the necessity of reentering that configuration data.
+:The CCS must support persistence of the contest configuration. This means that following a shutdown of the CCS, or a failure on the machine(s) on which the CCS runs, it must be possible to quickly restore the configuration information already entered into the CCS without the necessity of reentering that configuration data.
 
 ==== Contest State Persistency ====
 
