@@ -717,7 +717,6 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 ==== Timestamp Handling ====
 :The CCS must provide a configuration mechanism for specifying whether timestamps provided on runs submitted through the command-line run submission interface should be used or ignored.  When the configuration specifies that timestamps should be ignored, the CCS should apply a timestamp to the submitted run as specified in [[XX]].  When the configuration specifies that timestamps should not be ignored, the CCS should treat the specified timestamp as the time at which the run was submitted, regardless of the actual current time.
-:
 
 == Documentation Requirements ==
 
