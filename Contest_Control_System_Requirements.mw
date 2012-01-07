@@ -692,6 +692,9 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 == Testability Requirements ==
 
+=== Test Mode ===
+The CCS must be capable of running in two modes: TEST mode and REAL mode.  When running in TEST mode, the CCS must display prominently on every client a notice that it is in TEST mode.  
+
 === Scriptable Submissions ===
 
 :The CCS must provide a mechanism by which team submissions of both runs and clarification requests can be scripted for automated testing. In other words, the CCS must provide a command-line based interface allowing an external program to submit a run to the CCS and to submit a clarification request to the CCS.
