@@ -281,6 +281,8 @@ Note: time interval removal does not affect the order in which runs arrived to t
 :# Automatic judging of the problem must be disabled.
 :# Submissions on the problem must not affect the scoreboard at all, including submissions received prior to disabling.
 
+'''TODO clarify disabled problems, effect on standings/scoreboard, effect on team/clar submission, (event feed?)
+
 === Rejudging === 
 
 ==== Automatic Rejudging ====
