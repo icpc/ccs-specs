@@ -705,13 +705,13 @@ At a minimum the command line interface must implement the following switches:
 
 -p <problem_id>
 
--u <user>
+-u <user_id>
 
 -t <unix timestamp for submission>
 
 -f <folder containing the files in the submission>
 
-The folder must contain all files for the submission, and no other files. File names must be identical to those used in the submission. The CCS may implement additional switches.
+-p, -u and -f are mandatory for all submissions. -t is optional. The folder must contain all files for the submission, and no other files. File names must be identical to those used in the submission. The CCS may implement additional switches.
 
 === Run Forwarding Interface ===
 
