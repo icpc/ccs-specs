@@ -704,6 +704,12 @@ Note: time interval removal does not affect the order in which runs arrived to t
 :The requirements of this subsection are intended to provide a method by which the World Finals Director of Operations can perform automated testing on the CCS during the Certification Process (see [[Contest_Control_System#Certification Process| Certification Process]]). The CCS implementers should assume that the scripting interfaces will be invoked multiple times in rapid succession, in arbitrary order with arbitrary parameters, by external scripts; care should therefore be taken by the implementers to avoid any design or implementation characteristics which limit or prohibit the ability of an external [[Test Harness]] framework to operate in this manner.
 
 ==== Command Line Submission interface ====
+
+:The command line is options then filenames.
+
+ <command> -p a -u team1 -w pass1 hello.c hello.h
+ <command> -p h -u team1 -w pass1 solutions.c
+
 :At a minimum the command line interface must implement the following switches:
 
 ::-p <problem short-name>
@@ -713,8 +719,6 @@ Note: time interval removal does not affect the order in which runs arrived to t
 ::-w <team password>
 
 ::-t <contest-time for submission> 
-
-::-f <folder containing the files in the submission. The folder must contain all files for the submission, and no other files.>
 
 ::-p, -u and -f are mandatory for all submissions. -t is optional. File names must be identical to those used in the submission. The submissions can be expected to arrive in timestamp order. The CCS may implement additional switches.
 
