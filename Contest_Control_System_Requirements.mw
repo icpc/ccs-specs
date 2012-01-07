@@ -211,6 +211,8 @@ CCS meets all the requirements listed in this standard.
 
 :The CCS must be able to read an ICPC Contest Management System (CMS)-generated initialization file containing a list of teams registered for the World Finals, and use the data in this file to create automatically whatever internal representation is necessary to allow each team (and only the teams) specified in the registration list to participate in the World Finals contest.  The format and content of the CMS-generated initialization file is given in the [[#teams.tsv|teams.tsv]] and [[#groups.tsv|groups.tsv]] files.
 
+'''TODO remove reference to CMS - irrelevant, CCSs don't care where the file came from
+
 === Configuration Change ===
 
 :The CCS must allow updating of configuration data without restarting or stopping the CCS.  
