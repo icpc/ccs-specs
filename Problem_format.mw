@@ -17,8 +17,8 @@ and output specifications, but not sample input and output. Language must be giv
 
 A template will be provided that \imports this file as well as the sample input
 and output. The format of the problem statement is described in [[Problem Statement Template]].  Files needed by this file must all be in
-<tt><problem>/problem_statement/</tt> , problem.tex should reference auxiliary files as if the
-working directory is <tt><problem>/problem_statement/</tt>.
+<tt><short-name>/problem_statement/</tt> , problem.tex should reference auxiliary files as if the
+working directory is <tt><short-name>/problem_statement/</tt>.
 
 === Test data ===
 
