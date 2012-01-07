@@ -701,19 +701,19 @@ Note: time interval removal does not affect the order in which runs arrived to t
 :The requirements of this subsection are intended to provide a method by which the World Finals Director of Operations can perform automated testing on the CCS during the Certification Process (see [[Contest_Control_System#Certification Process| Certification Process]]). The CCS implementers should assume that the scripting interfaces will be invoked multiple times in rapid succession, in arbitrary order with arbitrary parameters, by external scripts; care should therefore be taken by the implementers to avoid any design or implementation characteristics which limit or prohibit the ability of an external [[Test Harness]] framework to operate in this manner.
 
 ==== Run Submission interface ====
-At a minimum the command line interface must implement the following switches:
+:At a minimum the command line interface must implement the following switches:
 
--p <problem short-name>
+::-p <problem short-name>
 
--u <team id>
+::-u <team id>
 
--w <team password>
+::-w <team password>
 
--t <contest-time for submission> 
+::-t <contest-time for submission> 
 
--f <folder containing the files in the submission. The folder must contain all files for the submission, and no other files.>
+::-f <folder containing the files in the submission. The folder must contain all files for the submission, and no other files.>
 
--p, -u and -f are mandatory for all submissions. -t is optional. File names must be identical to those used in the submission. The CCS may implement additional switches.
+::-p, -u and -f are mandatory for all submissions. -t is optional. File names must be identical to those used in the submission. The CCS may implement additional switches.
 
 ==== Timestamp Handling ====
 :The CCS must provide a configuration mechanism for specifying whether timestamps provided on runs submitted through the command-line run submission interface should be used or ignored.  When the configuration specifies that timestamps should be ignored, the CCS should apply a timestamp to the submitted run as specified in [[XX]].  When the configuration specifies that timestamps should not be ignored, the CCS should treat the specified timestamp as the time at which the run was submitted, regardless of the actual current time.
