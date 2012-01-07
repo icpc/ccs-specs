@@ -487,7 +487,7 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 === Prohibited Operations ===
 
-:The CCS must automatically prevent a submitted program from performing prohibited operations.
+:The CCS must ensure that prohibited operations have no non-trivial outside effects.
 
 :The prohibited operations are:
 :# Using libraries except those explicitly allowed
