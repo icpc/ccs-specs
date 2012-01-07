@@ -700,6 +700,19 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 :The requirements of this subsection are intended to provide a method by which the World Finals Director of Operations can perform automated testing on the CCS during the Certification Process (see [[Contest_Control_System#Certification Process| Certification Process]]). The CCS implementers should assume that the scripting interfaces will be invoked multiple times in rapid succession, in arbitrary order with arbitrary parameters, by external scripts; care should therefore be taken by the implementers to avoid any design or implementation characteristics which limit or prohibit the ability of an external [[Test Harness]] framework to operate in this manner.
 
+==== CLI interface ====
+At a minimum the command line interface must implement the following switches:
+
+-p <problem_id>
+
+-u <user>
+
+-t <unix timestamp for submission>
+
+-f <folder containing the files in the submission>
+
+The folder must contain all files for the submission, and no other files. File names must be identical to those used in the submission. The CCS may implement additional switches.
+
 === Run Forwarding Interface ===
 
 :A CCS must provide a dynamic run forwarding interface ([[Run Forwarding Feed]]) through which an external program can obtain in real time a copy of each run submitted by a team. In addition, a CCS must be capable of connecting to an external program which implements a run forwarding interface and accepting in real time the run submissions provided by that run forwarding interface.  
