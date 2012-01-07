@@ -721,11 +721,11 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 ::-m <main source filename>
 
-::-m <directory for main and other files>
+::-d <directory for main and other files>
 
 ::-t <contest-time for submission> 
 
-::-p, -u, -m and -f are mandatory for all submissions. -t is optional. File names must be identical to those used in the submission. The submissions can be expected to arrive in timestamp order. The CCS may implement additional switches.
+::-p, -u, -m, -d and -f are mandatory for all submissions. -t is optional. File names must be identical to those used in the submission. The submissions can be expected to arrive in timestamp order. The CCS may implement additional switches.
 
 '''TODO''' Suggestion: <command> problem teamId teamPassword folder [contestTime]
 
