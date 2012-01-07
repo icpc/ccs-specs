@@ -526,7 +526,7 @@ Note: time interval removal does not affect the order in which runs arrived to t
 :# Creating files
 :# Sending signals to other programs
 :# Side-stepping time or memory limits
-:# Sending or receiving network traffic
+:# Sending or receiving network traffic, e.g. opening sockets
 
 === Judge Responses ===
 
