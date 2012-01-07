@@ -650,7 +650,7 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 :A submission is pending judgement if it has no judgement or if the judgement is '''Judging System Error'''.  Pending judgements have no effect on scoring.
 
-:Runs marked as '''Deleted''' have no effect on scoring.
+:'''Deleted''' Runs and '''Disabled''' Problems have no effect on scoring.
 
 === Scoreboard ===
 
