@@ -719,7 +719,7 @@ Note: time interval removal does not affect the order in which runs arrived to t
 ::-p, -u and -f are mandatory for all submissions. -t is optional. File names must be identical to those used in the submission. The submissions should be sent in timestamp order. The CCS may implement additional switches.
 
 ==== Timestamp Handling ====
-:When the CCS is running in REAL mode (as opposed to TEST mode), timestamps provided via the Run Submission Interface should be ignored, the CCS should apply a timestamp to the submitted run as specified in [[XX]].  When the CCS is running in TEST mode the CCS should treat the specified timestamp as the time at which the run was submitted, regardless of the actual current time.
+:When the CCS is running in REAL mode (as opposed to TEST mode), timestamps provided via the Run Submission Interface should be ignored, the CCS should apply a timestamp to the submitted run as specified in [[Timestamps and Ids for Runs, Clarifications and Notifications]].  When the CCS is running in TEST mode the CCS should treat the specified timestamp as the time at which the run was submitted, regardless of the actual current time.
 
 == Documentation Requirements ==
 
