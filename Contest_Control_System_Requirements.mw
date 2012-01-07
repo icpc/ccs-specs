@@ -281,6 +281,8 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 :When a set of runs are being rejudged as described in [[#Automatic Rejudging|Automatic Rejudging]], the CCS must provide a way for the user to see the changes in judgments that would result if the rejudge is committed.
 
+''' Todo: notification should not actually be sent in this case, but is in the list referred to above.'''
+
 ==== Run Selection ==== 
 
 :The CCS must support the ability to rejudge a set of run submissions.  This means that it must be possible to provide the CCS with a filter of runs to be rejudged, based upon which the CCS automatically selects all runs matching the filter, and automatically rejudges them.
