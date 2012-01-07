@@ -244,6 +244,8 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 :It must be possible to specify, for each team, an integer amount of penalty time to be added into that team's total penalty time.
 
+'''TODO: reword to make clear that "added" includes adding negative values (the most likely case)
+
 === Problem States: Enabled, Paused, and Disabled ===
 
 :Each contest problem can be in one of three mutually exclusive states: enabled, paused, and disabled.  The CCS must provide a mechanism to enable, pause and disable each contest problem separately, or all at once, without the need of stopping the contest.
