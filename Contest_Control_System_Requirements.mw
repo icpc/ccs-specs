@@ -593,6 +593,8 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 === Balloon Notifications ===
 
+'''Todo: This can probably be removed. We have to confirm that it's all in the [[Event_Feed]]'''
+
 :The CCS must have an ability to send a message, called a balloon notification, for every run which have received an accepted judgment. It also must send revocations or updates resulting from rejudging.
 
 :The notification includes the following
