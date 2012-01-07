@@ -759,7 +759,7 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 == Appendix: File formats ==
 
-All files should be encoded in utf-8.
+All files should be encoded in UTF-8.
 
 === contest.yaml ===
 
