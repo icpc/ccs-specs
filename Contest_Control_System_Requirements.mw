@@ -693,7 +693,7 @@ Note: time interval removal does not affect the order in which runs arrived to t
 == Testability Requirements ==
 
 === Test Mode ===
-The CCS must be capable of running in two modes: TEST mode and REAL mode.  When running in TEST mode, the CCS must display prominently on every client a notice that it is in TEST mode.  
+:The CCS must be capable of running in two modes: TEST mode and REAL mode.  When running in TEST mode, the CCS must display prominently on every client a notice that it is in TEST mode.
 
 === Scriptable Submissions ===
 
