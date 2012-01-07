@@ -705,11 +705,7 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 ==== Command Line Submission interface ====
 
-:Sample command line
-
- <command> -p a -u team1 -w pass1 -d runs002/ -m hello.c
- <command> -p h -u team1 -w pass1 -d runs104/ -m solutions.c 
- <command> -p b -u team1 -w pass1 -d runs241
+:The CCS must provide a command line interface that supports the ability to submit a run.
 
 :At a minimum the command line interface must implement the following switches:
 
@@ -728,6 +724,12 @@ Note: time interval removal does not affect the order in which runs arrived to t
 ::-p, -u, -m, -d and -f are mandatory for all submissions. -t is optional. File names must be identical to those used in the submission. The submissions can be expected to arrive in timestamp order. The CCS may implement additional switches.
 
 '''TODO''' Suggestion: <command> problem teamId teamPassword folder [contestTime]
+
+:Sample command line:
+
+ <command> -p a -u team1 -w pass1 -d runs002/ -m hello.c
+ <command> -p h -u team1 -w pass1 -d runs104/ -m solutions.c 
+ <command> -p b -u team1 -w pass1 -d runs241/ -m sumemall.c
 
 ==== Timestamp Handling ====
 :When the CCS is running in [[Contest_Control_System#Test Mode| REAL]] mode, timestamps provided via the [[Contest_Control_System#Command Line Submission interface| Run Submission Interface]] should be ignored and the CCS should apply a timestamp to the submitted run as specified in the section describing [[Contest_Control_System#Timestamps and Ids for Runs, Clarifications and Notifications| timestamp]]s.  
