@@ -703,7 +703,7 @@ Note: time interval removal does not affect the order in which runs arrived to t
 ==== CLI interface ====
 At a minimum the command line interface must implement the following switches:
 
--p <problem_id>
+-p <problem short-name>
 
 -u <user_id>
 
