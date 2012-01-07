@@ -486,7 +486,7 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 ''' Todo: Revisit the term ''notification'' to make sure it's well defined'''
 
-:The CCS must be possible to configure such that these actions are performed on a machine that is not accessible to any team (possibly just a different virtual machine, e.g. if the machines used in the contest are thin clients connecting to a shared server).
+:It must be possible to configure the CCS such that these actions are performed on a machine that is not accessible to any team (possibly just a different virtual machine, e.g. if the machines used in the contest are thin clients connecting to a shared server).
 
 === Prevention of Auto-judge Machine Starvation ===
 :The CCS must use auto-judge machines efficiently and fairly. At a minimum it needs to ensure:
