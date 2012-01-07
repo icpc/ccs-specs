@@ -428,7 +428,7 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 === Current Problem State ===
 
-:The CCS must provide a mechanism for teams to see the current [[#Problem_States:_Enabled.2C_Paused.2C_and_Disabled|state]] (enabled, paused, or disabled) of each contest problem.
+:The CCS must provide a mechanism for teams to determine the current [[#Problem_States:_Enabled.2C_Paused.2C_and_Disabled|state]] (enabled, paused, or disabled) of each contest problem.
 
 == Judge Interface ==
 
