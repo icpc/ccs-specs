@@ -126,7 +126,7 @@ Verification Checks (in order)
 
 ==== Configuration file format ====
 
-problem.yaml is a YAML file consisting of a mapping with the following keys:
+problem.yaml is a UTF-8 encoded YAML file consisting of a mapping with the following keys:
 
 {| class="wikitable"
 ! Key !! Comments !! Example
