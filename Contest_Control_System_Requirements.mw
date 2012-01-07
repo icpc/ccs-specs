@@ -707,7 +707,9 @@ At a minimum the command line interface must implement the following switches:
 
 -u <team id>
 
--t <unix timestamp for submission>
+-w <team password>
+
+-t <contest-time for submission> 
 
 -f <folder containing the files in the submission. The folder must contain all files for the submission, and no other files.>
 
