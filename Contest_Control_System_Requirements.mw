@@ -364,6 +364,8 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 === Submitting a Run ===
 
+''' Todo: Standardize the terminology. Use "run", "submission" or some combination consistently'''
+
 :For purposes of this standard, the terms ''run'' and ''submission'', and any combination thereof, refer to a set of source code files submitted as a single unit at one time to the judging system by a team as a proposed solution to a given problem.
 
 ==== Submission Mechanism ====
