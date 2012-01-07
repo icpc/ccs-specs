@@ -490,7 +490,7 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 == Judging ==
 
-=== Automatic Invocation ===
+=== Automated Judgements ===
 
 :The CCS must provide the ability to invoke an automated judging mechanism when a team submits a run. This mechanism must automatically (that is, without human intervention) process each newly submitted run, and for each such run must automatically:
 
