@@ -108,6 +108,13 @@ CCS meets all the requirements listed in this standard.
 
 :The CCS must not lose more than 1 minute of contest data on a failure of any part of the contest system.
 
+==== Being Robust ====
+
+'''TODO: consider this
+:The CCS must support a robust mechanism that allows the contest to continue with minimal disruption in case of hardware failure.
+
+:Allow the contest to continue with minimal disruption in case of failures including but not limited to hardware failure.
+
 === Secure Authentication ===
 
 :The CCS must support a secure authentication mechanism, allowing each registered user (being either a [[#Team_Interface|team]], an [[#Admin_Interface|admin]], or a [[#Judge_Interface|judge]]) to gain access to the contest, and must insure that:
