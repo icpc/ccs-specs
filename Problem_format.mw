@@ -66,7 +66,7 @@ TODO: describe the default diff capabilities.
 
 === Verification ===
 
-Solutions or validators in languages that is not supported by the CCS
+Solutions or validators in languages that are not supported by the CCS
 should be ignored and a warning to that effect shown.
 
 Verification Checks (in order)
