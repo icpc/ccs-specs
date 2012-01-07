@@ -705,7 +705,7 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 ==== Command Line Submission interface ====
 
-:The command line is options then filenames.
+:The command line is composed of command line options then one or more filename.
 
  <command> -p a -u team1 -w pass1 hello.c hello.h
  <command> -p h -u team1 -w pass1 solutions.c
