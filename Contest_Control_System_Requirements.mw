@@ -705,10 +705,11 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 ==== Command Line Submission interface ====
 
-:The command line is composed of command line options then one or more filename.
+:Sample command line
 
- <command> -p a -u team1 -w pass1 hello.c hello.h
- <command> -p h -u team1 -w pass1 solutions.c
+ <command> -p a -u team1 -w pass1 -d runs002/ -m hello.c
+ <command> -p h -u team1 -w pass1 -d runs104/ -m solutions.c 
+ <command> -p b -u team1 -w pass1 -d runs241
 
 :At a minimum the command line interface must implement the following switches:
 
@@ -718,9 +719,13 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 ::-w <team password>
 
+::-m <main source filename>
+
+::-m <directory for main and other files>
+
 ::-t <contest-time for submission> 
 
-::-p, -u and -f are mandatory for all submissions. -t is optional. File names must be identical to those used in the submission. The submissions can be expected to arrive in timestamp order. The CCS may implement additional switches.
+::-p, -u, -m and -f are mandatory for all submissions. -t is optional. File names must be identical to those used in the submission. The submissions can be expected to arrive in timestamp order. The CCS may implement additional switches.
 
 '''TODO''' Suggestion: <command> problem teamId teamPassword folder [contestTime]
 
