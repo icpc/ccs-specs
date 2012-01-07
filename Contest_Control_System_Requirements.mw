@@ -400,6 +400,7 @@ Note: time interval removal does not affect the order in which runs arrived to t
 === Notifications ===
 
 : The CCS must notify teams when a judgement, clarification or broadcast message has been received. This notification may not steal focus.
+'''TODO: verify that "Notification" is used consistently; clarify the wording in the above.
 
 === Scoreboard Display ===
 
