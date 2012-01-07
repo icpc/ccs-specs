@@ -277,6 +277,8 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 '''TODO: Reword the above so that it doesn't require an explicit select/execute/commit cycle, but instead allows (e.g.) the DOM-Judge mechanism of rejudging and then applying the results if desired.
 
+'''TODO: team notifications don't happen until commit/apply, not on test rejudgements
+
 ==== Verifying Rejudgement Results ====
 
 :When a set of runs are being rejudged as described in [[#Automatic Rejudging|Automatic Rejudging]], the CCS must provide a way for the user to see the changes in judgments that would result if the rejudge is committed.
