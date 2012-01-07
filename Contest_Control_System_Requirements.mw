@@ -167,6 +167,8 @@ CCS meets all the requirements listed in this standard.
 
 === Other Required Specifications ===
 
+''' Todo: maybe we don't need to list this here. Move to Appendix?'''
+
 :Here are a number of specifications that the CCS must implement.
 
 :# [[Event Feed]] Specification
