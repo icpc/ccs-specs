@@ -77,17 +77,13 @@ CCS meets all the requirements listed in this standard.
 == General Requirements ==
 '''TODO onsite support and platform are for a specific world finals, don't really fit with other requirements that apply any year or for non-finals usage. Can we group them somehow?
 
-=== No outside contact ===
+=== Licensing ===
 
-:The CCS must be able to run at the world finals site without contact to anything outside the contest network.
+:The CCS must either be freely useable, or must be accompanied by a license granting to the ACM-ICPC the non-exclusive, non-revocable, non-transferable rights of use of the CCS both for purposes of evaluation and testing and for use in the ICPC World Finals. The CCS may not require obtaining any third-party license in order to be used by the ACM-ICPC.
 
 === On-site support ===
 
 :At least one person from the submitting entity with intimate knowledge about the inner workings of the CCS must be willing and able to participate at the World Finals where it is used.
-
-=== Licensing ===
-
-:The CCS must either be freely useable, or must be accompanied by a license granting to the ACM-ICPC the non-exclusive, non-revocable, non-transferable rights of use of the CCS both for purposes of evaluation and testing and for use in the ICPC World Finals. The CCS may not require obtaining any third-party license in order to be used by the ACM-ICPC.
 
 === Platform ===
 
@@ -135,6 +131,10 @@ CCS meets all the requirements listed in this standard.
 === Network Security ===
 
 :All communication between CCS modules which takes place over the contest network must be encrypted.
+
+=== No outside contact ===
+
+:The CCS must be able to run at the world finals site without contact to anything outside the contest network.
 
 === Timestamps and Ids for Runs, Clarifications and Notifications ===
 :A timestamp and an integral sequence number, called an Id, are assigned to runs, clarifications, and balloon notifications. Runs and clarifications are assigned an id and a timestamp at the time they enter the system, and balloon notifications are assigned an id and a timestamp at the time they are generated.
