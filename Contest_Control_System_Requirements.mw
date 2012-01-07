@@ -165,7 +165,7 @@ CCS meets all the requirements listed in this standard.
 
 :The CCS must not impose an upper limit on the number of test data files for a problem, or their sizes.
 
-==== Other Required Specifications ====
+=== Other Required Specifications ===
 
 :Here are a number of specifications that the CCS must implement.
 
