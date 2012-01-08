@@ -523,17 +523,17 @@ During times when the scoreboard is frozen, judges must be able to view the curr
 
 :The CCS must answer each submitted run with one of the following responses:
 
-:* '''Compile Error'''
-:* '''Run-Time Error'''
-:* '''Time Limit Exceeded'''
-:* '''Wrong Answer'''
-:* '''Accepted'''
-:* '''Security Violation'''
-:* '''Judging System Error'''
+:* '''Compile Error''' (CE)
+:* '''Run-Time Error''' (RTE)
+:* '''Time Limit Exceeded''' (TLE)
+:* '''Wrong Answer''' (WA)
+:* '''Accepted''' (AC)
+:* '''Security Violation''' (SV)
+:* '''Judging Error''' (JE)
 
 :When manually overriding the judgement the following could also be used:
 
-:* '''Deleted'''
+:* '''Deleted''' (DEL)
 
 === Assigning a Judgment ===
 
