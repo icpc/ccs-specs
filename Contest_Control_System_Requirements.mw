@@ -715,15 +715,15 @@ The CCS must be capable of generating an external file containing the final resu
 
 === System Manager’s Guide ===
 
-:The CCS must include a “System Manager’s Guide” document in PDF format. The System Manager’s Guide must describe the steps required to install and start the CCS on the OS platform specified for use in the World Finals. In the event that the CCS consists of multiple modules and/or packages, the guide must contain a description of the relationship between the modules or packages, including any specific installation and/or startup steps required for each module or package.
+The CCS must include a “System Manager’s Guide” document in PDF format. The System Manager’s Guide must describe the steps required to install and start the CCS on the OS platform specified for use in the World Finals. In the event that the CCS consists of multiple modules and/or packages, the guide must contain a description of the relationship between the modules or packages, including any specific installation and/or startup steps required for each module or package.
 
-:The System Manager’s Guide must provide instructions to contest personnel explaining situations (if any) where the CCS uses functions of the underlying operating system (OS) platform to meet requirements laid out in this standard. For example, if the CCS relies on the use of OS account and password management to implement requirements related to contest security and credentials, or print services provided by the OS to implement requirements related to external notifications, this must be described in the System Manager’s Guide.
+The System Manager’s Guide must provide instructions to contest personnel explaining situations (if any) where the CCS uses functions of the underlying operating system (OS) platform to meet requirements laid out in this standard. For example, if the CCS relies on the use of OS account and password management to implement requirements related to contest security and credentials, or print services provided by the OS to implement requirements related to external notifications, this must be described in the System Manager’s Guide.
 
-:The System Manager’s Guide must explicitly list any operating system dependencies of the CCS, including but not limited to which OS platform and version are required and which optional OS packages must be installed for the CCS to function properly.
+The System Manager’s Guide must explicitly list any operating system dependencies of the CCS, including but not limited to which OS platform and version are required and which optional OS packages must be installed for the CCS to function properly.
 
-:The System Manager’s Guide must explicitly list any software dependencies of the CCS. For example, any tools such as Java, PERL, WebServer, Browser, database systems, etc., which are required for correct operation of the CCS must be listed in the guide, including specific version numbers of each tool which the CCS requires for its correct operation.
+The System Manager’s Guide must explicitly list any software dependencies of the CCS. For example, any tools such as Java, PERL, WebServer, Browser, database systems, etc., which are required for correct operation of the CCS must be listed in the guide, including specific version numbers of each tool which the CCS requires for its correct operation.
 
-:The System Manager’s Guide must describe the steps required to use each of the “Testability Interfaces” described in the section on Testability. For example, the guide must describe how to invoke the command-line tool which supports submitting runs from a team, as well as describing the use of all other required testability interfaces.
+The System Manager’s Guide must describe the steps required to use each of the “Testability Interfaces” described in the section on Testability. For example, the guide must describe how to invoke the command-line tool which supports submitting runs from a team, as well as describing the use of all other required testability interfaces.
 
 == Certification Process ==
 
