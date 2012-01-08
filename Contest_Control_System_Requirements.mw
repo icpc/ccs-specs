@@ -311,6 +311,8 @@ The exact phrase displayed on the frozen scoreboard must be:
 
   The scoreboard was frozen with XX minutes remaining - solutions submitted in the last XX minutes of the contest are still shown as pending.
 
+where XX is the number of minutes remaining in the contest at the time the scoreboard was frozen.
+
 It must be possible to re-enable scoreboard display updating at any time after it has been disabled, again without stopping the contest or affecting contest operations in any way.
 
 === Suspension of notification of accepted runs ===
