@@ -591,11 +591,12 @@ The ''current scoreboard'' lists the teams sorted by position (with alphabetical
 The scoreboard must include at least the following information.
 
 For each team:
-# university name and logo, country flag,
-Todo: add links/references to university logo and country flag files
-# team position,
-# number of problems solved,
-# total penalty time.
+# university name
+# univerisity logo (see [[#logos.tar.gz|logos.tar.gz]])
+# country flag (see [[#flags.tar.gz|flags.tar.gz]])
+# team position
+# number of problems solved
+# total penalty time
 
 For each team and problem:
 # number of submission from that team on that problem,
