@@ -268,19 +268,19 @@ When a problem is disabled:
 
 ==== Automatic Rejudging ====
 
-The CCS must allow the ability to rejudge a selected set of runs.
+The CCS must allow the ability to automatically rejudge a selected set of runs.
 
-The selected runs are executed and judged in the same manner as for a newly arrived run.
+Each run in the set of selected runs is executed and judged in the same manner as for a newly arrived run.
 
 ==== Previewing Rejudgement Results ====
 
-There must be a way to preview the changes in judgements that would result if a specific rejudge would be done, without committing it.
+There must be a way to preview the judgements which result from rejudging the set of selected runs without committing the resulting judgements.
 
 ==== Run Selection ==== 
 
-The CCS must support the ability to rejudge a set of run submissions.  This means that it must be possible to provide the CCS with a filter of runs to be rejudged, based upon which the CCS automatically selects all runs matching the filter, and automatically rejudges them.
+It must be possible to provide the CCS with a filter of runs to be rejudged, based upon which the CCS automatically selects all runs matching the filter, and automatically rejudges them.
 
-The CCS must support these filters to be any combination of filters of the following type.
+The CCS must support any combination of filters of the following type.
 
 # A specific (single) run.
 # All runs which have been submitted for a specific problem.
