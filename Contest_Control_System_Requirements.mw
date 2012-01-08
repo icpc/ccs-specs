@@ -264,8 +264,6 @@ When a problem is disabled:
 # Automatic judging of the problem must be disabled.
 # Submissions on the problem must not affect the scoreboard at all, including submissions received prior to disabling.
 
-'''TODO clarify disabled problems, effect on standings/scoreboard, effect on team/clar submission, (event feed?)
-
 === Rejudging === 
 
 ==== Automatic Rejudging ====
