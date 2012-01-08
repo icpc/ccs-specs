@@ -268,7 +268,7 @@ When a problem is disabled:
 
 ==== Automatic Rejudging ====
 
-The systen must allow the ability to rejudge a selected set of runs.
+The CCS must allow the ability to rejudge a selected set of runs.
 
 The selected runs are executed and judged in the same manner as for a newly arrived run.
 
