@@ -1022,8 +1022,6 @@ Then follow several lines with the following format (one per team).
 | 7 || Group Winner|| North American|| string
 |}
 
-:'''Comment:''' Add Group Id or Group name or both?  To allow potential ranking in regions, etc. [[User:Douglas Lane|Douglas Lane]] 02:52, 31 May 2011 (CEST)
-
 Group Winner is a string with the name of the group if the team is the group winner, otherwise empty.
 
 The External ID for a team can be found in the [[#teams.tsv|teams.tsv]].
