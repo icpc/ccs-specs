@@ -1067,6 +1067,10 @@ Account Types include: team, judge, admin, analyst, etc.
 
 Account numbers for teams must be the same as the corresponding team numbers in teams.tsv.
 
+=== accounts.tsv ===
+
+=== passwords.txt ===
+
 === logos.tar.gz ===
 The file contains the logos for all teams, in a tar archive and compressed using gzip.
 
