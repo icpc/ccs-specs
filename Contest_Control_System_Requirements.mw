@@ -119,7 +119,7 @@ If the CCS uses a login/password mechanism, it must support account creation and
 
 # read a text file of passwords, one per line
 # assign passwords to accounts, deterministically (that is, the same password mapping should be produced if the same data is input a second time)
-# read a text file acccounts.tsv containing fields TYPE, NAME, and LOGIN defining additional accounts to be created (that is, accounts in addition to teams)
+# read a text file ''acccounts.tsv'' containing fields TYPE, NAME, and LOGIN defining additional accounts to be created (that is, accounts in addition to teams)
 # generate a file userdata.tsv containing user account information in the format described in [[#userdata.tsv| userdata.tsv]].
 
 ==== Logging Out ====
