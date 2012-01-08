@@ -107,7 +107,7 @@ If the CCS uses a login/password mechanism to enforce secure authentication, it 
 # read [[#teams.tsv|teams.tsv]] defining team accounts to be created
 # read [[#accounts.tsv| accounts.tsv]] defining additional accounts to be created (that is, accounts in addition to teams)
 # read [[#passwords.txt|passwords.txt]] a list of passwords to be assigned
-# assign passwords to accounts, deterministically (that is, the same password mapping should be produced if the same data is input a second time)
+# assign passwords to accounts, deterministically (that is, the same password mapping must be produced if the same data is input a second time)
 # generate a file '''userdata.tsv''' containing user account information in the format described in [[#userdata.tsv| userdata.tsv]].
 
 ==== Logging Out ====
