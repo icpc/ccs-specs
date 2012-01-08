@@ -113,9 +113,14 @@ The CCS must support a secure authentication mechanism, allowing each registered
 
 ==== Authentication Data ====
 
-If the CCS uses a login/password mechanism, it should generate login/password information for all users.  It should also, for each type of user, output a complete list of username/password pairs in a file using the [[#userdata.tsv|userdata.tsv]] format.
-
 '''TODO resolve what the requirements are, what are the data flows/contents and use
+
+If the CCS uses a login/password mechanism, it must support account creation and password assignment according to the following algorithm:
+
+# read a text file of passwords, one per line
+# assign passwords to accounts, deterministically (that is, the same password mapping should be produced if the same data is input a second time)
+# read a text file acccounts.tsv containing fields TYPE, NAME, and LOGIN defining additional accounts to be created (that is, accounts in addition to teams)
+# generate a file userdata.tsv containing user account information in the format described in [[#userdata.tsv| userdata.tsv]].
 
 ==== Logging Out ====
 
