@@ -1006,7 +1006,7 @@ Then follow several lines with the following format (one per team).
 |-
 | 2 || Rank in contest || 1 || integer
 |-
-| 3 || Award || gold || string
+| 3 || Award || Gold Medal|| string
 |-
 | 4 || Number of problems the team has solved || 4 || integer
 |-
@@ -1014,10 +1014,8 @@ Then follow several lines with the following format (one per team).
 |-
 | 6 || Time of the last submission || 233 || integer
 |-
-| 7 || Group Winner|| North America|| string
+| 7 || Group Winner|| North American|| string
 |}
-
-:'''Comment:''' Jeff D would like to change award content from gold to Gold Medal [[User:Douglas Lane|Douglas Lane]] 00:31, 31 May 2011 (CEST)
 
 :'''Comment:''' Add Group Id or Group name or both?  To allow potential ranking in regions, etc. [[User:Douglas Lane|Douglas Lane]] 02:52, 31 May 2011 (CEST)
 
@@ -1027,7 +1025,7 @@ The External ID for a team can be found in the [[#teams.tsv|teams.tsv]].
 
 If the team is not ranked (has no assigned rank) then the Rank in contest field is empty.
 
-Award is a string with value "gold", "silver", "bronze", "ranked" or "honorable" as appropriate, see [[#Scoring Data Generation|Scoring Data Generation]] for details.
+Award is a string with value "Gold Medal", "Silver Medal", "Bronze Medal", "Ranked" or "Honorable" as appropriate, see [[#Scoring Data Generation|Scoring Data Generation]] for details.
 
 === userdata.tsv ===
 
