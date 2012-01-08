@@ -401,7 +401,7 @@ The CCS must notify teams when a judgement, clarification or broadcast message h
 
 === Scoreboard Display ===
 
-The CCS must provide a mechanism for teams to view the current scoreboard. The scoreboard should be updated at least every 30 seconds.
+The CCS must provide a mechanism for teams to view the current scoreboard. The scoreboard must be updated at least every 30 seconds.
 
 === Current Problem State ===
 
