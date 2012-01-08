@@ -733,7 +733,7 @@ The CCS must be capable of generating an external file containing the final resu
 
 :# The complete set of files, modules, or packages making up the executable components of the CCS;
 :# PDF’s for each of the documents listed under [[Contest_Control_System#Documentation_Requirements| Documentation Requirements]];
-:# A text file named “License” containing the license, conforming to the the [[#License|License]] section, under which the CCS is made available to the ACM ICPC; and
+:# A text file named “License” containing the license, conforming to the the [[#Licensing|Licensing]] section, under which the CCS is made available to the ACM ICPC; and
 :# A text file named “readme” containing instructions on how to properly unpack the archive file to set up the installation process.
 
 == Appendix: File formats ==
