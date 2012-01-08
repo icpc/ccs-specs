@@ -599,50 +599,50 @@ During times when the scoreboard is frozen, judges must be able to view the curr
 
 === Scoring Data Generation ===
 
-:The CCS must be capable of automatically generating up-to-date scoring data according to the following:
+The CCS must be capable of automatically generating up-to-date scoring data according to the following:
 
-:# For purposes of scoring, the ''contest time of a submission'' is the number of minutes elapsed from the beginning of the contest when the submission was made, skipping removed time intervals if specified (see [[#Removing_time_intervals|Removing Time Intervals]]).  This is rounded ''down'' to the nearest minute, so 59.99 seconds is 0 minutes.
-:# The ''contest time that a team solved a problem'' is the contest time of the team's first accepted submission to that problem.
-:# A team's ''penalty time on a problem'' is the contest time that the team solved the problem, plus 20 minutes for each previous rejected run by that team on that problem, or 0 if the team has not solved the problem.
-:# A team's ''total penalty time'' is the sum of the penalty times for all problems plus any judge added penalty time.
-:# A team's ''last accepted submission'' is the contest time of the problem that the team solved last.
-:# The ''position'' of a team is determined by sorting the teams by number of problems solved (descending), total penalty time (ascending), last accepted submission (ascending).
-:# The ''rank'' of a team is the determined as follows:
-:## For teams in positions up to and including 12+B, the rank equals the position (B is provided when [[#Finalizing_the_Contest|finalizing the contest]], the default value is 0).
-:## Teams that solved fewer problems than the median team are not ranked at all.
-:## For the remaining teams, the rank is determined by sorting the teams by number of problems solved (descending).
-:# The ''award'' of a team is:
-:## ''gold'' if rank is 1 through 4.
-:## ''silver'' if rank is 5 through 8.
-:## ''bronze'' if rank is 9 through 12+B.
-:## ''ranked'' if rank is not 1 through 12+B but the team is ranked.
-:## ''honorable'' otherwise.
+# For purposes of scoring, the ''contest time of a submission'' is the number of minutes elapsed from the beginning of the contest when the submission was made, skipping removed time intervals if specified (see [[#Removing_time_intervals|Removing Time Intervals]]).  This is rounded ''down'' to the nearest minute, so 59.99 seconds is 0 minutes.
+# The ''contest time that a team solved a problem'' is the contest time of the team's first accepted submission to that problem.
+# A team's ''penalty time on a problem'' is the contest time that the team solved the problem, plus 20 minutes for each previous rejected run by that team on that problem, or 0 if the team has not solved the problem.
+# A team's ''total penalty time'' is the sum of the penalty times for all problems plus any judge added penalty time.
+# A team's ''last accepted submission'' is the contest time of the problem that the team solved last.
+# The ''position'' of a team is determined by sorting the teams by number of problems solved (descending), total penalty time (ascending), last accepted submission (ascending).
+# The ''rank'' of a team is the determined as follows:
+## For teams in positions up to and including 12+B, the rank equals the position (B is provided when [[#Finalizing_the_Contest|finalizing the contest]], the default value is 0).
+## Teams that solved fewer problems than the median team are not ranked at all.
+## For the remaining teams, the rank is determined by sorting the teams by number of problems solved (descending).
+# The ''award'' of a team is:
+## ''gold'' if rank is 1 through 4.
+## ''silver'' if rank is 5 through 8.
+## ''bronze'' if rank is 9 through 12+B.
+## ''ranked'' if rank is not 1 through 12+B but the team is ranked.
+## ''honorable'' otherwise.
 
-:When a number of teams are tied for the same position/rank, they all occupy the same position/rank and a suitable number of subsequent positions/ranks are left empty.  For instance, if four teams are tied for 17th position, they are all in 17th position and positions 18, 19 and 20 are unoccupied.
+When a number of teams are tied for the same position/rank, they all occupy the same position/rank and a suitable number of subsequent positions/ranks are left empty.  For instance, if four teams are tied for 17th position, they are all in 17th position and positions 18, 19 and 20 are unoccupied.
 
-:A submission is pending judgement if it has no judgement or if the judgement is '''Judging System Error'''.  Pending judgements have no effect on scoring.
+A submission is pending judgement if it has no judgement or if the judgement is '''Judging System Error'''.  Pending judgements have no effect on scoring.
 
-:'''Deleted''' Runs and '''Disabled''' Problems have no effect on scoring.
+'''Deleted''' Runs and '''Disabled''' Problems have no effect on scoring.
 
 === Scoreboard ===
 
-:The ''current scoreboard'' lists the teams sorted by position (with alphabetical order on team name as tie breaker).  
+The ''current scoreboard'' lists the teams sorted by position (with alphabetical order on team name as tie breaker).  
 
-:The scoreboard should include at least the following information.
+The scoreboard should include at least the following information.
 
-:For each team:
-:# university name and logo, country flag,
-:# team position,
-:# number of problems solved,
-:# total penalty time.
+For each team:
+# university name and logo, country flag,
+# team position,
+# number of problems solved,
+# total penalty time.
 
-:For each team and problem:
-:# number of submission from that team on that problem,
-:# whether the problem is solved, unsolved or a judgement is pending,
-:# if problem is solved, the contest time it was solved,
-:# if problem is pending, how many submissions are pending on that problem,
+For each team and problem:
+# number of submission from that team on that problem,
+# whether the problem is solved, unsolved or a judgement is pending,
+# if problem is solved, the contest time it was solved,
+# if problem is pending, how many submissions are pending on that problem,
 
-:A problem is pending judgement if any submission on it is pending judgement and there is not an earlier accepted submission on that problem.
+A problem is pending judgement if any submission on it is pending judgement and there is not an earlier accepted submission on that problem.
 
 == Data Export ==
 
