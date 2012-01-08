@@ -636,7 +636,7 @@ The CCS must be capable of generating an external file containing the final resu
 == Testability Requirements ==
 
 === Test Mode ===
-The CCS must be capable of running in two modes: TEST mode and REAL mode.  When running in TEST mode, the CCS must display prominently on every client a notice that it is in TEST mode.
+The CCS must be capable of running in two modes: Test mode and Real mode.  When running in Test mode, the CCS must display prominently on every client a notice that it is in Test mode.
 
 === Run Submission Interface ===
 
