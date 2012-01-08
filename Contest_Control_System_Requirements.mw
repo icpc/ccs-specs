@@ -247,7 +247,7 @@ Removing the interval between wall-clock time T<sub>0</sub> and T<sub>1</sub> me
 * T<sub>0</sub> &le; T<sub>1</sub>
 * The removal of a time interval must be reversible, i.e., it must be possible to put it back. 
 
-'''Todo: what is the meaning of the above"'''
+'''Todo: what is the meaning of the above?'''
 
 Note: time interval removal does not affect the order in which runs arrived to the CCS. If run R<sub>i</sub> arrived before R<sub>k</sub> during a removed interval, R<sub>i</sub> is still considered to have arrived strictly before R<sub>k</sub>.
 
