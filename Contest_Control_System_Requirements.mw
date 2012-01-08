@@ -700,23 +700,23 @@ The CCS must be capable of generating an external file containing the final resu
 
 === Standard Compliance ===
 
-:The CCS must include a ''Standard Compliance'' document in PDF format, that for each requirement (referencing by requirement number) in this standard document confirms that the CCS conforms and explains how the functionality is implemented.
+The CCS must include a ''Standard Compliance'' document in PDF format, that for each requirement (referencing by requirement number) in this standard document confirms that the CCS conforms and explains how the functionality is implemented.
 
 === Team Guide ===
 
-:The CCS must include a “Team Guide” document in PDF format. The Team Guide must provide all the necessary instructions showing how a contest team uses the functions of the team interface.
+The CCS must include a “Team Guide” document in PDF format. The Team Guide must provide all the necessary instructions showing how a contest team uses the functions of the team interface.
 
-:The Team Guide must also describe the way in which judge’s responses to submitted runs and clarifications are received by teams.
+The Team Guide must also describe the way in which judge’s responses to submitted runs and clarifications are received by teams.
 
 === Judge’s Guide ===
 
-:The CCS must include a “Judge’s Guide” document in PDF format. The Judge’s Guide must provide all the necessary instructions showing how a human contest judge uses the functions of the human judge interface. 
+The CCS must include a “Judge’s Guide” document in PDF format. The Judge’s Guide must provide all the necessary instructions showing how a human contest judge uses the functions of the human judge interface. 
 
 === Contest Administrator’s Guide ===
 
-:The CCS must include a “Contest Administrator’s Guide” document in PDF format. The Administrator’s Guide must provide all the necessary instructions showing how contest personnel use the functions of the CCS to set up and manage a contest.
+The CCS must include a “Contest Administrator’s Guide” document in PDF format. The Administrator’s Guide must provide all the necessary instructions showing how contest personnel use the functions of the CCS to set up and manage a contest.
 
-:In the event that a configuration item is provided by using services of the underlying operating system rather than facilities directly implemented or controlled by the CCS itself, the administrator’s Guide must explicitly state this fact, and reference the System Manager’s Guide (see below) as the source of information on handling that portion of configuration and preparation for the contest.
+In the event that a configuration item is provided by using services of the underlying operating system rather than facilities directly implemented or controlled by the CCS itself, the administrator’s Guide must explicitly state this fact, and reference the System Manager’s Guide (see below) as the source of information on handling that portion of configuration and preparation for the contest.
 
 === System Manager’s Guide ===
 
