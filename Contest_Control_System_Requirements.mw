@@ -235,7 +235,7 @@ Removing the interval between time T<sub>0</sub> and T<sub>1</sub>, where T<sub>
 
 The removal of a time interval must be reversible.  This means that if a time interval is removed, the CCS must support the capability of subsequently restoring the contest to the state it had prior to the removal of the time interval. 
 
-Note: time interval removal does not affect the order in which runs arrived to the CCS. If run R<sub>i</sub> arrived before R<sub>j</sub> during a removed interval, R<sub>i</sub> must still be considered by the CCS to have arrived strictly before R<sub>j</sub>.
+Note that time interval removal does not affect the order in which runs arrived to the CCS. If run R<sub>i</sub> arrived before R<sub>j</sub> during a removed interval, R<sub>i</sub> must still be considered by the CCS to have arrived strictly before R<sub>j</sub>.
 
 ==== Changing contest length ====
 
