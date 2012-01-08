@@ -74,10 +74,10 @@ CCS meets all the requirements listed in this standard.
 
 == Definitions of Terms ==
 
-; Solution
-: For purposes of this standard, the '''solution''', refer to a set of source code files submitted as a single unit at one time to the judging system by a team as a proposed solution to a given problem.
+; Submission
+: For purposes of this standard, '''submission''' refer to a set of source code files submitted as a single unit at one time to the judging system by a team as a proposed solution to a given problem.
 
-; Pending solutions
+; Pending submission
 :
 
 ; Clarification request: ...
