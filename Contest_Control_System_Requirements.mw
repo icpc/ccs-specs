@@ -730,9 +730,9 @@ Note: time interval removal does not affect the order in which runs arrived to t
 :The CCS may assume that runs submitted via the  [[Contest_Control_System#Run Submission Interface| Run Submission Interface]] which contain the -t parameter will be submitted in increasing timestamp order.
 
 ==== Timestamp Handling ====
-:When the CCS is running in [[Contest_Control_System#Test Mode| REAL]] mode, timestamps provided via the [[Contest_Control_System#Command Line Submission interface| Run Submission Interface]] should be ignored and the CCS should apply a timestamp to the submitted run as specified in the section describing [[Contest_Control_System#Timestamps and Ids for Runs, Clarifications and Notifications| timestamp]]s.  
+:When the CCS is running in [[Contest_Control_System#Test Mode| REAL]] mode, timestamps provided via the Run Submission Interface should be ignored and the CCS should apply a timestamp to the submitted run as specified in the section describing [[Contest_Control_System#Timestamps and Ids for Runs, Clarifications and Notifications| timestamp]]s.  
 
-:When the CCS is running in [[Contest_Control_System#Test Mode|TEST]] mode it should use the timestamp specified by the -t parameter in section [[Contest_Control_System#Command Line Submission interface | Run Submission Interface]] as the timestamp for the run regardless of the current actual time.
+:When the CCS is running in [[Contest_Control_System#Test Mode|TEST]] mode and receives a run via the Run Submission Interface it should use the timestamp specified by the -t parameter in the run as the timestamp for the run regardless of the current actual time.
 
 == Documentation Requirements ==
 
