@@ -229,7 +229,7 @@ The contest should automatically start when the configured start time is reached
 
 It must be possible to, potentially retroactively, specify time intervals that will be disregarded for the purpose of scoring. The time during all such intervals will not be counted towards a team's penalty time for solved problems.
 
-Note that removing a time interval changes the wall-clock time when the contest ends, as the duration of the contest in [[contest.yaml|contest.yaml]] is specified in contest time. 
+Note that removing a time interval changes the wall-clock time when the contest ends, as the duration of the contest in [[#contest.yaml|contest.yaml]] is specified in contest time. 
 
 Removing the interval between time T<sub>0</sub> and T<sub>1</sub>, where T<sub>0</sub> &le; T<sub>1</sub>, means that all runs received between T<sub>0</sub> and T<sub>1</sub> will have the same time and that the time for all runs received after T<sub>1</sub> will have a time that is T<sub>1</sub>-T<sub>0</sub> lower than if the interval was not removed.
 
