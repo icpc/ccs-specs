@@ -155,18 +155,6 @@ CCS meets all the requirements listed in this standard.
 
 :The CCS must not impose an upper limit on the number of test data files for a problem, or their sizes.
 
-=== Other Required Specifications ===
-
-''' Todo: maybe we don't need to list this here. Move to Appendix?'''
-
-:Here are a number of specifications that the CCS must implement.
-
-:# [[Event Feed]] Specification
-:# [[Run Forwarding Feed]] Specification
-:# [[Problem format]] specification  - problem load file specification
-:# [[Output validator]] specification - validate/test team run output, CCS must implement a default  output validator
-:# [[Input format validator]] specification
-
 === Use At A Specific World Finals ===
 
 :In order for a CCS to be selected for use at a particular year's World Finals it must satisfy each of the following constraints:
