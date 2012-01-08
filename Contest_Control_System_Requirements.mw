@@ -397,7 +397,7 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 :The CCS must insure that no team can learn anything about the run submissions of any other team (other than what can be deduced from the scoreboard).
 
-=== Submitting a Clarification ===
+=== Submitting a Clarification Request ===
 
 :For purposes of this standard, the terms ''clarification'', ''clarification request'', and ''clar'' all refer to a message sent from a team to the judges asking for clarification regarding a contest problem.
 
