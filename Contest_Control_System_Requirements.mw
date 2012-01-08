@@ -379,23 +379,23 @@ The CCS must provide each team with a capability for reviewing the status of eac
 
 The CCS must insure that no team can learn anything about the run submissions of any other team (other than what can be deduced from the scoreboard).
 
-=== Submitting a Clarification Request ===
+=== Clarification Requests ===
 
-For purposes of this standard, the terms ''clarification'', ''clarification request'', and ''clar'' all refer to a message sent from a team to the judges asking for clarification regarding a contest problem.
+A clarification request is a message sent from a team to the judges asking for clarification regarding a contest problem or possibly the contest in general.
 
-==== Clarification Mechanism ====
+==== Sending Clarification Requests ====
 
 The CCS must provide each team with the ability to submit a clarification request to the judges over the network. 
 
-==== Clarification Content ====
+==== Content of Clarification Requests ====
 
 The team must be able to specify the text content and category of a clarification request.
 
-==== Team Viewing of Clarification Status ====
+==== Viewing of Clarification Request Status ====
 
-The CCS must provide each team with a capability for reviewing the status of each clarification request the team has submitted, including: the contest time of the clarification request; the problem identified in the clarification request if identification of a specific problem was required by the CCS; and the response from the judges to the clarification if any response has occurred yet.
+The CCS must provide each team with a capability for reviewing the status of each clarification request the team has submitted, including: the contest time of the clarification request; the problem identified in the clarification request if identification of a specific problem was required by the CCS; and the response from the judges to the clarification request if any response has occurred yet.
 
-==== Clarification Security ====
+==== Clarification Request Security ====
 
 The CCS must insure that no team can see the clarification requests of any other team, except as provided in the section [[Contest_Control_System#Human_Judge_Interface | Human Judge Interface]].
 
