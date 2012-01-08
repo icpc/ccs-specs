@@ -663,9 +663,9 @@ Options -l, -p, -u, -w, -m and -d are mandatory for all submissions. The -t swit
 The CCS may assume that runs submitted via the  [[Contest_Control_System#Run Submission Interface| Run Submission Interface]] which contain the -t parameter will be submitted in increasing timestamp order.
 
 ==== Timestamp Handling ====
-When the CCS is running in [[Contest_Control_System#Test Mode| REAL]] mode and receives a run via the Run Submission Interface, any timestamp provided via the -t parameter must be ignored and the CCS must apply a timestamp to the submitted run as specified in the section describing [[Contest_Control_System#Timestamps and Ids for Runs, Clarifications and Notifications| timestamp]]s.  
+When the CCS is running in [[Contest_Control_System#Test Mode| Real]] mode and receives a run via the Run Submission Interface, any timestamp provided via the -t parameter must be ignored and the CCS must apply a timestamp to the submitted run as specified in the section describing [[Contest_Control_System#Timestamps and Ids for Runs, Clarifications and Notifications| timestamp]]s.  
 
-When the CCS is running in [[Contest_Control_System#Test Mode|TEST]] mode and receives a run via the Run Submission Interface containing a timestamp specified with a -t parameter, it must use the timestamp specified by the -t parameter in the run as the timestamp for the run, as long as it is higher than any previously assigned timestamp, regardless of the current actual time.
+When the CCS is running in [[Contest_Control_System#Test Mode|Test]] mode and receives a run via the Run Submission Interface containing a timestamp specified with a -t parameter, it must use the timestamp specified by the -t parameter in the run as the timestamp for the run, as long as it is higher than any previously assigned timestamp, regardless of the current actual time.
 
 == Documentation Requirements ==
 
