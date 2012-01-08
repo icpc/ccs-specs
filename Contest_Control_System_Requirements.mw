@@ -305,9 +305,9 @@ During times when the scoreboard is frozen, administrators must be able to view 
 
 === Freezing the Scoreboard ===
 
-The scoreboard should automatically freeze when the configured scoreboard freeze time is reached. It must also be possible to manually freeze the scoreboard at the current time. All submissions received after the freeze time should be treated as pending on a frozen scoreboard.
+The scoreboard must automatically freeze when the configured scoreboard freeze time is reached. It must also be possible to manually freeze the scoreboard at the current time. All submissions received after the freeze time must be treated as pending on a frozen scoreboard.
 
-The exact phrase displayed on the frozen scoreboard should be:
+The exact phrase displayed on the frozen scoreboard must be:
 
   The scoreboard was frozen with XX minutes remaining - solutions submitted in the last XX minutes of the contest are still shown as pending.
 
