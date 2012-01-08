@@ -231,14 +231,12 @@ It must be possible to, potentially retroactively, specify time intervals that w
 
 Note that removing a time interval changes the wall-clock time when the contest ends, as the duration of the contest in contest.yaml is specified in contest time. 
 
-Removing the interval between wall-clock time T<sub>0</sub> and T<sub>1</sub> means that all runs received between T<sub>0</sub> and T<sub>1</sub> will have the same contest-time and that the contest-time for all runs received after T<sub>1</sub> will have a contest-time that is T<sub>1</sub>-T<sub>0</sub> lower than if the interval was not removed.
+Removing the interval between time T<sub>0</sub> and T<sub>1</sub> means that all runs received between T<sub>0</sub> and T<sub>1</sub> will have the same contest-time and that the contest-time for all runs received after T<sub>1</sub> will have a contest-time that is T<sub>1</sub>-T<sub>0</sub> lower than if the interval was not removed.
 
 * T<sub>0</sub> &le; T<sub>1</sub>
-* The removal of a time interval must be reversible, i.e., it must be possible to put it back. 
+* The removal of a time interval must be reversible.  This means that if a time interval is removed, the CCS must support the capability of subsequently restoring the contest to the state it had prior to the removal of the time interval. 
 
-'''Todo: what is the meaning of the above?'''
-
-Note: time interval removal does not affect the order in which runs arrived to the CCS. If run R<sub>i</sub> arrived before R<sub>k</sub> during a removed interval, R<sub>i</sub> is still considered to have arrived strictly before R<sub>k</sub>.
+Note: time interval removal does not affect the order in which runs arrived to the CCS. If run R<sub>i</sub> arrived before R<sub>j</sub> during a removed interval, R<sub>i</sub> must still be considered by the CCS to have arrived strictly before R<sub>j</sub>.
 
 ==== Changing contest length ====
 
