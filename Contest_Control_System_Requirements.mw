@@ -701,19 +701,17 @@ Note: time interval removal does not affect the order in which runs arrived to t
 === Test Mode ===
 :The CCS must be capable of running in two modes: TEST mode and REAL mode.  When running in TEST mode, the CCS must display prominently on every client a notice that it is in TEST mode.
 
-=== Scriptable Submissions ===
+=== Run Submission Interface ===
 
 :The CCS must provide a mechanism by which team submission of runs can be scripted for automated testing. In other words, the CCS must provide a command-line based interface allowing an external program to submit a run to the CCS.
 
-:The run submission command-line interface must provide mechanism for specifying all parameters that would be specified by a team utilizing the corresponding interactive interface, including that the command-line interface must accept and perform validation of user credentials before accepting a run.
+:The command-line run submission interface must provide mechanism for specifying all parameters that would be specified by a team utilizing the corresponding interactive interface, including that the command-line interface must accept and perform validation of user credentials before accepting a run.
 
 :The requirements of this subsection are intended to provide a method by which the World Finals Director of Operations can perform automated testing on the CCS during the Certification Process (see [[Contest_Control_System#Certification Process| Certification Process]]). The CCS implementers should assume that the scriptable run submission interface will be invoked multiple times in rapid succession, with arbitrary parameters, by external scripts; care should therefore be taken by the implementers to avoid any design or implementation characteristics which limit or prohibit the ability of an external [[Test Harness]] framework to operate in this manner.
 
-==== Command Line Run Submission interface ====
+==== Run Submission Command Line Parameters ====
 
-:The CCS must provide a command line interface that supports the ability to submit a run.
-
-:At a minimum the command line interface must implement the following switches:
+:At a minimum the run submission command line interface must implement the following switches:
 
 ::-p <problem short-name>
 
@@ -727,9 +725,9 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 ::-t <contest-time for submission> 
 
-:-p, -u, -w, -m and -d are mandatory for all submissions. The -t is optional.   The CCS may implement additional switches.
+:-p, -u, -w, -m and -d are mandatory for all submissions. The -t switch is optional.   The CCS may implement additional switches.
 
-:The CCS may assume that runs submitted via the  [[Contest_Control_System#Command Line Submission interface| Run Submission Interface]] will be submitted in increasing timestamp order.
+:The CCS may assume that runs submitted via the  [[Contest_Control_System#Run Submission Interface| Run Submission Interface]] which contain the -t parameter will be submitted in increasing timestamp order.
 
 ==== Timestamp Handling ====
 :When the CCS is running in [[Contest_Control_System#Test Mode| REAL]] mode, timestamps provided via the [[Contest_Control_System#Command Line Submission interface| Run Submission Interface]] should be ignored and the CCS should apply a timestamp to the submitted run as specified in the section describing [[Contest_Control_System#Timestamps and Ids for Runs, Clarifications and Notifications| timestamp]]s.  
