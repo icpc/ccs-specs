@@ -1106,6 +1106,8 @@ Then follow several lines with the following format (one per account).
 
 Account Types are: judge, admin, analyst, feed-all, feed-spectator, feed-floor.
 
+'''Todo: analyst account are not described anywhere.'''
+
 === passwords.txt ===
 
 '''Todo: description'''
