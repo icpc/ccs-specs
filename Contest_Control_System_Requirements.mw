@@ -268,10 +268,9 @@ When a problem is disabled:
 
 ==== Automatic Rejudging ====
 
-Rejudging a set of runs must be done in the following steps:
-# A user selects a set of runs to be rejudged, as described in [[#Run_Selection|Run Selection]] below.
-# The selected runs are run and judged in the same manner as for a newly arrived run.  For each selected run a new judgment is determined.
-# Selected runs are assigned the judgments determined in the previous step.
+The systen must allow the ability to rejudge a selected set of runs.
+
+The selected runs are executed and judged in the same manner as for a newly arrived run.
 
 ==== Previewing Rejudgement Results ====
 
