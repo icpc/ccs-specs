@@ -593,38 +593,6 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 :The CCS must provide a default "diff" capable of handling the options specified in the [[Problem_format#problem.cfg|problem format standard]].
 
-=== Balloon Notifications ===
-
-'''Todo: This can probably be removed. We have to confirm that it's all in the [[Event_Feed]]'''
-
-:The CCS must have an ability to send a message, called a balloon notification, for every run which have received an accepted judgment. It also must send revocations or updates resulting from rejudging.
-
-:The notification includes the following
-
-:# A sequence number of the notification. 
-:# Notification type: new / revocation / update
-:# Identification of the team that submitted the run.
-:# The contest time at which the run was submitted. 
-:# A timestamp
-:# The problem to which the judgment applies.
-:# The color of balloon which applies to that problem (see Configuring Problems, below). 
-:# A list of all problems solved by the team so far, along with their balloon colors.
-:# "First in contest" if this is the earliest submitted run that is accepted.
-:# "First for problem" if this is the earliest submitted run that is accepted for this problem.
-:# "First for team" if this is first notification of acceptance for this team. 
-
-:As submission ids increase with time, the notion of "first" is based on the id of a submission. A revocation can occur when a previously accepted run is rejected due to rejudging. Similarly, rejudging of one run can change whether another run was "first" to solve a problem or not, requiring an update. If a previously revoked balloon should be awarded, this also should result in an update notification.
-
-:Note that run judgements may not come in the same order as submissions, meaning that the first notification of acceptance does not have to be for the earliest submitted accepted run. 
-
-:The format of balloon notifications is defined in [[Event_Feed#notification|Event Feed Notifications]].
-
-:The sequence numbers assigned to the external notifications are used to detect if a notification is missing (e.g., due to printer malfunction). The CCS must provide at least one of the two following features: 
-:# the CCS must be able to resend a previously sent message with a given sequence number upon request 
-:# the CCS must have an interface listing all notifications, and allowing a user to access the data included in any one of them. Such a complete list of notifications must be protected in such a way that teams cannot access it.
-
-:It is optional whether the CCS also provides the ability to send notifications for runs which receive rejected judgments, but it must be possible to configure the CCS to only send notifications for accepted runs.
-
 == Scoring ==
 
 === Scoring Data Generation ===
