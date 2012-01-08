@@ -352,7 +352,7 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 === Finalizing the Contest ===
 
-:Finalizing is the procedure to authorize the final results at the end of a contest.  The [[#results.tsv]] and [[#scoreboard.tsv]] files will be generated and the [[Event_Feed#finalized]] element will be sent to [[Event Feed]]s.
+:Finalizing is the procedure to authorize the final results at the end of a contest.  The [[#results.tsv|results.tsv]] and [[#scoreboard.tsv|scoreboard.tsv]] files will be generated and the [[Event_Feed#finalized]] element will be sent to [[Event Feed]]s.
 
 :When the contest is over, but not finalized, all scoreboards must show a warning that the results are not final.
 
