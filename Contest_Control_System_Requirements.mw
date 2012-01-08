@@ -742,6 +742,8 @@ A YAML file consisting of a mapping with the following keys:
 | languages || Sequence of mappings with keys as defined below
 |-
 | problemset || Sequence of mappings with keys as defined below
+|-
+| penaltytime || Penalty minutes for each incorrect run (default 20)
 |}
 
 ==== languages ====
@@ -790,6 +792,7 @@ A sequence of mappings with the following keys:
  duration:          5:00:00
  scoreboard-freeze: 4:00:00
  event-feed-port: 4713
+ penaltytime: 20
  
  default-clars:
    - No comment, read problem statement.
