@@ -105,7 +105,7 @@ CCS meets all the requirements listed in this standard.
 
 ==== Contest State Persistency ====
 
-:The CCS must also support persistence of the contest state once the contest has been started. This means that following a shutdown of the CCS, or a power failure on the machine(s) on which the CCS runs, it must be possible to quickly restore the contest state to what it was prior to the shutdown or power failure. The contest state for purposes of this requirement includes all data regarding submitted runs, submitted clarification requests, answers to clarification requests, run judgements, and similar data defining and/or affecting the standings of the contest.
+:The CCS must support persistence of the contest state once the contest has been started. This means that following a shutdown of the CCS, or a power failure on the machine(s) on which the CCS runs, it must be possible to quickly restore the contest state to what it was prior to the shutdown or power failure. The contest state for purposes of this requirement includes all data regarding submitted runs, submitted clarification requests, answers to clarification requests, run judgements, and similar data defining and/or affecting the standings of the contest.
 
 :The CCS must not lose more than 1 minute of contest data on a failure of any part of the contest system.
 
