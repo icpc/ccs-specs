@@ -347,7 +347,7 @@ It must be possible to suspend the notification of accepted runs. When this func
 
 === Finalizing the Contest ===
 
-Finalizing is the procedure to authorize the final results at the end of a contest.  The [[#results.tsv|results.tsv]] and [[#scoreboard.tsv|scoreboard.tsv]] files will be generated and the [[Event_Feed#finalized]] element will be sent to [[Event Feed]]s.
+Finalizing is the procedure to authorize the final results at the end of a contest.  The [[#results.tsv|results.tsv]] and [[#scoreboard.tsv|scoreboard.tsv]] files will be generated and the [[Event_Feed#finalized'|finalized]] element will be sent on the [[Event Feed]]s.
 
 When the contest is over, but not finalized, all scoreboards must show a warning that the results are not final.
 
