@@ -262,9 +262,7 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 ==== Adding penalty time ====
 
-:It must be possible to specify, for each team, an integer amount of penalty time to be added into that team's total penalty time.
-
-'''TODO: reword to make clear that "added" includes adding negative values (the most likely case)
+:It must be possible to specify, for each team, an integer, potentially negative, amount of penalty time to be added into that team's total penalty time.
 
 === Problem States: Enabled, Paused, and Disabled ===
 
