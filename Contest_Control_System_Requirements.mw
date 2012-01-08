@@ -111,7 +111,7 @@ The CCS must support a secure authentication mechanism, allowing each registered
 # Only users who supply correct authentication credentials may invoke contest-related functions.
 # Users may only invoke functions corresponding to their authentication credentials.  (In other words, it must not be possible for, e.g., a team to invoke functions as if they were some other team, or as if they were a judge.)
 
-==== Creation of Authentication Data ====
+==== Authentication Data ====
 
 If the CCS uses a login/password mechanism, it should generate login/password information for all users.  It should also, for each type of user, output a complete list of username/password pairs in a file using the [[#userdata.tsv|userdata.tsv]] format.
 
