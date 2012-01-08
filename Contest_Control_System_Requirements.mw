@@ -1089,8 +1089,6 @@ Then follow several lines with the following format (one per account).
 
 Account Types are: judge, admin, analyst, feed-all, feed-public, feed-floor.
 
-'''Todo: analyst account are not described anywhere.'''
-
 === passwords.txt ===
 
 A text file containing passwords of arbitrary length, one password per file line.  All password characters will be non-space printable ASCII characters (i.e, 0x21 to 0x7E inclusive).
