@@ -146,7 +146,6 @@ CCS meets all the requirements listed in this standard.
 :A timestamp and an integral sequence number, called an Id, are assigned to runs, clarifications, and balloon notifications. Runs and clarifications are assigned an id and a timestamp at the time they enter the system, and balloon notifications are assigned an id and a timestamp at the time they are generated.
 
 :*The id sequences are separate for runs, clarifications, and notifications i.e., there are both a run 1, a clarification 1, and a notification 1.
-'''Todo: We don't really need to require separate sequences'''
 :* Ids always increase by one.
 '''Todo: ...or that they increase by one'''
 :* Run j cannot have a timestamp smaller than run (j-1). The same holds for the ids of clarifications and notifications.
