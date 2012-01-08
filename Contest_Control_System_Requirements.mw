@@ -90,14 +90,6 @@ CCS meets all the requirements listed in this standard.
 
 :The CCS must either be freely useable, or must be accompanied by a license granting to the ACM-ICPC the non-exclusive, non-revocable, non-transferable rights of use of the CCS both for purposes of evaluation and testing and for use in the ICPC World Finals. The CCS may not require obtaining any third-party license in order to be used by the ACM-ICPC.
 
-=== On-site support ===
-
-:At least one person from the submitting entity with intimate knowledge about the inner workings of the CCS must be willing and able to participate at the World Finals where it is used.
-
-=== Platform ===
-
-:The CCS must run on the computer platform set aside for the CCS at the World Finals and posted at the ICPC web site. Normally this will consist of one machine per team, several auto-judging machines that are identical to the team machines, and one or more servers.
-
 === Data Persistency ===
 
 ==== Contest Configuration Persistency ====
@@ -175,6 +167,15 @@ CCS meets all the requirements listed in this standard.
 :# [[Problem format]] specification  - problem load file specification
 :# [[Output validator]] specification - validate/test team run output, CCS must implement a default  output validator
 :# [[Input format validator]] specification
+
+=== Use At A Specific World Finals ===
+
+:In order for a CCS to be selected for use at a particular year's World Finals it must satisfy each of the following constraints:
+::*The CCS must be certified according to the procedures described under
+[[link to certification process]].  
+::*At least one person from the submitting entity with intimate knowledge about the inner workings of the CCS must be willing and able to participate at the World Finals where it is used.
+
+:*The CCS must run on the computer platform set aside for the CCS at the World Finals and posted at the ICPC web site. Normally this will consist of one machine per team, several auto-judging machines that are identical to the team machines, and one or more servers.
 
 == Contest Configuration ==
 
