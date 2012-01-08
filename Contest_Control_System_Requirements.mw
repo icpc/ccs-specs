@@ -278,17 +278,18 @@ There must be a way to preview the judgements which result from rejudging the se
 
 ==== Run Selection ==== 
 
-It must be possible to provide the CCS with a filter of runs to be rejudged, based upon which the CCS automatically selects all runs matching the filter, and automatically rejudges them.
-
+It must be possible to provide the CCS with a filter of runs to be rejudged.
 The CCS must support any combination of filters of the following type.
 
 # A specific (single) run.
 # All runs which have been submitted for a specific problem.
 # All runs which have been submitted using a specific language.
+# All runs which have been submitted by a specific team or set of teams.
+# All runs which were submitted between some contest time T<sub>0</sub> and some subsequent contest time T<sub>1</sub>.
 # All runs which have been assigned any specific one of the allowable run judgments as defined in [[#Judge Responses|Judge Responses]], or all runs that received any judgment other than "Accepted" (that is, all rejected runs).
 # All runs which have been judged on a specific computer (identified in some reasonable way, e.g., IP address or hostname).  This requirement is only applicable if the CCS uses multiple machines to judge runs.
 
-Thus, for example, it must be possible to select "all rejected runs for problem B", "all Time Limit Exceeded runs using Java for problem C", or "all runs in C++".
+Thus, for example, it must be possible to select "all rejected runs for problem B", "all Time Limit Exceeded runs using Java for problem C", "all runs submitted in the first hour of the contest", or "all runs in C++".
 
 === Manual Override of Judgments ===
 
