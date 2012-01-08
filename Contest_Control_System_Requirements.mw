@@ -1032,9 +1032,9 @@ Then follow several lines with the following format (one per account).
 | 5 || Password || B!5MWJiy || string
 |}
 
-Account Types are: judge, admin, analyst, feed-all, feed-public, feed-floor.
+Account Types present in ''userdata.tsv'' are: team, judge, admin, analyst, feed-all, feed-public, feed-floor.
 
-Account numbers for teams must be the same as the corresponding team numbers in teams.tsv.
+Account numbers for teams must be the same as the corresponding team numbers in ''teams.tsv''.
 
 === accounts.tsv ===
 
