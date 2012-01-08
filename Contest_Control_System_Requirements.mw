@@ -363,73 +363,73 @@ The following fields need to be entered before Finalizing the contest:
 
 == Team Interface ==
 
-:This section describes all the required capabilities for users authenticated as team.
+This section describes all the required capabilities for users authenticated as team.
 
 === Submitting a Run ===
 
 ''' Todo: Standardize the terminology. Use "run", "submission" or some combination consistently'''
 
-:For purposes of this standard, the terms ''run'' and ''submission'', and any combination thereof, refer to a set of source code files submitted as a single unit at one time to the judging system by a team as a proposed solution to a given problem.
+For purposes of this standard, the terms ''run'' and ''submission'', and any combination thereof, refer to a set of source code files submitted as a single unit at one time to the judging system by a team as a proposed solution to a given problem.
 
 ==== Submission Mechanism ====
 
-:The CCS must provide each team with the ability to submit a run to the judging system.
+The CCS must provide each team with the ability to submit a run to the judging system.
 
 ==== Submission Contents ====
 
-:A team must be able to specify, for each run submission: 
+A team must be able to specify, for each run submission: 
 # the contest problem to which the submission applies
 # the programming language used in the submission; 
 # the source code file or files comprising the submission. 
 
-:The CCS must allow teams to specify arbitrarily many files in a given submission and must allow teams to make submissions for any defined contest problem and written in any defined contest programming language.
+The CCS must allow teams to specify arbitrarily many files in a given submission and must allow teams to make submissions for any defined contest problem and written in any defined contest programming language.
 
 ==== Team Viewing of Submission Status ====
 
-:The CCS must provide each team with a capability for reviewing the status of each run the team has submitted, including: the contest time of the submission; the language and problem specified in the submission; and the most recent judgment (if any) for the submission.
+The CCS must provide each team with a capability for reviewing the status of each run the team has submitted, including: the contest time of the submission; the language and problem specified in the submission; and the most recent judgment (if any) for the submission.
 
 ==== Submission Security ====
 
-:The CCS must insure that no team can learn anything about the run submissions of any other team (other than what can be deduced from the scoreboard).
+The CCS must insure that no team can learn anything about the run submissions of any other team (other than what can be deduced from the scoreboard).
 
 === Submitting a Clarification Request ===
 
-:For purposes of this standard, the terms ''clarification'', ''clarification request'', and ''clar'' all refer to a message sent from a team to the judges asking for clarification regarding a contest problem.
+For purposes of this standard, the terms ''clarification'', ''clarification request'', and ''clar'' all refer to a message sent from a team to the judges asking for clarification regarding a contest problem.
 
 ==== Clarification Mechanism ====
 
-:The CCS must provide each team with the ability to submit a clarification request to the judges over the network. 
+The CCS must provide each team with the ability to submit a clarification request to the judges over the network. 
 
 ==== Clarification Content ====
 
-:The team must be able to specify the text content and category of a clarification request.
+The team must be able to specify the text content and category of a clarification request.
 
 ==== Team Viewing of Clarification Status ====
 
-:The CCS must provide each team with a capability for reviewing the status of each clarification request the team has submitted, including: the contest time of the clarification request; the problem identified in the clarification request if identification of a specific problem was required by the CCS; and the response from the judges to the clarification if any response has occurred yet.
+The CCS must provide each team with a capability for reviewing the status of each clarification request the team has submitted, including: the contest time of the clarification request; the problem identified in the clarification request if identification of a specific problem was required by the CCS; and the response from the judges to the clarification if any response has occurred yet.
 
 ==== Clarification Security ====
 
-:The CCS must insure that no team can see the clarification requests of any other team, except as provided in the section [[Contest_Control_System#Human_Judge_Interface | Human Judge Interface]].
+The CCS must insure that no team can see the clarification requests of any other team, except as provided in the section [[Contest_Control_System#Human_Judge_Interface | Human Judge Interface]].
 
 === Broadcast Messages ===
 
 ==== Team Viewing of Broadcast Messages ====
 
-:The CCS must provide each team with a capability for viewing any broadcast messages sent by the judges (see [[Contest_Control_System#Issuing_Broadcast_Messages| Issuing Broadcast Messages]] under Judging).
+The CCS must provide each team with a capability for viewing any broadcast messages sent by the judges (see [[Contest_Control_System#Issuing_Broadcast_Messages| Issuing Broadcast Messages]] under Judging).
 
 === Notifications ===
 
-: The CCS must notify teams when a judgement, clarification or broadcast message has been received. This notification may not steal focus.
+ The CCS must notify teams when a judgement, clarification or broadcast message has been received. This notification may not steal focus.
 '''TODO: verify that "Notification" is used consistently; clarify the wording in the above.
 
 === Scoreboard Display ===
 
-:The CCS must provide a mechanism for teams to view the current scoreboard. The scoreboard should be updated at least every 30 seconds.
+The CCS must provide a mechanism for teams to view the current scoreboard. The scoreboard should be updated at least every 30 seconds.
 
 === Current Problem State ===
 
-:The CCS must provide a mechanism for teams to determine the current [[#Problem_States:_Enabled.2C_Paused.2C_and_Disabled|state]] (enabled, paused, or disabled) of each contest problem.
+The CCS must provide a mechanism for teams to determine the current [[#Problem_States:_Enabled.2C_Paused.2C_and_Disabled|state]] (enabled, paused, or disabled) of each contest problem.
 
 == Judge Interface ==
 
