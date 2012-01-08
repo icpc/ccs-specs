@@ -678,21 +678,21 @@ The CCS must be capable of generating an external file containing the final resu
 
 ::-p <problem short-name>
 
+::-l <language name>
+
 ::-u <team id>
 
 ::-w <team password>
 
 ::-m <main source filename>
 
-::-d <directory for main and other files>
+::-d <directory for main source and other source files>
 
 ::-t <contest-time for submission> 
 
-:-p, -u, -w, -m and -d are mandatory for all submissions. The -t switch is optional.   The CCS may implement additional switches.
+:Options -l, -p, -u, -w, -m and -d are mandatory for all submissions. The -t switch is optional.   The CCS may implement additional switches.
 
 :The CCS may assume that runs submitted via the  [[Contest_Control_System#Run Submission Interface| Run Submission Interface]] which contain the -t parameter will be submitted in increasing timestamp order.
-
-'''TODO how does the CCS determine the language for the submission? [[User:Douglas Lane|Douglas Lane]] 03:03, 8 January 2012 (CET)
 
 ==== Timestamp Handling ====
 :When the CCS is running in [[Contest_Control_System#Test Mode| REAL]] mode and receives a run via the Run Submission Interface, any timestamp provided via the -t parameter should be ignored and the CCS should apply a timestamp to the submitted run as specified in the section describing [[Contest_Control_System#Timestamps and Ids for Runs, Clarifications and Notifications| timestamp]]s.  
