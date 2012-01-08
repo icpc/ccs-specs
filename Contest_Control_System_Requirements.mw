@@ -72,19 +72,6 @@ requirements of some other contest; such additional functionality will not disqu
 the CCS from qualifying as a candidate to run the ICPC World Finals provided the
 CCS meets all the requirements listed in this standard.
 
-== Definitions of Terms ==
-
-; Submission
-: For purposes of this standard, '''submission''' refer to a set of source code files submitted as a single unit at one time to the judging system by a team as a proposed solution to a given problem.
-
-; Pending judgements
-:
-
-; Clarification request: ...
-; Notification: ...
-
-'''Todo: Add descriptions or remove section'''
-
 == General Requirements ==
 
 === Licensing ===
