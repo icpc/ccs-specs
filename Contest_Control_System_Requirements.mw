@@ -1075,7 +1075,7 @@ Account numbers for teams must be the same as the corresponding team numbers in 
 
 === accounts.tsv ===
 
-A text file consisting of a version line and one line for each account in the contest. Each line has tab separated fields as defined below.
+A text file consisting of a version line and one line for each non-team account in the contest. Each line has tab separated fields as defined below.
 
 The first line has the following format
 {| class="wikitable"
