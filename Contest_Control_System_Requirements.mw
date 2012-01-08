@@ -404,8 +404,7 @@ The CCS must provide each team with a capability for viewing any broadcast messa
 
 === Notifications ===
 
- The CCS must notify teams when a judgement, clarification or broadcast message has been received. This notification may not steal focus.
-'''TODO: verify that "Notification" is used consistently; clarify the wording in the above.
+The CCS must notify teams when a judgement, clarification or broadcast message has been received. This notification may not steal focus.
 
 === Scoreboard Display ===
 
