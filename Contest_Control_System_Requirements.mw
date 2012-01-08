@@ -270,19 +270,12 @@ When a problem is disabled:
 
 Rejudging a set of runs must be done in the following steps:
 # A user selects a set of runs to be rejudged, as described in [[#Run_Selection|Run Selection]] below.
-# The selected runs are run and judged in the same manner as for a newly arrived run.  For each selected run a new judgment is determined, ''but not assigned to the run''.
-# A user ''commits'' the results of the rejudging, whereupon all the selected runs are assigned the judgments determined in the previous step.
-If the results of a rejudge have not been committed when a new rejudge is started, the results of the old rejudge are discarded.
+# The selected runs are run and judged in the same manner as for a newly arrived run.  For each selected run a new judgment is determined.
+# Selected runs are assigned the judgments determined in the previous step.
 
-'''TODO: Reword the above so that it doesn't require an explicit select/execute/commit cycle, but instead allows (e.g.) the DOM-Judge mechanism of rejudging and then applying the results if desired.
+==== Previewing Rejudgement Results ====
 
-'''TODO: team notifications don't happen until commit/apply, not on test rejudgements
-
-==== Verifying Rejudgement Results ====
-
-When a set of runs are being rejudged as described in [[#Automatic Rejudging|Automatic Rejudging]], the CCS must provide a way for the user to see the changes in judgments that would result if the rejudge is committed.
-
-''' Todo: notification should not actually be sent in this case, but is in the list referred to above.'''
+There must be a way to preview the changes in judgements that would result if a specific rejudge would be done, without committing it.
 
 ==== Run Selection ==== 
 
