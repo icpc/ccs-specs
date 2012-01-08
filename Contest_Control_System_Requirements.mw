@@ -173,7 +173,7 @@ The CCS must be able to read the contest configuration file ([[#contest.yaml|con
 
 === Predefined Clarification Answers ===
 
-The CCS must provide the ability to configure predefined answers to clarification requests (e.g., "No response, read problem statement." and "This will be answered after the practice session."), so that judges can choose to reply to a clarification request by selecting a predefined answer rather than being required to enter a specific answer.  One of the predefined answers should be the "default" answer.
+The CCS must provide the ability to configure predefined answers to clarification requests (e.g., "No response, read problem statement." and "This will be answered after the practice session."), so that judges can choose to reply to a clarification request by selecting a predefined answer rather than being required to enter a specific answer.  One of the predefined answers must be the "default" answer.
 
 === Clarification Categories ===
 
