@@ -742,7 +742,7 @@ A YAML file consisting of a mapping with the following keys:
 |-
 | problemset || Sequence of mappings with keys as defined below
 |-
-| penaltytime || Penalty minutes for each incorrect run (default 20)
+| penaltytime || Penalty minutes for each incorrect run (optional, default 20)
 |}
 
 ==== languages ====
