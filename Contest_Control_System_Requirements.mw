@@ -335,9 +335,10 @@ Finalizing is the procedure to authorize the final results at the end of a conte
 
 When the contest is over, but not finalized, all scoreboards must show a warning that the results are not final.
 
-The CCS must provide a way for admins to finalize the contest. It must not be possible to finalize a contest if one or more of the following applies:
-# The contest is still running (i.e., the contest time is not over).
-# There are unjudged runs.
+The CCS must provide a way for admins to finalize the contest. It must ''not'' be possible to finalize a contest if one or more of the following applies:
+
+# The contest is still running (i.e., the contest is not over).
+# There are un-judged runs.
 # There are runs judged as [[#Exception Judgments|Judging Error]].
 # There are unanswered clarifications.
 
