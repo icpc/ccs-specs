@@ -262,7 +262,7 @@ When a problem is paused:
 When a problem is disabled:
 # Teams must not be able to submit solutions to the problem. The problem name must be removed or disabled from solution submit interfaces where present.
 # Automatic judging of the problem must be disabled.
-# Submissions on the problem must not affect the scoreboard at all, including submissions received prior to disabling.
+# Submissions on the problem must not affect the scoring at all, including submissions received prior to disabling.
 
 === Rejudging === 
 
