@@ -176,45 +176,45 @@ In order for a CCS to be selected for use at the World Finals it must satisfy ea
 
 === Advance Configuration ===
 
-:All variable aspects of the CCS must be configurable prior to the start of a World Finals contest. That is, the CCS may not require that any changes be made to the CCS configuration once the contest has started. Note that this does not alter any requirements which state that the CCS must allow certain configuration changes to be able to be made after the contest starts; it means that the contest administration staff shall not be required to make any changes once the contest starts.
+All variable aspects of the CCS must be configurable prior to the start of a World Finals contest. That is, the CCS may not require that any changes be made to the CCS configuration once the contest has started. Note that this does not alter any requirements which state that the CCS must allow certain configuration changes to be able to be made after the contest starts; it means that the contest administration staff shall not be required to make any changes once the contest starts.
 
 === Importing Contest Configuration File ===
 
-:The CCS must be able to read the contest configuration file ([[#contest.yaml|contest.yaml]]) containing the contest configuration and use the data in that file to configure the CCS.
+The CCS must be able to read the contest configuration file ([[#contest.yaml|contest.yaml]]) containing the contest configuration and use the data in that file to configure the CCS.
 
 === Predefined Clarification Answers ===
 
-:The CCS must provide the ability to configure predefined answers to clarification requests (e.g., "No response, read problem statement." and "This will be answered after the practice session."), so that judges can choose to reply to a clarification request by selecting a predefined answer rather than being required to enter a specific answer.  One of the predefined answers should be the "default" answer.
+The CCS must provide the ability to configure predefined answers to clarification requests (e.g., "No response, read problem statement." and "This will be answered after the practice session."), so that judges can choose to reply to a clarification request by selecting a predefined answer rather than being required to enter a specific answer.  One of the predefined answers should be the "default" answer.
 
 === Clarification Categories ===
 
-:It must be possible to configure "categories" to which clarification requests can be assigned. A request belongs to exactly one category.  Examples of categories are "General", "SysOps", "Operations".
+It must be possible to configure "categories" to which clarification requests can be assigned. A request belongs to exactly one category.  Examples of categories are "General", "SysOps", "Operations".
 
-:In addition, the CCS must construct one category per problem, i.e., categories named "Problem A", "Problem B", etc. for each problem.
+In addition, the CCS must construct one category per problem, i.e., categories named "Problem A", "Problem B", etc. for each problem.
 
 === Programming Languages ===
 
 ==== Supported Languages ====
 
-:The CCS must provide the ability to compile and execute (or interpret, as appropriate for the language) submitted source code files for each of the languages specified by the [http://cm.baylor.edu/ICPCWiki/Wiki.jsp?page=Programming%20Environment Programming Environment of the World Finals].
+The CCS must provide the ability to compile and execute (or interpret, as appropriate for the language) submitted source code files for each of the languages specified by the [http://cm.baylor.edu/ICPCWiki/Wiki.jsp?page=Programming%20Environment Programming Environment of the World Finals].
 
 ==== Language Options ====
 
-:For each supported language compiler or interpreter it must be possible to configure the CCS to invoke it with any of the options specified in the compiler or interpreter's documentation.
+For each supported language compiler or interpreter it must be possible to configure the CCS to invoke it with any of the options specified in the compiler or interpreter's documentation.
 
 === Contest Problems ===
 
-:Problems (including judge data, validators, execution time limit, etc) are configured using the [[Problem_format|ICPC problem format]]. The CCS must have full support for this standard. All problems that are added or changed must be verified as defined in the problem standard.
+Problems (including judge data, validators, execution time limit, etc) are configured using the [[Problem_format|ICPC problem format]]. The CCS must have full support for this standard. All problems that are added or changed must be verified as defined in the problem standard.
 
 === Importing Team Registration Files ===
 
-:The CCS must be able to read an initialization file containing a list of teams registered for the World Finals, and use the data in this file to create automatically whatever internal representation is necessary to allow each team (and only the teams) specified in the registration list to participate in the World Finals contest. The CCS must also be able to read an initialization file containing the list of groups that the teams belong to. The format and content of the files are given in the [[#teams.tsv|teams.tsv]] and [[#groups.tsv|groups.tsv]] sections.
+The CCS must be able to read an initialization file containing a list of teams registered for the World Finals, and use the data in this file to create automatically whatever internal representation is necessary to allow each team (and only the teams) specified in the registration list to participate in the World Finals contest. The CCS must also be able to read an initialization file containing the list of groups that the teams belong to. The format and content of the files are given in the [[#teams.tsv|teams.tsv]] and [[#groups.tsv|groups.tsv]] sections.
 
 === Configuration Change ===
 
-:The CCS must allow updating of configuration data without restarting or stopping the CCS.  
+The CCS must allow updating of configuration data without restarting or stopping the CCS.  
 
-:The CCS must support the ability to create and save an updated contest.yaml file upon request.
+The CCS must support the ability to create and save an updated contest.yaml file upon request.
 
 == Admin Interface ==
 
