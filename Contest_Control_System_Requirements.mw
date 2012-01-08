@@ -599,7 +599,7 @@ A submission is pending judgement if it has no judgement or if the judgement is 
 
 The ''current scoreboard'' lists the teams sorted by position (with alphabetical order on team name as tie breaker).  
 
-The scoreboard should include at least the following information.
+The scoreboard must include at least the following information.
 
 For each team:
 # university name and logo, country flag,
