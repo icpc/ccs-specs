@@ -591,6 +591,7 @@ The CCS must be capable of automatically generating up-to-date scoring data acco
 # For purposes of scoring, the ''contest time of a submission'' is the number of minutes elapsed from the beginning of the contest when the submission was made, skipping removed time intervals if specified (see [[#Removing_time_intervals|Removing Time Intervals]]).  This is rounded ''down'' to the nearest minute, so 59.99 seconds is 0 minutes.
 # The ''contest time that a team solved a problem'' is the contest time of the team's first accepted submission to that problem.
 # A team's ''penalty time on a problem'' is the contest time that the team solved the problem, plus 20 minutes for each previous rejected run by that team on that problem, or 0 if the team has not solved the problem.
+'''TODO make penalty points 20 configurable in contest.yaml
 # A team's ''total penalty time'' is the sum of the penalty times for all problems plus any judge added penalty time.
 # A team's ''last accepted submission'' is the contest time of the problem that the team solved last.
 # The ''position'' of a team is determined by sorting the teams by number of problems solved (descending), total penalty time (ascending), last accepted submission (ascending).
