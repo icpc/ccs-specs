@@ -167,9 +167,11 @@ The CCS must run on the computer platform set aside for the CCS at the World Fin
 
 All variable aspects of the CCS must be configurable prior to the start of a World Finals contest. That is, the CCS may not require that any changes be made to the CCS configuration once the contest has started. Note that this does not alter any requirements which state that the CCS must allow certain configuration changes to be able to be made after the contest starts; it means that the contest administration staff must not be required to make any changes once the contest starts.
 
-=== Importing Contest Configuration File ===
+=== Importing Contest Configuration ===
 
-The CCS must be able to read the contest configuration file ([[#contest.yaml|contest.yaml]]) containing the contest configuration and use the data in that file to configure the CCS.
+The CCS must be able to import contest configuration from a single URL, and use the data at that location to configure the CCS. The configuration URL contains all contest configuration data, including the contest configuration file ([[#contest.yaml|contest.yaml]]), problem definitions, teams.tsv, groups.tsv, logos.tar.gz, and flags.tar.gz.
+
+For example, if the URL is http://10.1.1.0/data, teams.tsv can be imported from http://10.1.1.0/data/teams.tsv.
 
 === Predefined Clarification Answers ===
 
