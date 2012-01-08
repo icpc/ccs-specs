@@ -1110,6 +1110,8 @@ Account Types are: judge, admin, analyst.
 
 === passwords.txt ===
 
+'''Todo: description'''
+
 === logos.tar.gz ===
 The file contains the logos for all teams, in a tar archive and compressed using gzip.
 
