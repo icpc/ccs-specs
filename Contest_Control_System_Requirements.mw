@@ -157,9 +157,11 @@ All variable aspects of the CCS must be configurable prior to the start of a Wor
 
 === Importing Contest Configuration ===
 
-The CCS must be able to import contest configuration from a single URL, and use the data at that location to configure the CCS. The configuration URL contains all contest configuration data, including the contest configuration file ([[#contest.yaml|contest.yaml]]), problem definitions, teams.tsv, groups.tsv, logos.tar.gz, and flags.tar.gz.
+The CCS must be able to import contest configuration from a single URL, and use the data at that location to configure the CCS. The configuration URL contains all contest configuration data, including the contest configuration file ([[#contest.yaml|contest.yaml]]), problem definitions, teams.tsv, groups.tsv, logos.tar.gz, and flags.tar.gz. For example, if the URL is http://10.1.1.0/data, teams.tsv can be imported from http://10.1.1.0/data/teams.tsv.
 
-For example, if the URL is http://10.1.1.0/data, teams.tsv can be imported from http://10.1.1.0/data/teams.tsv.
+The CCS must be able to read [[#teams.tsv|teams.tsv]], which contains a list of teams registered for the World Finals. It must use the data in this file to automatically create whatever internal representation is necessary to allow each team (and only the teams) specified in the registration list to participate in the World Finals contest.
+
+The CCS must be able to read [[#groups.tsv|groups.tsv]], an initialization file containing the list of groups that the teams belong to.
 
 === Predefined Clarification Answers ===
 
@@ -184,10 +186,6 @@ For each supported language compiler or interpreter it must be possible to confi
 === Contest Problems ===
 
 Problems (including judge data, validators, execution time limit, etc) are configured using the [[Problem_format|ICPC problem format]]. The CCS must have full support for this standard. All problems that are added or changed must be verified as defined in the problem standard.
-
-=== Importing Team Registration Files ===
-
-The CCS must be able to read an initialization file containing a list of teams registered for the World Finals, and use the data in this file to create automatically whatever internal representation is necessary to allow each team (and only the teams) specified in the registration list to participate in the World Finals contest. The CCS must also be able to read an initialization file containing the list of groups that the teams belong to. The format and content of the files are given in the [[#teams.tsv|teams.tsv]] and [[#groups.tsv|groups.tsv]] sections.
 
 === Configuration Change ===
 
