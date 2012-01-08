@@ -1104,7 +1104,7 @@ Account Types are: judge, admin, analyst, feed-all, feed-public, feed-floor.
 
 === passwords.txt ===
 
-A text file containing passwords of arbitrary length, one password per file line.  All password characters will be non-blank printable ASCII characters (i.e, 0x21 to 0x7E inclusive).
+A text file containing passwords of arbitrary length, one password per file line.  All password characters will be non-space printable ASCII characters (i.e, 0x21 to 0x7E inclusive).
 
 === logos.tar.gz ===
 The file contains the logos for all teams, in a tar archive and compressed using gzip.
