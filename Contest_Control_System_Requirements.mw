@@ -707,7 +707,7 @@ In order for a given CCS to be considered as a candidate for running the ICPC Wo
 
 == Appendix: File formats ==
 
-All files msut be encoded in UTF-8.
+All files must be encoded in UTF-8.
 
 === contest.yaml ===
 
