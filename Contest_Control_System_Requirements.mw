@@ -673,19 +673,13 @@ The requirements of this subsection are intended to provide a method by which th
 
 At a minimum the run submission command line interface must implement the following switches:
 
--p <problem short-name>
-
--l <language name>
-
--u <team id>
-
--w <team password>
-
--m <main source filename>
-
--d <directory for main source and other source files>
-
--t <contest-time for submission> 
+ -p <problem short-name>
+ -l <language name>
+ -u <team id>
+ -w <team password>
+ -m <main source filename>
+ -d <directory for main source and other source files>
+ -t <contest-time for submission> 
 
 Options -l, -p, -u, -w, -m and -d are mandatory for all submissions. The -t switch is optional.   The CCS may implement additional switches.
 
