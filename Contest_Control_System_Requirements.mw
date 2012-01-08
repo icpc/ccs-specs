@@ -402,7 +402,7 @@ The CCS must provide a mechanism for teams to determine the current [[#Problem_S
 
 This section describes all the required capabilities for users authenticated as judge.
 
-=== Simultaneous Judging ===
+=== Simultaneous Usage ===
 
 It must be possible for multiple human judges, working on different computers, to simultaneously perform the operations specified in this subsection (on different run submissions).
 
