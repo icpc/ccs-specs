@@ -84,6 +84,24 @@ The CCS must support a mechanism that allows the contest to continue with minima
 
 === Account Types ===
 
+The CCS must support the ability of clients to access the system through different ''account types''.  
+
+The type of account which a client uses to access the system constrains the functions which the client may perform, as described below.
+
+At least the following different types of accounts must be supported:
+
+* Team: used by teams competing in the contest.  The functions available to team clients are as defined in the [[#Team Interface|section on the team interface]].
+
+* Judge: used by judges in the contest.  The functions available to judge clients are as defined in the [[#Judge Interface|section on the judge interface]]. 
+
+* Admin: used by contest administrators. The functions available to admmin clients are as defined in the [[#Admin Interface|section on the admin interface]].
+
+* Analyst: used by ICPC-Live Analysts. The functions available to analyst clients are a subset of those defined in the [[#Judge Interface|section on the judge interface]]; specifically, analyst clients have precisely those capabilities defined in [[#Simultaneous Judging|simultaneous judging]] and those defined in [[#Viewing Runs|viewing runs]], plus the capability of viewing the scoreboard as seen by the teams (as defined in [[#Scoreboard Display|the section on the team scoreboard]].
+
+* Feed: used by clients accessing the [[#Event Feed|event feed]].  The CCS must support three distinct types of Feed accounts, as listed below.  Different Feed accounts receive different levels of data when the client is connected to the [[#Event Feed|event feed]].
+# feed-floor: used for clients that may display data visible to contest contestants  
+# feed-public: used for public clients 
+# feed-all: used for internal/sysops clients
 
 === Secure Authentication ===
 
