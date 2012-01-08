@@ -703,11 +703,11 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 === Scriptable Submissions ===
 
-:The CCS must provide a mechanism by which team submissions of both runs and clarification requests can be scripted for automated testing. In other words, the CCS must provide a command-line based interface allowing an external program to submit a run to the CCS and to submit a clarification request to the CCS.
+:The CCS must provide a mechanism by which team submission of runs can be scripted for automated testing. In other words, the CCS must provide a command-line based interface allowing an external program to submit a run to the CCS.
 
-:The run submission and clarification submission command-line interfaces must provide mechanisms for specifying all parameters that would be specified by a team utilizing the corresponding interactive interface, including that the command-line interfaces must accept and perform validation of user credentials before accepting a run or a clarification request.
+:The run submission command-line interface must provide mechanism for specifying all parameters that would be specified by a team utilizing the corresponding interactive interface, including that the command-line interface must accept and perform validation of user credentials before accepting a run.
 
-:The requirements of this subsection are intended to provide a method by which the World Finals Director of Operations can perform automated testing on the CCS during the Certification Process (see [[Contest_Control_System#Certification Process| Certification Process]]). The CCS implementers should assume that the scripting interfaces will be invoked multiple times in rapid succession, in arbitrary order with arbitrary parameters, by external scripts; care should therefore be taken by the implementers to avoid any design or implementation characteristics which limit or prohibit the ability of an external [[Test Harness]] framework to operate in this manner.
+:The requirements of this subsection are intended to provide a method by which the World Finals Director of Operations can perform automated testing on the CCS during the Certification Process (see [[Contest_Control_System#Certification Process| Certification Process]]). The CCS implementers should assume that the scriptable run submission interface will be invoked multiple times in rapid succession, with arbitrary parameters, by external scripts; care should therefore be taken by the implementers to avoid any design or implementation characteristics which limit or prohibit the ability of an external [[Test Harness]] framework to operate in this manner.
 
 ==== Command Line Run Submission interface ====
 
