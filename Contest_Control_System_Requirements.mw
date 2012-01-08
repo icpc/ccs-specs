@@ -299,7 +299,7 @@ The CCS must require a separate authentication every time a judgment is changed 
 
 === Scoreboard Display ===
 
-The CCS must provide a mechanism for judges to view the current scoreboard. The scoreboard should be updated at least every 30 seconds.
+The CCS must provide a mechanism for judges to view the current scoreboard. The scoreboard must be updated at least every 30 seconds.
 
 During times when the scoreboard is frozen, administrators must be able to view the current (updated) scoreboard as well as the frozen scoreboard.
 
