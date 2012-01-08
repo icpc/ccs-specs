@@ -648,21 +648,21 @@ A problem is pending judgement if any submission on it is pending judgement and 
 
 === Event Feed ===
 
-:It is a requirement that the CCS provide an ''external event feed''.  This means that the CCS must have a mechanism for external processes to connect to the CCS and obtain dynamic real-time updates regarding the current state of the contest. The CCS event feed mechanism must comply with the [[Event Feed|Event Feed specification]].
+It is a requirement that the CCS provide an ''external event feed''.  This means that the CCS must have a mechanism for external processes to connect to the CCS and obtain dynamic real-time updates regarding the current state of the contest. The CCS event feed mechanism must comply with the [[Event Feed|Event Feed specification]].
 
 === Scoreboard Data File ===
 
-:The CCS must be capable of generating an external file containing the current scoreboard. The format of this file must be as defined in [[#scoreboard.tsv|scoreboard.tsv]].
+The CCS must be capable of generating an external file containing the current scoreboard. The format of this file must be as defined in [[#scoreboard.tsv|scoreboard.tsv]].
 
-:The CCS must automatically save an updated copy of the external scoring data file whenever the scoring data itself is updated as described above.
+The CCS must automatically save an updated copy of the external scoring data file whenever the scoring data itself is updated as described above.
 
 === Final Results Data File ===
 
-:The ''final results'' lists the ranked teams sorted by rank (with alphabetical order on team name as tie breaker), followed by the unranked teams (sorted alphabetically by team name).  It includes for each ranked team their rank and:
-:# The number of problems solved, if the team is ranked (i.e., if they solved more than the median number of problems).
-:# The total penalty time and time of last accepted submission, if the team is in rank 1 through 12+B (where B is as defined in [[#Scoring_Data_Generation|Scoring Data Generation]]). 
+The ''final results'' lists the ranked teams sorted by rank (with alphabetical order on team name as tie breaker), followed by the unranked teams (sorted alphabetically by team name).  It includes for each ranked team their rank and:
+# The number of problems solved, if the team is ranked (i.e., if they solved more than the median number of problems).
+# The total penalty time and time of last accepted submission, if the team is in rank 1 through 12+B (where B is as defined in [[#Scoring_Data_Generation|Scoring Data Generation]]). 
 
-:The CCS must be capable of generating an external file containing the final results of the World Finals contest. The format of this file must be as defined in the [[#results.tsv|results.tsv]].
+The CCS must be capable of generating an external file containing the final results of the World Finals contest. The format of this file must be as defined in the [[#results.tsv|results.tsv]].
 
 == Testability Requirements ==
 
