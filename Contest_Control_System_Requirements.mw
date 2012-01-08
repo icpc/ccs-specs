@@ -858,7 +858,7 @@ A sequence of mappings with the following keys:
  start-time:        2011-02-04 01:23Z
  duration:          5:00:00
  scoreboard-freeze: 4:00:00
- submission-feed-port: 45010
+ event-feed-port: 4713
  
  default-clars:
    - No comment, read problem statement.
