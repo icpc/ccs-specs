@@ -111,8 +111,7 @@ CCS meets all the requirements listed in this standard.
 
 ==== Data Backup ====
 
-:The CCS must support a robust mechanism that allows the contest to continue with minimal disruption in case of hardware failure.
-This means for example that the CCS must arrange that all contest data is continually backed up in a way that allows the contest to be restored to its current state in the event of a single hard disk failure, loss of network connection, or other similar failure.
+:The CCS must support a robust mechanism that allows the contest to continue with minimal disruption in case of hardware failure. This means for example that the CCS must arrange that all contest data is continually backed up in a way that allows the contest to be restored to its current state in the event of a single hard disk failure, loss of network connection, or other similar failure.
 
 === Secure Authentication ===
 
