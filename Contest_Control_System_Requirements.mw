@@ -1106,7 +1106,7 @@ Then follow several lines with the following format (one per account).
 | 5 || Password || B!5MWJiy || string
 |}
 
-Account Types are: judge, admin, analyst.
+Account Types are: judge, admin, analyst, feed-all, feed-spectator, feed-floor.
 
 === passwords.txt ===
 
