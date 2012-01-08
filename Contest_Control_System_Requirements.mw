@@ -919,7 +919,7 @@ Then follow several lines with the following format (one per team).
 ! Example
 ! Type
 |-
-| 1 || Team ID || 22 || integer
+| 1 || Team Number || 22 || integer
 |-
 | 2 || External ID || 24314 || integer
 |-
