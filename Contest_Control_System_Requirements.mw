@@ -1074,6 +1074,39 @@ Account numbers for teams must be the same as the corresponding team numbers in 
 
 === accounts.tsv ===
 
+A text file consisting of a version line and one line for each account in the contest. Each line has tab separated fields as defined below.
+
+The first line has the following format
+{| class="wikitable"
+! Field
+! Description
+! Example
+! Type
+|-
+| 1 || Label || accounts || fixed string (always same value)
+|-
+| 2 || Version number || 1  || integer
+|}
+
+Then follow several lines with the following format (one per account).
+
+{| class="wikitable"
+! Field
+! Description
+! Example
+! Type
+|-
+| 1 || Account Type || judge || string
+|-
+| 3 || Full Name || Per Austrin  || string
+|-
+| 4 || Username || austrin || string
+|-
+| 5 || Password || B!5MWJiy || string
+|}
+
+Account Types are: judge, admin, analyst.
+
 === passwords.txt ===
 
 === logos.tar.gz ===
