@@ -589,6 +589,7 @@ The scoreboard must include at least the following information.
 
 For each team:
 # university name and logo, country flag,
+Todo: add links/references to university logo and country flag files
 # team position,
 # number of problems solved,
 # total penalty time.
