@@ -214,31 +214,31 @@ In order for a CCS to be selected for use at the World Finals it must satisfy ea
 
 == Admin Interface ==
 
-:This section describes all the required capabilities for users authenticated as admin.
+This section describes all the required capabilities for users authenticated as admin.
 
 === Account Disabling ===
 
-:The CCS must have a mechanism to disable any account (either an account for a human user or for another system), without the need for starting or stopping the contest. For example, this includes [[#Secure_Authentication|team accounts]] and judge accounts.
+The CCS must have a mechanism to disable any account (either an account for a human user or for another system), without the need for starting or stopping the contest. For example, this includes [[#Secure_Authentication|team accounts]] and judge accounts.
 
-:If a user is currently logged in when the associated account is being disabled, that user must become logged out of the system.
+If a user is currently logged in when the associated account is being disabled, that user must become logged out of the system.
 
 === Changes To Authentication Data ===
 
-:The CCS must allow user authentication credential information to be changed dynamically by contest administration staff while the contest is running.
+The CCS must allow user authentication credential information to be changed dynamically by contest administration staff while the contest is running.
 
 === Starting the Contest ===
 
-:The contest should automatically start when the configured start time is reached. It must also be possible to start the contest at the current time.
+The contest should automatically start when the configured start time is reached. It must also be possible to start the contest at the current time.
 
 === Adjusting for Exceptional Circumstances ===
 
 ==== Removing time intervals ====
 
-:It must be possible to, potentially retroactively, specify time intervals that will be disregarded for the purpose of scoring. The time during all such intervals will not be counted towards a team's penalty time for solved problems.
+It must be possible to, potentially retroactively, specify time intervals that will be disregarded for the purpose of scoring. The time during all such intervals will not be counted towards a team's penalty time for solved problems.
 
-:Note that removing a time interval changes the wall-clock time when the contest ends, as the duration of the contest in contest.yaml is specified in contest time. 
+Note that removing a time interval changes the wall-clock time when the contest ends, as the duration of the contest in contest.yaml is specified in contest time. 
 
-:Removing the interval between wall-clock time T<sub>0</sub> and T<sub>1</sub> means that all runs received between T<sub>0</sub> and T<sub>1</sub> will have the same contest-time and that the contest-time for all runs received after T<sub>1</sub> will have a contest-time that is T<sub>1</sub>-T<sub>0</sub> lower than if the interval was not removed.
+Removing the interval between wall-clock time T<sub>0</sub> and T<sub>1</sub> means that all runs received between T<sub>0</sub> and T<sub>1</sub> will have the same contest-time and that the contest-time for all runs received after T<sub>1</sub> will have a contest-time that is T<sub>1</sub>-T<sub>0</sub> lower than if the interval was not removed.
 
 * T<sub>0</sub> &le; T<sub>1</sub>
 * The removal of a time interval must be reversible, i.e., it must be possible to put it back. 
@@ -247,30 +247,30 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 ==== Changing contest length ====
 
-:It must be possible to change the length of the contest at any time during the contest.
+It must be possible to change the length of the contest at any time during the contest.
 
 ==== Adding penalty time ====
 
-:It must be possible to specify, for each team, an integer, potentially negative, amount of penalty time to be added into that team's total penalty time.
+It must be possible to specify, for each team, an integer, potentially negative, amount of penalty time to be added into that team's total penalty time.
 
 === Problem States: Enabled, Paused, and Disabled ===
 
-:Each contest problem can be in one of three mutually exclusive states: enabled, paused, and disabled.  The CCS must provide a mechanism to enable, pause and disable each contest problem separately, or all at once, without the need of stopping the contest.
+Each contest problem can be in one of three mutually exclusive states: enabled, paused, and disabled.  The CCS must provide a mechanism to enable, pause and disable each contest problem separately, or all at once, without the need of stopping the contest.
 
-:When a problem is enabled:
-:# Teams must be able to submit solutions to the problem.
-:# Unjudged submissions to the problem must be automatically judged.
-:# Submissions on the problem must be included in the scoreboard.
+When a problem is enabled:
+# Teams must be able to submit solutions to the problem.
+# Unjudged submissions to the problem must be automatically judged.
+# Submissions on the problem must be included in the scoreboard.
 
-:When a problem is paused:
-:# Teams must be able to submit solutions to the problem as if it was enabled.
-:# Automatic judging of the problem must be disabled.
-:# Submissions on the problem must be included in the scoreboard.
+When a problem is paused:
+# Teams must be able to submit solutions to the problem as if it was enabled.
+# Automatic judging of the problem must be disabled.
+# Submissions on the problem must be included in the scoreboard.
 
-:When a problem is disabled:
-:# Teams must not be able to submit solutions to the problem. The problem name must be removed or disabled from solution submit interfaces where present.
-:# Automatic judging of the problem must be disabled.
-:# Submissions on the problem must not affect the scoreboard at all, including submissions received prior to disabling.
+When a problem is disabled:
+# Teams must not be able to submit solutions to the problem. The problem name must be removed or disabled from solution submit interfaces where present.
+# Automatic judging of the problem must be disabled.
+# Submissions on the problem must not affect the scoreboard at all, including submissions received prior to disabling.
 
 '''TODO clarify disabled problems, effect on standings/scoreboard, effect on team/clar submission, (event feed?)
 
@@ -278,11 +278,11 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 ==== Automatic Rejudging ====
 
-:Rejudging a set of runs must be done in the following steps:
-:# A user selects a set of runs to be rejudged, as described in [[#Run_Selection|Run Selection]] below.
-:# The selected runs are run and judged in the same manner as for a newly arrived run.  For each selected run a new judgment is determined, ''but not assigned to the run''.
-:# A user ''commits'' the results of the rejudging, whereupon all the selected runs are assigned the judgments determined in the previous step.
-:If the results of a rejudge have not been committed when a new rejudge is started, the results of the old rejudge are discarded.
+Rejudging a set of runs must be done in the following steps:
+# A user selects a set of runs to be rejudged, as described in [[#Run_Selection|Run Selection]] below.
+# The selected runs are run and judged in the same manner as for a newly arrived run.  For each selected run a new judgment is determined, ''but not assigned to the run''.
+# A user ''commits'' the results of the rejudging, whereupon all the selected runs are assigned the judgments determined in the previous step.
+If the results of a rejudge have not been committed when a new rejudge is started, the results of the old rejudge are discarded.
 
 '''TODO: Reword the above so that it doesn't require an explicit select/execute/commit cycle, but instead allows (e.g.) the DOM-Judge mechanism of rejudging and then applying the results if desired.
 
@@ -290,68 +290,68 @@ Note: time interval removal does not affect the order in which runs arrived to t
 
 ==== Verifying Rejudgement Results ====
 
-:When a set of runs are being rejudged as described in [[#Automatic Rejudging|Automatic Rejudging]], the CCS must provide a way for the user to see the changes in judgments that would result if the rejudge is committed.
+When a set of runs are being rejudged as described in [[#Automatic Rejudging|Automatic Rejudging]], the CCS must provide a way for the user to see the changes in judgments that would result if the rejudge is committed.
 
 ''' Todo: notification should not actually be sent in this case, but is in the list referred to above.'''
 
 ==== Run Selection ==== 
 
-:The CCS must support the ability to rejudge a set of run submissions.  This means that it must be possible to provide the CCS with a filter of runs to be rejudged, based upon which the CCS automatically selects all runs matching the filter, and automatically rejudges them.
+The CCS must support the ability to rejudge a set of run submissions.  This means that it must be possible to provide the CCS with a filter of runs to be rejudged, based upon which the CCS automatically selects all runs matching the filter, and automatically rejudges them.
 
-:The CCS must support these filters to be any combination of filters of the following type.
+The CCS must support these filters to be any combination of filters of the following type.
 
-:# A specific (single) run.
-:# All runs which have been submitted for a specific problem.
-:# All runs which have been submitted using a specific language.
-:# All runs which have been assigned any specific one of the allowable run judgments as defined in [[#Judge Responses|Judge Responses]], or all runs that received any judgment other than "Accepted" (that is, all rejected runs).
-:# All runs which have been judged on a specific computer (identified in some reasonable way, e.g., IP address or hostname).  This requirement is only applicable if the CCS uses multiple machines to judge runs.
+# A specific (single) run.
+# All runs which have been submitted for a specific problem.
+# All runs which have been submitted using a specific language.
+# All runs which have been assigned any specific one of the allowable run judgments as defined in [[#Judge Responses|Judge Responses]], or all runs that received any judgment other than "Accepted" (that is, all rejected runs).
+# All runs which have been judged on a specific computer (identified in some reasonable way, e.g., IP address or hostname).  This requirement is only applicable if the CCS uses multiple machines to judge runs.
 
-:Thus, for example, it must be possible to select "all rejected runs for problem B", "all Time Limit Exceeded runs using Java for problem C", or "all runs in C++".
+Thus, for example, it must be possible to select "all rejected runs for problem B", "all Time Limit Exceeded runs using Java for problem C", or "all runs in C++".
 
 === Manual Override of Judgments ===
 
-:The CCS must support the ability to assign, to a single run, an updated judgment chosen from among any of the allowed run judgments as defined in [[Contest_Control_System#Judge Responses|Judge Responses]], or else to mark the run as deleted.  Deleted runs have no effect on scoring.
+The CCS must support the ability to assign, to a single run, an updated judgment chosen from among any of the allowed run judgments as defined in [[Contest_Control_System#Judge Responses|Judge Responses]], or else to mark the run as deleted.  Deleted runs have no effect on scoring.
 
-:The CCS must require a separate authentication every time a judgment is changed manually and all such changes must be logged.
+The CCS must require a separate authentication every time a judgment is changed manually and all such changes must be logged.
 
 === Scoreboard Display ===
 
-:The CCS must provide a mechanism for judges to view the current scoreboard. The scoreboard should be updated at least every 30 seconds.
+The CCS must provide a mechanism for judges to view the current scoreboard. The scoreboard should be updated at least every 30 seconds.
 
-:During times when the scoreboard is frozen, administrators must be able to view the current (updated) scoreboard as well as the frozen scoreboard.
+During times when the scoreboard is frozen, administrators must be able to view the current (updated) scoreboard as well as the frozen scoreboard.
 
 === Freezing the Scoreboard ===
 
-:The scoreboard should automatically freeze when the configured scoreboard freeze time is reached. It must also be possible to manually freeze the scoreboard at the current time. All submissions received after the freeze time should be treated as pending on a frozen scoreboard.
+The scoreboard should automatically freeze when the configured scoreboard freeze time is reached. It must also be possible to manually freeze the scoreboard at the current time. All submissions received after the freeze time should be treated as pending on a frozen scoreboard.
 
-:The exact phrase displayed on the frozen scoreboard should be:
+The exact phrase displayed on the frozen scoreboard should be:
 
   The scoreboard was frozen with XX minutes remaining - solutions submitted in the last XX minutes of the contest are still shown as pending.
 
-:It must be possible to re-enable scoreboard display updating at any time after it has been disabled, again without stopping the contest or affecting contest operations in any way.
+It must be possible to re-enable scoreboard display updating at any time after it has been disabled, again without stopping the contest or affecting contest operations in any way.
 
 === Suspension of notification of accepted runs ===
 
-:It must be possible to suspend the notification of accepted runs. When this function has been invoked, the following should happen:
+It must be possible to suspend the notification of accepted runs. When this function has been invoked, the following should happen:
 
-:# Any run that changes to Accepted should be shown as pending in the team interface.
-:# A broadcast message saying that notification of accepted runs has been suspended must be sent to all teams.
+# Any run that changes to Accepted should be shown as pending in the team interface.
+# A broadcast message saying that notification of accepted runs has been suspended must be sent to all teams.
 
 === Finalizing the Contest ===
 
-:Finalizing is the procedure to authorize the final results at the end of a contest.  The [[#results.tsv|results.tsv]] and [[#scoreboard.tsv|scoreboard.tsv]] files will be generated and the [[Event_Feed#finalized]] element will be sent to [[Event Feed]]s.
+Finalizing is the procedure to authorize the final results at the end of a contest.  The [[#results.tsv|results.tsv]] and [[#scoreboard.tsv|scoreboard.tsv]] files will be generated and the [[Event_Feed#finalized]] element will be sent to [[Event Feed]]s.
 
-:When the contest is over, but not finalized, all scoreboards must show a warning that the results are not final.
+When the contest is over, but not finalized, all scoreboards must show a warning that the results are not final.
 
-:The CCS must provide a way for admins to finalize the contest. It must not be possible to finalize a contest if one or more of the following applies:
-:# The contest is still running (i.e., the contest time is not over).
-:# There are unjudged runs.
-:# There are runs judged as [[#Exception Judgments|Judging System Error]].
-:# There are unanswered clarifications.
+The CCS must provide a way for admins to finalize the contest. It must not be possible to finalize a contest if one or more of the following applies:
+# The contest is still running (i.e., the contest time is not over).
+# There are unjudged runs.
+# There are runs judged as [[#Exception Judgments|Judging System Error]].
+# There are unanswered clarifications.
 
-:The following fields need to be entered before Finalizing the contest:
-:# B, a non-negative integer, as used in [[#Scoring Data Generation|Scoring Data Generation]].
-:# a comment, string, that indicates who approves the Final Results, for Example Finalized by John Doe and Jane Doe.
+The following fields need to be entered before Finalizing the contest:
+# B, a non-negative integer, as used in [[#Scoring Data Generation|Scoring Data Generation]].
+# a comment, string, that indicates who approves the Final Results, for Example Finalized by John Doe and Jane Doe.
 
 == Team Interface ==
 
