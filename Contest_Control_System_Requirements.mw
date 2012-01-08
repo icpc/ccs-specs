@@ -181,7 +181,7 @@ The CCS must be able to import contest configuration from a single URL, and use 
 
 The CCS must be able to read [[#teams.tsv|teams.tsv]], which contains a list of teams registered for the World Finals. It must use the data in this file to automatically create whatever internal representation is necessary to allow each team (and only the teams) specified in the registration list to participate in the World Finals contest.
 
-The CCS must be able to read [[#groups.tsv|groups.tsv]], an initialization file containing the list of groups that the teams belong to.
+The CCS must be able to read [[#groups.tsv|groups.tsv]], an initialization file containing the list of groups to which the teams belong.
 
 === Predefined Clarification Answers ===
 
