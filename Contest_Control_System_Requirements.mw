@@ -87,73 +87,73 @@ CCS meets all the requirements listed in this standard.
 
 === Licensing ===
 
-:The CCS must either be freely useable, or must be accompanied by a license granting to the ACM-ICPC the non-exclusive, non-revocable, non-transferable rights of use of the CCS both for purposes of evaluation and testing and for use in the ICPC World Finals. The CCS may not require obtaining any third-party license in order to be used by the ACM-ICPC.
+The CCS must either be freely useable, or must be accompanied by a license granting to the ACM-ICPC the non-exclusive, non-revocable, non-transferable rights of use of the CCS both for purposes of evaluation and testing and for use in the ICPC World Finals. The CCS may not require obtaining any third-party license in order to be used by the ACM-ICPC.
 
 === Data Persistency ===
 
 ==== Contest Configuration Persistency ====
 
-:The CCS must support persistence of the contest configuration. This means that following a shutdown of the CCS, or a failure on the machine(s) on which the CCS runs, it must be possible to quickly restore the configuration information already entered into the CCS without the necessity of reentering that configuration data.
+The CCS must support persistence of the contest configuration. This means that following a shutdown of the CCS, or a failure on the machine(s) on which the CCS runs, it must be possible to quickly restore the configuration information already entered into the CCS without the necessity of reentering that configuration data.
 
 ==== Contest State Persistency ====
 
-:The CCS must support persistence of the contest state once the contest has been started. This means that following a shutdown of the CCS, or a power failure on the machine(s) on which the CCS runs, it must be possible to quickly restore the contest state to what it was prior to the shutdown or power failure. The contest state for purposes of this requirement includes all data regarding submitted runs, submitted clarification requests, answers to clarification requests, run judgements, and similar data defining and/or affecting the standings of the contest.
+The CCS must support persistence of the contest state once the contest has been started. This means that following a shutdown of the CCS, or a power failure on the machine(s) on which the CCS runs, it must be possible to quickly restore the contest state to what it was prior to the shutdown or power failure. The contest state for purposes of this requirement includes all data regarding submitted runs, submitted clarification requests, answers to clarification requests, run judgements, and similar data defining and/or affecting the standings of the contest.
 
-:The CCS must not lose more than 1 minute of contest data on a failure of any part of the contest system.
+The CCS must not lose more than 1 minute of contest data on a failure of any part of the contest system.
 
 ==== Data Backup ====
 
-:The CCS must support a mechanism that allows the contest to continue with minimal disruption in case of hardware failure. This means for example that the CCS must arrange that all contest data is continually backed up in a way that allows the contest to be restored to its current state in the event of a single hard disk failure, loss of network connection, or other similar failure.
+The CCS must support a mechanism that allows the contest to continue with minimal disruption in case of hardware failure. This means for example that the CCS must arrange that all contest data is continually backed up in a way that allows the contest to be restored to its current state in the event of a single hard disk failure, loss of network connection, or other similar failure.
 
 === Secure Authentication ===
 
-:The CCS must support a secure authentication mechanism, allowing each registered user (being either a [[#Team_Interface|team]], an [[#Admin_Interface|admin]], or a [[#Judge_Interface|judge]]) to gain access to the contest, and must ensure that:
-:# Only users who supply correct authentication credentials may invoke contest-related functions.
-:# Users may only invoke functions corresponding to their authentication credentials.  (In other words, it must not be possible for, e.g., a team to invoke functions as if they were some other team, or as if they were a judge.)
+The CCS must support a secure authentication mechanism, allowing each registered user (being either a [[#Team_Interface|team]], an [[#Admin_Interface|admin]], or a [[#Judge_Interface|judge]]) to gain access to the contest, and must ensure that:
+# Only users who supply correct authentication credentials may invoke contest-related functions.
+# Users may only invoke functions corresponding to their authentication credentials.  (In other words, it must not be possible for, e.g., a team to invoke functions as if they were some other team, or as if they were a judge.)
 
 ==== Creation of Authentication Data ====
 
-: If the CCS uses a login/password mechanism, it should generate login/password information for all users.  It should also, for each type of user, output a complete list of username/password pairs in a file using the [[#userdata.tsv|userdata.tsv]] format.
+If the CCS uses a login/password mechanism, it should generate login/password information for all users.  It should also, for each type of user, output a complete list of username/password pairs in a file using the [[#userdata.tsv|userdata.tsv]] format.
 
 '''TODO resolve what the requirements are, what are the data flows/contents and use
 
 ==== Logging Out ====
 
-:The CCS must support a mechanism for each user to disconnect from the contest, with the effect that no other user of the computer system not possessing that team’s authentication credentials will be able to invoke CCS functions as if they did possess those credentials.
+The CCS must support a mechanism for each user to disconnect from the contest, with the effect that no other user of the computer system not possessing that team’s authentication credentials will be able to invoke CCS functions as if they did possess those credentials.
 
 ==== Underlying Implementation ====
 
-:The CCS may optionally rely on the underlying operating system account login/password mechanism for purposes of meeting the requirements of this section, provided that it is the case that the CCS enforces all of the requirements of this section, including but not limited to the requirement that users not be allowed to invoke functions as if they were some user other than that specified by their login credentials.
+The CCS may optionally rely on the underlying operating system account login/password mechanism for purposes of meeting the requirements of this section, provided that it is the case that the CCS enforces all of the requirements of this section, including but not limited to the requirement that users not be allowed to invoke functions as if they were some user other than that specified by their login credentials.
 
 === Network Security ===
 
-:All communication between CCS modules which takes place over the contest network must be encrypted.
+All communication between CCS modules which takes place over the contest network must be encrypted.
 
 === No outside contact ===
 
-:The CCS must be able to run at the World Finals site without contact to anything outside the contest network.
+The CCS must be able to run at the World Finals site without contact to anything outside the contest network.
 
 === Timestamps and Ids for Runs, Clarifications and Notifications ===
-:A timestamp and an integral sequence number, called an Id, are assigned to runs, clarifications, and balloon notifications. Runs and clarifications are assigned an id and a timestamp at the time they enter the system, and balloon notifications are assigned an id and a timestamp at the time they are generated.
+A timestamp and an integral sequence number, called an Id, are assigned to runs, clarifications, and balloon notifications. Runs and clarifications are assigned an id and a timestamp at the time they enter the system, and balloon notifications are assigned an id and a timestamp at the time they are generated.
 
-:*The id sequences are separate for runs, clarifications, and notifications i.e., there are both a run 1, a clarification 1, and a notification 1.
-:* Ids always increase by one.
-:* Run received earlier must have lowed ID. The same holds for the ids of clarifications and notifications.
-:* Timestamps must have at least second granularity.
+*The id sequences are separate for runs, clarifications, and notifications i.e., there are both a run 1, a clarification 1, and a notification 1.
+* Ids always increase by one.
+* Run received earlier must have lowed ID. The same holds for the ids of clarifications and notifications.
+* Timestamps must have at least second granularity.
 
 === Limitations ===
 
 ==== Number of Problems ====
 
-:The CCS must not impose an upper limit on the number of different contest problems.
+The CCS must not impose an upper limit on the number of different contest problems.
 
 ==== Number of Teams ====
 
-:The CCS must not impose an upper limit on the number of teams.
+The CCS must not impose an upper limit on the number of teams.
 
 ==== Test Data Files ====
 
-:The CCS must not impose an upper limit on the number of test data files for a problem, or their sizes.
+The CCS must not impose an upper limit on the number of test data files for a problem, or their sizes.
 
 === Use At The World Finals ===
 
