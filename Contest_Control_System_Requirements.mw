@@ -350,7 +350,7 @@ When the contest is over, but not finalized, all scoreboards must show a warning
 The CCS must provide a way for admins to finalize the contest. It must not be possible to finalize a contest if one or more of the following applies:
 # The contest is still running (i.e., the contest time is not over).
 # There are unjudged runs.
-# There are runs judged as [[#Exception Judgments|Judging System Error]].
+# There are runs judged as [[#Exception Judgments|Judging Error]].
 # There are unanswered clarifications.
 
 The following fields need to be entered before Finalizing the contest:
