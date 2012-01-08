@@ -1064,7 +1064,7 @@ Then follow several lines with the following format (one per account).
 |-
 | 3 || Full Name || University of Virginia  || string
 |-
-| 4 || Username/login || team-001 || string
+| 4 || Username|| team-001 || string
 |-
 | 5 || Password || B!5MWJiy || string
 |}
