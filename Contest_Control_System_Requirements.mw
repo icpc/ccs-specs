@@ -491,7 +491,7 @@ It must be possible to configure the CCS such that these actions are performed o
 
 === Prevention of Auto-judge Machine Starvation ===
 The CCS must use auto-judge machines efficiently and fairly. At a minimum it needs to ensure:
-#Submissions should not be left in queue if there are unused auto-judge machines
+#Submissions must not be left in queue if there are unused auto-judge machines
 #The system must prevent a single or a group of team from starving other teams out of auto-judge machines
 
 === Prohibited Operations ===
