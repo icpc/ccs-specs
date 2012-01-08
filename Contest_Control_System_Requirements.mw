@@ -278,7 +278,7 @@ There must be a way to preview the judgements which result from rejudging the se
 
 ==== Run Selection ==== 
 
-It must be possible to provide the CCS with a filter defining the set of runs to be rejudged.
+The CCS must provide the ability to specify a filter defining the set of runs to be rejudged.
 The CCS must support any combination of filters of the following type.
 
 # A specific (single) run.
