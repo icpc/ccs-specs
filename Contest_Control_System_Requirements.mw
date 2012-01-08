@@ -131,7 +131,7 @@ CCS meets all the requirements listed in this standard.
 
 === No outside contact ===
 
-:The CCS must be able to run at the world finals site without contact to anything outside the contest network.
+:The CCS must be able to run at the World Finals site without contact to anything outside the contest network.
 
 === Timestamps and Ids for Runs, Clarifications and Notifications ===
 :A timestamp and an integral sequence number, called an Id, are assigned to runs, clarifications, and balloon notifications. Runs and clarifications are assigned an id and a timestamp at the time they enter the system, and balloon notifications are assigned an id and a timestamp at the time they are generated.
