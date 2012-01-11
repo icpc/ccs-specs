@@ -22,6 +22,8 @@ and output. The format of the problem statement is described in [[Problem Statem
 <tt><short_name>/problem_statement/</tt> , problem.tex should reference auxiliary files as if the
 working directory is <tt><short_name>/problem_statement/</tt>.
 
+The problem title is found in the <tt>problem.tex</tt> file (see [[Problem Statement Template]]).  If the problem title is not found in <tt>problem.tex</tt> then use the <tt>name</tt> field in the <tt>[[#Configuration file format| problem.yaml]]</tt> file.  If the problem name is not found in the <tt>[[#Configuration file format| problem.yaml]]</tt> file use the <short_name>.
+
 === Test data ===
 
 The test data are provided in subdirectories of <tt><short_name>/data/</tt>. The sample data in <tt><short_name>/data/sample/</tt> and the secret data in <tt><short_name>/data/secret/</tt>.
