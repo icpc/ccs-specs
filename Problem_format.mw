@@ -133,8 +133,6 @@ problem.yaml is a UTF-8 encoded YAML file consisting of a mapping with the follo
 {| class="wikitable"
 ! Key !! Comments !! Example
 |-
-|name||The full title for a problem, used if problem title is not present in [[Problem Statement Template]]||Reverse squares
-|-
 | source || optional || ICPC World Finals 2011
 |-
 | author || optional, defaults to "Unknown"  ||
