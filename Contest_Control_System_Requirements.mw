@@ -211,6 +211,8 @@ For each supported language compiler or interpreter it must be possible to confi
 
 Problems (including judge data, validators, execution time limit, etc) are configured using the [[Problem_format|ICPC problem format]]. The CCS must have full support for this standard, but may assume that an English problem statement exists. All problems that are added or changed must be verified as defined in the problem standard.
 
+The problem name is as defined in the problemtitle macro in the problem specification. Optionally, the plainproblemtitle may be used instead. If problemtitle is used escaped sections must be handled properly. If plainproblemtitle is used it must be used verbatim.
+
 === Configuration Change ===
 
 The CCS must allow updating of configuration data without restarting or stopping the CCS.  
