@@ -209,7 +209,7 @@ For each supported language compiler or interpreter it must be possible to confi
 
 === Contest Problems ===
 
-Problems (including judge data, validators, execution time limit, etc) are configured using the [[Problem_format|ICPC problem format]]. The CCS must have full support for this standard. All problems that are added or changed must be verified as defined in the problem standard.
+Problems (including judge data, validators, execution time limit, etc) are configured using the [[Problem_format|ICPC problem format]]. The CCS must have full support for this standard, but may assume that an English problem statement exists. All problems that are added or changed must be verified as defined in the problem standard.
 
 === Configuration Change ===
 
