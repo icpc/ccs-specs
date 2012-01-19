@@ -78,11 +78,11 @@ Verification Checks (in order)
 # Check solutions (run all solutions check that they get the expected verdicts)
 
  Warn if:
-       there is no problem.tex
        there are no *.in in data/sample/
 
  Error if:
        there is no problem.yaml
+       there is no problem statement (i.e., a problem*.tex file)
        any value in problem.yaml is invalid
        there are no *.in in data/secret/
        there are .in files without corresponding .ans files in data/*/
