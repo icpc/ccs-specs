@@ -209,9 +209,9 @@ For each supported language compiler or interpreter it must be possible to confi
 
 === Contest Problems ===
 
-Problems (including judge data, validators, execution time limit, etc) are specified and configured using the [[Problem_format|ICPC problem format]]. The CCS must have full support for this standard, but may assume that an English problem statement exists. All problems that are added or changed must be verified as defined in the problem standard.
+Problems (including judge data, validators, execution time limit, etc) are specified and configured using the [[Problem_format|ICPC problem format]]. The CCS must have full support for this standard, but may assume that problem.tex exists (containing a problem statement in English). All problems that are added or changed must be verified as defined in the problem standard.
 
-The problem name is as defined in the ''problemtitle'' macro in the problem specification. Optionally, the ''plainproblemtitle'', if present, may be used instead. If ''problemtitle'' is used then escaped sections must be handled properly. If ''plainproblemtitle'' is used it must be used verbatim.
+The problem name is as defined in the ''problemname'' macro in the problem specification. Optionally, the ''plainproblemname'', if present, may be used instead. If ''problemname'' is used then escaped parts of it must be handled properly. If ''plainproblemname'' is used it must be used verbatim.
 
 === Configuration Change ===
 
