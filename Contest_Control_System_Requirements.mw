@@ -639,15 +639,16 @@ For each team:
 # total penalty time
 
 For each team and problem:
-# number of submission from that team on that problem,
+# number of submissions from that team on that problem,
 # whether the problem is solved, unsolved or a judgement is pending,
-# if problem is solved, the contest time it was solved,
-# if problem is pending, how many submissions are pending on that problem,
+# if the problem is solved, the contest time at which it was solved,
+# if the problem is pending judgement, how many submissions are pending judgement on that problem,
 
 A problem is pending judgement if any submission on it is pending judgement and there is not an earlier accepted submission on that problem.
 
 
 ----
+
 == Data Export ==
 
 === Event Feed ===
