@@ -62,9 +62,29 @@ A validator is either a file or a directory. A validator in the form of a direct
 * the validator must be run by executing the run script.
 Otherwise, the validator will be compiled and run as if it was a submission (except that it is given the command-line arguments specified in problem.yaml, if there are any).
 
-==== Default Diff Capabilities ====
+==== Default Validator Capabilities ====
 
-TODO: describe the default diff capabilities.
+The default validator is essentially a beefed-up diff. In its default mode, it
+tokenizes the files to compare and compares them token by token. It supports the
+following command-line arguments to control how tokens are compared.
+
+{| class="wikitable"
+! Arguments !! Description
+|-
+| <tt>case_sensitive</tt> || indicates that comparisons should be case-sensitive.
+|-
+| <tt>space_change_sensitive</tt> || indicates that changes in the amount of whitespace should be rejected (the default is that any sequence of 1 or more
+whitespace characters are equivalent).
+|-
+| <tt>float_relative_tolerance &epsilon;</tt> || indicates that floating-point tokens should be accepted if they are within relative error &le; &epsilon; (see below for details).
+|-
+| <tt>float_absolute_tolerance &epsilon;</tt> || indicates that floating-point tokens should be accepted if they are within absolute error &le; &epsilon; (see below for details).
+|-
+| <tt>float_tolerance &epsilon;</tt> || short-hand for applying &epsilon; as both relative and absolute tolerance.
+|}
+
+When supplying both a relative and an absolute tolerance, the semantics are that a token is accepted if it is within either of the two tolerances.
+When a floating-point tolerance has been set, any valid formatting of floating point numbers is accepted for floating point tokens. So for instance if a token in the answer file says <tt>0.0314</tt>, a token of <tt>3.14000000e-2</tt> in the output file would be accepted. If no floating point tolerance has been set, floating point tokens are treated just like any other token and has to match exactly.
 
 === Determination of Time Limit ===
 
