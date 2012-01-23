@@ -639,6 +639,7 @@ For each team and problem:
 
 A problem is pending judgement if any submission on it is pending judgement and there is not an earlier accepted submission on that problem.
 
+----
 == Data Export ==
 
 === Event Feed ===
