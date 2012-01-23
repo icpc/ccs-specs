@@ -742,6 +742,7 @@ In order for a given CCS to be considered as a candidate for running the ICPC Wo
 # A text file named “License” containing the license, conforming to the the [[#Licensing|Licensing]] section, under which the CCS is made available to the ACM ICPC; and
 # A text file named “readme” containing instructions on how to properly unpack the archive file to set up the installation process.
 
+----
 == Appendix: File formats ==
 
 All files must be encoded in UTF-8.
