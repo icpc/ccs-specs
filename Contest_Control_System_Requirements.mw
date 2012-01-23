@@ -329,8 +329,8 @@ The scoreboard must automatically freeze when the configured scoreboard freeze t
 
 The exact phrase displayed on the frozen scoreboard must be:
 
-  The scoreboard was frozen with XX minutes remaining - solutions submitted in the last XX minutes 
-  of the contest are still shown as pending.
+  The scoreboard was frozen with XX minutes remaining - solutions submitted in the 
+  last XX minutes of the contest are still shown as pending.
 
 where XX is the number of minutes remaining in the contest at the time the scoreboard was frozen.
 
