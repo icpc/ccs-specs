@@ -126,7 +126,7 @@ If the CCS uses a login/password mechanism to enforce secure authentication, it 
 
 ==== Logging Out ====
 
-The CCS must support a mechanism for each user to disconnect from the contest, with the effect that no other user of the computer system not possessing that team’s authentication credentials will be able to invoke CCS functions as if they did possess those credentials.
+The CCS must support a mechanism for each user to disconnect from the contest, with the effect that no other user of the computer system not possessing that team&apos;s authentication credentials will be able to invoke CCS functions as if they did possess those credentials.
 
 ==== Underlying Implementation ====
 
