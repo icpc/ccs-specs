@@ -66,6 +66,12 @@ Otherwise, the validator will be compiled and run as if it was a submission (exc
 
 TODO: describe the default diff capabilities.
 
+=== Determination of Time Limit ===
+
+The execution time limit for the problem is determined as follows. First, all the provided <tt>accepted/</tt> solutions are run. Let ''t<sub>max</sub>'' be the maximum running time of these solutions on any of the input files.  The time limit is then set to be ''t<sub>lim</sub>'' = &lceil;''t<sub>max</sub> &middot; M''&rceil; where ''M'' is the value of the time multiplier parameter from the [[#limits|limits configuration of problem.yaml]].
+
+Furthermore, it is required that all of the provided time limit exceeded submissions run for at least ''t<sub>lim</sub> &middot; S'' seconds, where S is the value of the time safety margin parameter from the [[#limits|limits configuration]].
+
 === Verification ===
 
 Solutions or validators in languages that are not supported by the CCS
@@ -110,8 +116,6 @@ Verification Checks (in order)
  Let t_slow be the shortest time any of the solutions ran on any of the inputs.
 
  If t_slow is less than t * time_limit_safety_margin: Error!
-
- The execution time limit should be at least t * time_limit_multiplier and at most 1 second more.
 
  For each solution in submissions/wrong_answer/:
        For each *.in in data/*/:
