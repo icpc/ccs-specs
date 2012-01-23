@@ -2,6 +2,8 @@
 <br clear="all" /> 
 <div style="break-before: page">&nbsp;</div>
 
+<div style="break-before: page">&nbsp;</div>
+----
 == Introduction ==
 
 This document specifies a standard for operation, verification and validation
@@ -63,9 +65,6 @@ requirements of some other contest; such additional functionality will not disqu
 the CCS from qualifying as a candidate to run the ICPC World Finals provided the
 CCS meets all the requirements listed in this standard.
 
-<div style="break-before: page">&nbsp;</div>
-
-----
 == General Requirements ==
 
 === Licensing ===
