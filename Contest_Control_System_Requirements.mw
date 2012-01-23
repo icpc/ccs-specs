@@ -660,6 +660,7 @@ The ''final results'' lists the ranked teams sorted by rank (with alphabetical o
 
 The CCS must be capable of generating an external file containing the final results of the World Finals contest. The format of this file must be as defined in the [[#results.tsv|results.tsv]].
 
+----
 == Testability Requirements ==
 
 === Test Mode ===
