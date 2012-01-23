@@ -178,6 +178,9 @@ At least one person from the submitting entity with intimate knowledge about the
 The CCS must run on the computer platform set aside for the CCS at the World Finals and posted at the ICPC web site. Normally this will consist of one machine per team, several auto-judging machines that are identical to the team machines, and one or more servers.
 
 ----
+<br clear="all" /> 
+<div style="break-before: page">&nbsp;</div>
+
 == Contest Configuration ==
 
 === Advance Configuration ===
@@ -225,6 +228,7 @@ The CCS must allow updating of configuration data without restarting or stopping
 The CCS must support the ability to create and save an updated contest.yaml file upon request.
 
 ----
+
 == Admin Interface ==
 
 This section describes all the required capabilities for users authenticated as admin.
