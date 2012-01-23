@@ -1,9 +1,3 @@
-----
-<br clear="all" /> 
-<div style="break-before: page">&nbsp;</div>
-
-<div style="break-before: page">&nbsp;</div>
-----
 
 ----
 == Introduction ==
@@ -67,6 +61,8 @@ requirements of some other contest; such additional functionality will not disqu
 the CCS from qualifying as a candidate to run the ICPC World Finals provided the
 CCS meets all the requirements listed in this standard.
 
+
+----
 == General Requirements ==
 
 === Licensing ===
@@ -178,6 +174,8 @@ At least one person from the submitting entity with intimate knowledge about the
 ==== Computer Platform ====
 The CCS must run on the computer platform set aside for the CCS at the World Finals and posted at the ICPC web site. Normally this will consist of one machine per team, several auto-judging machines that are identical to the team machines, and one or more servers.
 
+
+----
 == Contest Configuration ==
 
 === Advance Configuration ===
@@ -224,8 +222,8 @@ The CCS must allow updating of configuration data without restarting or stopping
 
 The CCS must support the ability to create and save an updated contest.yaml file upon request.
 
-----
 
+----
 == Admin Interface ==
 
 This section describes all the required capabilities for users authenticated as admin.
@@ -360,6 +358,8 @@ The following fields need to be entered before Finalizing the contest:
 # B, a non-negative integer, as used in [[#Scoring Data Generation|Scoring Data Generation]].
 # a comment, string, that indicates who approves the Final Results, for Example Finalized by John Doe and Jane Doe.
 
+
+
 ----
 == Team Interface ==
 
@@ -429,6 +429,7 @@ The CCS must provide a mechanism for teams to view the current scoreboard. The s
 
 The CCS must provide a mechanism for teams to determine the current [[#Problem_States:_Enabled.2C_Paused.2C_and_Disabled|state]] (enabled, paused, or disabled) of each contest problem.
 
+
 ----
 == Judge Interface ==
 
@@ -485,6 +486,7 @@ The CCS must provide the ability for a human judge to compose a message and broa
 The CCS must provide a mechanism for judges to view the current scoreboard. The scoreboard must be updated at least every 30 seconds.
 
 During times when the scoreboard is frozen, judges must be able to view the current (updated) scoreboard as well as the frozen scoreboard.
+
 
 ----
 == Judging ==
@@ -588,6 +590,7 @@ The content of stdout and stderr of the output validator can be ignored by the c
 
 The CCS must provide a default "diff" capable of handling the options specified in the [[Problem_format#problem.cfg|problem format standard]].
 
+
 ----
 == Scoring ==
 
@@ -640,6 +643,7 @@ For each team and problem:
 
 A problem is pending judgement if any submission on it is pending judgement and there is not an earlier accepted submission on that problem.
 
+
 ----
 == Data Export ==
 
@@ -660,6 +664,7 @@ The ''final results'' lists the ranked teams sorted by rank (with alphabetical o
 # The total penalty time and time of last accepted submission, if the team is in rank 1 through 12+B (where B is as defined in [[#Scoring_Data_Generation|Scoring Data Generation]]). 
 
 The CCS must be capable of generating an external file containing the final results of the World Finals contest. The format of this file must be as defined in the [[#results.tsv|results.tsv]].
+
 
 ----
 == Testability Requirements ==
@@ -696,6 +701,7 @@ When the CCS is running in [[Contest_Control_System#Test Mode| Real]] mode and r
 
 When the CCS is running in [[Contest_Control_System#Test Mode|Test]] mode and receives a run via the Run Submission Interface containing a timestamp specified with a -t parameter, it must use the timestamp specified by the -t parameter in the run as the timestamp for the run, as long as it is higher than any previously assigned timestamp, regardless of the current actual time.
 
+
 ----
 == Documentation Requirements ==
 
@@ -731,6 +737,7 @@ The System Manager’s Guide must explicitly list any software dependencies of t
 
 The System Manager’s Guide must describe the steps required to use each of the “Testability Interfaces” described in the section on Testability. For example, the guide must describe how to invoke the command-line tool which supports submitting runs from a team, as well as describing the use of all other required testability interfaces.
 
+
 ----
 == Certification Process ==
 
@@ -742,6 +749,7 @@ In order for a given CCS to be considered as a candidate for running the ICPC Wo
 # PDF’s for each of the documents listed under [[Contest_Control_System#Documentation_Requirements| Documentation Requirements]];
 # A text file named “License” containing the license, conforming to the the [[#Licensing|Licensing]] section, under which the CCS is made available to the ACM ICPC; and
 # A text file named “readme” containing instructions on how to properly unpack the archive file to set up the installation process.
+
 
 ----
 == Appendix: File formats ==
