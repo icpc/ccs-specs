@@ -485,6 +485,7 @@ The CCS must provide a mechanism for judges to view the current scoreboard. The 
 
 During times when the scoreboard is frozen, judges must be able to view the current (updated) scoreboard as well as the frozen scoreboard.
 
+----
 == Judging ==
 
 === Automated Judgements ===
