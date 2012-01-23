@@ -728,7 +728,7 @@ The CCS must include a "Judge's Guide" document in PDF format. The Judge's Guide
 
 The CCS must include a "Contest Administrator's Guide" document in PDF format. The Administrator's Guide must provide all the necessary instructions showing how contest personnel use the functions of the CCS to set up and manage a contest.
 
-In the event that a configuration item is provided by using services of the underlying operating system rather than facilities directly implemented or controlled by the CCS itself, the administrator's Guide must explicitly state this fact, and reference the System Manager’s Guide (see below) as the source of information on handling that portion of configuration and preparation for the contest.
+In the event that a configuration item is provided by using services of the underlying operating system rather than facilities directly implemented or controlled by the CCS itself, the administrator's Guide must explicitly state this fact, and reference the System Manager's Guide (see below) as the source of information on handling that portion of configuration and preparation for the contest.
 
 === System Manager's Guide ===
 
