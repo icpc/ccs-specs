@@ -696,7 +696,7 @@ At a minimum the run submission command line interface must implement the follow
  -d <directory for main source and other source files>
  -t <contest-time for submission> 
 
-Options -l, -p, -u, -w, -m and -d are mandatory for all submissions. The -t switch is optional.   The CCS may implement additional switches.
+Options -p, -l, -u, -w, -m and -d are mandatory for all submissions. The -t switch is optional.   The CCS may implement additional switches.
 
 The CCS may assume that runs submitted via the  [[Contest_Control_System#Run Submission Interface| Run Submission Interface]] which contain the -t parameter will be submitted in increasing timestamp order.
 
