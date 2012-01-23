@@ -587,6 +587,7 @@ The content of stdout and stderr of the output validator can be ignored by the c
 
 The CCS must provide a default "diff" capable of handling the options specified in the [[Problem_format#problem.cfg|problem format standard]].
 
+----
 == Scoring ==
 
 === Scoring Data Generation ===
