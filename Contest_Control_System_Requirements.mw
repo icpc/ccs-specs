@@ -608,7 +608,7 @@ The CCS must be capable of automatically generating up-to-date scoring data acco
 # A team's ''last accepted submission'' is the contest time of the problem that the team solved last.
 # The ''position'' of a team is determined by sorting the teams first by number of problems solved (descending), then within that by total penalty time (ascending), then within that by last accepted submission (ascending).
 # The ''rank'' of a team is then determined as follows:
-## For teams in positions up to and including 12+B, the rank equals the position (B is provided when [[#Finalizing_the_Contest|finalizing the contest]], the default value is 0).
+## For teams in positions up to and including 12+B, the rank equals the position (B is provided when [[#Finalizing_the_Contest|finalizing the contest]]; the default value is 0).
 ## Teams that solved fewer problems than the median team are not ranked at all.
 ## For the remaining teams, the rank is determined by sorting the teams by number of problems solved (descending).
 # The ''award'' of a team is:
