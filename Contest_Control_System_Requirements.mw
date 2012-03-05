@@ -705,7 +705,7 @@ At a minimum the run submission command line interface must implement the follow
  -t <contest-time for submission> 
  -i <run id>
 
-Options -p, -l, -u, -w, and -m  are mandatory for all submissions. The -t and -i switches are optional.   The CCS may implement additional switches.
+Options -p, -l, -u, and -w  are mandatory for all submissions. The switch -m is only required if needed by the language set using -l. The -t and -i switches are optional. The CCS may implement additional switches.
 
 The CCS may assume that runs submitted via the [[Contest_Control_System#Run Submission Interface| Run Submission Interface]] which contain the -t parameter will be submitted in increasing timestamp order.
 
