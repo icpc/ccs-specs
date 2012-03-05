@@ -702,12 +702,12 @@ At a minimum the run submission command line interface must implement the follow
  -u <team id>
  -w <team password>
  -m <main source filename>
- -d <directory for main source and other source files>
  -t <contest-time for submission> 
+ -i <run id>
 
-Options -p, -l, -u, -w, -m and -d are mandatory for all submissions. The -t switch is optional.   The CCS may implement additional switches.
+Options -p, -l, -u, -w, and -m  are mandatory for all submissions. The -t and -i switches are optional.   The CCS may implement additional switches.
 
-The CCS may assume that runs submitted via the  [[Contest_Control_System#Run Submission Interface| Run Submission Interface]] which contain the -t parameter will be submitted in increasing timestamp order.
+The CCS may assume that runs submitted via the [[Contest_Control_System#Run Submission Interface| Run Submission Interface]] which contain the -t parameter will be submitted in increasing timestamp order.
 
 ==== Timestamp Handling ====
 When the CCS is running in [[Contest_Control_System#Test Mode| Real]] mode and receives a run via the Run Submission Interface, any timestamp provided via the -t parameter must be ignored and the CCS must apply a timestamp to the submitted run as specified in the section describing [[Contest_Control_System#Timestamps and Ids for Runs, Clarifications and Notifications| timestamp]]s.  
