@@ -1141,7 +1141,7 @@ A text file containing passwords with a length of between 0 and 128 characters, 
 === logos.tar.gz ===
 The file contains the logos for all teams, in a tar archive and compressed using gzip.
 
-The archive must contain a folder named "logos", with a logo in .png format, containing an alpha channel, for each team in the contest. The logo must be named <team number>.png, where team number is padded with 0 to 4 digits. Example: 0042.png. This folder may not contain any other files. If possible, the logos should be as square as possible and 400x400 pixels or larger (but don't upsize images or add unnecessary transparent borders).
+The archive must contain a folder named "logos", with a logo in .png format, containing an alpha channel, for each team in the contest. The logo must be named <team number>.png, where team number is padded with 0 to 4 digits. Example: 0042.png. This folder may not contain any other files. If possible, the logos should be as square as possible and 600x600 pixels or larger (but don't upsize images or add unnecessary transparent borders).
 
 The archive may contain other files and folders. These must be ignored by the CCS when importing the logos.
 
