@@ -4,6 +4,8 @@ This document describes a standard for distributing and sharing problems for alg
 
 All problems must have a "short name" consisting solely of lower case letters a-z and digits 0-9.  All files related to a given problem are provided in a directory named after the short name of the problem.
 
+All file names must consist solely of lower or upper case letters a-z, A-Z, digits 0-9, period, dash or underscore, but must not begin or end with period, dash or underscore. 
+
 All text files for a problem should be UTF-8 encoded.
 
 === Problem Metadata ===
