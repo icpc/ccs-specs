@@ -702,7 +702,7 @@ At a minimum the run submission command line interface must implement the follow
  -u <team id>
  -w <team password>
  -m <main source filename>
- -t <contest-time for submission> 
+ -t <contest-time (in ms) for submission> 
  -i <run id>
 
 Options -p, -l, -u, and -w  are mandatory for all submissions. The switch -m is only required if needed by the language set using -l. The -t and -i switches are optional. The CCS may implement additional switches.
