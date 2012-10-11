@@ -343,13 +343,6 @@ where XX is the number of minutes remaining in the contest at the time the score
 
 It must be possible to re-enable scoreboard display updating at any time after it has been disabled, again without stopping the contest or affecting contest operations in any way.
 
-=== Suspension of notification of accepted runs ===
-
-It must be possible to suspend the notification of accepted runs. When this function has been invoked, the following must happen:
-
-# Any run that changes to Accepted must be shown as pending in the team interface.
-# A broadcast message saying that notification of accepted runs has been suspended must be sent to all teams.
-
 === Finalizing the Contest ===
 
 Finalizing is the procedure to authorize the final results at the end of a contest.  The [[#results.tsv|results.tsv]] and [[#scoreboard.tsv|scoreboard.tsv]] files will be generated and the [[Event_Feed#Finalized_Event|finalized]] element will be sent on the [[Event Feed]]s.
