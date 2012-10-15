@@ -194,7 +194,7 @@ All variable aspects of the CCS must be configurable prior to the start of a Wor
 
 === Importing Contest Configuration ===
 
-The CCS must be able to import contest configuration from a single URL, and use the data at that location to configure the CCS. The configuration URL contains all contest configuration data, including the contest configuration file ([[#contest.yaml|contest.yaml]]), problem definitions, teams.tsv, groups.tsv, logos.tar.gz, and flags.tar.gz. For example, if the URL is http://10.1.1.0/data, teams.tsv can be imported from http://10.1.1.0/data/teams.tsv.
+The CCS must be able to import contest configuration from a single URL, and use the data at that location to configure the CCS. The configuration URL contains all contest configuration data, including the contest configuration file ([[#contest.yaml|contest.yaml]]), problemset configuration file ([[#problemset.yaml|problemset.yaml]]), problem definitions, teams.tsv, groups.tsv, logos.tar.gz, and flags.tar.gz. For example, if the URL is http://10.1.1.0/data, teams.tsv can be imported from http://10.1.1.0/data/teams.tsv.
 
 The CCS must be able to read [[#teams.tsv|teams.tsv]], which contains a list of teams registered for the World Finals. It must use the data in this file to automatically create whatever internal representation is necessary to allow each team (and only the teams) specified in the registration list to participate in the World Finals contest.
 
