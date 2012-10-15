@@ -766,7 +766,7 @@ All files must be encoded in UTF-8.
 === contest.yaml ===
 
 A YAML file consisting of a mapping with the following keys:
-
+ 
 {| class="wikitable"
 ! Key !! Description
 |-
@@ -787,8 +787,6 @@ A YAML file consisting of a mapping with the following keys:
 | clar-categories || Sequence of categories for clarifications.
 |-
 | languages || Sequence of mappings with keys as defined below
-|-
-| problemset || Sequence of mappings with keys as defined below
 |-
 | penaltytime || Penalty minutes for each incorrect run (optional, default 20)
 |}
@@ -812,22 +810,6 @@ A sequence of mappings with the following keys:
 |}
 
 A CCS may place reasonable requirements on the configuration of languages. For instance, a CCS may require that the C compiler is configured such that the output binary will be statically linked and output a binary with name 'long_weird_name'. Such requirements should be clearly specified in the CCS documentation. The CCS should not place any restrictions on optimization options used, and should in general place as few restrictions as possible on the language configuration.
-
-==== problemset ====
-
-A sequence of mappings with the following keys:
-
-{| class="wikitable"
-! Key !! Description
-|-
-| letter || Upper case letter designating the problem 
-|-
-| short-name || The problem identifier, used to map to the problem data
-|-
-| color || Color of balloon used for this problem
-|-
-| rgb || RGB values for balloon used for this problem (should match color above)
-|}
 
 ==== Example ====
 
@@ -864,8 +846,40 @@ A sequence of mappings with the following keys:
      compiler-args: -O {files}
      runner: /usr/bin/java
      runner-args: 
+
+=== problemset.yaml ===
+
+A YAML file consisting of a mapping with the following keys:
+
  
- problemset:
+{| class="wikitable"
+! Key !! Description
+|-
+| problems || Sequence of mappings with keys as defined below
+|}
+
+
+==== problems ====
+
+A sequence of mappings with the following keys:
+
+{| class="wikitable"
+! Key !! Description
+|-
+| letter || Upper case letter designating the problem 
+|-
+| short-name || The problem identifier, used to map to the problem data
+|-
+| color || Color of balloon used for this problem
+|-
+| rgb || RGB values for balloon used for this problem (should match color above)
+|}
+
+==== Example ====
+
+ # Problem set configuration
+ --- 
+ problems:
    - letter:     A
      short-name: apl
      color:      yellow
@@ -891,7 +905,7 @@ A sequence of mappings with the following keys:
      color:      white
      rgb:        #ffffff
  ...
-
+ 
 === groups.tsv ===
 
 A text file consisting of a version line and one line for each group (super regionals at the WF) that needs to be tracked separately with regards to results. Each line has tab separated fields as defined below.
