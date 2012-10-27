@@ -533,17 +533,35 @@ The prohibited operations are:
 
 The CCS must answer each submitted run with one of the following responses:
 
-* '''Compile Error''' (CE)
-* '''Run-Time Error''' (RTE)
-* '''Time Limit Exceeded''' (TLE)
-* '''Wrong Answer''' (WA)
-* '''Accepted''' (AC)
-* '''Security Violation''' (SV)
-* '''Judging Error''' (JE)
+{| class="wikitable"
+! Response
+! Acronym
+|-
+| Compile Error  || CE
+|-
+| Run-Time Error  || RTE
+|-
+| Time Limit Exceeded  || TLE
+|-
+| Wrong Answer  || WA
+|-
+| Accepted  || AC
+|-
+| Security Violation  || SV
+|-
+| Judging Error  || JE
+|-
+|}
 
 When manually overriding the judgement the following could also be used:
 
-* '''Deleted''' (DEL)
+{| class="wikitable"
+! Response
+! Acronym
+|-
+| Deleted|| DEL
+|-
+|}
 
 === Assigning a Judgment ===
 
