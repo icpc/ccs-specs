@@ -1122,6 +1122,79 @@ Account Types present in ''userdata.tsv'' are: team, judge, admin, analyst, feed
 
 Account numbers for teams must be the same as the corresponding team numbers in ''teams.tsv''.
 
+===Scoreboard JSON File===
+
+====Format====
+
+Each JSON output is created is an JSON array with zero or 
+more JSON members.  The output will be in a single long JSON
+string.
+
+Sample JSON if no teams defined
+ []
+
+Each JSON Member is composed of a team member with optional problem members
+for example.  This example is formatted in order to better show the example,
+the actual JSON will be a single line of JSON.
+
+  [ {"seq":1365"),("id":"1","name":"University of Brevia","group":"Pangea"
+ 	,"B":{"a":1,"t":20,"s":"solved"}
+ 	,"D":{"a":1,"t":66,"s":"first"}
+ 	,"E":{"a":1,"t":112,"s":"solved"}
+ 	,"F":{"a":3,"s":"tried"}
+ 	,"L":{"a":3,"t":152,"s":"solved"}},
+  {"id":"2","name":"University of Fondu","group":"North America"
+ 	,"B":{"a":1,"t":10,"s":"first"}
+ 	,"D":{"a":1,"t":68,"s":"solved"}
+ 	,"E":{"a":1,"t":122,"s":"solved"}
+ 	,"F":{"a":2,"s":"tried"}
+ 	,"L":{"a":3,"t":192,"s":"solved"}}
+ ]
+
+This same JSON example will be output as a single line, for example:
+ [{"seq":1365"),{"id":"1","name":"University of Brevia","group":"Pangea","B":{"a":1,"t":20,"s":"solved"},"D":{"a":1,"t":66,"s":"first"},"E":{"a":1,"t":112,"s":"solved"},"F":{"a":3,"s":"tried"},"L":{"a":3,"t":152,"s":"solved"}},{"id":"2","name":"University of Fondu","group":"North America","B":{"a":1,"t":10,"s":"first"},"D":{"a":1,"t":68,"s":"solved"},"E":{"a":1,"t":122,"s":"solved"},"F":{"a":2,"s":"tried"},"L":{"a":3,"t":192,"s":"solved"}}]
+
+====General Format for problem members====
+
+ {"id":"<team_id>","rank":<Rank>,"solved":<problems_solved>,"score":<team_score>"name":"<University_name>","group":"<Group_name>"
+ 	,"<Problem_letter>":{"a":<Attempts>,"p":<Pending>,"t":<Elapsed_time>,"s":"<Results_phase>"}},
+
+Fields and examples for sequence, team and problem JSON members.
+
+{| class="wikitable"
+! Name
+! Key
+! Description
+! Example
+! Type
+|-
+|sequence_number||seq|| Event Feed Sequence Number || 1365 ||integer
+|-
+|team_id||id|| Team number || 3 ||integer
+|-
+|Rank||rank|| rank in contest || 12 ||integer
+|-
+|problems_solved ||solved|| number problems solved || 5 ||integer
+|-
+|team_score||score|| team score / penalty || 324 ||integer
+|-
+|University_name ||name|| University/team name || Oxford University || String 
+|-
+|Group_name||group|| Group/Region name || Europe || String
+|-
+|Problem_letter ||(N/A)|| letter for problem || D || upper case char [A-Z]
+|-
+|Attempts ||a|| number of attempts for problem || 3 || Integer
+|-
+|Elapsed_time  ||t|| time when solved || 143 || Integer
+|-
+|Pending  ||p|| pending runs count || 2 || Integer
+|-
+|Results_phase  ||s|| results/info about run  || solved || String: "tried", "solved", "first", "pend"
+|}
+
+The following keys are optional: t, p
+
 === accounts.tsv ===
 
 A text file consisting of a version line and one line for each non-team account in the contest. Each line has tab separated fields as defined below.
