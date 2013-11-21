@@ -1157,6 +1157,28 @@ Then follow several lines with the following format (one per account).
 
 Account Types are: judge, admin, analyst, feed-all, feed-public, feed-floor.
 
+=== runs.tsv ===
+
+A text file consisting of a single line per run.  Each line has tab separated fields as defined below.
+
+{| class="wikitable"
+! Field
+! Description
+! Example
+! Type
+|-
+| 1 || run id|| 7 || integer
+|-
+| 2 || team number|| 12 || integer
+|-
+| 3 || short problem name|| railway || string from contest.yaml
+|-
+| 4 || submission time in ms|| 2033497 || long integer
+|-
+| 5 || judge response acronym || AC|| string
+|-
+|}
+
 === passwords.txt ===
 
 A text file containing passwords with a length of between 0 and 128 characters, one password per file line. The password file is used as a pool of possible passwords for teams. All password characters will be non-space printable ASCII characters (i.e, 0x21 to 0x7E inclusive).
