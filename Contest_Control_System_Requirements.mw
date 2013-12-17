@@ -111,12 +111,6 @@ At least the following different types of accounts must be supported:
 
 * Analyst: used by ICPC-Live Analysts. The functions available to analyst clients are a subset of those available to judges; specifically, analyst clients have precisely those capabilities defined in [[#Simultaneous_Usage|simultaneous usage]] and those defined in [[#Viewing Runs|viewing runs]], plus the capability of viewing the scoreboard as seen by the teams (as defined in [[#Scoreboard_Display_2|team scoreboard]]).
 
-* Feed: used by clients accessing the [[#Event Feed|event feed]].  The CCS must support three distinct types of Feed accounts, as described below; different Feed account types receive different levels of data when the client is connected to the [[#Event Feed|event feed]]. The types of Feed accounts are:  
-# feed-floor: used for clients that may display data visible to contest contestants  
-# feed-public: used for public clients 
-# feed-all: used for ICPC internal/sysops clients
-It must be possible for multiple clients to connect using the same Feed account type.
-
 === Secure Authentication ===
 
 The CCS must support a secure authentication mechanism, allowing each registered user (being either a [[#Team_Interface|team]], an [[#Admin_Interface|admin]], a [[#Judge_Interface|judge]], an analyst, or a [[Event Feed|feed]] account) to gain access to the contest, and must ensure that:
