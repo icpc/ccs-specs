@@ -161,15 +161,15 @@ A timestamp and an integral sequence number, called an Id, are assigned to runs 
 
 ==== Number of Problems ====
 
-The CCS must not impose an upper limit on the number of different contest problems.
+The CCS must support at least 15 problems. Specifically any UI, scoreboards or other reports should be fully useable with that number of problems.
 
 ==== Number of Teams ====
 
-The CCS must not impose an upper limit on the number of teams.
+The CCS must support at least 200 teams.
 
 ==== Test Data Files ====
 
-The CCS must not impose an upper limit on the number of test data files for a problem, or their sizes.
+The CCS must support at least 200 test data files per problem, a maximum size of 8GB per test data file and a combined size for all test data files in a problem of 20GB.
 
 === Use At The World Finals ===
 
