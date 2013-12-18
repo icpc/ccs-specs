@@ -792,7 +792,7 @@ A YAML file consisting of a mapping with the following keys:
 |-
 | scoreboard-freeze || Time when scoreboard will be frozen in contest time as h:mm:ss
 |-
-| event-feed-port || Port number for the [[Event Feed]]
+| event-feed-port || Port number for the [[Event Feed]] (optional, deafult 4713)
 |-
 | default-clars || Sequence of pre-defined clarification answers. The first will be pre-selected
 |-
@@ -857,7 +857,7 @@ A CCS may place reasonable requirements on the configuration of languages. For i
      compiler: /usr/bin/javac
      compiler-args: -O {files}
      runner: /usr/bin/java
-     runner-args: 
+     runner-args:
 
 === problemset.yaml ===
 
