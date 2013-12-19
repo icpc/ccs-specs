@@ -638,7 +638,7 @@ A submission is pending judgement if it has no judgement or if the judgement is 
 
 === Scoreboard ===
 
-The ''current scoreboard'' lists the teams sorted by position (with alphabetical order on team name as tie breaker).  
+The ''current scoreboard'' lists the teams sorted by position (with alphabetical order on university name as tie breaker).  
 
 The scoreboard must include at least the following information.
 
