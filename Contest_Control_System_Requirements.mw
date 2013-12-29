@@ -377,7 +377,7 @@ A team must be able to specify, for each run:
 # the programming language used in the run; 
 # the source code file or files comprising the run. 
 
-The CCS must allow teams to specify arbitrarily many files in a given run and must allow teams to make run submissions for any defined contest problem, subject to the constraints listed in [[#Problem_States:_Enabled.2C_Paused.2C_and_Disabled|Problem States]], and written in any defined contest programming language.
+The CCS must allow teams to specify at least 10 files in a given run and must allow teams to make run submissions for any defined contest problem, subject to the constraints listed in [[#Problem_States:_Enabled.2C_Paused.2C_and_Disabled|Problem States]], and written in any defined contest programming language.
 
 ==== Team Viewing of Run Status ====
 
