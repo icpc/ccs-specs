@@ -48,7 +48,7 @@ as a set of stand-alone applications using a client-server architecture, or migh
 equally well be implemented as a set of scripts, web pages, and/or other facilities.
 
 This standard is not intended to act as a specification for what constitutes
-<nowiki>"best practices"</nowiki> in a Contest Control System; rather, it acts solely as a specification
+"best practices" in a Contest Control System; rather, it acts solely as a specification
 of what functionality is required to be a candidate for running the ICPC World Finals.
 As such, there may be functions listed in this standard which are specific solely to
 the ICPC World Finals but might not be required for running other contests; a
