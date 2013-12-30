@@ -119,7 +119,7 @@ The CCS must support a mechanism for each user to disconnect from the contest, w
 
 ==== Underlying Implementation ====
 
-The CCS may optionally rely on the underlying operating system account login/password mechanism for purposes of meeting the requirements of this section, provided that it is the case that the CCS enforces all of the requirements of this section, including but not limited to the requirement that users not be allowed to invoke functions as if they were some user other than that specified by their login credentials.
+The CCS may rely on the underlying operating system account login/password mechanism for purposes of meeting the requirements of this section, provided that it is the case that the CCS enforces all of the requirements of this section, including but not limited to the requirement that users not be allowed to invoke functions as if they were some user other than that specified by their login credentials.
 
 === Network Security ===
 
