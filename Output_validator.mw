@@ -1,3 +1,5 @@
+'''This document is deprecated'''
+
 == Summary ==
 
 An output validator is a program that is given the output of a submitted program, together with the corresponding input file, and a correct answer file for the input, and then decides whether the output provided is a correct output for the given input file.
