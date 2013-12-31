@@ -695,7 +695,7 @@ A YAML file consisting of a mapping with the following keys:
 |-
 | event-feed-port || Port number for the [[Event Feed]] (optional, deafult 4713)
 |-
-| default-clars || Sequence of pre-defined clarification answers. The first will be pre-selected
+| default-clars || Sequence of pre-defined clarification answers. The first is the default and will be pre-selected
 |-
 | clar-categories || Sequence of categories for clarifications.
 |-
