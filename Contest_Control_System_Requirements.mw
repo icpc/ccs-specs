@@ -347,7 +347,7 @@ A team must be able to specify, for each submission:
 # the programming language used in the submission; 
 # the source code file or files comprising the submission. 
 
-The CCS must allow teams to specify at least 10 files in a given submission and must allow teams to make submissions for any defined contest problem, subject to the constraints listed in [[#Problem_States:_Enabled.2C_Paused.2C_and_Disabled|Problem States]], and written in any defined contest programming language.
+The CCS must allow teams to specify at least 10 files in a given submission and must allow teams to make submissions for any defined contest problem, written in any defined contest programming language.
 
 ==== Team Viewing of Submission Status ====
 
