@@ -331,31 +331,31 @@ The following fields need to be entered before Finalizing the contest:
 
 This section describes all the required capabilities for users authenticated as team.
 
-=== Submitting a Run ===
+=== Submissions ===
 
-For purposes of this standard, solutions to problems submitted for judging are called '''runs'''.
-A run consists of a set of source code files submitted as a single unit at one time to the judging system by a team.
+For purposes of this standard, solutions to problems submitted for judging are called '''submissions'''.
+A submission consists of a set of source code files sent as a single unit at one time to the judging system by a team.
 
 ==== Submission Mechanism ====
 
-The CCS must provide each team with the ability to submit a run to the judging system.
+The CCS must provide each team with the ability to make a submission to the judging system.
 
 ==== Submission Contents ====
 
-A team must be able to specify, for each run: 
-# the contest problem to which the run applies;
-# the programming language used in the run; 
-# the source code file or files comprising the run. 
+A team must be able to specify, for each submission: 
+# the contest problem to which the submission applies;
+# the programming language used in the submission; 
+# the source code file or files comprising the submission. 
 
-The CCS must allow teams to specify at least 10 files in a given run and must allow teams to make run submissions for any defined contest problem, subject to the constraints listed in [[#Problem_States:_Enabled.2C_Paused.2C_and_Disabled|Problem States]], and written in any defined contest programming language.
+The CCS must allow teams to specify at least 10 files in a given submission and must allow teams to make submissions for any defined contest problem, subject to the constraints listed in [[#Problem_States:_Enabled.2C_Paused.2C_and_Disabled|Problem States]], and written in any defined contest programming language.
 
-==== Team Viewing of Run Status ====
+==== Team Viewing of Submission Status ====
 
-The CCS must provide each team with a capability for reviewing the status of each run the team has submitted, including: the contest time of the run (that is, the time relative to the start of the contest at which the run was submitted); the language and problem specified in the run; and the most recent judgment (if any) for the run.
+The CCS must provide each team with a capability for reviewing the status of each submission the team has made, including: the contest time of the submission, the language and problem specified in the submission; and the most recent judgment (if any) for the submission.
 
-==== Run Security ====
+==== Submission Security ====
 
-The CCS must insure that no team can learn anything about the runs submitted by any other team (other than what can be deduced from the scoreboard).
+The CCS must insure that no team can learn anything about the submissions of any other team (other than what can be deduced from the scoreboard).
 
 === Clarification Requests ===
 
