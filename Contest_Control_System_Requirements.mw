@@ -271,20 +271,20 @@ Each submission in the set of selected submissions is executed and judged in the
 
 There must be a way to preview the judgements which result from rejudging the set of selected submissions without committing the resulting judgements.
 
-==== Run Selection ==== 
+==== Submission Selection ==== 
 
-The CCS must provide the ability to specify a filter defining the set of runs to be rejudged.
+The CCS must provide the ability to specify a filter defining the set of submissions to be rejudged.
 The CCS must support any combination of filters of the following types:
 
-# A specific (single) run.
-# All runs which have been submitted for a specific problem.
-# All runs which have been submitted using a specific language.
-# All runs which have been submitted by a specific team or set of teams.
-# All runs which were submitted between some contest time T<sub>0</sub> and some subsequent contest time T<sub>1</sub>.
-# All runs which have been assigned any specific one of the allowable run judgments as defined in [[#Judge Responses|Judge Responses]], or all runs that received any judgment other than "Accepted" (that is, all rejected runs).
-# All runs which have been judged on a specific computer (identified in some reasonable way, e.g., IP address or hostname).  This requirement is only applicable if the CCS uses multiple machines to judge runs.
+# A specific (single) submission.
+# All submissions for a specific problem.
+# All submissions using a specific language.
+# All submissions by a specific team or set of teams.
+# All submissions between some contest time T<sub>0</sub> and some subsequent contest time T<sub>1</sub>.
+# All submissions which have been assigned any specific one of the allowable submission judgments as defined in [[#Judge Responses|Judge Responses]], or all submissions that received any judgment other than "Accepted" (that is, all rejected submissions).
+# All submissions which have been run on a specific computer (identified in some reasonable way, e.g., IP address or hostname).  This requirement is only applicable if the CCS uses multiple machines to run submissions.
 
-Thus, for example, it must be possible to select "all rejected runs for problem B", "all Time Limit Exceeded runs using Java for problem C", "all runs submitted in the first hour of the contest using Java", or "all runs using C++".
+Thus, for example, it must be possible to select "all rejected submissions for problem B", "all Time Limit Exceeded submissions using Java for problem C", "all submissions from the first hour of the contest using Java", or "all submissions using C++".
 
 === Manual Override of Judgments ===
 
