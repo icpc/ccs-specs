@@ -201,7 +201,12 @@ For each supported language compiler or interpreter it must be possible to confi
 
 === Contest Problems ===
 
-Problems (including judge data, validators, execution time limit, etc) are specified and configured using the [[Problem_format|ICPC problem format]]. The CCS must have full support for this standard, but may assume that problem.tex exists (containing a problem statement in English). All problems that are added or changed must be verified as defined in the problem standard.
+Problems (including judge data, validators, execution time limit, etc) are specified and configured using the [http://www.problemarchive.org/wiki/index.php/Problem_Format | Kattis problem package format]. The CCS must support this standard with the following exceptions:
+
+* The CCS does not have to support the use of the following keys in problem.yaml: type, validation, libraries or languages. This means that the default value will be used.
+* The CCS does not have to support sections 5 "Included Code", 9 "Graders" or 10 "Generators".
+
+The CCS must report an error when importing problems that use any unsupported features. The CCS may report an error when unsupported keys are used, even if they are given the default value.
 
 The problem name is as defined in the ''problemname'' macro in the problem specification. Optionally, the ''plainproblemname'', if present, may be used instead. If ''problemname'' is used then escaped parts of it must be handled properly. If ''plainproblemname'' is used it must be used verbatim.
 
