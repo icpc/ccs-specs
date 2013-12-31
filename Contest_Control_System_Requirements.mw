@@ -263,9 +263,9 @@ The CCS must provide some way to temporarily pause judging on a per problem basi
 
 ==== Automatic Rejudging ====
 
-The CCS must allow the ability to automatically rejudge a selected set of runs.
+The CCS must allow the ability to automatically rejudge a selected set of submissions.
 
-Each run in the set of selected runs is executed and judged in the same manner as for a newly arrived run.
+Each submission in the set of selected submissions is executed and judged in the same manner as for a newly arrived submission.
 
 ==== Previewing Rejudgement Results ====
 
