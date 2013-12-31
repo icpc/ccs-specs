@@ -181,7 +181,7 @@ The CCS must be able to synchronize its clock to an NTP server provided on the c
 
 === Predefined Clarification Answers ===
 
-The CCS must provide the ability to configure predefined answers to clarification requests (e.g., "No response, read problem statement." and "This will be answered after the practice session."), so that judges can choose to reply to a clarification request by selecting a predefined answer rather than being required to enter a specific answer.  One of the predefined answers must be the "default" answer.
+The CCS must be able to configure predefined answers to clarification requests (e.g., "No response, read problem statement." and "This will be answered after the practice session.") from the [[#contest.yaml | contest configuration file]], so that judges can choose to reply to a clarification request by selecting a predefined answer rather than being required to enter a specific answer.  One of the predefined answers must be the "default" answer.
 
 === Clarification Categories ===
 
