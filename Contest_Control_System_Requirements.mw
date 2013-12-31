@@ -269,7 +269,7 @@ Each submission in the set of selected submissions is executed and judged in the
 
 ==== Previewing Rejudgement Results ====
 
-There must be a way to preview the judgements which result from rejudging the set of selected runs without committing the resulting judgements.
+There must be a way to preview the judgements which result from rejudging the set of selected submissions without committing the resulting judgements.
 
 ==== Run Selection ==== 
 
