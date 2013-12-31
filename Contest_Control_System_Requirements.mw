@@ -185,7 +185,7 @@ The CCS must be able to configure predefined answers to clarification requests (
 
 === Clarification Categories ===
 
-It must be possible to configure "categories" to which clarification requests can be assigned. A request belongs to exactly one category.  Examples of categories are "General", "SysOps", "Operations".
+The CCS must be able to configure "categories" to which clarification requests can be assigned from the [[#contest.yaml | contest configuration file]]. A request belongs to exactly one category.  Examples of categories are "General", "SysOps", "Operations".
 
 In addition, the CCS must construct one category per problem, i.e., categories named "Problem A", "Problem B", etc. for each problem.
 
