@@ -472,7 +472,7 @@ The CCS must use auto-judge machines efficiently and fairly. At a minimum it nee
 
 === Prohibited Operations ===
 
-The CCS must ensure that prohibited operations in submitted runs have no non-trivial outside effects.
+The CCS must ensure that prohibited operations in submissions have no non-trivial outside effects.
 
 The prohibited operations are:
 # Using libraries except those explicitly allowed
