@@ -699,7 +699,9 @@ In order for a given CCS to be considered as a candidate for running the ICPC Wo
 
 All files must be encoded in UTF-8.
 
-=== contest.yaml ===
+=== Input files ===
+
+==== contest.yaml ====
 
 A YAML file consisting of a mapping with the following keys:
  
@@ -727,7 +729,7 @@ A YAML file consisting of a mapping with the following keys:
 | penaltytime || Penalty minutes for each incorrect run (optional, default 20)
 |}
 
-==== languages ====
+===== languages =====
 
 A sequence of mappings with the following keys:
 
@@ -747,7 +749,7 @@ A sequence of mappings with the following keys:
 
 A CCS may place reasonable requirements on the configuration of languages. For instance, a CCS may require that the C compiler is configured such that the output binary will be statically linked and output a binary with name 'long_weird_name'. Such requirements should be clearly specified in the CCS documentation. The CCS should not place any restrictions on optimization options used, and should in general place as few restrictions as possible on the language configuration.
 
-==== Example ====
+===== Example =====
 
  # Contest configuration
  ---
@@ -783,7 +785,7 @@ A CCS may place reasonable requirements on the configuration of languages. For i
      runner: /usr/bin/java
      runner-args:
 
-=== problemset.yaml ===
+==== problemset.yaml ====
 
 A YAML file consisting of a mapping with the following keys:
 
@@ -794,7 +796,7 @@ A YAML file consisting of a mapping with the following keys:
 | problems || Sequence of mappings with keys as defined below
 |}
 
-==== problems ====
+===== problems =====
 
 A sequence of mappings with the following keys:
 
@@ -810,7 +812,7 @@ A sequence of mappings with the following keys:
 | rgb || RGB values for balloon used for this problem (should match color above)
 |}
 
-==== Example ====
+===== Example =====
 
  # Problem set configuration
  --- 
@@ -841,7 +843,7 @@ A sequence of mappings with the following keys:
      rgb:        #ffffff
  ...
  
-=== groups.tsv ===
+==== groups.tsv ====
 
 A text file consisting of a version line and one line for each group (super regionals at the WF) that needs to be tracked separately with regards to results. Each line has tab separated fields as defined below.
 
@@ -869,7 +871,7 @@ Then follow several lines with the following format (one per team group).
 | 2 || Group name ||North America  || string
 |}
 
-=== teams.tsv ===
+==== teams.tsv ====
 
 A text file consisting of a version line and one line for each team in the contest. Each line has tab separated fields as defined below.
 
@@ -908,7 +910,56 @@ Then follow several lines with the following format (one per team).
 | 7 || Country Code || USA || string ISO 3166-1 alpha-3
 |}
 
-=== scoreboard.tsv ===
+==== accounts.tsv ====
+
+A text file consisting of a version line and one line for each non-team account in the contest. Each line has tab separated fields as defined below.
+
+The first line has the following format
+{| class="wikitable"
+! Field
+! Description
+! Example
+! Type
+|-
+| 1 || Label || accounts || fixed string (always same value)
+|-
+| 2 || Version number || 1  || integer
+|}
+
+Then follow several lines with the following format (one per account).
+
+{| class="wikitable"
+! Field
+! Description
+! Example
+! Type
+|-
+| 1 || Account Type || judge || string
+|-
+| 3 || Full Name || Per Austrin  || string
+|-
+| 4 || Username || austrin || string
+|-
+| 5 || Password || B!5MWJiy || string
+|}
+
+Account Types are: judge, admin, analyst.
+
+==== passwords.txt ====
+
+A text file containing passwords with a length of between 0 and 128 characters, one password per file line. The password file is used as a pool of possible passwords for teams. All password characters will be non-space printable ASCII characters (i.e, 0x21 to 0x7E inclusive).
+
+==== logos.tar.gz ====
+
+The file contains the logos for all teams, in a tar archive and compressed using gzip.
+
+The archive must contain a folder named "logos", with a logo in .png format, containing an alpha channel, for each team in the contest. The logo must be named <team number>.png, where team number is padded with 0 to 4 digits. Example: 0042.png. This folder may not contain any other files. If possible, the logos should be as square as possible and 600x600 pixels or larger (but don't upsize images or add unnecessary transparent borders).
+
+The archive may contain other files and folders. These must be ignored by the CCS when importing the logos.
+
+=== Output files ===
+
+==== scoreboard.tsv ====
 
 A text file consisting of a version  line and one line for each team in the contest, sorted in position order with alphabetical order on team name as tie breaker. Each line has tab separated fields as defined below.
 
@@ -953,7 +1004,7 @@ The time when problem was solved must be -1 if the problem was not solved.
 
 The time of last accepted submission must be -1 if team has not solved a problem.
 
-=== results.tsv ===
+==== results.tsv ====
 
 A text file consisting of a version  line and one line for each team in the contest, sorted in rank order with alphabetical order on team name as tie breaker. Each line has tab separated fields as defined below.
 
@@ -999,7 +1050,7 @@ If the team is not ranked (has no assigned rank) then the Rank in contest field 
 
 Award is a string with value "Gold Medal", "Silver Medal", "Bronze Medal", "Ranked" or "Honorable" as appropriate, see [[#Scoring Data Generation|Scoring Data Generation]] for details.
 
-=== userdata.tsv ===
+==== userdata.tsv ====
 
 A text file consisting of a version line and one line for each account in the contest. Each line has tab separated fields as defined below.
 
@@ -1038,42 +1089,7 @@ Account Types present in ''userdata.tsv'' are: team, judge, admin, analyst.
 
 Account numbers for teams must be the same as the corresponding team numbers in ''teams.tsv''.
 
-=== accounts.tsv ===
-
-A text file consisting of a version line and one line for each non-team account in the contest. Each line has tab separated fields as defined below.
-
-The first line has the following format
-{| class="wikitable"
-! Field
-! Description
-! Example
-! Type
-|-
-| 1 || Label || accounts || fixed string (always same value)
-|-
-| 2 || Version number || 1  || integer
-|}
-
-Then follow several lines with the following format (one per account).
-
-{| class="wikitable"
-! Field
-! Description
-! Example
-! Type
-|-
-| 1 || Account Type || judge || string
-|-
-| 3 || Full Name || Per Austrin  || string
-|-
-| 4 || Username || austrin || string
-|-
-| 5 || Password || B!5MWJiy || string
-|}
-
-Account Types are: judge, admin, analyst.
-
-=== runs.tsv ===
+==== runs.tsv ====
 
 A text file consisting of a single line per run.  Each line has tab separated fields as defined below.
 
@@ -1094,15 +1110,3 @@ A text file consisting of a single line per run.  Each line has tab separated fi
 | 5 || judge response acronym || AC|| string
 |-
 |}
-
-=== passwords.txt ===
-
-A text file containing passwords with a length of between 0 and 128 characters, one password per file line. The password file is used as a pool of possible passwords for teams. All password characters will be non-space printable ASCII characters (i.e, 0x21 to 0x7E inclusive).
-
-=== logos.tar.gz ===
-
-The file contains the logos for all teams, in a tar archive and compressed using gzip.
-
-The archive must contain a folder named "logos", with a logo in .png format, containing an alpha channel, for each team in the contest. The logo must be named <team number>.png, where team number is padded with 0 to 4 digits. Example: 0042.png. This folder may not contain any other files. If possible, the logos should be as square as possible and 600x600 pixels or larger (but don't upsize images or add unnecessary transparent borders).
-
-The archive may contain other files and folders. These must be ignored by the CCS when importing the logos.
