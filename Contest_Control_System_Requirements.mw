@@ -650,41 +650,6 @@ The ''final results'' lists the ranked teams sorted by rank (with alphabetical o
 
 The CCS must be capable of generating an external file containing the final results of the World Finals contest. The format of this file must be as defined in the [[#results.tsv|results.tsv]].
 
-== Testability Requirements ==
-
-=== Test Mode ===
-The CCS must be capable of running in two modes: Test mode and Real mode.  When running in Test mode, the CCS must display prominently on every client a notice that it is in Test mode.
-
-=== Run Submission Interface ===
-
-The CCS must provide a mechanism by which team submission of runs can be scripted for automated testing. In other words, the CCS must provide a command-line based interface allowing an external program to submit a run to the CCS.
-
-The command-line run submission interface must provide mechanism for specifying all parameters that would be specified by a team utilizing the corresponding interactive interface, including that the command-line interface must accept and perform validation of user credentials before accepting a run.
-
-The requirements of this subsection are intended to provide a method by which the World Finals Director of Operations can perform automated testing on the CCS during the [[Contest_Control_System#Certification Process| Certification Process]]. The CCS implementers should assume that the scriptable run submission interface will be invoked multiple times in rapid succession, with arbitrary parameters, by external scripts; care should therefore be taken by the implementers to avoid any design or implementation characteristics which limit or prohibit the ability of an external [[Test Harness]] framework to operate in this manner.
-
-==== Run Submission Command Line Parameters ====
-
-At a minimum the run submission command line interface must implement the following switches:
-
- -p <problem short-name>
- -l <language name>
- -u <team id>
- -w <team password>
- -m <main source filename>
- -t <contest-time (in ms) for submission>
- -i <run id>
-
-Options -p, -l, -u, and -w  are mandatory for all submissions. The switch -m is only required if needed by the language set using -l. The -t and -i switches are optional. The CCS may implement additional switches.
-
-The CCS may assume that runs submitted via the [[Contest_Control_System#Run Submission Interface| Run Submission Interface]] which contain the -t parameter will be submitted in increasing timestamp order.
-
-==== Timestamp Handling ====
-
-When the CCS is running in [[Contest_Control_System#Test Mode| Real]] mode and receives a run via the Run Submission Interface, any timestamp provided via the -t parameter must be ignored and the CCS must apply a timestamp to the submitted run as specified in the section describing [[Contest_Control_System#Timestamps and Ids for Runs, Clarifications and Notifications| timestamp]]s.  
-
-When the CCS is running in [[Contest_Control_System#Test Mode|Test]] mode and receives a run via the Run Submission Interface containing a timestamp specified with a -t parameter, it must use the timestamp specified by the -t parameter in the run as the timestamp for the run, as long as it is higher than any previously assigned timestamp, regardless of the current actual time.
-
 == Documentation Requirements ==
 
 === Standard Compliance ===
