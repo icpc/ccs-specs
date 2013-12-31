@@ -254,24 +254,9 @@ It must be possible to change the length of the contest at any time during the c
 
 It must be possible to specify, for each team, an integer, potentially negative, amount of penalty time to be added into that team's total penalty time.
 
-=== Problem States: Enabled, Paused, and Disabled ===
+=== Pausing Judging ===
 
-Each contest problem can be in one of three mutually exclusive states: enabled, paused, and disabled.  The CCS must provide a mechanism to enable, pause and disable each contest problem separately, or all at once, without the need of stopping the contest.
-
-When a problem is enabled:
-# Teams must be able to submit solutions to the problem.
-# Unjudged submissions to the problem must be automatically judged.
-# Submissions on the problem must be included in the scoreboard.
-
-When a problem is paused:
-# Teams must be able to submit solutions to the problem as if it was enabled.
-# Automatic judging of the problem must be disabled.
-# Submissions on the problem must be included in the scoreboard.
-
-When a problem is disabled:
-# Teams must not be able to submit solutions to the problem. The problem name must be removed or disabled from solution submit interfaces where present.
-# Automatic judging of the problem must be disabled.
-# Submissions on the problem must not affect the scoring at all, including submissions received prior to disabling.
+The CCS must provide some way to temporarily pause judging on a per problem basing. While judging is paused teams should still be able to submit solutions and these submission should be shown on the scoreboard as usual.
 
 === Rejudging === 
 
