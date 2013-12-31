@@ -375,7 +375,7 @@ The CCS must provide each team with a capability for reviewing the status of eac
 
 ==== Clarification Request Security ====
 
-The CCS must insure that no team can see the clarification requests of any other team, except as provided in the section [[Contest_Control_System#Judge_Interface | Judge Interface]].
+The CCS must ensure that no team can see the clarification requests of any other team, except as provided in the section [[Contest_Control_System#Judge_Interface | Judge Interface]].
 
 === Broadcast Messages ===
 
