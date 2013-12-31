@@ -175,6 +175,10 @@ The CCS must be able to read [[#teams.tsv|teams.tsv]], which contains a list of 
 
 The CCS must be able to read [[#groups.tsv|groups.tsv]], an initialization file containing the list of groups to which the teams belong.
 
+=== Clock Synchronization ===
+
+The CCS must be able to synchronize its clock to an NTP server provided on the contest network. 
+
 === Predefined Clarification Answers ===
 
 The CCS must provide the ability to configure predefined answers to clarification requests (e.g., "No response, read problem statement." and "This will be answered after the practice session."), so that judges can choose to reply to a clarification request by selecting a predefined answer rather than being required to enter a specific answer.  One of the predefined answers must be the "default" answer.
