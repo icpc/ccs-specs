@@ -487,7 +487,7 @@ The prohibited operations are:
 
 === Judge Responses ===
 
-The CCS must answer each submitted run with one of the following responses:
+The CCS must answer each submission with one of the following responses:
 
 {| class="wikitable"
 ! Response
