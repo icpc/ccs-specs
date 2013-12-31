@@ -21,7 +21,7 @@ Doug Lane, Pehr Söderman, and Mattias de Zalenski.
 
 For purposes of this standard, the term ''contest control system'' (CCS) means
 software which automatically manages the operation of a programming contest.
-Operations to be managed by the CCS include: run submissions by teams, judging of runs, handling clarification
+Operations to be managed by the CCS include: running submissions by teams, judging of submissions, handling clarification
 requests from teams and clarification responses from judges, calculation of
 standings, generating external representations of contest results, and overall CCS configuration.
 
