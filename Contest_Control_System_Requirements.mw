@@ -257,7 +257,7 @@ It must be possible to specify, for each team, an integer, potentially negative,
 
 === Pausing Judging ===
 
-The CCS must provide some way to temporarily pause judging on a per problem basing. While judging is paused teams should still be able to submit solutions and these submission should be shown on the scoreboard as usual.
+The CCS must provide some way to temporarily pause judging on a per problem basis. While judging is paused teams should still be able to submit solutions and these submission should be shown on the scoreboard as usual.
 
 === Rejudging === 
 
