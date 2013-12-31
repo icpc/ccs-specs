@@ -319,9 +319,9 @@ When the contest is over, but not finalized, all scoreboards must show a warning
 The CCS must provide a way for admins to finalize the contest. It must ''not'' be possible to finalize a contest if one or more of the following applies:
 
 # The contest is still running (i.e., the contest is not over).
-# There are un-judged runs.
-# There are runs judged as [[#Exception Judgments|Judging Error]].
-# There are unanswered clarifications.
+# There are un-judged submissions.
+# There are submissions judged as [[#Exception Judgments|Judging Error]].
+# There are unanswered clarification requests.
 
 The following fields need to be entered before Finalizing the contest:
 # B, a non-negative integer, as used in [[#Scoring Data Generation|Scoring Data Generation]].
