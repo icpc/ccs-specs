@@ -511,16 +511,6 @@ The CCS must answer each submitted run with one of the following responses:
 |-
 |}
 
-When manually overriding the judgement the following could also be used:
-
-{| class="wikitable"
-! Response
-! Acronym
-|-
-| Deleted|| DEL
-|-
-|}
-
 === Assigning a Judgment ===
 
 The next two sections define how to assign a judgment to a program for problems with a single input file and with multiple input files, respectively.  Note however that the '''Judging Error''' and '''Security Violation''' judgments constitute exceptions to this, as defined in [[#Exceptional Judgments|Exceptional Judgments]].
