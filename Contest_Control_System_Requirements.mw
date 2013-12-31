@@ -129,11 +129,11 @@ The CCS must be able to run at the World Finals site without contact to anything
 
 === Timestamps and Ids for Runs and Clarifications ===
 
-A timestamp and an integral sequence number, called an ID, are assigned to runs and clarifications at the time they enter the system.  The following constraints must be enforced by the CCS:
-*The ID sequences are separate for runs and clarifications; i.e., there is both a run 1 and a clarification 1.
-* The first run to enter the system must have run ID 1, and similarly the first clarification to enter the system must have clarification ID 1.
-* IDs always increase by one (that is, any new run which enters the system must have a run id which is one greater than the previous run to enter the system, and similarly for clarification IDs).
-* Runs received earlier must have a lower ID than runs received later. The same holds for the IDs of clarifications.
+A timestamp and an integral sequence number, called an ID, are assigned to runs and clarification requests at the time they enter the system.  The following constraints must be enforced by the CCS:
+*The ID sequences are separate for submissions and clarification requests; i.e., there is both a submission with ID 1 and a clarification request with ID 1.
+* The first submission to enter the system must have submission ID 1, and similarly the first clarification request to enter the system must have clarification request ID 1.
+* IDs always increase by one (that is, any new submission which enters the system must have a submission id which is one greater than the previous submission to enter the system, and similarly for clarification request IDs).
+* Submissions received earlier must have a lower ID than submissions received later. The same holds for the IDs of clarification requests.
 * Timestamps must have at least second granularity.
 
 === Limitations ===
