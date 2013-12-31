@@ -397,7 +397,7 @@ This section describes all the required capabilities for users authenticated as 
 
 === Simultaneous Usage ===
 
-It must be possible for multiple human judges, working on different computers, to simultaneously perform the operations specified in this subsection (on different run submissions).
+It must be possible for multiple human judges, working on different computers, to simultaneously perform the operations specified in this subsection (on different submissions).
 
 === Viewing Runs ===
 
