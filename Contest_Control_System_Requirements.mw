@@ -103,6 +103,8 @@ The CCS must support a secure authentication mechanism, allowing each registered
 # Only users who supply correct authentication credentials may invoke contest-related functions.
 # Users may only invoke functions corresponding to their authentication credentials.  (In other words, it must not be possible for, e.g., a team to invoke functions as if they were some other team, or as if they were a judge.)
 
+The CCS may rely on the underlying operating system account login/password mechanism for purposes of meeting the requirements of this section, provided that it is the case that the CCS enforces all of the requirements of this section, including but not limited to the requirement that users not be allowed to invoke functions as if they were some user other than that specified by their login credentials.
+
 ==== Authentication Data ====
 
 If the CCS uses a login/password mechanism to enforce secure authentication, it must support account creation and password assignment according to the following algorithm:
@@ -116,10 +118,6 @@ If the CCS uses a login/password mechanism to enforce secure authentication, it 
 ==== Logging Out ====
 
 The CCS must support a mechanism for each user to disconnect from the contest, with the effect that no other user of the computer system not possessing that team<nowiki>'</nowiki>s authentication credentials will be able to invoke CCS functions as if they did possess those credentials.
-
-==== Underlying Implementation ====
-
-The CCS may rely on the underlying operating system account login/password mechanism for purposes of meeting the requirements of this section, provided that it is the case that the CCS enforces all of the requirements of this section, including but not limited to the requirement that users not be allowed to invoke functions as if they were some user other than that specified by their login credentials.
 
 === Network Security ===
 
