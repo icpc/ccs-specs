@@ -681,9 +681,6 @@ When the CCS is running in [[Contest_Control_System#Test Mode| Real]] mode and r
 
 When the CCS is running in [[Contest_Control_System#Test Mode|Test]] mode and receives a run via the Run Submission Interface containing a timestamp specified with a -t parameter, it must use the timestamp specified by the -t parameter in the run as the timestamp for the run, as long as it is higher than any previously assigned timestamp, regardless of the current actual time.
 
-
-----
-
 == Documentation Requirements ==
 
 === Standard Compliance ===
