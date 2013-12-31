@@ -389,10 +389,6 @@ The CCS must notify teams when a judgement, clarification or broadcast message h
 
 The CCS must provide a mechanism for teams to view the current scoreboard. The scoreboard must be updated at least every 30 seconds.
 
-=== Current Problem State ===
-
-The CCS must provide a mechanism for teams to determine the current [[#Problem_States:_Enabled.2C_Paused.2C_and_Disabled|state]] (enabled, paused, or disabled) of each contest problem.
-
 == Judge Interface ==
 
 This section describes all the required capabilities for users authenticated as judge.
