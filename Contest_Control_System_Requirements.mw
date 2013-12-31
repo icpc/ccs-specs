@@ -585,7 +585,7 @@ When a number of teams are tied for the same position/rank, they all occupy the 
 
 A submission is pending judgement if it has no judgement or if the judgement is '''Judging Error'''.  Pending judgements have no effect on scoring.
 
-'''Deleted''' Runs and '''Disabled''' Problems have no effect on scoring.
+'''Disabled''' Problems have no effect on scoring.
 
 === Scoreboard ===
 
