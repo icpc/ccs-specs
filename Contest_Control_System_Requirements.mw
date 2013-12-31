@@ -152,12 +152,14 @@ The CCS must support at least 200 test data files per problem, a maximum size of
 
 === Use At The World Finals ===
 
-In order for a CCS to be selected for use at the World Finals it must satisfy each of the following constraints:
+In order for a CCS to be selected for use at the World Finals the following constraints must be satisfied:
 
 ====Support Personnel ====
+
 At least one person from the submitting entity with intimate knowledge about the inner workings of the CCS must be willing and able to attend at the World Finals where it is used.
 
 ==== Computer Platform ====
+
 The CCS must run on the computer platform set aside for the CCS at the World Finals and posted at the ICPC web site. Normally this will consist of one machine per team, several auto-judging machines that are identical to the team machines, and one or more servers.
 
 == Contest Configuration ==
