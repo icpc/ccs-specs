@@ -1063,9 +1063,9 @@ If the team is not ranked (has no assigned rank) then the Rank in contest field 
 
 Award is a string with value "Gold Medal", "Silver Medal", "Bronze Medal", "Ranked" or "Honorable" as appropriate, see [[#Scoring Data Generation|Scoring Data Generation]] for details.
 
-==== runs.tsv ====
+==== submissions.tsv ====
 
-A text file consisting of a single line per run.  Each line has tab separated fields as defined below.
+A text file consisting of a single line per submission.  Each line has tab separated fields as defined below.
 
 {| class="wikitable"
 ! Field
@@ -1073,7 +1073,7 @@ A text file consisting of a single line per run.  Each line has tab separated fi
 ! Example
 ! Type
 |-
-| 1 || run id|| 7 || integer
+| 1 || submission id|| 7 || integer
 |-
 | 2 || team number|| 12 || integer
 |-
