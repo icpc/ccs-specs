@@ -543,19 +543,9 @@ The preceding sections define how to assign a judgment to a submitted program.  
 
 === Validators ===
 
-The CCS must support problem-specific [[Output validator]]s as described in the [[Problem_format|problem format standard]].  As described there, the output validators must adhere to the [[Output_validator|output validator standard]].
-
-The CCS will execute the team's program and then execute the [[Output validator]].
-
-==== Additional Requirements ====
-
 A CCS supporting this standard must safeguard against faulty validators. For instance, if a validator were to produce excessively large feedback files, or crash, the CCS must handle this gracefully and report it to contest staff. Reasons for such misbehaviour of the validator program could be for instance a security bug in the validator program, enabling malicious submissions to produce feedback files of their own choosing.
 
 The content of ''stdout'' and ''stderr'' of the output validator can be ignored by the contest control system.
-
-==== Default Validator ====
-
-The CCS must provide a default "diff" validator capable of handling the options specified in the [[Problem_format#problem.cfg|problem format standard]].
 
 == Scoring ==
 
