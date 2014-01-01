@@ -539,7 +539,7 @@ Note that the CCS is only required to judge as many files as needed to determine
 The preceding sections define how to assign a judgment to a submitted program.  However, the following two exceptions apply:
 
 # If, during any point of the judging process an error occurs that the CCS can not recover from, '''Judging Error''' must be the judgment.
-# If, during any point of the judging process the submitted program tries to perform a [[#Prohibited_Operations|prohibited operation]], '''Security Violation''' must be the judgment.
+# If, during any point of the judging process the submitted program tries to perform a [[#Prohibited_Operations|prohibited operation]], '''Security Violation''' may be the judgment.
 
 === Validators ===
 
