@@ -204,7 +204,8 @@ For each supported language compiler or interpreter it must be possible to confi
 
 Problems (including judge data, validators, execution time limit, etc) are specified and configured using the [http://www.problemarchive.org/wiki/index.php/Problem_Format | Kattis problem package format]. The CCS must support this standard with the following exceptions:
 
-* The CCS does not have to support the use of the following keys in problem.yaml: type, validation, libraries or languages. This means that the default value will be used.
+* The CCS does not have to support the use of the following keys in problem.yaml: type, libraries or languages. This means that the default value will be used.
+* The CCS does only have to support the values "default" or "custom" for the key validation in problem.yaml.
 * The CCS does not have to support sections 5 "Included Code", 9 "Graders" or 10 "Generators".
 
 The CCS must report an error when importing problems that use any unsupported features. The CCS may report an error when unsupported keys are used, even if they are given the default value.
