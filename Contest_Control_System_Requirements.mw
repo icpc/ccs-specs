@@ -289,7 +289,7 @@ Thus, for example, it must be possible to select "all rejected submissions for p
 
 === Manual Override of Judgments ===
 
-The CCS must support the ability to assign, to a single submission, an updated judgment chosen from among any of the allowed submission judgments as defined in [[Contest_Control_System#Judge Responses|Judge Responses]], or else to mark the submission as deleted. Deleted submissions must have no effect on scoring.
+The CCS must support the ability to assign, to a single submission, an updated judgment chosen from among any of the allowed submission judgments as defined in [[Contest_Control_System#Judge Responses|Judge Responses]], or else to delete the submission. Deleted submissions must have no effect on scoring.
 
 The CCS must require a separate authentication every time a judgment is changed manually and all such changes must be logged.
 
