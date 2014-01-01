@@ -99,7 +99,7 @@ At least the following different types of accounts must be supported:
 
 === Secure Authentication ===
 
-The CCS must support a secure authentication mechanism, allowing each registered user (being either a [[#Team_Interface|team]], an [[#Admin_Interface|admin]], a [[#Judge_Interface|judge]], an analyst, or a [[Event Feed|feed]] account) to gain access to the contest, and must ensure that:
+The CCS must support a secure authentication mechanism, allowing each registered user (being either a [[#Team_Interface|team]], an [[#Admin_Interface|admin]], a [[#Judge_Interface|judge]], or an analyst) to gain access to the contest, and must ensure that:
 # Only users who supply correct authentication credentials may invoke contest-related functions.
 # Users may only invoke functions corresponding to their authentication credentials.  (In other words, it must not be possible for, e.g., a team to invoke functions as if they were some other team, or as if they were a judge.)
 
