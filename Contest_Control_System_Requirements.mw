@@ -127,7 +127,7 @@ All communication between CCS modules which takes place over the contest network
 
 The CCS must be able to run at the World Finals site without contact to anything outside the contest network.
 
-=== Timestamps and IDs for Submissions and Clarifications ===
+=== Timestamps and IDs ===
 
 A timestamp and an integral sequence number, called an ID, are assigned to submissions and clarification requests at the time they enter the system.  The following constraints must be enforced by the CCS:
 *The ID sequences are separate for submissions and clarification requests; i.e., there is both a submission with ID 1 and a clarification request with ID 1.
