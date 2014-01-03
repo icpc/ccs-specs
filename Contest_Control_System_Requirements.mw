@@ -617,6 +617,15 @@ The CCS must be capable of generating an external file containing the final resu
 
 == Documentation Requirements ==
 
+=== Items Which Must Be Submitted ===
+
+In order for a given CCS to be considered as a candidate for running the ICPC World Finals contest, a single archive file (e.g. .zip, .tar, .tar.gz, .tgz) must be submitted to the World Finals Director of Operations. The archive file must contain all of the following items:
+
+# The complete set of files, modules, or packages making up the executable components of the CCS.
+# PDF's for each of the documents listed under [[Contest_Control_System#Documentation_Requirements| Documentation Requirements]].
+# A text file named "License" containing the license, conforming to the the [[#Licensing|Licensing]] section, under which the CCS is made available to the ACM ICPC.
+# A text file named "readme" containing instructions on how to properly unpack the archive file to set up the installation process.
+
 === Standard Compliance ===
 
 The CCS must include a ''Standard Compliance'' document in PDF format, that for each requirement (referencing by requirement number) in this standard document confirms that the CCS conforms and explains how the functionality is implemented.
@@ -648,17 +657,6 @@ The System Manager's Guide must explicitly list any operating system dependencie
 The System Manager's Guide must explicitly list any software dependencies of the CCS. For example, any tools such as Java, PERL, WebServer, Browser, database systems, etc., which are required for correct operation of the CCS must be listed in the guide, including specific version numbers of each tool which the CCS requires for its correct operation.
 
 The System Manager's Guide must describe the steps required to use each of the "Testability Interfaces" described in the section on Testability. For example, the guide must describe how to invoke the command-line tool which supports submitting runs from a team, as well as describing the use of all other required testability interfaces.
-
-== Certification Process ==
-
-=== Items Which Must Be Submitted ===
-
-In order for a given CCS to be considered as a candidate for running the ICPC World Finals contest, a single archive file (e.g. .zip, .tar, .tar.gz, .tgz) must be submitted to the World Finals Director of Operations. The archive file must contain all of the following items:
-
-# The complete set of files, modules, or packages making up the executable components of the CCS.
-# PDF's for each of the documents listed under [[Contest_Control_System#Documentation_Requirements| Documentation Requirements]].
-# A text file named "License" containing the license, conforming to the the [[#Licensing|Licensing]] section, under which the CCS is made available to the ACM ICPC.
-# A text file named "readme" containing instructions on how to properly unpack the archive file to set up the installation process.
 
 == Appendix: File formats ==
 
