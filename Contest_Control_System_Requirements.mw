@@ -908,10 +908,6 @@ Then follow several lines with the following format (one per account).
 
 Account Types are: judge, admin, analyst.
 
-==== passwords.txt ====
-
-A text file containing passwords with a length of between 0 and 128 characters, one password per file line. The password file is used as a pool of possible passwords for teams. All password characters will be non-space printable ASCII characters (i.e, 0x21 to 0x7E inclusive).
-
 ==== logos.tar.gz ====
 
 The file contains the logos for all teams, in a tar archive and compressed using gzip.
