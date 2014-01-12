@@ -477,8 +477,6 @@ The CCS must ensure that prohibited operations in submissions have no non-trivia
 The prohibited operations are:
 # Using libraries except those explicitly allowed
 # Executing other programs
-# Creating new processes
-# Creating new threads
 # Reading any files
 # Creating files
 # Sending signals to other programs
