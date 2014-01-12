@@ -255,6 +255,10 @@ It must be possible to change the length of the contest at any time during the c
 
 It must be possible to specify, for each team, an integer, potentially negative, amount of penalty time to be added into that team's total penalty time.
 
+==== Ignoring submissions ====
+
+It must be possible to remove, ignore or somehow mark a submission so that it in now way affects the scoring of the contest.
+
 === Pausing Judging ===
 
 The CCS must provide some way to temporarily pause judging on a per problem basis. While judging is paused teams should still be able to make submissions and these submission should be shown on the scoreboard as usual.
