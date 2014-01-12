@@ -485,25 +485,24 @@ The prohibited operations are:
 
 === Judge Responses ===
 
-The CCS must answer each submission with one of the following responses:
+The CCS must answer each submission with a responses from the table below. Some judgements results in penalty time being added and only Accepted means that the problem shoudl be counted as solved, as specified in the table.
 
 {| class="wikitable"
-! Response
-! Acronym
+! Response !! Acronym !! Penalty !! Solved
 |-
-| Compile Error  || CE
+| Compile Error  || CE || No || No
 |-
-| Run-Time Error  || RTE
+| Run-Time Error  || RTE || Yes || No
 |-
-| Time Limit Exceeded  || TLE
+| Time Limit Exceeded  || TLE || Yes || No
 |-
-| Wrong Answer  || WA
+| Wrong Answer  || WA || Yes || No
 |-
-| Accepted  || AC
+| Accepted  || AC || No || Yes
 |-
-| Security Violation  || SV
+| Security Violation  || SV || Yes || No
 |-
-| Judging Error  || JE
+| Judging Error  || JE || No || No
 |-
 |}
 
