@@ -685,7 +685,7 @@ A YAML file consisting of a mapping with the following keys:
 |-
 | languages || Sequence of mappings with keys as defined below
 |-
-| penaltytime || Penalty minutes for each incorrect run (optional, default 20)
+| penalty-time || Penalty minutes for each incorrect run (optional, default 20)
 |}
 
 ===== languages =====
