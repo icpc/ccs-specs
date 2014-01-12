@@ -941,7 +941,7 @@ Then follow several lines with the following format (one per account).
 |-
 | 1 || Account Type || team || string
 |-
-| 2 || Account Number || 42 || integer
+| 2 || Team Number || 42 || integer
 |-
 | 3 || Full Name || University of Virginia  || string
 |-
@@ -952,7 +952,7 @@ Then follow several lines with the following format (one per account).
 
 Account Types present in ''userdata.tsv'' are: team, judge, admin, analyst.
 
-Account numbers for teams must be the same as the corresponding team numbers in ''teams.tsv''.
+Team numbers for teams must be the same as the corresponding team numbers in ''teams.tsv''. Team number should not be used for any other account type.
 
 ==== scoreboard.tsv ====
 
