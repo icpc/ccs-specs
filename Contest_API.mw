@@ -1,0 +1,90 @@
+== Introduction ==
+
+This page describes a '''draft''' API for accessing information provided by a [[Contest_Control_System]].
+Such an API can be used by a multitude of clients:
+* an external scoreboard
+* a scoreboard resolver application
+* contest analysis software, such as the [[ICAT]] toolset
+* another "shadow" CCS, providing a run-forwarding interface
+* internally, to interface between the CCS server and judging instances
+
+This API is meant to be useful, not only at the ICPC World Finals, but more generally in any ICPC-style contest setup.
+
+== General design principles ==
+
+The interface is implemented as a HTTP REST interface that outputs information in [https://en.wikipedia.org/wiki/JSON JSON] format. The specific base URL will be dependent on the server (main CCS or CDS) providing the service and will be indicated as <tt>baseurl</tt>.
+
+Query parameters are passed as variables in the URL instead of encoded in the URL path, e.g.
+  GET http://example.com/team?id=10
+instead of
+  GET http://example.com/team/10
+
+Rationale: this allows for more flexibility to later extend/generalize the interface, e.g. to return results depending on a filter:
+  http://example.com/team?group=europe
+
+Access to (parts of) the API is optionally controlled by HTTP authentication. This provides a standard and flexible method, while the user one authenticates as can be used for fine-grained access control to specific bits.
+
+=== Recurring details ===
+
+'''Timestamps''' are encoded as floats without exponent representing Unix
+Epoch seconds. The API and client must accept floats with up to 9
+digits after the decimal point and should provide at least microsecond
+resolution, for example: <tt>1390517449.324000000</tt>.
+The rationale for Epoch is that it is independent of time zone, easily
+parsable and supported in about any possible language.
+
+Identifier strings: do we want to restrict these to certain
+characters (preferably not just numeric), limit the length?
+
+'''File contents''' are base64 encoded. This allows it to be embedded as strings in the JSON with other data.
+For smallish files (such as source code) the additional encoding overhead in size and time is not an issue;
+for large files, one should probably revert to providing these separately in a raw format.
+'''TODO''': in this case replace the contents with a download URL?
+
+== Interface specification ==
+
+The following list of API calls are to be supported; <tt>baseurl</tt> denotes an HTTP or HTTPS URL at which this API is provided.
+
+=== GET baseurl/contest ===
+
+Provides information on the current contest.
+
+=== GET baseurl/problems ===
+=== GET baseurl/languages ===
+=== GET baseurl/teams ===
+=== GET baseurl/submissions ===
+
+=== GET baseurl/submission_files ===
+
+This provides the file(s) of a specific submission.
+
+Parameters:
+* '''id''' required identifier of the submission
+
+Returns a JSON array, with each element an object describing a file, with the following elements:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Description
+|-
+| filename
+| string
+| filename of this file (without path? any disallowed characters?)
+|-
+| content
+| string
+| base64 encoded contents of the file
+|}
+
+'''To be added''': how to encode encode for Java submissions which file contains the main class, and/or what the main class name is?
+
+==== Example ====
+
+Request:
+  GET http://example.com/submission_files?id=223
+Returned data:
+  [{"filename":"a.java","content":"&lt;base64_string&gt;"},{"filename":"helper.java","content":"&lt;base64_string&gt;"}]
+
+=== GET baseurl/judgings ===
+=== GET baseurl/testcases ===
