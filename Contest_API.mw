@@ -37,7 +37,8 @@ parsable and supported in about any possible language.
 '''Identifier strings''' (type <tt>&lt;ID&gt;</tt> in the specification)
 do we want to restrict these to certain characters (preferably not just numeric), limit the length?
 
-'''File contents''' are base64 encoded. This allows it to be embedded as strings in the JSON with other data.
+'''File contents''' (type <tt>&lt;BASE64&gt;>/tt> in the specification)
+are base64 encoded. This allows it to be embedded as strings in the JSON with other data.
 For smallish files (such as source code) the additional encoding overhead in size and time is not an issue;
 for large files, one should probably revert to providing these separately in a raw format.
 '''TODO''': in this case replace the contents with a download URL?
