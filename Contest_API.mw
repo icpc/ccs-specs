@@ -51,17 +51,211 @@ The following list of API calls are to be supported; <tt>baseurl</tt> denotes an
 
 Provides information on the current contest.
 
+Parameters: ''none''
+
+Returns a JSON object with the elements below. If there is no current (this may include about to start or just finished) contest, returns an empty object <tt>{}</tt>.
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Description
+|-
+| id
+| ID
+| yes
+| identifier of the current contest
+|-
+| name
+| string
+| yes
+| name of the contest
+|-
+| start
+| TIME
+| yes
+| start time of the contest
+|-
+| length
+| integer
+| yes
+| contest length in seconds
+|-
+| penalty
+| integer
+| yes for WF
+| penalty time per wrong submission, in seconds
+|-
+| freeze
+| integer
+| yes for WF
+| time after contest start that scoreboard is frozen, in seconds
+|}
+
 === GET baseurl/problems ===
+
+Lists problems in the current contest.
+
+Parameters: ''none''
+
+Returns a JSON array, with each element an object describing a problem, with the following elements:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Description
+|-
+| id
+| ID
+| yes
+| identifier of the problem
+|-
+| name
+| string
+| yes
+| name of the problem
+|-
+| color
+| string
+| no
+| color of this problem (e.g. on the scoreboard), specified in [http://en.wikipedia.org/wiki/Web_colors HTML hexadecimal] ('''TODO''': also allow HTML names?)
+|-
+| timelimit
+| float
+| no
+| time limit per testcase in seconds
+|-
+| memorylimit
+| integer
+| no
+| memory limit in KiB
+|-
+| text
+| BASE64
+| no
+| Problem description text ('''TODO''': in which format? PDF/HTML, either, add mime-type, unspecified?)
+|}
+
 === GET baseurl/languages ===
+
+Lists programming languages that can be used for submissions.
+
+Parameters: ''none''
+
+Returns a JSON array, with each element an object describing a language, with the following elements:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Description
+|-
+| id
+| ID
+| yes
+| identifier of the language
+|-
+| name
+| string
+| yes
+| name of the language
+|}
+
 === GET baseurl/teams ===
+
+Lists all teams.
+'''TODO''': also show inactive/special teams depending on authentication level of client (with extra tag)?
+
+Parameters: ''none''
+
+Returns a JSON array, with each element an object describing a team, with the following elements:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Description
+|-
+| id
+| ID
+| yes
+| identifier of the team
+|-
+| name
+| string
+| yes
+| name of the team
+|-
+| nationality
+| string
+| yes for WF
+| [https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3 ISO 3-letter code] of the team's nationality
+|-
+| affiliation
+| string
+| yes for WF
+| university or other entity that team is affiliated to
+|-
+| region
+| string
+| yes for WF
+| a region team is from (in ICPC WFs these are the super-regions, such as Europe)
+|-
+| external-id
+| string
+| yes for WF?
+| external identifier for this team, e.g. from imported ICPC data
+|}
+
 === GET baseurl/submissions ===
+
+List of submissions in the current contest.
+
+Parameters:
+* '''firstid''' (optional) identifier of first in range of submissions to list
+* '''lastid''' (optional) identifier of last in range of submissions to list
+
+Returns a JSON array, with each element an object describing a submission, with the following elements:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Description
+|-
+| id
+| ID
+| yes
+| identifier of the submission
+|-
+| team
+| ID
+| yes
+| identifier of the team that made the submission
+|-
+| problem
+| ID
+| yes
+| identifier of the problem submitted for
+|-
+| language
+| ID
+| yes
+| identifier of the language submitted for
+|-
+| time
+| TIME
+| yes
+| timestamp of when the submission was made
+|}
 
 === GET baseurl/submission_files ===
 
 This provides the file(s) of a specific submission.
 
 Parameters:
-* '''id''' required identifier of the submission
+* '''id''' (required) identifier of the submission
 
 Returns a JSON array, with each element an object describing a file, with the following elements:
 {| class="wikitable"
@@ -75,7 +269,7 @@ Returns a JSON array, with each element an object describing a file, with the fo
 | filename of this file (without path? any disallowed characters?)
 |-
 | content
-| string
+| BASE64
 | base64 encoded contents of the file
 |}
 
@@ -89,4 +283,76 @@ Returned data:
   [{"filename":"a.java","content":"&lt;base64_string&gt;"},{"filename":"helper.java","content":"&lt;base64_string&gt;"}]
 
 === GET baseurl/judgings ===
+
+Lists judgings of submissions.
+'''TODO''': does this format of providing judging information separately from submissions fit all CCS's?
+Rationale for this choice is that a rejudging does/need not affect previously published submission or judging information.
+
+Parameters:
+* '''firstid''' (optional) identifier of first in range of judgings to list
+* '''lastid''' (optional) identifier of last in range of judgings to list
+
+Returns a JSON array, with each element an object describing a judging, with the following elements:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Description
+|-
+| id
+| ID
+| yes
+| identifier of the judging
+|-
+| submission
+| ID
+| yes
+| identifier of the submission judged
+|-
+| outcome
+| string
+| yes
+| result of judging, '''NULL''' if judging has not finished yet.
+|}
+
 === GET baseurl/testcases ===
+
+Lists testcases for a problem.
+
+Parameters:
+* '''problem''' identifier of a problem
+
+Returns a JSON array, with each element an object describing a testcase, with the following elements:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Description
+|-
+| id
+| ID
+| yes
+| identifier of the testcase
+|-
+| description
+| string
+| no
+| description of the testcase, e.g. which corner case it tests
+|-
+| sample
+| boolean
+| no
+| whether this is a sample testcase (i.e. publicly available)
+|-
+| input
+| BASE64
+| ?
+| input for this testcase (base64 encoded, or provided as a separate raw URL?)
+|-
+| answer
+| BASE64
+| ?
+| jury (reference) answer for this testcase (base64 encoded, or provided as a separate raw URL?)
+|}
