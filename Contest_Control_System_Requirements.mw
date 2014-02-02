@@ -444,7 +444,7 @@ The CCS must provide the ability for a human judge to compose a message and broa
 
 === Scoreboard Display ===
 
-The CCS must provide a mechanism for judges to view the current scoreboard. The scoreboard must be updated at least every 30 seconds.
+The CCS must provide a mechanism for judges to view the current scoreboard. The scoreboard must be updated in such a way that it's never more than 30 seconds out of date.
 
 During times when the scoreboard is frozen, judges must be able to view the current (updated) scoreboard as well as the frozen scoreboard.
 
