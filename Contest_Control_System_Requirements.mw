@@ -95,8 +95,6 @@ At least the following different types of accounts must be supported:
 
 * Admin: used by contest administrators. The functions available to admin clients are as defined in the section on the [[#Admin Interface|admin interface]].
 
-* Analyst: used by ICPC-Live Analysts. The functions available to analyst clients are a subset of those available to judges; specifically, analyst clients have precisely those capabilities defined in [[#Simultaneous_Usage|simultaneous usage]] and those defined in [[#Viewing Runs|viewing runs]], plus the capability of viewing the scoreboard as seen by the teams (as defined in [[#Scoreboard_Display_2|team scoreboard]]).
-
 === Secure Authentication ===
 
 The CCS must support a secure authentication mechanism, allowing each registered user (being either a [[#Team_Interface|team]], an [[#Admin_Interface|admin]], a [[#Judge_Interface|judge]], or an analyst) to gain access to the contest, and must ensure that:
