@@ -948,7 +948,7 @@ Then follow several lines with the following format (one per account).
 | 5 || Password || B!5MWJiy || string
 |}
 
-Account Types present in ''userdata.tsv'' are: team, judge, admin, analyst.
+Account Types present in ''userdata.tsv'' are: team, judge, admin.
 
 Team numbers for teams must be the same as the corresponding team numbers in ''teams.tsv''. Team number should not be used for any other account type.
 
