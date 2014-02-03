@@ -252,7 +252,7 @@ It must be possible to specify, for each team, an integer, potentially negative,
 
 ==== Ignoring submissions ====
 
-It must be possible to remove, ignore or somehow mark a submission so that it in now way affects the scoring of the contest.
+It must be possible to remove, ignore or somehow mark a submission so that it in no way affects the scoring of the contest.
 
 === Pausing Judging ===
 
@@ -484,7 +484,7 @@ The prohibited operations are:
 
 === Judge Responses ===
 
-The CCS must answer each submission with a responses from the table below. Some judgements results in penalty time being added and only Accepted means that the problem shoudl be counted as solved, as specified in the table.
+The CCS must answer each submission with a responses from the table below. Some judgements results in penalty time being added and only Accepted means that the problem should be counted as solved, as specified in the table.
 
 {| class="wikitable"
 ! Response !! Acronym !! Penalty !! Solved
