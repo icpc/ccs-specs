@@ -402,7 +402,7 @@ It must be possible for multiple human judges, working on different computers, t
 
 The CCS must provide a human judge with the ability to perform each of the following operations:
 
-# See a list of all submissions, where the list includes (for each submission) the contest-relative time at which the submission was sent, the problem and language specified in the submission, and any judgments applied.
+# See a list of all submissions, where the list includes (for each submission) the contest time at which the submission was sent, the problem and language specified in the submission, and any judgments applied.
 # Sort the list of submissions by submission time (newest submissions first).
 # Filter the list of submissions by:
 ## Problem
