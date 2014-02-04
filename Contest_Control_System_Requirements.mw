@@ -126,7 +126,7 @@ The CCS must be able to run at the World Finals site without contact to anything
 
 === Timestamps and IDs ===
 
-A timestamp and an integral sequence number, called an ID, are assigned to submissions and clarification requests at the time they enter the system.  The following constraints must be enforced by the CCS:
+A timestamp and an integer sequence number, called an ID, are assigned to submissions and clarification requests at the time they enter the system.  The following constraints must be enforced by the CCS:
 * Submissions received earlier must have a lower ID than submissions received later. The same holds for the IDs of clarification requests.
 * Timestamps must have at least second granularity.
 
