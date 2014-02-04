@@ -623,7 +623,7 @@ In order for a given CCS to be considered as a candidate for running the ICPC Wo
 
 === Standard Compliance Document ===
 
-The CCS must include a ''Standard Compliance Document'' in PDF format, that for each requirement (referencing by requirement number) in this standard document confirms that the CCS conforms and explains how that is.
+The CCS must include a ''Standard Compliance Document'' in PDF format, that for each requirement (referencing by section number) in this standard document confirms that the CCS conforms and explains how that is.
 
 === Team Guide ===
 
