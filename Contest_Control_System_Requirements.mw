@@ -77,8 +77,6 @@ The CCS must support persistence of the contest state once the contest has been 
 
 The CCS must not lose more than 1 minute of contest data on a failure of any part of the contest system.
 
-==== Data Backup ====
-
 The CCS must support a mechanism that allows the contest to continue with minimal disruption in case of hardware failure. This means for example that the CCS must arrange that all contest data is continually backed up in a way that allows the contest to be restored to its current state in the event of a single hard disk failure, loss of network connection, or other similar failure.
 
 === Account Types ===
