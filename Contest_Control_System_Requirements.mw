@@ -670,6 +670,27 @@ A YAML file consisting of a mapping with the following keys:
 |-
 | scoreboard-freeze || Time when scoreboard will be frozen in contest time as h:mm:ss
 |-
+| penalty-time || Penalty minutes for rejected submission (optional, default 20)
+|}
+
+===== Example =====
+
+ # Contest configuration
+ ---
+ name:              ACM-ICPC World Finals 2011
+ short-name:        ICPC WF 2011
+ start-time:        2011-02-04 01:23Z
+ duration:          5:00:00
+ scoreboard-freeze: 4:00:00
+ penaltytime:       20
+ 
+==== system.yaml ====
+
+A YAML file consisting of a mapping with the following keys:
+ 
+{| class="wikitable"
+! Key !! Description
+|-
 | event-feed-port || Port number for the [[Event Feed]] (optional, deafult 4713)
 |-
 | default-clars || Sequence of pre-defined clarification answers. The first is the default and will be pre-selected
@@ -677,8 +698,6 @@ A YAML file consisting of a mapping with the following keys:
 | clar-categories || Sequence of categories for clarifications.
 |-
 | languages || Sequence of mappings with keys as defined below
-|-
-| penalty-time || Penalty minutes for rejected submission (optional, default 20)
 |}
 
 ===== languages =====
@@ -703,15 +722,9 @@ A CCS may place reasonable requirements on the configuration of languages. For i
 
 ===== Example =====
 
- # Contest configuration
+ # System configuration
  ---
- name:              ACM-ICPC World Finals 2011
- short-name:        ICPC WF 2011
- start-time:        2011-02-04 01:23Z
- duration:          5:00:00
- scoreboard-freeze: 4:00:00
  event-feed-port:   4713
- penaltytime:       20
  
  default-clars:
    - No comment, read problem statement.
