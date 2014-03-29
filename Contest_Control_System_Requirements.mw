@@ -647,8 +647,6 @@ The System Manager's Guide must explicitly list any operating system dependencie
 
 The System Manager's Guide must explicitly list any software dependencies of the CCS. For example, any tools such as Java, PERL, WebServer, Browser, database systems, etc., which are required for correct operation of the CCS must be listed in the guide, including specific version numbers of each tool which the CCS requires for its correct operation.
 
-The System Manager's Guide must describe the steps required to use each of the "Testability Interfaces" described in the section on Testability. For example, the guide must describe how to invoke the command-line tool which supports making submissions from a team, as well as describing the use of all other required testability interfaces.
-
 == Appendix: File formats ==
 
 All files must be encoded in UTF-8.
