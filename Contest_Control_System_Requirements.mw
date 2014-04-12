@@ -192,7 +192,7 @@ For each supported language compiler or interpreter it must be possible to confi
 
 === Contest Problems ===
 
-Problems (including judge data, validators, execution time limit, etc) are specified and configured using the [http://www.problemarchive.org/wiki/index.php/Problem_Format | Kattis problem package format]. The CCS must support this standard with the following exceptions:
+Problems (including judge data, validators, execution time limit, etc) are specified and configured using the [http://www.problemarchive.org/wiki/index.php/Problem_Format Kattis problem package format]. The CCS must support this standard with the following exceptions:
 
 * The CCS does not have to support the use of the following keys in problem.yaml: type, libraries or languages. This means that the default value will be used.
 * The CCS does only have to support the values "default" or "custom" for the key validation in problem.yaml.
