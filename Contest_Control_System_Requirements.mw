@@ -687,7 +687,7 @@ A YAML file consisting of a mapping with the following keys:
 {| class="wikitable"
 ! Key !! Description
 |-
-| event-feed-port || Port number for the [[Event Feed]] (optional, deafult 4713)
+| event-feed-port || Port number for the [[Event Feed]] (optional, default 4713)
 |-
 | default-clars || Sequence of pre-defined clarification answers. The first is the default and will be pre-selected
 |-
