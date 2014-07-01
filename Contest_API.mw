@@ -356,3 +356,76 @@ Returns a JSON array, with each element an object describing a testcase, with th
 | ?
 | jury (reference) answer for this testcase (base64 encoded, or provided as a separate raw URL?)
 |}
+
+=== GET baseurl/scoreboard ===
+
+Provides the scoreboard of the current contest.
+
+Parameters: ''none''
+
+Returns a JSON array where each element is an object that represents a row for one team, containing:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Description
+|-
+| rank
+| integer
+| yes
+| rank of this team, 1-based and duplicate in case of ties
+|-
+| team
+| ID
+| yes
+| identifier of the team
+|-
+| score
+| object
+| yes
+| object (for possible extension to other scoring methods) containing integer elements "num_solved" and "total_time"
+|-
+| problems
+| array
+| yes
+| array of problems with scoring data, see below for the specification of each element
+|}
+Each problem element within the scoreboard consists of:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Description
+|-
+| id
+| ID
+| yes
+| identifier of the problem
+|-
+| num_attempts
+| integer
+| yes
+| number of judged submissions (including possibly a final correct one)
+|-
+| num_pending
+| integer
+| yes
+| number of pending submissions (either queued or due to freeze)
+|-
+| solved
+| boolean
+| yes
+| whether the team solved this problem
+|-
+| first
+| boolean
+| no
+| true if this team solved the problem first in contest
+|-
+| time
+| integer
+| yes
+| present if solved, minutes into the contest when solved by team
+|}
