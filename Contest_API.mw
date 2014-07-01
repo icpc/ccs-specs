@@ -5,7 +5,7 @@ Such an API can be used by a multitude of clients:
 * an external scoreboard
 * a scoreboard resolver application
 * contest analysis software, such as the [[ICAT]] toolset
-* another "shadow" CCS, providing a run-forwarding interface
+* another "shadow" CCS, providing a run-forwarding interface to it
 * internally, to interface between the CCS server and judging instances
 
 This API is meant to be useful, not only at the ICPC World Finals, but more generally in any ICPC-style contest setup.
