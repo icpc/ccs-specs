@@ -109,7 +109,7 @@ Returns a JSON array, with each element an object describing a problem, with the
 | id
 | ID
 | yes
-| identifier of the problem
+| identifier of the problem (at WFs: a string with capitalized problem letter)
 |-
 | shortname
 | string
@@ -410,7 +410,7 @@ Each row object contains:
 | team
 | ID
 | yes
-| identifier of the team
+| identifier of the team as in <tt>teams</tt> API call.
 |-
 | score
 | object
@@ -433,7 +433,7 @@ Each problem element within the scoreboard consists of:
 | id
 | ID
 | yes
-| identifier of the problem
+| identifier of the problem as in <tt>problems</tt> API call.
 |-
 | num_judged
 | integer
