@@ -111,6 +111,11 @@ Returns a JSON array, with each element an object describing a problem, with the
 | yes
 | identifier of the problem
 |-
+| shortname
+| string
+| yes
+| brief name of the problem (restrict to, say, 10 characters?)
+|-
 | name
 | string
 | yes
@@ -119,7 +124,8 @@ Returns a JSON array, with each element an object describing a problem, with the
 | color
 | string
 | no
-| color of this problem (e.g. on the scoreboard), specified in [http://en.wikipedia.org/wiki/Web_colors HTML hexadecimal] ('''TODO''': also allow HTML names?)
+| color of this problem (e.g. on the scoreboard), specified in [http://en.wikipedia.org/wiki/Web_colors HTML hexadecimal or HTML color name] 
+<!-- Save this for later discussion - Jaap, 2015-02-11
 |-
 | timelimit
 | float
@@ -135,7 +141,18 @@ Returns a JSON array, with each element an object describing a problem, with the
 | BASE64
 | no
 | Problem description text ('''TODO''': in which format? PDF/HTML, either, add mime-type, unspecified?)
+-->
 |}
+
+==== Example ====
+
+Request:
+  GET http://example.com/problems
+Returned data:
+  [{"id":"A","shortname":"asteroids","name":"Asteroid Rangers","color":"blue"},
+   {"id":"B","shortname":"bottles","name":"Curvy Little Bottles","color":"#ffaa00"},
+   ...
+  ]
 
 === GET baseurl/languages ===
 
