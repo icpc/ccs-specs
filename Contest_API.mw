@@ -204,26 +204,38 @@ Returns a JSON array, with each element an object describing a team, with the fo
 | yes
 | name of the team
 |-
+| affiliation
+| string
+| yes for WF
+| name of university or other entity that team is affiliated to (may be same as name at WFs)
+|-
 | nationality
 | string
 | yes for WF
 | [https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3 ISO 3-letter code] of the team's nationality
 |-
-| affiliation
-| string
-| yes for WF
-| university or other entity that team is affiliated to
-|-
 | region
 | string
 | yes for WF
-| a region team is from (in ICPC WFs these are the super-regions, such as Europe)
+| region this team is from (in ICPC WFs these are the super-regions, such as Europe)
+<!-- Save this for later discussion - Jaap, 2015-02-11
 |-
 | external-id
 | string
 | yes for WF?
 | external identifier for this team, e.g. from imported ICPC data
+-->
 |}
+
+==== Example ====
+
+Request:
+  GET http://example.com/teams
+Returned data:
+  [{"id":42,"name":"Shanghai Jiao Tong University","nationality":"CHN","affiliation":"Shanghai Jiao Tong University","region":"Asia",},
+   {"id":"11","name":"CMU1","nationality":"USA","affiliation":"Carnegie Mellon University","region":"North America"},
+   ...
+  ]
 
 === GET baseurl/submissions ===
 
