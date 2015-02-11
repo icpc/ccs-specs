@@ -363,7 +363,9 @@ Provides the scoreboard of the current contest.
 
 Parameters: ''none''
 
-Returns a JSON array where each element is an object that represents a row for one team, containing:
+Returns a JSON array where each element is an object that represents a row for one team. The array is
+sorted according to rank and alphabetical on team name within identically ranked teams.
+Each row object contains:
 {| class="wikitable"
 |-
 ! Name
@@ -404,7 +406,7 @@ Each problem element within the scoreboard consists of:
 | yes
 | identifier of the problem
 |-
-| num_attempts
+| num_judged
 | integer
 | yes
 | number of judged submissions (including possibly a final correct one)
@@ -419,13 +421,24 @@ Each problem element within the scoreboard consists of:
 | yes
 | whether the team solved this problem
 |-
-| first
-| boolean
-| no
-| true if this team solved the problem first in contest
-|-
 | time
 | integer
 | yes
 | present if solved, minutes into the contest when solved by team
 |}
+
+==== Example ====
+
+Request:
+  GET http://example.com/scoreboard
+Returned data:
+  [{"rank":1,"team":42,"score":{"num_solved":3,"total_time":340},
+    "problems":[
+     {"id":"A","num_judged":3,"num_pending":1,"solved":false},
+     {"id":"B","num_judged":1,"num_pending":0,"solved":true,"time":20},
+     {"id":"C","num_judged":2,"num_pending":0,"solved":true,"time":55},
+     {"id":"D","num_judged":0,"num_pending":0,"solved":false},
+     {"id":"E","num_judged":3,"num_pending":0,"solved":true,"time":205}
+    ]},
+   ...
+  ]
