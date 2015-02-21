@@ -108,8 +108,13 @@ Returns a JSON array, with each element an object describing a problem, with the
 |-
 | id
 | ID
+| ?
+| identifier of the problem
+|-
+| label
+| string
 | yes
-| identifier of the problem (at WFs: a string with capitalized problem letter)
+| label of the problem in the contest, typically a single capitalized letter
 |-
 | shortname
 | string
@@ -149,8 +154,8 @@ Returns a JSON array, with each element an object describing a problem, with the
 Request:
   GET http://example.com/problems
 Returned data:
-  [{"id":"A","shortname":"asteroids","name":"Asteroid Rangers","color":"blue"},
-   {"id":"B","shortname":"bottles","name":"Curvy Little Bottles","color":"#ffaa00"},
+  [{id:"10","label":"A","shortname":"asteroids","name":"Asteroid Rangers","color":"blue"},
+   {id:"84","label":"B","shortname":"bottles","name":"Curvy Little Bottles","color":"#ffaa00"},
    ...
   ]
 
@@ -430,10 +435,10 @@ Each problem element within the scoreboard consists of:
 ! Required?
 ! Description
 |-
-| id
-| ID
+| label
+| string
 | yes
-| identifier of the problem as in <tt>problems</tt> API call.
+| label of the problem as in <tt>problems</tt> API call.
 |-
 | num_judged
 | integer
@@ -463,11 +468,11 @@ Request:
 Returned data:
   [{"rank":1,"team":42,"score":{"num_solved":3,"total_time":340},
     "problems":[
-     {"id":"A","num_judged":3,"num_pending":1,"solved":false},
-     {"id":"B","num_judged":1,"num_pending":0,"solved":true,"time":20},
-     {"id":"C","num_judged":2,"num_pending":0,"solved":true,"time":55},
-     {"id":"D","num_judged":0,"num_pending":0,"solved":false},
-     {"id":"E","num_judged":3,"num_pending":0,"solved":true,"time":205}
+     {"label":"A","num_judged":3,"num_pending":1,"solved":false},
+     {"label":"B","num_judged":1,"num_pending":0,"solved":true,"time":20},
+     {"label":"C","num_judged":2,"num_pending":0,"solved":true,"time":55},
+     {"label":"D","num_judged":0,"num_pending":0,"solved":false},
+     {"label":"E","num_judged":3,"num_pending":0,"solved":true,"time":205}
     ]},
    ...
   ]
