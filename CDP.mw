@@ -131,9 +131,9 @@ The events folder may also contain other files in the format
 This folder, which must be named "results", contains required output files from the CCS.
 Examples may include:
 
-# [[results.tsv]] 
-# [[scoreboard.tsv]]
-* [[runs.tsv]]
+# [[Contest_Control_System#results.tsv|results.tsv]] 
+# [[Contest_Control_System#scoreboard.tsv|scoreboard.tsv]]
+# [[Contest_Control_System#submissions.tsv|submissions.tsv]]
 
 ===results/<CCS> folder===
 
