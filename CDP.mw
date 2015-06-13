@@ -33,13 +33,14 @@ must be "config", it must reside directly in the root folder of the CDP,
 and it must contain the following files:
 
 * [[Contest_Control_System#contest.yaml|contest.yaml]]
-* [[problemset.yaml]]
+* [[Contest_Control_System#problemset.yaml|problemset.yaml]]
 
-* One file for each defined contest problem, where each file is defined using [[Problem Format]]
+* One file for each defined contest problem, where each file is defined using 
+[[http://www.problemarchive.org/wiki/index.php/Problem_Format|Problem Format]]
 
-* [[groups.tsv]] 
-* [[teams.tsv]]
-* [[userdata.tsv]]
+* [[Contest_Control_System#groups.tsv|groups.tsv]] 
+* [[Contest_Control_System#teams.tsv|teams.tsv]]
+* [[Contest_Control_System#userdata.tsv|userdata.tsv]]
 
 ==images folder ==
 
