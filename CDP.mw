@@ -32,7 +32,7 @@ Contains files used to configure a CCS. The name of the folder
 must be "config", it must reside directly in the root folder of the CDP,
 and it must contain the following files:
 
-* [[https://clics.ecs.baylor.edu/index.php/Contest_Control_System#contest.yaml>>contest.yaml]]
+* [[https://clics.ecs.baylor.edu/index.php/Contest_Control_System#contest.yaml|contest.yaml]]
 * [[problemset.yaml]]
 
 * One file for each defined contest problem, where each file is defined using [[Problem Format]]
