@@ -28,7 +28,7 @@ These are files and folders which provide input/configuration information for a 
 
 ==config folder==
 
-Contains files used to configure a CCS. The name of the folder
+Contains data used to configure a CCS. The name of the folder
 must be "config", it must reside directly in the root folder of the CDP,
 and it must contain the following files and folders:
 
