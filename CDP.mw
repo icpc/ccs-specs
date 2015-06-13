@@ -154,11 +154,10 @@ The name of each reaction video file should be "reactionXX.m2ts", where "XX" is 
 submission number for which the team reaction video was recorded.
 
 ==backups folder==
-* contains a final backups of each team's working folder in the form team<X>.zip.
+* contains backups of each team's working folder in the form team<X>.zip.
 
 For team102 their $HOME backup would be stored in
- backups/team102.zip
-
+''backups/team102.zip''.
 
 =Examples=
 
