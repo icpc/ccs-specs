@@ -30,13 +30,13 @@ These are files and folders which provide input/configuration information for a 
 
 Contains files used to configure a CCS. The name of the folder
 must be "config", it must reside directly in the root folder of the CDP,
-and it must contain the following files:
+and it must contain the following files and folders:
 
 * [[Contest_Control_System#contest.yaml|contest.yaml]]
 * [[Contest_Control_System#problemset.yaml|problemset.yaml]]
 
 * One folder for each contest problem defined in the [[Contest_Control_System#problemset.yaml|problemset.yaml]] file, where each folder contains data as defined by the following [http://www.problemarchive.org/wiki/index.php/Problem_Format Problem Format Specification].  (See also:
-[http://www.problemarchive.org/wiki/index.php/Problem_format_directory_structure].)
+[http://www.problemarchive.org/wiki/index.php/Problem_format_directory_structure problem format directory structure].)
 
 * [[Contest_Control_System#groups.tsv|groups.tsv]] 
 * [[Contest_Control_System#teams.tsv|teams.tsv]]
