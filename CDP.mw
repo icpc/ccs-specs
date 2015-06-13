@@ -35,7 +35,7 @@ and it must contain the following files:
 * [[Contest_Control_System#contest.yaml|contest.yaml]]
 * [[Contest_Control_System#problemset.yaml|problemset.yaml]]
 
-* One folder for each defined contest problem, where each folder contains data as defined by the following [[http://www.problemarchive.org/wiki/index.php/Problem_Format|Problem Format Specification]]
+* One folder for each contest problem defined in the [[Contest_Control_System#problemset.yaml|problemset.yaml]] file, where each folder contains data as defined by the following [http://www.problemarchive.org/wiki/index.php/Problem_Format Problem Format Specification]
 
 * [[Contest_Control_System#groups.tsv|groups.tsv]] 
 * [[Contest_Control_System#teams.tsv|teams.tsv]]
