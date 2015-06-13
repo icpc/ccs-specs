@@ -33,7 +33,7 @@ must be "config", it must reside directly in the root folder of the CDP,
 and it must contain the following files:
 
 * [[contest.yaml]]
-* [[problemset.yaml]])
+* [[problemset.yaml]]
 
 * One file for each defined contest problem, where each file is defined using [[Problem Format]]
 
