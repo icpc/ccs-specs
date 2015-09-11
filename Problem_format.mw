@@ -119,7 +119,7 @@ Verification Checks (in order)
 
  Warn if:
        there are no *.in in data/sample/
-
+ 
  Error if:
        there is no problem.yaml
        there is no problem statement (i.e., a problem*.tex file)
@@ -132,31 +132,31 @@ Verification Checks (in order)
        validator begins with "custom" and there are no validators in output_validators/
        there are validators in output_validators/ and validator does not begin with "custom"
        any validator (input format or output) does not compile
-
+ 
  For each *.in in public_data and judge_data:
        For each validator in input_format_validators/:
                If the validator does not accept the input file: Error!
-
+  
  For each solution in test_submissions/accepted/:
        For each *.in in data/*/:
                Run the solution on the input
                For the built-in validator if corrector is "diff" or each validator in output_validators/:
                        If the validator does not accept the output of the solution: Error!
  Let t be the longest time any of the solutions ran on any of the inputs.
-
+ 
  For each solution in submissions/time_limit_exceeded/:
        For each *.in in data/*/:
                Run the solution on the input for at least t * time_limit_safety_margin seconds.
  Let t_slow be the shortest time any of the solutions ran on any of the inputs.
-
+ 
  If t_slow is less than t * time_limit_safety_margin: Error!
-
+ 
  For each solution in submissions/wrong_answer/:
        For each *.in in data/*/:
                Run the solution on the input
                For the built-in validator if corrector = "diff" or each validator in output_validators/:
                        If the validator accepts the output of the solution: Error!
-
+ 
  For each solution in submissions/run_time_error/:
        For each *.in in data/*/:
                Run the solution on the input
