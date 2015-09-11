@@ -1,3 +1,13 @@
-'''This document is deprecated'''
+=Draft=
 
-See [[Contest_Control_System#Contest_Problems]] for requirements regarding the problem format.
+This is a draft standard for the ICPC 2016 Finals, upon approval
+this draft status will change to Final Approved status.  The Final
+version will have a version number and date.
+
+=Other Problem Format Standards=
+* [http://www.problemarchive.org/wiki/index.php/Problem_Format Problem Format Specification]
+* [http://www.problemarchive.org/wiki/index.php/Problem_format_directory_structure problem format directory structure].
+
+=See Also=
+
+* [[Contest_Control_System#Contest_Problems]] for requirements regarding the problem format.
