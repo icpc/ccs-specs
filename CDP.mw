@@ -62,8 +62,8 @@ file whose name is X.png,  where X is the team number (e.g., 1.png, 102.png, etc
 
 This folder holds one 1920x1080 image file for each contest team
 containing the team's picture (typically for example taken during contest registration).  
-Each team picture must be in a separate PNG-format
-file whose name is X.png,  where X is the team number (e.g., 1.png, 102.png, etc.).
+Each team picture must be in a separate JPEG-format
+file whose name is X.png,  where X is the team number (e.g., 1.jpg, 102.jpg, etc.).
 
 ===images/icon folder===
 
