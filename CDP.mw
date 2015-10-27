@@ -225,12 +225,12 @@ Here are two examples of implementations of the CDP specfication.
  config/sumit/problem.yaml
  events/[[events.json]]
  events/[[events.xml]]
- images/logo/logo1.png
- images/logo/logo2.png
- images/logo/logo3.png
- images/team/team1.jpg
- images/team/team2.jpg
- images/team/team3.jpg
+ images/logo/1.png
+ images/logo/2.png
+ images/logo/3.png
+ images/team/1.jpg
+ images/team/2.jpg
+ images/team/3.jpg
  results/[[results.tsv]]
  results/[[runs.tsv]]
  results/[[scoreboard.tsv]]
