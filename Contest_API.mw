@@ -29,13 +29,16 @@ Access to (parts of) the API is optionally controlled by HTTP authentication. Th
 '''Timestamps''' (type <tt>&lt;TIME&gt;</tt> in the specification)
 are encoded as floats without exponent representing Unix
 Epoch seconds. The API and client must accept floats with up to 9
-digits after the decimal point and should provide at least microsecond
-resolution, for example: <tt>1390517449.324000000</tt>.
+digits after the decimal point and should provide microsecond
+resolution, for example: <tt>1390517449.324</tt>, truncating (i.e.
+rounding down) internal timestamps when necessary, so in a 5 hour
+contest a submission at 18000 seconds is late.
 The rationale for Epoch is that it is independent of time zone, easily
 parsable and supported in about any possible language.
 
-'''Identifier strings''' (type <tt>&lt;ID&gt;</tt> in the specification)
-do we want to restrict these to certain characters (preferably not just numeric), limit the length?
+'''Identifiers''' (type <tt>&lt;ID&gt;</tt> in the specification)
+Should these be integer or string type? If string, do we want to restrict these to certain characters or limit the length?
+For 2016 use integers.
 
 '''File contents''' (type <tt>&lt;BASE64&gt;></tt> in the specification)
 are base64 encoded. This allows it to be embedded as strings in the JSON with other data.
