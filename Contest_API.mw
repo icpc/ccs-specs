@@ -291,7 +291,7 @@ Returns a JSON array, with each element an object describing a submission, with 
 
 === GET baseurl/submission_files ===
 
-This provides the file(s) of a specific submission.
+This provides the file(s) of a specific submission, see also the [[Draft_2014_REST_interface_for_source_code_fetching]].
 
 Parameters:
 * '''id''' (required) identifier of the submission
