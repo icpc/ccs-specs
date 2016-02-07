@@ -116,7 +116,7 @@ Returns a JSON array, with each element an object describing a problem, with the
 | yes
 | label of the problem in the contest, typically a single capitalized letter
 |-
-| shortname
+| short_name
 | string
 | yes
 | brief name of the problem (restrict to, say, 10 characters?)
@@ -126,10 +126,15 @@ Returns a JSON array, with each element an object describing a problem, with the
 | yes
 | name of the problem
 |-
+| rgb
+| string
+| no
+| hexadecimal RGB value of problem color as specified in [http://en.wikipedia.org/wiki/Web_colors#Hex_triplet HTML hexadecimal colors], e.g. '#AC00FF' or '#fff'
+|-
 | color
 | string
 | no
-| color of this problem (e.g. on the scoreboard), specified in [http://en.wikipedia.org/wiki/Web_colors HTML hexadecimal or HTML color name] 
+| human readable color description associated to the RGB value
 <!-- Save this for later discussion - Jaap, 2015-02-11
 |-
 | timelimit
@@ -154,8 +159,8 @@ Returns a JSON array, with each element an object describing a problem, with the
 Request:
   GET http://example.com/problems
 Returned data:
-  [{id:"10","label":"A","shortname":"asteroids","name":"Asteroid Rangers","color":"blue"},
-   {id:"84","label":"B","shortname":"bottles","name":"Curvy Little Bottles","color":"#ffaa00"},
+  [{id:"10","label":"A","shortname":"asteroids","name":"Asteroid Rangers","rgb":"#00f","color":"blue"},
+   {id:"84","label":"B","shortname":"bottles","name":"Curvy Little Bottles","rgb":"#808080","color":"gray"},
    ...
   ]
 
