@@ -664,7 +664,7 @@ A YAML file consisting of a mapping with the following keys:
 |-
 | duration || Duration as h:mm:ss (length of contest, in contest time)
 |-
-| scoreboard-freeze-length || Time before end of contest when scoreboard will be frozen, in h:mm:ss
+| scoreboard-freeze-length || Time length before end of contest when scoreboard will be frozen, in h:mm:ss
 |-
 | penalty-time || Penalty minutes for rejected submission (optional, default 20)
 |}
@@ -679,7 +679,7 @@ A YAML file consisting of a mapping with the following keys:
  duration:                 5:00:00
  scoreboard-freeze-length: 1:00:00
  penaltytime:              20
- 
+
 ==== system.yaml ====
 
 A YAML file consisting of a mapping with the following keys:
