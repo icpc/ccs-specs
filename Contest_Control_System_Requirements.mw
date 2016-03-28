@@ -916,45 +916,6 @@ The archive may contain other files and folders. These must be ignored by the CC
 
 === Output files ===
 
-==== userdata.tsv ====
-
-A text file consisting of a version line and one line for each account in the contest. Each line has tab separated fields as defined below.
-
-The first line has the following format
-{| class="wikitable"
-! Field
-! Description
-! Example
-! Type
-|-
-| 1 || Label || userdata || fixed string (always same value)
-|-
-| 2 || Version number || 1  || integer
-|}
-
-Then follow several lines with the following format (one per account).
-
-{| class="wikitable"
-! Field
-! Description
-! Example
-! Type
-|-
-| 1 || Account Type || team || string
-|-
-| 2 || Team Number || 42 || integer
-|-
-| 3 || Full Name || University of Virginia  || string
-|-
-| 4 || Username|| team-001 || string
-|-
-| 5 || Password || B!5MWJiy || string
-|}
-
-Account Types present in ''userdata.tsv'' are: team, judge, admin.
-
-Team numbers for teams must be the same as the corresponding team numbers in ''teams.tsv''. Team number should not be used for any other account type.
-
 ==== scoreboard.tsv ====
 
 A text file consisting of a version  line and one line for each team in the contest, sorted in position order with alphabetical order on team name as tie breaker. Each line has tab separated fields as defined below.
