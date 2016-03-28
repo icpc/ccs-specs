@@ -781,29 +781,28 @@ A sequence of mappings with the following keys:
    - letter:     A
      short-name: apl
      color:      yellow
-     rgb:        #ffff00
+     rgb:        '#ffff00'
    
    - letter:     B
      short-name: barcodes
      color:      red
-     rgb:        #ff0000
+     rgb:        '#ff0000'
    
    - letter:     C
      short-name: biobots
      color:      green
-     rgb:        #00ff00
+     rgb:        '#00ff00'
    
    - letter:     D
      short-name: castles
      color:      blue
-     rgb:        #0000ff
+     rgb:        '#0000ff'
    
    - letter:     E
      short-name: channel
      color:      white
-     rgb:        #ffffff
- ...
- 
+     rgb:        '#ffffff'
+
 ==== groups.tsv ====
 
 A text file consisting of a version line and one line for each group (super regionals at the WF) that needs to be tracked separately with regards to results. Each line has tab separated fields as defined below.
