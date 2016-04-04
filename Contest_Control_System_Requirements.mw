@@ -678,7 +678,7 @@ A YAML file consisting of a mapping with the following keys:
  start-time:               2011-02-04T01:23:00Z
  duration:                 5:00:00
  scoreboard-freeze-length: 1:00:00
- penaltytime:              20
+ penalty-time:             20
 
 ==== system.yaml ====
 
