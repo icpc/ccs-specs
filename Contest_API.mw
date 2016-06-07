@@ -192,6 +192,17 @@ Returns a JSON array, with each element an object describing a language, with th
 | name of the language
 |}
 
+==== Example ====
+
+Request:
+  GET http://example.com/languages
+Returned data:
+  [{"id":1,"name":"Java"},
+   {"id":2,"name":"GNU C++"},
+   {"id":4358281971166881160,"name":"Python"},
+   ...
+  ]
+
 === GET baseurl/teams ===
 
 Lists all teams.
