@@ -13,6 +13,7 @@ This API is meant to be useful, not only at the ICPC World Finals, but more gene
 == General design principles ==
 
 The interface is implemented as a HTTP REST interface that outputs information in [https://en.wikipedia.org/wiki/JSON JSON] format. The specific base URL will be dependent on the server (main CCS or CDS) providing the service and will be indicated as <tt>baseurl</tt>.
+The design is based on the [https://docs.google.com/document/d/12RVKS_u36WY9kU8iVIMzHtH5Df3WjK-mt-YmJu8j6ZI/edit ICPC Contest Ontology draft].
 
 Query parameters are passed as variables in the URL instead of encoded in the URL path, e.g.
   GET http://example.com/team?id=10
@@ -26,25 +27,18 @@ Access to (parts of) the API is optionally controlled by HTTP authentication. Th
 
 === Recurring details ===
 
-'''Timestamps''' (type <tt>&lt;TIME&gt;</tt> in the specification)
-are encoded as floats without exponent representing Unix
-Epoch seconds. The API and client must accept floats with up to 9
-digits after the decimal point and should provide microsecond
-resolution, for example: <tt>1390517449.324</tt>, truncating (i.e.
-rounding down) internal timestamps when necessary, so in a 5 hour
-contest a submission at 18000 seconds is late.
-The rationale for Epoch is that it is independent of time zone, easily
-parsable and supported in about any possible language.
+'''Absolute timestamps''' (type <tt>&lt;TIME&gt;</tt> in the specification)
+are human-readable, given in [https://en.wikipedia.org/wiki/ISO_8601 ISO 8601] extended combined date/time format with timezone: <tt>yyyy-mm-ddThh:mm:ss(.uuu)?[+-]zz(:mm)?</tt> (or timezone <tt>Z</tt> for UTC).
+
+'''Relative times''' (type <tt>&lt;RELTIME&gt;</tt> in the specification)
+are human-readable, given in a slight modification of the [https://en.wikipedia.org/wiki/ISO_8601 ISO 8601] extended time format: <tt>(h)*h:mm:ss(.uuu)?</tt>
 
 '''Identifiers''' (type <tt>&lt;ID&gt;</tt> in the specification)
-Should these be integer or string type? If string, do we want to restrict these to certain characters or limit the length?
-For 2016 use integers.
+are given as string consisting of characters <tt>[a-zA-Z0-9-_]</tt> of length at most 36 and not starting with a <tt>-</tt> (dash).
 
-'''File contents''' (type <tt>&lt;BASE64&gt;></tt> in the specification)
-are base64 encoded. This allows it to be embedded as strings in the JSON with other data.
-For smallish files (such as source code) the additional encoding overhead in size and time is not an issue;
-for large files, one should probably revert to providing these separately in a raw format.
-'''TODO''': in this case replace the contents with a download URL?
+'''File contents''' (type <tt>&lt;FILE&gt;</tt> in the specification)
+are given as base64 encoded string.
+'''TODO''': also support a download URL?
 
 == Interface specification ==
 
@@ -72,27 +66,32 @@ Returns a JSON object with the elements below. If there is no current (this may 
 | name
 | string
 | yes
-| name of the contest
+| display name of the contest
 |-
-| start
+| formal_name
+| string
+| yes for WF
+| full name of the contest
+|-
+| start_time
 | TIME
-| yes
+| yes; may be <tt>null</tt> during contest pause
 | start time of the contest
 |-
-| length
-| integer
+| duration
+| RELTIME
 | yes
-| contest length in seconds
+| length of the contest
 |-
-| penalty
+| scoreboard-freeze-duration
+| RELTIME
+| yes for WF
+| how long the scoreboard is frozen before the end of the contest
+|-
+| penalty_time
 | integer
 | yes for WF
-| penalty time per wrong submission, in seconds
-|-
-| freeze
-| integer
-| yes for WF
-| time after contest start that scoreboard is frozen, in seconds
+| penalty time for a wrong submission, in minutes
 |}
 
 === GET baseurl/problems ===
@@ -111,7 +110,7 @@ Returns a JSON array, with each element an object describing a problem, with the
 |-
 | id
 | ID
-| ?
+| yes
 | identifier of the problem
 |-
 | label
@@ -119,15 +118,15 @@ Returns a JSON array, with each element an object describing a problem, with the
 | yes
 | label of the problem in the contest, typically a single capitalized letter
 |-
-| short_name
-| string
-| yes
-| brief name of the problem (restrict to, say, 10 characters?)
-|-
 | name
 | string
 | yes
 | name of the problem
+|-
+| ordinal
+| integer
+| yes
+| ordering of problems on the scoreboard
 |-
 | rgb
 | string
@@ -162,8 +161,8 @@ Returns a JSON array, with each element an object describing a problem, with the
 Request:
   GET http://example.com/problems
 Returned data:
-  [{"id":10,"label":"A","shortname":"asteroids","name":"Asteroid Rangers","rgb":"#00f","color":"blue"},
-   {"id":84,"label":"B","shortname":"bottles","name":"Curvy Little Bottles","rgb":"#808080","color":"gray"},
+  [{"id":"10","label":"A","shortname":"asteroids","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f"},
+   {"id":"B","label":"B","shortname":"bottles","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080"},
    ...
   ]
 
@@ -197,8 +196,8 @@ Returns a JSON array, with each element an object describing a language, with th
 Request:
   GET http://example.com/languages
 Returned data:
-  [{"id":1,"name":"Java"},
-   {"id":2,"name":"GNU C++"},
+  [{"id":"1","name":"Java"},
+   {"id":"cpp","name":"GNU C++"},
    {"id":4358281971166881160,"name":"Python"},
    ...
   ]
@@ -223,32 +222,40 @@ Returns a JSON array, with each element an object describing a team, with the fo
 | yes
 | identifier of the team
 |-
+| icpc_id
+| string
+| yes for WF
+| external identifier from ICPC CMS
+|-
 | name
 | string
 | yes
 | name of the team
 |-
+| formal_name
+| string
+| no
+| full name of the team if too long for normal display purposes
+|-
 | affiliation
 | string
 | yes for WF
-| name of university or other entity that team is affiliated to (may be same as name at WFs)
+| name of university or other entity that team is affiliated to
 |-
 | nationality
 | string
-| yes for WF
+| no (not used at WF)
 | [https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3 ISO 3-letter code] of the team's nationality
 |-
-| group
+| group_id
 | string
 | yes for WF
-| group this team is part of (in ICPC WFs these are the super-regions, such as Europe)
-<!-- Save this for later discussion - Jaap, 2015-02-11
+| ID of the group this team is part of (in ICPC WFs these are the super-regions, such as Europe)
 |-
-| external-id
-| string
-| yes for WF?
-| external identifier for this team, e.g. from imported ICPC data
--->
+| logo
+| FILE
+| no
+| team/university logo
 |}
 
 ==== Example ====
@@ -256,8 +263,97 @@ Returns a JSON array, with each element an object describing a team, with the fo
 Request:
   GET http://example.com/teams
 Returned data:
-  [{"id":42,"name":"Shanghai Jiao Tong University","nationality":"CHN","affiliation":"Shanghai Jiao Tong University","group":"Asia",},
-   {"id":11,"name":"CMU1","nationality":"USA","affiliation":"Carnegie Mellon University","group":"North America"},
+  [{"id":"42","icpc_id":"201433","number":42,"name":"Shanghai Jiao Tong U.","formal_name":"Shanghai Jiao Tong University","affiliation":"Shanghai Jiao Tong University","group_id":"7",},
+   {"id":"11","name":"CMU1","nationality":"USA","affiliation":"Carnegie Mellon University","group_id":"8"},
+   ...
+  ]
+
+=== GET baseurl/groups ===
+
+Lists all groups (at the World Finals these are the super regions).
+
+Parameters: ''none''
+
+Returns a JSON array, with each element an object describing a team, with the following elements:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Description
+|-
+| id
+| ID
+| yes
+| identifier of the group
+|-
+| icpc_id
+| string
+| yes for WF
+| external identifier from ICPC CMS
+|-
+| name
+| string
+| yes
+| name of the group
+|}
+
+==== Example ====
+
+Request:
+  GET http://example.com/groups
+Returned data:
+  [{"id":"7","icpc_id":"7593","name":"Asia"},
+   ...
+  ]
+
+=== GET baseurl/judgement_types ===
+
+Lists all judgement types available (i.e. possible responses when judging a submission).
+
+Parameters: ''none''
+
+Returns a JSON array, with each element an object describing a team, with the following elements:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Description
+|-
+| id
+| ID
+| yes
+| identifier of the judgement type
+|-
+| label
+| string
+| yes
+| label for this judgement, typically a 2-3 letter capitalized shorthand, see [http://www.problemarchive.org/wiki/index.php/Problem_Format#Graders Problem Format]
+|-
+| name
+| string
+| yes
+| name of the judgement
+|-
+| penalty
+| boolean
+| yes
+| whether this judgement causes penalty time
+|-
+| solved
+| boolean
+| yes
+| whether this judgement is considered correct
+|}
+
+==== Example ====
+
+Request:
+  GET http://example.com/judgement_types
+Returned data:
+  [{"id":"CE","label":"CE","name":"Compiler Error","penalty":false,"solved":false},
+   {"id":"0357c4a9-6983-45d7-8080-90d24c5511ea","label":"AC","name":"Accepted","penalty":false,"solved":true},
    ...
   ]
 
@@ -282,17 +378,17 @@ Returns a JSON array, with each element an object describing a submission, with 
 | yes
 | identifier of the submission
 |-
-| team
+| team_id
 | ID
 | yes
 | identifier of the team that made the submission
 |-
-| problem
+| problem_id
 | ID
 | yes
 | identifier of the problem submitted for
 |-
-| language
+| language_id
 | ID
 | yes
 | identifier of the language submitted for
@@ -301,49 +397,81 @@ Returns a JSON array, with each element an object describing a submission, with 
 | TIME
 | yes
 | timestamp of when the submission was made
+|-
+| contest_time
+| RELTIME
+| yes
+| contest relative time when the submission was made
 |}
+
+==== Example ====
+
+Request:
+  GET http://example.com/submissions
+Returned data:
+  [{"id":"187","team_id":"42","problem_id":"2","language_id":"cpp","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034"},
+   ...
+  ]
 
 === GET baseurl/submission_files ===
 
 This provides the file(s) of a specific submission, see also the [[Draft_2014_REST_interface_for_source_code_fetching]].
 
 Parameters:
-* '''id''' (required) identifier of the submission
+* '''submission_id''' (required) identifier of the submission
 
 Returns a JSON array, with each element an object describing a file, with the following elements:
 {| class="wikitable"
 |-
 ! Name
 ! Type
+! Required?
 ! Description
+|-
+| id
+| ID
+| yes
+| identifier of the submission file
+|-
+| submission_id
+| ID
+| yes
+| identifier of the submission
 |-
 | filename
 | string
+| yes
 | filename of this file (without path? any disallowed characters?)
 |-
-| content
-| BASE64
-| base64 encoded contents of the file
+| source
+| FILE
+| yes
+| contents of the file
+|-
+| main
+| boolean
+| no
+| whether this is the main source (relevant e.g. for Java)
 |}
 
-'''To be added''': how to encode encode for Java submissions which file contains the main class, and/or what the main class name is?
 
 ==== Example ====
 
 Request:
   GET http://example.com/submission_files?id=223
 Returned data:
-  [{"filename":"a.java","content":"&lt;base64_string&gt;"},{"filename":"helper.java","content":"&lt;base64_string&gt;"}]
+  [{"id":"d079c12d-98ce-4bb7-8097-ae083b45feb4","submission_id":"223","filename":"a.java","content":"&lt;base64_string&gt;","main":true},
+   {"id":"18e44041-8caf-4d77-8864-f5584f1ddfed","submission_id":"223","filename":"helper.java","content":"&lt;base64_string&gt;"}
+  ]
 
-=== GET baseurl/judgings ===
+=== GET baseurl/submission_judgements ===
 
-Lists judgings of submissions.
-'''TODO''': does this format of providing judging information separately from submissions fit all CCS's?
-Rationale for this choice is that a rejudging does/need not affect previously published submission or judging information.
+Lists judgements of submissions.
 
 Parameters:
-* '''firstid''' (optional) identifier of first in range of judgings to list
-* '''lastid''' (optional) identifier of last in range of judgings to list
+* '''first_id''' (optional) identifier of first in range of judgements to list
+* '''last_id''' (optional) identifier of last in range of judgements to list
+* '''submission_id''' (optional) identifier of submission to list all judgements associated to it
 
 Returns a JSON array, with each element an object describing a judging, with the following elements:
 {| class="wikitable"
@@ -356,27 +484,54 @@ Returns a JSON array, with each element an object describing a judging, with the
 | id
 | ID
 | yes
-| identifier of the judging
+| identifier of the judgement
 |-
-| submission
+| submission_id
 | ID
 | yes
 | identifier of the submission judged
 |-
-| outcome
-| string
+| judgement_type_id
+| ID
 | yes
-| result of judging, '''NULL''' if judging has not finished yet.
+| the verdict of this judgement
+|-
+| solved
+| boolean
+| yes
+| whether the submission is considered correct
+|-
+| time
+| TIME
+| yes
+| absolute time when judgement completed
+|-
+| contest_time
+| RELTIME
+| yes
+| contest relative time when judgement completed
 |}
 
-=== GET baseurl/testcases ===
+==== Example ====
 
-Lists testcases for a problem.
+Request:
+  GET http://example.com/submission_judgements
+Returned data:
+  [{"id":"14430","submission_id":"223","judgement_type_id":"CE","solved":false,"time":"2014-06-25T11:22:48.427+01","contest_time":"1:22:48.427"},
+   ...
+  ]
+
+
+=== GET baseurl/test_case_judgements ===
+
+Lists judgements of individual test cases of a submission.
+
+'''TODO''': this specification is literally copied from [https://docs.google.com/document/d/12RVKS_u36WY9kU8iVIMzHtH5Df3WjK-mt-YmJu8j6ZI/edit ICPC Contest Ontology draft], which uses '''judgement_id''' where probably we want to use '''submission_judgement_id'''.
 
 Parameters:
-* '''problem''' identifier of a problem
+* '''judgement_id''' (optional) identifier of submission judgement to list all test case judgements associated to it
 
-Returns a JSON array, with each element an object describing a testcase, with the following elements:
+Returns a JSON array, with each element an object describing a judging, with the following elements:
 {| class="wikitable"
 |-
 ! Name
@@ -387,12 +542,89 @@ Returns a JSON array, with each element an object describing a testcase, with th
 | id
 | ID
 | yes
-| identifier of the testcase
+| identifier of the judgement
+|-
+| judgement_id
+| ID
+| yes
+| identifier of the submission judgement this is part of
+|-
+| test_case_id
+| ID
+| yes
+| identifier of the test case judged
+|-
+| judgement_type_id
+| ID
+| yes
+| the verdict of this judgement (i.e. a judgement type)
+|-
+| output
+| FILE
+| yes
+| team output for this test case
+|-
+| solved
+| boolean
+| yes
+| whether the submission is considered correct
+|-
+| time
+| TIME
+| yes
+| absolute time when test case judgement completed
+|-
+| contest_time
+| RELTIME
+| yes
+| contest relative time when test case judgement completed
+|}
+
+==== Example ====
+
+Request:
+  GET http://example.com/test_case_judgements
+Returned data:
+  [{"id":"1312","judgement_id":"14431","test_case_id":"115","judgement_type_id":"0357c4a9-6983-45d7-8080-90d24c5511ea",
+    "output":"&lt;base64_string&gt;","solved":true,"time":"2014-06-25T11:22:42.420+01","contest_time":"1:22:42.420"},
+   ...
+  ]
+
+
+=== GET baseurl/test_cases ===
+
+Lists test cases for a problem.
+
+Parameters:
+* '''problem_id''' identifier of a problem
+
+Returns a JSON array, with each element an object describing a test case, with the following elements:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Description
+|-
+| id
+| ID
+| yes
+| identifier of the test case
+|-
+| problem_id
+| ID
+| yes
+| identifier of the problem
+|-
+| ordinal
+| integer
+| yes
+| sequence number of this test case
 |-
 | description
 | string
 | no
-| description of the testcase, e.g. which corner case it tests
+| a short description of the test case, e.g. which corner case it tests
 |-
 | sample
 | boolean
@@ -400,15 +632,97 @@ Returns a JSON array, with each element an object describing a testcase, with th
 | whether this is a sample testcase (i.e. publicly available)
 |-
 | input
-| BASE64
-| ?
-| input for this testcase (base64 encoded, or provided as a separate raw URL?)
+| FILE
+| yes
+| input for this test case
 |-
 | answer
-| BASE64
-| ?
-| jury (reference) answer for this testcase (base64 encoded, or provided as a separate raw URL?)
+| FILE
+| yes
+| jury (reference) answer for this test case
 |}
+
+==== Example ====
+
+Request:
+  GET http://example.com/test_cases
+Returned data:
+  [{"id":"115","problem_id":"2","ordinal":28,"description":"Test corner case of zero input","sample":false","input":"&lt;base64_string&gt;","answer":"&lt;base64_string&gt;"},
+   ...
+  ]
+
+
+=== GET baseurl/clarifications ===
+
+Lists clarification requests &amp; replies.
+
+Parameters:
+* '''id''' identifier of a problem
+
+Returns a JSON array, with each element an object describing a test case, with the following elements:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Description
+|-
+| id
+| ID
+| yes
+| identifier of the test case
+|-
+| reply_to_id
+| ID
+| yes; may be <tt>null</tt>
+| identifier of clarification this is a reply to
+|-
+| team_id
+| ID
+| yes; may be <tt>null</tt>
+| identifier of the team asking or receiving this reply, <tt>null</tt> if a reply to all teams
+|-
+| problem_id
+| ID
+| yes, may be <tt>null</tt>
+| identifier of associated problem, may be <tt>null</tt>
+|-
+| text
+| string
+| yes
+| question or reply text
+|-
+| from_jury
+| boolean
+| yes
+| whether this is a response from the jury (otherwise question from team)
+|-
+| to_all_teams
+| boolean
+| yes
+| was this a reply sent to all teams?
+|-
+| time
+| TIME
+| yes
+| time of the question/reply
+|-
+| contest-time
+| RELTIME
+| yes
+| contest time of the question/reply
+|}
+
+==== Example ====
+
+Request:
+  GET http://example.com/clarifications
+Returned data:
+  [{"id":"8","reply_to_id":"5","team_id":null,"problem_id":"2","text":"Does bouncing means bounce to the grid above the current one? Yes",
+    "from_jury":true,"to_all_teams":true,"time":"2014-06-25T12:43:02.037+01","contest_time":"2:28:02.037"},
+   ...
+  ]
+
 
 === GET baseurl/scoreboard ===
 
@@ -431,10 +745,10 @@ Each row object contains:
 | yes
 | rank of this team, 1-based and duplicate in case of ties
 |-
-| team
+| team_id
 | ID
 | yes
-| identifier of the team as in <tt>teams</tt> API call.
+| identifier of the team
 |-
 | score
 | object
@@ -454,10 +768,10 @@ Each problem element within the scoreboard consists of:
 ! Required?
 ! Description
 |-
-| label
-| string
+| problem_id
+| ID
 | yes
-| label of the problem as in <tt>problems</tt> API call.
+| identifier of the problem
 |-
 | num_judged
 | integer
@@ -485,13 +799,13 @@ Each problem element within the scoreboard consists of:
 Request:
   GET http://example.com/scoreboard
 Returned data:
-  [{"rank":1,"team":42,"score":{"num_solved":3,"total_time":340},
+  [{"rank":1,"team":"42","score":{"num_solved":3,"total_time":340},
     "problems":[
-     {"label":"A","num_judged":3,"num_pending":1,"solved":false},
-     {"label":"B","num_judged":1,"num_pending":0,"solved":true,"time":20},
-     {"label":"C","num_judged":2,"num_pending":0,"solved":true,"time":55},
-     {"label":"D","num_judged":0,"num_pending":0,"solved":false},
-     {"label":"E","num_judged":3,"num_pending":0,"solved":true,"time":205}
+     {"problem_id":"1","num_judged":3,"num_pending":1,"solved":false},
+     {"problem_id":"2","num_judged":1,"num_pending":0,"solved":true,"time":20},
+     {"problem_id":"3","num_judged":2,"num_pending":0,"solved":true,"time":55},
+     {"problem_id":"4","num_judged":0,"num_pending":0,"solved":false},
+     {"problem_id":"5","num_judged":3,"num_pending":0,"solved":true,"time":205}
     ]},
    ...
   ]
