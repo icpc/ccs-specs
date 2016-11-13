@@ -239,6 +239,11 @@ Returns a JSON array, with each element an object describing a team, with the fo
 | yes for WF
 | external identifier from ICPC CMS
 |-
+| number
+| integer
+| yes for WF
+| team seat number
+|-
 | name
 | string
 | yes
