@@ -263,7 +263,7 @@ Returns a JSON array, with each element an object describing a team, with the fo
 Request:
   GET http://example.com/teams
 Returned data:
-  [{"id":"42","icpc_id":"201433","number":42,"name":"Shanghai Jiao Tong U.","formal_name":"Shanghai Jiao Tong University","affiliation":"Shanghai Jiao Tong University","group_id":"7",},
+  [{"id":"42","icpc_id":"201433","number":42,"name":"Shanghai Jiao Tong U.","formal_name":"Shanghai Jiao Tong University","affiliation":"Shanghai Jiao Tong University","group_id":"7"},
    {"id":"11","name":"CMU1","nationality":"USA","affiliation":"Carnegie Mellon University","group_id":"8"},
    ...
   ]
@@ -647,7 +647,7 @@ Returns a JSON array, with each element an object describing a test case, with t
 Request:
   GET http://example.com/test_cases
 Returned data:
-  [{"id":"115","problem_id":"2","ordinal":28,"description":"Test corner case of zero input","sample":false","input":"&lt;base64_string&gt;","answer":"&lt;base64_string&gt;"},
+  [{"id":"115","problem_id":"2","ordinal":28,"description":"Test corner case of zero input","sample":false,"input":"&lt;base64_string&gt;","answer":"&lt;base64_string&gt;"},
    ...
   ]
 
