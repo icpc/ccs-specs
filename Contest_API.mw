@@ -632,11 +632,6 @@ Returns a JSON array, with each element an object describing a test case, with t
 | no
 | a short description of the test case, e.g. which corner case it tests
 |-
-| sample
-| boolean
-| no
-| whether this is a sample testcase (i.e. publicly available)
-|-
 | input
 | FILE
 | yes
@@ -646,6 +641,11 @@ Returns a JSON array, with each element an object describing a test case, with t
 | FILE
 | yes
 | jury (reference) answer for this test case
+|-
+| sample
+| boolean
+| no
+| whether this is a sample testcase (i.e. publicly available)
 |}
 
 ==== Example ====
@@ -655,7 +655,6 @@ Request:
 Returned data:
   [{"id":"115","problem_id":"2","ordinal":28,"description":"Test corner case of zero input","sample":false,"input":"&lt;base64_string&gt;","answer":"&lt;base64_string&gt;"}
   ]
-
 
 === GET baseurl/clarifications ===
 
