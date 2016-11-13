@@ -792,8 +792,8 @@ Each problem element within the scoreboard consists of:
 |-
 | time
 | integer
-| yes
-| present if solved, minutes into the contest when solved by team
+| if and only if <tt>solved=true</tt>
+| minutes into the contest when solved by team
 |}
 
 ==== Example ====
