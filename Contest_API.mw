@@ -94,6 +94,42 @@ Returns a JSON object with the elements below. If there is no current (this may 
 | penalty time for a wrong submission, in minutes
 |}
 
+=== GET baseurl/languages ===
+
+Lists programming languages that can be used for submissions.
+
+Parameters: ''none''
+
+Returns a JSON array, with each element an object describing a language, with the following elements:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Description
+|-
+| id
+| ID
+| yes
+| identifier of the language
+|-
+| name
+| string
+| yes
+| name of the language
+|}
+
+==== Example ====
+
+Request:
+  GET http://example.com/languages
+Returned data:
+  [{"id":"1","name":"Java"},
+   {"id":"cpp","name":"GNU C++"},
+   {"id":4358281971166881160,"name":"Python"},
+   ...
+  ]
+
 === GET baseurl/problems ===
 
 Lists problems in the current contest.
@@ -166,42 +202,6 @@ Returned data:
    ...
   ]
 
-=== GET baseurl/languages ===
-
-Lists programming languages that can be used for submissions.
-
-Parameters: ''none''
-
-Returns a JSON array, with each element an object describing a language, with the following elements:
-{| class="wikitable"
-|-
-! Name
-! Type
-! Required?
-! Description
-|-
-| id
-| ID
-| yes
-| identifier of the language
-|-
-| name
-| string
-| yes
-| name of the language
-|}
-
-==== Example ====
-
-Request:
-  GET http://example.com/languages
-Returned data:
-  [{"id":"1","name":"Java"},
-   {"id":"cpp","name":"GNU C++"},
-   {"id":4358281971166881160,"name":"Python"},
-   ...
-  ]
-
 === GET baseurl/teams ===
 
 Lists all teams.
@@ -248,9 +248,9 @@ Returns a JSON array, with each element an object describing a team, with the fo
 | [https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3 ISO 3-letter code] of the team's nationality
 |-
 | group_id
-| string
+| ID
 | yes for WF
-| ID of the group this team is part of (in ICPC WFs these are the super-regions, such as Europe)
+| identifier of the group this team is part of (in ICPC WFs these are the super-regions)
 |-
 | logo
 | FILE
@@ -378,20 +378,20 @@ Returns a JSON array, with each element an object describing a submission, with 
 | yes
 | identifier of the submission
 |-
-| team_id
+| language_id
 | ID
 | yes
-| identifier of the team that made the submission
+| identifier of the language submitted for
 |-
 | problem_id
 | ID
 | yes
 | identifier of the problem submitted for
 |-
-| language_id
+| team_id
 | ID
 | yes
-| identifier of the language submitted for
+| identifier of the team that made the submission
 |-
 | time
 | TIME
@@ -670,7 +670,7 @@ Returns a JSON array, with each element an object describing a test case, with t
 | id
 | ID
 | yes
-| identifier of the test case
+| identifier of the clarification
 |-
 | reply_to_id
 | ID
