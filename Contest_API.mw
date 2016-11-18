@@ -83,7 +83,7 @@ Returns a JSON object with the elements below. If there is no current (this may 
 | yes
 | length of the contest
 |-
-| scoreboard-freeze-duration
+| scoreboard_freeze_duration
 | RELTIME
 | yes for WF
 | how long the scoreboard is frozen before the end of the contest
