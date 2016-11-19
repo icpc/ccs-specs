@@ -21,7 +21,7 @@ instead of
   GET http://example.com/teams/10
 
 Rationale: this allows for more flexibility to later extend/generalize the interface, e.g. to return results depending on a filter:
-  http://example.com/team?group=europe
+  http://example.com/teams?group=europe
 
 Access to (parts of) the API is optionally controlled by HTTP authentication. This provides a standard and flexible method, while the user one authenticates as can be used for fine-grained access control to specific bits.
 
