@@ -22,7 +22,7 @@ All text files for a problem should be UTF-8 encoded.
 
 === Problem Metadata ===
 
-Metadata about the problem (e.g., source, license, limits) are provided in a file <tt><short-name>/problem.yaml</tt>.  The format of this file is defined in the Appendix.
+Metadata about the problem (e.g., source, license, limits) are provided in a file <tt><short-name>/problem.yaml</tt>.  The format of this file is defined in the [[#Appendix|Appendix]].
 
 === Problem Statements ===
 
