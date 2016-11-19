@@ -16,9 +16,9 @@ The interface is implemented as a HTTP REST interface that outputs information i
 The design is based on the [https://docs.google.com/document/d/12RVKS_u36WY9kU8iVIMzHtH5Df3WjK-mt-YmJu8j6ZI/edit ICPC Contest Ontology draft].
 
 Query parameters are passed as variables in the URL instead of encoded in the URL path, e.g.
-  GET http://example.com/team?id=10
+  GET http://example.com/teams?id=10
 instead of
-  GET http://example.com/team/10
+  GET http://example.com/teams/10
 
 Rationale: this allows for more flexibility to later extend/generalize the interface, e.g. to return results depending on a filter:
   http://example.com/team?group=europe
