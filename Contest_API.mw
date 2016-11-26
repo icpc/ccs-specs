@@ -31,7 +31,7 @@ Access to (parts of) the API is optionally controlled by HTTP authentication. Th
 are human-readable, given in [https://en.wikipedia.org/wiki/ISO_8601 ISO 8601] extended combined date/time format with timezone: <tt>yyyy-mm-ddThh:mm:ss(.uuu)?[+-]zz(:mm)?</tt> (or timezone <tt>Z</tt> for UTC).
 
 '''Relative times''' (type <tt>&lt;RELTIME&gt;</tt> in the specification)
-are human-readable, given in a slight modification of the [https://en.wikipedia.org/wiki/ISO_8601 ISO 8601] extended time format: <tt>(h)*h:mm:ss(.uuu)?</tt>
+are human-readable, given in a slight modification of the [https://en.wikipedia.org/wiki/ISO_8601 ISO 8601] extended time format: <tt>(-)?(h)*h:mm:ss(.uuu)?</tt>
 
 '''Identifiers''' (type <tt>&lt;ID&gt;</tt> in the specification)
 are given as string consisting of characters <tt>[a-zA-Z0-9-_]</tt> of length at most 36 and not starting with a <tt>-</tt> (dash).
@@ -509,11 +509,6 @@ Returns a JSON array, with each element an object describing a judging, with the
 | yes
 | the verdict of this judgement
 |-
-| solved
-| boolean
-| yes
-| whether the submission is considered correct
-|-
 | time
 | TIME
 | yes
@@ -530,15 +525,13 @@ Returns a JSON array, with each element an object describing a judging, with the
 Request:
   GET http://example.com/submission_judgements
 Returned data:
-  [{"id":"14430","submission_id":"223","judgement_type_id":"CE","solved":false,"time":"2014-06-25T11:22:48.427+01","contest_time":"1:22:48.427"}
+  [{"id":"14430","submission_id":"223","judgement_type_id":"CE","time":"2014-06-25T11:22:48.427+01","contest_time":"1:22:48.427"}
   ]
 
 
 === GET baseurl/test_case_judgements ===
 
 Lists judgements of individual test cases of a submission.
-
-'''TODO''': this specification is literally copied from [https://docs.google.com/document/d/12RVKS_u36WY9kU8iVIMzHtH5Df3WjK-mt-YmJu8j6ZI/edit ICPC Contest Ontology draft], which uses '''judgement_id''' where probably we want to use '''submission_judgement_id'''.
 
 Parameters:
 * '''judgement_id''' (optional) identifier of submission judgement to list all test case judgements associated to it
@@ -556,7 +549,7 @@ Returns a JSON array, with each element an object describing a judging, with the
 | yes
 | identifier of the judgement
 |-
-| judgement_id
+| submission_judgement_id
 | ID
 | yes
 | identifier of the submission judgement this is part of
@@ -576,11 +569,6 @@ Returns a JSON array, with each element an object describing a judging, with the
 | yes
 | team output for this test case
 |-
-| solved
-| boolean
-| yes
-| whether the submission is considered correct
-|-
 | time
 | TIME
 | yes
@@ -597,8 +585,8 @@ Returns a JSON array, with each element an object describing a judging, with the
 Request:
   GET http://example.com/test_case_judgements
 Returned data:
-  [{"id":"1312","judgement_id":"14431","test_case_id":"115","judgement_type_id":"0357c4a9-6983-45d7-8080-90d24c5511ea",
-    "output":"&lt;base64_string&gt;","solved":true,"time":"2014-06-25T11:22:42.420+01","contest_time":"1:22:42.420"}
+  [{"id":"1312","submission_judgement_id":"14431","test_case_id":"115","judgement_type_id":"0357c4a9-6983-45d7-8080-90d24c5511ea",
+    "output":"&lt;base64_string&gt;","time":"2014-06-25T11:22:42.420+01","contest_time":"1:22:42.420"}
   ]
 
 
@@ -724,6 +712,12 @@ Returns a JSON array, with each element an object describing a test case, with t
 
 ==== Example ====
 
+Request:
+  GET http://example.com/clarifications
+Returned data:
+  [{"id":"1","reply_to_id":null,"team_id":null,"problem_id":null,"text":"Do not touch anything before the contest starts!",
+    "from_jury":true,"to_all_teams":true,"time":"2014-06-25T11:59:27.543+01","contest_time":"-0:15:32.457"}
+  ]
 Request:
   GET http://example.com/clarifications
 Returned data:
