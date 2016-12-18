@@ -15,13 +15,14 @@ This API is meant to be useful, not only at the ICPC World Finals, but more gene
 The interface is implemented as a HTTP REST interface that outputs information in [https://en.wikipedia.org/wiki/JSON JSON] format. The specific base URL will be dependent on the server (main CCS or CDS) providing the service and will be indicated as <tt>baseurl</tt>.
 The design is based on the [https://docs.google.com/document/d/12RVKS_u36WY9kU8iVIMzHtH5Df3WjK-mt-YmJu8j6ZI/edit ICPC Contest Ontology draft].
 
-Query parameters are passed as variables in the URL instead of encoded in the URL path, e.g.
-  GET http://example.com/teams?id=10
-instead of
+We follow standard REST practices so that a whole collection can be requested, e.g. at the URL path
+  GET http://example.com/teams
+while an element with specific ID is requested as
   GET http://example.com/teams/10
+Querying on any other attributes than main ID is done through a URL argument "filter":
+  http://example.com/teams?filter=group_id:7
 
-Rationale: this allows for more flexibility to later extend/generalize the interface, e.g. to return results depending on a filter:
-  http://example.com/teams?group=europe
+Besides '''GET''', also '''POST''', '''PUT''', and '''DELETE''' methods are available to update states (with sufficient permissions). Standard HTTP error codes are returned to indicate success or failure.
 
 Access to (parts of) the API is optionally controlled by HTTP authentication. This provides a standard and flexible method, while the user one authenticates as can be used for fine-grained access control to specific bits.
 
