@@ -144,7 +144,7 @@ Returns a JSON array, with each element an object describing a language, with th
 Request:
   GET http://example.com/languages
 Returned data:
-  [{"id":"1","name":"Java"},
+  [{"id":"1-java","name":"Java"},
    {"id":"cpp","name":"GNU C++"},
    {"id":"4358281971166881160","name":"Python"}
   ]
@@ -216,7 +216,7 @@ Returns a JSON array, with each element an object describing a problem, with the
 Request:
   GET http://example.com/problems
 Returned data:
-  [{"id":"10","label":"A","shortname":"asteroids","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f"},
+  [{"id":"10-asteroids","label":"A","shortname":"asteroids","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f"},
    {"id":"B","label":"B","shortname":"bottles","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080"}
   ]
 
@@ -286,7 +286,7 @@ Returns a JSON array, with each element an object describing a team, with the fo
 Request:
   GET http://example.com/teams
 Returned data:
-  [{"id":"42","icpc_id":"201433","number":42,"name":"Shanghai Jiao Tong U.","formal_name":"Shanghai Jiao Tong University","affiliation":"Shanghai Jiao Tong University","group_id":"7"},
+  [{"id":"abc123","icpc_id":"201433","number":42,"name":"Shanghai Jiao Tong U.","formal_name":"Shanghai Jiao Tong University","affiliation":"Shanghai Jiao Tong University","group_id":"asia-74324325532"},
    {"id":"11","name":"CMU1","nationality":"USA","affiliation":"Carnegie Mellon University","group_id":"8"}
   ]
 
@@ -325,7 +325,7 @@ Returns a JSON array, with each element an object describing a team, with the fo
 Request:
   GET http://example.com/groups
 Returned data:
-  [{"id":"7","icpc_id":"7593","name":"Asia"}
+  [{"id":"asia-74324325532","icpc_id":"7593","name":"Asia"}
   ]
 
 === GET baseurl/judgement_types ===
@@ -434,7 +434,7 @@ Returns a JSON array, with each element an object describing a submission, with 
 Request:
   GET http://example.com/submissions
 Returned data:
-  [{"id":"187","label":"187","team_id":"42","problem_id":"2","language_id":"cpp","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034"}
+  [{"id":"wf2017-32163123xz3132yy","label":"187","team_id":"abc123","problem_id":"10-asteroids","language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034"}
   ]
 
 === GET baseurl/submission_files ===
@@ -484,8 +484,8 @@ Returns a JSON array, with each element an object describing a file, with the fo
 Request:
   GET http://example.com/submission_files?id=223
 Returned data:
-  [{"id":"d079c12d-98ce-4bb7-8097-ae083b45feb4","submission_id":"223","filename":"a.java","source":"&lt;base64_string&gt;","main":true},
-   {"id":"18e44041-8caf-4d77-8864-f5584f1ddfed","submission_id":"223","filename":"helper.java","source":"&lt;base64_string&gt;","content":false}
+  [{"id":"d079c12d-98ce-4bb7-8097-ae083b45feb4","submission_id":"wf2017-32163123xz3132yy","filename":"a.java","source":"&lt;base64_string&gt;","main":true},
+   {"id":"18e44041-8caf-4d77-8864-f5584f1ddfed","submission_id":"wf2017-32163123xz3132yy","filename":"helper.java","source":"&lt;base64_string&gt;","content":false}
   ]
 
 === GET baseurl/submission_judgements ===
@@ -536,7 +536,7 @@ Returns a JSON array, with each element an object describing a judging, with the
 Request:
   GET http://example.com/submission_judgements
 Returned data:
-  [{"id":"14430","submission_id":"223","judgement_type_id":"CE","time":"2014-06-25T11:22:48.427+01","contest_time":"1:22:48.427"}
+  [{"id":"189549","submission_id":"wf2017-32163123xz3132yy","judgement_type_id":"CE","time":"2014-06-25T11:22:48.427+01","contest_time":"1:22:48.427"}
   ]
 
 
@@ -596,7 +596,7 @@ Returns a JSON array, with each element an object describing a judging, with the
 Request:
   GET http://example.com/test_case_judgements
 Returned data:
-  [{"id":"1312","submission_judgement_id":"14431","test_case_id":"115","judgement_type_id":"0357c4a9-6983-45d7-8080-90d24c5511ea",
+  [{"id":"1312","submission_judgement_id":"189549","test_case_id":"10-asteroids-28","judgement_type_id":"0357c4a9-6983-45d7-8080-90d24c5511ea",
     "output":"&lt;base64_string&gt;","time":"2014-06-25T11:22:42.420+01","contest_time":"1:22:42.420"}
   ]
 
@@ -657,7 +657,7 @@ Returns a JSON array, with each element an object describing a test case, with t
 Request:
   GET http://example.com/test_cases
 Returned data:
-  [{"id":"115","problem_id":"2","ordinal":28,"description":"Test corner case of zero input","sample":false,"input":"&lt;base64_string&gt;","answer":"&lt;base64_string&gt;"}
+  [{"id":"10-asteroids-28","problem_id":"10-asteroids","ordinal":28,"description":"Test corner case of zero input","sample":false,"input":"&lt;base64_string&gt;","answer":"&lt;base64_string&gt;"}
   ]
 
 === GET baseurl/clarifications ===
@@ -726,13 +726,13 @@ Returns a JSON array, with each element an object describing a test case, with t
 Request:
   GET http://example.com/clarifications
 Returned data:
-  [{"id":"1","reply_to_id":null,"team_id":null,"problem_id":null,"text":"Do not touch anything before the contest starts!",
+  [{"id":"wf2017-1","reply_to_id":null,"team_id":null,"problem_id":null,"text":"Do not touch anything before the contest starts!",
     "from_jury":true,"to_all_teams":true,"time":"2014-06-25T11:59:27.543+01","contest_time":"-0:15:32.457"}
   ]
 Request:
   GET http://example.com/clarifications
 Returned data:
-  [{"id":"8","reply_to_id":"5","team_id":null,"problem_id":"2","text":"Does bouncing means bounce to the grid above the current one? Yes",
+  [{"id":"wf2017-8","reply_to_id":"wf2017-5","team_id":null,"problem_id":"10-asteroids","text":"Does bouncing means bounce to the grid above the current one? Yes",
     "from_jury":true,"to_all_teams":true,"time":"2014-06-25T12:43:02.037+01","contest_time":"2:28:02.037"}
   ]
 
@@ -812,7 +812,7 @@ Each problem element within the scoreboard consists of:
 Request:
   GET http://example.com/scoreboard
 Returned data:
-  [{"rank":1,"team_id":"42","score":{"num_solved":3,"total_time":340},
+  [{"rank":1,"team_id":"abc123","score":{"num_solved":3,"total_time":340},
     "problems":[
      {"problem_id":"1","num_judged":3,"num_pending":1,"solved":false},
      {"problem_id":"2","num_judged":1,"num_pending":0,"solved":true,"time":20},
