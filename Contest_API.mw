@@ -37,6 +37,11 @@ are human-readable, given in a slight modification of the [https://en.wikipedia.
 '''Identifiers''' (type <tt>&lt;ID&gt;</tt> in the specification)
 are given as string consisting of characters <tt>[a-zA-Z0-9-_]</tt> of length at most 36 and not starting with a <tt>-</tt> (dash).
 
+'''Labels''' (type <tt>&lt;LABEL&gt;</tt> in the specification)
+are strings consisting of characters <tt>[a-zA-Z0-9-_]</tt> of length at most 10 and not starting with a <tt>-</tt> (dash).
+The rationale is that these characters are both URL and filename safe, and the length is small enough to make these easy to use for human communication.
+If an element has both an identifier and a label, then the intention is that the label can be identical to the identifier if it is short enough.
+
 '''File contents''' (type <tt>&lt;FILE&gt;</tt> in the specification)
 are given as base64 encoded string.
 '''TODO''': also support a download URL?
@@ -164,7 +169,7 @@ Returns a JSON array, with each element an object describing a problem, with the
 | identifier of the problem
 |-
 | label
-| string
+| LABEL
 | yes
 | label of the problem in the contest, typically a single capitalized letter
 |-
@@ -240,10 +245,10 @@ Returns a JSON array, with each element an object describing a team, with the fo
 | yes for WF
 | external identifier from ICPC CMS
 |-
-| number
-| integer
-| yes for WF
-| team seat number
+| label
+| LABEL
+| yes
+| human readable identifier, at WFs normally the team seat number
 |-
 | name
 | string
@@ -343,7 +348,7 @@ Returns a JSON array, with each element an object describing a team, with the fo
 | identifier of the judgement type
 |-
 | label
-| string
+| LABEL
 | yes
 | label for this judgement, typically a 2-3 letter capitalized shorthand, see [http://www.problemarchive.org/wiki/index.php/Problem_Format#Graders Problem Format]
 |-
@@ -393,6 +398,11 @@ Returns a JSON array, with each element an object describing a submission, with 
 | yes
 | identifier of the submission
 |-
+| label
+| LABEL
+| yes
+| human readable identifier, typically a low incrementing number
+|-
 | language_id
 | ID
 | yes
@@ -424,7 +434,7 @@ Returns a JSON array, with each element an object describing a submission, with 
 Request:
   GET http://example.com/submissions
 Returned data:
-  [{"id":"187","team_id":"42","problem_id":"2","language_id":"cpp","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034"}
+  [{"id":"187","label":"187","team_id":"42","problem_id":"2","language_id":"cpp","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034"}
   ]
 
 === GET baseurl/submission_files ===
