@@ -286,8 +286,8 @@ Returns a JSON array, with each element an object describing a team, with the fo
 Request:
   GET http://example.com/teams
 Returned data:
-  [{"id":"abc123","icpc_id":"201433","number":42,"name":"Shanghai Jiao Tong U.","formal_name":"Shanghai Jiao Tong University","affiliation":"Shanghai Jiao Tong University","group_id":"asia-74324325532"},
-   {"id":"11","name":"CMU1","nationality":"USA","affiliation":"Carnegie Mellon University","group_id":"8"}
+  [{"id":"abc123","label":"123","icpc_id":"201433","number":42,"name":"Shanghai Jiao Tong U.","formal_name":"Shanghai Jiao Tong University","affiliation":"Shanghai Jiao Tong University","group_id":"asia-74324325532"},
+   {"id":"11","label":"11","name":"CMU1","nationality":"USA","affiliation":"Carnegie Mellon University","group_id":"8"}
   ]
 
 === GET baseurl/groups ===
