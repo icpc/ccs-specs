@@ -971,7 +971,7 @@ The first line has the following format
 ! Example
 ! Type
 |-
-| 1 || Label || results || string the constant "results"
+| 1 || Label || results || string (the constant "results")
 |-
 | 2 || Version number || 1  || integer
 |}
@@ -985,7 +985,7 @@ Then follow several lines with the following format (one per team).
 |-
 | 1 || External ID || 24314|| integer
 |-
-| 2 || Rank in contest || 1 || integer
+| 2 || Rank in contest || 1 || integer or empty string
 |-
 | 3 || Award || Gold Medal|| string
 |-
