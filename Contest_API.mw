@@ -119,6 +119,25 @@ Returned data:
   {"id":"wf2016","name":"2016 ICPC World Finals",
    "start_time":null,"duration":"5:00:00","scoreboard_freeze_duration":"1:00:00","penalty_time":0}
 
+=== PUT baseurl/contest ===
+
+An administrator (role to be defined later) has the ability to clear or set the start time of a contest via a PUT. The PUT must include a valid JSON element with only two attributes allowed: the contest id (used for verification) and a start time (a value or null).
+
+The request will fail with a 401 if the user does not have sufficient access rights, or a 403 if the contest is started or within 30s of starting, or the new start time is in the past or within 30s.
+
+This API is a replacement for the Contest Start Interface: https://clics.ecs.baylor.edu/index.php/Contest_Start_Interface
+
+==== Example ====
+
+Request:
+  PUT http://example.com/contest
+Request data:
+  {"id":"7b0dd4ea-19a1-4434-9034-529ebe55ab45","start_time":"2014-06-25T10:00:00+01"}
+Request:
+  PUT http://example.com/contest
+Request data:
+  {"id":"wf2016","start_time":null}
+
 === GET baseurl/languages ===
 
 Lists programming languages that can be used for submissions.
