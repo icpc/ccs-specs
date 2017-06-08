@@ -46,6 +46,11 @@ If an element has both an identifier and a label, then the intention is that the
 are given as base64 encoded string.
 '''TODO''': also support a download URL?
 
+=== Roles ===
+
+Access to some of the REST services will be protected via user roles. We will define a set of standard roles like Administrator, Judge/Jury, and Team (one per team).
+In the future we will list restrictions to each service based on role.
+
 == Interface specification ==
 
 The following list of API calls are to be supported; <tt>baseurl</tt> denotes an HTTP or HTTPS URL at which this API is provided.
