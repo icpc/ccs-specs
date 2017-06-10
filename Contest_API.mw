@@ -279,30 +279,10 @@ Returns a JSON array, with each element an object describing a team, with the fo
 | yes
 | name of the team
 |-
-| formal_name
-| string
-| no
-| full name of the team if too long for normal display purposes
-|-
-| affiliation
-| string
-| yes for WF
-| name of university or other entity that team is affiliated to
-|-
-| nationality
-| string
-| no (not used at WF)
-| [https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3 ISO 3-letter code] of the team's nationality
-|-
-| group_id
+| institution_id
 | ID
-| yes for WF
-| identifier of the group this team is part of (in ICPC WFs these are the super-regions)
-|-
-| logo
-| FILE
-| no
-| team/university logo
+| yes
+| identifier of the institution (university or other entity) that team is affiliated to
 |}
 
 ==== Example ====
@@ -310,8 +290,67 @@ Returns a JSON array, with each element an object describing a team, with the fo
 Request:
   GET http://example.com/teams
 Returned data:
-  [{"id":"abc123","label":"123","icpc_id":"201433","number":42,"name":"Shanghai Jiao Tong U.","formal_name":"Shanghai Jiao Tong University","affiliation":"Shanghai Jiao Tong University","group_id":"asia-74324325532"},
-   {"id":"11","label":"11","name":"CMU1","nationality":"USA","affiliation":"Carnegie Mellon University","group_id":"8"}
+  [{"id":"abc123","label":"123","icpc_id":"201433","name":"Shanghai Tigers","institution_id":"inst123"},
+   {"id":"11","label":"11","name":"CMU1","institution_id":"inst105"}
+  ]
+
+=== GET baseurl/institutions ===
+
+Lists all institutions (i.e. universities).
+
+Parameters: ''none''
+
+Returns a JSON array, with each element an object describing an institution, with the following elements:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Description
+|-
+| id
+| ID
+| yes
+| identifier of the institution
+|-
+| icpc_id
+| string
+| yes for WF
+| external identifier from ICPC CMS
+|-
+| name
+| string
+| yes
+| display name of the institution
+|-
+| formal_name
+| string
+| no
+| full institution name if too long for normal display purposes
+|-
+| country
+| string
+| no (not used at WF)
+| [https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3 ISO 3-letter code] of the institution's country
+|-
+| group_id
+| ID
+| yes for WF
+| identifier of the group this institution is part of (in ICPC WFs these are the super-regions)
+|-
+| logo
+| FILE
+| no
+| institution (university) logo
+|}
+
+==== Example ====
+
+Request:
+  GET http://example.com/institutions
+Returned data:
+  [{"id":"inst123","icpc_id":"433","name":"Shanghai Jiao Tong U.","formal_name":"Shanghai Jiao Tong University","group_id":"asia-74324325532"},
+   {"id":"inst105","name":"Carnegie Mellon University","country":"USA","group_id":"8"}
   ]
 
 === GET baseurl/groups ===
