@@ -69,9 +69,9 @@ are given as base64 encoded string.
 
 == Interface specification ==
 
-The following list of API calls are to be supported; <tt>baseurl</tt> denotes an HTTP or HTTPS URL at which this API is provided.
+The following list of API endpoints are to be supported.
 
-=== GET baseurl/contest ===
+=== GET /contest ===
 
 Provides information on the current contest.
 
@@ -135,7 +135,7 @@ Returned data:
   {"id":"wf2016","name":"2016 ICPC World Finals",
    "start_time":null,"duration":"5:00:00","scoreboard_freeze_duration":"1:00:00","penalty_time":0}
 
-=== PATCH baseurl/contest ===
+=== PATCH /contest ===
 
 An administrator (role to be defined later) has the ability to clear or set the start time of a contest via a PATCH. The PATCH must include a valid JSON element with only two attributes allowed: the contest id (used for verification) and a start time (a value or null).
 
@@ -154,7 +154,7 @@ Request:
 Request data:
   {"id":"wf2016","start_time":null}
 
-=== GET baseurl/languages ===
+=== GET /languages ===
 
 Lists programming languages that can be used for submissions.
 
@@ -189,7 +189,7 @@ Returned data:
    {"id":"4358281971166881160","name":"Python"}
   ]
 
-=== GET baseurl/problems ===
+=== GET /problems ===
 
 Lists problems in the current contest.
 
@@ -260,7 +260,7 @@ Returned data:
    {"id":"B","label":"B","shortname":"bottles","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080"}
   ]
 
-=== GET baseurl/teams ===
+=== GET /teams ===
 
 Lists all teams.
 '''TODO''': also show inactive/special teams depending on authentication level of client (with extra tag)?
@@ -310,7 +310,7 @@ Returned data:
    {"id":"11","label":"11","name":"CMU1","institution_id":"inst105"}
   ]
 
-=== GET baseurl/institutions ===
+=== GET /institutions ===
 
 Lists all institutions (i.e. universities).
 
@@ -369,7 +369,7 @@ Returned data:
    {"id":"inst105","name":"Carnegie Mellon University","country":"USA","group_id":"8"}
   ]
 
-=== GET baseurl/groups ===
+=== GET /groups ===
 
 Lists all groups (at the World Finals these are the super regions).
 
@@ -407,7 +407,7 @@ Returned data:
   [{"id":"asia-74324325532","icpc_id":"7593","name":"Asia"}
   ]
 
-=== GET baseurl/judgement_types ===
+=== GET /judgement_types ===
 
 Lists all judgement types available (i.e. possible responses when judging a submission).
 
@@ -456,7 +456,7 @@ Returned data:
    {"id":"0357c4a9-6983-45d7-8080-90d24c5511ea","label":"AC","name":"Accepted","penalty":false,"solved":true}
   ]
 
-=== GET baseurl/submissions ===
+=== GET /submissions ===
 
 List of submissions in the current contest.
 
@@ -516,7 +516,7 @@ Returned data:
   [{"id":"wf2017-32163123xz3132yy","label":"187","team_id":"abc123","problem_id":"10-asteroids","language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034"}
   ]
 
-=== GET baseurl/submission_files ===
+=== GET /submission_files ===
 
 This provides the file(s) of a specific submission, see also the [[Draft_2014_REST_interface_for_source_code_fetching]].
 
@@ -567,7 +567,7 @@ Returned data:
    {"id":"18e44041-8caf-4d77-8864-f5584f1ddfed","submission_id":"wf2017-32163123xz3132yy","filename":"helper.java","source":"&lt;base64_string&gt;","main":false}
   ]
 
-=== GET baseurl/submission_judgements ===
+=== GET /submission_judgements ===
 
 Lists judgements of submissions.
 
@@ -619,7 +619,7 @@ Returned data:
   ]
 
 
-=== GET baseurl/test_case_judgements ===
+=== GET /test_case_judgements ===
 
 Lists judgements of individual test cases of a submission.
 
@@ -680,7 +680,7 @@ Returned data:
   ]
 
 
-=== GET baseurl/test_cases ===
+=== GET /test_cases ===
 
 Lists test cases for a problem.
 
@@ -739,7 +739,7 @@ Returned data:
   [{"id":"10-asteroids-28","problem_id":"10-asteroids","ordinal":28,"description":"Test corner case of zero input","sample":false,"input":"&lt;base64_string&gt;","answer":"&lt;base64_string&gt;"}
   ]
 
-=== GET baseurl/clarifications ===
+=== GET /clarifications ===
 
 Lists clarification requests &amp; replies.
 
@@ -816,7 +816,7 @@ Returned data:
   ]
 
 
-=== GET baseurl/scoreboard ===
+=== GET /scoreboard ===
 
 Provides the scoreboard of the current contest.
 
