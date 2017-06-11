@@ -12,19 +12,40 @@ This API is meant to be useful, not only at the ICPC World Finals, but more gene
 
 == General design principles ==
 
-The interface is implemented as a HTTP REST interface that outputs information in [https://en.wikipedia.org/wiki/JSON JSON] format. The specific base URL will be dependent on the server (main CCS or CDS) providing the service and will be indicated as <tt>baseurl</tt>.
+The interface is implemented as a HTTP REST interface that outputs information in [https://en.wikipedia.org/wiki/JSON JSON] format. The specific base URL will be dependent on the server (main CCS or CDS) providing the service; below we only indicate the relative paths of API endpoints.
 The design is based on the [https://docs.google.com/document/d/12RVKS_u36WY9kU8iVIMzHtH5Df3WjK-mt-YmJu8j6ZI/edit ICPC Contest Ontology draft].
 
 We follow standard REST practices so that a whole collection can be requested, e.g. at the URL path
-  GET http://example.com/teams
+  GET http://example.com/api/teams
 while an element with specific ID is requested as
-  GET http://example.com/teams/10
+  GET http://example.com/api/teams/10
 Querying on any other attributes than main ID is done through a URL argument "filter":
-  http://example.com/teams?filter=group_id:7
+  http://example.com/api/teams?filter=group_id:7
 
-Besides '''GET''', also '''POST''', '''PUT''', and '''DELETE''' methods are available to update states (with sufficient permissions). Standard HTTP error codes are returned to indicate success or failure.
+The standard HTTP verbs are used:
+;GET
+: Read data. This method is idempotent and does not modify any data. It can be used to request a whole collection or a specific element.
+;POST
+: Create a new element. This can only be called on a collection endpoint. No '''id''' attribute should be specified as it is up to the server to assign one, which is returned in the location header.
+;PUT
+: Replaces a specific element. This method is idempotent and can only be called on a specific element and replaces its contents with the data provided. The payload data should be complete, i.e. no partial updates are allowed.
+;PATCH
+: Updates/modifies a specific element. Similar to '''PUT''' but allows partial updates by providing only that data, for example:
+: <code>PATCH http://example.com/api/teams/10</code>
+: with JSON contents
+: <code>{"name":"We like to change our team name"}</code>
+;DELETE
+: Delete a specific element. Idempotent, but may return a 404 status code when repeated. Any provided data is ignored. Example:
+: <code>DELETE http://example.com/api/teams/8</code>
+
+Standard HTTP error codes are returned to indicate success or failure.
 
 Access to (parts of) the API is optionally controlled by HTTP authentication. This provides a standard and flexible method, while the user one authenticates as can be used for fine-grained access control to specific bits.
+
+=== Roles ===
+
+Access to some of the REST services will be protected via user roles. We will define a set of standard roles like Administrator, Judge/Jury, and Team (one per team).
+In the future we will list restrictions to each service and methods allowed based on role.
 
 === Recurring details ===
 
@@ -45,11 +66,6 @@ If an element has both an identifier and a label, then the intention is that the
 '''File contents''' (type <tt>&lt;FILE&gt;</tt> in the specification)
 are given as base64 encoded string.
 '''TODO''': also support a download URL?
-
-=== Roles ===
-
-Access to some of the REST services will be protected via user roles. We will define a set of standard roles like Administrator, Judge/Jury, and Team (one per team).
-In the future we will list restrictions to each service based on role.
 
 == Interface specification ==
 
