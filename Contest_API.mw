@@ -33,7 +33,7 @@ The standard HTTP verbs are used:
 : Updates/modifies a specific element. Similar to '''PUT''' but allows partial updates by providing only that data, for example:
 : <code>PATCH http://example.com/api/teams/10</code>
 : with JSON contents
-: <code>{"name":"We like to change our team name"}</code>
+: <code>{"name":"Our cool new team name"}</code>
 ;DELETE
 : Delete a specific element. Idempotent, but may return a 404 status code when repeated. Any provided data is ignored. Example:
 : <code>DELETE http://example.com/api/teams/8</code>
