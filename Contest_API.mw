@@ -69,13 +69,16 @@ are given as base64 encoded string.
 
 == Interface specification ==
 
-The following list of API endpoints are to be supported.
+The following list of API endpoints are to be supported. Note that
+<code>contest</code> and <code>scoreboard</code> are singular nouns
+and indeed contain only a single element.
 
-=== GET /contest ===
+All endpoints should support '''GET'''; specific details on other
+methods are mentioned below.
+
+=== /contest ===
 
 Provides information on the current contest.
-
-Parameters: ''none''
 
 Returns a JSON object with the elements below. If there is no current (this may include about to start or just finished) contest, returns an empty object <tt>{}</tt>.
 {| class="wikitable"
@@ -121,6 +124,21 @@ Returns a JSON object with the elements below. If there is no current (this may 
 | penalty time for a wrong submission, in minutes
 |}
 
+==== PATCH start_time ====
+
+To replace the [[Contest Start Interface]], at the ICPC World Finals,
+a CCS or CDS implementing this specification should allow for a specific role
+('''FIXME''': define name later?) that has the ability to clear or set
+the contest start time.
+
+The PATCH must include a valid JSON element with only two attributes
+allowed: the contest id (used for verification) and a start time (a
+<code>&lt;TIME&gt;</code> value or <code>null</code>).
+
+The request should fail with a 401 if the user does not have
+sufficient access rights, or a 403 if the contest is started or within
+30s of starting, or if the new start time is in the past or within 30s.
+
 ==== Example ====
 
 Request:
@@ -135,16 +153,6 @@ Returned data:
   {"id":"wf2016","name":"2016 ICPC World Finals",
    "start_time":null,"duration":"5:00:00","scoreboard_freeze_duration":"1:00:00","penalty_time":0}
 
-=== PATCH /contest ===
-
-An administrator (role to be defined later) has the ability to clear or set the start time of a contest via a PATCH. The PATCH must include a valid JSON element with only two attributes allowed: the contest id (used for verification) and a start time (a value or null).
-
-The request will fail with a 401 if the user does not have sufficient access rights, or a 403 if the contest is started or within 30s of starting, or the new start time is in the past or within 30s.
-
-This API is a replacement for the Contest Start Interface: https://clics.ecs.baylor.edu/index.php/Contest_Start_Interface
-
-==== Example ====
-
 Request:
   PATCH http://example.com/api/contest
 Request data:
@@ -154,11 +162,10 @@ Request:
 Request data:
   {"id":"wf2016","start_time":null}
 
-=== GET /languages ===
+
+=== /languages ===
 
 Lists programming languages that can be used for submissions.
-
-Parameters: ''none''
 
 Returns a JSON array, with each element an object describing a language, with the following elements:
 {| class="wikitable"
@@ -189,11 +196,9 @@ Returned data:
    {"id":"4358281971166881160","name":"Python"}
   ]
 
-=== GET /problems ===
+=== /problems ===
 
 Lists problems in the current contest.
-
-Parameters: ''none''
 
 Returns a JSON array, with each element an object describing a problem, with the following elements:
 {| class="wikitable"
@@ -260,12 +265,10 @@ Returned data:
    {"id":"B","label":"B","shortname":"bottles","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080"}
   ]
 
-=== GET /teams ===
+=== /teams ===
 
 Lists all teams.
 '''TODO''': also show inactive/special teams depending on authentication level of client (with extra tag)?
-
-Parameters: ''none''
 
 Returns a JSON array, with each element an object describing a team, with the following elements:
 {| class="wikitable"
@@ -310,11 +313,9 @@ Returned data:
    {"id":"11","label":"11","name":"CMU1","institution_id":"inst105"}
   ]
 
-=== GET /institutions ===
+=== /institutions ===
 
 Lists all institutions (i.e. universities).
-
-Parameters: ''none''
 
 Returns a JSON array, with each element an object describing an institution, with the following elements:
 {| class="wikitable"
@@ -369,11 +370,9 @@ Returned data:
    {"id":"inst105","name":"Carnegie Mellon University","country":"USA","group_id":"8"}
   ]
 
-=== GET /groups ===
+=== /groups ===
 
 Lists all groups (at the World Finals these are the super regions).
-
-Parameters: ''none''
 
 Returns a JSON array, with each element an object describing a team, with the following elements:
 {| class="wikitable"
@@ -407,11 +406,9 @@ Returned data:
   [{"id":"asia-74324325532","icpc_id":"7593","name":"Asia"}
   ]
 
-=== GET /judgement_types ===
+=== /judgement_types ===
 
 Lists all judgement types available (i.e. possible responses when judging a submission).
-
-Parameters: ''none''
 
 Returns a JSON array, with each element an object describing a team, with the following elements:
 {| class="wikitable"
@@ -456,7 +453,7 @@ Returned data:
    {"id":"0357c4a9-6983-45d7-8080-90d24c5511ea","label":"AC","name":"Accepted","penalty":false,"solved":true}
   ]
 
-=== GET /submissions ===
+=== /submissions ===
 
 List of submissions in the current contest.
 
@@ -516,7 +513,7 @@ Returned data:
   [{"id":"wf2017-32163123xz3132yy","label":"187","team_id":"abc123","problem_id":"10-asteroids","language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034"}
   ]
 
-=== GET /submission_files ===
+=== /submission_files ===
 
 This provides the file(s) of a specific submission, see also the [[Draft_2014_REST_interface_for_source_code_fetching]].
 
@@ -567,7 +564,7 @@ Returned data:
    {"id":"18e44041-8caf-4d77-8864-f5584f1ddfed","submission_id":"wf2017-32163123xz3132yy","filename":"helper.java","source":"&lt;base64_string&gt;","main":false}
   ]
 
-=== GET /submission_judgements ===
+=== /submission_judgements ===
 
 Lists judgements of submissions.
 
@@ -619,7 +616,7 @@ Returned data:
   ]
 
 
-=== GET /test_case_judgements ===
+=== /test_case_judgements ===
 
 Lists judgements of individual test cases of a submission.
 
@@ -680,7 +677,7 @@ Returned data:
   ]
 
 
-=== GET /test_cases ===
+=== /test_cases ===
 
 Lists test cases for a problem.
 
@@ -739,7 +736,7 @@ Returned data:
   [{"id":"10-asteroids-28","problem_id":"10-asteroids","ordinal":28,"description":"Test corner case of zero input","sample":false,"input":"&lt;base64_string&gt;","answer":"&lt;base64_string&gt;"}
   ]
 
-=== GET /clarifications ===
+=== /clarifications ===
 
 Lists clarification requests &amp; replies.
 
@@ -816,11 +813,12 @@ Returned data:
   ]
 
 
-=== GET /scoreboard ===
+=== /scoreboard ===
 
 Provides the scoreboard of the current contest.
 
-Parameters: ''none''
+Since this is generated data, only the '''GET''' method is allowed
+here, irrespective of role.
 
 Returns a JSON array where each element is an object that represents a row for one team. The array is
 sorted according to rank and alphabetical on team name within identically ranked teams.
