@@ -265,6 +265,62 @@ Returned data:
    {"id":"B","label":"B","shortname":"bottles","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080"}
   ]
 
+=== /problems/''X''/test_cases ===
+
+Lists test cases for a given problem (with id ''X'').
+
+Returns a JSON array, with each element an object describing a test case, with the following elements:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Description
+|-
+| id
+| ID
+| yes
+| identifier of the test case
+|-
+| problem_id
+| ID
+| yes
+| identifier of the problem ('''TODO''': keep this?)
+|-
+| ordinal
+| integer
+| yes
+| sequence number of this test case
+|-
+| description
+| string
+| no
+| a short description of the test case, e.g. which corner case it tests
+|-
+| input
+| FILE
+| yes
+| input for this test case
+|-
+| answer
+| FILE
+| yes
+| jury (reference) answer for this test case
+|-
+| sample
+| boolean
+| no
+| whether this is a sample testcase (i.e. publicly available)
+|}
+
+==== Example ====
+
+Request:
+  GET http://example.com/api/problems/10-asteroids/test_cases
+Returned data:
+  [{"id":"10-asteroids-28","problem_id":"10-asteroids","ordinal":28,"description":"Test corner case of zero input","sample":false,"input":"&lt;base64_string&gt;","answer":"&lt;base64_string&gt;"}
+  ]
+
 === /teams ===
 
 Lists all teams.
@@ -673,62 +729,6 @@ Returned data:
     "output":"&lt;base64_string&gt;","time":"2014-06-25T11:22:42.420+01","contest_time":"1:22:42.420"}
   ]
 
-
-=== /problems/''X''/test_cases ===
-
-Lists test cases for a given problem (with id ''X'').
-
-Returns a JSON array, with each element an object describing a test case, with the following elements:
-{| class="wikitable"
-|-
-! Name
-! Type
-! Required?
-! Description
-|-
-| id
-| ID
-| yes
-| identifier of the test case
-|-
-| problem_id
-| ID
-| yes
-| identifier of the problem ('''TODO''': keep this?)
-|-
-| ordinal
-| integer
-| yes
-| sequence number of this test case
-|-
-| description
-| string
-| no
-| a short description of the test case, e.g. which corner case it tests
-|-
-| input
-| FILE
-| yes
-| input for this test case
-|-
-| answer
-| FILE
-| yes
-| jury (reference) answer for this test case
-|-
-| sample
-| boolean
-| no
-| whether this is a sample testcase (i.e. publicly available)
-|}
-
-==== Example ====
-
-Request:
-  GET http://example.com/api/problems/10-asteroids/test_cases
-Returned data:
-  [{"id":"10-asteroids-28","problem_id":"10-asteroids","ordinal":28,"description":"Test corner case of zero input","sample":false,"input":"&lt;base64_string&gt;","answer":"&lt;base64_string&gt;"}
-  ]
 
 === /clarifications ===
 
