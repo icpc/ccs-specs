@@ -674,12 +674,9 @@ Returned data:
   ]
 
 
-=== /test_cases ===
+=== /problems/''X''/test_cases ===
 
-Lists test cases for a problem.
-
-Parameters:
-* '''problem_id''' identifier of a problem
+Lists test cases for a given problem (with id ''X'').
 
 Returns a JSON array, with each element an object describing a test case, with the following elements:
 {| class="wikitable"
@@ -697,7 +694,7 @@ Returns a JSON array, with each element an object describing a test case, with t
 | problem_id
 | ID
 | yes
-| identifier of the problem
+| identifier of the problem ('''TODO''': keep this?)
 |-
 | ordinal
 | integer
@@ -728,7 +725,7 @@ Returns a JSON array, with each element an object describing a test case, with t
 ==== Example ====
 
 Request:
-  GET http://example.com/api/test_cases
+  GET http://example.com/api/problems/10-asteroids/test_cases
 Returned data:
   [{"id":"10-asteroids-28","problem_id":"10-asteroids","ordinal":28,"description":"Test corner case of zero input","sample":false,"input":"&lt;base64_string&gt;","answer":"&lt;base64_string&gt;"}
   ]
