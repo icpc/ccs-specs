@@ -70,10 +70,10 @@ are given as base64 encoded string.
 == Extensibility ==
 
 This specification is meant to cover the basic data of a contest, with the idea that server/client implementations can extend this with more data and/or roles.
-In particular, this specification already lists some endpoints or specific fields as optional, or required only in ICPC World Finals context.
+In particular, this specification already lists some endpoints or specific attributes as optional, or required only in ICPC World Finals context.
 The following guidelines are meant to ease extensibility.
 
-* Clients should accept extra fields in endpoints, that are not specified here.
+* Clients should accept extra attributes in endpoints, that are not specified here.
 * Servers should not expect clients to recognize more than the basic, required specification.
 * In extensions of this specification, any attributes should either always be present or never; the value can be <tt>null</tt>. This is to make it easier for clients to detect what extensions are in place.
 
