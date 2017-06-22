@@ -559,6 +559,11 @@ Returns a JSON array, with each element an object describing a submission, with 
 | RELTIME
 | yes
 | contest relative time when the submission was made
+|-
+| entry_point
+| string
+| yes, but can be <tt>null</tt>
+| code entry point for specific languages
 |}
 
 ==== Example ====
@@ -566,7 +571,7 @@ Returns a JSON array, with each element an object describing a submission, with 
 Request:
   GET http://example.com/api/submissions
 Returned data:
-  [{"id":"wf2017-32163123xz3132yy","label":"187","team_id":"abc123","problem_id":"10-asteroids","language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034"}
+  [{"id":"wf2017-32163123xz3132yy","label":"187","team_id":"abc123","problem_id":"10-asteroids","language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034","entry_point":"Main"}
   ]
 
 === /submissions/''X''/files ===
@@ -600,11 +605,6 @@ Returns a JSON array, with each element an object describing a file, with the fo
 | FILE
 | yes
 | contents of the file
-|-
-| main
-| boolean
-| no
-| whether this is the main source (relevant e.g. for Java)
 |}
 
 
