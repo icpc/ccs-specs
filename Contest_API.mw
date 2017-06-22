@@ -731,7 +731,7 @@ Returned data:
 Lists clarification requests &amp; replies.
 
 Parameters:
-* '''id''' identifier of a problem
+* '''problem_id''' (optional) identifier of a problem to list only clarifications associated to that problem.
 
 Returns a JSON array, with each element an object describing a test case, with the following elements:
 {| class="wikitable"
@@ -801,7 +801,6 @@ Returned data:
   [{"id":"wf2017-8","reply_to_id":"wf2017-5","team_id":null,"problem_id":"10-asteroids","text":"Does bouncing means bounce to the grid above the current one? Yes",
     "from_jury":true,"to_all_teams":true,"time":"2014-06-25T12:43:02.037+01","contest_time":"2:28:02.037"}
   ]
-
 
 === /scoreboard ===
 
