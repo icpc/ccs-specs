@@ -514,10 +514,6 @@ Returned data:
 
 List of submissions in the current contest.
 
-Parameters:
-* '''firstid''' (optional) identifier of first in range of submissions to list
-* '''lastid''' (optional) identifier of last in range of submissions to list
-
 Returns a JSON array, with each element an object describing a submission, with the following elements:
 {| class="wikitable"
 |-
@@ -624,8 +620,6 @@ Returned data:
 Lists judgements of submissions.
 
 Parameters:
-* '''first_id''' (optional) identifier of first in range of judgements to list
-* '''last_id''' (optional) identifier of last in range of judgements to list
 * '''submission_id''' (optional) identifier of submission to list all judgements associated to it
 
 Returns a JSON array, with each element an object describing a judging, with the following elements:
