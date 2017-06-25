@@ -42,7 +42,7 @@ Standard [https://en.wikipedia.org/wiki/List_of_HTTP_status_codes HTTP status co
 
 Access to (parts of) the API is optionally controlled by HTTP authentication. This provides a standard and flexible method, while the user one authenticates as can be used for fine-grained access control to specific bits.
 
-== Filtering ==
+=== Filtering ===
 
 '''GET''' queries to the collection endpoints can be filtered on which elements are returned using the '''filter''' URL argument as follows:
   filter=<attribute>:<value>[|<value>...][,<attribute>:<value>...]
