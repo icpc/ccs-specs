@@ -42,7 +42,11 @@ Standard [https://en.wikipedia.org/wiki/List_of_HTTP_status_codes HTTP status co
 
 Access to (parts of) the API is optionally controlled by HTTP authentication. This provides a standard and flexible method, while the user one authenticates as can be used for fine-grained access control to specific bits.
 
-=== Filtering ===
+=== General query parameters ===
+
+A number of query parameters are supported for easier access. 
+
+==== Filtering ====
 
 '''GET''' queries to the collection endpoints can be filtered on which elements are returned using the '''filter''' URL argument as follows:
   filter=<attribute>:<value>[|<value>...][,<attribute>:<value>...]
@@ -52,6 +56,16 @@ For example
   GET [http://example.com/api/submissions?filter=language_id:c|cpp,problem_id=asteroids http://example.com/api/submissions?filter=language_id:c|cpp,problem_id=asteroids]
 would return all submissions with language IDs '''c''' or '''cpp''' and problem ID '''asteroids'''. 
 
+==== Restricting output ====
+
+The output of '''GET''' queries to collection endpoints or individual elements (so '''not''' the <tt>/contest</tt> and <tt>/scoreboard</tt> endpoints) can be restricted to only a subset of attributes as follows:
+  output=<attribute>[,<attribute>...]
+
+==== Sorting output ====
+
+The output of '''GET''' queries to collection endpoints can be sorted as follows:
+  output=-?<attribute>[,-?<attribute>...]
+Sorting is ascending by default, but descending when an attribute is prefixed with a <tt>-</tt>. Subsequent attributes are used as tie-breakers.
 
 === Roles ===
 
