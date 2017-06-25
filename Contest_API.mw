@@ -38,9 +38,20 @@ The standard HTTP verbs are used:
 : Delete a specific element. Idempotent, but may return a 404 status code when repeated. Any provided data is ignored. Example:
 : <code>DELETE http://example.com/api/teams/8</code>
 
-Standard HTTP error codes are returned to indicate success or failure.
+Standard [https://en.wikipedia.org/wiki/List_of_HTTP_status_codes HTTP status codes] are returned to indicate success or failure.
 
 Access to (parts of) the API is optionally controlled by HTTP authentication. This provides a standard and flexible method, while the user one authenticates as can be used for fine-grained access control to specific bits.
+
+== Filtering ==
+
+'''GET''' queries to the collection endpoints can be filtered on which elements are returned using the '''filter''' URL argument as follows:
+  filter=<attribute>:<value>[|<value>...][,<attribute>:<value>...]
+Values have to be [https://en.wikipedia.org/wiki/Percent-encoding URL encoded]. '''TODO''': how to deal with any occurrences of characters <code>:,|</code> in values?
+
+For example
+  GET [http://example.com/api/submissions?filter=language_id:c|cpp,problem_id=asteroids http://example.com/api/submissions?filter=language_id:c|cpp,problem_id=asteroids]
+would return all submissions with language IDs '''c''' or '''cpp''' and problem ID '''asteroids'''. 
+
 
 === Roles ===
 
