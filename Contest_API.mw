@@ -69,20 +69,6 @@ could return:
   ["Shanghai Tigers","CMU1"]
 
 
-==== Sorting output ====
-
-The output of '''GET''' queries to collection endpoints can be sorted as follows:
-  output=-?<attribute>[,-?<attribute>...]
-Sorting is ascending by default, but descending when an attribute is prefixed with a <tt>-</tt>. Subsequent attributes are used as tie-breakers. Sorting on attributes of type FILE may trigger undefined behavior.
-
-For example
-  GET http://example.com/api/institutions?sort=-country,name
-could return:
-  [{"id":"inst105","name":"Carnegie Mellon University","country":"USA","group_id":"8"},
-   {"id":"inst108","name":"Harvard University","country":"USA","group_id":"8"},
-   {"id":"inst123","name":"Shanghai Jiao Tong University","country":"CHN","group_id":"asia-74324325532"}
-  ]
-
 === Roles ===
 
 Access to some of the REST services will be protected via user roles. We will define a set of standard roles like Administrator, Judge/Jury, and Team (one per team).
