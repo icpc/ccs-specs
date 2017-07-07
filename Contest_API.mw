@@ -609,6 +609,16 @@ Returned data:
     "language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034","entry_point":"Main"}
   ]
 
+=== /submissions/X ===
+
+Returns a JSON object describing a submission, with elements as above.
+
+Request:
+  GET http://example.com/api/submissions/wf2017-32163123xz3132yy
+Returned data:
+  {"id":"wf2017-32163123xz3132yy","label":"187","team_id":"abc123","problem_id":"10-asteroids",
+    "language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034","entry_point":"Main"}
+
 === /submissions/''X''/files ===
 
 This provides the file(s) of a given submission (with id ''X''). In particular, it replaces the [[Draft_2014_REST_interface_for_source_code_fetching]].
