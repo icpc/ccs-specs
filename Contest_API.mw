@@ -49,12 +49,12 @@ A number of query parameters are supported for easier access.
 ==== Filtering ====
 
 '''GET''' queries to the collection endpoints can be filtered on which elements are returned using the '''filter''' URL argument as follows:
-  filter=<attribute>:<value>[|<value>...][,<attribute>:<value>...]
-Values have to be [https://en.wikipedia.org/wiki/Percent-encoding URL encoded]. '''TODO''': how to deal with any occurrences of characters <code>:,|</code> in values?
+  filter=<attribute>:<value>[,<attribute>:<value>...]
+Values have to be [https://en.wikipedia.org/wiki/Percent-encoding URL encoded]. '''TODO''': how to deal with any occurrences of characters <code>:,</code> in values? Note that we do not (yet) support logical ORs of filters.
 
 For example
   GET [http://example.com/api/submissions?filter=language_id:c|cpp,problem_id=asteroids http://example.com/api/submissions?filter=language_id:c|cpp,problem_id=asteroids]
-would return all submissions with language IDs '''c''' or '''cpp''' and problem ID '''asteroids'''. 
+would return all submissions with language IDs '''c''' or '''cpp''' and problem ID '''asteroids'''.
 
 ==== Restricting output ====
 
