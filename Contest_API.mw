@@ -22,6 +22,18 @@ while an element with specific ID is requested as
 Querying on any other attributes than main ID is done through a URL argument "filter":
   http://example.com/api/teams?filter=group_id:7
 
+A collection is always returned as a JSON list of objects. Every element represents a single element (and always includes the ID). When requesting a single element the exact same object is returned. E.g. the URL path
+ GET baseurl/<collection>
+returns
+ [ { "id":<id1>, <element specific data for id2>},
+   { "id":<id2>, <element specific data for id1>},
+      ...
+ ]
+while the URL path
+ GET baseurl/<collection>/<id1>
+returns
+ { "id":<id1>, <element specific data for id2>}
+
 The standard HTTP verbs are used:
 ;GET
 : Read data. This method is idempotent and does not modify any data. It can be used to request a whole collection or a specific element.
