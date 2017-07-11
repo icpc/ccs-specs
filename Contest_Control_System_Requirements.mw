@@ -903,7 +903,9 @@ Then follow several lines with the following format (one per account).
 | 4 || Password || B!5MWJiy || string
 |}
 
-Account Types are: judge, admin.
+Account Types are: '''team''', '''judge''', '''admin''', '''analyst'''.
+
+For accounts of type '''team''' username is on the form "team-nnn" where "nnn" is the zero padded team number as given in [[#teams.tsv|teams.tsv]].
 
 ==== logos.tar.gz ====
 
