@@ -664,7 +664,7 @@ Returned data:
    {"id":"18e44041-8caf-4d77-8864-f5584f1ddfed","submission_id":"wf2017-32163123xz3132yy","filename":"helper.java","source":"&lt;base64_string&gt;","main":false}
   ]
 
-=== /submission-judgements ===
+=== /judgements ===
 
 Lists judgements of submissions.
 
@@ -708,11 +708,10 @@ Returns a JSON array, with each element an object describing a judging, with the
 ==== Example ====
 
 Request:
-  GET http://example.com/api/submission-judgements
+  GET http://example.com/api/judgements
 Returned data:
   [{"id":"189549","submission_id":"wf2017-32163123xz3132yy","judgement_type_id":"CE","time":"2014-06-25T11:22:48.427+01","contest_time":"1:22:48.427"}
   ]
-
 
 === /test-case-judgements ===
 
