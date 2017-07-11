@@ -314,7 +314,7 @@ Returned data:
    {"id":"B","label":"B","shortname":"bottles","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080"}
   ]
 
-=== /problems/''X''/test_cases ===
+=== /problems/''X''/test-cases ===
 
 Lists test cases for a given problem (with id ''X'').
 
@@ -365,7 +365,7 @@ Returns a JSON array, with each element an object describing a test case, with t
 ==== Example ====
 
 Request:
-  GET http://example.com/api/problems/10-asteroids/test_cases
+  GET http://example.com/api/problems/10-asteroids/test-cases
 Returned data:
   [{"id":"10-asteroids-28","problem_id":"10-asteroids","ordinal":28,"description":"Test corner case of zero input",
     "sample":false,"input":"&lt;base64_string&gt;","answer":"&lt;base64_string&gt;"}
@@ -512,7 +512,7 @@ Returned data:
   [{"id":"asia-74324325532","icpc_id":"7593","name":"Asia"}
   ]
 
-=== /judgement_types ===
+=== /judgement-types ===
 
 Lists all judgement types available (i.e. possible responses when judging a submission).
 
@@ -553,7 +553,7 @@ Returns a JSON array, with each element an object describing a team, with the fo
 ==== Example ====
 
 Request:
-  GET http://example.com/api/judgement_types
+  GET http://example.com/api/judgement-types
 Returned data:
   [{"id":"CE","label":"CE","name":"Compiler Error","penalty":false,"solved":false},
    {"id":"0357c4a9-6983-45d7-8080-90d24c5511ea","label":"AC","name":"Accepted","penalty":false,"solved":true}
@@ -664,7 +664,7 @@ Returned data:
    {"id":"18e44041-8caf-4d77-8864-f5584f1ddfed","submission_id":"wf2017-32163123xz3132yy","filename":"helper.java","source":"&lt;base64_string&gt;","main":false}
   ]
 
-=== /submission_judgements ===
+=== /submission-judgements ===
 
 Lists judgements of submissions.
 
@@ -708,13 +708,13 @@ Returns a JSON array, with each element an object describing a judging, with the
 ==== Example ====
 
 Request:
-  GET http://example.com/api/submission_judgements
+  GET http://example.com/api/submission-judgements
 Returned data:
   [{"id":"189549","submission_id":"wf2017-32163123xz3132yy","judgement_type_id":"CE","time":"2014-06-25T11:22:48.427+01","contest_time":"1:22:48.427"}
   ]
 
 
-=== /test_case_judgements ===
+=== /test-case-judgements ===
 
 Lists judgements of individual test cases of a submission.
 
@@ -768,7 +768,7 @@ Returns a JSON array, with each element an object describing a judging, with the
 ==== Example ====
 
 Request:
-  GET http://example.com/api/test_case_judgements
+  GET http://example.com/api/test-case-judgements
 Returned data:
   [{"id":"1312","submission_judgement_id":"189549","test_case_id":"10-asteroids-28","judgement_type_id":"0357c4a9-6983-45d7-8080-90d24c5511ea",
     "output":"&lt;base64_string&gt;","time":"2014-06-25T11:22:42.420+01","contest_time":"1:22:42.420"}
