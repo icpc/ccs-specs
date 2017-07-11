@@ -124,9 +124,11 @@ and indeed contain only a single element.
 All endpoints should support '''GET'''; specific details on other
 methods are mentioned below.
 
-=== /contest ===
+=== / ===
 
 Provides information on the current contest.
+
+On a system that supports multiple contests the '''baseurl''' could look something like <tt>basebaseurl/contests/<id></tt>, i.e. this endpoint is actually an element in the collection '''contests''' one level higher. On a system that does not support multiple contests the '''baseurl''' could look like <tt>basebaseurl/contest</tt>.
 
 Returns a JSON object with the elements below. If there is no current (this may include about to start or just finished) contest, returns an empty object <tt>{}</tt>.
 {| class="wikitable"
@@ -209,7 +211,6 @@ Request:
   PATCH http://example.com/api/contest
 Request data:
   {"id":"wf2016","start_time":null}
-
 
 === /languages ===
 
