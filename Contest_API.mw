@@ -733,15 +733,15 @@ Returns a JSON array, with each element an object describing a judging, with the
 | yes
 | identifier of the run
 |-
-| submission_judgement_id
+| judgement_id
 | ID
 | yes
-| identifier of the submission judgement this is part of
+| identifier of the judgement this is part of
 |-
-| test_case_id
+| test_data_id
 | ID
 | yes
-| identifier of the test case judged
+| identifier of the test data judged
 |-
 | judgement_type_id
 | ID
@@ -751,7 +751,7 @@ Returns a JSON array, with each element an object describing a judging, with the
 | output
 | FILE
 | yes
-| team output for this test case
+| team output for this test data
 |-
 | time
 | TIME
