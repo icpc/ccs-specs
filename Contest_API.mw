@@ -713,7 +713,7 @@ Returned data:
   [{"id":"189549","submission_id":"wf2017-32163123xz3132yy","judgement_type_id":"CE","time":"2014-06-25T11:22:48.427+01","contest_time":"1:22:48.427"}
   ]
 
-=== /test-case-judgements ===
+=== /runs ===
 
 Lists judgements of individual test cases of a submission.
 
@@ -731,7 +731,7 @@ Returns a JSON array, with each element an object describing a judging, with the
 | id
 | ID
 | yes
-| identifier of the judgement
+| identifier of the run
 |-
 | submission_judgement_id
 | ID
@@ -756,23 +756,22 @@ Returns a JSON array, with each element an object describing a judging, with the
 | time
 | TIME
 | yes
-| absolute time when test case judgement completed
+| absolute time when run completed
 |-
 | contest_time
 | RELTIME
 | yes
-| contest relative time when test case judgement completed
+| contest relative time when run completed
 |}
 
 ==== Example ====
 
 Request:
-  GET http://example.com/api/test-case-judgements
+  GET http://example.com/api/runs
 Returned data:
   [{"id":"1312","submission_judgement_id":"189549","test_case_id":"10-asteroids-28","judgement_type_id":"0357c4a9-6983-45d7-8080-90d24c5511ea",
     "output":"&lt;base64_string&gt;","time":"2014-06-25T11:22:42.420+01","contest_time":"1:22:42.420"}
   ]
-
 
 === /clarifications ===
 
