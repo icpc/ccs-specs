@@ -793,15 +793,15 @@ Returns a JSON array, with each element an object describing a test case, with t
 | yes
 | identifier of the clarification
 |-
-| reply_to_id
+| from_team_id
 | ID
 | yes; may be <tt>null</tt>
-| identifier of clarification this is a reply to
+| identifier of team sending this clarification request, <tt>null</tt> if a clarification sent by jury
 |-
-| team_id
+| to_team_id
 | ID
 | yes; may be <tt>null</tt>
-| identifier of the team asking or receiving this reply, <tt>null</tt> if a reply to all teams
+| identifier of the team receiving this reply, <tt>null</tt> if a reply to all teams or a request sent by a team
 |-
 | problem_id
 | ID
@@ -813,16 +813,6 @@ Returns a JSON array, with each element an object describing a test case, with t
 | yes
 | question or reply text
 |-
-| from_jury
-| boolean
-| yes
-| whether this is a response from the jury (otherwise question from team)
-|-
-| to_all_teams
-| boolean
-| yes
-| was this a reply sent to all teams?
-|-
 | time
 | TIME
 | yes
@@ -833,20 +823,21 @@ Returns a JSON array, with each element an object describing a test case, with t
 | yes
 | contest time of the question/reply
 |}
+Note that at least one of <tt>from_team_id</tt> and <tt>to_team_id</tt> has to be <tt>null</tt>. That is, teams cannot send messages to other teams.
 
 ==== Example ====
 
 Request:
   GET http://example.com/api/clarifications
 Returned data:
-  [{"id":"wf2017-1","reply_to_id":null,"team_id":null,"problem_id":null,"text":"Do not touch anything before the contest starts!",
-    "from_jury":true,"to_all_teams":true,"time":"2014-06-25T11:59:27.543+01","contest_time":"-0:15:32.457"}
+  [{"id":"wf2017-1","from_team_id":null,"to_team_id":null,"problem_id":null,"text":"Do not touch anything before the contest starts!",
+    "time":"2014-06-25T11:59:27.543+01","contest_time":"-0:15:32.457"}
   ]
 Request:
   GET http://example.com/api/clarifications
 Returned data:
-  [{"id":"wf2017-8","reply_to_id":"wf2017-5","team_id":null,"problem_id":"10-asteroids","text":"Does bouncing means bounce to the grid above the current one? Yes",
-    "from_jury":true,"to_all_teams":true,"time":"2014-06-25T12:43:02.037+01","contest_time":"2:28:02.037"}
+  [{"id":"wf2017-8","reply_to_id":"wf2017-5","from_team_id":null,"to_team_id":"abc123","problem_id":"10-asteroids","text":"Does bouncing means bounce to the grid above the current one? Read the problem statement",
+    "time":"2014-06-25T12:43:02.037+01","contest_time":"2:28:02.037"}
   ]
 
 === /scoreboard ===
