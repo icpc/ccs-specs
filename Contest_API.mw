@@ -62,7 +62,7 @@ A number of query parameters are supported for easier access.
 
 '''GET''' queries to the collection endpoints can be filtered on which elements are returned using the '''filter''' URL argument as follows:
   filter=<attribute>:<value>[,<attribute>:<value>...]
-Values are case insensitive and have to be [https://en.wikipedia.org/wiki/Percent-encoding URL encoded]. '''TODO''': how to deal with any occurrences of characters <code>:,</code> in values? Note that we do not (yet) support logical ORs of filters.
+Attributes and values are case sensitive and have to be [https://en.wikipedia.org/wiki/Percent-encoding URL encoded]. '''TODO''': how to deal with any occurrences of characters <code>:,</code> in values? Note that we do not (yet) support logical ORs of filters.
 
 For example
   GET [http://example.com/api/submissions?filter=language_id:cpp,problem_id=asteroids http://example.com/api/submissions?filter=language_id:cpp,problem_id=asteroids]
