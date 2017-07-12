@@ -1,8 +1,8 @@
-This is a draft. Sections <s>highlighted in yellow</s> have not been implemented in the reference implementation of the problem format tool chain. This might imply that that part of the specification is more in flux. Sections <s class="dep">highlighted in red</s> are deprecated.
+This is a draft. 
 
 == Overview ==
 
-This document describes the format of a ''Kattis problem package'', used for distributing and sharing problems for algorithmic programming contests as well as educational use. 
+This document describes the problem format used at the ICPC World Finals. It is intended to be a proper subset of the [http://www.problemarchive.org/wiki/index.php/Problem_Format Kattis problem package format], i.e. problems following this spec should be valid according to the Kattis format as well, with no changes, but not necessarily vice versa.
 
 === General Requirements ===
 
