@@ -157,7 +157,7 @@ and output specifications, but not sample input and output. Language must be giv
 Auxiliary files needed by the problem statement files must all be in <tt><short_name>/problem_statement/</tt> , <tt>problem.<language>.<filetype></tt> should reference auxiliary files as if the
 working directory is <tt><short_name>/problem_statement/</tt>. Image file formats supported are <tt>.png</tt>, <tt>.jpg</tt>, <tt>.jpeg</tt>, and <tt>.pdf</tt>.
 
-A LaTeX file may include the Problem name using the LaTeX command <tt>\problemname</tt> in case LaTeX formatting of the title is wanted.
+The LaTeX file may include the Problem name using the LaTeX command <tt>\problemname</tt> in case LaTeX formatting of the title is wanted.
 
 The problem statements must only contain the actual problem statement, no sample data.
 
