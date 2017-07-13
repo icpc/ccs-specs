@@ -609,15 +609,15 @@ The CCS must be capable of generating an external file containing the final resu
 In order for a given CCS to be considered as a candidate for running the ICPC World Finals contest, the following documents must be submitted.
 
 * A text file named "License" containing the license, conforming to the the [[#Licensing|Licensing]] section, under which the CCS is made available to the ACM ICPC.
-* A ''Standard Compliance Document'' as defined below.
+* A ''Requirements Compliance Document'' as defined below.
 * A ''Team Guide'' as defined below.
 * A ''Judge's Guide'' as defined below.
 * A ''Contest Administrator's Guide'' as defined below.
 * A ''System Manager's Guide'' as defined below.
 
-=== Standard Compliance Document ===
+=== Requirements Compliance Document ===
 
-The CCS must include a ''Standard Compliance Document'' in PDF format, that for each requirement (referencing by section number) in this standard document confirms that the CCS conforms and explains how that is. In the event that a configuration item is provided by using services of the underlying operating system rather than facilities directly implemented or controlled by the CCS itself, this fact must be explicitly stated.
+The CCS must include a ''Requirements Compliance Document'' in PDF format, that for each requirement (referencing by section number) in this document confirms that the CCS conforms and explains how that is. In the event that a configuration item is provided by using services of the underlying operating system rather than facilities directly implemented or controlled by the CCS itself, this fact must be explicitly stated.
 
 === Team Guide ===
 
@@ -635,7 +635,7 @@ The CCS must include a "Contest Administrator's Guide" in PDF format. The Admini
 
 The CCS must include a "System Manager's Guide" document in PDF format. The System Manager's Guide must describe the steps required to install and start the CCS on the OS platform specified for use in the World Finals. In the event that the CCS consists of multiple modules and/or packages, the guide must contain a description of the relationship between the modules or packages, including any specific installation and/or startup steps required for each module or package.
 
-The System Manager's Guide must provide instructions to contest personnel explaining situations (if any) where the CCS uses functions of the underlying operating system (OS) platform to meet requirements laid out in this standard. For example, if the CCS relies on the use of OS account and password management to implement requirements related to contest security and credentials, or print services provided by the OS to implement requirements related to external notifications, this must be described in the System Manager's Guide.
+The System Manager's Guide must provide instructions to contest personnel explaining situations (if any) where the CCS uses functions of the underlying operating system (OS) platform to meet requirements laid out in this document. For example, if the CCS relies on the use of OS account and password management to implement requirements related to contest security and credentials, or print services provided by the OS to implement requirements related to external notifications, this must be described in the System Manager's Guide.
 
 The System Manager's Guide must explicitly list any operating system dependencies of the CCS, including but not limited to which OS platform and version are required and which optional OS packages must be installed for the CCS to function properly.
 
