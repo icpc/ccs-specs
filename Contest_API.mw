@@ -124,6 +124,20 @@ and indeed contain only a single element.
 All endpoints should support '''GET'''; specific details on other
 methods are mentioned below.
 
+The endpoints could be categorised into 3 groups as follows:
+
+;Configuration: /, /languages, /problems/*, teams, /institutions, /groups, /judgement-types
+;Live data: /submissions/*, /judgements, /runs, clarifications
+;Aggregate data: /scoreboard, /event-feed
+
+Configuration is normally set before contest start. Is not expected to, but could occasionally be updated during a contest. Does not have associated
+timestamp/contest time attributes. Updates are notified via the event feed.
+
+Live data is generated during the contest and new elements are expected. Data is immutable though, only inserts, no updates or deletes of elements. Does not have associated
+timestamp/contest time attributes. Updates are notified via the event feed. Updates are notified via the event feed.
+
+Derived data: Only GET makes sense. Updates are not notified via the event feed.
+
 === / ===
 
 Provides information on the current contest.
