@@ -803,7 +803,7 @@ Returns a JSON array, with each element an object describing a test case, with t
 | yes; may be <tt>null</tt>
 | identifier of the team receiving this reply, <tt>null</tt> if a reply to all teams or a request sent by a team
 |-
-| reply_id
+| reply_to_id
 | ID
 | yes, may be <tt>null</tt>
 | identifier of clarification this is in response to, if any. may be <tt>null</tt>
@@ -835,13 +835,13 @@ Note that at least one of <tt>from_team_id</tt> and <tt>to_team_id</tt> has to b
 Request:
   GET http://example.com/api/clarifications
 Returned data:
-  [{"id":"wf2017-1","from_team_id":null,"to_team_id":null,"problem_id":null,"text":"Do not touch anything before the contest starts!",
+  [{"id":"wf2017-1","from_team_id":null,"to_team_id":null,"reply_to_id":null,"problem_id":null,"text":"Do not touch anything before the contest starts!",
     "time":"2014-06-25T11:59:27.543+01","contest_time":"-0:15:32.457"}
   ]
 Request:
   GET http://example.com/api/clarifications
 Returned data:
-  [{"id":"wf2017-8","reply_to_id":"wf2017-5","from_team_id":null,"to_team_id":"abc123","problem_id":"10-asteroids","text":"Does bouncing means bounce to the grid above the current one? Read the problem statement",
+  [{"id":"wf2017-8","from_team_id":null,"to_team_id":"abc123","reply_to_id":"wf2017-5","problem_id":"10-asteroids","text":"Does bouncing means bounce to the grid above the current one? Read the problem statement",
     "time":"2014-06-25T12:43:02.037+01","contest_time":"2:28:02.037"}
   ]
 
