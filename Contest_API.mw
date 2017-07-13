@@ -703,6 +703,10 @@ Returns a JSON array, with each element an object describing a judging, with the
 | RELTIME
 | yes
 | contest relative time when judgement completed
+|-
+| run_ids
+| Array of run_ids
+| List of runs that comprise this judgement
 |}
 
 ==== Example ====
@@ -710,7 +714,7 @@ Returns a JSON array, with each element an object describing a judging, with the
 Request:
   GET http://example.com/api/judgements
 Returned data:
-  [{"id":"189549","submission_id":"wf2017-32163123xz3132yy","judgement_type_id":"CE","time":"2014-06-25T11:22:48.427+01","contest_time":"1:22:48.427"}
+  [{"id":"189549","submission_id":"wf2017-32163123xz3132yy","judgement_type_id":"CE","time":"2014-06-25T11:22:48.427+01","contest_time":"1:22:48.427", run_ids: ["123455","123456","123457","123458","123459"]}
   ]
 
 === /runs ===
