@@ -706,6 +706,7 @@ Returns a JSON array, with each element an object describing a judging, with the
 |-
 | run_ids
 | Array of run_ids
+| yes
 | List of runs that comprise this judgement
 |}
 
