@@ -326,7 +326,7 @@ This section describes all the required capabilities for users authenticated as 
 
 === Submissions ===
 
-For purposes of this standard, solutions to problems submitted for judging are called '''submissions'''.
+For purposes of this document, solutions to problems submitted for judging are called '''submissions'''.
 A submission consists of a set of source code files sent as a single unit at one time to the judging system by a team.
 
 ==== Submission Mechanism ====
