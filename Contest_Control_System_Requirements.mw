@@ -1,6 +1,6 @@
 == Introduction ==
 
-This document specifies a standard for operation, verification and validation
+This document specifies requirements for operation, verification and validation
 of Programming Contest Control Systems that wish to be considered for managing
 the operation of the [http://icpc.baylor.edu ACM International Collegiate Programming Contest]
 [http://cm.baylor.edu/ICPCWiki/Wiki.jsp?page=World%20Finals World Finals]. 
@@ -8,9 +8,9 @@ The document defines a set of operations, capabilities, and features which
 any candidate system must provide, including a set of testability criteria which must
 be satisfied and a set of documentation which must be provided.
 
-The current draft of the standard is ''Version 1.0'', published ''<insert publication date>'' by the 
+The current draft of the requirements document is ''Version 1.0'', published ''<insert publication date>'' by the 
 ''Competitive Learning Institute'' (''<insert CLI website URL>'').   [TODO: insert into the previous sentence the 
-final publication date once the standard has been approved; insert official CLI website URL once that has been created.]
+final publication date once the requirements has been approved; insert official CLI website URL once that has been created.]
 
 The primary authors of the document are John Clevenger and Fredrik Niemelä,
 acting under the auspices of the Competitive Learning Institute (CLI).
@@ -19,7 +19,7 @@ Doug Lane, Pehr Söderman, and Mattias de Zalenski.
 
 === Overview === 
 
-For purposes of this standard, the term ''contest control system'' (CCS) means
+For purposes of this requirements document, the term ''contest control system'' (CCS) means
 software which automatically manages the operation of a programming contest.
 Operations to be managed by the CCS include: running submissions by teams, judging of submissions, handling clarification
 requests from teams and clarification responses from judges, calculation of
@@ -28,8 +28,8 @@ standings, generating external representations of contest results, and overall C
 A contest control system may be submitted to the Director of
 Operations for the ICPC World Finals for consideration as a candidate to run the
 World Finals. The items which must be submitted in order to be considered are
-described under [[#Certification Process| Certification Process]] in this standard. Any submitted CCS
-which meets all of the requirements defined in this standard will be certified as being
+described under [[#Certification Process| Certification Process]] in this document. Any submitted CCS
+which meets all of the requirements defined in this document will be certified as being
 accepted as a candidate to run the World Finals. Meeting or failing to
 meet each requirement will be determined by a test specified by the Director of
 Operations and/or his/her designee.
@@ -40,24 +40,24 @@ accepted as candidates prior to the acceptance deadline.
 
 === Rationale ===
 
-This standard is intended to specify functional requirements, not
-implementation requirements. Nothing in this standard should be construed as
+This document is intended to specify functional requirements, not
+implementation requirements. Nothing in this document should be construed as
 requiring any particular implementation architecture or use of any particular
 implementation language or languages. For example, a CCS might be implemented
 as a set of stand-alone applications using a client-server architecture, or might
 equally well be implemented as a set of scripts, web pages, and/or other facilities.
 
-This standard is not intended to act as a specification for what constitutes
+These requirements are not intended to act as a specification for what constitutes
 "best practices" in a Contest Control System; rather, it acts solely as a specification
 of what functionality is required to be a candidate for running the ICPC World Finals.
-As such, there may be functions listed in this standard which are specific solely to
+As such, there may be functions listed in this document which are specific solely to
 the ICPC World Finals but might not be required for running other contests; a
 candidate CCS must meet the requirements for these functions.
 
 Likewise, there may be functionality which a CCS provides to meet the
 requirements of some other contest; such additional functionality will not disqualify
 the CCS from qualifying as a candidate to run the ICPC World Finals provided the
-CCS meets all the requirements listed in this standard.
+CCS meets all the requirements listed in this document.
 
 == General Requirements ==
 
