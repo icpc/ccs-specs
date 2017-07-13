@@ -803,6 +803,11 @@ Returns a JSON array, with each element an object describing a test case, with t
 | yes; may be <tt>null</tt>
 | identifier of the team receiving this reply, <tt>null</tt> if a reply to all teams or a request sent by a team
 |-
+| reply_id
+| ID
+| yes, may be <tt>null</tt>
+| identifier of clarification this is in response to, if any. may be <tt>null</tt>
+|-
 | problem_id
 | ID
 | yes, may be <tt>null</tt>
