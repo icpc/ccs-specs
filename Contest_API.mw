@@ -733,10 +733,10 @@ Returns a JSON array, with each element an object describing a judging, with the
 | yes
 | identifier of the run
 |-
-| judgement_id
+| submission_id
 | ID
 | yes
-| identifier of the judgement this is part of
+| identifier of the submission this run is for
 |-
 | test_data_id
 | ID
