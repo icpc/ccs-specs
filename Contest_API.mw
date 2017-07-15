@@ -77,8 +77,6 @@ For example
   GET http://example.com/api/teams?output=name
 could return:
   [{"name":"Shanghai Tigers"},{"name":"CMU1"}]
-'''TODO''': if only one output field is requested, would we like to special-case to output the field values as an array, as:
-  ["Shanghai Tigers","CMU1"]
 
 === Roles ===
 
