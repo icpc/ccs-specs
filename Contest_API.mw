@@ -385,8 +385,7 @@ Returned data:
 
 === /teams ===
 
-Lists all teams.
-'''TODO''': also show inactive/special teams depending on authentication level of client (with extra tag)?
+Lists all teams in the contest.
 
 Returns a JSON array, with each element an object describing a team, with the following elements:
 {| class="wikitable"
