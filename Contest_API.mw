@@ -111,7 +111,7 @@ The following guidelines are meant to ease extensibility.
 
 * Clients should accept extra attributes in endpoints, that are not specified here.
 * Servers should not expect clients to recognize more than the basic, required specification.
-* In extensions of this specification, any attributes should either always be present or never; the value can be <tt>null</tt>. This is to make it easier for clients to detect what extensions are in place. '''TODO''': we should also make the <tt>scoreboard:problem:time</tt> attribute be always present (but <tt>null</tt> when <tt>solved=false</tt>).
+* In this specification and extensions, an attribute with value <tt>null</tt> must be treated equivalently to that attribute not being present. Furthermore, we default to attributes not being present (instead of <tt>null</tt>).
 
 == Interface specification ==
 
