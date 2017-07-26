@@ -678,8 +678,8 @@ Returns a JSON array, with each element an object describing a judging, with the
 | yes
 | identifier of the submission this run is for
 |-
-| test_data_id
-| ID
+| test_data_number
+| integer
 | yes
 | identifier of the test data judged
 |-
