@@ -576,7 +576,7 @@ Returns a JSON array, with each element an object describing a file, with the fo
 | submission_id
 | ID
 | yes
-| identifier of the submission ('''TODO''': keep this?)
+| identifier of the submission
 |-
 | filename
 | string
