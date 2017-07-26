@@ -54,30 +54,6 @@ Standard [https://en.wikipedia.org/wiki/List_of_HTTP_status_codes HTTP status co
 
 Access to (parts of) the API is optionally controlled by HTTP authentication. This provides a standard and flexible method, while the user one authenticates as can be used for fine-grained access control to specific bits.
 
-=== General query parameters ===
-
-A number of query parameters are supported for easier access. 
-
-==== Filtering ====
-
-'''GET''' queries to the collection endpoints can be filtered on which elements are returned using the '''filter''' URL argument as follows:
-  filter=<attribute>:<value>[,<attribute>:<value>...]
-Attributes and values are case sensitive and have to be [https://en.wikipedia.org/wiki/Percent-encoding URL encoded]. '''TODO''': how to deal with any occurrences of characters <code>:,</code> in values? Note that we do not (yet) support logical ORs of filters.
-
-For example
-  GET [http://example.com/api/submissions?filter=language_id:cpp,problem_id=asteroids http://example.com/api/submissions?filter=language_id:cpp,problem_id=asteroids]
-would return all submissions with language ID '''cpp''' and problem ID '''asteroids'''.
-
-==== Restricting output ====
-
-The output of '''GET''' queries to collection endpoints or individual elements (so '''not''' the <tt>/contest</tt> and <tt>/scoreboard</tt> endpoints) can be restricted to only a subset of attributes as follows:
-  output=<attribute>[,<attribute>...]
-
-For example
-  GET http://example.com/api/teams?output=name
-could return:
-  [{"name":"Shanghai Tigers"},{"name":"CMU1"}]
-
 === Roles ===
 
 Access to some of the REST services will be protected via user roles. We will define a set of standard roles like Administrator, Judge/Jury, and Team (one per team).
