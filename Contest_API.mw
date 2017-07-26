@@ -274,6 +274,11 @@ Returns a JSON array, with each element an object describing a problem, with the
 | string
 | no
 | human readable color description associated to the RGB value
+|-
+| test_data_count
+| integer
+| yes
+| number of test data sets
 <!-- Save this for later discussion - Jaap, 2015-02-11
 |-
 | timelimit
