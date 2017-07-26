@@ -100,7 +100,7 @@ methods are mentioned below.
 
 The endpoints could be categorised into 3 groups as follows:
 
-;Configuration: /, /languages, /problems/*, teams, /institutions, /groups, /judgement-types
+;Configuration: /, /languages, /problems/*, teams, /organizations, /groups, /judgement-types
 ;Live data: /submissions/*, /judgements, /runs, clarifications
 ;Aggregate data: /scoreboard, /event-feed
 
@@ -339,10 +339,10 @@ Returns a JSON array, with each element an object describing a team, with the fo
 | yes
 | name of the team
 |-
-| institution_id
+| organization_id
 | ID
 | yes
-| identifier of the institution (university or other entity) that team is affiliated to
+| identifier of the organization (e.g. university or other entity) that team is affiliated to
 |-
 | group_id
 | ID
@@ -355,15 +355,15 @@ Returns a JSON array, with each element an object describing a team, with the fo
 Request:
   GET http://example.com/api/teams
 Returned data:
-  [{"id":"abc123","label":"123","icpc_id":"201433","name":"Shanghai Tigers","institution_id":"inst123","group_id":"asia-74324325532"},
-   {"id":"11","label":"11","name":"CMU1","institution_id":"inst105","group_id":"8"}
+  [{"id":"abc123","label":"123","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia-74324325532"},
+   {"id":"11","label":"11","name":"CMU1","organization_id":"inst105","group_id":"8"}
   ]
 
-=== /institutions ===
+=== /organizations ===
 
-Lists all institutions (i.e. universities).
+Lists all organizations (i.e. universities in ICPC context).
 
-Returns a JSON array, with each element an object describing an institution, with the following elements:
+Returns a JSON array, with each element an object describing an organization, with the following elements:
 {| class="wikitable"
 |-
 ! Name
@@ -374,7 +374,7 @@ Returns a JSON array, with each element an object describing an institution, wit
 | id
 | ID
 | yes
-| identifier of the institution
+| identifier of the organization
 |-
 | icpc_id
 | string
@@ -384,28 +384,28 @@ Returns a JSON array, with each element an object describing an institution, wit
 | name
 | string
 | yes
-| display name of the institution
+| display name of the organization
 |-
 | formal_name
 | string
 | no
-| full institution name if too long for normal display purposes
+| full organization name if too long for normal display purposes
 |-
 | country
 | string
 | no (not used at WF)
-| [https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3 ISO 3-letter code] of the institution's country
+| [https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3 ISO 3-letter code] of the organization's country
 |-
 | logo
 | FILE
 | no
-| institution (university) logo
+| organization logo
 |}
 
 ==== Example ====
 
 Request:
-  GET http://example.com/api/institutions
+  GET http://example.com/api/organizations
 Returned data:
   [{"id":"inst123","icpc_id":"433","name":"Shanghai Jiao Tong U.","formal_name":"Shanghai Jiao Tong University"},
    {"id":"inst105","name":"Carnegie Mellon University","country":"USA"}
