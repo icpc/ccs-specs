@@ -8,7 +8,7 @@ Such an API can be used by a multitude of clients:
 * another "shadow" CCS, providing run-forwarding together with the event feed
 * internally, to interface between the CCS server and judging instances
 
-This API is meant to be useful, not only at the ICPC World Finals, but more generally in any ICPC-style contest setup. It is meant to incorporate and supersede the [[JSON_Scoreboard_2016|JSON Scoreboard]], the [[Draft_2014_REST_interface_for_source_code_fetching|REST interface for source code fetching]], and the [[Contest_Start_Interface|Contest start interface]].
+This API is meant to be useful, not only at the ICPC World Finals, but more generally in any ICPC-style contest setup. It is meant to incorporate and supersede the [[JSON_Scoreboard_2016|JSON Scoreboard]], the [[Draft_2014_REST_interface_for_source_code_fetching|REST interface for source code fetching]], and the [[Contest_Start_Interface|Contest start interface]]. This REST interface is specified in conjuction with the new [[JSON Event Feed]], which provides all changes to this interface as CRUD-style events.
 
 == General design principles ==
 
