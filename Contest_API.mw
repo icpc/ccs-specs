@@ -631,26 +631,42 @@ Returns a JSON array, with each element an object describing a judging, with the
 |-
 | judgement_type_id
 | ID
-| yes
+| yes, may be <tt>null</tt>
 | the verdict of this judgement
 |-
-| time
+| start_time
 | TIME
 | yes
-| absolute time when judgement completed
+| absolute time when judgement started
 |-
-| contest_time
+| start_contest_time
 | RELTIME
 | yes
+| contest relative time when judgement started
+|-
+| end_time
+| TIME
+| yes, may be <tt>null</tt>
+| absolute time when judgement completed
+|-
+| end_contest_time
+| RELTIME
+| yes, may be <tt>null</tt>
 | contest relative time when judgement completed
 |}
+
+When a judgement is started, each of <tt>judgement_type_id</tt>, <tt>end_time</tt> and <tt>end_contest_time</tt> will be <tt>null</tt>.
+These are set when the judgement is completed.
 
 ==== Example ====
 
 Request:
   GET http://example.com/api/judgements
 Returned data:
-  [{"id":"189549","submission_id":"wf2017-32163123xz3132yy","judgement_type_id":"CE","time":"2014-06-25T11:22:48.427+01","contest_time":"1:22:48.427"}
+  [{"id":"189549","submission_id":"wf2017-32163123xz3132yy","judgement_type_id":"CE","start_time":"2014-06-25T11:22:48.427+01",
+    "start_contest_time":"1:22:48.427","end_time":"2014-06-25T11:23:32.481+01","end_contest_time":"1:23:32.481"},
+   {"id":"189550","submission_id":"wf2017-32163123xz3133ub","judgement_type_id":null,"start_time":"2014-06-25T11:24:03.921+01",
+    "start_contest_time":"1:24:03.921","end_time":null,"end_contest_time":null}
   ]
 
 === /runs ===
