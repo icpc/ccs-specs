@@ -341,7 +341,7 @@ Returns a JSON array, with each element an object describing a team, with the fo
 |-
 | organization_id
 | ID
-| yes
+| yes for WF
 | identifier of the organization (e.g. university or other entity) that team is affiliated to
 |-
 | group_id
