@@ -694,10 +694,10 @@ Returns a JSON array, with each element an object describing a judging, with the
 | yes
 | identifier of the judgement this is part of
 |-
-| test_data_number
+| ordinal
 | integer
 | yes
-| identifier of the test data judged
+| ordering of runs in the judgement (implicit from the test cases)
 |-
 | judgement_type_id
 | ID
