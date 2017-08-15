@@ -47,9 +47,10 @@ The standard HTTP verbs are used:
 : with JSON contents
 : <code>{"name":"Our cool new team name"}</code>
 : No updates of the '''id''' attribute are allowed either.
-;DELETE
+;DELETE (to be included)
 : Delete a specific element. Idempotent, but may return a 404 status code when repeated. Any provided data is ignored. Example:
 : <code>DELETE http://example.com/api/teams/8</code>
+: Any deletes should always keep the referential integrity intact: at no time should an ID exist that refers to a deleted element. This can be ensured by either first deleting referenced elements (i.e. "ON DELETE CASCADE" in SQL terms) or setting the referencing ID to <tt>null</tt> (i.e. "ON DELETE SET NULL" in SQL terms) when this is allowed.
 
 Standard [https://en.wikipedia.org/wiki/List_of_HTTP_status_codes HTTP status codes] are returned to indicate success or failure.
 
