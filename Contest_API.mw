@@ -58,6 +58,7 @@ Access to (parts of) the API is optionally controlled by HTTP authentication. Th
 
 Access to some of the REST services will be protected via user roles. We will define a set of standard roles like Administrator, Judge/Jury, and Team (one per team).
 In the future we will list restrictions to each service and methods allowed based on role.
+'''TODO''': restrictions possible at attribute level?
 
 === Recurring details ===
 
