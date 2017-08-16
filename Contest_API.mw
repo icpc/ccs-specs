@@ -711,6 +711,11 @@ Returns a JSON array, with each element an object describing a judging, with the
 | RELTIME
 | yes, may be <tt>null</tt>
 | contest relative time when judgement completed
+|-
+| reaction
+| FILE
+| yes for WF
+| reaction video from team's webcam
 |}
 
 When a judgement is started, each of <tt>judgement_type_id</tt>, <tt>end_time</tt> and <tt>end_contest_time</tt> will be <tt>null</tt>.
