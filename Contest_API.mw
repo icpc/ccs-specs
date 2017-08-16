@@ -351,6 +351,36 @@ Returns a JSON array, with each element an object describing a team, with the fo
 | ID
 | yes for WF
 | identifier of the group this team is part of (in ICPC WFs these are the super-regions)
+|-
+| photo
+| FILE
+| yes for WF
+| registration photo of the team
+|-
+| video
+| FILE
+| yes for WF
+| registration video of the team
+|-
+| backup
+| FILE
+| yes for WF
+| team machine file backup (zip)
+|-
+| desktop
+| STREAM
+| yes for WF
+| team desktop streaming video
+|-
+| webcam
+| STREAM
+| yes for WF
+| team webcam streaming video
+|-
+| location
+| string
+| yes for WF
+| JSON object with the team's x, y, and rotation angle on the contest floor
 |}
 
 ==== Example ====
