@@ -611,49 +611,6 @@ Returned data:
     "language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034","entry_point":"Main", "files":[{"filename":"a.java"},{"filename":"b.java"}]}
   ]
 
-=== /submissions/<id>/files ===
-
-This provides the file(s) of a given submission (with id <id>). In particular, it replaces the [[Draft_2014_REST_interface_for_source_code_fetching]].
-
-Returns a JSON array, with each element an object describing a file, with the following elements:
-{| class="wikitable"
-|-
-! Name
-! Type
-! Required?
-! Description
-|-
-| id
-| ID
-| yes
-| identifier of the submission file
-|-
-| submission_id
-| ID
-| yes
-| identifier of the submission
-|-
-| filename
-| string
-| yes
-| filename of this file (without path? any disallowed characters?)
-|-
-| source
-| FILE
-| yes
-| contents of the file
-|}
-
-
-==== Example ====
-
-Request:
-  GET http://example.com/api/submissions/wf2017-32163123xz3132yy/files
-Returned data:
-  [{"id":"d079c12d-98ce-4bb7-8097-ae083b45feb4","submission_id":"wf2017-32163123xz3132yy","filename":"a.java","source":"&lt;base64_string&gt;","main":true},
-   {"id":"18e44041-8caf-4d77-8864-f5584f1ddfed","submission_id":"wf2017-32163123xz3132yy","filename":"helper.java","source":"&lt;base64_string&gt;","main":false}
-  ]
-
 === /judgements ===
 
 Lists judgements of submissions.
