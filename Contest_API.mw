@@ -613,7 +613,7 @@ Returned data:
 
 ==== /submissions/<id>/files ====
 
-This provides the file(s) of a given submission (with id <id>) as a zip archive.
+This provides the file(s) of a given submission (with id <id>) as a zip archive. The files and directories that comprises the submissions should be stored directly at the root of the zip file, i.e. there should be no extra directories or files added.
 
 === /judgements ===
 
