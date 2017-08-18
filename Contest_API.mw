@@ -354,32 +354,32 @@ Returns a JSON array, with each element an object describing a team, with the fo
 |-
 | photo
 | FILE
-| yes for WF
+| CDS @ WF
 | registration photo of the team
 |-
 | video
 | FILE
-| yes for WF
+| CDS @ WF
 | registration video of the team
 |-
 | backup
 | FILE
-| yes for WF
+| CDS @ WF
 | team machine file backup (zip)
 |-
 | desktop
 | STREAM
-| yes for WF
+| CDS @ WF
 | team desktop streaming video
 |-
 | webcam
 | STREAM
-| yes for WF
+| CDS @ WF
 | team webcam streaming video
 |-
 | location
 | string
-| yes for WF
+| CDS @ WF
 | JSON object with the team's x, y, and rotation angle on the contest floor
 |}
 
