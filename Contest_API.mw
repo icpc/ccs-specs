@@ -873,6 +873,9 @@ Provides the scoreboard of the current contest.
 Since this is generated data, only the '''GET''' method is allowed
 here, irrespective of role.
 
+Security:
+* For clients with the public role, the scoreboard will not include information from judgements of submissions received after the scoreboard freeze.
+
 Returns a JSON array where each element is an object that represents a row for one team. The array is
 sorted according to rank and alphabetical on team name within identically ranked teams.
 Each row object contains:
