@@ -436,28 +436,23 @@ Returns a JSON array, with each element an object describing an organization, wi
 |-
 | icon
 | FILE
-| yes for WF
+| CDS @ WF
 | organization icon
 |-
 | url
 | string
-| yes for WF
+| CDS @ WF
 | URL to organization's website
 |-
-| hashtag
+| twitter-hashtag
 | string
-| yes for WF
+| CDS @ WF
 | organization hashtag
 |-
-| latitude
+| location
 | string
-| yes for WF
-| organization latitude
-|-
-| longitude
-| string
-| yes for WF
-| organization longitude
+| CDS @ WF
+| JSON object containing organization's latitude and longitude
 |}
 
 ==== Example ====
