@@ -78,9 +78,9 @@ are strings consisting of characters <tt>[a-zA-Z0-9-_]</tt> of length at most 10
 The rationale is that these characters are both URL and filename safe, and the length is small enough to make these easy to use for human communication.
 If an element has both an identifier and a label, then the intention is that the label can be identical to the identifier if it is short enough.
 
-'''File contents''' (type <tt>&lt;FILE&gt;</tt> in the specification)
-are given as base64 encoded string.
-'''TODO''': also support a download URL?
+'''File''' content (type <tt>&lt;FILE&gt;</tt> in the specification) should be included within the JSON as a base64 encoded string when adding or updating an object. They are not included in the JSON in subsequent GET responses, but can be accessed via a corresponding child URL, e.g. teams/43/logo. Some servers may support content negotiation for different mime types.
+
+'''Stream''' content (type <tt>&lt;STREAM&gt;</tt> in the specification) represent streaming content sources like live video. They are not included in JSON GET responses, but can be accessed via a corresponding child URL, e.g. teams/43/desktop will stream a team's desktop video. Some servers may support content negotiation for different mime types.
 
 == Extensibility ==
 
