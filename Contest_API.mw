@@ -611,6 +611,10 @@ Returned data:
     "language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034","entry_point":"Main", "files":[{"filename":"a.java"},{"filename":"b.java"}]}
   ]
 
+==== /submissions/<id>/files
+
+This provides the file(s) of a given submission (with id <id>) as a zip archive.
+
 === /judgements ===
 
 Lists judgements of submissions.
