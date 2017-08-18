@@ -354,31 +354,6 @@ Returns a JSON array, with each element an object describing a team, with the fo
 | yes for WF
 | identifier of the group this team is part of (in ICPC WFs these are the super-regions)
 |-
-| photo
-| FILE
-| CDS @ WF
-| registration photo of the team
-|-
-| video
-| FILE
-| CDS @ WF
-| registration video of the team
-|-
-| backup
-| FILE
-| CDS @ WF
-| team machine file backup (zip)
-|-
-| desktop
-| STREAM
-| CDS @ WF
-| team desktop streaming video
-|-
-| webcam
-| STREAM
-| CDS @ WF
-| team webcam streaming video
-|-
 | location
 | string
 | CDS @ WF
@@ -393,6 +368,26 @@ Returned data:
   [{"id":"abc123","label":"123","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia-74324325532"},
    {"id":"11","label":"11","name":"CMU1","organization_id":"inst105","group_id":"8"}
   ]
+
+==== /teams/<id>/photo ====
+
+Returns the registration photo of the team (with id <id>).
+
+==== /teams/<id>/video ====
+
+Returns the registration video of the team (with id <id>).
+
+==== /teams/<id>/backup ====
+
+Returns the file backup of the team machine (with id <id>) as a zip archive.
+
+==== /teams/<id>/desktop ====
+
+Returns the desktop streaming video of the team (with id <id>).
+
+==== /teams/<id>/webcam ====
+
+Returns the webcam streaming video of the team (with id <id>).
 
 === /organizations ===
 
