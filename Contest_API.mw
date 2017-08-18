@@ -454,9 +454,9 @@ Returns a JSON array, with each element an object describing an organization, wi
 | organization hashtag
 |-
 | location
-| string
+| object
 | CDS @ WF
-| JSON object containing organization's latitude and longitude
+| JSON object containing latitude and longitude as floating point numbers
 |}
 
 ==== Example ====
