@@ -19,8 +19,6 @@ We follow standard REST practices so that a whole collection can be requested, e
   GET http://example.com/api/teams
 while an element with specific ID is requested as
   GET http://example.com/api/teams/10
-Querying on any other attributes than main ID is done through a URL argument "filter":
-  http://example.com/api/teams?filter=group_id:7
 
 A collection is always returned as a JSON list of objects. Every element represents a single element (and always includes the ID). When requesting a single element the exact same object is returned. E.g. the URL path
  GET baseurl/<collection>
