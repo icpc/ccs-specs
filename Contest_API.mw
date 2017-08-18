@@ -709,7 +709,7 @@ Returns a JSON array, with each element an object describing a judging, with the
 |-
 | reaction
 | FILE
-| yes for WF
+| CDS @ WF
 | reaction video from team's webcam
 |}
 
