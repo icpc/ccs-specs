@@ -666,9 +666,6 @@ Lists judgements of submissions.
 Security:
 * For clients with the public role, judgements will not be included for submissions received after the scoreboard freeze.
 
-Parameters:
-* '''submission_id''' (optional) identifier of submission to list all judgements associated to it
-
 Returns a JSON array, with each element an object describing a judging, with the following elements:
 {| class="wikitable"
 |-
@@ -736,9 +733,6 @@ Returned data:
 
 Lists judgements of individual test cases of a submission.
 
-Parameters:
-* '''judgement_id''' (optional) identifier of submission judgement to list all test case judgements associated to it
-
 Returns a JSON array, with each element an object describing a judging, with the following elements:
 {| class="wikitable"
 |-
@@ -795,9 +789,6 @@ Returned data:
 === /clarifications ===
 
 Lists clarification requests &amp; replies.
-
-Parameters:
-* '''problem_id''' (optional) identifier of a problem to list only clarifications associated to that problem.
 
 Returns a JSON array, with each element an object describing a test case, with the following elements:
 {| class="wikitable"
