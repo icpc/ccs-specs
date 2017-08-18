@@ -355,9 +355,9 @@ Returns a JSON array, with each element an object describing a team, with the fo
 | identifier of the group this team is part of (in ICPC WFs these are the super-regions)
 |-
 | location
-| string
+| object
 | CDS @ WF
-| JSON object with the team's x, y, and rotation angle on the contest floor
+| JSON object with the team's x, y, and rotation angle on the contest floor as floating point numbers
 |}
 
 ==== Example ====
