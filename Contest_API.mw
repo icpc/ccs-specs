@@ -58,9 +58,13 @@ Access to (parts of) the API is optionally controlled by HTTP authentication. Th
 
 === Roles ===
 
-Access to some of the REST services will be protected via user roles. We will define a set of standard roles like Administrator, Judge/Jury, and Team (one per team).
-In the future we will list restrictions to each service and methods allowed based on role.
-'''TODO''': restrictions possible at attribute level?
+Access to some of the REST services is protected via user roles. Each provider must support at least the following roles, although additional roles may be supported for specific uses:
+ - public (default role: contest data that's available to everyone)
+ - admin (data or capability only available to contest administrators)
+
+Role-based access may completely hide some objects from the user, may omit certain attributes, or may embargo or omit objects based on the current contest time. Details are listed for each object.
+
+'''TODO''': should 'public' be over HTTP?
 
 === Recurring details ===
 
