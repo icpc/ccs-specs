@@ -426,16 +426,6 @@ Returns a JSON array, with each element an object describing an organization, wi
 | no (not used at WF)
 | [https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3 ISO 3-letter code] of the organization's country
 |-
-| logo
-| FILE
-| yes for WF
-| organization logo
-|-
-| icon
-| FILE
-| CDS @ WF
-| organization icon
-|-
 | url
 | string
 | CDS @ WF
@@ -460,6 +450,10 @@ Returned data:
   [{"id":"inst123","icpc_id":"433","name":"Shanghai Jiao Tong U.","formal_name":"Shanghai Jiao Tong University"},
    {"id":"inst105","name":"Carnegie Mellon University","country":"USA"}
   ]
+
+==== /organizations/<id>/logo ====
+
+Returns the logo of the organization (with id <id>).
 
 === /groups ===
 
