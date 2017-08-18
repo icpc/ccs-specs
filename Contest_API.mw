@@ -665,6 +665,9 @@ Returned data:
 
 Lists judgements of submissions.
 
+Security:
+* For clients with the public role, judgements will not be included for submissions received after the scoreboard freeze.
+
 Parameters:
 * '''submission_id''' (optional) identifier of submission to list all judgements associated to it
 
