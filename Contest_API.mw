@@ -706,11 +706,6 @@ Returns a JSON array, with each element an object describing a judging, with the
 | yes
 | the verdict of this judgement (i.e. a judgement type)
 |-
-| output
-| FILE
-| yes
-| team output for this test data
-|-
 | time
 | TIME
 | yes
