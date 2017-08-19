@@ -372,7 +372,7 @@ Returns a JSON array, with each element an object describing a team, with the fo
 | location.rotation
 | float
 | CDS @ WF
-| Teams rotation in degrees.
+| Team's rotation in degrees.
 |}
 
 For all teams there are also endpoints returning files associated with the team.
