@@ -62,8 +62,6 @@ Access to some of the REST services is protected via user roles. Each provider m
 
 Role-based access may completely hide some objects from the user, may omit certain attributes, or may embargo or omit objects based on the current contest time. Details are listed for each object.
 
-'''TODO''': should 'public' be over HTTP?
-
 === Recurring details ===
 
 '''Absolute timestamps''' (type <tt>&lt;TIME&gt;</tt> in the specification)
