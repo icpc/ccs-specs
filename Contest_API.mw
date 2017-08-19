@@ -358,6 +358,31 @@ Returns a JSON array, with each element an object describing a team, with the fo
 | object
 | CDS @ WF
 | JSON object with the team's x, y, and rotation angle on the contest floor as floating point numbers
+|-
+| photo
+| FILE
+| CDS @ WF
+| registration photo of the team
+|-
+| video
+| FILE
+| CDS @ WF
+| registration video of the team
+|-
+| backup
+| FILE
+| CDS @ WF
+| latest file backup of the team machine as a zip archive
+|-
+| desktop
+| STREAM
+| CDS @ WF
+| streaming video of the team desktop
+|-
+| webcam
+| STREAM
+| CDS @ WF
+| streaming video of the team webcam
 |}
 
 ==== Example ====
@@ -368,26 +393,6 @@ Returned data:
   [{"id":"abc123","label":"123","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia-74324325532"},
    {"id":"11","label":"11","name":"CMU1","organization_id":"inst105","group_id":"8"}
   ]
-
-==== /teams/<id>/photo ====
-
-Returns the registration photo of the team (with id <id>).
-
-==== /teams/<id>/video ====
-
-Returns the registration video of the team (with id <id>).
-
-==== /teams/<id>/backup ====
-
-Returns the file backup of the team machine (with id <id>) as a zip archive.
-
-==== /teams/<id>/desktop ====
-
-Returns the desktop streaming video of the team (with id <id>).
-
-==== /teams/<id>/webcam ====
-
-Returns the webcam streaming video of the team (with id <id>).
 
 === /organizations ===
 
