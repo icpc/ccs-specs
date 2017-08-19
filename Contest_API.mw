@@ -358,28 +358,37 @@ Returns a JSON array, with each element an object describing a team, with the fo
 | object
 | CDS @ WF
 | JSON object with the team's x, y, and rotation angle on the contest floor as floating point numbers
+|}
+
+For all teams there are also endpoints returning files associated with the team.
+{| class="wikitable"
 |-
-| photo
-| FILE
+! Endpoint
+! Type
+! Required?
+! Description
+|-
+| /teams/<id>/photo
+| image/png or image/jpeg
 | CDS @ WF
 | registration photo of the team
 |-
-| video
-| FILE
+| /teams/<id>/video
+| video/?
 | CDS @ WF
 | registration video of the team
 |-
-| backup
-| FILE
+| /teams/<id>/backup
+| application/zip
 | CDS @ WF
 | latest file backup of the team machine as a zip archive
 |-
-| desktop
+| /teams/<id>/desktop
 | STREAM
 | CDS @ WF
 | streaming video of the team desktop
 |-
-| webcam
+| /teams/<id>/webcam
 | STREAM
 | CDS @ WF
 | streaming video of the team webcam
