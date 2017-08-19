@@ -306,8 +306,8 @@ Returns a JSON array, with each element an object describing a problem, with the
 Request:
   GET http://example.com/api/problems
 Returned data:
-  [{"id":"10-asteroids","label":"A","shortname":"asteroids","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f"},
-   {"id":"B","label":"B","shortname":"bottles","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080"}
+  [{"id":"10-asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","test_data_count":10},
+   {"id":"B","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","test_data_count":15}
   ]
 
 === /teams ===
