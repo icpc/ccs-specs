@@ -357,7 +357,22 @@ Returns a JSON array, with each element an object describing a team, with the fo
 | location
 | object
 | CDS @ WF
-| JSON object with the team's x, y, and rotation angle on the contest floor as floating point numbers
+| JSON object as specified below.
+|-
+| location.x
+| float
+| CDS @ WF
+| Team's x position in meters.
+|-
+| location.y
+| object
+| CDS @ WF
+| Team's y position in meters.
+|-
+| location.rotation
+| object
+| CDS @ WF
+| Teams rotation in degrees.
 |}
 
 For all teams there are also endpoints returning files associated with the team.
