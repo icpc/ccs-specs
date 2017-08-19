@@ -468,7 +468,32 @@ Returns a JSON array, with each element an object describing an organization, wi
 | location
 | object
 | CDS @ WF
-| JSON object containing latitude and longitude as floating point numbers
+| JSON object as specified below
+|-
+| location.latitude
+| float
+| CDS @ WF
+| latitude
+|-
+| location.longitude
+| float
+| CDS @ WF
+| longitude
+|}
+
+For all organisations there are also endpoints returning files associated with the organisation.
+
+{| class="wikitable"
+|-
+! Endpoint
+! Type
+! Required?
+! Description
+|-
+|  /organizations/<id>/logo
+| image/png
+| CDS @ WF
+| logo of the organization
 |}
 
 ==== Example ====
@@ -479,10 +504,6 @@ Returned data:
   [{"id":"inst123","icpc_id":"433","name":"Shanghai Jiao Tong U.","formal_name":"Shanghai Jiao Tong University"},
    {"id":"inst105","name":"Carnegie Mellon University","country":"USA"}
   ]
-
-==== /organizations/<id>/logo ====
-
-Returns the logo of the organization (with id <id>).
 
 === /groups ===
 
