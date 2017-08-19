@@ -365,12 +365,12 @@ Returns a JSON array, with each element an object describing a team, with the fo
 | Team's x position in meters.
 |-
 | location.y
-| object
+| float
 | CDS @ WF
 | Team's y position in meters.
 |-
 | location.rotation
-| object
+| float
 | CDS @ WF
 | Teams rotation in degrees.
 |}
