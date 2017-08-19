@@ -931,3 +931,7 @@ Returned data:
      {"problem_id":"5","num_judged":3,"num_pending":0,"solved":true,"time":205}
     ]}
   ]
+
+=== /event-feed ===
+
+Provides the event feed for the current contest.
