@@ -645,7 +645,7 @@ Request:
   GET http://example.com/api/submissions
 Returned data:
   [{"id":"wf2017-32163123xz3132yy","label":"187","team_id":"abc123","problem_id":"10-asteroids",
-    "language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034","entry_point":"Main", "files":[{"filename":"a.java"},{"filename":"b.java"}]}
+    "language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034","entry_point":"Main"}
   ]
 
 ==== /submissions/<id>/files ====
