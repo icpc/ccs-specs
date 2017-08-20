@@ -639,6 +639,30 @@ Returns a JSON array, with each element an object describing a submission, with 
 | code entry point for specific languages
 |}
 
+For all submissions there are also endpoints returning files associated with the submission.
+
+{| class="wikitable"
+|-
+! Endpoint
+! Type
+! Required?
+! Description
+|-
+| /submissions/<id>/files
+| application/zip
+| yes
+| submission files, contained at the root of the zip archive
+|-
+| /submissions/<id>/reaction
+| video/?
+| CDS @ WF
+| reaction video from team's webcam
+|}
+
+The endpoint '''/files''' provides the file(s) of a given submission as a zip archive. These should be stored directly from the root of the zip file, i.e. there should not be extra directories (or files) added unless these are explicitly part of the submission content.
+
+For '''POST''', '''PUT''' and '''PATCH''' methods, '''files''' would be included as an attribute in the submission and contain the base64-encoded string of the zip archive.
+
 ==== Example ====
 
 Request:
@@ -647,12 +671,6 @@ Returned data:
   [{"id":"wf2017-32163123xz3132yy","label":"187","team_id":"abc123","problem_id":"10-asteroids",
     "language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034","entry_point":"Main"}
   ]
-
-==== /submissions/<id>/files ====
-
-This provides the file(s) of a given submission (with id <id>) as a zip archive. The files and directories that comprise the submissions should be stored directly from the root of the zip file, i.e. there should not be extra directories (or files) added unless these are explicitly part of the submission content.
-
-For '''POST''', '''PUT''' and '''PATCH''' methods, '''files''' would be included as an attribute in the submission and contain the base64-encoded string of the zip archive.
 
 === /judgements ===
 
@@ -703,11 +721,6 @@ Returns a JSON array, with each element an object describing a judging, with the
 | RELTIME
 | yes, may be <tt>null</tt>
 | contest relative time when judgement completed
-|-
-| reaction
-| FILE
-| CDS @ WF
-| reaction video from team's webcam
 |}
 
 When a judgement is started, each of <tt>judgement_type_id</tt>, <tt>end_time</tt> and <tt>end_contest_time</tt> will be <tt>null</tt>.
