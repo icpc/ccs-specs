@@ -652,6 +652,8 @@ Returned data:
 
 This provides the file(s) of a given submission (with id <id>) as a zip archive. The files and directories that comprise the submissions should be stored directly from the root of the zip file, i.e. there should not be extra directories (or files) added unless these are explicitly part of the submission content.
 
+For '''POST''', '''PUT''' and '''PATCH''' methods, '''files''' would be included as an attribute in the submission and contain the base64-encoded string of the zip archive.
+
 === /judgements ===
 
 Lists judgements of submissions.
