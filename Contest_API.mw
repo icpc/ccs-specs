@@ -121,7 +121,7 @@ Provides information on the current contest.
 
 On a system that supports multiple contests the '''baseurl''' could look something like <tt>basebaseurl/contests/<id></tt>, i.e. this endpoint is actually an element in the collection '''contests''' one level higher. On a system that does not support multiple contests the '''baseurl''' could look like <tt>basebaseurl/contest</tt>.
 
-Returns a JSON object with the elements below. If there is no current (this may include about to start or just finished) contest, returns an empty object <tt>{}</tt>.
+Returns a JSON object with the elements below. If there is no current (this may include about to start or just finished) contest, a 404 error is returned.
 {| class="wikitable"
 |-
 ! Name
