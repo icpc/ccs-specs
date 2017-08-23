@@ -51,15 +51,17 @@ The standard HTTP verbs are used:
 
 Standard [https://en.wikipedia.org/wiki/List_of_HTTP_status_codes HTTP status codes] are returned to indicate success or failure.
 
-Access to (parts of) the API is optionally controlled by HTTP authentication. This provides a standard and flexible method, while the user one authenticates as can be used for fine-grained access control to specific bits.
-
 === Roles ===
 
-Access to some of the REST services is protected via user roles. Each provider must support at least the following roles, although additional roles may be supported for specific uses:
- - public (default role: contest data that's available to everyone)
- - admin (data or capability only available to contest administrators)
+Access to (specific parts of) the REST API is controlled via user roles. The provider should require HTTP authentication to access each role. This provides a standard and flexible method, while the user one authenticates as implies a role that can be used for fine-grained access control.
 
-Role-based access may completely hide some objects from the user, may omit certain attributes, or may embargo or omit objects based on the current contest time. Details are listed for each object.
+Each provider must support at least the following roles, although additional roles may be supported for specific uses:
+* public (default role: contest data that's available to everyone)
+* admin (data or capability only available to contest administrators)
+
+Role-based access may completely hide some objects from the user, may omit certain attributes, or may embargo or omit objects based on the current contest time. 
+By default, the public user has read-only access (no '''POST''', '''PUT''', '''PATCH''' or '''DELETE''' methods allowed) and does not have access to judgements and runs from submissions made after the contest freeze time.
+'''TODO''': Details are listed for each object.
 
 === Recurring details ===
 
