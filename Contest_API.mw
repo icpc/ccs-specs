@@ -12,13 +12,12 @@ This API is meant to be useful, not only at the ICPC World Finals, but more gene
 
 == General design principles ==
 
-The interface is implemented as a HTTP REST interface that outputs information in [https://en.wikipedia.org/wiki/JSON JSON] format. The specific base URL will be dependent on the server (main CCS or CDS) providing the service; below we only indicate the relative paths of API endpoints.
-The design is based on the [https://docs.google.com/document/d/12RVKS_u36WY9kU8iVIMzHtH5Df3WjK-mt-YmJu8j6ZI/edit ICPC Contest Ontology draft].
+The interface is implemented as a HTTP REST interface that outputs information in [https://en.wikipedia.org/wiki/JSON JSON] format. The specific base URL will be dependent on the server (main CCS or CDS) providing the service; below we only indicate the relative paths of API endpoints. This REST interface should be provided over HTTPS to guard against eavesdropping on sensitive contest data and authentication credentials (see roles below).
 
 We follow standard REST practices so that a whole collection can be requested, e.g. at the URL path
-  GET http://example.com/api/teams
+  GET https://example.com/api/teams
 while an element with specific ID is requested as
-  GET http://example.com/api/teams/10
+  GET https://example.com/api/teams/10
 
 A collection is always returned as a JSON list of objects. Every element represents a single element (and always includes the ID). When requesting a single element the exact same object is returned. E.g. the URL path
  GET baseurl/<collection>
@@ -41,13 +40,13 @@ The standard HTTP verbs are used:
 : Replaces a specific element. This method is idempotent and can only be called on a specific element and replaces its contents with the data provided. The payload data should be complete, i.e. no partial updates are allowed. The '''id''' attribute cannot be changed: it does not need to be specified (other than in the URL) and if specified different from in the URL, a '''409 Conflict''' HTTP code should be returned.
 ;PATCH
 : Updates/modifies a specific element. Similar to '''PUT''' but allows partial updates by providing only that data, for example:
-: <code>PATCH http://example.com/api/teams/10</code>
+: <code>PATCH https://example.com/api/teams/10</code>
 : with JSON contents
 : <code>{"name":"Our cool new team name"}</code>
 : No updates of the '''id''' attribute are allowed either.
 ;DELETE (to be included)
 : Delete a specific element. Idempotent, but may return a 404 status code when repeated. Any provided data is ignored. Example:
-: <code>DELETE http://example.com/api/teams/8</code>
+: <code>DELETE https://example.com/api/teams/8</code>
 : Any deletes should always keep the referential integrity intact: at no time should an ID exist that refers to a deleted element. This can be ensured by either first deleting referenced elements (i.e. "ON DELETE CASCADE" in SQL terms) or setting the referencing ID to <tt>null</tt> (i.e. "ON DELETE SET NULL" in SQL terms) when this is allowed.
 
 Standard [https://en.wikipedia.org/wiki/List_of_HTTP_status_codes HTTP status codes] are returned to indicate success or failure.
