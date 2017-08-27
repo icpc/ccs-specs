@@ -836,7 +836,7 @@ Returns a JSON array, with each element an object describing a test case, with t
 | yes
 | time of the question/reply
 |-
-| contest-time
+| contest_time
 | RELTIME
 | yes
 | contest time of the question/reply
