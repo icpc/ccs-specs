@@ -469,7 +469,7 @@ Returns a JSON array, with each element an object describing an organization, wi
 | longitude
 |}
 
-For all organisations there are also endpoints returning files associated with the organisation.
+For all organisations there are also endpoints returning files associated with the organization.
 
 {| class="wikitable"
 |-
@@ -482,6 +482,12 @@ For all organisations there are also endpoints returning files associated with t
 | image/png
 | CDS @ WF
 | logo of the organization
+|-
+|  /organizations/<id>/logo/<X>px
+| image/png
+| CDS @ WF
+| requests the smallest logo of the organization that has a dimension of at least X pixels, e.g. /logo/160px requests the smallest logo that is at least 160 pixels big.
+The server may only have a single image, support a few sizes (recommended sizes: 56px, 160px), or provide more
 |}
 
 ==== Example ====
