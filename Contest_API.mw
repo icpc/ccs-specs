@@ -265,12 +265,12 @@ Returns a JSON array, with each element an object describing a problem, with the
 |-
 | rgb
 | string
-| no
+| yes for WF
 | hexadecimal RGB value of problem color as specified in [http://en.wikipedia.org/wiki/Web_colors#Hex_triplet HTML hexadecimal colors], e.g. '#AC00FF' or '#fff'
 |-
 | color
 | string
-| no
+| yes for WF
 | human readable color description associated to the RGB value
 |-
 | test_data_count
