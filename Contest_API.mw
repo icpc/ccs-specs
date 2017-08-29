@@ -483,11 +483,15 @@ For all organisations there are also endpoints returning files associated with t
 | CDS @ WF
 | logo of the organization
 |-
-|  /organizations/<id>/logo/<X>px
+|  /organizations/<id>/logo/160px
 | image/png
 | CDS @ WF
-| requests the smallest logo of the organization that has a dimension of at least X pixels, e.g. /logo/160px requests the smallest logo that is at least 160 pixels big.
-The server may only have a single image, support a few sizes (recommended sizes: 56px, 160px), or provide more
+| requests a smaller logo of the organization that is 160 pixels in size. The server may return this smaller logo if it is able, or may return the same as /logo
+|-
+|  /organizations/<id>/logo/56px
+| image/png
+| CDS @ WF
+| requests a smaller logo of the organization that is 56 pixels in size. The server may return this smaller logo if it is able, or may return the same as /logo
 |}
 
 ==== Example ====
