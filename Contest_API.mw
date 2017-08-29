@@ -74,9 +74,9 @@ are human-readable, given in a slight modification of the [https://en.wikipedia.
 '''Identifiers''' (type <tt>&lt;ID&gt;</tt> in the specification)
 are given as string consisting of characters <tt>[a-zA-Z0-9-_]</tt> of length at most 36 and not starting with a <tt>-</tt> (dash).
 
-IDs are assigned by the person or system that is the source of the object, and must be maintained by downstream systems. For example, the person configuring a contest on disk will typically define the id for each team, and any CCS or CDS that exposes the team must use the same id.
+Ids are assigned by the person or system that is the source of the object, and must be maintained by downstream systems. For example, the person configuring a contest on disk will typically define the id for each team, and any CCS or CDS that exposes the team must use the same id.
 
-Some IDs are also used as identifiable labels and are marked below along with the recommended format. These IDs must be meaningful for human communication (e.g. team "43", problem "A") and are as short as reasonable but not more than 10.
+Some ids are also used as identifiable labels and are marked below along with the recommended format. These ids must be meaningful for human communication (e.g. team "43", problem "A") and are as short as reasonable but not more than 10. Ids not marked as labels may be random characters and cannot be assumed to be suitable for display purposes.
 
 '''File''' content (type <tt>&lt;FILE&gt;</tt> in the specification) should be included within the JSON as a base64 encoded string when adding or updating an object. They are not included in the JSON in subsequent GET responses, but can be accessed via a corresponding child URL, e.g. teams/43/logo. Some servers may support content negotiation for different mime types.
 
@@ -251,7 +251,7 @@ Returns a JSON array, with each element an object describing a problem, with the
 | id
 | ID
 | yes
-| identifier of the problem. Used as a label, typically a single capitalized letter
+| identifier of the problem. Usable as a label, typically a single capitalized letter
 |-
 | name
 | string
@@ -320,7 +320,7 @@ Returns a JSON array, with each element an object describing a team, with the fo
 | id
 | ID
 | yes
-| identifier of the team. Used as a label, at WFs normally the team seat number
+| identifier of the team. Usable as a label, at WFs normally the team seat number
 |-
 | icpc_id
 | string
@@ -544,8 +544,8 @@ Returns a JSON array, with each element an object describing a team, with the fo
 | id
 | ID
 | yes
-| identifier of the judgement type. Used as a label, typically a 2-3 letter capitalized shorthand like "CE". See [http://www.problemarchive.org/wiki/index.php/Problem_Format#Graders Problem Format]
--
+| identifier of the judgement type. Usable as a label, typically a 2-3 letter capitalized shorthand, see [http://www.problemarchive.org/wiki/index.php/Problem_Format#Graders Problem Format]
+|-
 | name
 | string
 | yes
@@ -567,8 +567,8 @@ Returns a JSON array, with each element an object describing a team, with the fo
 Request:
   GET http://example.com/api/judgement-types
 Returned data:
-  [{"id":"CE","label":"CE","name":"Compiler Error","penalty":false,"solved":false},
-   {"id":"0357c4a9-6983-45d7-8080-90d24c5511ea","label":"AC","name":"Accepted","penalty":false,"solved":true}
+  [{"id":"CE","name":"Compiler Error","penalty":false,"solved":false},
+   {"id":"AC","name":"Accepted","penalty":false,"solved":true}
   ]
 
 === /submissions ===
@@ -586,7 +586,7 @@ Returns a JSON array, with each element an object describing a submission, with 
 | id
 | ID
 | yes
-| identifier of the submission. Used as a label, typically a low incrementing number
+| identifier of the submission. Usable as a label, typically a low incrementing number
 |-
 | language_id
 | ID
@@ -647,7 +647,7 @@ For '''POST''', '''PUT''' and '''PATCH''' methods, '''files''' would be included
 Request:
   GET http://example.com/api/submissions
 Returned data:
-  [{"id":"wf2017-32163123xz3132yy","label":"187","team_id":"abc123","problem_id":"10-asteroids",
+  [{"id":"187","team_id":"abc123","problem_id":"10-asteroids",
     "language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034","entry_point":"Main"}
   ]
 
