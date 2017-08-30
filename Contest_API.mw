@@ -852,6 +852,49 @@ Returned data:
     "time":"2014-06-25T12:43:02.037+01","contest_time":"2:28:02.037"}
   ]
 
+=== /awards (draft) ===
+
+Lists all awards (medals, first to solve, etc.).
+
+Returns a JSON array, with each element an object describing an award, with the following elements:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Description
+|-
+| id
+| ID
+| yes
+| identifier of the award
+|-
+| type
+| string
+| yes
+| the award type, one of medal, first-to-solve, place, winner, group, or rank
+|-
+| citation
+| string
+| yes
+| award citation, e.g. "Gold medal winner"
+|-
+| team-ids
+| array
+| yes
+| JSON array of team ids receiving this award
+|}
+
+==== Example ====
+
+Request:
+  GET http://example.com/api/awards
+Returned data:
+  [{"id":"a123","type":"medal","citation":"Gold medal winner","team-ids":["54","23","1","54"]},
+   {"id":"gold","type":"first-to-solve","citation":"First to solve problem A","team-ids":["45"]}
+  ]
+
+
 === /scoreboard ===
 
 Provides the scoreboard of the current contest.
