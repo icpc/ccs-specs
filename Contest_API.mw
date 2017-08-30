@@ -947,7 +947,7 @@ Returned data:
     "time":"2014-06-25T12:43:02.037+01","contest_time":"2:28:02.037"}
   ]
 
-=== /awards (draft) ===
+=== /awards ===
 
 Lists all awards (medals, first to solve, etc.).
 
