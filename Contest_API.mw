@@ -245,16 +245,19 @@ Returns a JSON array, with each element an object describing a language, with th
 ! Name
 ! Type
 ! Required?
+! @WF
 ! Description
 |-
 | id
 | ID
 | yes
+| CCS
 | identifier of the language
 |-
 | name
 | string
 | yes
+| CCS
 | name of the language
 |}
 
