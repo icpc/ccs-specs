@@ -22,14 +22,14 @@ while an element with specific ID is requested as
 A collection is always returned as a JSON list of objects. Every element represents a single element (and always includes the ID). When requesting a single element the exact same object is returned. E.g. the URL path
  GET baseurl/<collection>
 returns
- [ { "id":<id1>, <element specific data for id2>},
-   { "id":<id2>, <element specific data for id1>},
+ [ { "id":<id1>, <element specific data for id1>},
+   { "id":<id2>, <element specific data for id2>},
       ...
  ]
 while the URL path
  GET baseurl/<collection>/<id1>
 returns
- { "id":<id1>, <element specific data for id2>}
+ { "id":<id1>, <element specific data for id1>}
 
 The standard HTTP verbs are used:
 ;GET
