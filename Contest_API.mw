@@ -820,36 +820,43 @@ Returns a JSON array, with each element an object describing a judging, with the
 ! Name
 ! Type
 ! Required?
+! @WF
 ! Description
 |-
 | id
 | ID
 | yes
+| CCS
 | identifier of the run
 |-
 | judgement_id
 | ID
 | yes
+| CCS
 | identifier of the judgement this is part of
 |-
 | ordinal
 | integer
 | yes
+| CCS
 | ordering of runs in the judgement (implicit from the test cases)
 |-
 | judgement_type_id
 | ID
 | yes
+| CCS
 | the verdict of this judgement (i.e. a judgement type)
 |-
 | time
 | TIME
 | yes
+| CCS
 | absolute time when run completed
 |-
 | contest_time
 | RELTIME
 | yes
+| CCS
 | contest relative time when run completed
 |}
 
