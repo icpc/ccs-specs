@@ -76,7 +76,7 @@ are given as string consisting of characters <tt>[a-zA-Z0-9-_]</tt> of length at
 
 Ids are assigned by the person or system that is the source of the object, and must be maintained by downstream systems. For example, the person configuring a contest on disk will typically define the id for each team, and any CCS or CDS that exposes the team must use the same id.
 
-Some ids are also used as identifiable labels and are marked below along with the recommended format. These ids must be meaningful for human communication (e.g. team "43", problem "A") and are as short as reasonable but not more than 10. Ids not marked as labels may be random characters and cannot be assumed to be suitable for display purposes.
+Some ids are also used as identifiable labels and are marked below along with the recommended format. These ids should be meaningful for human communication (e.g. team "43", problem "A") and are as short as reasonable but not more than 10. Ids not marked as labels may be random characters and cannot be assumed to be suitable for display purposes.
 
 '''File''' content (type <tt>&lt;FILE&gt;</tt> in the specification) should be included within the JSON as a base64 encoded string when adding or updating an object. They are not included in the JSON in subsequent GET responses, but can be accessed via a corresponding child URL, e.g. teams/43/logo. Some servers may support content negotiation for different mime types.
 
