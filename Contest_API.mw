@@ -165,9 +165,24 @@ Returns a JSON object with the elements below. If there is no current (this may 
 | penalty time for a wrong submission, in minutes
 |-
 | state
-| string
+| object
 | yes
-| One of <tt>not-started</tt>, <tt>running</tt>, <tt>frozen</tt>, <tt>finished</tt>, <tt>finalized</tt>, or <tt>published</tt>.
+| JSON object as specified below
+|-
+| state.running
+| boolean
+| yes
+| whether the contest is currently running
+|-
+| state.frozen
+| boolean
+| yes
+| whether the scoreboard is currently frozen
+|-
+| state.final
+| boolean
+| yes
+| whether the standings have been finalized
 |}
 
 ==== PATCH start_time ====
