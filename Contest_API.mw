@@ -310,107 +310,6 @@ Returned data:
    {"id":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","test_data_count":15}
   ]
 
-=== /teams ===
-
-Lists all teams in the contest.
-
-Returns a JSON array, with each element an object describing a team, with the following elements:
-{| class="wikitable"
-|-
-! Name
-! Type
-! Required?
-! Description
-|-
-| id
-| ID
-| yes
-| identifier of the team. Usable as a label, at WFs normally the team seat number
-|-
-| icpc_id
-| string
-| yes for WF
-| external identifier from ICPC CMS
-|-
-| name
-| string
-| yes
-| name of the team
-|-
-| organization_id
-| ID
-| yes for WF
-| identifier of the organization (e.g. university or other entity) that team is affiliated to
-|-
-| group_id
-| ID
-| yes for WF
-| identifier of the group this team is part of (in ICPC WFs these are the super-regions)
-|-
-| location
-| object
-| CDS @ WF
-| JSON object as specified below.
-|-
-| location.x
-| float
-| CDS @ WF
-| Team's x position in meters.
-|-
-| location.y
-| float
-| CDS @ WF
-| Team's y position in meters.
-|-
-| location.rotation
-| float
-| CDS @ WF
-| Team's rotation in degrees.
-|}
-
-For all teams there are also endpoints returning files associated with the team.
-{| class="wikitable"
-|-
-! Endpoint
-! Type
-! Required?
-! Description
-|-
-| /teams/<id>/photo
-| image/png or image/jpeg
-| CDS @ WF
-| registration photo of the team
-|-
-| /teams/<id>/video
-| video/?
-| CDS @ WF
-| registration video of the team
-|-
-| /teams/<id>/backup
-| application/zip
-| CDS @ WF
-| latest file backup of the team machine as a zip archive
-|-
-| /teams/<id>/desktop
-| STREAM
-| CDS @ WF
-| streaming video of the team desktop
-|-
-| /teams/<id>/webcam
-| STREAM
-| CDS @ WF
-| streaming video of the team webcam
-|}
-
-==== Example ====
-
-Request:
-  GET http://example.com/api/teams
-Returned data:
-  [{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia-74324325532"},
-   {"id":"123","name":"CMU1","organization_id":"inst105","group_id":"8"}
-  ]
-
 === /organizations ===
 
 Lists all organizations (i.e. universities in ICPC context).
@@ -542,6 +441,107 @@ Request:
   GET http://example.com/api/groups
 Returned data:
   [{"id":"asia-74324325532","icpc_id":"7593","name":"Asia"}
+  ]
+
+=== /teams ===
+
+Lists all teams in the contest.
+
+Returns a JSON array, with each element an object describing a team, with the following elements:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Description
+|-
+| id
+| ID
+| yes
+| identifier of the team. Usable as a label, at WFs normally the team seat number
+|-
+| icpc_id
+| string
+| yes for WF
+| external identifier from ICPC CMS
+|-
+| name
+| string
+| yes
+| name of the team
+|-
+| organization_id
+| ID
+| yes for WF
+| identifier of the organization (e.g. university or other entity) that team is affiliated to
+|-
+| group_id
+| ID
+| yes for WF
+| identifier of the group this team is part of (in ICPC WFs these are the super-regions)
+|-
+| location
+| object
+| CDS @ WF
+| JSON object as specified below.
+|-
+| location.x
+| float
+| CDS @ WF
+| Team's x position in meters.
+|-
+| location.y
+| float
+| CDS @ WF
+| Team's y position in meters.
+|-
+| location.rotation
+| float
+| CDS @ WF
+| Team's rotation in degrees.
+|}
+
+For all teams there are also endpoints returning files associated with the team.
+{| class="wikitable"
+|-
+! Endpoint
+! Type
+! Required?
+! Description
+|-
+| /teams/<id>/photo
+| image/png or image/jpeg
+| CDS @ WF
+| registration photo of the team
+|-
+| /teams/<id>/video
+| video/?
+| CDS @ WF
+| registration video of the team
+|-
+| /teams/<id>/backup
+| application/zip
+| CDS @ WF
+| latest file backup of the team machine as a zip archive
+|-
+| /teams/<id>/desktop
+| STREAM
+| CDS @ WF
+| streaming video of the team desktop
+|-
+| /teams/<id>/webcam
+| STREAM
+| CDS @ WF
+| streaming video of the team webcam
+|}
+
+==== Example ====
+
+Request:
+  GET http://example.com/api/teams
+Returned data:
+  [{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia-74324325532"},
+   {"id":"123","name":"CMU1","organization_id":"inst105","group_id":"8"}
   ]
 
 === /judgement-types ===
