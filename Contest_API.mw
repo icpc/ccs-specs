@@ -163,6 +163,11 @@ Returns a JSON object with the elements below. If there is no current (this may 
 | integer
 | yes for WF
 | penalty time for a wrong submission, in minutes
+|-
+| state
+| string
+| yes
+| One of <tt>not-started</tt>, <tt>running</tt>, <tt>frozen</tt>, <tt>finished</tt>, <tt>finalized</tt>, <tt>published</tt>, or <tt>paused</tt>.
 |}
 
 ==== PATCH start_time ====
