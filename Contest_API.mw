@@ -656,42 +656,50 @@ Returns a JSON array, with each element an object describing a submission, with 
 ! Name
 ! Type
 ! Required?
+! @WF
 ! Description
 |-
 | id
 | ID
 | yes
+| CCS
 | identifier of the submission. Usable as a label, typically a low incrementing number
 |-
 | language_id
 | ID
 | yes
+| CCS
 | identifier of the language submitted for
 |-
 | problem_id
 | ID
 | yes
+| CCS
 | identifier of the problem submitted for
 |-
 | team_id
 | ID
 | yes
+| CCS
 | identifier of the team that made the submission
 |-
 | time
 | TIME
 | yes
+| CCS
 | timestamp of when the submission was made
 |-
 | contest_time
 | RELTIME
 | yes
+| CCS
 | contest relative time when the submission was made
 |-
 | entry_point
 | string
-| yes, but can be <tt>null</tt>
-| code entry point for specific languages
+| yes
+| CCS
+| code entry point for specific languages, can be <tt>null</tt>
 |}
 
 For all submissions there are also endpoints returning files associated with the submission.
@@ -701,16 +709,19 @@ For all submissions there are also endpoints returning files associated with the
 ! Endpoint
 ! Type
 ! Required?
+! @WF
 ! Description
 |-
 | /submissions/<id>/files
 | application/zip
 | yes
+| CCS
 | submission files, contained at the root of the zip archive
 |-
 | /submissions/<id>/reaction
 | video/?
-| CDS @ WF
+| no
+| CDS
 | reaction video from team's webcam
 |}
 
