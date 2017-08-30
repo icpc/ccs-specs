@@ -167,7 +167,7 @@ Returns a JSON object with the elements below. If there is no current (this may 
 | state
 | string
 | yes
-| One of <tt>not-started</tt>, <tt>running</tt>, <tt>frozen</tt>, <tt>finished</tt>, <tt>finalized</tt>, <tt>published</tt>, or <tt>paused</tt>.
+| One of <tt>not-started</tt>, <tt>running</tt>, <tt>frozen</tt>, <tt>finished</tt>, <tt>finalized</tt>, or <tt>published</tt>.
 |}
 
 ==== PATCH start_time ====
