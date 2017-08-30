@@ -879,46 +879,55 @@ Returns a JSON array, with each element an object describing a test case, with t
 ! Name
 ! Type
 ! Required?
+! @WF
 ! Description
 |-
 | id
 | ID
 | yes
+| CCS
 | identifier of the clarification
 |-
 | from_team_id
 | ID
-| yes; may be <tt>null</tt>
-| identifier of team sending this clarification request, <tt>null</tt> if a clarification sent by jury
+| no
+| optional CCS
+| identifier of team sending this clarification request, <tt>null</tt> or missing if a clarification sent by jury
 |-
 | to_team_id
 | ID
-| yes; may be <tt>null</tt>
-| identifier of the team receiving this reply, <tt>null</tt> if a reply to all teams or a request sent by a team
+| no
+| optional CCS
+| identifier of the team receiving this reply, <tt>null</tt> or missing if a reply to all teams or a request sent by a team
 |-
 | reply_to_id
 | ID
-| yes, may be <tt>null</tt>
-| identifier of clarification this is in response to, if any. may be <tt>null</tt>
+| no
+| optional CCS
+| identifier of clarification this is in response to, if any.
 |-
 | problem_id
 | ID
-| yes, may be <tt>null</tt>
-| identifier of associated problem, may be <tt>null</tt>
+| np
+| optional CCS
+| identifier of associated problem.
 |-
 | text
 | string
 | yes
+| CCS
 | question or reply text
 |-
 | time
 | TIME
 | yes
+| CCS
 | time of the question/reply
 |-
 | contest_time
 | RELTIME
 | yes
+| CCS
 | contest time of the question/reply
 |}
 Note that at least one of <tt>from_team_id</tt> and <tt>to_team_id</tt> has to be <tt>null</tt>. That is, teams cannot send messages to other teams.
