@@ -957,26 +957,31 @@ Returns a JSON array, with each element an object describing an award, with the 
 ! Name
 ! Type
 ! Required?
+! @WF
 ! Description
 |-
 | id
 | ID
-| yes
+| no
+| CDS
 | identifier of the award
 |-
 | type
 | string
-| yes
+| no
+| CDS
 | the award type, one of medal, first-to-solve, place, winner, group, or rank
 |-
 | citation
 | string
-| yes
+| no
+| CDS
 | award citation, e.g. "Gold medal winner"
 |-
 | team-ids
 | array
-| yes
+| no
+| CDS
 | JSON array of team ids receiving this award
 |}
 
