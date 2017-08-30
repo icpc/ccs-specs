@@ -1012,26 +1012,31 @@ Each row object contains:
 ! Name
 ! Type
 ! Required?
+! @WF
 ! Description
 |-
 | rank
 | integer
 | yes
+| CCS
 | rank of this team, 1-based and duplicate in case of ties
 |-
 | team_id
 | ID
 | yes
+| CCS
 | identifier of the team
 |-
 | score
 | object
 | yes
+| CCS
 | object (for possible extension to other scoring methods) containing integer elements "num_solved" and "total_time"
 |-
 | problems
 | array
 | yes
+| CCS
 | array of problems with scoring data, see below for the specification of each element
 |}
 Each problem element within the scoreboard consists of:
@@ -1040,31 +1045,37 @@ Each problem element within the scoreboard consists of:
 ! Name
 ! Type
 ! Required?
+! @WF
 ! Description
 |-
 | problem_id
 | ID
 | yes
+| CCS
 | identifier of the problem
 |-
 | num_judged
 | integer
 | yes
+| CCS
 | number of judged submissions (including possibly a final correct one)
 |-
 | num_pending
 | integer
 | yes
+| CCS
 | number of pending submissions (either queued or due to freeze)
 |-
 | solved
 | boolean
 | yes
+| CCS
 | whether the team solved this problem
 |-
 | time
 | integer
 | if and only if <tt>solved=true</tt>
+| CCS
 | minutes into the contest when solved by team
 |}
 
