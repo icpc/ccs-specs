@@ -340,56 +340,67 @@ Returns a JSON array, with each element an object describing an organization, wi
 ! Name
 ! Type
 ! Required?
+! @WF
 ! Description
 |-
 | id
 | ID
 | yes
+| CCS
 | identifier of the organization
 |-
 | icpc_id
 | string
-| yes for WF
+| no
+| CCS
 | external identifier from ICPC CMS
 |-
 | name
 | string
 | yes
+| CCS
 | display name of the organization
 |-
 | formal_name
 | string
 | no
+| optional
 | full organization name if too long for normal display purposes
 |-
 | country
 | string
-| no (not used at WF)
+| no
+| no
 | [https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3 ISO 3-letter code] of the organization's country
 |-
 | url
 | string
-| CDS @ WF
+| no
+| CDS
 | URL to organization's website
 |-
 | twitter-hashtag
 | string
-| CDS @ WF
+| no
+| CDS
 | organization hashtag
 |-
 | location
 | object
-| CDS @ WF
+| no
+| CDS
 | JSON object as specified below
 |-
 | location.latitude
 | float
-| CDS @ WF
+| no
+| CDS
 | latitude
 |-
 | location.longitude
 | float
-| CDS @ WF
+| no
+| CDS
 | longitude
 |}
 
@@ -400,21 +411,25 @@ For all organisations there are also endpoints returning files associated with t
 ! Endpoint
 ! Type
 ! Required?
+! @WF
 ! Description
 |-
 |  /organizations/<id>/logo
 | image/png
-| CDS @ WF
+| no
+| CDS
 | logo of the organization
 |-
 |  /organizations/<id>/logo/160px
 | image/png
-| CDS @ WF
+| no
+| CDS
 | requests a smaller logo of the organization that is 160 pixels in size. The server may return this smaller logo if it is able, or may return the same as /logo
 |-
 |  /organizations/<id>/logo/56px
 | image/png
-| CDS @ WF
+| no
+| CDS
 | requests a smaller logo of the organization that is 56 pixels in size. The server may return this smaller logo if it is able, or may return the same as /logo
 |}
 
