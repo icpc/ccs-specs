@@ -905,10 +905,9 @@ Returns a JSON array, with each element an object describing an award, with the 
 Request:
   GET http://example.com/api/awards
 Returned data:
-  [{"id":"a123","type":"medal","citation":"Gold medal winner","team-ids":["54","23","1","54"]},
-   {"id":"gold","type":"first-to-solve","citation":"First to solve problem A","team-ids":["45"]}
+  [{"id":"gold-medal","type":"medal","citation":"Gold medal winner","team-ids":["54","23","1","54"]},
+   {"id":"first-to-solve-a","type":"first-to-solve","citation":"First to solve problem A","team-ids":["45"]}
   ]
-
 
 === /scoreboard ===
 
