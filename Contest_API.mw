@@ -319,23 +319,6 @@ Returns a JSON array, with each element an object describing a problem, with the
 | yes
 | CCS
 | number of test data sets
-<!-- Save this for later discussion - Jaap, 2015-02-11
-|-
-| timelimit
-| float
-| no
-| time limit per testcase in seconds
-|-
-| memorylimit
-| integer
-| no
-| memory limit in KiB
-|-
-| text
-| BASE64
-| no
-| Problem description text ('''TODO''': in which format? PDF/HTML, either, add mime-type, unspecified?)
--->
 |}
 
 ==== Example ====
