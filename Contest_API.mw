@@ -452,21 +452,25 @@ Returns a JSON array, with each element an object describing a team, with the fo
 ! Name
 ! Type
 ! Required?
+! @WF
 ! Description
 |-
 | id
 | ID
 | yes
+| CCS
 | identifier of the group
 |-
 | icpc_id
 | string
-| yes for WF
+| no
+| CCS
 | external identifier from ICPC CMS
 |-
 | name
 | string
 | yes
+| CCS
 | name of the group
 |}
 
