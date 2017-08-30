@@ -987,3 +987,77 @@ Returned data:
 === /event-feed ===
 
 Provides the event feed for the current contest.
+
+==== Feed options ====
+
+===== Filtering events =====
+
+If a client only wants some events the feed can be filtered with the "events" URL argument:
+
+ /event-feed?events=submissions,teams
+
+If not specified all events will be sent. If specified only the listed events will be sent.
+
+===== Notification only =====
+
+If a client does not want the "data" part of events this can be removed with the "no-data" URL argument:
+
+ /event-feed?no-data
+
+If not specified all events will include data. If specified the <tt>data</tt> attribute and its contents will not be present for any event.
+
+===== Feed starting point =====
+
+If a client wants data from some point in time this can be done with the "timestamp" URL argument:
+
+ /event-feed?timestamp=2014-06-25T11%3A22%3A05.034%2B01
+
+If specified the event feed will include all events strictly ''after'' the specified timestamp. If not specified the event feed will include all events from the beginning of the feed.
+
+Timestamps in the future are allowed.
+
+Timestamps are given as  [https://en.wikipedia.org/wiki/ISO_8601 ISO 8601] extended combined date/time format with timezone: <tt>yyyy-mm-ddThh:mm:ss(.uuu)?[+-]zz(:mm)?</tt> (or timezone <tt>Z</tt> for UTC). Specifically, they are given in the same format as the '''timestamp'''s in the feed. This means that if a client copies the timestamp of an event and uses that for the timestamp URL argument it will get all events after that event. This is useful e.g. if a client is disconnected and want to continue where it left off.
+
+Multiple requests of the event feed for the same period must return equivalent events (excluding heartbeat events), including historical timestamps and configuration changes. The system might contain the same heartbeat events every time, but it is not required to.
+
+==== Feed format ====
+
+The feed is served as [http://specs.okfnlabs.org/ndjson/ Newline delimited JSON], with every event as its own JSON object.
+
+The general format for events is:
+ {"event": "<event type>", "id": "<id>, "endpoint": "<API endpoint>", "timestamp": "<timestamp>", "data": <data from endpoint> }
+
+This document uses the terms "element" and "collection". A collection is a list
+of elements. An element corresponds to a single object (run, judgement,
+language, team, etc.).
+
+{| class="wikitable"
+|-
+! Name
+! Description
+! Format
+|-
+| event
+| Name of the event. Used for filtering. 
+| One of '''contests''', '''languages''', '''problems''', '''test-cases''', '''teams''', '''universities''', '''groups''', '''judgement-types''', '''submissions''', '''submission-files''', '''judgements''', '''runs''', '''clarifications'''.
+|-
+| id
+| ID for the object that's being updated. Always present if event relates to element, never present if event relates to collection.
+| String consisting of characters <tt>[a-zA-Z0-9-_]</tt> of length at most 36 and not starting with a <tt>-</tt> (dash).
+|-
+| endpoint
+| URL for corresponding API endpoint. A GET from this URL would return exactly what's in the '''data''' element.
+| URL
+|-
+| timestamp
+| Time for the event. Some events will have internal timestamp in the data section. This timestamp might not agree with that timestamp. The semantics of this timestamp is simply when the event was sent on the feed. 
+| [https://en.wikipedia.org/wiki/ISO_8601 ISO 8601] extended combined date/time format with timezone: <tt>yyyy-mm-ddThh:mm:ss(.uuu)?[+-]zz(:mm)?</tt> (or timezone <tt>Z</tt> for UTC).
+|-
+| data
+| The exact data that would be returned if calling the corresponding API endpoint at this time.
+| JSON object as defined by the [[Draft_CCS_REST_interface#Roles | REST API]].
+|}
+
+Events are guaranteed to come in timestamp order and timestamps are guaranteed to be unique. (Note though that this only applies to the event feed timestamp. Some events might have timestamps inside the "data" value, those might be different and specifically out of order).
+
+Every event with a corresponding API endpoint maps to either a collection or an element in a collection. (The '''contests''' event is a special case. It could be argued that it is an element, and in any case it is treated as an element). When an event is sent as an element, that can either be an insert (if the ID given has not been seen before, update (if the ID has been seen before) or delete (if the ID has been seen before but the data element is "null"). When an event is sent as a collection it is always a complete replace of the previous state. E.g. if we have already seen IDs A and B and are sent a collection with IDs A and C that means that B is deleted, C is added and A is potentially updated (depending on whether the new value for A given is different or not). Note that in this case elements that are not changed at all must still be included with no change.
