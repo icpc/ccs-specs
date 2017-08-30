@@ -207,7 +207,7 @@ Request:
 Returned data:
   {"id":"7b0dd4ea-19a1-4434-9034-529ebe55ab45","name":"2014 ICPC World Finals",
    "formal_name":"38th Annual World Finals of the ACM International Collegiate Programming Contest",
-   "start_time":"2014-06-25T10:00:00+01","duration":"5:00:00","scoreboard_freeze_duration":"1:00:00","penalty_time":20}
+   "start_time":"2014-06-25T10:00:00+01","duration":"5:00:00","scoreboard_freeze_duration":"1:00:00","penalty_time":20, "state": {"running": true, "frozen": false, "final": false}}
 Request:
   GET http://example.com/api/contest
 Returned data:
