@@ -364,8 +364,8 @@ Returns a JSON array, with each element an object describing an organization, wi
 | formal_name
 | string
 | no
-| optional
-| full organization name if too long for normal display purposes
+| CCS
+| full organization name if too long for normal display purposes. <tt>null</tt> or missing if not needed.
 |-
 | country
 | string
