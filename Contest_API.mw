@@ -492,51 +492,61 @@ Returns a JSON array, with each element an object describing a team, with the fo
 ! Name
 ! Type
 ! Required?
+! @WF
 ! Description
 |-
 | id
 | ID
 | yes
+| CCS
 | identifier of the team. Usable as a label, at WFs normally the team seat number
 |-
 | icpc_id
 | string
-| yes for WF
+| no
+| CCS
 | external identifier from ICPC CMS
 |-
 | name
 | string
 | yes
+| CCS
 | name of the team
 |-
 | organization_id
 | ID
-| yes for WF
+| no
+| CCS
 | identifier of the organization (e.g. university or other entity) that team is affiliated to
 |-
 | group_id
 | ID
-| yes for WF
+| no
+| CCS
 | identifier of the group this team is part of (in ICPC WFs these are the super-regions)
 |-
 | location
 | object
-| CDS @ WF
+| no
+| CDS
 | JSON object as specified below.
 |-
 | location.x
 | float
-| CDS @ WF
+| no
+|CDS
 | Team's x position in meters.
 |-
 | location.y
 | float
-| CDS @ WF
+| no
+| CDS
 | Team's y position in meters.
 |-
 | location.rotation
 | float
-| CDS @ WF
+| no
+| CDS
 | Team's rotation in degrees.
 |}
 
@@ -546,31 +556,37 @@ For all teams there are also endpoints returning files associated with the team.
 ! Endpoint
 ! Type
 ! Required?
+! @WF
 ! Description
 |-
 | /teams/<id>/photo
 | image/png or image/jpeg
-| CDS @ WF
+| no
+| CDS
 | registration photo of the team
 |-
 | /teams/<id>/video
 | video/?
-| CDS @ WF
+| no
+| CDS
 | registration video of the team
 |-
 | /teams/<id>/backup
 | application/zip
-| CDS @ WF
+| no
+| CDS
 | latest file backup of the team machine as a zip archive
 |-
 | /teams/<id>/desktop
 | STREAM
-| CDS @ WF
+| no
+| CDS
 | streaming video of the team desktop
 |-
 | /teams/<id>/webcam
 | STREAM
-| CDS @ WF
+| no
+| CDS
 | streaming video of the team webcam
 |}
 
