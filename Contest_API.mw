@@ -750,41 +750,49 @@ Returns a JSON array, with each element an object describing a judging, with the
 ! Name
 ! Type
 ! Required?
+! @WF
 ! Description
 |-
 | id
 | ID
 | yes
+| CCS
 | identifier of the judgement
 |-
 | submission_id
 | ID
 | yes
+| CCS
 | identifier of the submission judged
 |-
 | judgement_type_id
 | ID
-| yes, may be <tt>null</tt>
+| no
+| optional CCS
 | the verdict of this judgement
 |-
 | start_time
 | TIME
 | yes
+| CCS
 | absolute time when judgement started
 |-
 | start_contest_time
 | RELTIME
 | yes
+| CCS
 | contest relative time when judgement started
 |-
 | end_time
 | TIME
-| yes, may be <tt>null</tt>
+| no
+| optional CCS
 | absolute time when judgement completed
 |-
 | end_contest_time
 | RELTIME
-| yes, may be <tt>null</tt>
+| no
+| optional CCS
 | contest relative time when judgement completed
 |}
 
