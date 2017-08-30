@@ -609,26 +609,31 @@ Returns a JSON array, with each element an object describing a team, with the fo
 ! Name
 ! Type
 ! Required?
+! @WF
 ! Description
 |-
 | id
 | ID
 | yes
+| CCS
 | identifier of the judgement type. Usable as a label, typically a 2-3 letter capitalized shorthand, see [http://www.problemarchive.org/wiki/index.php/Problem_Format#Graders Problem Format]
 |-
 | name
 | string
 | yes
+| CCS
 | name of the judgement
 |-
 | penalty
 | boolean
 | yes
+| CCS
 | whether this judgement causes penalty time
 |-
 | solved
 | boolean
 | yes
+| CCS
 | whether this judgement is considered correct
 |}
 
