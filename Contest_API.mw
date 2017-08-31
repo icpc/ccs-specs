@@ -404,7 +404,7 @@ Returns a JSON array, with each element an object describing an organization, wi
 | longitude
 |}
 
-For all organisations there are also endpoints returning files associated with the organization.
+For all organizations there are also endpoints returning files associated with the organization.
 
 {| class="wikitable"
 |-
