@@ -949,7 +949,7 @@ Returned data:
 
 === /awards ===
 
-Lists all awards (medals, first to solve, etc.).
+Lists all awards (medals, first to solve, etc.). This endpoint is optional, but if it is provided all elements are required.
 
 Returns a JSON array, with each element an object describing an award, with the following elements:
 {| class="wikitable"
@@ -962,25 +962,25 @@ Returns a JSON array, with each element an object describing an award, with the 
 |-
 | id
 | ID
-| no
+| yes
 | CDS
 | identifier of the award
 |-
 | type
 | string
-| no
+| yes
 | CDS
 | the award type, one of medal, first-to-solve, place, winner, group, or rank
 |-
 | citation
 | string
-| no
+| yes
 | CDS
 | award citation, e.g. "Gold medal winner"
 |-
 | team-ids
 | array
-| no
+| yes
 | CDS
 | JSON array of team ids receiving this award
 |}
