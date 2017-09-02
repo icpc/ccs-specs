@@ -914,13 +914,13 @@ Returns a JSON array, with each element an object describing a test case, with t
 | reply_to_id
 | ID
 | yes
-| optional CCS
+| CCS
 | identifier of clarification this is in response to, otherwise <tt>null</tt> 
 |-
 | problem_id
 | ID
 | yes
-| optional CCS
+| CCS
 | identifier of associated problem, <tt>null</tt> if not associated to a problem
 |-
 | text
