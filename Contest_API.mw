@@ -376,7 +376,7 @@ Returns a JSON array, with each element an object describing an organization, wi
 | string
 | no
 | CCS
-| full organization name if too long for normal display purposes. <tt>null</tt> or missing if not needed.
+| full organization name if too long for normal display purposes.
 |-
 | country
 | string
