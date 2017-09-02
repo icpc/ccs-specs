@@ -390,7 +390,7 @@ Returns a JSON array, with each element an object describing an organization, wi
 | CDS
 | URL to organization's website
 |-
-| twitter-hashtag
+| twitter_hashtag
 | string
 | no
 | CDS
