@@ -767,8 +767,8 @@ Returns a JSON array, with each element an object describing a judging, with the
 |-
 | judgement_type_id
 | ID
-| no
-| optional CCS
+| yes
+| CCS
 | the verdict of this judgement
 |-
 | start_time
@@ -785,14 +785,14 @@ Returns a JSON array, with each element an object describing a judging, with the
 |-
 | end_time
 | TIME
-| no
-| optional CCS
+| yes
+| CCS
 | absolute time when judgement completed
 |-
 | end_contest_time
 | RELTIME
-| no
-| optional CCS
+| yes
+| CCS
 | contest relative time when judgement completed
 |}
 
