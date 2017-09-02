@@ -1182,3 +1182,14 @@ language, team, etc.).
 Events are guaranteed to come in timestamp order and timestamps are guaranteed to be unique. (Note though that this only applies to the event feed timestamp. Some events might have timestamps inside the "data" value, those might be different and specifically out of order).
 
 Every event with a corresponding API endpoint maps to either a collection or an element in a collection. (The '''contests''' event is a special case. It could be argued that it is an element, and in any case it is treated as an element). When an event is sent as an element, that can either be an insert (if the ID given has not been seen before, update (if the ID has been seen before) or delete (if the ID has been seen before but the data element is "null"). When an event is sent as a collection it is always a complete replace of the previous state. E.g. if we have already seen IDs A and B and are sent a collection with IDs A and C that means that B is deleted, C is added and A is potentially updated (depending on whether the new value for A given is different or not). Note that in this case elements that are not changed at all must still be included with no change.
+
+==== Heartbeat ====
+
+The event feed is guaranteed to send some data at least every 120 seconds. If no other event is sent, a heartbeat will be.
+
+The heartbeat event does *not* have a corresponding API endpoint, so the endpoint and data keys are missing.
+
+;Event ID: heartbeat
+;Required elements: event, timestamp
+;Example:
+ {"event": "heartbeat", "timestamp": "2017-07-18T10:13:01+01"}
