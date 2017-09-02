@@ -890,27 +890,27 @@ Returns a JSON array, with each element an object describing a test case, with t
 |-
 | from_team_id
 | ID
-| no
-| optional CCS
-| identifier of team sending this clarification request, <tt>null</tt> or missing if a clarification sent by jury
+| yes
+| CCS
+| identifier of team sending this clarification request, <tt>null</tt> if a clarification sent by jury
 |-
 | to_team_id
 | ID
-| no
-| optional CCS
-| identifier of the team receiving this reply, <tt>null</tt> or missing if a reply to all teams or a request sent by a team
+| yes
+| CCS
+| identifier of the team receiving this reply, <tt>null</tt> if a reply to all teams or a request sent by a team
 |-
 | reply_to_id
 | ID
-| no
+| yes
 | optional CCS
-| identifier of clarification this is in response to, if any.
+| identifier of clarification this is in response to, otherwise <tt>null</tt> 
 |-
 | problem_id
 | ID
-| np
+| yes
 | optional CCS
-| identifier of associated problem.
+| identifier of associated problem, <tt>null</tt> if not associated to a problem
 |-
 | text
 | string
