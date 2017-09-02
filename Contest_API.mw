@@ -82,7 +82,14 @@ Some ids are also used as identifiable labels and are marked below along with th
 are used to give an explicit order to a list of objects. Ordinal attributes must be non-negative and unique in a list of objects, and they should typically be low numbers starting from zero.
 However, clients must not assume that the ordinals start at zero nor that they are sequential. Instead the ordinal values should be used to sort the list of objects.
 
-'''File''' content (type <tt>&lt;FILE&gt;</tt> in the specification) should be included within the JSON as a base64 encoded string when adding or updating an object. They are not included in the JSON in subsequent GET responses, but can be accessed via a corresponding child URL, e.g. /organizations/43/logo. Some servers may support content negotiation for different mime types.
+'''File''' content is not included in the JSON in GET responses, but can be accessed via a corresponding child URL, e.g. <tt>/organizations/43/logo</tt>. The mime type must be provided by the server, and servers may support content negotiation for different mime types. When using POST, PUT or PATCH to add or update an object, then the file content should be included within the JSON of the parent object as a base64 encoded string, e.g.
+    POST https://example.com/api/organizations
+with JSON data
+    { "id":"inst105",
+      "name":"Carnegie Mellon University",
+      ...
+      "logo":"&lt;base64 string&gt;"
+    }
 
 '''Stream''' content (type <tt>&lt;STREAM&gt;</tt> in the specification) represent streaming content sources like live video. They are not included in JSON GET responses, but can be accessed via a corresponding child URL, e.g. teams/43/desktop will stream a team's desktop video. Some servers may support content negotiation for different mime types.
 
