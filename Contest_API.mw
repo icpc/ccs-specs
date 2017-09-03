@@ -1043,13 +1043,25 @@ Each row object contains:
 | object
 | yes
 | CCS
-| object (for possible extension to other scoring methods) containing integer elements "num_solved" and "total_time"
+| JSON object as specified below (for possible extension to other scoring methods)
+|-
+| score.num_solved
+| integer
+| yes
+| CCS
+| number of problems solved by the team
+|-
+| score.total_time
+| integer
+| yes
+| CCS
+| total penalty time accrued by the team
 |-
 | problems
 | array
 | yes
 | CCS
-| array of problems with scoring data, see below for the specification of each element
+| JSON array of problems with scoring data, see below for the specification of each element
 |}
 Each problem element within the scoreboard consists of:
 {| class="wikitable"
@@ -1086,9 +1098,9 @@ Each problem element within the scoreboard consists of:
 |-
 | time
 | integer
-| if and only if <tt>solved=true</tt>
+| iff <tt>solved=true</tt>
 | CCS
-| minutes into the contest when solved by team
+| minutes into the contest when this problem was solved by the team
 |}
 
 ==== Example ====
