@@ -638,9 +638,9 @@ Returns a JSON array, with each element an object describing a team, with the fo
 |-
 | penalty
 | boolean
-| yes
+| depends
 | CCS
-| whether this judgement causes penalty time
+| whether this judgement causes penalty time; should be present if and only if contest:penalty_time is present
 |-
 | solved
 | boolean
