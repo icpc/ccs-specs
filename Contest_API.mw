@@ -976,13 +976,7 @@ Returns a JSON array, with each element an object describing an award, with the 
 | ID
 | yes
 | CDS
-| identifier of the award
-|-
-| type
-| string
-| yes
-| CDS
-| the award type, one of medal, first-to-solve, place, winner, group, or rank
+| identifier of the award, typically an enum value like "medal", "first-to-solve", "place", "winner", "group", or "rank"
 |-
 | citation
 | string
@@ -1002,9 +996,9 @@ Returns a JSON array, with each element an object describing an award, with the 
 Request:
   GET https://example.com/api/awards
 Returned data:
-  [{"id":"gold-medal","type":"medal","citation":"Gold medal winner","team_ids":["54","23","1","45"]},
-   {"id":"first-to-solve-a","type":"first-to-solve","citation":"First to solve problem A","team_ids":["45"]},
-   {"id":"first-to-solve-b","type":"first-to-solve","citation":"First to solve problem B","team_ids":[]}
+  [{"id":"gold-medal","citation":"Gold medal winner","team_ids":["54","23","1","45"]},
+   {"id":"first-to-solve-a","citation":"First to solve problem A","team_ids":["45"]},
+   {"id":"first-to-solve-b","citation":"First to solve problem B","team_ids":[]}
   ]
 
 === /scoreboard ===
