@@ -300,7 +300,13 @@ Returns a JSON array, with each element an object describing a problem, with the
 | ID
 | yes
 | CCS
-| identifier of the problem. Usable as a label, typically a single capitalized letter
+| identifier of the problem, at the WFs the directory name of the problem archive
+|-
+| label
+| string
+| yes
+| CCS
+| label of the problem on the scoreboard, typically a single capitalized letter
 |-
 | name
 | string
@@ -338,8 +344,8 @@ Returns a JSON array, with each element an object describing a problem, with the
 Request:
   GET https://example.com/api/problems
 Returned data:
-  [{"id":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","test_data_count":10},
-   {"id":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","test_data_count":15}
+  [{"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","test_data_count":10},
+   {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","test_data_count":15}
   ]
 
 === /organizations ===
