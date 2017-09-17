@@ -138,23 +138,27 @@ Returns a JSON object with the elements below. If there is no current (this may 
 ! Name
 ! Type
 ! Required?
+! Nullable?
 ! @WF
 ! Description
 |-
 | id
 | ID
 | yes
+| no
 | CCS
 | identifier of the current contest
 |-
 | name
 | string
 | yes
+| no
 | CCS
 | display name of the contest
 |-
 | formal_name
 | string
+| no
 | no
 | CCS
 | full name of the contest
@@ -162,17 +166,20 @@ Returns a JSON object with the elements below. If there is no current (this may 
 | start_time
 | TIME
 | yes
+| yes
 | CCS
 | start time of the contest, may be <tt>null</tt> during contest pause
 |-
 | duration
 | RELTIME
 | yes
+| no
 | CCS
 | length of the contest
 |-
 | scoreboard_freeze_duration
 | RELTIME
+| no
 | no
 | CCS
 | how long the scoreboard is frozen before the end of the contest
@@ -180,30 +187,35 @@ Returns a JSON object with the elements below. If there is no current (this may 
 | penalty_time
 | integer
 | no
+| no
 | CCS
 | penalty time for a wrong submission, in minutes
 |-
 | state
 | object
 | yes
+| no
 | CCS
 | JSON object as specified below
 |-
 | state.running
 | boolean
 | yes
+| no
 | CCS
 | whether the contest is currently running
 |-
 | state.frozen
 | boolean
+| depends
 | no
 | CCS
-| whether the scoreboard is currently frozen
+| whether the scoreboard is currently frozen. Required iff scoreboard_freeze_duration is present.
 |-
 | state.final
 | boolean
 | yes
+| no
 | CCS
 | whether the standings have been finalized
 |}
@@ -257,18 +269,21 @@ Returns a JSON array, with each element an object describing a language, with th
 ! Name
 ! Type
 ! Required?
+! Nullable?
 ! @WF
 ! Description
 |-
 | id
 | ID
 | yes
+| no
 | CCS
 | identifier of the language
 |-
 | name
 | string
 | yes
+| no
 | CCS
 | name of the language
 |}
@@ -293,35 +308,41 @@ Returns a JSON array, with each element an object describing a problem, with the
 ! Name
 ! Type
 ! Required?
+! Nullable?
 | @WF
 ! Description
 |-
 | id
 | ID
 | yes
+| no
 | CCS
 | identifier of the problem, at the WFs the directory name of the problem archive
 |-
 | label
 | string
 | yes
+| no
 | CCS
 | label of the problem on the scoreboard, typically a single capitalized letter
 |-
 | name
 | string
 | yes
+| no
 | CCS
 | name of the problem
 |-
 | ordinal
 | integer
 | yes
+| no
 | CCS
 | ordering of problems on the scoreboard
 |-
 | rgb
 | string
+| no
 | no
 | CCS
 | hexadecimal RGB value of problem color as specified in [http://en.wikipedia.org/wiki/Web_colors#Hex_triplet HTML hexadecimal colors], e.g. '#AC00FF' or '#fff'
@@ -329,12 +350,14 @@ Returns a JSON array, with each element an object describing a problem, with the
 | color
 | string
 | no
+| no
 | CCS
 | human readable color description associated to the RGB value
 |-
 | test_data_count
 | integer
 | yes
+| no
 | CCS
 | number of test data sets
 |}
@@ -358,68 +381,78 @@ Returns a JSON array, with each element an object describing an organization, wi
 ! Name
 ! Type
 ! Required?
+! Nullable?
 ! @WF
 ! Description
 |-
 | id
 | ID
 | yes
+| no
 | CCS
 | identifier of the organization
 |-
 | icpc_id
 | string
 | no
+| yes
 | CCS
 | external identifier from ICPC CMS
 |-
 | name
 | string
 | yes
+| no
 | CCS
 | display name of the organization
 |-
 | formal_name
 | string
 | no
+| yes
 | CCS
 | full organization name if too long for normal display purposes.
 |-
 | country
 | string
 | no
-| no
+| yes
 | [https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3 ISO 3-letter code] of the organization's country
 |-
 | url
 | string
 | no
+| yes
 | CDS
 | URL to organization's website
 |-
 | twitter_hashtag
 | string
 | no
+| yes
 | CDS
 | organization hashtag
 |-
 | location
 | object
 | no
+| yes
 | CDS
 | JSON object as specified below
 |-
 | location.latitude
 | float
+| depends
 | no
 | CDS
-| latitude
+| latitude. Required iff location is present.
 |-
 | location.longitude
 | float
+| depends
 | no
 | CDS
-| longitude
+| longitude. Required iff location is present.
 |}
 
 For all organizations there are also endpoints returning files associated with the organization.
@@ -470,24 +503,28 @@ Returns a JSON array, with each element an object describing a team, with the fo
 ! Name
 ! Type
 ! Required?
+! Nullable?
 ! @WF
 ! Description
 |-
 | id
 | ID
 | yes
+| no
 | CCS
 | identifier of the group
 |-
 | icpc_id
 | string
 | no
+| yes
 | CCS
 | external identifier from ICPC CMS
 |-
 | name
 | string
 | yes
+| no
 | CCS
 | name of the group
 |}
@@ -510,62 +547,72 @@ Returns a JSON array, with each element an object describing a team, with the fo
 ! Name
 ! Type
 ! Required?
+! Nullable?
 ! @WF
 ! Description
 |-
 | id
 | ID
 | yes
+| no
 | CCS
 | identifier of the team. Usable as a label, at WFs normally the team seat number
 |-
 | icpc_id
 | string
 | no
+| yes
 | CCS
 | external identifier from ICPC CMS
 |-
 | name
 | string
 | yes
+| no
 | CCS
 | name of the team
 |-
 | organization_id
 | ID
 | no
+| yes
 | CCS
 | identifier of the organization (e.g. university or other entity) that team is affiliated to
 |-
 | group_id
 | ID
 | no
+| yes
 | CCS
 | identifier of the group this team is part of (in ICPC WFs these are the super-regions)
 |-
 | location
 | object
 | no
+| no
 | CDS
 | JSON object as specified below.
 |-
 | location.x
 | float
+| depends
 | no
 |CDS
-| Team's x position in meters.
+| Team's x position in meters. Required iff location is present
 |-
 | location.y
 | float
+| depends
 | no
 | CDS
-| Team's y position in meters.
+| Team's y position in meters. Required iff location is present
 |-
 | location.rotation
 | float
+| depends
 | no
 | CDS
-| Team's rotation in degrees.
+| Team's rotation in degrees. Required iff location is present
 |}
 
 For all teams there are also endpoints returning files associated with the team.
@@ -627,30 +674,35 @@ Returns a JSON array, with each element an object describing a team, with the fo
 ! Name
 ! Type
 ! Required?
+! Nullable?
 ! @WF
 ! Description
 |-
 | id
 | ID
 | yes
+| no
 | CCS
 | identifier of the judgement type. Usable as a label, typically a 2-3 letter capitalized shorthand, see [http://www.problemarchive.org/wiki/index.php/Problem_Format#Graders Problem Format]
 |-
 | name
 | string
 | yes
+| no
 | CCS
 | name of the judgement
 |-
 | penalty
 | boolean
 | depends
+| no
 | CCS
 | whether this judgement causes penalty time; should be present if and only if contest:penalty_time is present
 |-
 | solved
 | boolean
 | yes
+| no
 | CCS
 | whether this judgement is considered correct
 |}
@@ -674,50 +726,58 @@ Returns a JSON array, with each element an object describing a submission, with 
 ! Name
 ! Type
 ! Required?
+! Nullable?
 ! @WF
 ! Description
 |-
 | id
 | ID
 | yes
+| no
 | CCS
 | identifier of the submission. Usable as a label, typically a low incrementing number
 |-
 | language_id
 | ID
 | yes
+| no
 | CCS
 | identifier of the language submitted for
 |-
 | problem_id
 | ID
 | yes
+| no
 | CCS
 | identifier of the problem submitted for
 |-
 | team_id
 | ID
 | yes
+| no
 | CCS
 | identifier of the team that made the submission
 |-
 | time
 | TIME
 | yes
+| no
 | CCS
 | timestamp of when the submission was made
 |-
 | contest_time
 | RELTIME
 | yes
+| no
 | CCS
 | contest relative time when the submission was made
 |-
 | entry_point
 | string
 | yes
+| yes
 | CCS
-| code entry point for specific languages, can be <tt>null</tt>
+| code entry point for specific languages
 |}
 
 For all submissions there are also endpoints returning files associated with the submission.
@@ -768,23 +828,27 @@ Returns a JSON array, with each element an object describing a judging, with the
 ! Name
 ! Type
 ! Required?
+! Nullable?
 ! @WF
 ! Description
 |-
 | id
 | ID
 | yes
+| no
 | CCS
 | identifier of the judgement
 |-
 | submission_id
 | ID
 | yes
+| no
 | CCS
 | identifier of the submission judged
 |-
 | judgement_type_id
 | ID
+| yes
 | yes
 | CCS
 | the verdict of this judgement
@@ -792,23 +856,27 @@ Returns a JSON array, with each element an object describing a judging, with the
 | start_time
 | TIME
 | yes
+| no
 | CCS
 | absolute time when judgement started
 |-
 | start_contest_time
 | RELTIME
 | yes
+| no
 | CCS
 | contest relative time when judgement started
 |-
 | end_time
 | TIME
 | yes
+| yes
 | CCS
 | absolute time when judgement completed
 |-
 | end_contest_time
 | RELTIME
+| yes
 | yes
 | CCS
 | contest relative time when judgement completed
@@ -838,42 +906,49 @@ Returns a JSON array, with each element an object describing a judging, with the
 ! Name
 ! Type
 ! Required?
+! Nullable?
 ! @WF
 ! Description
 |-
 | id
 | ID
 | yes
+| no
 | CCS
 | identifier of the run
 |-
 | judgement_id
 | ID
 | yes
+| no
 | CCS
 | identifier of the judgement this is part of
 |-
 | ordinal
 | integer
 | yes
+| no
 | CCS
 | ordering of runs in the judgement (implicit from the test cases)
 |-
 | judgement_type_id
 | ID
 | yes
+| no
 | CCS
 | the verdict of this judgement (i.e. a judgement type)
 |-
 | time
 | TIME
 | yes
+| no
 | CCS
 | absolute time when run completed
 |-
 | contest_time
 | RELTIME
 | yes
+| no
 | CCS
 | contest relative time when run completed
 |}
@@ -897,17 +972,20 @@ Returns a JSON array, with each element an object describing a test case, with t
 ! Name
 ! Type
 ! Required?
+! Nullable?
 ! @WF
 ! Description
 |-
 | id
 | ID
 | yes
+| no
 | CCS
 | identifier of the clarification
 |-
 | from_team_id
 | ID
+| yes
 | yes
 | CCS
 | identifier of team sending this clarification request, <tt>null</tt> if a clarification sent by jury
@@ -915,11 +993,13 @@ Returns a JSON array, with each element an object describing a test case, with t
 | to_team_id
 | ID
 | yes
+| yes
 | CCS
 | identifier of the team receiving this reply, <tt>null</tt> if a reply to all teams or a request sent by a team
 |-
 | reply_to_id
 | ID
+| yes
 | yes
 | CCS
 | identifier of clarification this is in response to, otherwise <tt>null</tt> 
@@ -927,24 +1007,28 @@ Returns a JSON array, with each element an object describing a test case, with t
 | problem_id
 | ID
 | yes
+| yes
 | CCS
 | identifier of associated problem, <tt>null</tt> if not associated to a problem
 |-
 | text
 | string
 | yes
+| no
 | CCS
 | question or reply text
 |-
 | time
 | TIME
 | yes
+| no
 | CCS
 | time of the question/reply
 |-
 | contest_time
 | RELTIME
 | yes
+| no
 | CCS
 | contest time of the question/reply
 |}
@@ -975,24 +1059,28 @@ Returns a JSON array, with each element an object describing an award, with the 
 ! Name
 ! Type
 ! Required?
+! Nullable?
 ! @WF
 ! Description
 |-
 | id
 | ID
 | yes
+| no
 | CDS
 | identifier of the award, typically an enum value like "medal", "first-to-solve", "place", "winner", "group", or "rank"
 |-
 | citation
 | string
 | yes
+| no
 | CDS
 | award citation, e.g. "Gold medal winner"
 |-
 | team_ids
 | array
 | yes
+| no
 | CDS
 | JSON array of team ids receiving this award
 |}
@@ -1025,42 +1113,49 @@ Each row object contains:
 ! Name
 ! Type
 ! Required?
+! Nullable?
 ! @WF
 ! Description
 |-
 | rank
 | integer
 | yes
+| no
 | CCS
 | rank of this team, 1-based and duplicate in case of ties
 |-
 | team_id
 | ID
 | yes
+| no
 | CCS
 | identifier of the team
 |-
 | score
 | object
 | yes
+| no
 | CCS
 | JSON object as specified below (for possible extension to other scoring methods)
 |-
 | score.num_solved
 | integer
 | yes
+| no
 | CCS
 | number of problems solved by the team
 |-
 | score.total_time
 | integer
 | yes
+| no
 | CCS
 | total penalty time accrued by the team
 |-
 | problems
 | array
 | yes
+| no
 | CCS
 | JSON array of problems with scoring data, see below for the specification of each element
 |}
@@ -1070,38 +1165,44 @@ Each problem element within the scoreboard consists of:
 ! Name
 ! Type
 ! Required?
+! Nullable?
 ! @WF
 ! Description
 |-
 | problem_id
 | ID
 | yes
+| no
 | CCS
 | identifier of the problem
 |-
 | num_judged
 | integer
 | yes
+| no
 | CCS
 | number of judged submissions (including possibly a final correct one)
 |-
 | num_pending
 | integer
 | yes
+| no
 | CCS
 | number of pending submissions (either queued or due to freeze)
 |-
 | solved
 | boolean
 | yes
+| no
 | CCS
 | whether the team solved this problem
 |-
 | time
 | integer
-| iff <tt>solved=true</tt>
+| depends
+| no
 | CCS
-| minutes into the contest when this problem was solved by the team
+| minutes into the contest when this problem was solved by the team. Required iff <tt>solved=true</tt>
 |}
 
 ==== Example ====
