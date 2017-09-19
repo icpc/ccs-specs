@@ -1275,7 +1275,7 @@ language, team, etc.).
 |-
 | event
 | Name of the event. Used for filtering. 
-| One of '''contests''', '''languages''', '''problems''', '''test-cases''', '''teams''', '''organizations''', '''groups''', '''judgement-types''', '''submissions''', '''judgements''', '''runs''', '''clarifications''', "heartbeat".
+| One of '''contests''', '''languages''', '''problems''', '''test-cases''', '''teams''', '''organizations''', '''groups''', '''judgement-types''', '''submissions''', '''judgements''', '''runs''', '''clarifications''', '''heartbeat'''.
 |-
 | id
 | ID for the object that's being updated. Always present if event relates to element, never present if event relates to collection.
