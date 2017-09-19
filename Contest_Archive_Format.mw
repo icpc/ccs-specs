@@ -1,0 +1,45 @@
+== Draft Contest Archive Format ==
+
+There are several reasons that contest information will be stored on disk, including:
+* As configuration used to initialize a CCS
+* As an archive of what happened in a contest
+* As an archive for replaying a contest, either for testing contest tools or for teams to compete against live data
+* As a base for offline analysis
+
+This draft lays out the relative location and format of each type of contest-related information when reading or writing to disk. It is based on the [Draft CCS REST interface] and uses formats that are more natural to read/write for tools that have adopted this REST interface.
+
+== What is not covered ==
+
+There are a few open design questions that have not been closed yet, including:
+* Do config objects and events go in the same or separate folders?
+* The location of event feed, scoreboard, and other files
+
+== Types with file content ==
+
+Types that have additional files (or are likely to have in the future) are stored in a folder per object, using the type name and id as the folder name:
+ <type>/<id>/data.json
+ <type>/<id>/<other files>
+
+Data.json is a single JSON element containing one object, identical to the API call to baseurl/<type>/<id>. Types that follow this format are: organizations, teams, submissions, runs, and problems.
+
+==== Example ====
+
+The folder for a team with id 11 might look like the following:
+ * teams/11/data.json
+ * teams/11/photo.jpg
+ * teams/11/backup.zip
+ * teams/11/...
+
+and data.json contains a single line of JSON:
+ {"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia-74324325532"}
+
+== Types without file content ==
+
+For types that are not likely to have additional files there is a simpler format on disk: a single <type>.json file containing the full list of objects. This file is identical to the API call to baseurl/<type>. Types that follow this format are: languages, groups, judgement types, judgements, clarifications, and awards.
+
+==== Example ====
+
+Contents of languages.json:
+ [{"id":"1-java","name":"Java"},
+   {"id":"cpp","name":"GNU C++"},
+   {"id":"4358281971166881160","name":"Python"}]
