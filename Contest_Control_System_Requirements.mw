@@ -604,6 +604,70 @@ The ''final results'' lists the ranked teams sorted by rank (with alphabetical o
 
 The CCS must be capable of generating an external file containing the final results of the World Finals contest. The format of this file must be as defined in the [[#results.tsv|results.tsv]].
 
+== Shadow Mode ==
+
+=== Overview ===
+
+Each World Finals contest is managed by a single CCS, called the Primary CCS. Participants in a WF contest (teams, judges, contest administrators, etc.) 
+connect only to the Primary CCS; all participant-visible contest operations are handled by the Primary CCS and the final results 
+of the contest are computed by the Primary CCS.
+
+In order to insure accuracy of the final contest results, each World Finals also runs an independent “parallel” CCS called the Shadow CCS.  
+The main task of the Shadow CCS is to verify that the final results computed by the Primary CCS are correct according to the rules of the World Finals.  
+A contest control system acting as a Shadow CCS is said to be running in ''shadow mode''.  
+This section defines requirements which must be implemented by a CCS related to shadow mode.  
+
+=== Support for both Primary and Shadow Modes ===
+
+A CCS must be able to operate in either Primary or Shadow mode. This means that it must in principle be possible to run two identical instances of the CCS, one set to run in Primary mode and the other set to run in Shadow mode, and where the two CCS instances communicate with each other as defined by the requirements of this section and where each CCS instance performs all of the required operations of a Primary or Shadow CCS respectively.  A CCS will not be considered as a candidate for use at the World Finals unless it meets all of the requirements specified in this document, including all of the requirements listed in this section.  
+That is, a CCS will not be considered as a candidate for use at the World Finals unless it
+is capable of operating both as a Primary CCS and as a Shadow CCS.
+
+The requirement for the ability to run in either Primary mode or Shadow mode does not imply that a CCS must be able to operate in these modes simultaneously, nor that a CCS must be able to switch between these modes dynamically during a contest. Rather, it means that in order to be eligible to be a candidate for use at the World Finals, a CCS must support BOTH Primary and Shadow-mode operations and must meet all of the requirements for both modes, regardless of which mode it would actually be used in for the particular World Finals.   
+
+=== External Communication ===
+
+Beyond communicating with its own components (e.g., communicating with its external “auto-judges” or with the humans managing it), the only external communication which a CCS running in shadow mode is allowed to require is that it has the ability to communicate with at least one “server” component of the Primary CCS.  In particular, a CCS running in shadow mode may not require that it be able to communicate directly with any of the actual contest participants (meaning, the teams, judges, or contest administrators who communicate with the Primary CCS).   
+
+Said another way, the Shadow CCS must be able to perform all of its functions while communicating only with the Primary CCS.
+
+=== CCS Configuration ===
+
+A CCS running in shadow mode must be able to import a complete contest configuration as described in the [#Importing Contest Configuration] section of this Requirements Specification.
+In particular a shadow-mode CCS must be able to import a contest configuration from a single URL and must also be able to import the teams.tsv and groups.tsv files as specified in that section.  
+
+=== Submissions ===
+
+A CCS running in shadow mode must be able to obtain team submissions via communication with the Primary CCS.  As required elsewhere in this specification, the Primary CCS must implement the REST endpoints defined in the [[https://clics.ecs.baylor.edu/index.php/Contest_Control_System#Contest_Configuration |CLICS CCS_REST_interface specification]].  The following requirements then apply to the mechanisms used by the Shadow CCS for obtaining submissions: 
+
+# The Shadow CCS should use the  '''/event-feed''' REST endpoint defined in the [[https://clics.ecs.baylor.edu/index.php/Contest_Control_System#Contest_Configuration|CLICS CCS_REST_interface specification]] to obtain notification of team submissions from the Primary CCS (in other words, the Shadow CCS should use event-driven operation, not polling, for team submission notification).
+# The Shadow CCS must use the '''/submission'''s and '''/submissions/<id>/files''' REST endpoints defined in the [[https://clics.ecs.baylor.edu/index.php/Contest_Control_System#Contest_Configuration|CLICS CCS_REST_interface specification]] 
+for obtaining submission data from the Primary CCS.
+# The Shadow CCS must have the ability to retain the run id which was assigned to a run by the Primary CCS, and must provide the ability for the Shadow CCS administrator to fetch and display information regarding any run by looking up the run via the run id assigned by the Primary CCS.
+# The Shadow CCS must use the timestamp provided by the Primary CCS as the time of submission of the run for purposes of computing standings, 
+regardless of the time at which the run is actually obtained by the Shadow CCS.
+# The run obtained from the Primary CCS must be executed and judged in the same manner as if it had been submitted to the CCS running in non-shadow mode.
+
+=== Results ===
+
+A CCS running in shadow mode must produce the same set of output files as those required of a Primary CCS -- that is, it must produce at least the scoreboard.tsv and results.tsv files as defined elsewhere in this Requirements Specification.  
+
+A CCS running in shadow mode must in addition provide the capability to present a “diff” of submissions -- that is, a list of all submissions which at the current time have a different judgement than that which was assigned by the Primary CCS.
+
+
+=== Requirements Which May Be Imposed By The CCS ===
+
+A CCS may require the following conditions to exist in order to guarantee support for shadow-mode operations:
+
+* The Shadow CCS is provided with “auto-judging” hardware which is the same as that being used by the Primary CCS.
+* The Shadow CCS has a network connection to both the Event Feed and the REST services provided by the Primary CCS.
+* The Shadow CCS is provided with credentials which allow appropriate access to the required Primary CCS REST endpoints.
+* RunIDs for submissions are unique contest-wide, even in the event of a contest with multiple independent sites being managed by a single distributed Primary CCS. 
+* The Shadow CCS has access to the same contest configuration files as those used to configure the Primary CCS.
+ 
+A CCS may not require any conditions not specified above to exist in order to guarantee support for shadow-mode operations. 
+
+
 == Documentation Requirements ==
 
 In order for a given CCS to be considered as a candidate for running the ICPC World Finals contest, the following documents must be submitted.
