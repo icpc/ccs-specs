@@ -1293,14 +1293,6 @@ language, team, etc.).
 | ID for the object that's being updated. Always present if event relates to element, never present if event relates to collection.
 | String consisting of characters <tt>[a-zA-Z0-9-_]</tt> of length at most 36 and not starting with a <tt>-</tt> (dash).
 |-
-| endpoint
-| URL for corresponding API endpoint. A GET from this URL would return exactly what's in the '''data''' element.
-| URL
-|-
-| timestamp
-| Time for the event. Some events will have internal timestamp in the data section. This timestamp might not agree with that timestamp. The semantics of this timestamp is simply when the event was sent on the feed. 
-| [https://en.wikipedia.org/wiki/ISO_8601 ISO 8601] extended combined date/time format with timezone: <tt>yyyy-mm-ddThh:mm:ss(.uuu)?[+-]zz(:mm)?</tt> (or timezone <tt>Z</tt> for UTC).
-|-
 | data
 | The exact data that would be returned if calling the corresponding API endpoint at this time.
 | JSON object as defined by the [[Draft_CCS_REST_interface#Roles | REST API]].
