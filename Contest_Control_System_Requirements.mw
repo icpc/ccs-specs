@@ -627,7 +627,7 @@ The requirement for the ability to run in either Primary mode or Shadow mode doe
 
 === External Communication ===
 
-Beyond communicating with its own components (e.g., communicating with its external “auto-judges” or with the humans managing it), the only external communication which a CCS running in shadow mode is allowed to require is that it has the ability to communicate with at least one “server” component of the Primary CCS.  In particular, a CCS running in shadow mode may not require that it be able to communicate directly with any of the actual contest participants (meaning, the teams, judges, or contest administrators who communicate with the Primary CCS).   
+Beyond communicating with its own components (e.g., communicating with its external “auto-judges” or with the humans managing it), the only external communication which a CCS running in shadow mode is allowed to require is that it has the ability to communicate with at least one “server” component of the Primary CCS.  In particular, a CCS running in shadow mode may not require that it be able to communicate directly with any of the actual contest participants (meaning the teams, judges, or contest administrators who communicate with the Primary CCS).   
 
 Said another way, the Shadow CCS must be able to perform all of its functions while communicating only with the Primary CCS.
 
