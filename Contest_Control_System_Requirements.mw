@@ -642,7 +642,7 @@ A CCS running in shadow mode must be able to obtain team submissions via communi
 
 # The Shadow CCS should use the  '''/event-feed''' REST endpoint defined in the [https://clics.ecs.baylor.edu/index.php/Draft_CCS_REST_interface CLICS CCS_REST_interface specification] to obtain notification of team submissions from the Primary CCS (in other words, the Shadow CCS should preferably use event-driven operation, rather than polling, for team submission notification).
 # The Shadow CCS must use the '''/submissions''' and '''/submissions/<id>/files''' REST endpoints defined in the [https://clics.ecs.baylor.edu/index.php/Draft_CCS_REST_interface CLICS CCS_REST_interface specification] for obtaining submission data from the Primary CCS.
-# The Shadow CCS must have the ability to retain the submission id which was assigned to a submission by the Primary CCS, and must provide the ability for the Shadow CCS administrator to fetch and display information regarding any submission by looking up the submission via the submission id assigned by the Primary CCS.
+# The Shadow CCS must provide an interface which allows the Shadow CCS administrator to display information regarding any submission by looking up the submission using the submission id assigned by the Primary CCS.
 # The Shadow CCS must use the timestamp assigned to a submission by the Primary CCS as the time of the submission for purposes of computing standings, regardless of the time at which the submission is actually obtained by the Shadow CCS.
 # A submission obtained from the Primary CCS must be executed and judged by the Shadow CCS in the same manner as if it had been submitted to the CCS running in non-shadow mode.
 
