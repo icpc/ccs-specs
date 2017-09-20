@@ -648,10 +648,9 @@ A CCS running in shadow mode must be able to obtain team submissions via communi
 
 === Results ===
 
-A CCS running in shadow mode must produce the same set of output files as those required of a Primary CCS -- that is, it must produce at least the scoreboard.tsv and results.tsv files as defined elsewhere in this Requirements Specification.  
+A CCS running in shadow mode must produce the same set of output files as those required of a Primary CCS -- that is, it must produce at least the [[#scoreboard.tsv]] and [[#results.tsv]] files as defined elsewhere in this Requirements Specification.  
 
 A CCS running in shadow mode must in addition provide the capability to present a “diff” of submissions -- that is, a list of all submissions which at the current time have a different judgement than that which was assigned by the Primary CCS.
-
 
 === Requirements Which May Be Imposed By The CCS ===
 
