@@ -126,7 +126,7 @@ timestamp/contest time attributes. Inserts & deletes are notified via the event 
 
 Aggregate data: Only GET makes sense. Not included in the event feed.
 
-=== / ===
+=== / &nbsp; (contest) ===
 
 Provides information on the current contest.
 
