@@ -659,11 +659,10 @@ A CCS may require the following conditions to exist in order to guarantee suppor
 * The Shadow CCS is provided with “auto-judging” hardware which is the same as that being used by the Primary CCS.
 * The Shadow CCS has a network connection to both the Event Feed and the REST services provided by the Primary CCS.
 * The Shadow CCS is provided with credentials which allow appropriate access to the required Primary CCS REST endpoints.
-* RunIDs for submissions are unique contest-wide, even in the event of a contest with multiple independent sites being managed by a single distributed Primary CCS. 
+* SubmissionIDs for submissions are unique contest-wide, even in the event of a contest with multiple independent sites being managed by a single distributed Primary CCS. 
 * The Shadow CCS has access to the same contest configuration files as those used to configure the Primary CCS.
  
-A CCS may not require any conditions not specified above to exist in order to guarantee support for shadow-mode operations. 
-
+A CCS may not require any conditions not specified above to exist in order to guarantee support for shadow-mode operations.
 
 == Documentation Requirements ==
 
