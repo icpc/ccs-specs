@@ -118,13 +118,22 @@ The endpoints could be categorised into 3 groups as follows:
 ;Live data: /submissions, /judgements, /runs, /clarifications, /awards
 ;Aggregate data: /scoreboard, /event-feed
 
-Configuration is normally set before contest start. Is not expected to, but could occasionally be updated during a contest. Does not have associated
+Configuration is normally set before contest start. Is not expected to, but could occasionally be updated during a contest. It does not have associated
 timestamp/contest time attributes. Updates are notified via the event feed.
 
-Live data is generated during the contest and new elements are expected. Data is immutable though, only inserts, no updates or deletes of elements. Does have associated
-timestamp/contest time attributes. Inserts & deletes are notified via the event feed. '''Note''': judgements are the exception to immutability in a weak sense: they get updated once with the final verdict.
+Live data is generated during the contest and new elements are expected. Data is immutable though, only inserts, no updates or deletes of elements. It does have associated
+timestamp/contest time attributes. Inserts and deletes are notified via the event feed. '''Note''': judgements are the exception to immutability in a weak sense: they get updated once with the final verdict.
 
-Aggregate data: Only GET makes sense. Not included in the event feed.
+Aggregate data: Only '''GET''' makes sense. These are not included in the event feed.
+
+In the tables below, the columns are:
+;Name: Attribute name; object sub-attributes are indicated as <tt>object.attribute</tt>.
+;Type: Data type of the attribute; either a [https://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example JSON type] or [[Draft_CCS_REST_interface#Recurring_details|a type defined above]].
+;Required?: Whether this is a required attribute that '''must''' be implemented to conform to this specification.
+;Nullable?: Whether the attribute might be <tt>null</tt>.
+;@WF: Specifies whether this attribute is implemented at the ICPC World Finals and by whom.
+;Description: Description of the meaning of the attribute and any special considerations.
+
 
 === / &nbsp; (contest) ===
 
