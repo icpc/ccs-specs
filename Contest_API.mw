@@ -101,7 +101,7 @@ The following guidelines are meant to ease extensibility.
 
 * Clients should accept extra attributes in endpoints, that are not specified here.
 * Servers should not expect clients to recognize more than the basic, required specification.
-* In this specification and extensions, an attribute with value <tt>null</tt> must be treated equivalently to that attribute not being present. Furthermore, we default to attributes not being present (instead of <tt>null</tt>).
+* In this specification and extensions, an attribute with value <tt>null</tt> may be left out by the server (i.e. not be present). A client must treat an attribute with value <tt>null</tt> equivalently as that attribute not being present.
 
 == Interface specification ==
 
