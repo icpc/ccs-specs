@@ -612,7 +612,7 @@ Each World Finals contest is managed by a single CCS, called the ''Primary CCS''
 connect only to the Primary CCS; all participant-visible contest operations are handled by the Primary CCS and the final results 
 of the contest are computed by the Primary CCS.
 
-In order to insure accuracy of the final contest results, each World Finals also runs an independent “parallel” CCS called the Shadow CCS.  
+In order to insure accuracy of the final contest results, each World Finals also runs an independent “parallel” CCS called the ''Shadow CCS''.  
 The main task of the Shadow CCS is to verify that the final results computed by the Primary CCS are correct according to the rules of the World Finals.  
 A contest control system acting as a Shadow CCS is said to be running in ''shadow mode''.  
 This section defines requirements which must be implemented by a CCS related to shadow mode.
