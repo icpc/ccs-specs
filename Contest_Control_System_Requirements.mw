@@ -633,8 +633,8 @@ Said another way, the Shadow CCS must be able to perform all of its functions wh
 
 === CCS Configuration ===
 
-A CCS running in shadow mode must be able to import a complete contest configuration as described in the [#Importing Contest Configuration] section of this Requirements Specification.
-In particular a shadow-mode CCS must be able to import a contest configuration from a single URL and must also be able to import the teams.tsv and groups.tsv files as specified in that section.  
+A CCS running in shadow mode must be able to import a complete contest configuration as described in the [[#Importing Contest Configuration]] section of this Requirements Specification.
+In particular a shadow-mode CCS must be able to import a contest configuration from a single URL and must also be able to import the teams.tsv and groups.tsv files as specified in that section.
 
 === Submissions ===
 
