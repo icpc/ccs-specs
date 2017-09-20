@@ -130,9 +130,11 @@ In the tables below, the columns are:
 ;Name: Attribute name; object sub-attributes are indicated as <tt>object.attribute</tt>.
 ;Type: Data type of the attribute; either a [https://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example JSON type] or [[Draft_CCS_REST_interface#Recurring_details|a type defined above]].
 ;Required?: Whether this is a required attribute that '''must''' be implemented to conform to this specification.
-;Nullable?: Whether the attribute might be <tt>null</tt>.
+;Nullable?: Whether the attribute might be <tt>null</tt> (and thus implicitly can also not be present in that case).
 ;@WF: Specifies whether this attribute is implemented at the ICPC World Finals and by whom.
 ;Description: Description of the meaning of the attribute and any special considerations.
+
+Note that if an attribute is required and nullable, then if in a particular instance it is <tt>null</tt>, it may be left out. On the other hand, an attribute that is optional, but not nullable must either always be present (if the server implements/uses it), or never be present (if the server does not implement/use it). If an attribute is not implemented by a server, then it must never be present; this means that if a client sees an attribute, this means that the server implements it.
 
 
 === / &nbsp; (contest) ===
