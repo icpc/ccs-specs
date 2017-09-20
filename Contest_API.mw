@@ -426,7 +426,7 @@ Returns a JSON array, with each element an object describing an organization, wi
 | string
 | no
 | yes
-| no
+| CCS
 | [https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3 ISO 3-letter code] of the organization's country
 |-
 | url
