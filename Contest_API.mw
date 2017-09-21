@@ -1286,7 +1286,7 @@ This document uses the terms "element". An element corresponds to a single objec
 | One of '''contests''', '''languages''', '''problems''', '''teams''', '''organizations''', '''groups''', '''judgement-types''', '''submissions''', '''judgements''', '''runs''', '''clarifications''', '''heartbeat'''.
 |-
 | id
-| ID for the object that's being updated. Always present if event relates to element, never present if event relates to collection.
+| ID for the event.
 | String consisting of characters <tt>[a-zA-Z0-9-_]</tt> of length at most 36 and not starting with a <tt>-</tt> (dash).
 |-
 | data
