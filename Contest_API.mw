@@ -1256,15 +1256,13 @@ If not specified all events will include data. If specified the <tt>data</tt> at
 
 ===== Feed starting point =====
 
-If a client wants data from some point in time this can be done with the "timestamp" URL argument:
+If a client wants data from some point in time this can be done with the "id" URL argument:
 
- /event-feed?timestamp=2014-06-25T11%3A22%3A05.034%2B01
+ /event-feed?id=dj593
 
-If specified the event feed will include all events strictly ''after'' the specified timestamp. If not specified the event feed will include all events from the beginning of the feed.
+If specified the event feed will include all events strictly ''after'' the specified id. If a client copies the id of an event and uses that for the id URL argument it will get all events after that event. This is useful e.g. if a client is disconnected and wants to continue where it left off.
 
-Timestamps in the future are allowed.
-
-Timestamps are given as  [https://en.wikipedia.org/wiki/ISO_8601 ISO 8601] extended combined date/time format with timezone: <tt>yyyy-mm-ddThh:mm:ss(.uuu)?[+-]zz(:mm)?</tt> (or timezone <tt>Z</tt> for UTC). Specifically, they are given in the same format as the '''timestamp'''s in the feed. This means that if a client copies the timestamp of an event and uses that for the timestamp URL argument it will get all events after that event. This is useful e.g. if a client is disconnected and want to continue where it left off.
+If the id is not specified or invalid the event feed will include all events from the beginning of the feed.
 
 Multiple requests of the event feed for the same period must return equivalent events (excluding heartbeat events), including historical timestamps and configuration changes. The system might contain the same heartbeat events every time, but it is not required to.
 
