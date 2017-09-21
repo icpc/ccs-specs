@@ -1273,9 +1273,7 @@ The feed is served as [http://specs.okfnlabs.org/ndjson/ Newline delimited JSON]
 The general format for events is:
  {"event": "<event type>", "id": "<id>, "data": <data from endpoint> }
 
-This document uses the terms "element" and "collection". A collection is a list
-of elements. An element corresponds to a single object (run, judgement,
-language, team, etc.).
+This document uses the terms "element". An element corresponds to a single object (run, judgement, language, team, etc.).
 
 {| class="wikitable"
 |-
