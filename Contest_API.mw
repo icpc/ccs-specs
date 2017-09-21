@@ -1271,7 +1271,7 @@ Multiple requests of the event feed for the same period must return equivalent e
 The feed is served as [http://specs.okfnlabs.org/ndjson/ Newline delimited JSON], with every event as its own JSON object.
 
 The general format for events is:
- {"event": "<event type>", "id": "<id>, "data": <data from endpoint> }
+ {"event": "<event type>", "id": "<id>", "data": <data from endpoint> }
 
 This document uses the terms "element". An element corresponds to a single object (run, judgement, language, team, etc.).
 
