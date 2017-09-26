@@ -1270,10 +1270,10 @@ Multiple requests of the event feed for the same period must return equivalent e
 
 The feed is served as [http://specs.okfnlabs.org/ndjson/ Newline delimited JSON], with every event as its own JSON object.
 
-The general format for events is:
- {"event": "<event type>", "id": "<id>", "data": <data from endpoint> }
-
 This document uses the term "element". An element corresponds to a single object (run, judgement, language, team, etc.).
+
+The general format for events is:
+ {"event": "<event type>", "id": "<id>", "op": "<type of operation>", "data": <JSON data for element> }
 
 {| class="wikitable"
 |-
@@ -1283,20 +1283,64 @@ This document uses the term "element". An element corresponds to a single object
 |-
 | event
 | Name of the event. Used for filtering. 
-| One of '''contests''', '''languages''', '''problems''', '''teams''', '''organizations''', '''groups''', '''judgement-types''', '''submissions''', '''judgements''', '''runs''', '''clarifications''', '''heartbeat'''.
+| One of the events in the table below.
 |-
 | id
 | ID for the event.
 | String consisting of characters <tt>[a-zA-Z0-9-_]</tt> of length at most 36 and not starting with a <tt>-</tt> (dash).
 |-
+| op
+| Type of operation.
+| One of '''create''', '''update''', '''delete'''
+|-
 | data
-| The exact data that would be returned if calling the corresponding API endpoint at this time.
-| JSON object as defined by the [[Draft_CCS_REST_interface#Roles | REST API]].
+| For '''create''' and '''update''', the data that would be returned if calling the corresponding API endpoint at this time. For '''delete''' the data that was just removed.
+| JSON object as defined by the [[Draft_CCS_REST_interface| API]].
 |}
 
-Events are not guaranteed to come in chronological order, since they may come from a distributed system. Specifically, some events have timestamps inside the "data" value and these might arrive out of order.
+All events have a corresponding API endpoint, as specified in the table below.
 
-Every event with a corresponding API endpoint maps to an element in a collection. (The '''contests''' event is a special case. It could be argued that it is an element, and in any case it is treated as an element). When an event is sent as an element, that can either be an insert (if the ID given has not been seen before), update (if the ID has been seen before) or delete (if the ID has been seen before but the data element is "null").
+{| class="wikitable"
+|-
+! Event
+! API Endpoint
+|-
+| contest
+| <baseurl>/
+|-
+| language
+| <baseurl>/languages/<id>
+|-
+| problem
+| <baseurl>/problems/<id>
+|-
+| organization
+| <baseurl>/organizations/<id>
+|-
+| group
+| <baseurl>/group/<id>
+|-
+| team
+| <baseurl>/teams/<id>
+|-
+| judgement-type
+| <baseurl>/judgement-types/<id>
+|-
+| submission
+| <baseurl>/submissions/<id>
+|-
+| judgement
+| <baseurl>/judgements/<id>
+|-
+| run
+| <baseurl>/runs/<id>
+|-
+| clarification
+| <baseurl>/clarifications/<id>
+|-
+| award
+| <baseurl>/awards/<id>
+|}
 
 ==== Heartbeat ====
 
