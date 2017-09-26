@@ -1310,7 +1310,7 @@ All events have a corresponding API endpoint, as specified in the table below.
 | <baseurl>/organizations/<id>
 |-
 | group
-| <baseurl>/group/<id>
+| <baseurl>/groups/<id>
 |-
 | team
 | <baseurl>/teams/<id>
