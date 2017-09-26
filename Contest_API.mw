@@ -1268,7 +1268,7 @@ Multiple requests of the event feed for the same period must return equivalent e
 
 ==== Feed format ====
 
-The feed is served as [http://specs.okfnlabs.org/ndjson/ Newline delimited JSON], with every event as its own JSON object.
+The feed is served as [http://specs.okfnlabs.org/ndjson/ Newline delimited JSON], with every event as its own JSON object. To ensure keep alive, if no event is sent in 120 seconds, an newline should be.
 
 This document uses the term "element". An element corresponds to a single object (run, judgement, language, team, etc.).
 
