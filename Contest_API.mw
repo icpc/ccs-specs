@@ -1341,14 +1341,3 @@ All events have a corresponding API endpoint, as specified in the table below.
 | award
 | <baseurl>/awards/<id>
 |}
-
-==== Heartbeat ====
-
-The event feed is guaranteed to send some data at least every 120 seconds. If no other event is sent, a heartbeat will be.
-
-The heartbeat event does *not* have a corresponding API endpoint, so the endpoint and data keys are missing.
-
-;Event ID: heartbeat
-;Required elements: event, timestamp
-;Example:
- {"event": "heartbeat", "timestamp": "2017-07-18T10:13:01+01"}
