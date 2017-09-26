@@ -1246,14 +1246,6 @@ If a client only wants some events the feed can be filtered with the "events" UR
 
 If not specified all events will be sent. If specified only the listed events will be sent.
 
-===== Notification only =====
-
-If a client does not want the "data" part of events this can be removed with the "no-data" URL argument:
-
- /event-feed?no-data
-
-If not specified all events will include data. If specified the <tt>data</tt> attribute and its contents will not be present for any event.
-
 ===== Feed starting point =====
 
 If a client wants data from some point in time this can be done with the "id" URL argument:
