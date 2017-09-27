@@ -1162,7 +1162,7 @@ Returns a JSON array, with each element an object describing an award, with the 
 | yes
 | no
 | provided by CDS
-| identifier of the award, typically an enum value like "medal", "first-to-solve", "place", "winner", "group", or "rank"
+| identifier of the award.
 |-
 | citation
 | string
@@ -1178,6 +1178,50 @@ Returns a JSON array, with each element an object describing an award, with the 
 | provided by CDS
 | JSON array of team ids receiving this award
 |}
+
+Security:
+* For clients with the public role, awards will not include information from judgements of submissions received after the scoreboard freeze.
+
+Semantics:
+* Awards are not final until contest is
+* If an award is present during the contest this means that if the contest would end immediately and then become final, that award would be final. E.g. the "winner" during the contest should be the current leader.
+* If it's not possible to yet determine how the award would end up if the contest would end immediately, it must not be present. E.g. there should be no "first-to-solve-a" award if there are still submissions without a judgement on problem A that are earlier than all accepted submissions on problem A.
+
+For some common award cases the following IDs should be used. 
+{| class="wikitable"
+! ID
+! Meaning during contest
+! Meaning when contest is final
+|-
+| winner
+| Current leader(s). Empty if no team has scored.
+| Winner(s) of the contest
+|-
+| gold-medal
+| Teams currently placed to receive a gold medal. Empty if no team has scored.
+| Teams being awarded gold medals
+|-
+| silver-medal
+| Teams currently placed to receive a silver medal. Empty if no team has scored.
+| Teams being awarded silver medals
+|-
+| bronze-medal
+| Teams currently placed to receive a bronze medal, assuming no extra bronze are awarded. Empty if no team has scored.
+| Teams being awarded bronze medals
+|-
+| first-to-solve-<id>
+| The team(s), if any, that was first to solve problem <id>. This implies that no unjudged submission made earlier remains.
+| Same.
+|-
+| group-winner-<id>
+| Current leader(s) in group <id>. Empty if no team has scored.
+| Winner(s) of group <id>
+|-
+| organization-winner-<id>
+| Current leader(s) of organization <id>. Empty if no team has scored.
+| Winner(s) of organization <id>
+|}
+
 
 ==== Example ====
 
