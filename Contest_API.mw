@@ -1149,7 +1149,7 @@ Returns a JSON array, with each element an object describing an award, with the 
 | award citation, e.g. "Gold medal winner"
 |-
 | team_ids
-| array
+| array of ID
 | yes
 | no
 | provided by CDS
