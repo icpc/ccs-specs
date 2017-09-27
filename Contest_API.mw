@@ -1425,3 +1425,7 @@ All event types have a corresponding API endpoint, as specified in the table bel
 |}
 
 ==== Example ====
+
+  {"type":"teams","id":"k-2435","op":"create","data":{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
+  {"type":"teams","id":"k-2436","op":"update","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
+  {"type":"teams","id":"k-2437","op":"delete","data":{"id":"11"}}
