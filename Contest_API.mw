@@ -1301,6 +1301,8 @@ To ensure keep alive, if no event is sent in 120 seconds, an newline must be sen
 
 ==== Feed options ====
 
+There are options for filtering based on events and starting the feed at a specified event. Any combination of these may be specified.
+
 ===== Filtering events =====
 
 If a client only wants some events the feed can be filtered with the "events" URL argument:
