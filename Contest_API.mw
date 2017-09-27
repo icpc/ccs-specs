@@ -1373,7 +1373,7 @@ The general format for events is:
 | One of '''create''', '''update''', '''delete'''
 |-
 | data
-| For '''create''' and '''update''', the data that would be returned if calling the corresponding API endpoint at this time. For '''delete''' the data that was just removed.
+| For '''create''' and '''update''', the data that would be returned if calling the corresponding API endpoint at this time. For '''delete''' an object with only the '''id''' element.
 | JSON object as defined by the [[Draft_CCS_REST_interface| API]].
 |}
 
