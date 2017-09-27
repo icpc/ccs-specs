@@ -676,6 +676,65 @@ Returned data:
    {"id":"123","name":"CMU1","organization_id":"inst105","group_id":"8"}
   ]
 
+=== /team-members ===
+
+List all team members in the contest. This endpoint is optional, but if it is provided elements are required as specified below.
+
+Returns a JSON array, with each element an object describing a team member, with the following elements:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Nullable?
+! @WF
+! Description
+|-
+| id
+| ID
+| yes
+| no
+| CDS
+| identifier of the team-member.
+|-
+| icpc_id
+| string
+| no
+| yes
+| CDS
+| external identifier from ICPC CMS
+|-
+| name
+| string
+| yes
+| no
+| CDS
+| full name of team member.
+|-
+| team_id
+| ID
+| yes
+| no
+| CDS
+| team of team member.
+|-
+| role
+| string
+| yes
+| no
+| CDS
+| one of '''contestant''' or '''coach'''.
+|}
+
+==== Example ====
+
+Request:
+  GET https://example.com/api/team-members
+Returned data:
+  [{"id":"john-smith","icpc_id":"32442","name":"John Smith","team_id":"43","role":"contestant"},
+   {"id":"osten-umlautsen","icpc_id":"32443","name":"Östen Ümlautsen","team_id":"43","role":"coach"}
+  ]
+
 === /judgement-types ===
 
 Lists all judgement types available (i.e. possible responses when judging a submission).
@@ -1314,6 +1373,9 @@ All events have a corresponding API endpoint, as specified in the table below.
 |-
 | team
 | <baseurl>/teams/<id>
+|-
+| team-member
+| <baseurl>/team-members/<id>
 |-
 | judgement-type
 | <baseurl>/judgement-types/<id>
