@@ -806,8 +806,8 @@ For all team members there are also endpoints returning files associated with th
 Request:
   GET https://example.com/api/team-members
 Returned data:
-  [{"id":"john-smith","icpc_id":"32442","name":"John Smith","team_id":"43","role":"contestant"},
-   {"id":"osten-umlautsen","icpc_id":"32443","name":"Östen Ümlautsen","team_id":"43","role":"coach"}
+  [{"id":"john-smith","icpc_id":"32442","name":"John Smith","sex":"male","team_id":"43","role":"contestant"},
+   {"id":"osten-umlautsen","icpc_id":"32443","name":"Östen Ümlautsen","sex":"male","team_id":"43","role":"coach"}
   ]
 
 === /submissions ===
