@@ -1423,3 +1423,5 @@ All event types have a corresponding API endpoint, as specified in the table bel
 | awards
 | <baseurl>/awards/<id>
 |}
+
+==== Example ====
