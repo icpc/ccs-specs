@@ -1301,7 +1301,7 @@ Provides the event feed for the current contest.
 
 If a client only wants some events the feed can be filtered with the "events" URL argument:
 
- /event-feed?events=submissions,teams
+ /event-feed?events=submission,team
 
 If not specified all events will be sent. If specified only the listed events will be sent.
 
