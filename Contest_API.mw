@@ -763,6 +763,13 @@ Returns a JSON array, with each element an object describing a team member, with
 | provided by CDS
 | full name of team member.
 |-
+| sex
+| string
+| no
+| no
+| provided by CDS
+|one of '''male''', '''female''' or '''other'''
+|-
 | team_id
 | ID
 | yes
