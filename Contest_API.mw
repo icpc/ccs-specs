@@ -1224,12 +1224,13 @@ Each row object contains:
 | total penalty time accrued by the team
 |-
 | problems
-| array
+| array of object
 | yes
 | no
 | CCS
 | JSON array of problems with scoring data, see below for the specification of each element
 |}
+
 Each problem element within the scoreboard consists of:
 {| class="wikitable"
 |-
