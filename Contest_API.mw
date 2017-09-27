@@ -1329,9 +1329,9 @@ There are options for filtering based on events and starting the feed at a speci
 
 ===== Filtering events =====
 
-If a client only wants some events the feed can be filtered with the "events" URL argument:
+If a client only wants some types of events the feed can be filtered with the "events" URL argument:
 
- /event-feed?events=submission,team
+ /event-feed?type=submissions,teams
 
 If not specified all events will be sent. If specified only the listed events will be sent.
 
@@ -1352,7 +1352,7 @@ The feed is served as [http://specs.okfnlabs.org/ndjson/ Newline delimited JSON]
 This document uses the term "element". An element corresponds to a single object (run, judgement, language, team, etc.).
 
 The general format for events is:
- {"event": "<event type>", "id": "<id>", "op": "<type of operation>", "data": <JSON data for element> }
+ {"type": "<event type>", "id": "<id>", "op": "<type of operation>", "data": <JSON data for element> }
 
 {| class="wikitable"
 |-
@@ -1360,8 +1360,8 @@ The general format for events is:
 ! Description
 ! Format
 |-
-| event
-| Name of the event. Used for filtering. 
+| type
+| Type of event. Used for filtering. 
 | One of the events in the table below.
 |-
 | id
@@ -1377,49 +1377,49 @@ The general format for events is:
 | JSON object as defined by the [[Draft_CCS_REST_interface| API]].
 |}
 
-All events have a corresponding API endpoint, as specified in the table below.
+All event types have a corresponding API endpoint, as specified in the table below.
 
 {| class="wikitable"
 |-
 ! Event
 ! API Endpoint
 |-
-| contest
+| contests
 | <baseurl>/
 |-
-| judgement-type
+| judgement-types
 | <baseurl>/judgement-types/<id>
 |-
-| language
+| languages
 | <baseurl>/languages/<id>
 |-
-| problem
+| problems
 | <baseurl>/problems/<id>
 |-
-| group
+| groups
 | <baseurl>/groups/<id>
 |-
-| organization
+| organizations
 | <baseurl>/organizations/<id>
 |-
-| team
+| teams
 | <baseurl>/teams/<id>
 |-
-| team-member
+| team-members
 | <baseurl>/team-members/<id>
 |-
-| submission
+| submissions
 | <baseurl>/submissions/<id>
 |-
-| judgement
+| judgements
 | <baseurl>/judgements/<id>
 |-
-| run
+| runs
 | <baseurl>/runs/<id>
 |-
-| clarification
+| clarifications
 | <baseurl>/clarifications/<id>
 |-
-| award
+| awards
 | <baseurl>/awards/<id>
 |}
