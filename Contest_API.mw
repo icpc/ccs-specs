@@ -1295,6 +1295,10 @@ Returned data:
 
 Provides the event feed for the current contest.
 
+Multiple requests of the event feed must return the exact same events in the exact same order, except that events filtered out by the feed options must be left out.
+
+To ensure keep alive, if no event is sent in 120 seconds, an newline must be sent.
+
 ==== Feed options ====
 
 ===== Filtering events =====
@@ -1315,11 +1319,9 @@ If specified the event feed will include all events strictly ''after'' the speci
 
 If the id is not specified or invalid the event feed will include all events from the beginning of the feed.
 
-Multiple requests of the event feed for the same period must return equivalent events (excluding heartbeat events), including historical timestamps and configuration changes. The system might contain the same heartbeat events every time, but it is not required to.
-
 ==== Feed format ====
 
-The feed is served as [http://specs.okfnlabs.org/ndjson/ Newline delimited JSON], with every event as its own JSON object. To ensure keep alive, if no event is sent in 120 seconds, an newline should be.
+The feed is served as [http://specs.okfnlabs.org/ndjson/ Newline delimited JSON], with every event as its own JSON object. 
 
 This document uses the term "element". An element corresponds to a single object (run, judgement, language, team, etc.).
 
