@@ -778,6 +778,22 @@ Returns a JSON array, with each element an object describing a team member, with
 | one of '''contestant''' or '''coach'''.
 |}
 
+For all team members there are also endpoints returning files associated with the team member.
+{| class="wikitable"
+|-
+! Endpoint
+! Type
+! Required?
+! @WF
+! Description
+|-
+| /team-members/<id>/photo
+| image/png or image/jpeg
+| no
+| provided by CDS
+| registration photo of the team member
+|}
+
 ==== Example ====
 
 Request:
