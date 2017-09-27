@@ -270,6 +270,58 @@ Request:
 Request data:
   {"id":"wf2016","start_time":null}
 
+=== /judgement-types ===
+
+Lists all judgement types available (i.e. possible responses when judging a submission).
+
+Returns a JSON array, with each element an object describing a team, with the following elements:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Nullable?
+! @WF
+! Description
+|-
+| id
+| ID
+| yes
+| no
+| provided by CCS
+| identifier of the judgement type. Usable as a label, typically a 2-3 letter capitalized shorthand, see [http://www.problemarchive.org/wiki/index.php/Problem_Format#Graders Problem Format]
+|-
+| name
+| string
+| yes
+| no
+| provided by CCS
+| name of the judgement
+|-
+| penalty
+| boolean
+| depends
+| no
+| provided by CCS
+| whether this judgement causes penalty time; should be present if and only if contest:penalty_time is present
+|-
+| solved
+| boolean
+| yes
+| no
+| provided by CCS
+| whether this judgement is considered correct
+|}
+
+==== Example ====
+
+Request:
+  GET https://example.com/api/judgement-types
+Returned data:
+  [{"id":"CE","name":"Compiler Error","penalty":false,"solved":false},
+   {"id":"AC","name":"Accepted","penalty":false,"solved":true}
+  ]
+
 === /languages ===
 
 Lists programming languages that can be used for submissions.
@@ -380,6 +432,50 @@ Request:
 Returned data:
   [{"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","test_data_count":10},
    {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","test_data_count":15}
+  ]
+
+=== /groups ===
+
+Lists all groups (at the World Finals these are the super regions).
+
+Returns a JSON array, with each element an object describing a team, with the following elements:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Nullable?
+! @WF
+! Description
+|-
+| id
+| ID
+| yes
+| no
+| provided by CCS
+| identifier of the group
+|-
+| icpc_id
+| string
+| no
+| yes
+| provided by CCS
+| external identifier from ICPC CMS
+|-
+| name
+| string
+| yes
+| no
+| provided by CCS
+| name of the group
+|}
+
+==== Example ====
+
+Request:
+  GET https://example.com/api/groups
+Returned data:
+  [{"id":"asia-74324325532","icpc_id":"7593","name":"Asia"}
   ]
 
 === /organizations ===
@@ -503,50 +599,6 @@ Request:
 Returned data:
   [{"id":"inst123","icpc_id":"433","name":"Shanghai Jiao Tong U.","formal_name":"Shanghai Jiao Tong University"},
    {"id":"inst105","name":"Carnegie Mellon University","country":"USA"}
-  ]
-
-=== /groups ===
-
-Lists all groups (at the World Finals these are the super regions).
-
-Returns a JSON array, with each element an object describing a team, with the following elements:
-{| class="wikitable"
-|-
-! Name
-! Type
-! Required?
-! Nullable?
-! @WF
-! Description
-|-
-| id
-| ID
-| yes
-| no
-| provided by CCS
-| identifier of the group
-|-
-| icpc_id
-| string
-| no
-| yes
-| provided by CCS
-| external identifier from ICPC CMS
-|-
-| name
-| string
-| yes
-| no
-| provided by CCS
-| name of the group
-|}
-
-==== Example ====
-
-Request:
-  GET https://example.com/api/groups
-Returned data:
-  [{"id":"asia-74324325532","icpc_id":"7593","name":"Asia"}
   ]
 
 === /teams ===
@@ -733,58 +785,6 @@ Request:
 Returned data:
   [{"id":"john-smith","icpc_id":"32442","name":"John Smith","team_id":"43","role":"contestant"},
    {"id":"osten-umlautsen","icpc_id":"32443","name":"Östen Ümlautsen","team_id":"43","role":"coach"}
-  ]
-
-=== /judgement-types ===
-
-Lists all judgement types available (i.e. possible responses when judging a submission).
-
-Returns a JSON array, with each element an object describing a team, with the following elements:
-{| class="wikitable"
-|-
-! Name
-! Type
-! Required?
-! Nullable?
-! @WF
-! Description
-|-
-| id
-| ID
-| yes
-| no
-| provided by CCS
-| identifier of the judgement type. Usable as a label, typically a 2-3 letter capitalized shorthand, see [http://www.problemarchive.org/wiki/index.php/Problem_Format#Graders Problem Format]
-|-
-| name
-| string
-| yes
-| no
-| provided by CCS
-| name of the judgement
-|-
-| penalty
-| boolean
-| depends
-| no
-| provided by CCS
-| whether this judgement causes penalty time; should be present if and only if contest:penalty_time is present
-|-
-| solved
-| boolean
-| yes
-| no
-| provided by CCS
-| whether this judgement is considered correct
-|}
-
-==== Example ====
-
-Request:
-  GET https://example.com/api/judgement-types
-Returned data:
-  [{"id":"CE","name":"Compiler Error","penalty":false,"solved":false},
-   {"id":"AC","name":"Accepted","penalty":false,"solved":true}
   ]
 
 === /submissions ===
@@ -1364,26 +1364,26 @@ All events have a corresponding API endpoint, as specified in the table below.
 | contest
 | <baseurl>/
 |-
+| judgement-type
+| <baseurl>/judgement-types/<id>
+|-
 | language
 | <baseurl>/languages/<id>
 |-
 | problem
 | <baseurl>/problems/<id>
 |-
-| organization
-| <baseurl>/organizations/<id>
-|-
 | group
 | <baseurl>/groups/<id>
+|-
+| organization
+| <baseurl>/organizations/<id>
 |-
 | team
 | <baseurl>/teams/<id>
 |-
 | team-member
 | <baseurl>/team-members/<id>
-|-
-| judgement-type
-| <baseurl>/judgement-types/<id>
 |-
 | submission
 | <baseurl>/submissions/<id>
