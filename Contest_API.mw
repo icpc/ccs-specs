@@ -1060,7 +1060,7 @@ Returned data:
 
 Lists clarification requests &amp; replies.
 
-Returns a JSON array, with each element an object describing a test case, with the following elements:
+Returns a JSON array, with each element an object describing a clarification message (i.e. a clarification request or a clarification), with the following elements:
 {| class="wikitable"
 |-
 ! Name
