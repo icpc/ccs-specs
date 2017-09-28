@@ -1379,7 +1379,7 @@ Provides the event feed for the current contest.
 
 Multiple requests of the event feed must return the exact same events in the exact same order, except that events filtered out by the feed options must be left out.
 
-To ensure keep alive, if no event is sent in 120 seconds, an newline must be sent.
+To ensure keep alive, if no event is sent in 120 seconds, a newline must be sent.
 
 ==== Feed options ====
 
