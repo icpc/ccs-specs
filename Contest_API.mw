@@ -1193,34 +1193,42 @@ For some common award cases the following IDs should be used.
 ! ID
 ! Meaning during contest
 ! Meaning when contest is final
+! Comment
 |-
 | winner
 | Current leader(s). Empty if no team has scored.
 | Winner(s) of the contest
+|
 |-
 | gold-medal
 | Teams currently placed to receive a gold medal. Empty if no team has scored.
 | Teams being awarded gold medals
+|
 |-
 | silver-medal
 | Teams currently placed to receive a silver medal. Empty if no team has scored.
 | Teams being awarded silver medals
+|
 |-
 | bronze-medal
 | Teams currently placed to receive a bronze medal, assuming no extra bronze are awarded. Empty if no team has scored.
 | Teams being awarded bronze medals
+|
 |-
 | first-to-solve-<id>
 | The team(s), if any, that was first to solve problem <id>. This implies that no unjudged submission made earlier remains.
 | Same.
+| Will never change once set, except if there are rejudgements.
 |-
 | group-winner-<id>
 | Current leader(s) in group <id>. Empty if no team has scored.
 | Winner(s) of group <id>
+|
 |-
 | organization-winner-<id>
 | Current leader(s) of organization <id>. Empty if no team has scored.
 | Winner(s) of organization <id>
+| Not useful in contest with only one team per organization (e.g. the WF)
 |}
 
 
