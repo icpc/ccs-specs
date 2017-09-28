@@ -1139,8 +1139,8 @@ Returned data:
 Request:
   GET https://example.com/api/clarifications
 Returned data:
-  [{"id":"wf2017-8","from_team_id":null,"to_team_id":"abc123","reply_to_id":"wf2017-5","problem_id":"10-asteroids","text":"Does bouncing means bounce to the grid above the current one? Read the problem statement",
-    "time":"2014-06-25T12:43:02.037+01","contest_time":"2:28:02.037"}
+  [{"id":"1","from_team_id":"34","text":"May I ask a question?","time":"2017-06-25T11:59:27.543+01","contest_time":"1:59:27.543"},
+    {"id":"2","to_team_id":"34","reply_to_id":"1","text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}
   ]
 
 === /awards ===
