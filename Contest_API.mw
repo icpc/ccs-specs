@@ -549,7 +549,7 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | 
 | CE
 | RE
-| CE
+| CE, RE
 | Compilation took too long
 |-
 | JE
