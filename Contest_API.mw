@@ -231,6 +231,10 @@ Returns a JSON object with the elements below. If there is no current (this may 
 | whether the standings have been finalized
 |}
 
+==== Access restrictions at WF ====
+
+No access restrictions apply to a GET on this endpoint.
+
 ==== PATCH start_time ====
 
 To replace the [[Contest Start Interface]], at the ICPC World Finals,
@@ -312,6 +316,12 @@ Returns a JSON array, with each element an object describing a team, with the fo
 | provided by CCS
 | whether this judgement is considered correct
 |}
+
+==== Access restrictions at WF ====
+
+No access restrictions apply to a GET on this endpoint.
+
+==== Known judgement-types ====
 
 List of standardised identifiers for known judgements:
 
@@ -616,6 +626,10 @@ Returns a JSON array, with each element an object describing a language, with th
 | name of the language
 |}
 
+==== Access restrictions at WF ====
+
+No access restrictions apply to a GET on this endpoint.
+
 ==== Example ====
 
 Request:
@@ -690,6 +704,11 @@ Returns a JSON array, with each element an object describing a problem, with the
 | number of test data sets
 |}
 
+==== Access restrictions at WF ====
+
+The '''public''' role can only access these problems after the contest started.
+That is, before contest start this endpoint returns an empty array for clients with the '''public''' role.
+
 ==== Example ====
 
 Request:
@@ -734,6 +753,10 @@ Returns a JSON array, with each element an object describing a team, with the fo
 | provided by CCS
 | name of the group
 |}
+
+==== Access restrictions at WF ====
+
+No access restrictions apply to a GET on this endpoint.
 
 ==== Example ====
 
@@ -856,6 +879,10 @@ For all organizations there are also endpoints returning files associated with t
 | provided by CDS
 | requests a smaller logo of the organization that is 56 pixels in size. The server may return this smaller logo if it is able, or may return the same as /logo
 |}
+
+==== Access restrictions at WF ====
+
+No access restrictions apply to a GET on this endpoint or any of the associated file endpoints.
 
 ==== Example ====
 
@@ -984,6 +1011,13 @@ For all teams there are also endpoints returning files associated with the team.
 | streaming video of the team webcam
 |}
 
+==== Access restrictions at WF ====
+
+No access restrictions apply to a GET on this endpoint. For the associated file endpoints:
+* '''photo''' and '''video''' require no special access rights,
+* '''backup''' requires the '''admin''' or '''analyst''' role for acccess,
+* the '''desktop''' and '''webcam''' stream endpoints are available for the '''public''' role until scoreboard freeze.
+
 ==== Example ====
 
 Request:
@@ -1065,6 +1099,10 @@ For all team members there are also endpoints returning files associated with th
 | provided by CDS
 | registration photo of the team member
 |}
+
+==== Access restrictions at WF ====
+
+No access restrictions apply to a GET on this endpoint or any of the associated file endpoints.
 
 ==== Example ====
 
@@ -1165,6 +1203,11 @@ For all submissions there are also endpoints returning files associated with the
 The endpoint '''/files''' provides the file(s) of a given submission as a zip archive. These should be stored directly from the root of the zip file, i.e. there should not be extra directories (or files) added unless these are explicitly part of the submission content.
 For '''POST''', '''PUT''' and '''PATCH''' methods, '''files''' would be included as an attribute in the submission and contain the base64-encoded string of the zip archive.
 
+==== Access restrictions at WF ====
+
+The '''entry_point''' attribute and '''files''' endpoint are accessible only for clients with '''admin''' or '''analyst''' role.
+The '''reaction''' file endpoint is available to clients with '''public''' role only for submissions before the contest freeze.
+
 ==== Example ====
 
 Request:
@@ -1177,9 +1220,6 @@ Returned data:
 === /judgements ===
 
 Lists judgements of submissions.
-
-Security:
-* For clients with the public role, judgements will not be included for submissions received after the scoreboard freeze.
 
 Returns a JSON array, with each element an object describing a judging, with the following elements:
 {| class="wikitable"
@@ -1243,6 +1283,10 @@ Returns a JSON array, with each element an object describing a judging, with the
 
 When a judgement is started, each of <tt>judgement_type_id</tt>, <tt>end_time</tt> and <tt>end_contest_time</tt> will be <tt>null</tt>.
 These are set when the judgement is completed.
+
+==== Access restrictions at WF ====
+
+For clients with the '''public''' role, judgements will not be included for submissions received after the scoreboard freeze.
 
 ==== Example ====
 
@@ -1311,6 +1355,10 @@ Returns a JSON array, with each element an object describing a judging, with the
 | provided by CCS
 | contest relative time when run completed
 |}
+
+==== Access restrictions at WF ====
+
+For clients with the '''public''' role, runs will not be included for submissions received after the scoreboard freeze.
 
 ==== Example ====
 
@@ -1393,6 +1441,10 @@ Returns a JSON array, with each element an object describing a clarification mes
 |}
 Note that at least one of <tt>from_team_id</tt> and <tt>to_team_id</tt> has to be <tt>null</tt>. That is, teams cannot send messages to other teams.
 
+==== Access restrictions at WF ====
+
+Clients with the '''public''' role can only view clarifications replies from the jury to all teams, that is, messages where both <tt>from_team_id</tt> and <tt>to_team_id</tt> are <tt>null</tt>.
+
 ==== Examples ====
 
 Request:
@@ -1449,11 +1501,13 @@ Returns a JSON array, with each element an object describing an award, with the 
 | JSON array of team ids receiving this award
 |}
 
-Security:
-* For clients with the public role, awards will not include information from judgements of submissions received after the scoreboard freeze.
+==== Access restrictions at WF ====
 
-Semantics:
-* Awards are not final until contest is
+For clients with the '''public''' role, awards will not include information from judgements of submissions received after the scoreboard freeze.
+
+==== Semantics ====
+
+* Awards are not final until the contest is.
 * If an award is not intended to be updated during the contest it should not be present during the contest. E.g. if "winner" will not be updated with the current leader during the contest, it should not be '''create'''d until the award '''is''' awarded. 
 * If an award is present during the contest this means that if the contest would end immediately and then become final, that award would be final. E.g. the "winner" during the contest should be the current leader. This is of course subject to what data the client can see; the public role's winner may not change during the scoreboard freeze but an admin could see the true current winner.
 * If it's not possible to yet determine how the award would end up if the contest would end immediately, it must not be set. E.g. there should be no team ID for the "first-to-solve-a" award if there are still submissions without a judgement on problem A that are earlier than all accepted submissions on problem A.
@@ -1518,9 +1572,6 @@ Provides the scoreboard of the current contest.
 
 Since this is generated data, only the '''GET''' method is allowed
 here, irrespective of role.
-
-Security:
-* For clients with the public role, the scoreboard will not include information from judgements of submissions received after the scoreboard freeze.
 
 Returns a JSON array where each element is an object that represents a row for one team. The array is
 sorted according to rank and alphabetical on team name within identically ranked teams.
@@ -1623,6 +1674,10 @@ Each problem element within the scoreboard consists of:
 | minutes into the contest when this problem was solved by the team. Required iff <tt>solved=true</tt>
 |}
 
+==== Access restrictions at WF ====
+
+For clients with the '''public''' role, the scoreboard will not include information from judgements of submissions received after the scoreboard freeze.
+
 ==== Example ====
 
 Request:
@@ -1640,9 +1695,11 @@ Returned data:
 
 === /event-feed ===
 
-Provides the event feed for the current contest.
+Provides the event feed for the current contest. This is effectively a changelog of create, update and delete events taking place in the REST endpoints.
 
-Multiple requests of the event feed must return the exact same events in the exact same order, except that events filtered out by the feed options must be left out.
+Since this is generated data, only the '''GET''' method is allowed here, irrespective of role.
+
+Multiple requests of the event feed must return the exact same events in the exact same order, except that events filtered out by the feed options must be left out and possible new elements are added in later requests.
 
 To ensure keep alive, if no event is sent in 120 seconds, a newline must be sent.
 
@@ -1746,6 +1803,13 @@ All event types have a corresponding API endpoint, as specified in the table bel
 | awards
 | <baseurl>/awards/<id>
 |}
+
+==== General access restrictions ====
+
+No access restrictions apply to a GET on this endpoint.
+
+However, the resonse and '''data''' objects contained in it must observe the same restrictions as those of the respective endpoints.
+This means that attributes inside the '''data''' element will be present if and only if the client has access to those at the respective endpoint, and receives create, update and delete events only of elements it has (partial) access to, and create or delete events for elements when time-based access is granted or revoked.
 
 ==== Example ====
 
