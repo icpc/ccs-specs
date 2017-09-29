@@ -1190,7 +1190,7 @@ Security:
 Semantics:
 * Awards are not final until contest is
 * If an award is not intended to be updated during the contest it should not be present during the contest. E.g. if "winner" will not be updated with the current leader during the contest, it should not be '''create'''d until the award '''is''' awarded. 
-* If an award is present during the contest this means that if the contest would end immediately and then become final, that award would be final. E.g. the "winner" during the contest should be the current leader.
+* If an award is present during the contest this means that if the contest would end immediately and then become final, that award would be final. E.g. the "winner" during the contest should be the current leader. This is of course subject to what data the client can see; the public role's winner may not change during the final hour but an admin could see the true current winner.
 * If it's not possible to yet determine how the award would end up if the contest would end immediately, it must not be set. E.g. there should be no team ID for the "first-to-solve-a" award if there are still submissions without a judgement on problem A that are earlier than all accepted submissions on problem A.
 
 For some common award cases the following IDs should be used. 
