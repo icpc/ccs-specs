@@ -453,28 +453,28 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Time Limit Exceeed - Presentation Error
 | 
 | TLE
-| TLE, RE
+| TWA, TLE, RE
 | Too slow and also presentation error
 |-
 | TEO
 | Time Limit Exceeed - Excessive Output
 | 
 | TLE
-| TLE, RE
+| TWA, TLE, RE
 | Too slow and also excessive output
 |-
 | TIO
 | Time Limit Exceeed - Incomplete Output
 | 
 | TLE
-| TLE, RE
+| TWA, TLE, RE
 | Too slow and also incomplete output
 |-
 | TNO
 | Time Limit Exceeed - No Output
 | 
 | TLE
-| TIO, TLE, RE
+| TIO, TWA, TLE, RE
 | Too slow and also no output
 |-
 | MLE
@@ -509,28 +509,28 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Run-Time Error - Presentation Error
 |
 | RTE
-| RTE, RE
+| RWA, RTE, RE
 | Crashing and also presentation error
 |-
 | REO
 | Run-Time Error - Excessive Output
 |
 | RTE
-| RTE, RE
+| RWA, RTE, RE
 | Crashing and also excessive output
 |-
 | RIO
 | Run-Time Error - Incomplete Output
 |
 | RTE
-| RTE, RE
+| RWA, RTE, RE
 | Crashing and also incomplete output
 |-
 | RNO
 | Run-Time Error - No Output
 |
 | RTE
-| RIO, RTE, RE
+| RIO, RWA, RTE, RE
 | Crashing and also no output
 |-
 | CTL
