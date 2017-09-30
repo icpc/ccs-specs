@@ -1484,7 +1484,7 @@ Returns a JSON array, with each element an object describing an award, with the 
 
 ==== Access restrictions at WF ====
 
-For clients with the '''public''' role, awards will not include information from judgements of submissions received after the scoreboard freeze.
+For clients with the '''public''' role, awards will not include information from judgements of submissions received after the scoreboard freeze until it has been unfrozen.
 
 ==== Semantics ====
 
