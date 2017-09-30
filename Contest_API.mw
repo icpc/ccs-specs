@@ -293,7 +293,7 @@ Returns a JSON array, with each element an object describing a team, with the fo
 | yes
 | no
 | provided by CCS
-| identifier of the judgement type. Usable as a label, typically a 2-3 letter capitalized shorthand, see table below
+| identifier of the judgement type. Usable as a label, a 2-3 letter capitalized shorthand, see table below
 |-
 | name
 | string
@@ -325,7 +325,7 @@ No access restrictions apply to a GET on this endpoint.
 
 List of standardised identifiers for known judgements:
 
-The columns '''Big 5''' and '''Basic 2''' lists the "big 5" and "basic 2" equivalents, if any. A '''*''' in those column means that the judgement is one of the "big 5" or "basic 2".
+The column '''Big 5'''' lists the "big 5" equivalents, if any. A '''*''' in the column means that the judgement is one of the "big 5".
 
 The '''Translation''' column lists other judgements the judgement can safely be translated to, if a system does not support it.
 
@@ -334,7 +334,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 ! Name
 ! A.k.a.
 ! Big 5
-! Basic 2
 ! Translation
 ! Description
 |-
@@ -342,15 +341,13 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Accepted
 | Correct, Yes
 | *
-| *
 | -
 | Solves the problem
 |-
 | RE
 | Rejected
 | Incorrect, No
-| WA
-| *
+| WA?
 | -
 | Does not solve the problem
 |-
@@ -359,14 +356,12 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 |
 | *
 | RE
-| RE
 | Output is not correct
 |-
 | TLE
 | Time Limit Exceeded
 | 
 | *
-| RE
 | RE
 | Too slow
 |-
@@ -375,7 +370,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | 
 | *
 | RE
-| RE
 | Crashes
 |-
 | CE
@@ -383,14 +377,12 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | 
 | *
 | RE
-| RE
 | Does not compile
 |-
 | OLE
 | Output Limit Exceeded
 |
 | WA
-| RE
 | WA, RE
 | Output is larger than allowed
 |-
@@ -398,7 +390,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Presentation Error
 | Output Format Error
 | WA
-| RE
 | WA, RE
 | Data in output is correct, but formatting is wrong
 |-
@@ -406,7 +397,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Excessive Output
 | 
 | WA
-| RE
 | WA, RE
 | A correct output is produced, but also additional output 
 |-
@@ -414,7 +404,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Incomplete Output
 | 
 | WA
-| RE
 | WA, RE
 | Parts, but not all, of a correct output is produced
 |-
@@ -422,7 +411,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | No Output
 | 
 | WA
-| RE
 | IO, WA, RE
 | There is no output
 |-
@@ -430,7 +418,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Wallclock TIme Limit Exceeded
 |
 | TLE
-| RE
 | TLE, RE
 | CPU time limit is not exceeded, but wallclock is
 |-
@@ -438,7 +425,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Idleness Limit Exceeded
 |
 | TLE
-| RE
 | WTL, TLE, RE
 | No CPU time used for too long
 |-
@@ -446,7 +432,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Time Limit Exceeed - Correct Output
 | 
 | TLE
-| RE
 | TLE, RE
 | Too slow but producing correct output
 |-
@@ -454,7 +439,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Time Limit Exceeed - Wrong Answer
 | 
 | TLE
-| RE
 | TLE, RE
 | Too slow and also incorrect output
 |-
@@ -462,7 +446,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Time Limit Exceeed - Presentation Error
 | 
 | TLE
-| RE
 | TLE, RE
 | Too slow and also presentation error
 |-
@@ -470,7 +453,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Time Limit Exceeed - Excessive Output
 | 
 | TLE
-| RE
 | TLE, RE
 | Too slow and also excessive output
 |-
@@ -478,7 +460,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Time Limit Exceeed - Incomplete Output
 | 
 | TLE
-| RE
 | TIO, TLE, RE
 | Too slow and also incomplete output
 |-
@@ -486,7 +467,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Time Limit Exceeed - No Output
 | 
 | TLE
-| RE
 | TLE, RE
 | Too slow and also no output
 |-
@@ -494,7 +474,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Memory Limit Exceeded
 | 
 | RTE
-| RE
 | RTE, RE
 | Uses too much memory
 |- 
@@ -502,7 +481,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Security Violation
 | Illegal Function, Restricted Function
 | RTE
-| RE
 | RTE, RE
 | Uses some functionality that is not allowed by the system
 |-
@@ -510,7 +488,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Run-Time Error - Correct Output
 |
 | RTE
-| RE
 | RTE, RE
 | Crashing but producing correct output
 |-
@@ -518,7 +495,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Run-Time Error - Wrong Answer
 |
 | RTE
-| RE
 | RTE, RE
 | Crashing and also incorrect output
 |-
@@ -526,7 +502,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Run-Time Error - Presentation Error
 |
 | RTE
-| RE
 | RTE, RE
 | Crashing and also presentation error
 |-
@@ -534,7 +509,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Run-Time Error - Excessive Output
 |
 | RTE
-| RE
 | RTE, RE
 | Crashing and also excessive output
 |-
@@ -542,7 +516,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Run-Time Error - Incomplete Output
 |
 | RTE
-| RE
 | RTE, RE
 | Crashing and also incomplete output
 |-
@@ -550,7 +523,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Run-Time Error - No Output
 |
 | RTE
-| RE
 | RIO, RTE, RE
 | Crashing and also no output
 |-
@@ -558,14 +530,12 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Compile Time Limit Exceeded
 | 
 | CE
-| RE
 | CE, RE
 | Compilation took too long
 |-
 | JE
 | Judging Error
 | 
-| -
 | -
 | -
 | Something went wrong with the system
@@ -575,13 +545,11 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | 
 | -
 | -
-| -
 | Something went wrong with the submission
 |-
 | CS
 | Contact Staff
 | Other
-| -
 | -
 | -
 | Something went wrong
