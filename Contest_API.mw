@@ -1202,7 +1202,7 @@ Returned data:
 
 Lists judgements of submissions.
 
-Returns a JSON array, with each element an object describing a judging, with the following elements:
+Returns a JSON array, with each element an object describing a judgement, with the following elements:
 {| class="wikitable"
 |-
 ! Name
