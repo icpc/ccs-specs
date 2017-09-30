@@ -325,7 +325,7 @@ No access restrictions apply to a GET on this endpoint.
 
 List of standardised identifiers for known judgements:
 
-The column '''Big 5'''' lists the "big 5" equivalents, if any. A '''*''' in the column means that the judgement is one of the "big 5".
+The column '''Big 5''' lists the "big 5" equivalents, if any. A '''*''' in the column means that the judgement is one of the "big 5".
 
 The '''Translation''' column lists other judgements the judgement can safely be translated to, if a system does not support it.
 
