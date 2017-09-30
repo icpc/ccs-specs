@@ -467,14 +467,14 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | Time Limit Exceeed - Incomplete Output
 | 
 | TLE
-| TIO, TLE, RE
+| TLE, RE
 | Too slow and also incomplete output
 |-
 | TNO
 | Time Limit Exceeed - No Output
 | 
 | TLE
-| TLE, RE
+| TIO, TLE, RE
 | Too slow and also no output
 |-
 | MLE
