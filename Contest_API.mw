@@ -1020,7 +1020,14 @@ Returns a JSON array, with each element an object describing a team member, with
 | yes
 | no
 | provided by CDS
-| identifier of the team-member.
+| identifier of the team-member
+|-
+| team_id
+| ID
+| yes
+| no
+| provided by CDS
+| team of this team member
 |-
 | icpc_id
 | string
@@ -1029,33 +1036,33 @@ Returns a JSON array, with each element an object describing a team member, with
 | provided by CDS
 | external identifier from ICPC CMS
 |-
-| name
+| first_name
 | string
 | yes
 | no
 | provided by CDS
-| full name of team member.
+| first name of team member
+|-
+| last_name
+| string
+| yes
+| no
+| provided by CDS
+| last name of team member
 |-
 | sex
 | string
 | no
 | no
 | provided by CDS
-|one of '''male''', '''female''' or '''other'''
-|-
-| team_id
-| ID
-| yes
-| no
-| provided by CDS
-| team of team member.
+| one of '''male''', '''female''' or '''other'''
 |-
 | role
 | string
 | yes
 | no
 | provided by CDS
-| one of '''contestant''' or '''coach'''.
+| one of '''contestant''' or '''coach'''
 |}
 
 For all team members there are also endpoints returning files associated with the team member.
@@ -1083,8 +1090,8 @@ No access restrictions apply to a GET on this endpoint or any of the associated 
 Request:
   GET https://example.com/api/team-members
 Returned data:
-  [{"id":"john-smith","icpc_id":"32442","name":"John Smith","sex":"male","team_id":"43","role":"contestant"},
-   {"id":"osten-umlautsen","icpc_id":"32443","name":"Östen Ümlautsen","sex":"male","team_id":"43","role":"coach"}
+  [{"id":"john-smith","team_id":"43","icpc_id":"32442","first_name":"John","last_name":"Smith","sex":"male","role":"contestant"},
+   {"id":"osten-umlautsen","team_id":"43","icpc_id":null,"first_name":"Östen","last_name":"Ümlautsen","sex":"other","role":"coach"}
   ]
 
 === /submissions ===
