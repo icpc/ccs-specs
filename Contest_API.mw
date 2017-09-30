@@ -379,6 +379,13 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | RE
 | Does not compile
 |-
+| APE
+| Accepted - Presentation Error
+| Presentation Error, also see AC and PE
+| AC
+| AC
+| Solves the problem, although formatting is wrong
+|-
 | OLE
 | Output Limit Exceeded
 |
@@ -554,7 +561,6 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | -
 | Something went wrong
 |}
-
 
 ==== Example ====
 
