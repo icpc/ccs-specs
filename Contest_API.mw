@@ -740,11 +740,52 @@ Returned data:
   [{"id":"asia-74324325532","icpc_id":"7593","name":"Asia"}
   ]
 
-=== /organizations ===
+=== Organizations ===
 
-Lists all organizations (i.e. universities in ICPC context).
+Teams can be associated with organizations which will have some associated information, e.g. a logo. Typically organizations will be universities.
 
-Returns a JSON array, with each element an object describing an organization, with the following elements:
+The following endpoints are associated with organizations.
+
+{| class="wikitable"
+|-
+! Endpoint
+! Type
+! Required?
+! @WF
+! Description
+|-
+| /organizations
+| application/json
+| yes
+| provided by CCS & CDS
+| JSON Array of all organizations with elements as defined in table below
+|-
+| /organizations/<id>
+| application/json
+| yes
+| provided by CCS & CDS
+| JSON object of single organization with elements as defined in table below
+|-
+|  /organizations/<id>/logo
+| image/png
+| no
+| provided by CDS
+| logo of the organization
+|-
+|  /organizations/<id>/logo/160px
+| image/png
+| no
+| provided by CDS
+| requests a smaller logo of the organization that is 160 pixels in size. The server may return this smaller logo if it is able, or may return the same as /logo
+|-
+|  /organizations/<id>/logo/56px
+| image/png
+| no
+| provided by CDS
+| requests a smaller logo of the organization that is 56 pixels in size. The server may return this smaller logo if it is able, or may return the same as /logo
+|}
+
+JSON elements of organization objects:
 {| class="wikitable"
 |-
 ! Name
@@ -825,38 +866,9 @@ Returns a JSON array, with each element an object describing an organization, wi
 | longitude. Required iff location is present.
 |}
 
-For all organizations there are also endpoints returning files associated with the organization.
-
-{| class="wikitable"
-|-
-! Endpoint
-! Type
-! Required?
-! @WF
-! Description
-|-
-|  /organizations/<id>/logo
-| image/png
-| no
-| provided by CDS
-| logo of the organization
-|-
-|  /organizations/<id>/logo/160px
-| image/png
-| no
-| provided by CDS
-| requests a smaller logo of the organization that is 160 pixels in size. The server may return this smaller logo if it is able, or may return the same as /logo
-|-
-|  /organizations/<id>/logo/56px
-| image/png
-| no
-| provided by CDS
-| requests a smaller logo of the organization that is 56 pixels in size. The server may return this smaller logo if it is able, or may return the same as /logo
-|}
-
 ==== Access restrictions at WF ====
 
-No access restrictions apply to a GET on this endpoint or any of the associated file endpoints.
+No access restrictions apply to a GET on organizations endpoints.
 
 ==== Example ====
 
