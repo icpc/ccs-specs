@@ -1443,13 +1443,16 @@ Clients with the '''public''' role can only view clarifications replies from the
 Request:
   GET https://example.com/api/clarifications
 Returned data:
-  [{"id":"wf2017-1","from_team_id":null,"to_team_id":null,"reply_to_id":null,"problem_id":null,"text":"Do not touch anything before the contest starts!","time":"2014-06-25T11:59:27.543+01","contest_time":"-0:15:32.457"}
+  [{"id":"wf2017-1","from_team_id":null,"to_team_id":null,"reply_to_id":null,"problem_id":null,
+    "text":"Do not touch anything before the contest starts!","time":"2014-06-25T11:59:27.543+01","contest_time":"-0:15:32.457"}
   ]
 Request:
   GET https://example.com/api/clarifications
 Returned data:
-  [{"id":"1","from_team_id":"34","to_team_id":null,"reply_to_id":null,"problem_id":null,"text":"May I ask a question?","time":"2017-06-25T11:59:27.543+01","contest_time":"1:59:27.543"},
-   {"id":"2","from_team_id":null,"to_team_id":"34","reply_to_id":"1","problem_id":null,"text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}
+  [{"id":"1","from_team_id":"34","to_team_id":null,"reply_to_id":null,"problem_id":null,
+    "text":"May I ask a question?","time":"2017-06-25T11:59:27.543+01","contest_time":"1:59:27.543"},
+   {"id":"2","from_team_id":null,"to_team_id":"34","reply_to_id":"1","problem_id":null,
+    "text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}
   ]
 Request:
   GET https://example.com/api/clarifications
