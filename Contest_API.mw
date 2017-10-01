@@ -744,8 +744,7 @@ Returned data:
 
 Teams can be associated with organizations which will have some associated information, e.g. a logo. Typically organizations will be universities.
 
-The following endpoints are associated with organizations.
-
+The following endpoints are associated with organizations:
 {| class="wikitable"
 |-
 ! Endpoint
