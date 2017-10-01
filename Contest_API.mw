@@ -749,7 +749,7 @@ JSON elements of problem objects:
 The '''public''' role can only access these problems after the contest started.
 That is, before contest start this endpoint returns an empty array for clients with the '''public''' role.
 
-==== Example ====
+==== Examples ====
 
 Request:
   GET https://example.com/api/problems
@@ -757,6 +757,11 @@ Returned data:
   [{"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","test_data_count":10},
    {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","test_data_count":15}
   ]
+
+Request:
+  GET https://example.com/api/problems/asteroids
+Returned data:
+  {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","test_data_count":10}
 
 === /groups ===
 
