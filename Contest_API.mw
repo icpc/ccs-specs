@@ -274,18 +274,40 @@ Request:
 Request data:
   {"id":"wf2016","start_time":null}
 
-=== /judgement-types ===
+=== Judgement Types ===
 
-Lists all judgement types available (i.e. possible responses when judging a submission).
+Judgement types are the possible responses from the system when judging a submission.
 
-Returns a JSON array, with each element an object describing a team, with the following elements:
+The following endpoints are associated with judgement types:
+{| class="wikitable"
+|-
+! Endpoint
+! Mime-type
+! Required?
+! Source @WF
+! Description
+|-
+| /judgement-types
+| application/json
+| yes
+| CCS
+| JSON Array of all judgement types with elements as defined in table below
+|-
+| /judgement-types/<id>
+| application/json
+| yes
+| CCS
+| JSON object of single judgement type with elements as defined in table below
+|}
+
+JSON elements of judgement type objects:
 {| class="wikitable"
 |-
 ! Name
 ! Type
 ! Required?
 ! Nullable?
-! @WF
+! Source @WF
 ! Description
 |-
 | id
