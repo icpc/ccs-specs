@@ -314,28 +314,28 @@ JSON elements of judgement type objects:
 | ID
 | yes
 | no
-| provided by CCS
-| identifier of the judgement type. Usable as a label, a 2-3 letter capitalized shorthand, see table below
+| CCS
+| identifier of the judgement type, a 2-3 letter capitalized shorthand, see table below
 |-
 | name
 | string
 | yes
 | no
-| provided by CCS
+| CCS
 | name of the judgement
 |-
 | penalty
 | boolean
 | depends
 | no
-| provided by CCS
+| CCS
 | whether this judgement causes penalty time; should be present if and only if contest:penalty_time is present
 |-
 | solved
 | boolean
 | yes
 | no
-| provided by CCS
+| CCS
 | whether this judgement is considered correct
 |}
 
