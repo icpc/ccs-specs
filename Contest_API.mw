@@ -593,10 +593,33 @@ Returned data:
    {"id":"AC","name":"Accepted","penalty":false,"solved":true}
   ]
 
-=== /languages ===
+=== Languages ===
 
-Lists programming languages that can be used for submissions.
+Languages that are available for submission at the contest.
 
+The following endpoints are associated with langauges:
+{| class="wikitable"
+|-
+! Endpoint
+! Mime-type
+! Required?
+! Source @WF
+! Description
+|-
+| /languages
+| application/json
+| yes
+| CCS
+| JSON Array of all languages with elements as defined in table below
+|-
+| /languages/<id>
+| application/json
+| yes
+| CCS
+| JSON object of single languages with elements as defined in table below
+|}
+
+JSON elements of language objects:
 Returns a JSON array, with each element an object describing a language, with the following elements:
 {| class="wikitable"
 |-
@@ -604,21 +627,21 @@ Returns a JSON array, with each element an object describing a language, with th
 ! Type
 ! Required?
 ! Nullable?
-! @WF
+! Source @WF
 ! Description
 |-
 | id
 | ID
 | yes
 | no
-| provided by CCS
+| CCS
 | identifier of the language
 |-
 | name
 | string
 | yes
 | no
-| provided by CCS
+| CCS
 | name of the language
 |}
 
