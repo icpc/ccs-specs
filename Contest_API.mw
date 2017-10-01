@@ -620,7 +620,6 @@ The following endpoints are associated with langauges:
 |}
 
 JSON elements of language objects:
-Returns a JSON array, with each element an object describing a language, with the following elements:
 {| class="wikitable"
 |-
 ! Name
