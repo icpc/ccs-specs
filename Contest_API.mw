@@ -658,67 +658,89 @@ Returned data:
    {"id":"4358281971166881160","name":"Python"}
   ]
 
-=== /problems ===
+=== Problems ===
 
-Lists problems in the current contest.
+The problems to be solved in the contest
 
-Returns a JSON array, with each element an object describing a problem, with the following elements:
+The following endpoints are associated with problems:
+{| class="wikitable"
+|-
+! Endpoint
+! Mime-type
+! Required?
+! Source @WF
+! Description
+|-
+| /problems
+| application/json
+| yes
+| CCS
+| JSON Array of all problems with elements as defined in table below
+|-
+| /problems/<id>
+| application/json
+| yes
+| CCS
+| JSON object of single problem with elements as defined in table below
+|}
+
+JSON elements of problem objects:
 {| class="wikitable"
 |-
 ! Name
 ! Type
 ! Required?
 ! Nullable?
-! @WF
+! Source @WF
 ! Description
 |-
 | id
 | ID
 | yes
 | no
-| provided by CCS
+| CCS
 | identifier of the problem, at the WFs the directory name of the problem archive
 |-
 | label
 | string
 | yes
 | no
-| provided by CCS
+| CCS
 | label of the problem on the scoreboard, typically a single capitalized letter
 |-
 | name
 | string
 | yes
 | no
-| provided by CCS
+| CCS
 | name of the problem
 |-
 | ordinal
 | integer
 | yes
 | no
-| provided by CCS
+| CCS
 | ordering of problems on the scoreboard
 |-
 | rgb
 | string
 | no
 | no
-| provided by CCS
+| CCS
 | hexadecimal RGB value of problem color as specified in [http://en.wikipedia.org/wiki/Web_colors#Hex_triplet HTML hexadecimal colors], e.g. '#AC00FF' or '#fff'
 |-
 | color
 | string
 | no
 | no
-| provided by CCS
+| CCS
 | human readable color description associated to the RGB value
 |-
 | test_data_count
 | integer
 | yes
 | no
-| provided by CCS
+| CCS
 | number of test data sets
 |}
 
