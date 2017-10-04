@@ -1540,74 +1540,97 @@ Returned data:
 
 === /clarifications ===
 
-Lists clarification requests &amp; replies.
+Clarification message sent between teams and judges, a.k.a. clarification requests (questions from teams) and clarifications (answers from judges).
 
-Returns a JSON array, with each element an object describing a clarification message (i.e. a clarification request [question] from a team or a clarification response [reply from the judges]), with the following elements:
+The following endpoints are associated with clarification messages:
+{| class="wikitable"
+|-
+! Endpoint
+! Mime-type
+! Required?
+! Source @WF
+! Description
+|-
+| /clarifications
+| application/json
+| yes
+| CCS
+| JSON Array of all clarification messages with elements as defined in table below
+|-
+| /clarifications/<id>
+| application/json
+| yes
+| CCS
+| JSON object of single clarification message with elements as defined in table below
+|}
+
+JSON elements of clarification message objects:
 {| class="wikitable"
 |-
 ! Name
 ! Type
 ! Required?
 ! Nullable?
-! @WF
+! Source @WF
 ! Description
 |-
 | id
 | ID
 | yes
 | no
-| provided by CCS
+| CCS
 | identifier of the clarification
 |-
 | from_team_id
 | ID
 | yes
 | yes
-| provided by CCS
+| CCS
 | identifier of team sending this clarification request, <tt>null</tt> if a clarification sent by jury
 |-
 | to_team_id
 | ID
 | yes
 | yes
-| provided by CCS
+| CCS
 | identifier of the team receiving this reply, <tt>null</tt> if a reply to all teams or a request sent by a team
 |-
 | reply_to_id
 | ID
 | yes
 | yes
-| provided by CCS
+| CCS
 | identifier of clarification this is in response to, otherwise <tt>null</tt> 
 |-
 | problem_id
 | ID
 | yes
 | yes
-| provided by CCS
+| CCS
 | identifier of associated problem, <tt>null</tt> if not associated to a problem
 |-
 | text
 | string
 | yes
 | no
-| provided by CCS
+| CCS
 | question or reply text
 |-
 | time
 | TIME
 | yes
 | no
-| provided by CCS
+| CCS
 | time of the question/reply
 |-
 | contest_time
 | RELTIME
 | yes
 | no
-| provided by CCS
+| CCS
 | contest time of the question/reply
 |}
+
 Note that at least one of <tt>from_team_id</tt> and <tt>to_team_id</tt> has to be <tt>null</tt>. That is, teams cannot send messages to other teams.
 
 ==== Access restrictions at WF ====
