@@ -768,39 +768,61 @@ Request:
 Returned data:
   {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","test_data_count":10}
 
-=== /groups ===
+=== Groups ===
 
-Lists all groups (at the World Finals these are the super regions).
+Grouping of teams. At the World Finals these are the super regions, at regionals these are often different sites.
 
-Returns a JSON array, with each element an object describing a team, with the following elements:
+The following endpoints are associated with groups:
+{| class="wikitable"
+|-
+! Endpoint
+! Mime-type
+! Required?
+! Source @WF
+! Description
+|-
+| /groups
+| application/json
+| yes
+| CCS
+| JSON Array of all groups with elements as defined in table below
+|-
+| /groups/<id>
+| application/json
+| yes
+| CCS
+| JSON object of single group with elements as defined in table below
+|}
+
+JSON elements of group objects:
 {| class="wikitable"
 |-
 ! Name
 ! Type
 ! Required?
 ! Nullable?
-! @WF
+! Source @WF
 ! Description
 |-
 | id
 | ID
 | yes
 | no
-| provided by CCS
+| CCS
 | identifier of the group
 |-
 | icpc_id
 | string
 | no
 | yes
-| provided by CCS
+| CCS
 | external identifier from ICPC CMS
 |-
 | name
 | string
 | yes
 | no
-| provided by CCS
+| CCS
 | name of the group
 |}
 
