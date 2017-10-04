@@ -1139,13 +1139,13 @@ The following endpoints are associated with langauges:
 | /team-members
 | application/json
 | yes
-| CCS
+| CDS
 | JSON Array of all team members with elements as defined in table below
 |-
 | /team-members/<id>
 | application/json
 | yes
-| CCS
+| CDS
 | JSON object of single team member with elements as defined in table below
 |-
 | /team-members/<id>/photo
