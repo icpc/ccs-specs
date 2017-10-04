@@ -1538,7 +1538,7 @@ Returned data:
     "time":"2014-06-25T11:22:42.420+01","contest_time":"1:22:42.420"}
   ]
 
-=== /clarifications ===
+=== Clarifications ===
 
 Clarification message sent between teams and judges, a.k.a. clarification requests (questions from teams) and clarifications (answers from judges).
 
