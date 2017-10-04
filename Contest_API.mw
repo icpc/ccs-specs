@@ -981,7 +981,6 @@ Returned data:
 Teams competing in the contest.
 
 The following endpoints are associated with teams:
-s associated with the team.
 {| class="wikitable"
 |-
 ! Endpoint
