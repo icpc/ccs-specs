@@ -1227,7 +1227,7 @@ Returned data:
    {"id":"osten-umlautsen","team_id":"43","icpc_id":null,"first_name":"Östen","last_name":"Ümlautsen","sex":null,"role":"coach"}
   ]
 
-=== /submissions ===
+=== Submissions ===
 
 Submissions, a.k.a. attempts to solve problems in the contest.
 
