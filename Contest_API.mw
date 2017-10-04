@@ -2001,7 +2001,7 @@ The feed is served as [http://specs.okfnlabs.org/ndjson/ Newline delimited JSON]
 This document uses the term "element". An element corresponds to a single object (run, judgement, language, team, etc.).
 
 The general format for events is:
-  {id": "<id>", "type": "<event type>", ""op": "<type of operation>", "data": <JSON data for element> }
+  {id": "<id>", "type": "<event type>", "op": "<type of operation>", "data": <JSON data for element> }
 
 {| class="wikitable"
 |-
