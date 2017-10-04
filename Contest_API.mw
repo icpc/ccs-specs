@@ -160,7 +160,7 @@ The following endpoint is associated with contest:
 | application/json
 | yes
 | CCS
-| JSON object of single group with elements as defined in table below
+| JSON object of single contest with elements as defined in table below
 |}
 
 On a system that supports multiple contests the '''baseurl''' could look something like <tt>basebaseurl/contests/<id></tt>, i.e. this endpoint is actually an element in the collection '''contests''' one level higher. On a system that does not support multiple contests the '''baseurl''' could look like <tt>basebaseurl/contest</tt>.
