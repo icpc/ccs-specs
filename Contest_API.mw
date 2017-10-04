@@ -1123,84 +1123,96 @@ Returned data:
    {"id":"123","name":"CMU1","organization_id":"inst105","group_id":"8"}
   ]
 
-=== /team-members ===
+=== Team members ===
 
-List all team members in the contest. This endpoint is optional, but if it is provided elements are required as specified below.
+Team members of teams in the contest.
 
-Returns a JSON array, with each element an object describing a team member, with the following elements:
+The following endpoints are associated with langauges:
+{| class="wikitable"
+|-
+! Endpoint
+! Mime-type
+! Required?
+! Source @WF
+! Description
+|-
+| /team-members
+| application/json
+| yes
+| CCS
+| JSON Array of all team members with elements as defined in table below
+|-
+| /team-members/<id>
+| application/json
+| yes
+| CCS
+| JSON object of single team member with elements as defined in table below
+|-
+| /team-members/<id>/photo
+| image/png or image/jpeg
+| no
+| CDS
+| registration photo of the team member
+|}
+
+JSON elements of team member objects:
 {| class="wikitable"
 |-
 ! Name
 ! Type
 ! Required?
 ! Nullable?
-! @WF
+! Source @WF
 ! Description
 |-
 | id
 | ID
 | yes
 | no
-| provided by CDS
+| CDS
 | identifier of the team-member
-|-
-| team_id
-| ID
-| yes
-| no
-| provided by CDS
-| team of this team member
 |-
 | icpc_id
 | string
 | no
 | yes
-| provided by CDS
+| CDS
 | external identifier from ICPC CMS
+|-
+| team_id
+| ID
+| yes
+| no
+| CDS
+| team of this team member
 |-
 | first_name
 | string
 | yes
 | no
-| provided by CDS
+| CDS
 | first name of team member
 |-
 | last_name
 | string
 | yes
 | no
-| provided by CDS
+| CDS
 | last name of team member
 |-
 | sex
 | string
 | no
 | yes
-| provided by CDS
+| CDS
 | either '''male''' or '''female''', or possibly <tt>null</tt>
 |-
 | role
 | string
 | yes
 | no
-| provided by CDS
+| CDS
 | one of '''contestant''' or '''coach'''
-|}
-
-For all team members there are also endpoints returning files associated with the team member.
-{| class="wikitable"
-|-
-! Endpoint
-! Type
-! Required?
-! @WF
-! Description
-|-
-| /team-members/<id>/photo
-| image/png or image/jpeg
-| no
-| provided by CDS
-| registration photo of the team member
 |}
 
 ==== Access restrictions at WF ====
