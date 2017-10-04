@@ -1783,65 +1783,79 @@ Returned data:
    {"id":"first-to-solve-b","citation":"First to solve problem B","team_ids":[]}
   ]
 
-=== /scoreboard ===
+=== Scoreboard ===
 
-Provides the scoreboard of the current contest.
+Scoreboard of the contest.
 
-Since this is generated data, only the '''GET''' method is allowed
-here, irrespective of role.
+Since this is generated data, only the '''GET''' method is allowed here, irrespective of role.
 
-Returns a JSON array where each element is an object that represents a row for one team. The array is
+The following endpoints are associated with scoreboard:
+{| class="wikitable"
+|-
+! Endpoint
+! Mime-type
+! Required?
+! Source @WF
+! Description
+|-
+| /scoreboard
+| application/json
+| yes
+| CCS
+| JSON array of scoreboard rows with elements as defined in table below
+|}
+
+JSON elements of scoreboard row objects. Scoreboard array is
 sorted according to rank and alphabetical on team name within identically ranked teams.
-Each row object contains:
 {| class="wikitable"
 |-
 ! Name
 ! Type
 ! Required?
 ! Nullable?
-! @WF
+! Source @WF
 ! Description
 |-
 | rank
 | integer
 | yes
 | no
-| provided by CCS
+| CCS
 | rank of this team, 1-based and duplicate in case of ties
 |-
 | team_id
 | ID
 | yes
 | no
-| provided by CCS
+| CCS
 | identifier of the team
 |-
 | score
 | object
 | yes
 | no
-| provided by CCS
+| CCS
 | JSON object as specified below (for possible extension to other scoring methods)
 |-
 | score.num_solved
 | integer
 | yes
 | no
-| provided by CCS
+| CCS
 | number of problems solved by the team
 |-
 | score.total_time
 | integer
 | yes
 | no
-| provided by CCS
+| CCS
 | total penalty time accrued by the team
 |-
 | problems
 | array of object
 | yes
 | no
-| provided by CCS
+| CCS
 | JSON array of problems with scoring data, see below for the specification of each element
 |}
 
@@ -1852,42 +1866,42 @@ Each problem element within the scoreboard consists of:
 ! Type
 ! Required?
 ! Nullable?
-! @WF
+! Source @WF
 ! Description
 |-
 | problem_id
 | ID
 | yes
 | no
-| provided by CCS
+| CCS
 | identifier of the problem
 |-
 | num_judged
 | integer
 | yes
 | no
-| provided by CCS
+| CCS
 | number of judged submissions (including possibly a final correct one)
 |-
 | num_pending
 | integer
 | yes
 | no
-| provided by CCS
+| CCS
 | number of pending submissions (either queued or due to freeze)
 |-
 | solved
 | boolean
 | yes
 | no
-| provided by CCS
+| CCS
 | whether the team solved this problem
 |-
 | time
 | integer
 | depends
 | no
-| provided by CCS
+| CCS
 | minutes into the contest when this problem was solved by the team. Required iff <tt>solved=true</tt>
 |}
 
