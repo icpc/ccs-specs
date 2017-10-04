@@ -1262,13 +1262,13 @@ The following endpoints are associated with submissions:
 ! Source @WF
 ! Description
 |-
-| /languages
+| /submissions
 | application/json
 | yes
 | CCS
 | JSON Array of all submissions with elements as defined in table below
 |-
-| /languages/<id>
+| /submissions/<id>
 | application/json
 | yes
 | CCS
