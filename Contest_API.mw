@@ -1229,93 +1229,104 @@ Returned data:
 
 === /submissions ===
 
-List of submissions in the current contest.
+Submissions, a.k.a. attempts to solve problems in the contest.
 
-Returns a JSON array, with each element an object describing a submission, with the following elements:
+The following endpoints are associated with submissions:
+{| class="wikitable"
+|-
+! Endpoint
+! Type
+! Required?
+! Source @WF
+! Description
+|-
+| /languages
+| application/json
+| yes
+| CCS
+| JSON Array of all submissions with elements as defined in table below
+|-
+| /languages/<id>
+| application/json
+| yes
+| CCS
+| JSON object of single submission with elements as defined in table below
+|-
+| /submissions/<id>/files
+| application/zip
+| yes
+| CCS
+| submission files, contained at the root of the zip archive
+|-
+| /submissions/<id>/reaction
+| video/?
+| no
+| CDS
+| reaction video from team's webcam
+|}
+
+The endpoint '''/files''' provides the file(s) of a given submission as a zip archive. These should be stored directly from the root of the zip file, i.e. there should not be extra directories (or files) added unless these are explicitly part of the submission content.
+For '''POST''', '''PUT''' and '''PATCH''' methods, '''files''' would be included as an attribute in the submission and contain the base64-encoded string of the zip archive.
+
+JSON elements of submission objects:
 {| class="wikitable"
 |-
 ! Name
 ! Type
 ! Required?
 ! Nullable?
-! @WF
+! Source @WF
 ! Description
 |-
 | id
 | ID
 | yes
 | no
-| provided by CCS
+| CCS
 | identifier of the submission. Usable as a label, typically a low incrementing number
 |-
 | language_id
 | ID
 | yes
 | no
-| provided by CCS
+| CCS
 | identifier of the language submitted for
 |-
 | problem_id
 | ID
 | yes
 | no
-| provided by CCS
+| CCS
 | identifier of the problem submitted for
 |-
 | team_id
 | ID
 | yes
 | no
-| provided by CCS
+| CCS
 | identifier of the team that made the submission
 |-
 | time
 | TIME
 | yes
 | no
-| provided by CCS
+| CCS
 | timestamp of when the submission was made
 |-
 | contest_time
 | RELTIME
 | yes
 | no
-| provided by CCS
+| CCS
 | contest relative time when the submission was made
 |-
 | entry_point
 | string
 | yes
 | yes
-| provided by CCS
+| CCS
 | code entry point for specific languages
 |}
-
-For all submissions there are also endpoints returning files associated with the submission.
-
-{| class="wikitable"
-|-
-! Endpoint
-! Type
-! Required?
-! @WF
-! Description
-|-
-| /submissions/<id>/files
-| application/zip
-| yes
-| provided by CCS
-| submission files, contained at the root of the zip archive
-|-
-| /submissions/<id>/reaction
-| video/?
-| no
-| provided by CDS
-| reaction video from team's webcam
-|}
-
-The endpoint '''/files''' provides the file(s) of a given submission as a zip archive. These should be stored directly from the root of the zip file, i.e. there should not be extra directories (or files) added unless these are explicitly part of the submission content.
-For '''POST''', '''PUT''' and '''PATCH''' methods, '''files''' would be included as an attribute in the submission and contain the base64-encoded string of the zip archive.
 
 ==== Access restrictions at WF ====
 
