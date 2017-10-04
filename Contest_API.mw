@@ -1342,71 +1342,93 @@ Returned data:
     "language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034","entry_point":"Main"}
   ]
 
-=== /judgements ===
+=== Judgements ===
 
-Lists judgements of submissions.
+Judgements for submissions in the contest.
 
-Returns a JSON array, with each element an object describing a judgement, with the following elements:
+The following endpoints are associated with judgements:
+{| class="wikitable"
+|-
+! Endpoint
+! Mime-type
+! Required?
+! Source @WF
+! Description
+|-
+| /judgements
+| application/json
+| yes
+| CCS
+| JSON Array of all judgements with elements as defined in table below
+|-
+| /judgements/<id>
+| application/json
+| yes
+| CCS
+| JSON object of single judgement with elements as defined in table below
+|}
+
+JSON elements of judgement objects:
 {| class="wikitable"
 |-
 ! Name
 ! Type
 ! Required?
 ! Nullable?
-! @WF
+! Source @WF
 ! Description
 |-
 | id
 | ID
 | yes
 | no
-| provided by CCS
+| CCS
 | identifier of the judgement
 |-
 | submission_id
 | ID
 | yes
 | no
-| provided by CCS
+| CCS
 | identifier of the submission judged
 |-
 | judgement_type_id
 | ID
 | yes
 | yes
-| provided by CCS
+| CCS
 | the verdict of this judgement
 |-
 | start_time
 | TIME
 | yes
 | no
-| provided by CCS
+| CCS
 | absolute time when judgement started
 |-
 | start_contest_time
 | RELTIME
 | yes
 | no
-| provided by CCS
+| CCS
 | contest relative time when judgement started
 |-
 | end_time
 | TIME
 | yes
 | yes
-| provided by CCS
+| CCS
 | absolute time when judgement completed
 |-
 | end_contest_time
 | RELTIME
 | yes
 | yes
-| provided by CCS
+| CCS
 | contest relative time when judgement completed
 |}
 
-When a judgement is started, each of <tt>judgement_type_id</tt>, <tt>end_time</tt> and <tt>end_contest_time</tt> will be <tt>null</tt>.
+When a judgement is started, each of <tt>judgement_type_id</tt>, <tt>end_time</tt> and <tt>end_contest_time</tt> will be <tt>null</tt> (or missing).
 These are set when the judgement is completed.
 
 ==== Access restrictions at WF ====
