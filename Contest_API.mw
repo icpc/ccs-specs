@@ -1660,39 +1660,61 @@ Returned data:
     {"id":"2","to_team_id":"34","reply_to_id":"1","text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}
   ]
 
-=== /awards ===
+=== Awards ===
 
-Lists all awards (medals, first to solve, etc.). This endpoint is optional, but if it is provided all elements are required.
+Awards such as medals, first to solve, etc.
 
-Returns a JSON array, with each element an object describing an award, with the following elements:
+The following endpoints are associated with awards:
+{| class="wikitable"
+|-
+! Endpoint
+! Mime-type
+! Required?
+! Source @WF
+! Description
+|-
+| /awards
+| application/json
+| yes
+| CCS
+| JSON Array of all awards with elements as defined in table below
+|-
+| /awards/<id>
+| application/json
+| yes
+| CCS
+| JSON object of single award with elements as defined in table below
+|}
+
+JSON elements of award objects:
 {| class="wikitable"
 |-
 ! Name
 ! Type
 ! Required?
 ! Nullable?
-! @WF
+! Source @WF
 ! Description
 |-
 | id
 | ID
 | yes
 | no
-| provided by CDS
+| CDS
 | identifier of the award.
 |-
 | citation
 | string
 | yes
 | no
-| provided by CDS
+| CDS
 | award citation, e.g. "Gold medal winner"
 |-
 | team_ids
 | array of ID
 | yes
 | no
-| provided by CDS
+| CDS
 | JSON array of team ids receiving this award
 |}
 
