@@ -1930,6 +1930,22 @@ Provides the event feed for the current contest. This is effectively a changelog
 
 Since this is generated data, only the '''GET''' method is allowed here, irrespective of role.
 
+The following endpoint is associated with event feed:
+{| class="wikitable"
+|-
+! Endpoint
+! Mime-type
+! Required?
+! Source @WF
+! Description
+|-
+| /event-feed
+| application/x-ndjson
+| yes
+| CCS
+| NDJSON feed of events as defined below
+|}
+
 Multiple requests of the event feed must return the exact same events in the exact same order, except that events filtered out by the feed options must be left out and possible new elements are added in later requests.
 
 To ensure keep alive, if no event is sent in 120 seconds, a newline must be sent.
