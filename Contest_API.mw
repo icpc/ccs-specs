@@ -1446,60 +1446,82 @@ Returned data:
     "start_contest_time":"1:24:03.921","end_time":null,"end_contest_time":null}
   ]
 
-=== /runs ===
+=== Runs ===
 
-Lists judgements of individual test cases of a submission.
+Runs are judgements of individual test cases of a submission.
 
-Returns a JSON array, with each element an object describing a judging, with the following elements:
+The following endpoints are associated with runs:
+{| class="wikitable"
+|-
+! Endpoint
+! Mime-type
+! Required?
+! Source @WF
+! Description
+|-
+| /runs
+| application/json
+| yes
+| CCS
+| JSON Array of all runs with elements as defined in table below
+|-
+| /runs/<id>
+| application/json
+| yes
+| CCS
+| JSON object of single run with elements as defined in table below
+|}
+
+JSON elements of run objects:
 {| class="wikitable"
 |-
 ! Name
 ! Type
 ! Required?
 ! Nullable?
-! @WF
+! Source @WF
 ! Description
 |-
 | id
 | ID
 | yes
 | no
-| provided by CCS
+| CCS
 | identifier of the run
 |-
 | judgement_id
 | ID
 | yes
 | no
-| provided by CCS
+| CCS
 | identifier of the judgement this is part of
 |-
 | ordinal
 | integer
 | yes
 | no
-| provided by CCS
+| CCS
 | ordering of runs in the judgement (implicit from the test cases)
 |-
 | judgement_type_id
 | ID
 | yes
 | no
-| provided by CCS
+| CCS
 | the verdict of this judgement (i.e. a judgement type)
 |-
 | time
 | TIME
 | yes
 | no
-| provided by CCS
+| CCS
 | absolute time when run completed
 |-
 | contest_time
 | RELTIME
 | yes
 | no
-| provided by CCS
+| CCS
 | contest relative time when run completed
 |}
 
