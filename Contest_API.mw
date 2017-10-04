@@ -1789,7 +1789,7 @@ Scoreboard of the contest.
 
 Since this is generated data, only the '''GET''' method is allowed here, irrespective of role.
 
-The following endpoint are associated with scoreboard:
+The following endpoint is associated with scoreboard:
 {| class="wikitable"
 |-
 ! Endpoint
