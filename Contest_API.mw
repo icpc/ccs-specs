@@ -976,122 +976,135 @@ Returned data:
    {"id":"inst105","name":"Carnegie Mellon University","country":"USA"}
   ]
 
-=== /teams ===
+=== Teams ===
 
-Lists all teams in the contest.
+Teams competing in the contest.
 
-Returns a JSON array, with each element an object describing a team, with the following elements:
+The following endpoints are associated with teams:
+s associated with the team.
+{| class="wikitable"
+|-
+! Endpoint
+! Mime-type
+! Required?
+! Source @WF
+! Description
+|-
+| /teams
+| application/json
+| yes
+| CCS & CDS
+| JSON Array of all teams with elements as defined in table below
+|-
+| /teams/<id>
+| application/json
+| yes
+| CCS & CDS
+| JSON object of single team with elements as defined in table below
+|-
+| /teams/<id>/photo
+| image/png or image/jpeg
+| no
+| CDS
+| registration photo of the team
+|-
+| /teams/<id>/video
+| video/?
+| no
+| CDS
+| registration video of the team
+|-
+| /teams/<id>/backup
+| application/zip
+| no
+| CDS
+| latest file backup of the team machine as a zip archive
+|-
+| /teams/<id>/desktop
+| STREAM
+| no
+| CDS
+| streaming video of the team desktop
+|-
+| /teams/<id>/webcam
+| STREAM
+| no
+| CDS
+| streaming video of the team webcam
+|}
+
+JSON elements of table objects:
 {| class="wikitable"
 |-
 ! Name
 ! Type
 ! Required?
 ! Nullable?
-! @WF
+! Source @WF
 ! Description
 |-
 | id
 | ID
 | yes
 | no
-| provided by CCS
+| CCS
 | identifier of the team. Usable as a label, at WFs normally the team seat number
 |-
 | icpc_id
 | string
 | no
 | yes
-| provided by CCS
+| CCS
 | external identifier from ICPC CMS
 |-
 | name
 | string
 | yes
 | no
-| provided by CCS
+| CCS
 | name of the team
 |-
 | organization_id
 | ID
 | no
 | yes
-| provided by CCS
+| CCS
 | identifier of the organization (e.g. university or other entity) that team is affiliated to
 |-
 | group_id
 | ID
 | no
 | yes
-| provided by CCS
+| CCS
 | identifier of the group this team is part of (in ICPC WFs these are the super-regions)
 |-
 | location
 | object
 | no
 | no
-| provided by CDS
+| CDS
 | JSON object as specified below.
 |-
 | location.x
 | float
 | depends
 | no
-|provided by CDS
+| CDS
 | Team's x position in meters. Required iff location is present
 |-
 | location.y
 | float
 | depends
 | no
-| provided by CDS
+| CDS
 | Team's y position in meters. Required iff location is present
 |-
 | location.rotation
 | float
 | depends
 | no
-| provided by CDS
+| CDS
 | Team's rotation in degrees. Required iff location is present
-|}
-
-For all teams there are also endpoints returning files associated with the team.
-{| class="wikitable"
-|-
-! Endpoint
-! Type
-! Required?
-! @WF
-! Description
-|-
-| /teams/<id>/photo
-| image/png or image/jpeg
-| no
-| provided by CDS
-| registration photo of the team
-|-
-| /teams/<id>/video
-| video/?
-| no
-| provided by CDS
-| registration video of the team
-|-
-| /teams/<id>/backup
-| application/zip
-| no
-| provided by CDS
-| latest file backup of the team machine as a zip archive
-|-
-| /teams/<id>/desktop
-| STREAM
-| no
-| provided by CDS
-| streaming video of the team desktop
-|-
-| /teams/<id>/webcam
-| STREAM
-| no
-| provided by CDS
-| streaming video of the team webcam
 |}
 
 ==== Access restrictions at WF ====
