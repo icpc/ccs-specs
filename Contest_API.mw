@@ -1698,13 +1698,13 @@ The following endpoints are associated with awards:
 | /awards
 | application/json
 | no
-| CCS
+| CDS
 | JSON Array of all awards with elements as defined in table below
 |-
 | /awards/<id>
 | application/json
 | no
-| CCS
+| CDS
 | JSON object of single award with elements as defined in table below
 |}
 
