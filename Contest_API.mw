@@ -740,7 +740,7 @@ JSON elements of problem objects:
 | name of the problem
 |-
 | ordinal
-| integer
+| ORDINAL
 | yes
 | no
 | CCS
@@ -1516,7 +1516,7 @@ JSON elements of run objects:
 | identifier of the judgement this is part of
 |-
 | ordinal
-| integer
+| ORDINAL
 | yes
 | no
 | CCS
