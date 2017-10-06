@@ -66,26 +66,22 @@ Role-based access may completely hide some objects from the user, may omit certa
 By default, the public user has read-only access (no '''POST''', '''PUT''', '''PATCH''' or '''DELETE''' methods allowed) and does not have access to judgements and runs from submissions made after the contest freeze time.
 '''TODO''': Details are listed for each object.
 
-=== Recurring details ===
+=== JSON attribute types ===
 
-'''Absolute timestamps''' (type <tt>&lt;TIME&gt;</tt> in the specification)
-are human-readable, given in [https://en.wikipedia.org/wiki/ISO_8601 ISO 8601] extended combined date/time format with timezone: <tt>yyyy-mm-ddThh:mm:ss(.uuu)?[+-]zz(:mm)?</tt> (or timezone <tt>Z</tt> for UTC).
+Attribute types are specified as one of the [https://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example standard JSON types], or one of the more specific types below.
 
-'''Relative times''' (type <tt>&lt;RELTIME&gt;</tt> in the specification)
-are human-readable, given in a slight modification of the [https://en.wikipedia.org/wiki/ISO_8601 ISO 8601] extended time format: <tt>(-)?(h)*h:mm:ss(.uuu)?</tt>
+;Absolute timestamps
+: (type '''<tt>TIME</tt>''' in the specification) are human-readable, given in [https://en.wikipedia.org/wiki/ISO_8601 ISO 8601] extended combined date/time format with timezone: <tt>yyyy-mm-ddThh:mm:ss(.uuu)?[+-]zz(:mm)?</tt> (or timezone <tt>Z</tt> for UTC).
+;Relative times
+: (type '''<tt>RELTIME</tt>''' in the specification) are human-readable, given in a slight modification of the [https://en.wikipedia.org/wiki/ISO_8601 ISO 8601] extended time format: <tt>(-)?(h)*h:mm:ss(.uuu)?</tt>
+;Identifiers
+: (type '''<tt>ID</tt>''' in the specification) are given as string consisting of characters <tt>[a-zA-Z0-9-_]</tt> of length at most 36 and not starting with a <tt>-</tt> (dash).
+: Ids are assigned by the person or system that is the source of the object, and must be maintained by downstream systems. For example, the person configuring a contest on disk will typically define the id for each team, and any CCS or CDS that exposes the team must use the same id.
+: Some ids are also used as identifiable labels and are marked below along with the recommended format. These ids should be meaningful for human communication (e.g. team "43", problem "A") and are as short as reasonable but not more than 10 characters. Ids not marked as labels may be random characters and cannot be assumed to be suitable for display purposes.
+;Ordinals
+: (type '''<tt>ORDINAL</tt>''' in the specification) are used to give an explicit order to a list of objects. Ordinal attributes are integers and must be non-negative and unique in a list of objects, and they should typically be low numbers starting from zero. However, clients must not assume that the ordinals start at zero nor that they are sequential. Instead the ordinal values should be used to sort the list of objects.
 
-'''Identifiers''' (type <tt>&lt;ID&gt;</tt> in the specification)
-are given as string consisting of characters <tt>[a-zA-Z0-9-_]</tt> of length at most 36 and not starting with a <tt>-</tt> (dash).
-
-Ids are assigned by the person or system that is the source of the object, and must be maintained by downstream systems. For example, the person configuring a contest on disk will typically define the id for each team, and any CCS or CDS that exposes the team must use the same id.
-
-Some ids are also used as identifiable labels and are marked below along with the recommended format. These ids should be meaningful for human communication (e.g. team "43", problem "A") and are as short as reasonable but not more than 10 characters. Ids not marked as labels may be random characters and cannot be assumed to be suitable for display purposes.
-
-'''Ordinals''' (with type <tt>integer</tt>)
-are used to give an explicit order to a list of objects. Ordinal attributes must be non-negative and unique in a list of objects, and they should typically be low numbers starting from zero.
-However, clients must not assume that the ordinals start at zero nor that they are sequential. Instead the ordinal values should be used to sort the list of objects.
-
-'''File''' content is not included in the JSON in GET responses, but can be accessed via a corresponding child URL, e.g. <tt>/organizations/43/logo</tt>. The mime type must be provided by the server, and servers may support content negotiation for different mime types. When using POST, PUT or PATCH to add or update an object, then the file content should be included within the JSON of the parent object as a base64 encoded string, e.g.
+Besides the normal attributes, there are also endpoints that provide files or streams, such as <tt>/organizations/inst-123/logo</tt>, <tt>/submissions/526/files</tt> or <tt>/teams/42/webcam</tt>. In this case the server must provide the appropriate mime type and may support content negotiation for different mime types. Support to upload such files, if implemented by the server, should be done by accepting in a POST, PUT or PATCH to the parent collection or element endpoint an extra attribute with the same name and with value a base64 encoded string of the associated file contents. For example
     POST https://example.com/api/organizations
 with JSON data
     { "id":"inst105",
@@ -93,8 +89,6 @@ with JSON data
       ...
       "logo":"&lt;base64 string&gt;"
     }
-
-'''Stream''' content (type <tt>&lt;STREAM&gt;</tt> in the specification) represent streaming content sources like live video. They are not included in JSON GET responses, but can be accessed via a corresponding child URL, e.g. teams/43/desktop will stream a team's desktop video. Some servers may support content negotiation for different mime types.
 
 == Extensibility ==
 
