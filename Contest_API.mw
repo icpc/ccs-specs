@@ -176,77 +176,77 @@ Returns a JSON object with the elements below. If there is no current (this may 
 | ID
 | yes
 | no
-| provided by CCS
+| CCS
 | identifier of the current contest
 |-
 | name
 | string
 | yes
 | no
-| provided by CCS
+| CCS
 | display name of the contest
 |-
 | formal_name
 | string
 | no
 | no
-| provided by CCS
+| CCS
 | full name of the contest
 |-
 | start_time
 | TIME
 | yes
 | yes
-| provided by CCS
+| CCS
 | start time of the contest, may be <tt>null</tt> during contest pause
 |-
 | duration
 | RELTIME
 | yes
 | no
-| provided by CCS
+| CCS
 | length of the contest
 |-
 | scoreboard_freeze_duration
 | RELTIME
 | no
 | no
-| provided by CCS
+| CCS
 | how long the scoreboard is frozen before the end of the contest
 |-
 | penalty_time
 | integer
 | no
 | no
-| provided by CCS
+| CCS
 | penalty time for a wrong submission, in minutes
 |-
 | state
 | object
 | yes
 | no
-| provided by CCS
+| CCS
 | JSON object as specified below
 |-
 | state.running
 | boolean
 | yes
 | no
-| provided by CCS
+| CCS
 | whether the contest is currently running
 |-
 | state.frozen
 | boolean
 | depends
 | no
-| provided by CCS
+| CCS
 | whether the scoreboard is currently frozen. Required iff scoreboard_freeze_duration is present.
 |-
 | state.final
 | boolean
 | yes
 | no
-| provided by CCS
+| CCS
 | whether the standings have been finalized
 |}
 
