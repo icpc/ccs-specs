@@ -31,7 +31,10 @@ while the URL path
 returns
  { "id":<id1>, <element specific data for id1>}
 
-The standard HTTP verbs are used:
+=== HTTP methods ===
+
+The current version of this specification only requires support for the '''GET''' method, unless explicitly specified otherwise in an endpoint below (see [[#PATCH_start_time|PATCH start_time]]).
+However, for future compatibility below are already listed other methods with their expected behavior, if implemented.
 ;GET
 : Read data. This method is idempotent and does not modify any data. It can be used to request a whole collection or a specific element.
 ;POST
@@ -44,7 +47,7 @@ The standard HTTP verbs are used:
 : with JSON contents
 : <code>{"name":"Our cool new team name"}</code>
 : No updates of the '''id''' attribute are allowed either.
-;DELETE (to be included)
+;DELETE
 : Delete a specific element. Idempotent, but may return a 404 status code when repeated. Any provided data is ignored. Example:
 : <code>DELETE https://example.com/api/teams/8</code>
 : Any deletes should always keep the referential integrity intact: at no time should an ID exist that refers to a deleted element. This can be ensured by either first deleting referenced elements (i.e. "ON DELETE CASCADE" in SQL terms) or setting the referencing ID to <tt>null</tt> (i.e. "ON DELETE SET NULL" in SQL terms) when this is allowed.
