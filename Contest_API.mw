@@ -151,13 +151,13 @@ The following endpoint is associated with contest:
 | application/json
 | no
 | not used
-| JSON array of all contests with elements as defined in table below
+| JSON array of all contests with elements as defined in the table below
 |-
 | /
 | application/json
 | yes
 | CCS
-| JSON object of single contest with elements as defined in table below
+| JSON object of a single contest with elements as defined in the table below
 |}
 
 On a system that supports multiple contests the '''baseurl''' could look something like <tt>basebaseurl/contests/<id></tt>, i.e. this endpoint is actually an element in the collection '''contests''' one level higher. On a system that does not support multiple contests the '''baseurl''' could look like <tt>basebaseurl/contest</tt>.
@@ -226,7 +226,7 @@ Returns a JSON object with the elements below. If there is no current (this may 
 | yes
 | no
 | CCS
-| JSON object as specified below
+| JSON object as specified in the rows below
 |-
 | state.running
 | boolean
@@ -310,13 +310,13 @@ The following endpoints are associated with judgement types:
 | application/json
 | yes
 | CCS
-| JSON Array of all judgement types with elements as defined in table below
+| JSON array of all judgement types with elements as defined in the table below
 |-
 | /judgement-types/<id>
 | application/json
 | yes
 | CCS
-| JSON object of single judgement type with elements as defined in table below
+| JSON object of a single judgement type with elements as defined in the table below
 |}
 
 JSON elements of judgement type objects:
@@ -634,13 +634,13 @@ The following endpoints are associated with languages:
 | application/json
 | yes
 | CCS
-| JSON Array of all languages with elements as defined in table below
+| JSON array of all languages with elements as defined in the table below
 |-
 | /languages/<id>
 | application/json
 | yes
 | CCS
-| JSON object of a single language with elements as defined in table below
+| JSON object of a single language with elements as defined in the table below
 |}
 
 JSON elements of language objects:
@@ -699,13 +699,13 @@ The following endpoints are associated with problems:
 | application/json
 | yes
 | CCS
-| JSON Array of all problems with elements as defined in table below
+| JSON array of all problems with elements as defined in the table below
 |-
 | /problems/<id>
 | application/json
 | yes
 | CCS
-| JSON object of single problem with elements as defined in table below
+| JSON object of a single problem with elements as defined in the table below
 |}
 
 JSON elements of problem objects:
@@ -804,13 +804,13 @@ The following endpoints are associated with groups:
 | application/json
 | yes
 | CCS
-| JSON Array of all groups with elements as defined in table below
+| JSON array of all groups with elements as defined in the table below
 |-
 | /groups/<id>
 | application/json
 | yes
 | CCS
-| JSON object of single group with elements as defined in table below
+| JSON object of a single group with elements as defined in the table below
 |}
 
 JSON elements of group objects:
@@ -874,13 +874,13 @@ The following endpoints are associated with organizations:
 | application/json
 | yes
 | CCS & CDS
-| JSON Array of all organizations with elements as defined in table below
+| JSON array of all organizations with elements as defined in the table below
 |-
 | /organizations/<id>
 | application/json
 | yes
 | CCS & CDS
-| JSON object of single organization with elements as defined in table below
+| JSON object of a single organization with elements as defined in the table below
 |-
 |  /organizations/<id>/logo
 | image/png
@@ -965,21 +965,21 @@ JSON elements of organization objects:
 | no
 | yes
 | CDS
-| JSON object as specified below
+| JSON object as specified in the rows below
 |-
 | location.latitude
 | float
 | depends
 | no
 | CDS
-| latitude. Required iff location is present.
+| Latitude in degrees. Required iff location is present.
 |-
 | location.longitude
 | float
 | depends
 | no
 | CDS
-| longitude. Required iff location is present.
+| Longitude in degrees. Required iff location is present.
 |}
 
 ==== Access restrictions at WF ====
@@ -1012,13 +1012,13 @@ The following endpoints are associated with teams:
 | application/json
 | yes
 | CCS & CDS
-| JSON Array of all teams with elements as defined in table below
+| JSON array of all teams with elements as defined in the table below
 |-
 | /teams/<id>
 | application/json
 | yes
 | CCS & CDS
-| JSON object of single team with elements as defined in table below
+| JSON object of a single team with elements as defined in the table below
 |-
 | /teams/<id>/photo
 | image/png or image/jpeg
@@ -1101,28 +1101,28 @@ JSON elements of table objects:
 | no
 | no
 | CDS
-| JSON object as specified below.
+| JSON object as specified in the rows below
 |-
 | location.x
 | float
 | depends
 | no
 | CDS
-| Team's x position in meters. Required iff location is present
+| Team's x position in meters. Required iff location is present.
 |-
 | location.y
 | float
 | depends
 | no
 | CDS
-| Team's y position in meters. Required iff location is present
+| Team's y position in meters. Required iff location is present.
 |-
 | location.rotation
 | float
 | depends
 | no
 | CDS
-| Team's rotation in degrees. Required iff location is present
+| Team's rotation in degrees. Required iff location is present.
 |}
 
 ==== Access restrictions at WF ====
@@ -1158,13 +1158,13 @@ The following endpoints are associated with langauges:
 | application/json
 | no
 | CDS
-| JSON Array of all team members with elements as defined in table below
+| JSON array of all team members with elements as defined in the table below
 |-
 | /team-members/<id>
 | application/json
 | no
 | CDS
-| JSON object of single team member with elements as defined in table below
+| JSON object of a single team member with elements as defined in the table below
 |-
 | /team-members/<id>/photo
 | image/png or image/jpeg
@@ -1263,13 +1263,13 @@ The following endpoints are associated with submissions:
 | application/json
 | yes
 | CCS
-| JSON Array of all submissions with elements as defined in table below
+| JSON array of all submissions with elements as defined in the table below
 |-
 | /submissions/<id>
 | application/json
 | yes
 | CCS
-| JSON object of single submission with elements as defined in table below
+| JSON object of a single submission with elements as defined in the table below
 |-
 | /submissions/<id>/files
 | application/zip
@@ -1378,13 +1378,13 @@ The following endpoints are associated with judgements:
 | application/json
 | yes
 | CCS
-| JSON Array of all judgements with elements as defined in table below
+| JSON array of all judgements with elements as defined in the table below
 |-
 | /judgements/<id>
 | application/json
 | yes
 | CCS
-| JSON object of single judgement with elements as defined in table below
+| JSON object of a single judgement with elements as defined in the table below
 |}
 
 JSON elements of judgement objects:
@@ -1482,13 +1482,13 @@ The following endpoints are associated with runs:
 | application/json
 | yes
 | CCS
-| JSON Array of all runs with elements as defined in table below
+| JSON array of all runs with elements as defined in the table below
 |-
 | /runs/<id>
 | application/json
 | yes
 | CCS
-| JSON object of single run with elements as defined in table below
+| JSON object of a single run with elements as defined in the table below
 |}
 
 JSON elements of run objects:
@@ -1574,13 +1574,13 @@ The following endpoints are associated with clarification messages:
 | application/json
 | yes
 | CCS
-| JSON Array of all clarification messages with elements as defined in table below
+| JSON array of all clarification messages with elements as defined in the table below
 |-
 | /clarifications/<id>
 | application/json
 | yes
 | CCS
-| JSON object of single clarification message with elements as defined in table below
+| JSON object of a single clarification message with elements as defined in the table below
 |}
 
 JSON elements of clarification message objects:
@@ -1696,13 +1696,13 @@ The following endpoints are associated with awards:
 | application/json
 | no
 | CDS
-| JSON Array of all awards with elements as defined in table below
+| JSON array of all awards with elements as defined in the table below
 |-
 | /awards/<id>
 | application/json
 | no
 | CDS
-| JSON object of single award with elements as defined in table below
+| JSON object of a single award with elements as defined in the table below
 |}
 
 JSON elements of award objects:
@@ -1808,7 +1808,7 @@ Scoreboard of the contest.
 
 Since this is generated data, only the '''GET''' method is allowed here, irrespective of role.
 
-The following endpoint is associated with scoreboard:
+The following endpoint is associated with the scoreboard:
 {| class="wikitable"
 |-
 ! Endpoint
@@ -1821,10 +1821,10 @@ The following endpoint is associated with scoreboard:
 | application/json
 | yes
 | CCS
-| JSON array of scoreboard rows with elements as defined in table below
+| JSON array of scoreboard rows with elements as defined in the table below
 |}
 
-JSON elements of scoreboard row objects. Scoreboard array is
+JSON elements of scoreboard row objects. The scoreboard array is
 sorted according to rank and alphabetical on team name within identically ranked teams.
 {| class="wikitable"
 |-
@@ -1854,7 +1854,7 @@ sorted according to rank and alphabetical on team name within identically ranked
 | yes
 | no
 | CCS
-| JSON object as specified below (for possible extension to other scoring methods)
+| JSON object as specified in the rows below (for possible extension to other scoring methods)
 |-
 | score.num_solved
 | integer
@@ -1871,7 +1871,7 @@ sorted according to rank and alphabetical on team name within identically ranked
 | total penalty time accrued by the team
 |-
 | problems
-| array of object
+| array of objects
 | yes
 | no
 | CCS
