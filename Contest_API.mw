@@ -1900,7 +1900,7 @@ Each problem element within the scoreboard consists of:
 | yes
 | no
 | CCS
-| number of judged submissions (including possibly a final correct one)
+| number of judged submissions (up to and including the first correct one)
 |-
 | num_pending
 | integer
