@@ -621,7 +621,7 @@ Returned data:
 
 Languages that are available for submission at the contest.
 
-The following endpoints are associated with langauges:
+The following endpoints are associated with languages:
 {| class="wikitable"
 |-
 ! Endpoint
@@ -640,7 +640,7 @@ The following endpoints are associated with langauges:
 | application/json
 | yes
 | CCS
-| JSON object of single languages with elements as defined in table below
+| JSON object of a single language with elements as defined in table below
 |}
 
 JSON elements of language objects:
