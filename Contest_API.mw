@@ -1357,7 +1357,7 @@ The '''reaction''' file endpoint is available to clients with '''public''' role 
 Request:
   GET https://example.com/api/submissions
 Returned data:
-  [{"id":"187","team_id":"abc123","problem_id":"10-asteroids",
+  [{"id":"187","team_id":"123","problem_id":"10-asteroids",
     "language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034","entry_point":"Main"}
   ]
 
