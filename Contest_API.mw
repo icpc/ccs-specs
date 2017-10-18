@@ -2089,6 +2089,9 @@ This means that attributes inside the '''data''' element will be present if and 
 
 ==== Example ====
 
+Request:
+  GET https://example.com/api/event-feed
+Returned data:
   {"type":"teams","id":"k-2435","op":"create","data":{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
   {"type":"teams","id":"k-2436","op":"update","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
   {"type":"teams","id":"k-2437","op":"delete","data":{"id":"11"}}
