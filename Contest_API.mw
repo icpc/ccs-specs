@@ -71,9 +71,9 @@ By default, the public user has read-only access (no '''POST''', '''PUT''', '''P
 Attribute types are specified as one of the [https://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example standard JSON types], or one of the more specific types below.
 
 ;Absolute timestamps
-: (type '''<tt>TIME</tt>''' in the specification) are human-readable, given in [https://en.wikipedia.org/wiki/ISO_8601 ISO 8601] extended combined date/time format with timezone: <tt>yyyy-mm-ddThh:mm:ss(.uuu)?[+-]zz(:mm)?</tt> (or timezone <tt>Z</tt> for UTC).
+: (type '''<tt>TIME</tt>''' in the specification) are strings containing human-readable timestamps, given in [https://en.wikipedia.org/wiki/ISO_8601 ISO 8601] extended combined date/time format with timezone: <tt>yyyy-mm-ddThh:mm:ss(.uuu)?[+-]zz(:mm)?</tt> (or timezone <tt>Z</tt> for UTC).
 ;Relative times
-: (type '''<tt>RELTIME</tt>''' in the specification) are human-readable, given in a slight modification of the [https://en.wikipedia.org/wiki/ISO_8601 ISO 8601] extended time format: <tt>(-)?(h)*h:mm:ss(.uuu)?</tt>
+: (type '''<tt>RELTIME</tt>''' in the specification) are strings containing human-readable time durations, given in a slight modification of the [https://en.wikipedia.org/wiki/ISO_8601 ISO 8601] extended time format: <tt>(-)?(h)*h:mm:ss(.uuu)?</tt>
 ;Identifiers
 : (type '''<tt>ID</tt>''' in the specification) are given as string consisting of characters <tt>[a-zA-Z0-9-_]</tt> of length at most 36 and not starting with a <tt>-</tt> (dash).
 : IDs are assigned by the person or system that is the source of the object, and must be maintained by downstream systems. For example, the person configuring a contest on disk will typically define the ID for each team, and any CCS or CDS that exposes the team must use the same ID.
