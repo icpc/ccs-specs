@@ -122,7 +122,9 @@ and indeed contain only a single element.
 All endpoints should support '''GET'''; specific details on other
 methods are mentioned below.
 
-The endpoints could be categorised into 3 groups as follows:
+==== Types of endpoints ====
+
+The endpoints can be categorised into 3 groups as follows:
 
 ;Configuration: /, /languages, /problems, /teams, /organizations, /groups, /judgement-types
 ;Live data: /submissions, /judgements, /runs, /clarifications, /awards
@@ -134,7 +136,9 @@ timestamp/contest time attributes. Updates are notified via the event feed.
 Live data is generated during the contest and new elements are expected. Data is immutable though, only inserts, no updates or deletes of elements. It does have associated
 timestamp/contest time attributes. Inserts and deletes are notified via the event feed. '''Note''': judgements are the exception to immutability in a weak sense: they get updated once with the final verdict.
 
-Aggregate data: Only '''GET''' makes sense. These are not included in the event feed.
+Aggregate data: Only '''GET''' makes sense. These are not included in the event feed, also note that these should not be considered proper REST endpoints, and that the <tt>/event-feed</tt> endpoint is a streaming feed in NDJSON format.
+
+==== Table column description ====
 
 In the tables below, the columns are:
 ;Name: Attribute name; object sub-attributes are indicated as <tt>object.attribute</tt>.
