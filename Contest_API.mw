@@ -12,7 +12,11 @@ This API is meant to be useful, not only at the ICPC World Finals, but more gene
 
 == General design principles ==
 
-The interface is implemented as a HTTP REST interface that outputs information in [https://en.wikipedia.org/wiki/JSON JSON] format. The specific base URL will be dependent on the server (main CCS or CDS) providing the service; below we only indicate the relative paths of API endpoints. This REST interface should be provided over HTTPS to guard against eavesdropping on sensitive contest data and authentication credentials (see roles below).
+The interface is implemented as a HTTP REST interface that outputs information in [https://en.wikipedia.org/wiki/JSON JSON] format. This REST interface should be provided over HTTPS to guard against eavesdropping on sensitive contest data and authentication credentials (see roles below).
+
+=== Endpoint URLs ===
+
+The specific base URL of this API will be dependent on the server (e.g. main CCS or CDS) providing the service; in the specification we only indicate the relative paths of API endpoints with respect to a '''baseurl'''. In all the examples the baseurl is chosen <tt>https://example.com/api</tt>.
 
 We follow standard REST practices so that a whole collection can be requested, e.g. at the URL path
   GET https://example.com/api/teams
@@ -100,6 +104,15 @@ The following guidelines are meant to ease extensibility.
 * Servers should not expect clients to recognize more than the basic, required specification.
 * In this specification and extensions, an attribute with value <tt>null</tt> may be left out by the server (i.e. not be present). A client must treat an attribute with value <tt>null</tt> equivalently as that attribute not being present.
 
+=== Multiple contest API ===
+
+This API is specified to provide data for a single contest. However, there is a natural way to extend it to support serving multiple contests: the server would expose an API at a "higher level" with a collection of contests. For example
+  GET https://example.com/api/contests
+would provide a collection of all contests, while then a specific contest, say with identifier '''wf2018''' would be accessible under
+  GET https://example.com/api/contests/wf2018
+This last URL would then provide the same REST endpoints as the '''baseurl''' of the single contest API in this specification.
+
+
 == Interface specification ==
 
 The following list of API endpoints are to be supported. Note that
@@ -151,7 +164,7 @@ The following endpoint is associated with contest:
 | application/json
 | no
 | not used
-| JSON array of all contests with elements as defined in the table below
+| JSON array of all contests with elements as defined in the table below, see [[#Multiple contest API|Multiple contest API]]
 |-
 | /
 | application/json
@@ -159,8 +172,6 @@ The following endpoint is associated with contest:
 | CCS
 | JSON object of a single contest with elements as defined in the table below
 |}
-
-On a system that supports multiple contests the '''baseurl''' could look something like <tt>basebaseurl/contests/<id></tt>, i.e. this endpoint is actually an element in the collection '''contests''' one level higher. On a system that does not support multiple contests the '''baseurl''' could look like <tt>basebaseurl/contest</tt>.
 
 Returns a JSON object with the elements below. If there is no current (this may include about to start or just finished) contest, a 404 error is returned.
 {| class="wikitable"
@@ -2041,43 +2052,43 @@ All event types have a corresponding API endpoint, as specified in the table bel
 ! API Endpoint
 |-
 | contests
-| <baseurl>/
+| /
 |-
 | judgement-types
-| <baseurl>/judgement-types/<id>
+| /judgement-types/<id>
 |-
 | languages
-| <baseurl>/languages/<id>
+| /languages/<id>
 |-
 | problems
-| <baseurl>/problems/<id>
+| /problems/<id>
 |-
 | groups
-| <baseurl>/groups/<id>
+| /groups/<id>
 |-
 | organizations
-| <baseurl>/organizations/<id>
+| /organizations/<id>
 |-
 | teams
-| <baseurl>/teams/<id>
+| /teams/<id>
 |-
 | team-members
-| <baseurl>/team-members/<id>
+| /team-members/<id>
 |-
 | submissions
-| <baseurl>/submissions/<id>
+| /submissions/<id>
 |-
 | judgements
-| <baseurl>/judgements/<id>
+| /judgements/<id>
 |-
 | runs
-| <baseurl>/runs/<id>
+| /runs/<id>
 |-
 | clarifications
-| <baseurl>/clarifications/<id>
+| /clarifications/<id>
 |-
 | awards
-| <baseurl>/awards/<id>
+| /awards/<id>
 |}
 
 ==== General access restrictions ====
