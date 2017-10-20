@@ -1945,7 +1945,7 @@ Returned data:
 
 === Event feed ===
 
-Provides the event feed for the current contest. This is effectively a changelog of create, update and delete events taking place in the REST endpoints.
+Provides the event feed for the current contest. This is effectively a changelog of create, update and delete events taking place in the REST endpoints. Some endpoints (specifically [[#Scoreboard | Scoreboard]] and Event feed itself) is aggregated data, and so will only ever update due to some other REST endpoint updating. For this reason there is no explicit event for the them updating, since there will always be another event sent. This can also be seen by the fact that there is no submissions event in the table to events below.
 
 Since this is generated data, only the '''GET''' method is allowed here, irrespective of role.
 
