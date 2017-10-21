@@ -689,6 +689,67 @@ No access restrictions apply to a GET on this endpoint.
 
 ==== Known languages ====
 
+List of standardised identifiers for known languages.
+
+{| class="wikitable"
+! ID
+! Name
+|-
+| ada
+| Ada
+|-
+| c
+| C
+|-
+| cpp
+| C++
+|-
+| csharp
+| C#
+|-
+| go
+| Go
+|-
+| haskell
+| Haskell
+|-
+| java
+| Java
+|-
+| javascript
+| JavaScript
+|-
+| kotlin
+| Kotlin
+|-
+| objectivec
+| Objective-C
+|-
+| pascal
+| Pascal
+|-
+| php
+| PHP
+|-
+| prolog
+| Prolog
+|-
+| python2
+| Python 2
+|-
+| python3
+| Python 3
+|-
+| ruby
+| Ruby
+|-
+| rust
+| Rust
+|-
+| scala
+| Scala
+|}
+
 ==== Example ====
 
 Request:
