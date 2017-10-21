@@ -141,7 +141,7 @@ Aggregate data: Only '''GET''' makes sense. These are not included in the event 
 
 In the tables below, the columns are:
 ;Name: Attribute name; object sub-attributes are indicated as <tt>object.attribute</tt>.
-;Type: Data type of the attribute; either a [https://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example JSON type] or [[Draft_CCS_REST_interface#Recurring_details|a type defined above]].
+;Type: Data type of the attribute; either a [https://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example JSON type] or [[#Recurring_details|a type defined above]].
 ;Required?: Whether this is a required attribute that '''must''' be implemented to conform to this specification.
 ;Nullable?: Whether the attribute might be <tt>null</tt> (and thus implicitly can also not be present in that case).
 ;Source @WF: Specifies whether this attribute is implemented at the ICPC World Finals and by whom.
