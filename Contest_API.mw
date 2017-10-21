@@ -1811,7 +1811,7 @@ JSON elements of award objects:
 | yes
 | no
 | CDS
-| JSON array of team ids receiving this award
+| JSON array of [[#Teams | team]] ids receiving this award
 |}
 
 ==== Access restrictions at WF ====
