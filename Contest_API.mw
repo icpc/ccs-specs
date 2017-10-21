@@ -68,7 +68,6 @@ Each provider must support at least the following roles, although additional rol
 
 Role-based access may completely hide some objects from the user, may omit certain attributes, or may embargo or omit objects based on the current contest time. 
 By default, the public user has read-only access (no '''POST''', '''PUT''', '''PATCH''' or '''DELETE''' methods allowed) and does not have access to judgements and runs from submissions made after the contest freeze time.
-'''TODO''': Details are listed for each object.
 
 === JSON attribute types ===
 
