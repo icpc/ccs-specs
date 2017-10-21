@@ -687,6 +687,8 @@ JSON elements of language objects:
 
 No access restrictions apply to a GET on this endpoint.
 
+==== Known languages ====
+
 ==== Example ====
 
 Request:
