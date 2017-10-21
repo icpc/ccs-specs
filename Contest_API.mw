@@ -1590,7 +1590,7 @@ JSON elements of run objects:
 | yes
 | no
 | CCS
-| identifier of the judgement this is part of
+| identifier of the [[#Judgements | judgement]] this is part of
 |-
 | ordinal
 | ORDINAL
@@ -1604,7 +1604,7 @@ JSON elements of run objects:
 | yes
 | no
 | CCS
-| the verdict of this judgement (i.e. a judgement type)
+| the [[#Judgement Types | verdict]] of this judgement (i.e. a judgement type)
 |-
 | time
 | TIME
