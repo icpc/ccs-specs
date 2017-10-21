@@ -1279,7 +1279,7 @@ JSON elements of team member objects:
 | yes
 | no
 | CDS
-| team of this team member
+| [[#Teams | team]] of this team member
 |-
 | first_name
 | string
