@@ -1386,21 +1386,21 @@ JSON elements of submission objects:
 | yes
 | no
 | CCS
-| identifier of the language submitted for
+| identifier of the [[#Languages | language]] submitted for
 |-
 | problem_id
 | ID
 | yes
 | no
 | CCS
-| identifier of the problem submitted for
+| identifier of the [[#Problems | problem]] submitted for
 |-
 | team_id
 | ID
 | yes
 | no
 | CCS
-| identifier of the team that made the submission
+| identifier of the [[#Teams | team]] that made the submission
 |-
 | time
 | TIME
