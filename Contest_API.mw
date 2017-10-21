@@ -1682,7 +1682,7 @@ JSON elements of clarification message objects:
 | yes
 | yes
 | CCS
-| identifier of [[#Teams | team}} sending this clarification request, <tt>null</tt> if a clarification sent by jury
+| identifier of [[#Teams | team]] sending this clarification request, <tt>null</tt> if a clarification sent by jury
 |-
 | to_team_id
 | ID
