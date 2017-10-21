@@ -377,7 +377,7 @@ JSON elements of judgement type objects:
 
 No access restrictions apply to a GET on this endpoint.
 
-==== Known judgement-types ====
+==== Known judgement types ====
 
 List of standardised identifiers for known judgement types.
 
