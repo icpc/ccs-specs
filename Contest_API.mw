@@ -1924,7 +1924,7 @@ sorted according to rank and alphabetical on team name within identically ranked
 | yes
 | no
 | CCS
-| identifier of the team
+| identifier of the [[#Teams | team]]
 |-
 | score
 | object
@@ -1970,7 +1970,7 @@ Each problem element within the scoreboard consists of:
 | yes
 | no
 | CCS
-| identifier of the problem
+| identifier of the [[#Problems | problem]]
 |-
 | num_judged
 | integer
