@@ -1486,14 +1486,14 @@ JSON elements of judgement objects:
 | yes
 | no
 | CCS
-| identifier of the submission judged
+| identifier of the [[#Submissions | submission]] judged
 |-
 | judgement_type_id
 | ID
 | yes
 | yes
 | CCS
-| the verdict of this judgement
+| the [[#Judgement Types | verdict]] of this judgement
 |-
 | start_time
 | TIME
