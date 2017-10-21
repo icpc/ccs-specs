@@ -1164,14 +1164,14 @@ JSON elements of table objects:
 | no
 | yes
 | CCS
-| identifier of the organization (e.g. university or other entity) that team is affiliated to
+| identifier of the [[#Organizations | organization]] (e.g. university or other entity) that team is affiliated to
 |-
 | group_id
 | ID
 | no
 | yes
 | CCS
-| identifier of the group this team is part of (in ICPC WFs these are the super-regions)
+| identifier of the [[#Groups | group]] this team is part of (in ICPC WFs these are the super-regions)
 |-
 | location
 | object
