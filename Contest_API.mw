@@ -673,14 +673,14 @@ JSON elements of language objects:
 | yes
 | no
 | CCS
-| identifier of the language
+| identifier of the language from table below
 |-
 | name
 | string
 | yes
 | no
 | CCS
-| name of the language
+| name of the language (might not match table below, e.g. if localised)
 |}
 
 ==== Access restrictions at WF ====
