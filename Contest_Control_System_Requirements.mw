@@ -745,8 +745,6 @@ A YAML file consisting of a mapping with the following keys:
 {| class="wikitable"
 ! Key !! Description
 |-
-| event-feed-port || Port number for the [[Event Feed]] (optional, default 4713)
-|-
 | default-clars || Sequence of pre-defined clarification answers. The first is the default and will be pre-selected
 |-
 | clar-categories || Sequence of categories for clarifications.
@@ -778,8 +776,6 @@ A CCS may place reasonable requirements on the configuration of languages. For i
 
  # System configuration
  ---
- event-feed-port:   4713
- 
  default-clars:
    - No comment, read problem statement.
    - This will be answered during the answers to questions session.
