@@ -16,6 +16,36 @@ The Contest Archive consists of a single directory (possibly ZIP compressed) wit
 
 === Metadata ===
 
+Archive metadata is stored in a YAML file called '''archive.yaml''' with the following keys:
+
+{| class="wikitable"
+! Key !! Description
+|-
+| created-by || Name of system creating this archive
+|-
+| archive || ID of format used for content types not listed in archive.yaml
+|-
+| config || ID of format used for '''config'''
+|-
+| registration || ID of format used for '''registration'''
+|-
+| submissions || ID of format used for '''submissions'''
+|- 
+| judgements || ID of format used for '''judgements'''
+|-
+| runs || ID of format used for '''runs'''
+|-
+| clarifications || ID of format used for '''clarifications'''
+|-
+| awards || ID of format used for '''awards'''
+|-
+| scoreboard || ID of format used for '''scoreboard'''
+|-
+| events || ID of format used for '''events'''
+|}
+
+Only '''created-by''' is always required, but if any of content type is not listed then '''archive''' must be specified.
+
 === Config ===
 
 === Problems ===
