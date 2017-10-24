@@ -1359,7 +1359,7 @@ The following endpoints are associated with submissions:
 | submission files, contained at the root of the zip archive
 |-
 | /submissions/<id>/reaction
-| video/?
+| video/*
 | no
 | CDS
 | reaction video from team's webcam
