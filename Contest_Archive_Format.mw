@@ -46,6 +46,15 @@ Archive metadata is stored in a YAML file called '''archive.yaml''' with the fol
 
 Only '''created-by''' is always required, but if any of content type is not listed then '''archive''' must be specified.
 
+==== Example ====
+
+ # Contest Archive
+ ---
+ created-by: Kattis
+ archive:    icpc-api
+ problems:   kattis
+ awards:	    missing
+
 === Config ===
 
 === Problems ===
