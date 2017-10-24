@@ -8,7 +8,7 @@ There are several reasons that contest information will be stored on disk, inclu
 * As an archive for replaying a contest, either for testing contest tools or for teams to compete against live data
 * As a base for offline analysis
 
-This draft lays out the relative location and format of each type of contest-related information when reading or writing to disk. It is based on the [[Draft CCS REST interface]] and uses formats that are more natural to read/write for tools that have adopted this REST interface.
+This standard lays out the relative location and format of each type of contest-related information when reading or writing to disk. The top level structure is based on the [[Contest API]] structure, and a dump of the output from that API is one way to store the data. That said, the archive format allows for any format whose documentation has been registered with the ICPC. The sections below lists all currently known (and thus accepted) formats.
 
 == What is not covered ==
 
