@@ -10,6 +10,10 @@ There are several reasons that contest information will be stored on disk, inclu
 
 This standard lays out the relative location and format of each type of contest-related information when reading or writing to disk. The top level structure is based on the [[Contest API]] structure, and a dump of the output from that API is one way to store the data. That said, the archive format allows for any format whose documentation has been registered with the ICPC. The sections below lists all currently known (and thus accepted) formats.
 
+== Structure ==
+
+The Contest Archive consists of a single directory (possibly ZIP compressed) with a metadata file ('''archive.yaml''') and at most a single entry for each of the types of data ('''config''', '''problems''', '''registration''',  '''submissions''', '''judgements''', '''runs''', '''clarifications''', '''awards''', '''scoreboard''', '''events'''). An entry is either a file or a directory.
+
 == What is not covered ==
 
 There are a few open design questions that have not been closed yet, including:
