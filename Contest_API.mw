@@ -1108,7 +1108,7 @@ The following endpoints are associated with teams:
 | registration photo of the team
 |-
 | /teams/<id>/video
-| video/?
+| video/*
 | no
 | CDS
 | registration video of the team
