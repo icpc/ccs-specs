@@ -185,6 +185,20 @@ The following formats may be used:
 
 '''NB!''': This section should not be in this document, and is only included here while WIP. It should either be it's own document, or be added to the [[Contest API]] document. Every subsection defines the on disk format '''contest-api''' for a type of data.
 
+=== General principle ===
+
+==== Types with additional child endpoints ====
+
+Types that have child endpoints (or are likely to have in the future) are stored in a folder per object, using the type name and id as the folder name:
+ <types>/<id>/<type>.json
+ <types>/<id>/<other files>
+
+<type>.json is a single JSON element containing one object, identical to the API call to /<types>/<id>. Types that follow this format are: organizations, teams, and submissions.
+
+== Types without additional child endpoints ==
+
+For types that are not likely to have child endpoints there is a simpler format on disk: a single <types>.json file containing the full list of objects. This file is identical to the API call to /<types>. Types that follow this format are: languages, groups, judgement types, clarifications, and awards.
+
 === Config ===
 
 A directory, '''config''', containing:
@@ -303,33 +317,3 @@ A directory, '''events''', containing:
  events/primary.json
  events/shadow.json
  events/cdn.json
-
-== Types with file content ==
-
-Types that have additional files (or are likely to have in the future) are stored in a folder per object, using the type name and id as the folder name:
- <type>/<id>/data.json
- <type>/<id>/<other files>
-
-Data.json is a single JSON element containing one object, identical to the API call to baseurl/<type>/<id>. Types that follow this format are: organizations, teams, submissions, runs, and problems.
-
-==== Example ====
-
-The folder for a team with id 11 might look like the following:
- * teams/11/data.json
- * teams/11/photo.jpg
- * teams/11/backup.zip
- * teams/11/...
-
-and data.json contains a single line of JSON:
- {"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia-74324325532"}
-
-== Types without file content ==
-
-For types that are not likely to have additional files there is a simpler format on disk: a single <type>.json file containing the full list of objects. This file is identical to the API call to baseurl/<type>. Types that follow this format are: languages, groups, judgement types, judgements, clarifications, and awards.
-
-==== Example ====
-
-Contents of languages.json:
- [{"id":"1-java","name":"Java"},
-   {"id":"cpp","name":"GNU C++"},
-   {"id":"4358281971166881160","name":"Python"}]
