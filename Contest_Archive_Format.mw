@@ -57,17 +57,89 @@ Only '''created-by''' is always required, but if any of content type is not list
 
 === Config ===
 
+Configuration data for the contest.
+
+The following formats may be used:
+
+{| class="wikitable"
+! ID !! Description !! Specification
+|-
+| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_API#Config 
+|}
+
 === Problems ===
+
+Problems used at the contest.
+
+The following formats may be used:
+
+{| class="wikitable"
+! ID !! Description !! Specification
+|-
+| kattis || Kattis problem package format  || http://www.problemarchive.org/ 
+|-
+| icpc || ICPC problem package format (subset of the Kattis format) || https://clics.ecs.baylor.edu/index.php/Problem_format
+|}
 
 === Registration ===
 
+Registration data for the contest.
+
+The following formats may be used:
+
+{| class="wikitable"
+! ID !! Description !! Specification
+|-
+| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_API#Registration 
+|}
+
 === Submissions ===
+
+Submissions from the contest.
+
+The following formats may be used:
+
+{| class="wikitable"
+! ID !! Description !! Specification
+|-
+| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_API#Submissions 
+|}
 
 === Judgements ===
 
+Judgements from the contest.
+
+The following formats may be used:
+
+{| class="wikitable"
+! ID !! Description !! Specification
+|-
+| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_API#Judgements 
+|}
+
 === Runs ===
 
+Runs from the contest.
+
+The following formats may be used:
+
+{| class="wikitable"
+! ID !! Description !! Specification
+|-
+| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_API#Runs 
+|}
+
 === Clarifications ===
+
+Clarifications from the contest.
+
+The following formats may be used:
+
+{| class="wikitable"
+! ID !! Description !! Specification
+|-
+| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_API#Clarifications 
+|}
 
 === Awards ===
 
@@ -85,7 +157,29 @@ The following formats may be used:
 
 === Scoreboard ===
 
+Final scoreboard from the contest.
+
+The following formats may be used:
+
+{| class="wikitable"
+! ID !! Description !! Specification
+|-
+| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_API#Scoreboard 
+|}
+
 === Events ===
+
+List of events from the contest.
+
+The following formats may be used:
+
+{| class="wikitable"
+! ID !! Description !! Specification
+|-
+| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_API#Event_feed 
+|-
+| missing || No awards data ||  
+|}
 
 == What is not covered ==
 
