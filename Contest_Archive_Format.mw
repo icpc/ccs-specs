@@ -304,12 +304,6 @@ A directory, '''events''', containing:
  events/shadow.json
  events/cdn.json
 
-== What is not covered ==
-
-There are a few open design questions that have not been closed yet, including:
-* Do config objects and events go in the same or separate folders?
-* The location of event feed, scoreboard, and other files
-
 == Types with file content ==
 
 Types that have additional files (or are likely to have in the future) are stored in a folder per object, using the type name and id as the folder name:
