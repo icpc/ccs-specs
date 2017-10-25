@@ -183,7 +183,7 @@ The following formats may be used:
 
 == Contest API archive formats ==
 
-'''NB!''': This section should not be in this document, and is only included here while WIP. It should either be it's own document, or be added to the [[Contest API]] document. 
+'''NB!''': This section should not be in this document, and is only included here while WIP. It should either be it's own document, or be added to the [[Contest API]] document. Every subsection defines the on disk format '''contest-api''' for a type of data.
 
 === Config ===
 
