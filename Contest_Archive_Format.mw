@@ -187,12 +187,12 @@ The following formats may be used:
 
 === Config ===
 
-A directory, '''config''', containing the following files:
+A directory, '''config''', containing a JSON file for the /config endpoint as well as system.yaml defined in the [[Contest_Control_System_Requirements#system.yaml | CCSR]].
 
-;contest.json: Output from the [[Contest_API#Contests | contest endpoint]] after the contest.
-;judgement-types: Output from the [[Contest_API#Judgement_Types | judgement types endpoint]] after the contest.
-;languages: Output from the [[Contest_API#Languages | languages endpoint]] after the contest. 
-;system.yaml: Config file as defined in [[Contest_Control_System_Requirements#system.yaml | CCSR]].
+==== Example file listing ====
+
+ config/config.json
+ config/system.yaml
 
 === Registration ===
 
