@@ -195,7 +195,7 @@ Types that have child endpoints (or are likely to have in the future) are stored
 
 <type>.json is a single JSON element containing one object, identical to the API call to /<types>/<id>. Types that follow this format are: organizations, teams, and submissions.
 
-== Types without additional child endpoints ==
+==== Types without additional child endpoints ====
 
 For types that are not likely to have child endpoints there is a simpler format on disk: a single <types>.json file containing the full list of objects. This file is identical to the API call to /<types>. Types that follow this format are: languages, groups, judgement types, clarifications, and awards.
 
