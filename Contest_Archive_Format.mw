@@ -209,6 +209,19 @@ A directory, '''registration''', containing the following files and directories.
 ;team-members/<team-member-id>/team-member.json: Output from the [[Contest_API#Team_Members | team members endpoint]] after the contest.
 ;team-members/<team-member-id>/photo.{png,jpg}:
 
+==== File listing ====
+
+ groups.json
+ organizations/<id>/organization.json
+ organizations/<organization-id>/logo.png
+ organizations/<organization-id>/logo.160px.png
+ organizations/<organization-id>/logo.56px.png
+ teams/<id>/team.json
+ teams/<id>/photo.{png, jpg}
+ teams/<id>/backup.zip
+ team-members/<id>/team-member.json
+ team-members/<id>/photo.{png,jpg}
+
 === Submissions ===
 
 A directory, '''submissions''', containing a directory per submissions using the submission ID as the directory name. The submission directory contains the following files:
