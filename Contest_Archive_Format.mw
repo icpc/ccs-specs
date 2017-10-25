@@ -189,7 +189,7 @@ The following formats may be used:
 
 A directory, '''config''', containing:
 
-* a JSON file for the /config endpoint 
+* a JSON file (config.json) for the /config endpoint 
 * system.yaml defined in the [[Contest_Control_System_Requirements#system.yaml | CCSR]].
 
 ==== File listing ====
@@ -199,18 +199,21 @@ A directory, '''config''', containing:
 
 === Registration ===
 
-A directory, '''registration''', containing the following files and directories. The placeholders <organization-id>, <team-id> and <team-member-id> run over all IDs of its type:
+A directory, '''registration''', containing:
 
-;groups.json: Output from the [[Contest_API#Groups | groups endpoint]] after the contest.
-;organizations/<organization-id>/organization.json: Output from the [[Contest_API#Organizations | organizations endpoint]] (/organizations/<organization-id>) after the contest.
-;organizations/<organization-id>/logo.png:
-;organizations/<organization-id>/logo.160px.png:
-;organizations/<organization-id>/logo.56px.png:
-;teams/<team-id>/team.json:
-;teams/<team-id>/photo.{png, jpg}:
-;teams/<team-id>/backup.zip:
-;team-members/<team-member-id>/team-member.json: Output from the [[Contest_API#Team_Members | team members endpoint]] after the contest.
-;team-members/<team-member-id>/photo.{png,jpg}:
+* a JSON file (groups.json) for the /registration/groups endpoint
+* a directory for organizations containing:
+** d directory for each organisation using the organisation ID as directory name, containing:
+*** a JSON file (organization.json) for the /registration/organizatons/<id> endpoint
+*** a file for each endpoint available under /registration/organizatons/<id>
+* a directory for teams containing:
+** d directory for each team using the team ID as directory name, containing:
+*** a JSON file (team.json) for the /registration/teams/<id> endpoint
+*** a file for each endpoint available under /registration/teams/<id>
+* a directory for team-members containing:
+** d directory for each team member using the team member ID as directory name, containing:
+*** a JSON file (team-member.json) for the /registration/team-members/<id> endpoint
+*** a file for each endpoint available under /registration/team-members/<id>
 
 ==== File listing ====
 
