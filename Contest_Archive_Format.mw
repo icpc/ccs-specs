@@ -51,7 +51,7 @@ Only '''created-by''' is always required, but if any of content type is not list
  # Contest Archive
  ---
  created-by: Kattis
- archive:    icpc-api
+ archive:    contest-api
  problems:   kattis
  awards:	    missing
 
