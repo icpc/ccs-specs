@@ -214,8 +214,8 @@ A directory, '''registration''', containing the following files and directories.
 A directory, '''submissions''', containing a directory per submissions using the submission ID as the directory name. The submission directory contains the following files:
 
 ;submission.json: Output from the [[Contest_API#Submission | submission endpoint]] (/submissions/<id>) after the contest.
-;files.zip; Source code for submission (corresponds to /submissions/<id>/files).
-;reaction.*; Reaction video for submission (corresponds to /submissions/<id>/reaction) if available.
+;files.zip: Source code for submission (corresponds to /submissions/<id>/files).
+;reaction.*: Reaction video for submission (corresponds to /submissions/<id>/reaction) if available.
 
 === Judgements ===
 
