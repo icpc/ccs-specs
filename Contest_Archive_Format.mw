@@ -199,7 +199,7 @@ A directory, '''config''', containing the following files:
 A directory, '''registration''', containing the following files and directories. The placeholders <organization-id>, <team-id> and <team-member-id> run over all IDs of its type:
 
 ;groups.json: Output from the [[Contest_API#Groups | groups endpoint]] after the contest.
-;organizations/<organization-id>/organization.json; Output from the [[Contest_API#Organizations | organizations endpoint]] (/organizations/<organization-id>) after the contest.
+;organizations/<organization-id>/organization.json: Output from the [[Contest_API#Organizations | organizations endpoint]] (/organizations/<organization-id>) after the contest.
 ;organizations/<organization-id>/logo.png:
 ;organizations/<organization-id>/logo.160px.png:
 ;organizations/<organization-id>/logo.56px.png:
