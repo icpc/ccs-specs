@@ -203,15 +203,15 @@ A directory, '''registration''', containing:
 
 * a JSON file (groups.json) for the /registration/groups endpoint
 * a directory for organizations containing:
-** d directory for each organisation using the organisation ID as directory name, containing:
+** a directory for each organisation using the organisation ID as directory name, containing:
 *** a JSON file (organization.json) for the /registration/organizatons/<id> endpoint
 *** a file for each endpoint available under /registration/organizatons/<id>
 * a directory for teams containing:
-** d directory for each team using the team ID as directory name, containing:
+** a directory for each team using the team ID as directory name, containing:
 *** a JSON file (team.json) for the /registration/teams/<id> endpoint
 *** a file for each endpoint available under /registration/teams/<id>
 * a directory for team-members containing:
-** d directory for each team member using the team member ID as directory name, containing:
+** a directory for each team member using the team member ID as directory name, containing:
 *** a JSON file (team-member.json) for the /registration/team-members/<id> endpoint
 *** a file for each endpoint available under /registration/team-members/<id>
 
@@ -230,25 +230,79 @@ A directory, '''registration''', containing:
 
 === Submissions ===
 
-A directory, '''submissions''', containing a directory per submissions using the submission ID as the directory name. The submission directory contains the following files:
+A directory, '''submissions''', containing:
 
-;submission.json: Output from the [[Contest_API#Submission | submission endpoint]] (/submissions/<id>) after the contest.
-;files.zip: Source code for submission (corresponds to /submissions/<id>/files).
-;reaction.*: Reaction video for submission (corresponds to /submissions/<id>/reaction) if available.
+* a directory for each submission using the submission ID as directory name, containing:
+** a JSON file (submission.json) for the /submissions/<id> endpoint
+** a file for each endpoint available under /submissions/<id>
+
+==== File listing ====
+
+ submissions/submission.json
+ submissions/files.zip
+ submissions/reaction.*
 
 === Judgements ===
 
+A directory, '''judgements''', containing:
 
+* a JSON file (primary.json) for the /judgements endpoint for the primary system
+* a JSON file (shadow{1, 2, ...}.json) for the /judgements endpoint for a shadow system if any (use number in case of multiple shadows)
+
+==== File listing ====
+
+ judgements/primary.json
+ judgements/shadow.json
 
 === Runs ===
 
+A directory, '''runs''', containing:
+
+* a JSON file (primary.json) for the /runs endpoint on the primary system
+* a JSON file (shadow{1, 2, ...}.json) for the /runs endpoint on a shadow system, if available (use numbering in case of multiple shadows)
+
+==== File listing ====
+
+ runs/primary.json
+ runs/shadow.json
+
 === Clarifications ===
+
+A JSON file, '''clarifications.json''' for the /clarifications endpoint
+
+==== File listsing ====
+
+ clarifications.json
 
 === Awards ===
 
+A JSON file, '''awards.json''' for the /awards endpoint
+
+==== File listsing ====
+
+ awards.json
+
 === Scoreboard ===
 
+A JSON file, '''scoreboard.json''' for the /scoreboard endpoint
+
+==== File listsing ====
+
+ scoreboard.json
+
 === Events ===
+
+A directory, '''events''', containing:
+
+* a JSON file (primary.json) for the /event-feed endpoint on the primary system
+* a JSON file (shadow{1, 2, ...}.json) for the /event-feed endpoint on a shadow system, if available (use numbering in case of multiple shadows)
+* a JSON file (*.json) for the /event-feed endpoint on any other system producing events, if available (may not be named "primary" or "shadow*")
+
+==== File listing ====
+
+ events/primary.json
+ events/shadow.json
+ events/cdn.json
 
 == What is not covered ==
 
