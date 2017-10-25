@@ -12,7 +12,7 @@ This standard lays out the relative location and format of each type of contest-
 
 == Structure ==
 
-The Contest Archive consists of a single directory (possibly ZIP compressed) with a metadata file ('''archive.yaml''') and at most a single entry for each of the types of data ('''config''', '''problems''', '''registration''',  '''submissions''', '''judgements''', '''runs''', '''clarifications''', '''awards''', '''scoreboard''', '''events'''). An entry is either a file or a directory.
+The Contest Archive consists of a single directory (possibly ZIP compressed) with a metadata file ('''archive.yaml''') and at most a single entry for each of the types of data ('''config''', '''problems''', '''registration''',  '''submissions''', '''judgements''', '''runs''', '''clarifications''', '''awards''', '''scoreboard''', '''events'''). An entry is either a directory with the same name as the type of data, or a file with same base name as the type of data and any file extension.
 
 === Metadata ===
 
