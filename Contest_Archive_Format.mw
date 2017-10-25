@@ -187,7 +187,10 @@ The following formats may be used:
 
 === Config ===
 
-A directory, '''config''', containing a JSON file for the /config endpoint as well as system.yaml defined in the [[Contest_Control_System_Requirements#system.yaml | CCSR]].
+A directory, '''config''', containing:
+
+* a JSON file for the /config endpoint 
+* system.yaml defined in the [[Contest_Control_System_Requirements#system.yaml | CCSR]].
 
 ==== File listing ====
 
