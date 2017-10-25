@@ -64,7 +64,7 @@ The following formats may be used:
 {| class="wikitable"
 ! ID !! Description !! Specification
 |-
-| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_API#Config 
+| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_Archive_Format#Config 
 |}
 
 === Problems ===
@@ -90,7 +90,7 @@ The following formats may be used:
 {| class="wikitable"
 ! ID !! Description !! Specification
 |-
-| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_API#Registration 
+| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_Archive_Format#Registration 
 |}
 
 === Submissions ===
@@ -102,7 +102,7 @@ The following formats may be used:
 {| class="wikitable"
 ! ID !! Description !! Specification
 |-
-| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_API#Submissions 
+| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_Archive_Format#Submissions 
 |}
 
 === Judgements ===
@@ -114,7 +114,7 @@ The following formats may be used:
 {| class="wikitable"
 ! ID !! Description !! Specification
 |-
-| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_API#Judgements 
+| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_Archive_Format#Judgements 
 |}
 
 === Runs ===
@@ -126,7 +126,7 @@ The following formats may be used:
 {| class="wikitable"
 ! ID !! Description !! Specification
 |-
-| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_API#Runs 
+| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_Archive_Format#Runs 
 |}
 
 === Clarifications ===
@@ -138,7 +138,7 @@ The following formats may be used:
 {| class="wikitable"
 ! ID !! Description !! Specification
 |-
-| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_API#Clarifications 
+| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_Archive_Format#Clarifications 
 |}
 
 === Awards ===
@@ -150,7 +150,7 @@ The following formats may be used:
 {| class="wikitable"
 ! ID !! Description !! Specification
 |-
-| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_API#Awards 
+| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_Archive_Format#Awards 
 |-
 | missing || No awards data ||  
 |}
@@ -164,7 +164,7 @@ The following formats may be used:
 {| class="wikitable"
 ! ID !! Description !! Specification
 |-
-| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_API#Scoreboard 
+| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_Archive_Format#Scoreboard 
 |}
 
 === Events ===
@@ -176,7 +176,7 @@ The following formats may be used:
 {| class="wikitable"
 ! ID !! Description !! Specification
 |-
-| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_API#Event_feed 
+| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_Archive_Format#Events
 |-
 | missing || No awards data ||  
 |}
