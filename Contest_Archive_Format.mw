@@ -71,6 +71,18 @@ Only '''created-by''' is always required, but if any of content type is not list
 
 === Awards ===
 
+A summary of awards handed out at the contest.
+
+The following formats may be used:
+
+{| class="wikitable"
+! ID !! Description !! Specification
+|-
+| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_API#Awards 
+|-
+| missing || No awards data ||  
+|}
+
 === Scoreboard ===
 
 === Events ===
