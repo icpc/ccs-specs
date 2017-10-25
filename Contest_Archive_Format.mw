@@ -189,7 +189,7 @@ The following formats may be used:
 
 A directory, '''config''', containing a JSON file for the /config endpoint as well as system.yaml defined in the [[Contest_Control_System_Requirements#system.yaml | CCSR]].
 
-==== Example file listing ====
+==== File listing ====
 
  config/config.json
  config/system.yaml
