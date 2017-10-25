@@ -187,11 +187,39 @@ The following formats may be used:
 
 === Config ===
 
+A directory, '''config''', containing the following files:
+
+;contest.json: Output from the [[Contest_API#Contests | contest endpoint]] after the contest.
+;judgement-types: Output from the [[Contest_API#Judgement_Types | judgement types endpoint]] after the contest.
+;languages: Output from the [[Contest_API#Languages | languages endpoint]] after the contest. 
+;system.yaml: Config file as defined in [[Contest_Control_System_Requirements#system.yaml | CCSR]].
+
 === Registration ===
+
+A directory, '''registration''', containing the following files and directories. The placeholders <organization-id>, <team-id> and <team-member-id> run over all IDs of its type:
+
+;groups.json: Output from the [[Contest_API#Groups | groups endpoint]] after the contest.
+;organizations/<organization-id>/organization.json; Output from the [[Contest_API#Organizations | organizations endpoint]] (/organizations/<organization-id>) after the contest.
+;organizations/<organization-id>/logo.png:
+;organizations/<organization-id>/logo.160px.png:
+;organizations/<organization-id>/logo.56px.png:
+;teams/<team-id>/team.json:
+;teams/<team-id>/photo.{png, jpg}:
+;teams/<team-id>/backup.zip:
+;team-members/<team-member-id>/team-member.json: Output from the [[Contest_API#Team_Members | team members endpoint]] after the contest.
+;team-members/<team-member-id>/photo.{png,jpg}:
 
 === Submissions ===
 
+A directory, '''submissions''', containing a directory per submissions using the submission ID as the directory name. The submission directory contains the following files:
+
+;submission.json: Output from the [[Contest_API#Submission | submission endpoint]] (/submissions/<id>) after the contest.
+;files.zip; Source code for submission (corresponds to /submissions/<id>/files).
+;reaction.*; Reaction video for submission (corresponds to /submissions/<id>/reaction) if available.
+
 === Judgements ===
+
+
 
 === Runs ===
 
