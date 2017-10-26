@@ -60,8 +60,9 @@ Standard [https://en.wikipedia.org/wiki/List_of_HTTP_status_codes HTTP status co
 
 === Roles ===
 
-Access to (specific parts of) the REST API is controlled via user roles. The provider should require HTTP authentication to access each role. This provides a standard and flexible method, while the user one authenticates as implies a role that can be used for fine-grained access control.
-
+Access to this API is controlled via user roles. The API provider must require authentication to access each role except for optionally the public role.
+The API provider must support [https://en.wikipedia.org/wiki/Basic_access_authentication HTTP basic authentication]. This provides a standard and flexible method; besides HTTP basic auth, other forms of authentication can be offered as well.
+ 
 Each provider must support at least the following roles, although additional roles may be supported for specific uses:
 * public (default role: contest data that's available to everyone)
 * admin (data or capability only available to contest administrators)
