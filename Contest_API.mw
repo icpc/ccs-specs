@@ -959,13 +959,13 @@ The following endpoints are associated with organizations:
 |-
 | /organizations
 | application/json
-| yes
+| no
 | CCS & CDS
 | JSON array of all organizations with elements as defined in the table below
 |-
 | /organizations/<id>
 | application/json
-| yes
+| no
 | CCS & CDS
 | JSON object of a single organization with elements as defined in the table below
 |-
@@ -987,6 +987,8 @@ The following endpoints are associated with organizations:
 | CDS
 | requests a smaller logo of the organization that is 56 pixels in size. The server may return this smaller logo if it is able, or may return the same as /logo
 |}
+
+* Note that the first two endpoints must be provided if organizations are used. If they are not provided no other endpoint may refer to organizations (i.e. return any organization_ids).
 
 JSON elements of organization objects:
 {| class="wikitable"
