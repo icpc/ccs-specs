@@ -988,7 +988,7 @@ The following endpoints are associated with organizations:
 | requests a smaller logo of the organization that is 56 pixels in size. The server may return this smaller logo if it is able, or may return the same as /logo
 |}
 
-* Note that the first two endpoints must be provided if organizations are used. If they are not provided no other endpoint may refer to organizations (i.e. return any organization_ids).
+Note that the first two endpoints must be provided if organizations are used. If they are not provided no other endpoint may refer to organizations (i.e. return any organization_ids).
 
 JSON elements of organization objects:
 {| class="wikitable"
