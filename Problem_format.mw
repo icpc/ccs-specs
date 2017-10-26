@@ -48,6 +48,8 @@ For languages where there could be several entry points, the default entry point
 |-
 | javascript || JavaScript || main.js  || .js ||
 |-
+| kotlin || Kotlin || MainKt || .kt ||
+|-
 | objectivec || Objective-C || || .m ||
 |-
 | pascal || Pascal || || .pas ||
@@ -59,6 +61,8 @@ For languages where there could be several entry points, the default entry point
 | python2 || Python 2 || main.py || .py || Matches the regex "<tt>^#!.*python2 </tt>", and default if shebang does not match any other language
 |-
 | python3 || Python 3 || main.py || .py || Matches the regex "<tt>^#!.*python3 </tt>"
+|-
+| ruby || Ruby || || .rb ||
 |-
 | scala || Scala || || .scala ||
 |}
