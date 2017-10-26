@@ -887,16 +887,18 @@ The following endpoints are associated with groups:
 |-
 | /groups
 | application/json
-| yes
+| no
 | CCS
 | JSON array of all groups with elements as defined in the table below
 |-
 | /groups/<id>
 | application/json
-| yes
+| no
 | CCS
 | JSON object of a single group with elements as defined in the table below
 |}
+
+* Note that these endpoints must be provided if groups are used. If they are not provided no other endpoint may refer to groups (return any group_ids).
 
 JSON elements of group objects:
 {| class="wikitable"
