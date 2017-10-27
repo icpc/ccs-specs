@@ -296,7 +296,7 @@ sufficient access rights, or a 403 if the contest is started or within
 Request:
   GET https://example.com/api/
 Returned data:
-  {"id":"7b0dd4ea-19a1-4434-9034-529ebe55ab45","name":"2014 ICPC World Finals",
+  {"id":"wf2014","name":"2014 ICPC World Finals",
    "formal_name":"38th Annual World Finals of the ACM International Collegiate Programming Contest",
    "start_time":"2014-06-25T10:00:00+01","duration":"5:00:00","scoreboard_freeze_duration":"1:00:00","penalty_time":20,
    "state":{"running":true,"frozen":false,"final":false}}
@@ -309,7 +309,7 @@ Returned data:
 Request:
   PATCH https://example.com/api/
 Request data:
-  {"id":"7b0dd4ea-19a1-4434-9034-529ebe55ab45","start_time":"2014-06-25T10:00:00+01"}
+  {"id":"wf2014","start_time":"2014-06-25T10:00:00+01"}
 Request:
   PATCH https://example.com/api/
 Request data:
