@@ -2194,7 +2194,7 @@ All event types have a corresponding API endpoint, as specified in the table bel
 No access restrictions apply to a GET on this endpoint.
 
 However, the response and '''data''' objects contained in it must observe the same restrictions as those of the respective endpoints.
-This means that attributes inside the '''data''' element will be present if and only if the client has access to those at the respective endpoint, and receives create, update and delete events only of elements it has (partial) access to, and create or delete events for elements when time-based access is granted or revoked.
+This means that attributes inside the '''data''' element will be present if and only if the client has access to those at the respective endpoint. The client only receives create, update and delete events of elements it has (partial) access to. When time-based access is granted or revoked, create or delete events are dispatched for each affected entity.
 
 ==== Example ====
 
