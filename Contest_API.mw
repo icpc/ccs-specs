@@ -54,7 +54,7 @@ However, for future compatibility below are already listed other methods with th
 ;DELETE
 : Delete a specific element. Idempotent, but may return a 404 status code when repeated. Any provided data is ignored. Example:
 : <code>DELETE https://example.com/api/teams/8</code>
-: Note that deletes must keep [[#Referential integrity]] intact.
+: Note that deletes must keep [[#Referential integrity|referential integrity]] intact.
 
 Standard [https://en.wikipedia.org/wiki/List_of_HTTP_status_codes HTTP status codes] are returned to indicate success or failure.
 
