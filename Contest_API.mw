@@ -75,6 +75,8 @@ By default, the public user has read-only access (no '''POST''', '''PUT''', '''P
 Some attributes in elements are references to IDs of other elements. When such an attribute has a non-<tt>null</tt> value, then the referenced element must exist. That is, the full set of data exposed by the API must at all times be referentially intact.
 This implies for example that before creating a [[#Teams|team]] with an <tt>organization_id</tt>, the [[#Organizations|organization]] must already exist. In reverse, that organization can only be deleted after the team is deleted, or alternatively, the team's <tt>organization_id</tt> is set to <tt>null</tt>.
 
+Furthermore, the ID attribute (see below) of elements are not allowed to change. However, note that a particular ID might be reused by first deleting an element and then creating a new element with the same ID.
+
 === JSON attribute types ===
 
 Attribute types are specified as one of the [https://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example standard JSON types], or one of the more specific types below.
