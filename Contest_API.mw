@@ -189,6 +189,18 @@ The following endpoint is associated with contest:
 | yes
 | CCS
 | JSON object of a single contest with elements as defined in the table below
+|-
+|  /banner
+| image/png
+| no
+| CDS
+| banner for this contest, intended to be an image with a large aspect ratio like 8:1 or 9:1
+|-
+|  /logo
+| image/png
+| no
+| CDS
+| logo for this contest, intended to be an image with aspect ratio near 1:1
 |}
 
 Returns a JSON object with the elements below. If there is no current (this may include about to start or just finished) contest, a 404 error is returned.
