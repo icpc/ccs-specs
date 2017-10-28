@@ -205,11 +205,15 @@ A directory, '''config''', containing:
 
 * a JSON file (config.json) for the /config endpoint 
 * system.yaml defined in the [[Contest_Control_System_Requirements#system.yaml | CCSR]].
+* the contest banner, from the /banner endpoint, if available.
+* the contest logo, from the /logo endpoint, if available.
 
 ==== File listing ====
 
  config/config.json
  config/system.yaml
+ config/banner.png
+ config/logo.png
 
 === Registration ===
 
