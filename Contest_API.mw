@@ -54,7 +54,7 @@ However, for future compatibility below are already listed other methods with th
 ;DELETE
 : Delete a specific element. Idempotent, but may return a 404 status code when repeated. Any provided data is ignored. Example:
 : <code>DELETE https://example.com/api/teams/8</code>
-: Any deletes should always keep the referential integrity intact: at no time should an ID exist that refers to a deleted element. This can be ensured by either first deleting referenced elements (i.e. "ON DELETE CASCADE" in SQL terms) or setting the referencing ID to <tt>null</tt> (i.e. "ON DELETE SET NULL" in SQL terms) when this is allowed.
+: Note that deletes must keep [[#Referential integrity]] intact.
 
 Standard [https://en.wikipedia.org/wiki/List_of_HTTP_status_codes HTTP status codes] are returned to indicate success or failure.
 
@@ -69,6 +69,11 @@ Each provider must support at least the following roles, although additional rol
 
 Role-based access may completely hide some objects from the user, may omit certain attributes, or may embargo or omit objects based on the current contest time. 
 By default, the public user has read-only access (no '''POST''', '''PUT''', '''PATCH''' or '''DELETE''' methods allowed) and does not have access to judgements and runs from submissions made after the contest freeze time.
+
+=== Referential integrity ===
+
+Some attributes in elements are references to IDs of other elements. When such an attribute has a non-<tt>null</tt> value, then the referenced element must exist. That is, the full set of data exposed by the API must at all times be referentially intact.
+This implies for example that before creating a [[#Teams|team]] with an <tt>organization_id</tt>, the [[#Organizations|organization]] must already exist. In reverse, that organization can only be deleted after the team is deleted, or alternatively, the team's <tt>organization_id</tt> is set to <tt>null</tt>.
 
 === JSON attribute types ===
 
