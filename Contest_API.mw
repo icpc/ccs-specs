@@ -1354,6 +1354,73 @@ Returned data:
    {"id":"osten-umlautsen","team_id":"43","icpc_id":null,"first_name":"Östen","last_name":"Ümlautsen","sex":null,"role":"coach"}
   ]
 
+=== Contest state ===
+
+Current state of the contest, specifying whether it's running, the scoreboard is frozen or results are final.
+
+The following endpoints are associated with state:
+
+{| class="wikitable"
+|-
+! Endpoint
+! Type
+! Required?
+! Source @WF
+! Description
+|-
+| /state
+| application/json
+| yes
+| CCS
+| JSON object of the current contest state with elements as defined in the table below
+|}
+
+JSON elements of state objects:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Nullable?
+! Source @WF
+! Description
+|-
+| started
+| TIME
+| yes
+| yes
+| CCS
+| Time when contest started, or <tt>null</tt> if contest has not started.
+|-
+| ended
+| TIME
+| yes
+| yes
+| CCS
+| Time when contest ended, or <tt>null</tt> if contest has not ended. Must not be set if started is <tt>null</tt>.
+|-
+| froze
+| TIME
+| yes
+| depends
+| CCS
+| Time when scoreboard was frozen, or <tt>null</tt> if scoreboard has not been frozen. Required iff scoreboard_freeze_duration is present in contest endpoint.
+|-
+| thawed
+| TIME
+| yes
+| depends
+| CCS
+| Time when scoreboard was thawed, or <tt>null</tt> if contest has not been thawed. Required iff scoreboard_freeze_duration is present in contest endpoint. Must not be set if froze is <tt>null</null>
+|-
+| finalized
+| TIME
+| yes
+| yes
+| CCS
+| Time when results were finalized, or <tt>null</tt> if results has not ben finalized. Must not be set if ended is <tt>null</tt>
+|}
+
 === Submissions ===
 
 Submissions, a.k.a. attempts to solve problems in the contest.
