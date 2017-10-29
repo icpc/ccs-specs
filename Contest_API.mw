@@ -2212,6 +2212,9 @@ All event types have a corresponding API endpoint, as specified in the table bel
 | team-members
 | /team-members/<id>
 |-
+| state
+| /state
+|-
 | submissions
 | /submissions/<id>
 |-
