@@ -289,14 +289,12 @@ Request:
 Returned data:
   {"id":"wf2014","name":"2014 ICPC World Finals",
    "formal_name":"38th Annual World Finals of the ACM International Collegiate Programming Contest",
-   "start_time":"2014-06-25T10:00:00+01","duration":"5:00:00","scoreboard_freeze_duration":"1:00:00","penalty_time":20,
-   "state":{"running":true,"frozen":false,"final":false}}
+   "start_time":"2014-06-25T10:00:00+01","duration":"5:00:00","scoreboard_freeze_duration":"1:00:00","penalty_time":20}
 Request:
   GET https://example.com/api/
 Returned data:
   {"id":"dress2016","name":"2016 ICPC World Finals Dress Rehearsal",
-   "start_time":null,"duration":"2:30:00",
-   "state":{"running":false,"final":false}}
+   "start_time":null,"duration":"2:30:00"}
 Request:
   PATCH https://example.com/api/
 Request data:
