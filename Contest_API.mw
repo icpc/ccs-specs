@@ -1362,35 +1362,35 @@ JSON elements of state objects:
 | yes
 | yes
 | CCS
-| Time when contest started, or <tt>null</tt> if contest has not started.
+| Time when the contest started, or <tt>null</tt> if the contest has not started.
 |-
 | ended
 | TIME
 | yes
 | yes
 | CCS
-| Time when contest ended, or <tt>null</tt> if contest has not ended. Must not be set if started is <tt>null</tt>.
+| Time when the contest ended, or <tt>null</tt> if the contest has not ended. Must not be set if started is <tt>null</tt>.
 |-
 | froze
 | TIME
 | yes
 | depends
 | CCS
-| Time when scoreboard was frozen, or <tt>null</tt> if scoreboard has not been frozen. Required iff scoreboard_freeze_duration is present in the [[#Contests|contest]] endpoint.
+| Time when the scoreboard was frozen, or <tt>null</tt> if the scoreboard has not been frozen. Required iff <tt>scoreboard_freeze_duration</tt> is present in the [[#Contests|contest]] endpoint.
 |-
 | thawed
 | TIME
 | yes
 | depends
 | CCS
-| Time when scoreboard was thawed, or <tt>null</tt> if contest has not been thawed. Required iff scoreboard_freeze_duration is present in the [[#Contests|contest]] endpoint. Must not be set if froze is <tt>null</tt>.
+| Time when the scoreboard was thawed, or <tt>null</tt> if the scoreboard has not been thawed. Required iff <tt>scoreboard_freeze_duration</tt> is present in the [[#Contests|contest]] endpoint. Must not be set if froze is <tt>null</tt>.
 |-
 | finalized
 | TIME
 | yes
 | yes
 | CCS
-| Time when results were finalized, or <tt>null</tt> if results has not ben finalized. Must not be set if ended is <tt>null</tt>.
+| Time when the results were finalized, or <tt>null</tt> if results have not been finalized. Must not be set if ended is <tt>null</tt>.
 |}
 
 ==== Access restrictions at WF ====
