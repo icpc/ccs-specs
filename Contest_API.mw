@@ -140,7 +140,7 @@ methods are mentioned below.
 
 The endpoints can be categorised into 3 groups as follows:
 
-;Configuration: /, /judgement-types, /languages, /problems, /groups, /organizations, /teams
+;Configuration: /, /judgement-types, /languages, /problems, /groups, /organizations, /teams, /team-members
 ;Live data: /state, /submissions, /judgements, /runs, /clarifications, /awards
 ;Aggregate data: /scoreboard, /event-feed
 
