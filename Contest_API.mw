@@ -261,34 +261,6 @@ Returns a JSON object with the elements below. If there is no current (this may 
 | no
 | CCS
 | penalty time for a wrong submission, in minutes
-|-
-| state
-| object
-| yes
-| no
-| CCS
-| JSON object as specified in the rows below
-|-
-| state.running
-| boolean
-| yes
-| no
-| CCS
-| whether the contest is currently running
-|-
-| state.frozen
-| boolean
-| depends
-| no
-| CCS
-| whether the scoreboard is currently frozen. Required iff scoreboard_freeze_duration is present.
-|-
-| state.final
-| boolean
-| yes
-| no
-| CCS
-| whether the standings have been finalized
 |}
 
 ==== Access restrictions at WF ====
