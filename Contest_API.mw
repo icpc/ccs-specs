@@ -1376,14 +1376,14 @@ JSON elements of state objects:
 | yes
 | depends
 | CCS
-| Time when scoreboard was frozen, or <tt>null</tt> if scoreboard has not been frozen. Required iff scoreboard_freeze_duration is present in contest endpoint.
+| Time when scoreboard was frozen, or <tt>null</tt> if scoreboard has not been frozen. Required iff scoreboard_freeze_duration is present in the [[#Contests|contest]] endpoint.
 |-
 | thawed
 | TIME
 | yes
 | depends
 | CCS
-| Time when scoreboard was thawed, or <tt>null</tt> if contest has not been thawed. Required iff scoreboard_freeze_duration is present in contest endpoint. Must not be set if froze is <tt>null</null>
+| Time when scoreboard was thawed, or <tt>null</tt> if contest has not been thawed. Required iff scoreboard_freeze_duration is present in the [[#Contests|contest]] endpoint. Must not be set if froze is <tt>null</tt>
 |-
 | finalized
 | TIME
