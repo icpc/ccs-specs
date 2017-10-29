@@ -1393,6 +1393,20 @@ JSON elements of state objects:
 | Time when results were finalized, or <tt>null</tt> if results has not ben finalized. Must not be set if ended is <tt>null</tt>
 |}
 
+==== Access restrictions at WF ====
+
+No access restrictions apply to a GET on this endpoint.
+
+==== Example ====
+
+Request:
+  GET https://example.com/api/state
+Returned data:
+  {
+    "started": "2014-06-25T10:00:00+01",
+    "froze": "2014-06-25T14:00:00+01"
+  }
+
 === Submissions ===
 
 Submissions, a.k.a. attempts to solve problems in the contest.
