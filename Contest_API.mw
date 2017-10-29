@@ -141,7 +141,7 @@ methods are mentioned below.
 The endpoints can be categorised into 3 groups as follows:
 
 ;Configuration: /, /languages, /problems, /teams, /organizations, /groups, /judgement-types
-;Live data: /submissions, /judgements, /runs, /clarifications, /awards
+;Live data: /state, /submissions, /judgements, /runs, /clarifications, /awards
 ;Aggregate data: /scoreboard, /event-feed
 
 Configuration is normally set before contest start. Is not expected to, but could occasionally be updated during a contest. It does not have associated
