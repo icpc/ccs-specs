@@ -178,12 +178,6 @@ The following endpoint is associated with contest:
 ! Source @WF
 ! Description
 |-
-| ../
-| application/json
-| no
-| not used
-| JSON array of all contests with elements as defined in the table below, see [[#Multiple contest API|Multiple contest API]]
-|-
 | /
 | application/json
 | yes
