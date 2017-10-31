@@ -12,7 +12,7 @@ This API is meant to be useful, not only at the ICPC World Finals, but more gene
 
 == General design principles ==
 
-The interface is implemented as a HTTP REST interface that outputs information in [https://en.wikipedia.org/wiki/JSON JSON] format. This REST interface should be provided over HTTPS to guard against eavesdropping on sensitive contest data and authentication credentials (see roles below).
+The interface is implemented as a HTTP REST interface that outputs information in [https://en.wikipedia.org/wiki/JSON JSON] format ([https://tools.ietf.org/html/rfc7159 RFC]). This REST interface should be provided over HTTPS to guard against eavesdropping on sensitive contest data and authentication credentials (see roles below).
 
 === Endpoint URLs ===
 
@@ -61,7 +61,7 @@ Standard [https://en.wikipedia.org/wiki/List_of_HTTP_status_codes HTTP status co
 === Roles ===
 
 Access to this API is controlled via user roles. The API provider must require authentication to access each role except for optionally the public role.
-The API provider must support [https://en.wikipedia.org/wiki/Basic_access_authentication HTTP basic authentication]. This provides a standard and flexible method; besides HTTP basic auth, other forms of authentication can be offered as well.
+The API provider must support [https://en.wikipedia.org/wiki/Basic_access_authentication HTTP basic authentication] ([https://tools.ietf.org/html/rfc7617 RFC]). This provides a standard and flexible method; besides HTTP basic auth, other forms of authentication can be offered as well.
  
 Each provider must support at least the following roles, although additional roles may be supported for specific uses:
 * public (default role: contest data that's available to everyone)
