@@ -1363,7 +1363,7 @@ JSON elements of state objects:
 | CCS
 | Time when the contest ended, or <tt>null</tt> if the contest has not ended. Must not be set if started is <tt>null</tt>.
 |-
-| froze
+| frozen
 | TIME
 | depends
 | yes
@@ -1396,7 +1396,7 @@ Request:
 Returned data:
   {
     "started": "2014-06-25T10:00:00+01",
-    "froze": "2014-06-25T14:00:00+01"
+    "frozen": "2014-06-25T14:00:00+01"
   }
 
 === Submissions ===
