@@ -35,6 +35,8 @@ while the URL path
 returns
  { "id":<id1>, <element specific data for id1>}
 
+=== HTTP headers ===
+
 === HTTP methods ===
 
 The current version of this specification only requires support for the '''GET''' method, unless explicitly specified otherwise in an endpoint below (see [[#PATCH_start_time|PATCH start_time]]).
