@@ -188,7 +188,7 @@ The following endpoint is associated with contest:
 | image/png
 | no
 | CDS
-| banner for this contest, intended to be an image with a large aspect ratio like 8:1 or 9:1
+| banner for this contest, intended to be an image with a large aspect ratio around 8:1 or so
 |-
 |  /logo
 | image/png
