@@ -1360,6 +1360,8 @@ Returned data:
 
 Current state of the contest, specifying whether it's running, the scoreboard is frozen or results are final.
 
+A contest that has ended, has been thawed (or was never frozen) and is finalized must not change. I.e. that is the final contest state and no changes to any endpoint may happen after it has occurred.
+
 The following endpoints are associated with state:
 
 {| class="wikitable"
