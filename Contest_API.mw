@@ -1238,7 +1238,7 @@ JSON elements of table objects:
 
 The following access restrictions apply to a GET on this endpoint:
 * '''backup''' requires the '''admin''' or '''analyst''' role for acccess,
-* the '''desktop''' and '''webcam''' stream endpoints are available for the '''public''' role only when scoreboard is not frozen.
+* the '''desktop''' and '''webcam''' attributes are available for the '''public''' role only when scoreboard is not frozen.
 
 ==== Example ====
 
