@@ -53,13 +53,13 @@ However, for future compatibility below are already listed other methods with th
 : Replaces a specific element. This method is idempotent and can only be called on a specific element and replaces its contents with the data provided. The payload data should be complete, i.e. no partial updates are allowed. The '''id''' attribute cannot be changed: it does not need to be specified (other than in the URL) and if specified different from in the URL, a '''409 Conflict''' HTTP code should be returned.
 ;PATCH
 : Updates/modifies a specific element. Similar to '''PUT''' but allows partial updates by providing only that data, for example:
-: <code>PATCH https://example.com/api/teams/10</code>
+: <code>PATCH https://example.com/api/contests/wf14/teams/10</code>
 : with JSON contents
 : <code>{"name":"Our cool new team name"}</code>
 : No updates of the '''id''' attribute are allowed either.
 ;DELETE
 : Delete a specific element. Idempotent, but may return a 404 status code when repeated. Any provided data is ignored. Example:
-: <code>DELETE https://example.com/api/teams/8</code>
+: <code>DELETE https://example.com/api/contests/wf14/teams/8</code>
 : Note that deletes must keep [[#Referential integrity|referential integrity]] intact.
 
 Standard [https://en.wikipedia.org/wiki/List_of_HTTP_status_codes HTTP status codes] are returned to indicate success or failure.
