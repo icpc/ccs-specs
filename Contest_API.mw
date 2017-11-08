@@ -146,9 +146,9 @@ methods are mentioned below.
 
 The endpoints can be categorised into 3 groups as follows:
 
-;Configuration: /, /judgement-types, /languages, /problems, /groups, /organizations, /teams, /team-members
-;Live data: /state, /submissions, /judgements, /runs, /clarifications, /awards
-;Aggregate data: /scoreboard, /event-feed
+;Configuration: contests, judgement-types, languages, problems, groups, organizations, teams, team-members
+;Live data: state, submissions, judgements, runs, clarifications, awards
+;Aggregate data: scoreboard, event-feed
 
 Configuration is normally set before contest start. Is not expected to, but could occasionally be updated during a contest. It does not have associated
 timestamp/contest time attributes. Updates are notified via the event feed.
@@ -156,7 +156,7 @@ timestamp/contest time attributes. Updates are notified via the event feed.
 Live data is generated during the contest and new elements are expected. Data is immutable though, only inserts, no updates or deletes of elements. It does have associated
 timestamp/contest time attributes. Inserts and deletes are notified via the event feed. '''Note''': judgements are the exception to immutability in a weak sense: they get updated once with the final verdict.
 
-Aggregate data: Only '''GET''' makes sense. These are not included in the event feed, also note that these should not be considered proper REST endpoints, and that the <tt>/event-feed</tt> endpoint is a streaming feed in NDJSON format.
+Aggregate data: Only '''GET''' makes sense. These are not included in the event feed, also note that these should not be considered proper REST endpoints, and that the <tt>event-feed</tt> endpoint is a streaming feed in NDJSON format.
 
 ==== Table column description ====
 
@@ -184,19 +184,25 @@ The following endpoint is associated with contest:
 ! Source @WF
 ! Description
 |-
-| /
+| /contests
+| application/json
+| yes
+| CDS
+| JSON array of all contests with elements as defined in the table below
+|-
+| /contests/<id>
 | application/json
 | yes
 | CCS
 | JSON object of a single contest with elements as defined in the table below
 |-
-|  /banner
+|  /contests/<id>/banner
 | image/png
 | no
 | CDS
 | banner for this contest, intended to be an image with a large aspect ratio around 8:1 or so
 |-
-|  /logo
+|  /contests/<id>/logo
 | image/png
 | no
 | CDS
@@ -285,22 +291,22 @@ sufficient access rights, or a 403 if the contest is started or within
 ==== Example ====
 
 Request:
-  GET https://example.com/api/
+  GET https://example.com/api/contests/wf2014
 Returned data:
   {"id":"wf2014","name":"2014 ICPC World Finals",
    "formal_name":"38th Annual World Finals of the ACM International Collegiate Programming Contest",
    "start_time":"2014-06-25T10:00:00+01","duration":"5:00:00","scoreboard_freeze_duration":"1:00:00","penalty_time":20}
 Request:
-  GET https://example.com/api/
+  GET https://example.com/api/contests/dress2016
 Returned data:
   {"id":"dress2016","name":"2016 ICPC World Finals Dress Rehearsal",
    "start_time":null,"duration":"2:30:00"}
 Request:
-  PATCH https://example.com/api/
+  PATCH https://example.com/api/contests/wf2014
 Request data:
   {"id":"wf2014","start_time":"2014-06-25T10:00:00+01"}
 Request:
-  PATCH https://example.com/api/
+  PATCH https://example.com/api/contests/wf2016
 Request data:
   {"id":"wf2016","start_time":null}
 
@@ -317,13 +323,13 @@ The following endpoints are associated with judgement types:
 ! Source @WF
 ! Description
 |-
-| /judgement-types
+| /contests/<id>/judgement-types
 | application/json
 | yes
 | CCS
 | JSON array of all judgement types with elements as defined in the table below
 |-
-| /judgement-types/<id>
+| /contests/<id>/judgement-types/<id>
 | application/json
 | yes
 | CCS
@@ -617,14 +623,14 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 ==== Examples ====
 
 Request:
-  GET https://example.com/api/judgement-types
+  GET https://example.com/api/contests/wf14/judgement-types
 Returned data:
   [{"id":"CE","name":"Compiler Error","penalty":false,"solved":false},
    {"id":"AC","name":"Accepted","penalty":false,"solved":true}
   ]
 
 Request:
-  GET https://example.com/api/judgement-types/AC
+  GET https://example.com/api/contests/wf14/judgement-types/AC
 Returned data:
   {"id":"AC","name":"Accepted","penalty":false,"solved":true}
 
@@ -641,13 +647,13 @@ The following endpoints are associated with languages:
 ! Source @WF
 ! Description
 |-
-| /languages
+| /contests/<id>/languages
 | application/json
 | yes
 | CCS
 | JSON array of all languages with elements as defined in the table below
 |-
-| /languages/<id>
+| /contests/<id>/languages/<id>
 | application/json
 | yes
 | CCS
@@ -749,7 +755,7 @@ List of standardised identifiers for known languages.
 ==== Example ====
 
 Request:
-  GET https://example.com/api/languages
+  GET https://example.com/api/contests/wf14/languages
 Returned data:
   [{"id":"1-java","name":"Java"},
    {"id":"cpp","name":"GNU C++"},
@@ -769,13 +775,13 @@ The following endpoints are associated with problems:
 ! Source @WF
 ! Description
 |-
-| /problems
+| /contests/<id>/problems
 | application/json
 | yes
 | CCS
 | JSON array of all problems with elements as defined in the table below
 |-
-| /problems/<id>
+| /contests/<id>/problems/<id>
 | application/json
 | yes
 | CCS
@@ -850,14 +856,14 @@ That is, before contest start this endpoint returns an empty array for clients w
 ==== Examples ====
 
 Request:
-  GET https://example.com/api/problems
+  GET https://example.com/api/contests/wf14/problems
 Returned data:
   [{"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","test_data_count":10},
    {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","test_data_count":15}
   ]
 
 Request:
-  GET https://example.com/api/problems/asteroids
+  GET https://example.com/api/contests/wf14/problems/asteroids
 Returned data:
   {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","test_data_count":10}
 
@@ -874,13 +880,13 @@ The following endpoints are associated with groups:
 ! Source @WF
 ! Description
 |-
-| /groups
+| /contests/<id>/groups
 | application/json
 | no
 | CCS
 | JSON array of all groups with elements as defined in the table below
 |-
-| /groups/<id>
+| /contests/<id>/groups/<id>
 | application/json
 | no
 | CCS
@@ -928,7 +934,7 @@ No access restrictions apply to a GET on this endpoint.
 ==== Example ====
 
 Request:
-  GET https://example.com/api/groups
+  GET https://example.com/api/contests/wf14/groups
 Returned data:
   [{"id":"asia-74324325532","icpc_id":"7593","name":"Asia"}
   ]
@@ -946,31 +952,31 @@ The following endpoints are associated with organizations:
 ! Source @WF
 ! Description
 |-
-| /organizations
+| /contests/<id>/organizations
 | application/json
 | no
 | CCS & CDS
 | JSON array of all organizations with elements as defined in the table below
 |-
-| /organizations/<id>
+| /contests/<id>/organizations/<id>
 | application/json
 | no
 | CCS & CDS
 | JSON object of a single organization with elements as defined in the table below
 |-
-|  /organizations/<id>/logo
+| /contests/<id>/organizations/<id>/logo
 | image/png
 | no
 | CDS
 | logo of the organization
 |-
-|  /organizations/<id>/logo/160px
+| /contests/<id>/organizations/<id>/logo/160px
 | image/png
 | no
 | CDS
 | requests a smaller logo of the organization that is 160 pixels in size. The server may return this smaller logo if it is able, or may return the same as /logo
 |-
-|  /organizations/<id>/logo/56px
+| /contests/<id>/organizations/<id>/logo/56px
 | image/png
 | no
 | CDS
@@ -1067,7 +1073,7 @@ No access restrictions apply to a GET on organizations endpoints.
 ==== Example ====
 
 Request:
-  GET https://example.com/api/organizations
+  GET https://example.com/api/contests/<id>/organizations
 Returned data:
   [{"id":"inst123","icpc_id":"433","name":"Shanghai Jiao Tong U.","formal_name":"Shanghai Jiao Tong University"},
    {"id":"inst105","name":"Carnegie Mellon University","country":"USA"}
@@ -1086,43 +1092,43 @@ The following endpoints are associated with teams:
 ! Source @WF
 ! Description
 |-
-| /teams
+| /contests/<id>/teams
 | application/json
 | yes
 | CCS & CDS
 | JSON array of all teams with elements as defined in the table below
 |-
-| /teams/<id>
+| /contests/<id>/teams/<id>
 | application/json
 | yes
 | CCS & CDS
 | JSON object of a single team with elements as defined in the table below
 |-
-| /teams/<id>/photo
+| /contests/<id>/teams/<id>/photo
 | image/png or image/jpeg
 | no
 | CDS
 | registration photo of the team
 |-
-| /teams/<id>/video
+| /contests/<id>/teams/<id>/video
 | video/*
 | no
 | CDS
 | registration video of the team
 |-
-| /teams/<id>/backup
+| /contests/<id>/teams/<id>/backup
 | application/zip
 | no
 | CDS
 | latest file backup of the team machine as a zip archive
 |-
-| /teams/<id>/desktop
+| /contests/<id>/teams/<id>/desktop
 | STREAM
 | no
 | CDS
 | streaming video of the team desktop
 |-
-| /teams/<id>/webcam
+| /contests/<id>/teams/<id>/webcam
 | STREAM
 | no
 | CDS
@@ -1213,7 +1219,7 @@ No access restrictions apply to a GET on this endpoint. For the associated file 
 ==== Example ====
 
 Request:
-  GET https://example.com/api/teams
+  GET https://example.com/api/contests/wf14/teams
 Returned data:
   [{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia-74324325532"},
    {"id":"123","name":"CMU1","organization_id":"inst105","group_id":"8"}
@@ -1232,19 +1238,19 @@ The following endpoints are associated with langauges:
 ! Source @WF
 ! Description
 |-
-| /team-members
+| /contests/<id>/team-members
 | application/json
 | no
 | CDS
 | JSON array of all team members with elements as defined in the table below
 |-
-| /team-members/<id>
+| /contests/<id>/team-members/<id>
 | application/json
 | no
 | CDS
 | JSON object of a single team member with elements as defined in the table below
 |-
-| /team-members/<id>/photo
+| /contests/<id>/team-members/<id>/photo
 | image/png or image/jpeg
 | no
 | CDS
@@ -1318,7 +1324,7 @@ No access restrictions apply to a GET on this endpoint or any of the associated 
 ==== Example ====
 
 Request:
-  GET https://example.com/api/team-members
+  GET https://example.com/api/contests/wf14/team-members
 Returned data:
   [{"id":"john-smith","team_id":"43","icpc_id":"32442","first_name":"John","last_name":"Smith","sex":"male","role":"contestant"},
    {"id":"osten-umlautsen","team_id":"43","icpc_id":null,"first_name":"Östen","last_name":"Ümlautsen","sex":null,"role":"coach"}
@@ -1338,7 +1344,7 @@ The following endpoints are associated with state:
 ! Source @WF
 ! Description
 |-
-| /state
+| /contests/<id>/state
 | application/json
 | yes
 | CCS
@@ -1398,7 +1404,7 @@ No access restrictions apply to a GET on this endpoint.
 ==== Example ====
 
 Request:
-  GET https://example.com/api/state
+  GET https://example.com/api/contests/wf14/state
 Returned data:
   {
     "started": "2014-06-25T10:00:00+01",
@@ -1418,32 +1424,32 @@ The following endpoints are associated with submissions:
 ! Source @WF
 ! Description
 |-
-| /submissions
+| /contests/<id>/submissions
 | application/json
 | yes
 | CCS
 | JSON array of all submissions with elements as defined in the table below
 |-
-| /submissions/<id>
+| /contests/<id>/submissions/<id>
 | application/json
 | yes
 | CCS
 | JSON object of a single submission with elements as defined in the table below
 |-
-| /submissions/<id>/files
+| /contests/<id>/submissions/<id>/files
 | application/zip
 | yes
 | CCS
 | submission files, contained at the root of the zip archive
 |-
-| /submissions/<id>/reaction
+| /contests/<id>/submissions/<id>/reaction
 | video/*
 | no
 | CDS
 | reaction video from team's webcam
 |}
 
-The endpoint '''/files''' provides the file(s) of a given submission as a zip archive. These should be stored directly from the root of the zip file, i.e. there should not be extra directories (or files) added unless these are explicitly part of the submission content.
+The endpoint '''/contests/<id>/files''' provides the file(s) of a given submission as a zip archive. These should be stored directly from the root of the zip file, i.e. there should not be extra directories (or files) added unless these are explicitly part of the submission content.
 For '''POST''', '''PUT''' and '''PATCH''' methods, '''files''' would be included as an attribute in the submission and contain the base64-encoded string of the zip archive.
 
 JSON elements of submission objects:
@@ -1514,7 +1520,7 @@ The '''reaction''' file endpoint is available to clients with '''public''' role 
 ==== Example ====
 
 Request:
-  GET https://example.com/api/submissions
+  GET https://example.com/api/contests/wf14/submissions
 Returned data:
   [{"id":"187","team_id":"123","problem_id":"10-asteroids",
     "language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034","entry_point":"Main"}
@@ -1533,13 +1539,13 @@ The following endpoints are associated with judgements:
 ! Source @WF
 ! Description
 |-
-| /judgements
+| /contests/<id>/judgements
 | application/json
 | yes
 | CCS
 | JSON array of all judgements with elements as defined in the table below
 |-
-| /judgements/<id>
+| /contests/<id>/judgements/<id>
 | application/json
 | yes
 | CCS
@@ -1616,7 +1622,7 @@ For clients with the '''public''' role, judgements will not be included for subm
 ==== Example ====
 
 Request:
-  GET https://example.com/api/judgements
+  GET https://example.com/api/contests/wf14/judgements
 Returned data:
   [{"id":"189549","submission_id":"wf2017-32163123xz3132yy","judgement_type_id":"CE","start_time":"2014-06-25T11:22:48.427+01",
     "start_contest_time":"1:22:48.427","end_time":"2014-06-25T11:23:32.481+01","end_contest_time":"1:23:32.481"},
@@ -1637,13 +1643,13 @@ The following endpoints are associated with runs:
 ! Source @WF
 ! Description
 |-
-| /runs
+| /contests/<id>/runs
 | application/json
 | yes
 | CCS
 | JSON array of all runs with elements as defined in the table below
 |-
-| /runs/<id>
+| /contests/<id>/runs/<id>
 | application/json
 | yes
 | CCS
@@ -1710,7 +1716,7 @@ For clients with the '''public''' role, runs will not be included for submission
 ==== Example ====
 
 Request:
-  GET https://example.com/api/runs
+  GET https://example.com/api/contests/wf14/runs
 Returned data:
   [{"id":"1312","judgement_id":"189549","ordinal":28,"judgement_type_id":"TLE",
     "time":"2014-06-25T11:22:42.420+01","contest_time":"1:22:42.420"}
@@ -1729,13 +1735,13 @@ The following endpoints are associated with clarification messages:
 ! Source @WF
 ! Description
 |-
-| /clarifications
+| /contests/<id>/clarifications
 | application/json
 | yes
 | CCS
 | JSON array of all clarification messages with elements as defined in the table below
 |-
-| /clarifications/<id>
+| /contests/<id>/clarifications/<id>
 | application/json
 | yes
 | CCS
@@ -1818,13 +1824,13 @@ Clients with the '''public''' role can only view clarifications replies from the
 ==== Examples ====
 
 Request:
-  GET https://example.com/api/clarifications
+  GET https://example.com/api/contests/wf14/clarifications
 Returned data:
   [{"id":"wf2017-1","from_team_id":null,"to_team_id":null,"reply_to_id":null,"problem_id":null,
     "text":"Do not touch anything before the contest starts!","time":"2014-06-25T11:59:27.543+01","contest_time":"-0:15:32.457"}
   ]
 Request:
-  GET https://example.com/api/clarifications
+  GET https://example.com/api/contests/wf14/clarifications
 Returned data:
   [{"id":"1","from_team_id":"34","to_team_id":null,"reply_to_id":null,"problem_id":null,
     "text":"May I ask a question?","time":"2017-06-25T11:59:27.543+01","contest_time":"1:59:27.543"},
@@ -1832,7 +1838,7 @@ Returned data:
     "text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}
   ]
 Request:
-  GET https://example.com/api/clarifications
+  GET https://example.com/api/contests/wf14/clarifications
 Returned data:
   [{"id":"1","from_team_id":"34","text":"May I ask a question?","time":"2017-06-25T11:59:27.543+01","contest_time":"1:59:27.543"},
     {"id":"2","to_team_id":"34","reply_to_id":"1","text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}
@@ -1851,13 +1857,13 @@ The following endpoints are associated with awards:
 ! Source @WF
 ! Description
 |-
-| /awards
+| /contests/<id>/awards
 | application/json
 | no
 | CCS
 | JSON array of all awards with elements as defined in the table below
 |-
-| /awards/<id>
+| /contests/<id>/awards/<id>
 | application/json
 | no
 | CCS
@@ -1954,7 +1960,7 @@ For some common award cases the following IDs should be used.
 ==== Example ====
 
 Request:
-  GET https://example.com/api/awards
+  GET https://example.com/api/contests/wf14/awards
 Returned data:
   [{"id":"gold-medal","citation":"Gold medal winner","team_ids":["54","23","1","45"]},
    {"id":"first-to-solve-a","citation":"First to solve problem A","team_ids":["45"]},
@@ -1976,7 +1982,7 @@ The following endpoint is associated with the scoreboard:
 ! Source @WF
 ! Description
 |-
-| /scoreboard
+| /contests/<id>/scoreboard
 | application/json
 | yes
 | CCS
@@ -2090,7 +2096,7 @@ For clients with the '''public''' role, the scoreboard will not include informat
 ==== Example ====
 
 Request:
-  GET https://example.com/api/scoreboard
+  GET https://example.com/api/contests/wf14/scoreboard
 Returned data:
   [{"rank":1,"team_id":"123","score":{"num_solved":3,"total_time":340},
     "problems":[
@@ -2117,7 +2123,7 @@ The following endpoint is associated with event feed:
 ! Source @WF
 ! Description
 |-
-| /event-feed
+| /contests/<id>/event-feed
 | application/x-ndjson
 | yes
 | CCS
@@ -2201,46 +2207,46 @@ All event types have a corresponding API endpoint, as specified in the table bel
 ! API Endpoint
 |-
 | contests
-| /
+| /contests/<id>
 |-
 | judgement-types
-| /judgement-types/<id>
+| /contests/<id>/judgement-types/<id>
 |-
 | languages
-| /languages/<id>
+| /contests/<id>/languages/<id>
 |-
 | problems
-| /problems/<id>
+| /contests/<id>/problems/<id>
 |-
 | groups
-| /groups/<id>
+| /contests/<id>/groups/<id>
 |-
 | organizations
-| /organizations/<id>
+| /contests/<id>/organizations/<id>
 |-
 | teams
-| /teams/<id>
+| /contests/<id>/teams/<id>
 |-
 | team-members
-| /team-members/<id>
+| /contests/<id>/team-members/<id>
 |-
 | state
-| /state
+| /contests/<id>/state
 |-
 | submissions
-| /submissions/<id>
+| /contests/<id>/submissions/<id>
 |-
 | judgements
-| /judgements/<id>
+| /contests/<id>/judgements/<id>
 |-
 | runs
-| /runs/<id>
+| /contests/<id>/runs/<id>
 |-
 | clarifications
-| /clarifications/<id>
+| /contests/<id>/clarifications/<id>
 |-
 | awards
-| /awards/<id>
+| /contests/<id>/awards/<id>
 |}
 
 ==== General access restrictions ====
@@ -2253,7 +2259,7 @@ This means that attributes inside the '''data''' element will be present if and 
 ==== Example ====
 
 Request:
-  GET https://example.com/api/event-feed
+  GET https://example.com/api/contests/wf14/event-feed
 Returned data:
   {"type":"teams","id":"k-2435","op":"create","data":{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
   {"type":"teams","id":"k-2436","op":"update","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
