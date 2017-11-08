@@ -1545,7 +1545,7 @@ For '''POST''', '''PUT''' and '''PATCH''' methods, the '''files''' attribute sho
 ==== Access restrictions at WF ====
 
 The '''entry_point''' and '''files''' attribute are accessible only for clients with '''admin''' or '''analyst''' role.
-The '''reaction''' attribute is available to clients with '''public''' role only for submissions before the contest is frozen.
+The '''reaction''' attribute is available to clients with '''public''' role only when the contest is not frozen.
 
 ==== Example ====
 
