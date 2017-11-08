@@ -406,7 +406,7 @@ JSON elements of judgement type objects:
 | yes
 | no
 | CCS
-| name of the judgement
+| name of the judgement. (might not match table below, e.g. if localised)
 |-
 | penalty
 | boolean
