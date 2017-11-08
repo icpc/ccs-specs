@@ -1221,14 +1221,48 @@ JSON elements of table objects:
 | no
 | CDS
 | Team's rotation in degrees. Required iff location is present.
+|-
+| photo
+| array of IMAGE
+| no
+| yes
+| CDS
+| registration photo of the team. Default mime type is image/png
+|-
+| video
+| array of VIDEO
+| no
+| yes
+| CDS
+| registration video of the team.
+|-
+| backup
+| array of ARCHIVE
+| no
+| yes
+| CDS
+| latest file backup of the team machine as a zip archive.
+|-
+| desktop
+| array of STREAM
+| no
+| yes
+| CDS
+| streaming video of the team desktop.
+|-
+| webcam
+| array of STREAM
+| no
+| yes
+| CDS
+| streaming video of the team webcam.
 |}
 
 ==== Access restrictions at WF ====
 
-No access restrictions apply to a GET on this endpoint. For the associated file endpoints:
-* '''photo''' and '''video''' require no special access rights,
+The following access restrictions apply to a GET on this endpoint:
 * '''backup''' requires the '''admin''' or '''analyst''' role for acccess,
-* the '''desktop''' and '''webcam''' stream endpoints are available for the '''public''' role until scoreboard freeze.
+* the '''desktop''' and '''webcam''' stream endpoints are available for the '''public''' role only when scoreboard is not frozen.
 
 ==== Example ====
 
