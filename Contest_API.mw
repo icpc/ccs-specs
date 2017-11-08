@@ -2282,10 +2282,14 @@ All event types have a corresponding API endpoint, as specified in the table bel
 
 ==== General access restrictions ====
 
-No access restrictions apply to a GET on this endpoint.
-
-However, the response and '''data''' objects contained in it must observe the same restrictions as those of the respective endpoints.
+The event repsonses and '''data''' objects contained in it must observe the same restrictions as those of the respective endpoints they represent.
 This means that attributes inside the '''data''' element will be present if and only if the client has access to those at the respective endpoint. The client only receives create, update and delete events of elements it has (partial) access to. When time-based access is granted or revoked, create or delete events are dispatched for each affected entity.
+
+The referential integrity requirement must be strictly adhered to by the event feed. I.e. the API state as defined by the event feed "changelog" must at all points have referential integrity: 
+
+* if an object, A, is deleted and another object, B, refers to it, then the event that shows that B has been updated to not refer to A or that B has been deleted *must* come before the event that shows that A has been deleted.
+* if some data is only available after a specific state change, then the event showing the state change *must* come before any update events making that data available. E.g. problems are only available after contest start for the public role, so the state event showing that the contest has started *must* come before the problems events creating the problems.
+* Since nothing must change after the contest has ended, thawed (or never been frozen) and been finalized, no event may come after the state event showing that.
 
 ==== Example ====
 
