@@ -16,12 +16,12 @@ The interface is implemented as a HTTP REST interface that outputs information i
 
 === Endpoint URLs ===
 
-The specific base URL of this API will be dependent on the server (e.g. main CCS or CDS) providing the service; in the specification we only indicate the relative paths of API endpoints with respect to a '''baseurl'''. In all the examples the baseurl is chosen <tt>https://example.com/api</tt>.
+The specific base URL of this API will be dependent on the server (e.g. main CCS or CDS) providing the service; in the specification we only indicate the relative paths of API endpoints with respect to a '''baseurl'''. In all the examples below the baseurl is <tt>https://example.com/api</tt>.
 
 We follow standard REST practices so that a whole collection can be requested, e.g. at the URL path
-  GET https://example.com/api/teams
+  GET https://example.com/api/contests/wf14/teams
 while an element with specific ID is requested as
-  GET https://example.com/api/teams/10
+  GET https://example.com/api/contests/wf14/teams/10
 
 A collection is always returned as a JSON list of objects. Every element represents a single element (and always includes the ID). When requesting a single element the exact same object is returned. E.g. the URL path
  GET baseurl/<collection>
