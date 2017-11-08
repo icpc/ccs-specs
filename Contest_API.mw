@@ -1646,7 +1646,7 @@ These are set when the judgement is completed.
 
 ==== Access restrictions at WF ====
 
-For clients with the '''public''' role, judgements will not be included for submissions received after the scoreboard freeze.
+For clients with the '''public''' role, judgements will not be included for submissions received while the scoreboard is frozen. This means that all judgements for submissions received before the scoreboard has been frozen will be sent immediately, and all judgements for submissions received after the scoreboard as been frozen will be send immediately after the scoreboard has been thawed.
 
 ==== Example ====
 
