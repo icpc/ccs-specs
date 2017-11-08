@@ -2120,7 +2120,7 @@ Each problem element within the scoreboard consists of:
 
 ==== Access restrictions at WF ====
 
-For clients with the '''public''' role, the scoreboard will not include information from judgements of submissions received after the scoreboard freeze until it has been unfrozen.
+For clients with the '''public''' role, the scoreboard will not include information from judgements of submissions received after the scoreboard has been frozen until it has been thawed.
 
 ==== Example ====
 
