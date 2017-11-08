@@ -673,14 +673,26 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 Request:
   GET https://example.com/api/contests/wf14/judgement-types
 Returned data:
-  [{"id":"CE","name":"Compiler Error","penalty":false,"solved":false},
-   {"id":"AC","name":"Accepted","penalty":false,"solved":true}
-  ]
-
+ [{
+ 	"id": "CE",
+ 	"name": "Compiler Error",
+ 	"penalty": false,
+ 	"solved": false
+ }, {
+ 	"id": "AC",
+ 	"name": "Accepted",
+ 	"penalty": false,
+ 	"solved": true
+ }]
 Request:
   GET https://example.com/api/contests/wf14/judgement-types/AC
 Returned data:
-  {"id":"AC","name":"Accepted","penalty":false,"solved":true}
+ {
+ 	"id": "AC",
+ 	"name": "Accepted",
+ 	"penalty": false,
+ 	"solved": true
+ }
 
 === Languages ===
 
