@@ -1457,9 +1457,6 @@ The following endpoints are associated with submissions:
 | JSON object of a single submission with elements as defined in the table below
 |}
 
-The endpoint '''/contests/<id>/files''' provides the file(s) of a given submission as a zip archive. These should be stored directly from the root of the zip file, i.e. there should not be extra directories (or files) added unless these are explicitly part of the submission content.
-For '''POST''', '''PUT''' and '''PATCH''' methods, '''files''' would be included as an attribute in the submission and contain the base64-encoded string of the zip archive.
-
 JSON elements of submission objects:
 {| class="wikitable"
 |-
@@ -1533,6 +1530,9 @@ JSON elements of submission objects:
 | CDS
 | reaction video from team's webcam.
 |}
+
+The '''files''' attrubute provides the file(s) of a given submission as a zip archive. These should be stored directly from the root of the zip file, i.e. there should not be extra directories (or files) added unless these are explicitly part of the submission content.
+For '''POST''', '''PUT''' and '''PATCH''' methods, the '''files''' attribute should contain the base64-encoded string of the zip archive.
 
 ==== Access restrictions at WF ====
 
