@@ -101,6 +101,37 @@ Attribute types are specified as one of the [https://en.wikipedia.org/wiki/JSON#
 : Some IDs are also used as identifiable labels and are marked below along with the recommended format. These IDs should be meaningful for human communication (e.g. team "43", problem "A") and are as short as reasonable but not more than 10 characters. IDs not marked as labels may be random characters and cannot be assumed to be suitable for display purposes.
 ;Ordinals
 : (type '''<tt>ORDINAL</tt>''' in the specification) are used to give an explicit order to a list of objects. Ordinal attributes are integers and must be non-negative and unique in a list of objects, and they should typically be low numbers starting from zero. However, clients must not assume that the ordinals start at zero nor that they are sequential. Instead the ordinal values should be used to sort the list of objects.
+;File references
+: (types '''<tt>IMAGE</tt>''', '''<tt>VIDEO</tt>''', '''<tt>ARCHIVE</tt>''' and '''<tt>STREAM</tt>''' in the specification) are represented as a JSON object with elements as defined below.
+
+Element for file reference objects:
+{| class="wikitable"
+|-
+! Name
+! Type
+! Nullable?
+! Description
+|-
+| href
+| string
+| no
+| URL where the resource can be found. Relative URLs are relative to the '''baseurl'''. Must point to image of intended mime-type.
+|-
+| mime
+| string
+| iff default is defined
+| Mime type of resource. Optional if and only if a default mime-type is specified for the reference.
+|-
+| width
+| integer
+| no for '''<tt>IMAGE</tt>'''
+| Width of the image, video or stream in pixels. Should not be used for '''<tt>ARCHIVE</tt>'''.
+|-
+| height
+| integer
+| no for '''<tt>IMAGE</tt>'''
+| Height of the image, video or stream in pixels. Should not be used for '''<tt>ARCHIVE</tt>'''.
+|}
 
 Besides the normal attributes, there are also endpoints that provide files or streams, such as <tt>/organizations/inst-123/logo</tt>, <tt>/submissions/526/files</tt> or <tt>/teams/42/webcam</tt>. In this case the server must provide the appropriate mime type and may support content negotiation for different mime types. Support to upload such files, if implemented by the server, should be done by accepting in a POST, PUT or PATCH to the parent collection or element endpoint an extra attribute with the same name and with value a base64 encoded string of the associated file contents. For example
     POST https://example.com/api/organizations
