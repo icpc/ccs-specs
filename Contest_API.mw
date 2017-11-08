@@ -1455,18 +1455,6 @@ The following endpoints are associated with submissions:
 | yes
 | CCS
 | JSON object of a single submission with elements as defined in the table below
-|-
-| /contests/<id>/submissions/<id>/files
-| application/zip
-| yes
-| CCS
-| submission files, contained at the root of the zip archive
-|-
-| /contests/<id>/submissions/<id>/reaction
-| video/*
-| no
-| CDS
-| reaction video from team's webcam
 |}
 
 The endpoint '''/contests/<id>/files''' provides the file(s) of a given submission as a zip archive. These should be stored directly from the root of the zip file, i.e. there should not be extra directories (or files) added unless these are explicitly part of the submission content.
@@ -1530,12 +1518,26 @@ JSON elements of submission objects:
 | yes
 | CCS
 | code entry point for specific languages
+|-
+| files
+| array of ARCHIVE
+| yes
+| no
+| CCS
+| submission files, contained at the root of the archive.
+|-
+| reaction
+| array of VIDEO
+| no
+| yes
+| CDS
+| reaction video from team's webcam.
 |}
 
 ==== Access restrictions at WF ====
 
-The '''entry_point''' attribute and '''files''' endpoint are accessible only for clients with '''admin''' or '''analyst''' role.
-The '''reaction''' file endpoint is available to clients with '''public''' role only for submissions before the contest freeze.
+The '''entry_point''' and '''files''' attribute are accessible only for clients with '''admin''' or '''analyst''' role.
+The '''reaction''' attribute is available to clients with '''public''' role only for submissions before the contest is frozen.
 
 ==== Example ====
 
@@ -1543,7 +1545,8 @@ Request:
   GET https://example.com/api/contests/wf14/submissions
 Returned data:
   [{"id":"187","team_id":"123","problem_id":"10-asteroids",
-    "language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034","entry_point":"Main"}
+    "language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034","entry_point":"Main",
+    "files":[{"href":"https://example.com/api/wf14/submissions/187/files","mime":"application/zip"}]}
   ]
 
 === Judgements ===
