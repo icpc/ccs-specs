@@ -1425,7 +1425,7 @@ JSON elements of state objects:
 
 ==== Access restrictions at WF ====
 
-No access restrictions apply to a GET on this endpoint.
+For clients with the public role, the '''finalized''' attribute will not be included as long as the scoreboard is frozen. In other words, public clients will not be told that the contest is finalized until the scoreboard has also been thawed or if it was never frozen to begin with.
 
 ==== Example ====
 
