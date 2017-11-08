@@ -239,16 +239,16 @@ A directory, '''registration''', containing:
 
 ==== File listing ====
 
- groups.json
- organizations/<id>/organization.json
- organizations/<organization-id>/logo.png
- organizations/<organization-id>/logo.160px.png
- organizations/<organization-id>/logo.56px.png
- teams/<id>/team.json
- teams/<id>/photo.{png, jpg}
- teams/<id>/backup.zip
- team-members/<id>/team-member.json
- team-members/<id>/photo.{png,jpg}
+ registration/groups.json
+ registration/organizations/<id>/organization.json
+ registration/organizations/<organization-id>/logo.png
+ registration/organizations/<organization-id>/logo.160px.png
+ registration/organizations/<organization-id>/logo.56px.png
+ registration/teams/<id>/team.json
+ registration/teams/<id>/photo.{png, jpg}
+ registration/teams/<id>/backup.zip
+ registration/team-members/<id>/team-member.json
+ registration/team-members/<id>/photo.{png,jpg}
 
 === Submissions ===
 
