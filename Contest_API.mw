@@ -111,7 +111,7 @@ with JSON data
       "logo":"&lt;base64 string&gt;"
     }
 
-== Extensibility ==
+=== Extensibility ===
 
 This specification is meant to cover the basic data of a contest, with the idea that server/client implementations can extend this with more data and/or roles.
 In particular, this specification already lists some endpoints or specific attributes as optional, or required only in ICPC World Finals context.
