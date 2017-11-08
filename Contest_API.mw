@@ -817,10 +817,16 @@ List of standardised identifiers for known languages.
 Request:
   GET https://example.com/api/contests/wf14/languages
 Returned data:
-  [{"id":"1-java","name":"Java"},
-   {"id":"cpp","name":"GNU C++"},
-   {"id":"4358281971166881160","name":"Python"}
-  ]
+ [{
+ 	"id": "1-java",
+ 	"name": "Java"
+ }, {
+ 	"id": "cpp",
+ 	"name": "GNU C++"
+ }, {
+ 	"id": "4358281971166881160",
+ 	"name": "Python"
+ }]
 
 === Problems ===
 
