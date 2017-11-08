@@ -1117,36 +1117,6 @@ The following endpoints are associated with teams:
 | yes
 | CCS & CDS
 | JSON object of a single team with elements as defined in the table below
-|-
-| /contests/<id>/teams/<id>/photo
-| image/png or image/jpeg
-| no
-| CDS
-| registration photo of the team
-|-
-| /contests/<id>/teams/<id>/video
-| video/*
-| no
-| CDS
-| registration video of the team
-|-
-| /contests/<id>/teams/<id>/backup
-| application/zip
-| no
-| CDS
-| latest file backup of the team machine as a zip archive
-|-
-| /contests/<id>/teams/<id>/desktop
-| STREAM
-| no
-| CDS
-| streaming video of the team desktop
-|-
-| /contests/<id>/teams/<id>/webcam
-| STREAM
-| no
-| CDS
-| streaming video of the team webcam
 |}
 
 JSON elements of table objects:
