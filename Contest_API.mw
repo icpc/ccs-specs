@@ -320,23 +320,43 @@ sufficient access rights, or a 403 if the contest is started or within
 Request:
   GET https://example.com/api/contests/wf2014
 Returned data:
-  {"id":"wf2014","name":"2014 ICPC World Finals",
-   "formal_name":"38th Annual World Finals of the ACM International Collegiate Programming Contest",
-   "start_time":"2014-06-25T10:00:00+01","duration":"5:00:00","scoreboard_freeze_duration":"1:00:00","penalty_time":20,
-   "banner":[{"href":"https://example.com/api/wf2014/banner","width":1920,"height":240}]}
+ {
+ 	"id": "wf2014",
+ 	"name": "2014 ICPC World Finals",
+ 	"formal_name": "38th Annual World Finals of the ACM International Collegiate Programming Contest",
+ 	"start_time": "2014-06-25T10:00:00+01",
+ 	"duration": "5:00:00",
+ 	"scoreboard_freeze_duration": "1:00:00",
+ 	"penalty_time": 20,
+ 	"banner": [{
+ 		"href": "https://example.com/api/wf2014/banner",
+ 		"width": 1920,
+ 		"height": 240
+ 	}]
+ }
 Request:
   GET https://example.com/api/contests/dress2016
 Returned data:
-  {"id":"dress2016","name":"2016 ICPC World Finals Dress Rehearsal",
-   "start_time":null,"duration":"2:30:00"}
+ {
+ 	"id": "dress2016",
+ 	"name": "2016 ICPC World Finals Dress Rehearsal",
+ 	"start_time": null,
+ 	"duration": "2:30:00"
+ }
 Request:
   PATCH https://example.com/api/contests/wf2014
 Request data:
-  {"id":"wf2014","start_time":"2014-06-25T10:00:00+01"}
+ {
+ 	"id": "wf2014",
+ 	"start_time": "2014-06-25T10:00:00+01"
+ }
 Request:
   PATCH https://example.com/api/contests/wf2016
 Request data:
-  {"id":"wf2016","start_time":null}
+ {
+ 	"id": "wf2016",
+ 	"start_time": null
+ }
 
 === Judgement Types ===
 
