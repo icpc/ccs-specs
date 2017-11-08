@@ -187,9 +187,9 @@ The following formats may be used:
 
 === General principle ===
 
-==== Types with additional child endpoints ====
+==== Types with file references ====
 
-Types that have child endpoints (or are likely to have in the future) are stored in a folder per object, using the type name and id as the folder name:
+Types that have file references (or are likely to have in the future) are stored in a folder per object, using the type name and id as the folder name:
  <types>/<id>/<type>.json
  <types>/<id>/<other files>
 
