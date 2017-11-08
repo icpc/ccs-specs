@@ -1267,12 +1267,6 @@ The following endpoints are associated with langauges:
 | no
 | CDS
 | JSON object of a single team member with elements as defined in the table below
-|-
-| /contests/<id>/team-members/<id>/photo
-| image/png or image/jpeg
-| no
-| CDS
-| registration photo of the team member
 |}
 
 JSON elements of team member objects:
@@ -1333,11 +1327,19 @@ JSON elements of team member objects:
 | no
 | CDS
 | one of '''contestant''' or '''coach'''
+|-
+| photo
+| array of IMAGE
+| no
+| yes
+| CDS
+| registration photo of the team member. Default mime type is image/png
+
 |}
 
 ==== Access restrictions at WF ====
 
-No access restrictions apply to a GET on this endpoint or any of the associated file endpoints.
+No access restrictions apply to a GET on this endpoint.
 
 ==== Example ====
 
