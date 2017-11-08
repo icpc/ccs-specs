@@ -304,7 +304,7 @@ No access restrictions apply to a GET on this endpoint.
 
 To replace the [[Contest Start Interface]], at the ICPC World Finals,
 a provided by CCS or CDS implementing this specification should allow for a specific role
-('''FIXME''': define name later?) that has the ability to clear or set
+that has the ability to clear or set
 the contest start time.
 
 The PATCH must include a valid JSON element with only two attributes
