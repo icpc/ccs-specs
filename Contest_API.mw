@@ -1740,7 +1740,7 @@ JSON elements of run objects:
 
 ==== Access restrictions at WF ====
 
-For clients with the '''public''' role, runs will not be included for submissions received after the scoreboard freeze.
+For clients with the '''public''' role, runs will not be included for submissions received while the scoreboard is frozen. This means that all runs for submissions received before the scoreboard has been frozen will be sent immediately, and all runs for submissions received after the scoreboard has been frozen will be sent immediately after the scoreboard has been thawed.
 
 ==== Example ====
 
