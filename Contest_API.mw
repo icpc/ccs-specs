@@ -214,18 +214,6 @@ The following endpoint is associated with contest:
 | yes
 | CCS
 | JSON object of a single contest with elements as defined in the table below
-|-
-|  /contests/<id>/banner
-| image/png
-| no
-| CDS
-| banner for this contest, intended to be an image with a large aspect ratio around 8:1 or so
-|-
-|  /contests/<id>/logo
-| image/png
-| no
-| CDS
-| logo for this contest, intended to be an image with aspect ratio near 1:1
 |}
 
 Returns a JSON object with the elements below. If there is no current (this may include about to start or just finished) contest, a 404 error is returned.
@@ -286,6 +274,20 @@ Returns a JSON object with the elements below. If there is no current (this may 
 | no
 | CCS
 | penalty time for a wrong submission, in minutes
+|-
+| banner
+| array of IMAGE
+| no
+| yes
+| CDS
+| banner for this contest, intended to be an image with a large aspect ratio around 8:1 or so. Default and only allowed mime type is image/png. 
+|-
+| logo
+| array of IMAGE
+| no
+| yes
+| CDS
+| logo for this contest, intended to be an image with aspect ratio near 1:1. Default and only allowed mime type is image/png.
 |}
 
 ==== Access restrictions at WF ====
@@ -314,7 +316,8 @@ Request:
 Returned data:
   {"id":"wf2014","name":"2014 ICPC World Finals",
    "formal_name":"38th Annual World Finals of the ACM International Collegiate Programming Contest",
-   "start_time":"2014-06-25T10:00:00+01","duration":"5:00:00","scoreboard_freeze_duration":"1:00:00","penalty_time":20}
+   "start_time":"2014-06-25T10:00:00+01","duration":"5:00:00","scoreboard_freeze_duration":"1:00:00","penalty_time":20,
+   "banner":[{"href":"https://example.com/api/wf2014/banner","width":1920,"height":240}]}
 Request:
   GET https://example.com/api/contests/dress2016
 Returned data:
