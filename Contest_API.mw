@@ -1474,7 +1474,10 @@ Request:
 Returned data:
   {
     "started": "2014-06-25T10:00:00+01",
-    "frozen": "2014-06-25T14:00:00+01"
+    "ended": null,
+    "frozen": "2014-06-25T14:00:00+01",
+    "thawed": null,
+    "finalized": null
   }
 
 === Submissions ===
