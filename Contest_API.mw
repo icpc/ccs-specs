@@ -1570,7 +1570,7 @@ JSON elements of submission objects:
 | yes
 | no
 | CCS
-| submission files, contained at the root of the archive.
+| submission files, contained at the root of the archive. Default and only allowed mime type is application/zip.
 |-
 | reaction
 | array of VIDEO
