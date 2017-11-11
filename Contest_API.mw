@@ -1255,7 +1255,7 @@ JSON elements of table objects:
 | no
 | yes
 | CDS
-| latest file backup of the team machine as a zip archive.
+| latest file backup of the team machine. Default and only allowed mime type is application/zip.
 |-
 | desktop
 | array of STREAM
