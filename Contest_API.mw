@@ -2179,11 +2179,11 @@ Returned data:
 
 === Event feed ===
 
-Provides the event feed for the current contest. This is effectively a changelog of create, update and delete events taking place in the REST endpoints. Some endpoints (specifically [[#Scoreboard | Scoreboard]] and the Event feed itself) are aggregated data, and so these will only ever update due to some other REST endpoint updating. For this reason there is no explicit event for these, since there will always be another event sent. This can also be seen by the fact that there is no scoreboard event in the table of events below.
+Provides the event feed for the current contest. This is effectively a changelog of create, update and delete events taking place in the REST endpoints. Some endpoints (specifically the [[#Scoreboard | Scoreboard]] and the Event feed itself) are aggregated data, and so these will only ever update due to some other REST endpoint updating. For this reason there is no explicit event for these, since there will always be another event sent. This can also be seen by the fact that there is no scoreboard event in the table of events below.
 
 Since this is generated data, only the '''GET''' method is allowed here, irrespective of role.
 
-The following endpoint is associated with event feed:
+The following endpoint is associated with the event feed:
 {| class="wikitable"
 |-
 ! Endpoint
@@ -2214,7 +2214,7 @@ If a client only wants some types of events the feed can be filtered with the "t
 
  /event-feed?type=submissions,teams
 
-If not specified all events will be sent. If specified only events of the listed type will be sent.
+If not specified all events will be sent. If specified only events of the listed types will be sent.
 
 ===== Feed starting point =====
 
@@ -2320,13 +2320,13 @@ All event types have a corresponding API endpoint, as specified in the table bel
 
 ==== General access restrictions ====
 
-The event repsonses and '''data''' objects contained in it must observe the same restrictions as those of the respective endpoints they represent.
+The event responses and '''data''' objects contained in it must observe the same restrictions as those of the respective endpoints they represent.
 This means that attributes inside the '''data''' element will be present if and only if the client has access to those at the respective endpoint. The client only receives create, update and delete events of elements it has (partial) access to. When time-based access is granted or revoked, create or delete events are dispatched for each affected entity.
 
 The referential integrity requirement must be strictly adhered to by the event feed. I.e. the API state as defined by the event feed "changelog" must at all points have referential integrity: 
 
-* if an object, A, is deleted and another object, B, refers to it, then the event that shows that B has been updated to not refer to A or that B has been deleted *must* come before the event that shows that A has been deleted.
-* if some data is only available after a specific state change, then the event showing the state change *must* come before any update events making that data available. E.g. problems are only available after contest start for the public role, so the state event showing that the contest has started *must* come before the problems events creating the problems.
+* If an object, A, is deleted and another object, B, refers to it, then the event that shows that B has been updated to not refer to A or that B has been deleted *must* come before the event that shows that A has been deleted.
+* If some data is only available after a specific state change, then the event showing the state change *must* come before any update events making that data available. E.g. problems are only available after contest start for the public role, so the state event showing that the contest has started *must* come before the problems events creating the problems.
 * Since nothing must change after the contest has ended, thawed (or never been frozen) and been finalized, no event may come after the state event showing that.
 
 ==== Example ====
