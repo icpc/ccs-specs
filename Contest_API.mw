@@ -428,7 +428,7 @@ No access restrictions apply to a GET on this endpoint.
 
 ==== Known judgement types ====
 
-List of standardised identifiers for known judgement types.
+The list below contains standardized identifiers for known judgement types. These identifiers should be used by a server. Please send an email to [mailto:cliccs@ecs.csus.edu cliccs@ecs.csus.edu] when there are judgement types missing.
 
 The column '''Big 5''' lists the "big 5" equivalents, if any. A '''*''' in the column means that the judgement is one of the "big 5".
 
