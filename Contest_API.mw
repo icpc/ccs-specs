@@ -908,6 +908,13 @@ JSON elements of problem objects:
 | CCS
 | human readable color description associated to the RGB value
 |-
+| time_limit
+| float
+| no
+| no
+| CCS
+| time limit in seconds per test case
+|-
 | test_data_count
 | integer
 | yes
@@ -926,14 +933,14 @@ That is, before contest start this endpoint returns an empty array for clients w
 Request:
   GET https://example.com/api/contests/wf14/problems
 Returned data:
-  [{"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","test_data_count":10},
-   {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","test_data_count":15}
+  [{"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},
+   {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}
   ]
 
 Request:
   GET https://example.com/api/contests/wf14/problems/asteroids
 Returned data:
-  {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","test_data_count":10}
+  {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10}
 
 === Groups ===
 
