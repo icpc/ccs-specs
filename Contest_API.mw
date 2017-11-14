@@ -751,7 +751,9 @@ No access restrictions apply to a GET on this endpoint.
 
 ==== Known languages ====
 
-List of standardised identifiers for known languages.
+Below is list of standardized identifiers for known languages.
+When providing one of these languages, the corresponding identifier should be used.
+The language name may be adapted e.g. for localization or to indicate a particular version of the language.
 
 {| class="wikitable"
 ! ID
