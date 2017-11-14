@@ -2236,7 +2236,7 @@ If a client wants data from some point in time this can be done with the "id" UR
 
 If specified the event feed will include all events strictly ''after'' the specified id. If a client copies the id of an event and uses that for the id URL argument it will get all events after that event. This is useful e.g. if a client is disconnected and wants to continue where it left off.
 
-If the id is not specified the event feed will include all events from the beginning of the feed. If the id is invalid the endpoint will return a 400 error.
+If the id is not specified the event feed will include all events from the beginning of the feed. The request will fail with a 400 error if the id is invalid.
 
 ==== Feed format ====
 
