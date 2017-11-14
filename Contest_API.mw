@@ -912,7 +912,7 @@ JSON elements of problem objects:
 | no
 | no
 | CCS
-| time limit in seconds per test case
+| time limit in seconds per test data set (i.e. per single run)
 |-
 | test_data_count
 | integer
