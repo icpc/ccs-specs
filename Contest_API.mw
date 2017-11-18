@@ -2221,11 +2221,11 @@ There are options for filtering based on events and starting the feed at a speci
 
 ===== Filtering events =====
 
-If a client only wants some types of events the feed can be filtered with the "type" URL argument:
+If a client only wants some types of events the feed can be filtered with the "types" URL argument:
 
- /event-feed?type=submissions,teams
+ /event-feed?types=submissions,teams
 
-If not specified all events will be sent. If specified only events of the listed types will be sent.
+If not specified all events will be sent. If specified only events of the (comma separated) listed types will be sent.
 
 ===== Feed starting point =====
 
