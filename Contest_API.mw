@@ -1979,7 +1979,7 @@ JSON elements of award objects:
 | yes
 | no
 | CCS
-| JSON array of [[#Teams | team]] ids receiving this award
+| JSON array of [[#Teams | team]] ids receiving this award. No meaning must be implied or inferred from the order of IDs. The array may be empty.
 |}
 
 ==== Access restrictions at WF ====
