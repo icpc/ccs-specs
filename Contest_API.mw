@@ -1921,7 +1921,7 @@ Request:
   GET https://example.com/api/contests/wf14/clarifications
 Returned data:
   [{"id":"1","from_team_id":"34","text":"May I ask a question?","time":"2017-06-25T11:59:27.543+01","contest_time":"1:59:27.543"},
-    {"id":"2","to_team_id":"34","reply_to_id":"1","text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}
+   {"id":"2","to_team_id":"34","reply_to_id":"1","text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}
   ]
 
 === Awards ===
