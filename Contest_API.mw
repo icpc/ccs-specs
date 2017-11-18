@@ -1207,10 +1207,10 @@ JSON elements of table objects:
 | no
 | yes
 | CCS
-| identifier of the [[#Organizations | organization]] (e.g. university or other entity) that team is affiliated to
+| identifier of the [[#Organizations | organization]] (e.g. university or other entity) that this team is affiliated to
 |-
 | group_ids
-| JSON array of ID
+| array of ID
 | no
 | no
 | CCS
