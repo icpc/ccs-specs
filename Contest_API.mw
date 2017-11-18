@@ -1209,12 +1209,12 @@ JSON elements of table objects:
 | CCS
 | identifier of the [[#Organizations | organization]] (e.g. university or other entity) that team is affiliated to
 |-
-| group_id
-| ID
+| group_ids
+| JSON array of ID
 | no
-| yes
+| no
 | CCS
-| identifier of the [[#Groups | group]] this team is part of (in ICPC WFs these are the super-regions)
+| identifiers of the [[#Groups | group(s)]] this team is part of (in ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty.
 |-
 | location
 | object
@@ -1291,8 +1291,8 @@ The following access restrictions apply to a GET on this endpoint:
 Request:
   GET https://example.com/api/contests/wf14/teams
 Returned data:
-  [{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia-74324325532"},
-   {"id":"123","name":"CMU1","organization_id":"inst105","group_id":"8"}
+  [{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_ids":["asia-74324325532"]},
+   {"id":"123","name":"CMU1","organization_id":"inst105","group_ids":["8","11"]}
   ]
 
 === Team members ===
