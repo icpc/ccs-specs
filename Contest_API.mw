@@ -1214,7 +1214,7 @@ JSON elements of table objects:
 | no
 | no
 | CCS
-| identifiers of the [[#Groups | group(s)]] this team is part of (in ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty.
+| identifiers of the [[#Groups | group(s)]] this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty.
 |-
 | location
 | object
