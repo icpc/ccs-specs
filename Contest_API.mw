@@ -999,6 +999,13 @@ JSON elements of group objects:
 | no
 | CCS
 | name of the group
+|-
+| type
+| string
+| no
+| yes
+| CCS
+| type of this group
 |}
 
 ==== Access restrictions at WF ====
