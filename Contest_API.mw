@@ -2236,9 +2236,9 @@ If not specified all events will be sent. If specified only events of the (comma
 
 ===== Feed starting point =====
 
-If a client wants data from some point in time this can be done with the "id" URL argument:
+If a client wants data from some point in time this can be done with the "since_id" URL argument:
 
- /event-feed?id=dj593
+ /event-feed?since_id=dj593
 
 If specified the event feed will include all events strictly ''after'' the specified id. If a client copies the id of an event and uses that for the id URL argument it will get all events after that event. This is useful e.g. if a client is disconnected and wants to continue where it left off.
 
