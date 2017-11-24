@@ -139,13 +139,15 @@ Element for file reference objects:
 | Height of the image, video or stream in pixels. Should not be used for '''<tt>ARCHIVE</tt>'''.
 |}
 
-Besides the normal attributes, there are also endpoints that provide files or streams, such as <tt>/organizations/inst-123/logo</tt>, <tt>/submissions/526/files</tt> or <tt>/teams/42/webcam</tt>. In this case the server must provide the appropriate mime type and may support content negotiation for different mime types. Support to upload such files, if implemented by the server, should be done by accepting in a POST, PUT or PATCH to the parent collection or element endpoint an extra attribute with the same name and with value a base64 encoded string of the associated file contents. For example
+If implementing support for uploading files pointed to by resource links, substitute the href element with a data element with a base64 encoded string of the associated file contents as the value. 
+
+For example
     POST https://example.com/api/organizations
 with JSON data
     { "id":"inst105",
       "name":"Carnegie Mellon University",
       ...
-      "logo":"&lt;base64 string&gt;"
+      "logo": [{"data": "&lt;base64 string&gt;", "width": 160, "height": 160}]
     }
 
 === Extensibility ===
