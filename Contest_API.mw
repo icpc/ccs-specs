@@ -121,7 +121,7 @@ Element for file reference objects:
 | href
 | string
 | no
-| URL where the resource can be found. Relative URLs are relative to the '''baseurl'''. Must point to a file of intended mime-type.
+| URL where the resource can be found. Relative URLs are relative to the '''baseurl'''. Must point to a file of intended mime-type. Resource must be accessible using the exact same (possibly none) authentication as the call that returned this data.
 |-
 | mime
 | string
