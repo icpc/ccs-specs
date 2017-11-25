@@ -1796,6 +1796,13 @@ JSON elements of run objects:
 | no
 | CCS
 | contest relative time when run completed
+|-
+| run_time
+| float
+| no
+| no
+| CCS
+| run time in seconds
 |}
 
 ==== Access restrictions at WF ====
