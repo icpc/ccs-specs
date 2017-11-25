@@ -1699,6 +1699,13 @@ JSON elements of judgement objects:
 | yes
 | CCS
 | contest relative time when judgement completed
+|-
+| run_time
+| float
+| no
+| yes
+| CCS
+| maximum run time in seconds for any test case
 |}
 
 When a judgement is started, each of <tt>judgement_type_id</tt>, <tt>end_time</tt> and <tt>end_contest_time</tt> will be <tt>null</tt> (or missing).
