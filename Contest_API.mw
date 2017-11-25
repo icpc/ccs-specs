@@ -1781,7 +1781,7 @@ JSON elements of run objects:
 | yes
 | no
 | CCS
-| ordering of runs in the judgement (implicit from the test cases)
+| ordering of runs in the judgement. Must be different for every run in a judgement. Runs for the same test case must have the same ordinal.  Must be between 1 and <tt>problem:test_data_count</tt>.
 |-
 | judgement_type_id
 | ID
