@@ -1008,6 +1008,13 @@ JSON elements of group objects:
 | yes
 | CCS
 | type of this group
+|-
+| hidden
+| boolean
+| no
+| yes
+| CCS
+| if group should be hidden from scoreboard. Defaults to false if missing.
 |}
 
 ==== Access restrictions at WF ====
