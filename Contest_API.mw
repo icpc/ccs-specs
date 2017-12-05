@@ -910,7 +910,7 @@ JSON elements of problem objects:
 | human readable color description associated to the RGB value
 |-
 | time_limit
-| float
+| decimal
 | no
 | no
 | CCS
@@ -1708,7 +1708,7 @@ JSON elements of judgement objects:
 | contest relative time when judgement completed
 |-
 | max_run_time
-| float
+| decimal
 | no
 | yes
 | CCS
@@ -1812,7 +1812,7 @@ JSON elements of run objects:
 | contest relative time when run completed
 |-
 | run_time
-| float
+| decimal
 | no
 | no
 | CCS
