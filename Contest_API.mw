@@ -95,8 +95,8 @@ Attribute types are specified as one of the [https://en.wikipedia.org/wiki/JSON#
 
 ;Integers
 : (type '''<tt>integer</tt>''' in the specification) are JSON numbers that are restricted to be integer. They should be represented in standard integer representation <tt>(-)?[0-9]+</tt>.
-;Floating point numbers
-: (type '''<tt>float</tt>''' in the specification) are arbitrary JSON numbers that are expected to take non-integer values. It is recommended to use a decimal representation.
+;Fixed point numbers
+: (type '''<tt>decimal</tt>''' in the specification) are JSON numbers that are expected to take non-integer values. They must be in decimal (non-scientific) representation and have at most 3 decimals. That is, they should be a integer multiple of <tt>0.001</tt>.
 ;Absolute timestamps
 : (type '''<tt>TIME</tt>''' in the specification) are strings containing human-readable timestamps, given in [https://en.wikipedia.org/wiki/ISO_8601 ISO 8601] extended combined date/time format with timezone: <tt>yyyy-mm-ddThh:mm:ss(.uuu)?[+-]zz(:mm)?</tt> (or timezone <tt>Z</tt> for UTC).
 ;Relative times
