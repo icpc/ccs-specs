@@ -1023,12 +1023,18 @@ JSON elements of group objects:
 
 No access restrictions apply to a GET on this endpoint.
 
-==== Example ====
+==== Examples ====
 
 Request:
   GET https://example.com/api/contests/wf14/groups
 Returned data:
   [{"id":"asia-74324325532","icpc_id":"7593","name":"Asia"}
+  ]
+
+Request:
+  GET https://example.com/api/contests/wf14/groups
+Returned data:
+  [{"id":"42425","name":"Division 2","type":"division"}
   ]
 
 === Organizations ===
