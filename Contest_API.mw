@@ -146,7 +146,7 @@ Element for file reference objects:
 If implementing support for uploading files pointed to by resource links, substitute the href element with a data element with a base64 encoded string of the associated file contents as the value. 
 
 For example
-    POST https://example.com/api/organizations
+    POST https://example.com/api/contests/wf14/organizations
 with JSON data
     { "id":"inst105",
       "name":"Carnegie Mellon University",
@@ -334,7 +334,7 @@ Returned data:
  	"scoreboard_freeze_duration": "1:00:00",
  	"penalty_time": 20,
  	"banner": [{
- 		"href": "https://example.com/api/wf2014/banner",
+ 		"href": "https://example.com/api/contests/wf2014/banner",
  		"width": 1920,
  		"height": 240
  	}]
