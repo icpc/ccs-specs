@@ -1629,8 +1629,10 @@ Request:
 Returned data:
   [{"id":"187","team_id":"123","problem_id":"10-asteroids",
     "language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034","entry_point":"Main",
-    "files":[{"href":"https://example.com/api/wf14/submissions/187/files","mime":"application/zip"}]}
+    "files":[{"href":"contests/wf14/submissions/187/files","mime":"application/zip"}]}
   ]
+
+Note that the relative link for <tt>files</tt> points to the location <tt>https://example.com/api/contests/wf14/submissions/187/files</tt> since the base URL for the API is <tt>https://example.com/api</tt>.
 
 === Judgements ===
 
