@@ -241,9 +241,9 @@ A directory, '''registration''', containing:
 
  registration/groups.json
  registration/organizations/<id>/organization.json
- registration/organizations/<organization-id>/logo.png
- registration/organizations/<organization-id>/logo.160px.png
- registration/organizations/<organization-id>/logo.56px.png
+ registration/organizations/<id>/logo.png
+ registration/organizations/<id>/logo.160px.png
+ registration/organizations/<id>/logo.56px.png
  registration/teams/<id>/team.json
  registration/teams/<id>/photo.{png, jpg}
  registration/teams/<id>/backup.zip
