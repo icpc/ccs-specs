@@ -264,7 +264,7 @@ Returns a JSON object with the elements below. If there is no current (this may 
 | yes
 | yes
 | CCS
-| start time of the contest, may be <tt>null</tt> during contest pause
+| the scheduled start time of the contest, may be <tt>null</tt> if the start time is unknown or paused
 |-
 | duration
 | RELTIME
@@ -1466,7 +1466,7 @@ JSON elements of state objects:
 | yes
 | yes
 | CCS
-| Time when the contest started, or <tt>null</tt> if the contest has not started.
+| Time when the contest actually started, or <tt>null</tt> if the contest has not started yet. This is the time that should be used to calculate the current contest time, e.g. for scoreboard clocks.
 |-
 | ended
 | TIME
