@@ -143,6 +143,11 @@ Element for file reference objects:
 | Height of the image, video or stream in pixels. Should not be used for '''<tt>ARCHIVE</tt>'''.
 |}
 
+The '''href''' attributes may be [https://tools.ietf.org/html/rfc3986 absolute or relative URLs]; relative URLs must be interpreted relative to the '''baseurl''' of the API. For example, if '''baseurl''' is <tt>https://example.com/api</tt>, then the following are equivalent JSON response snippets pointing to the same location:
+
+  "href":"https://example.com/api/contests/wf14/submissions/187/files"
+  "href":"contests/wf14/submissions/187/files"
+
 If implementing support for uploading files pointed to by resource links, substitute the href element with a data element with a base64 encoded string of the associated file contents as the value. 
 
 For example
