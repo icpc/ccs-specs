@@ -10,7 +10,7 @@ Such an API can be used by a multitude of clients:
 * another "shadow" CCS, providing forwarding of submissions and all relevant information
 * internally, to interface between the CCS server and judging instances
 
-This API is meant to be useful, not only at the ICPC World Finals, but more generally in any ICPC-style contest setup. It is meant to incorporate and supersede the [[JSON_Scoreboard_2016|JSON Scoreboard]], the [[Draft_2014_REST_interface_for_source_code_fetching|REST interface for source code fetching]], and the [[Contest_Start_Interface|Contest start interface]]. This REST interface is specified in conjuction with a new [[#Event feed|NDJSON event feed]], which provides all changes to this interface as CRUD-style events and is meant to supersede the old XML [[Event Feed]].
+This API is meant to be useful, not only at the ICPC World Finals, but more generally in any ICPC-style contest setup. It is meant to incorporate and supersede the [[JSON_Scoreboard_2016|JSON Scoreboard]], the [[Draft_2014_REST_interface_for_source_code_fetching|REST interface for source code fetching]], and the [[Contest_Start_Interface|Contest start interface]]. This REST interface is specified in conjunction with a new [[#Event feed|NDJSON event feed]], which provides all changes to this interface as CRUD-style events and is meant to supersede the old XML [[Event Feed]].
 
 == General design principles ==
 
@@ -552,42 +552,42 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | No CPU time used for too long
 |-
 | TCO
-| Time Limit Exceeed - Correct Output
+| Time Limit Exceeded - Correct Output
 | 
 | TLE
 | TLE, RE
 | Too slow but producing correct output
 |-
 | TWA
-| Time Limit Exceeed - Wrong Answer
+| Time Limit Exceeded - Wrong Answer
 | 
 | TLE
 | TLE, RE
 | Too slow and also incorrect output
 |-
 | TPE
-| Time Limit Exceeed - Presentation Error
+| Time Limit Exceeded - Presentation Error
 | 
 | TLE
 | TWA, TLE, RE
 | Too slow and also presentation error
 |-
 | TEO
-| Time Limit Exceeed - Excessive Output
+| Time Limit Exceeded - Excessive Output
 | 
 | TLE
 | TWA, TLE, RE
 | Too slow and also excessive output
 |-
 | TIO
-| Time Limit Exceeed - Incomplete Output
+| Time Limit Exceeded - Incomplete Output
 | 
 | TLE
 | TWA, TLE, RE
 | Too slow and also incomplete output
 |-
 | TNO
-| Time Limit Exceeed - No Output
+| Time Limit Exceeded - No Output
 | 
 | TLE
 | TIO, TWA, TLE, RE
@@ -1314,7 +1314,7 @@ JSON elements of table objects:
 ==== Access restrictions at WF ====
 
 The following access restrictions apply to a GET on this endpoint:
-* '''backup''' requires the '''admin''' or '''analyst''' role for acccess,
+* '''backup''' requires the '''admin''' or '''analyst''' role for access,
 * the '''desktop''' and '''webcam''' attributes are available for the '''public''' role only when scoreboard is not frozen.
 
 ==== Example ====
@@ -1330,7 +1330,7 @@ Returned data:
 
 Team members of teams in the contest.
 
-The following endpoints are associated with langauges:
+The following endpoints are associated with languages:
 {| class="wikitable"
 |-
 ! Endpoint
@@ -1625,7 +1625,7 @@ JSON elements of submission objects:
 | reaction video from team's webcam.
 |}
 
-The '''files''' attrubute provides the file(s) of a given submission as a zip archive. These should be stored directly from the root of the zip file, i.e. there should not be extra directories (or files) added unless these are explicitly part of the submission content.
+The '''files''' attribute provides the file(s) of a given submission as a zip archive. These should be stored directly from the root of the zip file, i.e. there should not be extra directories (or files) added unless these are explicitly part of the submission content.
 For '''POST''', '''PUT''' and '''PATCH''' methods, the '''files''' attribute should contain the base64-encoded string of the zip archive.
 
 ==== Access restrictions at WF ====
