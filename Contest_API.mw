@@ -538,7 +538,7 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | There is no output
 |-
 | WTL
-| Wallclock TIme Limit Exceeded
+| Wallclock Time Limit Exceeded
 |
 | TLE
 | TLE, RE
