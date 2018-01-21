@@ -2,7 +2,7 @@
 
 == Introduction ==
 
-This page describes a API for accessing information provided by a [[Contest_Control_System|Contest Control System]] or [[CDS|Contest Data Server]].
+This page describes an API for accessing information provided by a [[Contest_Control_System|Contest Control System]] or [[CDS|Contest Data Server]].
 Such an API can be used by a multitude of clients:
 * an external scoreboard
 * a scoreboard resolver application
