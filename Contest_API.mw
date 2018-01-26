@@ -1202,7 +1202,7 @@ The following endpoints are associated with teams:
 | JSON object of a single team with elements as defined in the table below
 |}
 
-JSON elements of table objects:
+JSON elements of team objects:
 {| class="wikitable"
 |-
 ! Name
