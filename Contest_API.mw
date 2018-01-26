@@ -2176,7 +2176,7 @@ sorted according to rank and alphabetical on team name within identically ranked
 | JSON array of problems with scoring data, see below for the specification of each element
 |}
 
-Each problem element within the scoreboard consists of:
+Each problem object within the scoreboard consists of:
 {| class="wikitable"
 |-
 ! Name
