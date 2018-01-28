@@ -1,6 +1,6 @@
 {
 	"$schema": "http://json-schema.org/draft-04/schema#",
-	"title": "CLICS CCS REST API: submissions",
+	"title": "CLICS Contest API: submissions",
 	"description": "JSON response of this API call",
 	"type": "array",
 	"uniqueItems": true,

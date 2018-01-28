@@ -1,6 +1,6 @@
 {
 	"$schema": "http://json-schema.org/draft-04/schema#",
-	"title": "CLICS CCS REST API: contest",
+	"title": "CLICS Contest API: contest",
 	"description": "JSON response of this API call",
 	"type": "object",
 	"properties": {
