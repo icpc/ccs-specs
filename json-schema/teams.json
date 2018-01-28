@@ -1,0 +1,38 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "CLICS CCS REST API: teams",
+	"description": "JSON response of this API call",
+	"type": "array",
+	"uniqueItems": true,
+	"items": {
+		"type": "object",
+		"properties": {
+			"id": { "$ref": "common.json#/identifier" },
+			"icpc_id": { "type": [ "string", "null" ] },
+			"name": { "type": "string" },
+			"organization_id": { "$ref": "common.json#/identifierornull" },
+			"group_ids": {
+				"type": "array",
+				"uniqueItems": true,
+				"items": { "$ref": "common.json#/identifierornull" }
+			},
+			"location": {
+				"type": "object",
+				"properties": {
+					"x": { "type": "number" },
+					"y": { "type": "number" },
+					"rotation": { "type": "number" }
+				},
+				"required": ["x", "y", "rotation"],
+				"additionalProperties": false
+			},
+			"photo": { "$ref": "common.json#/filerefs" },
+			"video": { "$ref": "common.json#/filerefs" },
+			"backup": { "$ref": "common.json#/filerefs" },
+			"desktop": { "$ref": "common.json#/filerefs" },
+			"webcam": { "$ref": "common.json#/filerefs" }
+		},
+		"required": ["id", "name"],
+		"additionalProperties": false
+	}
+}

@@ -1,0 +1,14 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "CLICS CCS REST API: event-feed",
+	"description": "Single line response of this NDJSON API call",
+	"type": "object",
+	"properties": {
+		"id": { "$ref": "common.json#/identifier" },
+		"type": { "$ref": "common.json#/endpoints" },
+		"op": { "enum": [ "create", "update", "delete" ] },
+		"data": { "type": "object" }
+	},
+	"required": ["id", "type", "op", "data"],
+	"additionalProperties": false
+}

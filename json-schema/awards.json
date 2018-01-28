@@ -1,0 +1,20 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "CLICS CCS REST API: awards",
+	"description": "JSON response of this API call",
+	"type": "array",
+	"uniqueItems": true,
+	"items": {
+		"type": "object",
+		"properties": {
+			"id": { "$ref": "common.json#/identifier" },
+			"citation": { "type": "string" },
+			"team_ids": {
+				"type": "array",
+				"uniqueItems": true,
+				"items": { "$ref": "common.json#/identifier" }
+			}
+		},
+		"required": ["id", "citation", "team_ids"]
+	}
+}

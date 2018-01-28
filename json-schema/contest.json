@@ -1,0 +1,22 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "CLICS CCS REST API: contest",
+	"description": "JSON response of this API call",
+	"type": "object",
+	"properties": {
+		"id": { "$ref": "common.json#/identifier" },
+		"name": { "type": "string" },
+		"formal_name": { "type": "string" },
+		"start_time": { "$ref": "common.json#/abstimeornull" },
+		"duration": { "$ref": "common.json#/reltime" },
+		"scoreboard_freeze_duration": { "$ref": "common.json#/reltime" },
+		"penalty_time": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"banner": { "$ref": "common.json#/filerefs" },
+		"logo": { "$ref": "common.json#/filerefs" }
+	},
+	"required": ["id", "name", "duration"],
+	"additionalProperties": false
+}

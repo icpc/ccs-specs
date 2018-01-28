@@ -1,0 +1,18 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "CLICS CCS REST API: judgement_types",
+	"description": "JSON response of this API call",
+	"type": "array",
+	"uniqueItems": true,
+	"items": {
+		"type": "object",
+		"properties": {
+			"id": { "$ref": "common.json#/judgementtypeid" },
+			"name": { "type": "string" },
+			"penalty": { "type": "boolean" },
+			"solved": { "type": "boolean" }
+		},
+		"required": ["id", "name", "solved"],
+		"additionalProperties": false
+	}
+}

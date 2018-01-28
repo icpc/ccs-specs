@@ -1,0 +1,115 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "CLICS CCS REST API - common definitions",
+	"description": "Common definitions of objects used in the API calls",
+
+	"endpoints": {
+		"enum": [
+			"contests",
+			"judgement-types",
+			"languages",
+			"problems",
+			"groups",
+			"organizations",
+			"team-members",
+			"teams",
+			"state",
+			"submissions",
+			"judgements",
+			"runs",
+			"clarifications",
+			"awards",
+			"scoreboard",
+			"event-feed"
+		]
+	},
+
+	"abstime": {
+		"type": "string",
+		"pattern": "^[12][0-9]{3}-[01][0-9]-[0-3][0-9]T[0-2][0-9]:[0-6][0-9]:[0-6][0-9](\\.[0-9]{3})?([+-][0-1][0-9](:[0-5][0-9])?|Z)$"
+	},
+
+	"abstimeornull": {
+		"oneOf": [
+			{ "$ref": "#/abstime" },
+			{ "type": "null" }
+		]
+	},
+
+	"reltime": {
+		"type": "string",
+		"pattern": "^-?([1-9][0-9]*)?[0-9]:[0-5][0-9]:[0-5][0-9](\\.[0-9]{3})?$"
+	},
+
+	"identifier": {
+		"type": "string",
+		"pattern": "^[A-Za-z0-9_][A-Za-z0-9_-]{0,35}"
+	},
+
+	"identifierornull": {
+		"oneOf": [
+			{ "$ref": "#/identifier" },
+			{ "type": "null" }
+		]
+	},
+
+	"judgementtypeid": {
+		"enum": [
+			"AC", "RE", "WA", "TLE", "RTE", "CE", "APE", "OLE", "PE", "EO", "IO", "NO",
+			"WTL", "ILE", "TCO", "TWA", "TPE", "TEO", "TIO", "TNO", "MLE", "SV",
+			"RCO", "RWA", "RPE", "REO", "RIO", "RNO", "CTL", "JE", "SE", "CS"
+		]
+	},
+
+	"judgementtypeidornull": {
+		"oneOf": [
+			{ "$ref": "#/judgementtypeid" },
+			{ "type": "null" }
+		]
+	},
+
+	"label": {
+		"type": "string",
+		"pattern": "^[A-Za-z0-9_][A-Za-z0-9_-]{0,9}"
+	},
+
+	"file": {
+		"type": "string"
+	},
+
+	"ordinal": {
+		"type": "integer",
+		"minimum": 0
+	},
+
+	"decimal": {
+		"type": "number",
+		"multipleOf": 0.001
+	},
+
+	"fileref": {
+		"type": "object",
+		"properties": {
+			"href": { "type": "string" },
+			"mime": {
+				"oneOf": [
+					{ "type": "string" },
+					{ "type": "null" }
+				]
+			},
+			"width":  { "type": "integer", "minimum": 1 },
+			"height": { "type": "integer", "minimum": 1 }
+		},
+		"required": ["href"],
+		"additionalProperties": false
+	},
+
+	"filerefs": {
+		"type": "array",
+		"uniqueItems": true,
+		"items": {
+			"$ref": "#/fileref"
+		}
+
+	}
+}

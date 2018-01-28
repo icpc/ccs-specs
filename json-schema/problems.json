@@ -1,0 +1,31 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "CLICS CCS REST API: problems",
+	"description": "JSON response of this API call",
+	"type": "array",
+	"uniqueItems": true,
+	"items": {
+		"type": "object",
+		"properties": {
+			"id": { "$ref": "common.json#/identifier" },
+			"label": { "$ref": "common.json#/label" },
+			"name": { "type": "string" },
+			"ordinal": { "$ref": "common.json#/ordinal" },
+			"rgb": {
+				"type": "string",
+				"pattern": "^#[A-Fa-f0-9]{3}([A-Fa-f0-9]{3})?$"
+			},
+			"color": { "type": "string" },
+			"time_limit": {
+				"$ref": "common.json#/decimal",
+				"minimum": 0
+			},
+			"test_data_count": {
+				"type": "integer",
+				"minimum": 0
+			}
+		},
+		"required": ["id", "label", "name", "ordinal", "test_data_count"],
+		"additionalProperties": false
+	}
+}

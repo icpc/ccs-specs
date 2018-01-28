@@ -1,0 +1,16 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "CLICS CCS REST API: languages",
+	"description": "JSON response of this API call",
+	"type": "array",
+	"uniqueItems": true,
+	"items": {
+		"type": "object",
+		"properties": {
+			"id": { "$ref": "common.json#/identifier" },
+			"name": { "type": "string" }
+		},
+		"required": ["id", "name"],
+		"additionalProperties": false
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "CLICS CCS REST API: groups",
+	"description": "JSON response of this API call",
+	"type": "array",
+	"uniqueItems": true,
+	"items": {
+		"type": "object",
+		"properties": {
+			"id": { "$ref": "common.json#/identifier" },
+			"icpc_id": { "type": [ "string", "null" ] },
+			"name": { "type": "string" },
+			"type": { "type": "string" },
+			"hidden": { "type": "boolean" }
+		},
+		"required": ["id", "name"],
+		"additionalProperties": false
+	}
+}

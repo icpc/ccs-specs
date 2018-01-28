@@ -1,0 +1,23 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "CLICS CCS REST API: submissions",
+	"description": "JSON response of this API call",
+	"type": "array",
+	"uniqueItems": true,
+	"items": {
+		"type": "object",
+		"properties": {
+			"id": { "$ref": "common.json#/identifier" },
+			"language_id": { "$ref": "common.json#/identifier" },
+			"problem_id": { "$ref": "common.json#/identifier" },
+			"team_id": { "$ref": "common.json#/identifier" },
+			"time": { "$ref": "common.json#/abstime" },
+			"contest_time": { "$ref": "common.json#/reltime" },
+			"entry_point": { "type": [ "string", "null" ] },
+			"files": { "$ref": "common.json#/filerefs" },
+			"reaction": { "$ref": "common.json#/filerefs" }
+		},
+		"required": ["id", "language_id", "problem_id", "team_id", "time", "contest_time", "files"],
+		"additionalProperties": false
+	}
+}
