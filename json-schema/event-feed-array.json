@@ -1,0 +1,10 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "CLICS CCS REST API: event-feed array",
+	"description": "JSON array of responses of this NDJSON API call",
+	"type": "array",
+	"uniqueItems": true,
+	"items": {
+		"$ref": "event-feed.json#/"
+	}
+}

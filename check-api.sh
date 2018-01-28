@@ -120,28 +120,16 @@ done
 
 # Now do special case event-feed endpoint
 ENDPOINT='event-feed'
-SCHEMA="$MYDIR/json-schema/$ENDPOINT.json"
+SCHEMA="$MYDIR/json-schema/$ENDPOINT-array.json"
 OUTPUT="$TMP/$ENDPOINT.json"
 URL="${API_URL%/}/$ENDPOINT"
 
 if query_endpoint "$OUTPUT" "$URL" ; then
+	# Delete empty lines and transform NDJSON into a JSON array.
+	sed -i '/^$/d;1 s/^/[/;s/$/,/;$ s/,$/]/' "$OUTPUT"
+
 	printf '%20s: ' "$ENDPOINT"
-	# Do line by line validation of NDJSON, quit at first failure.
-	TMPOUTPUT="$TMP/event-feed-line.json"
-	TMPRESULT="$TMP/event-feed-tmp.txt"
-	VALID=1
-	while read LINE ; do
-		# Skip empty lines that may be inserted as heartbeat.
-		[ -z "$LINE" ] && continue
-		echo "$LINE" > "$TMPOUTPUT"
-		if ! validate_schema "$TMPOUTPUT" "$SCHEMA" > "$TMPRESULT"; then
-			printf "Failed to validate:\n%s\n" "$LINE"
-			cat "$TMPRESULT"
-			VALID=0
-			break
-		fi
-	done < "$OUTPUT"
-	[ "$VALID" -eq 1 ] && echo "OK"
+	validate_schema "$OUTPUT" "$SCHEMA"
 else
 	printf '%20s: Failed to download\n' "$ENDPOINT"
 fi
