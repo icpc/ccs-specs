@@ -6,7 +6,6 @@
 	"properties": {
 		"id": { "$ref": "common.json#/identifier" },
 		"type": { "$ref": "common.json#/endpoints" },
-		"time": { "$ref": "common.json#/abstime" },
 		"op": { "enum": [ "create", "update", "delete" ] },
 		"data": {
 			"type": "object",
