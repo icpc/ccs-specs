@@ -90,6 +90,8 @@ validate_schema()
 	return $EXITCODE
 }
 
+EXITCODE=0
+
 for ENDPOINT in $ENDPOINTS ; do
 	if [ "${ENDPOINTS_OPTIONAL/${ENDPOINT}/}" != "$ENDPOINTS_OPTIONAL" ]; then
 		OPTIONAL=1
@@ -109,11 +111,14 @@ for ENDPOINT in $ENDPOINTS ; do
 	if query_endpoint "$OUTPUT" "$URL" $OPTIONAL ; then
 		printf '%20s: ' "$ENDPOINT"
 		validate_schema "$OUTPUT" "$SCHEMA"
+		EXIT=$?
+		[ $EXIT -gt $EXITCODE ] && EXITCODE=$EXIT
 	else
 		if [ -n "$OPTIONAL" ]; then
 			printf '%20s: Optional, not present\n' "$ENDPOINT"
 		else
 			printf '%20s: Failed to download\n' "$ENDPOINT"
+			[ $EXITCODE -eq 0 ] && EXITCODE=1
 		fi
 	fi
 done
@@ -130,10 +135,12 @@ if query_endpoint "$OUTPUT" "$URL" ; then
 
 	printf '%20s: ' "$ENDPOINT"
 	validate_schema "$OUTPUT" "$SCHEMA"
+	EXIT=$?
+	[ $EXIT -gt $EXITCODE ] && EXITCODE=$EXIT
 else
 	printf '%20s: Failed to download\n' "$ENDPOINT"
 fi
 
 rm -rf $TMP
 
-exit 0
+exit $EXITCODE
