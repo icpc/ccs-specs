@@ -38,10 +38,50 @@ team-members
 awards
 '
 
+error()
+{
+	echo "Error: $*"
+	exit 1
+}
+
+verbose()
+{
+	if [ -z "$QUIET" ]; then
+		if [ $# -eq 1 ]; then
+			echo "$1"
+		else
+			printf "$@"
+		fi
+	fi
+}
+
+# Parse command-line options:
+while getopts 'dq' OPT ; do
+	case "$OPT" in
+		d) DEBUG=1 ;;
+		q) QUIET=1 ;;
+		:)
+			error "option '$OPTARG' requires an argument."
+			exit 1
+			;;
+		?)
+			error "unknown option '$OPTARG'."
+			exit 1
+			;;
+		*)
+			error "unknown error reading option '$OPT', value '$OPTARG'."
+			exit 1
+			;;
+	esac
+done
+shift $((OPTIND-1))
+
+[ -n "$DEBUG" ] && set -x
+
 API_URL="$1"
 
 if [ -z "$API_URL" ]; then
-	echo "Error: API URL argument expected."
+	error "API URL argument expected."
 	exit 1
 fi
 
@@ -55,26 +95,29 @@ query_endpoint()
 	local URL="$2"
 	local OPTIONAL="$3"
 
+	local CURLOPTS='-k -n -s'
+	[ -n "$DEBUG" ] && CURLOPTS="$CURLOPTS -S"
+
 	# Special case timeout for event-feed NDJSON endpoint.
 	if [ "${URL/event-feed/}" != "$URL" ]; then
-		TIMEOUT='--max-time 10'
+		CURLOPTS="$CURLOPTS --max-time 10"
 	fi
 
-	local HTTPCODE=$(curl -kns $TIMEOUT -w "%{http_code}\n" -o "$OUTPUT" "${URL}${URL_EXTRA}")
+	local HTTPCODE=$(curl $CURLOPTS -w "%{http_code}\n" -o "$OUTPUT" "${URL}${URL_EXTRA}")
 	local EXITCODE="$?"
 	if [ $EXITCODE -eq 28 ]; then # timeout
 		if [ -z "$TIMEOUT" ]; then
-			echo "Warning curl request timed out for '$URL'."
+			verbose "Warning: curl request timed out for '$URL'."
 			return $EXITCODE
 		fi
 	elif [ $EXITCODE -ne 0 ]; then
-		echo "Warning: curl returned exitcode $EXITCODE for '$URL'."
+		verbose "Warning: curl returned exitcode $EXITCODE for '$URL'."
 		return $EXITCODE
 	elif [ $HTTPCODE -ne 200 ]; then
-		[ -n "$OPTIONAL" ] || echo "Warning: curl returned HTTP status $HTTPCODE for '$URL'."
+		[ -n "$OPTIONAL" ] || verbose "Warning: curl returned HTTP status $HTTPCODE for '$URL'."
 		return 1
 	elif [ ! -e "$OUTPUT" -o ! -s "$OUTPUT" ]; then
-		[ -n "$OPTIONAL" ] || echo "Warning: no or empty file downloaded by curl."
+		[ -n "$OPTIONAL" ] || verbose "Warning: no or empty file downloaded by curl."
 		return 1
 	fi
 	return 0
@@ -84,9 +127,10 @@ validate_schema()
 {
 	local DATA="$1" SCHEMA="$2"
 
-	${VALIDATE_JSON:-validate-json} "$DATA" "$SCHEMA"
+	local RESULT=$(${VALIDATE_JSON:-validate-json} "$DATA" "$SCHEMA")
 	local EXITCODE=$?
-	[ $EXITCODE -eq 0 ] && echo "OK"
+	verbose '%s' "$RESULT"
+	[ $EXITCODE -eq 0 ] && verbose "OK"
 	return $EXITCODE
 }
 
@@ -109,15 +153,15 @@ for ENDPOINT in $ENDPOINTS ; do
 	OUTPUT="$TMP/$ENDPOINT.json"
 
 	if query_endpoint "$OUTPUT" "$URL" $OPTIONAL ; then
-		printf '%20s: ' "$ENDPOINT"
+		verbose '%20s: ' "$ENDPOINT"
 		validate_schema "$OUTPUT" "$SCHEMA"
 		EXIT=$?
 		[ $EXIT -gt $EXITCODE ] && EXITCODE=$EXIT
 	else
 		if [ -n "$OPTIONAL" ]; then
-			printf '%20s: Optional, not present\n' "$ENDPOINT"
+			verbose '%20s: Optional, not present\n' "$ENDPOINT"
 		else
-			printf '%20s: Failed to download\n' "$ENDPOINT"
+			verbose '%20s: Failed to download\n' "$ENDPOINT"
 			[ $EXITCODE -eq 0 ] && EXITCODE=1
 		fi
 	fi
@@ -133,14 +177,14 @@ if query_endpoint "$OUTPUT" "$URL" ; then
 	# Delete empty lines and transform NDJSON into a JSON array.
 	sed -i '/^$/d;1 s/^/[/;s/$/,/;$ s/,$/]/' "$OUTPUT"
 
-	printf '%20s: ' "$ENDPOINT"
+	verbose '%20s: ' "$ENDPOINT"
 	validate_schema "$OUTPUT" "$SCHEMA"
 	EXIT=$?
 	[ $EXIT -gt $EXITCODE ] && EXITCODE=$EXIT
 else
-	printf '%20s: Failed to download\n' "$ENDPOINT"
+	verbose '%20s: Failed to download\n' "$ENDPOINT"
 fi
 
-rm -rf $TMP
+[ -n "$DEBUG" ] || rm -rf $TMP
 
 exit $EXITCODE
