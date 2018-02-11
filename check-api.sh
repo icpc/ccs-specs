@@ -1,11 +1,6 @@
 #!/bin/bash
 # Checks whether a Contest API conforms to the specification
 # https://clics.ecs.baylor.edu/index.php/Contest_API
-#
-# Currently only checks a single contest under api/contests/{id}/
-#
-# Rquires https://github.com/justinrainbow/json-schema
-# which can be installed with: composer require justinrainbow/json-schema
 
 # Set path to json-validate binary if it's not in PATH:
 #VALIDATE_JSON=/path/to/json-validate
@@ -55,10 +50,44 @@ verbose()
 	fi
 }
 
+usage()
+{
+	cat <<EOF
+$(basename $0) - Validate a Contest API implementation with JSON schema.
+
+Usage: $(basename $0) [option]... URL
+
+This program validates a Contest API implementation against the
+specification: https://clics.ecs.baylor.edu/index.php/Contest_API
+
+It requires the validate-json binary from
+https://github.com/justinrainbow/json-schema which can be installed
+with \`composer require justinrainbow/json-schema\`.
+
+For now, the URL must point to a specific single contest inside the
+API, for example \`$(basename $0) https://example.com/api/contests/wf17\`
+to validate the API endpoints under contest 'wf17'.
+
+Options:
+
+  -d       Turn on shell script debugging.
+  -h       Snow this help output.
+  -j PROG  Specify the path to the 'validate-json' binary.
+  -q       Quiet mode: suppress all output except script errors.
+
+The script reports endpoints checked and validations errors.
+In quiet mode only the exit code indicates successful validation.
+
+EOF
+}
+
+
 # Parse command-line options:
-while getopts 'dq' OPT ; do
+while getopts 'dhj:nq' OPT ; do
 	case "$OPT" in
 		d) DEBUG=1 ;;
+		h) usage ; exit 0 ;;
+		j) VALIDATE_JSON="$OPTARG" ;;
 		q) QUIET=1 ;;
 		:)
 			error "option '$OPTARG' requires an argument."
