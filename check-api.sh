@@ -101,6 +101,7 @@ query_endpoint()
 
 	# Special case timeout for event-feed NDJSON endpoint.
 	if [ "${URL/event-feed/}" != "$URL" ]; then
+		TIMEOUT=1
 		CURLOPTS="$CURLOPTS --max-time 10"
 	fi
 
