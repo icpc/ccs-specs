@@ -131,7 +131,11 @@ validate_schema()
 	RESULT=$(${VALIDATE_JSON:-validate-json} "$DATA" "$SCHEMA")
 	EXITCODE=$?
 	verbose '%s' "$RESULT"
-	[ $EXITCODE -eq 0 ] && verbose "OK"
+	if [ $EXITCODE -eq 0 ]; then
+		verbose 'OK'
+	else
+		verbose ''
+	fi
 	return $EXITCODE
 }
 
