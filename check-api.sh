@@ -94,6 +94,7 @@ query_endpoint()
 	local OUTPUT="$1"
 	local URL="$2"
 	local OPTIONAL="$3"
+	local HTTPCODE EXITCODE
 
 	local CURLOPTS='-k -n -s'
 	[ -n "$DEBUG" ] && CURLOPTS="$CURLOPTS -S"
@@ -103,8 +104,8 @@ query_endpoint()
 		CURLOPTS="$CURLOPTS --max-time 10"
 	fi
 
-	local HTTPCODE=$(curl $CURLOPTS -w "%{http_code}\n" -o "$OUTPUT" "${URL}${URL_EXTRA}")
-	local EXITCODE="$?"
+	HTTPCODE=$(curl $CURLOPTS -w "%{http_code}\n" -o "$OUTPUT" "${URL}${URL_EXTRA}")
+	EXITCODE="$?"
 	if [ $EXITCODE -eq 28 ]; then # timeout
 		if [ -z "$TIMEOUT" ]; then
 			verbose "Warning: curl request timed out for '$URL'."
@@ -125,10 +126,10 @@ query_endpoint()
 
 validate_schema()
 {
-	local DATA="$1" SCHEMA="$2"
+	local DATA="$1" SCHEMA="$2" RESULT EXITCODE
 
-	local RESULT=$(${VALIDATE_JSON:-validate-json} "$DATA" "$SCHEMA")
-	local EXITCODE=$?
+	RESULT=$(${VALIDATE_JSON:-validate-json} "$DATA" "$SCHEMA")
+	EXITCODE=$?
 	verbose '%s' "$RESULT"
 	[ $EXITCODE -eq 0 ] && verbose "OK"
 	return $EXITCODE
