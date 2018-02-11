@@ -4,6 +4,7 @@
 	"description": "JSON response of this API call",
 	"type": "array",
 	"uniqueItems": true,
+	"$ref": "common.json#/nonemptyarray",
 	"items": {
 		"type": "object",
 		"properties": {

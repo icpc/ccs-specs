@@ -73,6 +73,7 @@ Options:
   -d       Turn on shell script debugging.
   -h       Snow this help output.
   -j PROG  Specify the path to the 'validate-json' binary.
+  -n       Require that all collection endpoints are non-empty.
   -q       Quiet mode: suppress all output except script errors.
 
 The script reports endpoints checked and validations errors.
@@ -88,6 +89,7 @@ while getopts 'dhj:nq' OPT ; do
 		d) DEBUG=1 ;;
 		h) usage ; exit 0 ;;
 		j) VALIDATE_JSON="$OPTARG" ;;
+		n) NONEMPTY=1 ;;
 		q) QUIET=1 ;;
 		:)
 			error "option '$OPTARG' requires an argument."
@@ -169,6 +171,14 @@ validate_schema()
 	return $EXITCODE
 }
 
+# Copy schema files so we can modify common.json for the non-empty option
+cp -a "$MYDIR/json-schema" "$TMP"
+
+if [ -n "$NONEMPTY" ]; then
+	# Don't understand why the first '\t' needs a double escape...
+	sed -i '/"nonemptyarray":/a \\t\t"minItems": 1' "$TMP/json-schema/common.json"
+fi
+
 EXITCODE=0
 
 for ENDPOINT in $ENDPOINTS ; do
@@ -184,7 +194,7 @@ for ENDPOINT in $ENDPOINTS ; do
 		URL="${API_URL%/}/$ENDPOINT"
 	fi
 
-	SCHEMA="$MYDIR/json-schema/$ENDPOINT.json"
+	SCHEMA="$TMP/json-schema/$ENDPOINT.json"
 	OUTPUT="$TMP/$ENDPOINT.json"
 
 	if query_endpoint "$OUTPUT" "$URL" $OPTIONAL ; then

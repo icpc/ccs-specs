@@ -111,5 +111,9 @@
 			"$ref": "#/fileref"
 		}
 
+	},
+
+	"$comment": "Inside here add '\"minItems\": 1' to require all collection endpoints to contain at least one element.",
+	"nonemptyarray": {
 	}
 }

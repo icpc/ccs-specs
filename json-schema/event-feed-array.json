@@ -4,6 +4,7 @@
 	"description": "JSON array of responses of this NDJSON API call",
 	"type": "array",
 	"uniqueItems": true,
+	"$ref": "common.json#/nonemptyarray",
 	"items": {
 		"$ref": "event-feed.json#/"
 	}
