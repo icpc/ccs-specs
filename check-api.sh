@@ -74,6 +74,7 @@ Options:
   -h       Snow this help output.
   -j PROG  Specify the path to the 'validate-json' binary.
   -n       Require that all collection endpoints are non-empty.
+  -t TIME  Timeout in seconds for downloading event feed (default: 10s)
   -q       Quiet mode: suppress all output except script errors.
 
 The script reports endpoints checked and validations errors.
@@ -82,14 +83,16 @@ In quiet mode only the exit code indicates successful validation.
 EOF
 }
 
+FEED_TIMEOUT=10
 
 # Parse command-line options:
-while getopts 'dhj:nq' OPT ; do
+while getopts 'dhj:nt:q' OPT ; do
 	case "$OPT" in
 		d) DEBUG=1 ;;
 		h) usage ; exit 0 ;;
 		j) VALIDATE_JSON="$OPTARG" ;;
 		n) NONEMPTY=1 ;;
+		t) FEED_TIMEOUT="$OPTARG" ;;
 		q) QUIET=1 ;;
 		:)
 			error "option '$OPTARG' requires an argument."
@@ -133,7 +136,7 @@ query_endpoint()
 	# Special case timeout for event-feed NDJSON endpoint.
 	if [ "${URL/event-feed/}" != "$URL" ]; then
 		TIMEOUT=1
-		CURLOPTS="$CURLOPTS --max-time 10"
+		CURLOPTS="$CURLOPTS --max-time ${FEED_TIMEOUT}"
 	fi
 
 	HTTPCODE=$(curl $CURLOPTS -w "%{http_code}\n" -o "$OUTPUT" "${URL}${URL_EXTRA}")
