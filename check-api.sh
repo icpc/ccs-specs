@@ -229,6 +229,7 @@ if query_endpoint "$OUTPUT" "$URL" ; then
 	validate_schema "$OUTPUT" "$SCHEMA"
 	EXIT=$?
 	[ $EXIT -gt $EXITCODE ] && EXITCODE=$EXIT
+	[ $EXIT -ne 0 ] && cat "$OUTPUT"
 else
 	verbose '%20s: Failed to download\n' "$ENDPOINT"
 fi
