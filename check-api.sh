@@ -57,7 +57,7 @@ Usage: $(basename $0) [option]... URL
 This program validates a Contest API implementation against the
 specification: https://clics.ecs.baylor.edu/index.php/Contest_API
 
-It requires the validate-json binary from
+It requires curl and the validate-json binary from
 https://github.com/justinrainbow/json-schema which can be installed
 with \`composer require justinrainbow/json-schema\`.
 
@@ -143,7 +143,11 @@ query_endpoint()
 	if [ "${URL/event-feed/}" != "$URL" ]; then
 		TIMEOUT=1
 		CURLOPTS="$CURLOPTS -N --max-time ${FEED_TIMEOUT}"
-		ARGS="${ARGS:+$ARGS&}stream=0"
+		# This is a hack around the --max-time option not working well
+		# on Travis CI for the DOMjudge event-feed endpoint.
+		if [ "${URL/domjudge/}" != "$URL" ]; then
+			ARGS="${ARGS:+$ARGS&}stream=0"
+		fi
 	fi
 
 	HTTPCODE=$(curl $CURLOPTS -w "%{http_code}\n" -o "$OUTPUT" "${URL}${ARGS:+?$ARGS}")
