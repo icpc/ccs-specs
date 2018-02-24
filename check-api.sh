@@ -6,7 +6,8 @@
 #VALIDATE_JSON=/path/to/json-validate
 
 # Optional extra arguments to append to the API URLs:
-#URL_EXTRA='?strict=1'
+# Separate with '&', do not add initial '?'.
+#URL_ARGS='strict=1'
 
 ENDPOINTS='
 contest
@@ -136,13 +137,16 @@ query_endpoint()
 	local CURLOPTS="$CURL_OPTIONS"
 	[ -n "$DEBUG" ] && CURLOPTS="$CURLOPTS -S"
 
+	local ARGS="$URL_ARGS"
+
 	# Special case timeout for event-feed NDJSON endpoint.
 	if [ "${URL/event-feed/}" != "$URL" ]; then
 		TIMEOUT=1
 		CURLOPTS="$CURLOPTS -N --max-time ${FEED_TIMEOUT}"
+		ARGS="${ARGS:+$ARGS&}stream=0"
 	fi
 
-	HTTPCODE=$(curl $CURLOPTS -w "%{http_code}\n" -o "$OUTPUT" "${URL}${URL_EXTRA}")
+	HTTPCODE=$(curl $CURLOPTS -w "%{http_code}\n" -o "$OUTPUT" "${URL}${ARGS:+?$ARGS}")
 	EXITCODE="$?"
 	if [ $EXITCODE -eq 28 ]; then # timeout
 		if [ -z "$TIMEOUT" ]; then
