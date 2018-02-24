@@ -70,11 +70,12 @@ to validate the API endpoints under contest 'wf17'.
 
 Options:
 
+  -c OPTS  Options to pass to curl to request API data (default: $CURL_OPTIONS)
   -d       Turn on shell script debugging.
   -h       Snow this help output.
   -j PROG  Specify the path to the 'validate-json' binary.
   -n       Require that all collection endpoints are non-empty.
-  -t TIME  Timeout in seconds for downloading event feed (default: 10s)
+  -t TIME  Timeout in seconds for downloading event feed (default: $FEED_TIMEOUT)
   -q       Quiet mode: suppress all output except script errors.
 
 The script reports endpoints checked and validations errors.
@@ -84,10 +85,12 @@ EOF
 }
 
 FEED_TIMEOUT=10
+CURL_OPTIONS='-n -s'
 
 # Parse command-line options:
-while getopts 'dhj:nt:q' OPT ; do
+while getopts 'c:dhj:nt:q' OPT ; do
 	case "$OPT" in
+		c) CURL_OPTIONS="$OPTARG" ;;
 		d) DEBUG=1 ;;
 		h) usage ; exit 0 ;;
 		j) VALIDATE_JSON="$OPTARG" ;;
@@ -130,7 +133,7 @@ query_endpoint()
 	local OPTIONAL="$3"
 	local HTTPCODE EXITCODE
 
-	local CURLOPTS='-k -n -s'
+	local CURLOPTS="$CURL_OPTIONS"
 	[ -n "$DEBUG" ] && CURLOPTS="$CURLOPTS -S"
 
 	# Special case timeout for event-feed NDJSON endpoint.
