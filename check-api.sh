@@ -5,10 +5,6 @@
 # Set path to json-validate binary if it's not in PATH:
 #VALIDATE_JSON=/path/to/json-validate
 
-# Optional extra arguments to append to the API URLs:
-# Separate with '&', do not add initial '?'.
-#URL_ARGS='strict=1'
-
 ENDPOINTS='
 contest
 judgement-types
@@ -71,6 +67,8 @@ to validate the API endpoints under contest 'wf17'.
 
 Options:
 
+  -a ARGS  Arguments to pass to the API request URLs. Separate arguments
+             with '&', do not add initial '?'. (default: $URL_ARGS)
   -c OPTS  Options to pass to curl to request API data (default: $CURL_OPTIONS)
   -d       Turn on shell script debugging.
   -h       Snow this help output.
@@ -87,10 +85,12 @@ EOF
 
 FEED_TIMEOUT=10
 CURL_OPTIONS='-n -s'
+URL_ARGS=''
 
 # Parse command-line options:
-while getopts 'c:dhj:nt:q' OPT ; do
+while getopts 'a:c:dhj:nt:q' OPT ; do
 	case "$OPT" in
+		a) URL_ARGS="$OPTARG" ;;
 		c) CURL_OPTIONS="$OPTARG" ;;
 		d) DEBUG=1 ;;
 		h) usage ; exit 0 ;;
