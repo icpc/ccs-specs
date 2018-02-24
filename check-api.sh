@@ -135,7 +135,7 @@ query_endpoint()
 	local HTTPCODE EXITCODE
 
 	local CURLOPTS="$CURL_OPTIONS"
-	[ -n "$DEBUG" ] && CURLOPTS="$CURLOPTS -S"
+	[ -n "$DEBUG" ] && CURLOPTS="${CURLOPTS/ -s/} -S"
 
 	local ARGS="$URL_ARGS"
 
