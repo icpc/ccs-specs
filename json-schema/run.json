@@ -17,5 +17,5 @@
 		}
 	},
 	"required": ["id", "judgement_id", "ordinal", "judgement_type_id", "time", "contest_time"],
-	"additionalProperties": false
+	"$ref": "common.json#/strictproperties"
 }

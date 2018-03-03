@@ -17,5 +17,5 @@
 		"contest_time": { "$ref": "common.json#/reltime" }
 	},
 	"required": ["id", "text", "time", "contest_time"],
-	"additionalProperties": false
+	"$ref": "common.json#/strictproperties"
 }

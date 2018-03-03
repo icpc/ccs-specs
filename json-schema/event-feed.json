@@ -39,11 +39,11 @@
 						"id": { "$ref": "common.json#/identifier" }
 					},
 					"required": ["id"],
-					"additionalProperties": false
+					"$ref": "common.json#/strictproperties"
 				}
 			}
 		]
 	},
 	"required": ["id", "type", "op", "data"],
-	"additionalProperties": false
+	"$ref": "common.json#/strictproperties"
 }

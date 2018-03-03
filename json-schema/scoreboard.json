@@ -26,7 +26,7 @@
 					}
 				},
 				"required": ["num_solved", "total_time"],
-				"additionalProperties": false
+				"$ref": "common.json#/strictproperties"
 			},
 			"problems": {
 				"type": "array",
@@ -56,11 +56,11 @@
 						}
 					],
 					"required": ["problem_id", "num_judged", "num_pending", "solved"],
-					"additionalProperties": false
+					"$ref": "common.json#/strictproperties"
 				}
 			}
 		},
 		"required": ["rank", "team_id", "score", "problems"],
-		"additionalProperties": false
+		"$ref": "common.json#/strictproperties"
 	}
 }

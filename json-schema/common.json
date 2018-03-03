@@ -101,7 +101,7 @@
 			"height": { "type": "integer", "minimum": 1 }
 		},
 		"required": ["href"],
-		"additionalProperties": false
+		"$ref": "#/strictproperties"
 	},
 
 	"filerefs": {
@@ -115,5 +115,9 @@
 
 	"$comment": "Inside here add '\"minItems\": 1' to require all collection endpoints to contain at least one element.",
 	"nonemptyarray": {
+	},
+
+	"$comment": "Inside here add '\"additionalProperties\": false' to force that no additional properties can be present beyond those defined in the API.",
+	"strictproperties": {
 	}
 }

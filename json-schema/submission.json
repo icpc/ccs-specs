@@ -16,5 +16,5 @@
 		"reaction": { "$ref": "common.json#/filerefs" }
 	},
 	"required": ["id", "language_id", "problem_id", "team_id", "time", "contest_time", "files"],
-	"additionalProperties": false
+	"$ref": "common.json#/strictproperties"
 }

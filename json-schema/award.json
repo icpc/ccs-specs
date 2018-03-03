@@ -13,5 +13,6 @@
 			"items": { "$ref": "common.json#/identifier" }
 		}
 	},
-	"required": ["id", "citation", "team_ids"]
+	"required": ["id", "citation", "team_ids"],
+	"$ref": "common.json#/strictproperties"
 }

@@ -9,5 +9,5 @@
 		"name": { "type": "string" }
 	},
 	"required": ["id", "name"],
-	"additionalProperties": false
+	"$ref": "common.json#/strictproperties"
 }

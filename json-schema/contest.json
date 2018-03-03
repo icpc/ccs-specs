@@ -19,5 +19,5 @@
 		"logo": { "$ref": "common.json#/filerefs" }
 	},
 	"required": ["id", "name", "duration"],
-	"additionalProperties": false
+	"$ref": "common.json#/strictproperties"
 }

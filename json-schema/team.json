@@ -22,7 +22,7 @@
 				"rotation": { "type": "number" }
 			},
 			"required": ["x", "y", "rotation"],
-			"additionalProperties": false
+			"$ref": "common.json#/strictproperties"
 		},
 		"photo": { "$ref": "common.json#/filerefs" },
 		"video": { "$ref": "common.json#/filerefs" },
@@ -31,5 +31,5 @@
 		"webcam": { "$ref": "common.json#/filerefs" }
 	},
 	"required": ["id", "name"],
-	"additionalProperties": false
+	"$ref": "common.json#/strictproperties"
 }

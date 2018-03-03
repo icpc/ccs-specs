@@ -11,5 +11,5 @@
 		"solved": { "type": "boolean" }
 	},
 	"required": ["id", "name", "solved"],
-	"additionalProperties": false
+	"$ref": "common.json#/strictproperties"
 }

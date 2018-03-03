@@ -81,6 +81,7 @@ Options:
   -h       Snow this help output.
   -j PROG  Specify the path to the 'validate-json' binary.
   -n       Require that all collection endpoints are non-empty.
+  -p       Allow extra properties beyond those defined in the Contest API.
   -t TIME  Timeout in seconds for downloading event feed (default: $FEED_TIMEOUT)
   -q       Quiet mode: suppress all output except script errors.
 
@@ -95,7 +96,7 @@ CURL_OPTIONS='-n -s'
 URL_ARGS=''
 
 # Parse command-line options:
-while getopts 'a:c:dhj:nt:q' OPT ; do
+while getopts 'a:c:dhj:npt:q' OPT ; do
 	case "$OPT" in
 		a) URL_ARGS="$OPTARG" ;;
 		c) CURL_OPTIONS="$OPTARG" ;;
@@ -103,6 +104,7 @@ while getopts 'a:c:dhj:nt:q' OPT ; do
 		h) usage ; exit 0 ;;
 		j) VALIDATE_JSON="$OPTARG" ;;
 		n) NONEMPTY=1 ;;
+		p) EXTRAPROP=1 ;;
 		t) FEED_TIMEOUT="$OPTARG" ;;
 		q) QUIET=1 ;;
 		:)
@@ -198,6 +200,9 @@ cp -a "$MYDIR/json-schema" "$TMP"
 if [ -n "$NONEMPTY" ]; then
 	# Don't understand why the first '\t' needs a double escape...
 	sed -i '/"nonemptyarray":/a \\t\t"minItems": 1' "$TMP/json-schema/common.json"
+fi
+if [ -z "$EXTRAPROP" ]; then
+	sed -i '/"strictproperties":/a \\t\t"additionalProperties": false' "$TMP/json-schema/common.json"
 fi
 
 # First validate and get all contests

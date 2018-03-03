@@ -12,5 +12,5 @@
 		"finalized": { "$ref": "common.json#/abstimeornull" }
 	},
 	"required": ["started", "ended", "finalized"],
-	"additionalProperties": false
+	"$ref": "common.json#/strictproperties"
 }
