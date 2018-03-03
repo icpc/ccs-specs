@@ -2,10 +2,11 @@
 	"$schema": "http://json-schema.org/draft-04/schema#",
 	"title": "CLICS Contest API: event-feed array",
 	"description": "JSON array of responses of this NDJSON API call",
+
 	"type": "array",
 	"uniqueItems": true,
 	"$ref": "common.json#/nonemptyarray",
 	"items": {
-		"$ref": "event-feed.json#/"
+		"$ref": "event-feed.json#"
 	}
 }
