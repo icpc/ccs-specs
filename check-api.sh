@@ -92,7 +92,7 @@ EOF
 
 FEED_TIMEOUT=10
 CURL_OPTIONS='-n -s'
-URL_ARGS='strict=1'
+URL_ARGS=''
 
 # Parse command-line options:
 while getopts 'a:c:dhj:nt:q' OPT ; do
@@ -211,7 +211,6 @@ if query_endpoint "$OUTPUT" "$URL" ; then
 	EXIT=$?
 	[ $EXIT -ne 0 -a $EXIT -ne 23 ] && exit $EXIT
 	CONTESTS=$(jq -r '.[].id' "$OUTPUT")
-	verbose "Contests: $CONTESTS"
 else
 	verbose '%20s: Failed to download\n' "$ENDPOINT"
 	exit 1
@@ -237,7 +236,7 @@ for CONTEST in $CONTESTS ; do
 		fi
 
 		SCHEMA="$TMP/json-schema/$ENDPOINT.json"
-		OUTPUT="$TMP/$CONTEST_$ENDPOINT.json"
+		OUTPUT="$TMP/${CONTEST}_${ENDPOINT}.json"
 
 		if query_endpoint "$OUTPUT" "$URL" $OPTIONAL ; then
 			verbose '%20s: ' "$ENDPOINT"
