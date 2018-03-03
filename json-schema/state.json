@@ -1,7 +1,8 @@
 {
-	"$schema": "http://json-schema.org/draft-04/schema#",
+	"$schema": "http://json-schema.org/draft-07/schema#",
 	"title": "CLICS Contest API: state",
 	"description": "JSON response of this API call",
+
 	"type": "object",
 	"properties": {
 		"started":   { "$ref": "common.json#/abstimeornull" },
