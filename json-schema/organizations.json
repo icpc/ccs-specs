@@ -2,52 +2,11 @@
 	"$schema": "http://json-schema.org/draft-04/schema#",
 	"title": "CLICS Contest API: organizations",
 	"description": "JSON response of this API call",
+
 	"type": "array",
 	"uniqueItems": true,
 	"$ref": "common.json#/nonemptyarray",
 	"items": {
-		"type": "object",
-		"properties": {
-			"id": { "$ref": "common.json#/identifier" },
-			"icpc_id": { "type": [ "string", "null" ] },
-			"name": { "type": "string" },
-			"formal_name": { "type": [ "string", "null" ] },
-			"country":  {
-				"oneOf": [
-					{
-						"type": "string",
-						"pattern": "^[A-Z]{3}$"
-					},
-					{ "type": "null" }
-				]
-			},
-			"url": { "type": [ "string", "null" ] },
-			"twitter_hashtag": { "type": [ "string", "null" ] },
-			"location": {
-				"oneOf": [
-					{
-						"type": "object",
-						"properties": {
-							"latitude": {
-								"type": "number",
-								"minimum": -90,
-								"maximum":  90
-							},
-							"longitude": {
-								"type": "number",
-								"minimum": -180,
-								"maximum":  180
-							}
-						},
-						"required": ["latitude", "longitude"],
-						"additionalProperties": false
-					},
-					{ "type": "null" }
-				]
-			},
-			"logo": { "$ref": "common.json#/filerefs" }
-		},
-		"required": ["id", "name"],
-		"additionalProperties": false
+		"$ref": "organization.json#"
 	}
 }

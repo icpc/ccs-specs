@@ -1,0 +1,21 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "CLICS Contest API - clarification",
+	"description": "Definition of a single clarification object",
+
+	"type": "object",
+	"properties": {
+		"id": { "$ref": "common.json#/identifier" },
+		"from_team_id": { "$ref": "common.json#/identifierornull" },
+		"to_team_id": { "$ref": "common.json#/identifierornull" },
+		"reply_to_id": { "$ref": "common.json#/identifierornull" },
+		"problem_id": { "$ref": "common.json#/identifierornull" },
+		"text": { "type": "string" },
+		"from_jury": { "type": "boolean" },
+		"to_all_teams": { "type": "boolean" },
+		"time": { "$ref": "common.json#/abstime" },
+		"contest_time": { "$ref": "common.json#/reltime" }
+	},
+	"required": ["id", "text", "time", "contest_time"],
+	"additionalProperties": false
+}

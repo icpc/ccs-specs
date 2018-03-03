@@ -1,0 +1,21 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "CLICS Contest API - run",
+	"description": "Definition of a single run object",
+
+	"type": "object",
+	"properties": {
+		"id": { "$ref": "common.json#/identifier" },
+		"judgement_id": { "$ref": "common.json#/identifier" },
+		"ordinal": { "$ref": "common.json#/ordinal" },
+		"judgement_type_id": { "$ref": "common.json#/judgementtypeid" },
+		"time": { "$ref": "common.json#/abstime" },
+		"contest_time": { "$ref": "common.json#/reltime" },
+		"run_time": {
+			"$ref": "common.json#/decimal",
+			"minimum": 0
+		}
+	},
+	"required": ["id", "judgement_id", "ordinal", "judgement_type_id", "time", "contest_time"],
+	"additionalProperties": false
+}

@@ -1,0 +1,15 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "CLICS Contest API - judgement_type",
+	"description": "Definition of a single judgement-type object",
+
+	"type": "object",
+	"properties": {
+		"id": { "$ref": "common.json#/judgementtypeid" },
+		"name": { "type": "string" },
+		"penalty": { "type": "boolean" },
+		"solved": { "type": "boolean" }
+	},
+	"required": ["id", "name", "solved"],
+	"additionalProperties": false
+}

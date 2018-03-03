@@ -2,35 +2,11 @@
 	"$schema": "http://json-schema.org/draft-04/schema#",
 	"title": "CLICS Contest API: judgements",
 	"description": "JSON response of this API call",
+
 	"type": "array",
 	"uniqueItems": true,
 	"$ref": "common.json#/nonemptyarray",
 	"items": {
-		"type": "object",
-		"properties": {
-			"id": { "$ref": "common.json#/identifier" },
-			"submission_id": { "$ref": "common.json#/identifier" },
-			"judgement_type_id": { "$ref": "common.json#/judgementtypeidornull" },
-			"start_time": { "$ref": "common.json#/abstime" },
-			"start_contest_time": { "$ref": "common.json#/reltime" },
-			"end_time": { "$ref": "common.json#/abstimeornull" },
-			"end_contest_time": {
-				"oneOf": [
-					{ "$ref": "common.json#/reltime" },
-					{ "type": "null" }
-				]
-			},
-			"max_run_time": {
-				"oneOf": [
-					{
-						"$ref": "common.json#/decimal",
-						"minimum": 0
-					},
-					{ "type": "null" }
-				]
-			}
-		},
-		"required": ["id", "submission_id", "start_time", "start_contest_time", "end_time", "end_contest_time"],
-		"additionalProperties": false
+		"$ref": "judgement.json#"
 	}
 }

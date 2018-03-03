@@ -1,0 +1,13 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "CLICS Contest API - language",
+	"description": "Definition of a single language object",
+
+	"type": "object",
+	"properties": {
+		"id": { "$ref": "common.json#/identifier" },
+		"name": { "type": "string" }
+	},
+	"required": ["id", "name"],
+	"additionalProperties": false
+}

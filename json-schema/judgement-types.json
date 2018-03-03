@@ -2,18 +2,11 @@
 	"$schema": "http://json-schema.org/draft-04/schema#",
 	"title": "CLICS Contest API: judgement_types",
 	"description": "JSON response of this API call",
+
 	"type": "array",
 	"uniqueItems": true,
 	"$ref": "common.json#/nonemptyarray",
 	"items": {
-		"type": "object",
-		"properties": {
-			"id": { "$ref": "common.json#/judgementtypeid" },
-			"name": { "type": "string" },
-			"penalty": { "type": "boolean" },
-			"solved": { "type": "boolean" }
-		},
-		"required": ["id", "name", "solved"],
-		"additionalProperties": false
+		"$ref": "judgement-type.json#"
 	}
 }
