@@ -57,13 +57,20 @@ Usage: $(basename $0) [option]... URL
 This program validates a Contest API implementation against the
 specification: https://clics.ecs.baylor.edu/index.php/Contest_API
 
-It requires curl and the validate-json binary from
-https://github.com/justinrainbow/json-schema which can be installed
-with \`composer require justinrainbow/json-schema\`.
+The URL must point to the base of the API, for example:
 
-For now, the URL must point to a specific single contest inside the
-API, for example \`$(basename $0) https://example.com/api/contests/wf17\`
-to validate the API endpoints under contest 'wf17'.
+  $(basename $0) -n -c '-knS' -a 'strict=1' https://example.com/api
+
+where the options -knS passed to curl make it ignore SSL certificate
+errors, use ~/.netrc for credentials, and be verbose. The option -a
+makes that 'strict=1' is appended as argument to each API call.
+
+This script requires:
+- the curl command line client
+- the validate-json binary from https://github.com/justinrainbow/json-schema
+  which can be installed with \`composer require justinrainbow/json-schema\`
+- the jq program from https://github.com/stedolan/jq
+  which is available as the \`jq\` package in Debian and Ubuntu.
 
 Options:
 
@@ -85,7 +92,7 @@ EOF
 
 FEED_TIMEOUT=10
 CURL_OPTIONS='-n -s'
-URL_ARGS=''
+URL_ARGS='strict=1'
 
 # Parse command-line options:
 while getopts 'a:c:dhj:nt:q' OPT ; do
@@ -193,57 +200,80 @@ if [ -n "$NONEMPTY" ]; then
 	sed -i '/"nonemptyarray":/a \\t\t"minItems": 1' "$TMP/json-schema/common.json"
 fi
 
+# First validate and get all contests
+ENDPOINT='contests'
+URL="${API_URL%/}/$ENDPOINT"
+SCHEMA="$TMP/json-schema/$ENDPOINT.json"
+OUTPUT="$TMP/$ENDPOINT.json"
+if query_endpoint "$OUTPUT" "$URL" ; then
+	verbose '%20s: ' "$ENDPOINT"
+	validate_schema "$OUTPUT" "$SCHEMA"
+	EXIT=$?
+	[ $EXIT -ne 0 -a $EXIT -ne 23 ] && exit $EXIT
+	CONTESTS=$(jq -r '.[].id' "$OUTPUT")
+	verbose "Contests: $CONTESTS"
+else
+	verbose '%20s: Failed to download\n' "$ENDPOINT"
+	exit 1
+fi
+
 EXITCODE=0
 
-for ENDPOINT in $ENDPOINTS ; do
-	if [ "${ENDPOINTS_OPTIONAL/${ENDPOINT}/}" != "$ENDPOINTS_OPTIONAL" ]; then
-		OPTIONAL=1
-	else
-		unset OPTIONAL
-	fi
+for CONTEST in $CONTESTS ; do
+	verbose "Validating contest '$CONTEST'..."
+	CONTEST_URL="${API_URL%/}/contests/$CONTEST"
 
-	if [ "$ENDPOINT" = 'contest' ]; then
-		URL="$API_URL"
-	else
-		URL="${API_URL%/}/$ENDPOINT"
-	fi
+	for ENDPOINT in $ENDPOINTS ; do
+		if [ "${ENDPOINTS_OPTIONAL/${ENDPOINT}/}" != "$ENDPOINTS_OPTIONAL" ]; then
+			OPTIONAL=1
+		else
+			unset OPTIONAL
+		fi
 
-	SCHEMA="$TMP/json-schema/$ENDPOINT.json"
-	OUTPUT="$TMP/$ENDPOINT.json"
+		if [ "$ENDPOINT" = 'contest' ]; then
+			URL="$CONTEST_URL"
+		else
+			URL="$CONTEST_URL/$ENDPOINT"
+		fi
 
-	if query_endpoint "$OUTPUT" "$URL" $OPTIONAL ; then
+		SCHEMA="$TMP/json-schema/$ENDPOINT.json"
+		OUTPUT="$TMP/$CONTEST_$ENDPOINT.json"
+
+		if query_endpoint "$OUTPUT" "$URL" $OPTIONAL ; then
+			verbose '%20s: ' "$ENDPOINT"
+			validate_schema "$OUTPUT" "$SCHEMA"
+			EXIT=$?
+			[ $EXIT -gt $EXITCODE ] && EXITCODE=$EXIT
+		else
+			if [ -n "$OPTIONAL" ]; then
+				verbose '%20s: Optional, not present\n' "$ENDPOINT"
+			else
+				verbose '%20s: Failed to download\n' "$ENDPOINT"
+				[ $EXITCODE -eq 0 ] && EXITCODE=1
+			fi
+		fi
+	done
+
+	# Now do special case event-feed endpoint
+	ENDPOINT='event-feed'
+	SCHEMA="$MYDIR/json-schema/$ENDPOINT-array.json"
+	OUTPUT="$TMP/$CONTEST_$ENDPOINT.json"
+	URL="$CONTEST_URL/$ENDPOINT"
+
+	if query_endpoint "$OUTPUT" "$URL" ; then
+		# Delete empty lines and transform NDJSON into a JSON array.
+		sed -i '/^$/d;1 s/^/[/;s/$/,/;$ s/,$/]/' "$OUTPUT"
+
 		verbose '%20s: ' "$ENDPOINT"
 		validate_schema "$OUTPUT" "$SCHEMA"
 		EXIT=$?
 		[ $EXIT -gt $EXITCODE ] && EXITCODE=$EXIT
+		[ $EXIT -ne 0 -a -n "$DEBUG" ] && cat "$OUTPUT"
 	else
-		if [ -n "$OPTIONAL" ]; then
-			verbose '%20s: Optional, not present\n' "$ENDPOINT"
-		else
-			verbose '%20s: Failed to download\n' "$ENDPOINT"
-			[ $EXITCODE -eq 0 ] && EXITCODE=1
-		fi
+		verbose '%20s: Failed to download\n' "$ENDPOINT"
 	fi
+
 done
-
-# Now do special case event-feed endpoint
-ENDPOINT='event-feed'
-SCHEMA="$MYDIR/json-schema/$ENDPOINT-array.json"
-OUTPUT="$TMP/$ENDPOINT.json"
-URL="${API_URL%/}/$ENDPOINT"
-
-if query_endpoint "$OUTPUT" "$URL" ; then
-	# Delete empty lines and transform NDJSON into a JSON array.
-	sed -i '/^$/d;1 s/^/[/;s/$/,/;$ s/,$/]/' "$OUTPUT"
-
-	verbose '%20s: ' "$ENDPOINT"
-	validate_schema "$OUTPUT" "$SCHEMA"
-	EXIT=$?
-	[ $EXIT -gt $EXITCODE ] && EXITCODE=$EXIT
-	[ $EXIT -ne 0 -a -n "$DEBUG" ] && cat "$OUTPUT"
-else
-	verbose '%20s: Failed to download\n' "$ENDPOINT"
-fi
 
 [ -n "$DEBUG" ] || rm -rf $TMP
 

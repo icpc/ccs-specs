@@ -1,0 +1,12 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "CLICS Contest API: contests",
+	"description": "JSON response of this API call",
+
+	"type": "array",
+	"uniqueItems": true,
+	"$ref": "common.json#/nonemptyarray",
+	"items": {
+		"$ref": "contest.json#"
+	}
+}
