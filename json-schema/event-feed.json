@@ -6,14 +6,15 @@
 	"type": "object",
 	"properties": {
 		"id": { "$ref": "common.json#/identifier" },
-		"type": { "$ref": "common.json#/endpoints" },
-		"op": { "enum": [ "create", "update", "delete" ] },
-		"data": {},
-		"oneOf": [
-			{
+		"type": { "$ref": "common.json#/endpoints" }
+	},
+	"oneOf": [
+		{
+			"properties": {
 				"op": { "enum": [ "create", "update" ] },
 				"data": {
-					"oneOf": [
+					"$comment": "Use anyOf since some types match others without strict attribute checking.",
+					"anyOf": [
 						{ "$ref": "contest.json#" },
 						{ "$ref": "judgement-type.json#" },
 						{ "$ref": "language.json#" },
@@ -30,8 +31,10 @@
 						{ "$ref": "award.json#" }
 					]
 				}
-			},
-			{
+			}
+		},
+		{
+			"properties": {
 				"op": { "enum": [ "delete" ] },
 				"data": {
 					"type": "object",
@@ -42,8 +45,8 @@
 					"$ref": "common.json#/strictproperties"
 				}
 			}
-		]
-	},
+		}
+	],
 	"required": ["id", "type", "op", "data"],
 	"$ref": "common.json#/strictproperties"
 }
