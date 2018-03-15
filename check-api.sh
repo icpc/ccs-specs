@@ -3,7 +3,7 @@
 # https://clics.ecs.baylor.edu/index.php/Contest_API
 
 # Set path to json-validate binary if it's not in PATH:
-#VALIDATE_JSON=/path/to/json-validate
+#VALIDATE_JSON=/path/to/validate-json
 
 ENDPOINTS='
 contest
