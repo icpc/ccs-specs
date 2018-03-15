@@ -16,6 +16,12 @@
 		"time": { "$ref": "common.json#/abstime" },
 		"contest_time": { "$ref": "common.json#/reltime" }
 	},
+	"not": {
+		"properties": {
+			"from_team_id": { "$ref": "common.json#/identifier" },
+			"to_team_id": { "$ref": "common.json#/identifier" }
+		}
+	},
 	"required": ["id", "text", "time", "contest_time"],
 	"$ref": "common.json#/strictproperties"
 }
