@@ -25,7 +25,7 @@ We follow standard REST practices so that a whole collection can be requested, e
 while an element with specific ID is requested as
   GET https://example.com/api/contests/wf14/teams/10
 
-A collection is always returned as a JSON list of objects. Every element represents a single element (and always includes the ID). When requesting a single element the exact same object is returned. E.g. the URL path
+A collection is always returned as a JSON list of objects. Every object in the list represents a single element (and always includes the ID). When requesting a single element the exact same object is returned. E.g. the URL path
  GET baseurl/<collection>
 returns
  [ { "id":<id1>, <element specific data for id1>},
