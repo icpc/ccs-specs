@@ -94,6 +94,7 @@ Furthermore, the ID attribute (see below) of elements are not allowed to change.
 === JSON attribute types ===
 
 Attribute types are specified as one of the [https://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example standard JSON types], or one of the more specific types below.
+mplementations to be consistent within a field, i.e. if the optional .uuu is included in an absolute timestamp it must be included when outputting all absolute timestamps.
 
 ;Integers
 : (type '''<tt>integer</tt>''' in the specification) are JSON numbers that are restricted to be integer. They should be represented in standard integer representation <tt>(-)?[0-9]+</tt>.
