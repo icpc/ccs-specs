@@ -270,7 +270,7 @@ Returns a JSON object with the elements below. If there is no current (this may 
 | yes
 | yes
 | CCS
-| the scheduled start time of the contest, may be <tt>null</tt> if the start time is unknown or paused
+| the scheduled start time of the contest, may be <tt>null</tt> if the start time is unknown or the countdown is paused
 |-
 | duration
 | RELTIME
