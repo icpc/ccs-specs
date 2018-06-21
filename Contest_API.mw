@@ -1477,7 +1477,7 @@ JSON elements of state objects:
 | yes
 | yes
 | CCS
-| Time when the contest actually started, or <tt>null</tt> if the contest has not started yet. This is the time that should be used to calculate the current contest time, e.g. for scoreboard clocks.
+| Time when the contest actually started, or <tt>null</tt> if the contest has not started yet. When set, this time must be equal to the [[#Contests|contest]] <tt>start_time</tt>.
 |-
 | frozen
 | TIME
