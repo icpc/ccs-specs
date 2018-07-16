@@ -272,6 +272,13 @@ Returns a JSON object with the elements below. If there is no current (this may 
 | CCS
 | the scheduled start time of the contest, may be <tt>null</tt> if the start time is unknown or the countdown is paused
 |-
+| countdown_pause_time
+| RELTIME
+| no
+| yes
+| CDS
+| A negative amount of seconds left when countdown to contest start is paused. At no time may both <tt>start_time</tt> and <tt>countdown_pause_time</tt> be non-<tt>null</tt>.
+|-
 | duration
 | RELTIME
 | yes
@@ -307,6 +314,8 @@ Returns a JSON object with the elements below. If there is no current (this may 
 | CDS
 | logo for this contest, intended to be an image with aspect ratio near 1:1. Default and only allowed mime type is image/png.
 |}
+
+The expected/typical use of <tt>countdown_pause_time</tt> is that once a <tt>start_time</tt> is defined and close, the countdown may be paused due to unforeseen delays. In this case, <tt>start_time</tt> should be set to <tt>null</tt> and <tt>countdown_pause_time</tt> to the (negative) number of seconds left to countdown. The <tt>countdown_pause_time</tt> may change to indicate approximate delay. Countdown is resumed by setting a new <tt>start_time</tt> and resetting <tt>countdown_pause_time</tt> to <tt>null</tt>.
 
 ==== Access restrictions at WF ====
 
@@ -352,6 +361,7 @@ Returned data:
  	"id": "dress2016",
  	"name": "2016 ICPC World Finals Dress Rehearsal",
  	"start_time": null,
+ 	"countdown_pause_time": "-0:03:38.749",
  	"duration": "2:30:00"
  }
 Request:
