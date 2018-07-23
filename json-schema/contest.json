@@ -9,6 +9,12 @@
 		"name": { "type": "string" },
 		"formal_name": { "type": "string" },
 		"start_time": { "$ref": "common.json#/abstimeornull" },
+		"countdown_pause_time": {
+			"oneOf": [
+				{ "$ref": "common.json#/reltime" },
+				{ "type": "null" }
+			]
+		},
 		"duration": { "$ref": "common.json#/reltime" },
 		"scoreboard_freeze_duration": { "$ref": "common.json#/reltime" },
 		"penalty_time": {

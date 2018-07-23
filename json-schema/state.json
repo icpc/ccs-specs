@@ -5,12 +5,13 @@
 
 	"type": "object",
 	"properties": {
-		"started":   { "$ref": "common.json#/abstimeornull" },
-		"ended":     { "$ref": "common.json#/abstimeornull" },
-		"frozen":    { "$ref": "common.json#/abstimeornull" },
-		"thawed":    { "$ref": "common.json#/abstimeornull" },
-		"finalized": { "$ref": "common.json#/abstimeornull" }
+		"started":        { "$ref": "common.json#/abstimeornull" },
+		"ended":          { "$ref": "common.json#/abstimeornull" },
+		"frozen":         { "$ref": "common.json#/abstimeornull" },
+		"thawed":         { "$ref": "common.json#/abstimeornull" },
+		"finalized":      { "$ref": "common.json#/abstimeornull" },
+		"end_of_updates": { "$ref": "common.json#/abstimeornull" }
 	},
-	"required": ["started", "ended", "finalized"],
+	"required": ["started", "ended", "finalized", "end_of_updates"],
 	"$ref": "common.json#/strictproperties"
 }
