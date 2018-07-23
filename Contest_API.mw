@@ -1516,19 +1516,24 @@ JSON elements of state objects:
 | yes
 | CCS
 | Time when the results were finalized, or <tt>null</tt> if results have not been finalized. Must not be set if ended is <tt>null</tt>.
+|-
+| end_of_updates
+| TIME
+| yes
+| yes
+| CCS
+| Time after last update to the contest occurred, or <tt>null</tt> if more updates are still to come. Setting this to non-<tt>null</tt> must be the very last change in the contest.
 |}
 
-These state changes must occur in the order listed in the table above, as far as they do occur (for example, the contest may never be frozen and thawed). That, is the following sequence of inequalities must hold:
-  started < frozen < ended < thawed < finalized
-where any <tt>null</tt> value should be ignored in the list.
+These state changes must occur in the order listed in the table above, as far as they do occur, except that <tt>thawed</tt> and <tt>finalized</tt> may occur in any order (for example, the contest may never be thawed, but not yet frozen). That, is the following sequence of inequalities must hold:
+  started < frozen < ended < thawed    < end_of_updates,
+                     ended < finalized < end_of_updates.
 
-A contest that has ended, has been thawed (or was never frozen) and is finalized must not change. That is, '''finalized''' is the final contest state and no changes to any endpoint may happen after it has occurred.
+A contest that has ended, has been thawed (or was never frozen) and is finalized must not change. Thus, <tt>end_of_updates</tt> can be set once both <tt>finalized</tt> is set and <tt>thawed</tt> is set if the contest was frozen.
 
 ==== Access restrictions at WF ====
 
-For clients with the public role, the '''finalized''' attribute will not be included as long as the scoreboard is frozen. In other words, public clients will not be told that the contest is finalized until the scoreboard has also been thawed. Note that any [[#Event feed|events]] received must still be in order of referential integrity, and the '''finalized''' state change must be the last event received.
-
-If the scoreboard is never frozen then '''finalized''' *is* included, i.e. you don't have to wait for the contest to be thawed if it was never frozen.
+No access restrictions apply to a GET on this endpoint, but note that when the <tt>frozen</tt> state is set, but <tt>thawed</tt> not yet, then this implies access restrictions for non-privileged users to other endpoints.
 
 ==== Example ====
 
@@ -1540,7 +1545,8 @@ Returned data:
     "ended": null,
     "frozen": "2014-06-25T14:00:00+01",
     "thawed": null,
-    "finalized": null
+    "finalized": null,
+    "end_of_updates": null
   }
 
 === Submissions ===
