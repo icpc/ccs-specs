@@ -30,6 +30,21 @@ team-members
 awards
 '
 
+ENDPOINTS_CHECK_CONSISTENT='
+contests
+judgement-types
+languages
+problems
+groups
+organizations
+teams
+state
+submissions
+judgements
+runs
+clarifications
+'
+
 error()
 {
 	echo "Error: $*"
@@ -76,6 +91,7 @@ Options:
 
   -a ARGS  Arguments to pass to the API request URLs. Separate arguments
              with '&', do not add initial '?'. (default: $URL_ARGS)
+  -C       Check internal consistency between REST endpoints and event feed.
   -c OPTS  Options to pass to curl to request API data (default: $CURL_OPTIONS)
   -d       Turn on shell script debugging.
   -h       Snow this help output.
@@ -96,9 +112,10 @@ CURL_OPTIONS='-n -s'
 URL_ARGS=''
 
 # Parse command-line options:
-while getopts 'a:c:dhj:npt:q' OPT ; do
+while getopts 'a:Cc:dhj:npt:q' OPT ; do
 	case "$OPT" in
 		a) URL_ARGS="$OPTARG" ;;
+		C) CHECK_CONSISTENCY=1 ;;
 		c) CURL_OPTIONS="$OPTARG" ;;
 		d) DEBUG=1 ;;
 		h) usage ; exit 0 ;;
@@ -277,6 +294,10 @@ for CONTEST in $CONTESTS ; do
 		[ $EXIT -ne 0 -a -n "$DEBUG" ] && cat "$OUTPUT"
 	else
 		verbose '%20s: Failed to download\n' "$ENDPOINT"
+	fi
+
+	if [ -n "$CHECK_CONSISTENCY" ]; then
+		$MYDIR/check-api-consistency.php "$TMP/$CONTEST" $ENDPOINTS_CHECK_CONSISTENT
 	fi
 
 done
