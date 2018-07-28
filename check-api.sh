@@ -6,7 +6,7 @@
 #VALIDATE_JSON=/path/to/validate-json
 
 ENDPOINTS='
-contest
+contests
 judgement-types
 languages
 problems
@@ -226,6 +226,7 @@ EXITCODE=0
 for CONTEST in $CONTESTS ; do
 	verbose "Validating contest '$CONTEST'..."
 	CONTEST_URL="${API_URL%/}/contests/$CONTEST"
+	mkdir -p "$TMP/$CONTEST"
 
 	for ENDPOINT in $ENDPOINTS ; do
 		if [ "${ENDPOINTS_OPTIONAL/${ENDPOINT}/}" != "$ENDPOINTS_OPTIONAL" ]; then
@@ -234,14 +235,15 @@ for CONTEST in $CONTESTS ; do
 			unset OPTIONAL
 		fi
 
-		if [ "$ENDPOINT" = 'contest' ]; then
+		if [ "$ENDPOINT" = 'contests' ]; then
 			URL="$CONTEST_URL"
+			SCHEMA="$TMP/json-schema/contest.json"
 		else
 			URL="$CONTEST_URL/$ENDPOINT"
+			SCHEMA="$TMP/json-schema/$ENDPOINT.json"
 		fi
 
-		SCHEMA="$TMP/json-schema/$ENDPOINT.json"
-		OUTPUT="$TMP/${CONTEST}_${ENDPOINT}.json"
+		OUTPUT="$TMP/$CONTEST/$ENDPOINT.json"
 
 		if query_endpoint "$OUTPUT" "$URL" $OPTIONAL ; then
 			verbose '%20s: ' "$ENDPOINT"
@@ -261,7 +263,7 @@ for CONTEST in $CONTESTS ; do
 	# Now do special case event-feed endpoint
 	ENDPOINT='event-feed'
 	SCHEMA="$MYDIR/json-schema/$ENDPOINT-array.json"
-	OUTPUT="$TMP/$CONTEST_$ENDPOINT.json"
+	OUTPUT="$TMP/$CONTEST/$ENDPOINT.json"
 	URL="$CONTEST_URL/$ENDPOINT"
 
 	if query_endpoint "$OUTPUT" "$URL" ; then
