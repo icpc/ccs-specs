@@ -107,7 +107,7 @@ while getopts 'a:Cc:dhj:npt:q' OPT ; do
 		a) URL_ARGS="$OPTARG" ;;
 		C) CHECK_CONSISTENCY=1 ;;
 		c) CURL_OPTIONS="$OPTARG" ;;
-		d) DEBUG=1 ;;
+		d) export DEBUG=1 ;;
 		h) usage ; exit 0 ;;
 		j) VALIDATE_JSON="$OPTARG" ;;
 		n) NONEMPTY=1 ;;

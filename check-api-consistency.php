@@ -12,6 +12,8 @@ $endpoints = array_splice($argv, 2);
 
 $feed_json = json_decode(file_get_contents($dir.'/event-feed.json'), true);
 
+$debug = getenv('DEBUG');
+
 $errors = 0;
 $warnings = 0;
 
@@ -98,6 +100,7 @@ foreach ($endpoints as $endpoint) {
         $endpoint_data[$endpoint][$id] = $element;
         if (!isset($feed_data[$endpoint][$id])) {
             error("'$endpoint".($id==='_single_' ? '' : "/$id")."' not found in feed.");
+            if ($debug) var_dump($element);
         }
     }
 }
@@ -113,6 +116,7 @@ foreach ($feed_data as $endpoint => $elements) {
             } elseif ($last['data']!==$endpoint_data[$endpoint][$id]) {
                 $diff = array_diff_keys($last['data'], $endpoint_data[$endpoint][$id]);
                 warning("'$endpoint".($id==='_single_' ? '' : "/$id")."' data mismatch betweed feed and REST endpoint: ".implode(',', $diff));
+                if (!$debug) var_dump($last['data'], $endpoint_data[$endpoint][$id]);
             }
         }
     }
