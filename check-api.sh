@@ -298,6 +298,8 @@ for CONTEST in $CONTESTS ; do
 
 	if [ -n "$CHECK_CONSISTENCY" ]; then
 		$MYDIR/check-api-consistency.php "$TMP/$CONTEST" $ENDPOINTS_CHECK_CONSISTENT
+		EXIT=$?
+		[ $EXIT -gt $EXITCODE ] && EXITCODE=$EXIT
 	fi
 
 done
