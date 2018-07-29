@@ -116,7 +116,7 @@ foreach ($feed_data as $endpoint => $elements) {
             } elseif ($last['data']!==$endpoint_data[$endpoint][$id]) {
                 $diff = array_diff_keys($last['data'], $endpoint_data[$endpoint][$id]);
                 warning("'$endpoint".($id==='_single_' ? '' : "/$id")."' data mismatch betweed feed and REST endpoint: ".implode(',', $diff));
-                if (!$debug) var_dump($last['data'], $endpoint_data[$endpoint][$id]);
+                if ($debug) var_dump($last['data'], $endpoint_data[$endpoint][$id]);
             }
         }
     }
