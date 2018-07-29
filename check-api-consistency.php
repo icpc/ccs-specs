@@ -40,7 +40,7 @@ foreach ($feed_json as $row) {
 // Given two associative arrays, return the keys of their symmetric difference.
 function array_diff_keys($a, $b)
 {
-    $keys = array_merge(array_keys($a), array_keys($b));
+    $keys = array_unique(array_merge(array_keys($a), array_keys($b)));
     $diff = [];
     foreach ($keys as $key) {
         if ((array_key_exists($key, $a) xor array_key_exists($key, $b)) ||
