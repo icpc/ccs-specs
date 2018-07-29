@@ -30,20 +30,10 @@ team-members
 awards
 '
 
-ENDPOINTS_CHECK_CONSISTENT='
-contests
-judgement-types
-languages
-problems
-groups
-organizations
-teams
-state
-submissions
-judgements
-runs
-clarifications
-'
+ENDPOINTS_CHECK_CONSISTENT="$ENDPOINTS"
+for endpoint in $ENDPOINTS_OPTIONAL scoreboard ; do
+	ENDPOINTS_CHECK_CONSISTENT="${ENDPOINTS_CHECK_CONSISTENT/$endpoint/}"
+done
 
 error()
 {
