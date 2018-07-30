@@ -1,4 +1,4 @@
-This page describes a draft archivel format for a contest. It is developed in parallell with the [[Contest API]]. It might very well end up being very similar to the CDP which has been suggested to use for this, but which have a slightly different purpose...
+This page describes a draft archivel format for a contest. It is developed in parallel with the [[Contest API]]. It might very well end up being very similar to the CDP which has been suggested to use for this, but which have a slightly different purpose...
 
 == Introduction ==
 
@@ -53,7 +53,7 @@ Only '''created-by''' is always required, but if any of content type is not list
  created-by: Kattis
  archive:    contest-api
  problems:   kattis
- awards:	    missing
+ awards:     missing
 
 === Config ===
 
@@ -178,12 +178,12 @@ The following formats may be used:
 |-
 | contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_Archive_Format#Events_2
 |-
-| missing || No awards data ||  
+| missing || No events data ||  
 |}
 
 == Contest API archive formats ==
 
-'''NB!''': This section should not be in this document, and is only included here while WIP. It should either be it's own document, or be added to the [[Contest API]] document. Every subsection defines the on disk format '''contest-api''' for a type of data.
+'''NB!''': This section should not be in this document, and is only included here while WIP. It should either be its own document, or be added to the [[Contest API]] document. Every subsection defines the on disk format '''contest-api''' for a type of data.
 
 === General principle ===
 
