@@ -245,7 +245,7 @@ A directory, '''registration''', containing:
  registration/organizations/<id>/logo.160px.png
  registration/organizations/<id>/logo.56px.png
  registration/teams/<id>/team.json
- registration/teams/<id>/photo.{png, jpg}
+ registration/teams/<id>/photo.{png,jpg}
  registration/teams/<id>/backup.zip
  registration/team-members/<id>/team-member.json
  registration/team-members/<id>/photo.{png,jpg}
@@ -269,7 +269,7 @@ A directory, '''submissions''', containing:
 A directory, '''judgements''', containing:
 
 * a JSON file (primary.json) for the /judgements endpoint for the primary system
-* a JSON file (shadow{1, 2, ...}.json) for the /judgements endpoint for a shadow system if any (use number in case of multiple shadows)
+* a JSON file (shadow{1,2,...}.json) for the /judgements endpoint for a shadow system if any (use number in case of multiple shadows)
 
 ==== File listing ====
 
@@ -281,7 +281,7 @@ A directory, '''judgements''', containing:
 A directory, '''runs''', containing:
 
 * a JSON file (primary.json) for the /runs endpoint on the primary system
-* a JSON file (shadow{1, 2, ...}.json) for the /runs endpoint on a shadow system, if available (use numbering in case of multiple shadows)
+* a JSON file (shadow{1,2,...}.json) for the /runs endpoint on a shadow system, if available (use numbering in case of multiple shadows)
 
 ==== File listing ====
 
@@ -292,7 +292,7 @@ A directory, '''runs''', containing:
 
 A JSON file, '''clarifications.json''' for the /clarifications endpoint
 
-==== File listsing ====
+==== File listing ====
 
  clarifications.json
 
@@ -300,7 +300,7 @@ A JSON file, '''clarifications.json''' for the /clarifications endpoint
 
 A JSON file, '''awards.json''' for the /awards endpoint
 
-==== File listsing ====
+==== File listing ====
 
  awards.json
 
@@ -308,7 +308,7 @@ A JSON file, '''awards.json''' for the /awards endpoint
 
 A JSON file, '''scoreboard.json''' for the /scoreboard endpoint
 
-==== File listsing ====
+==== File listing ====
 
  scoreboard.json
 
@@ -317,7 +317,7 @@ A JSON file, '''scoreboard.json''' for the /scoreboard endpoint
 A directory, '''events''', containing:
 
 * a JSON file (primary.json) for the /event-feed endpoint on the primary system
-* a JSON file (shadow{1, 2, ...}.json) for the /event-feed endpoint on a shadow system, if available (use numbering in case of multiple shadows)
+* a JSON file (shadow{1,2,...}.json) for the /event-feed endpoint on a shadow system, if available (use numbering in case of multiple shadows)
 * a JSON file (*.json) for the /event-feed endpoint on any other system producing events, if available (may not be named "primary" or "shadow*")
 
 ==== File listing ====
