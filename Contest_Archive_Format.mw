@@ -324,4 +324,4 @@ A directory, '''events''', containing:
 
  events/primary.json
  events/shadow.json
- events/cdn.json
+ events/cds.json
