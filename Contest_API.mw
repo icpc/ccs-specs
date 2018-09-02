@@ -1525,7 +1525,7 @@ JSON elements of state objects:
 | Time after last update to the contest occurred, or <tt>null</tt> if more updates are still to come. Setting this to non-<tt>null</tt> must be the very last change in the contest.
 |}
 
-These state changes must occur in the order listed in the table above, as far as they do occur, except that <tt>thawed</tt> and <tt>finalized</tt> may occur in any order (for example, the contest may never be thawed, but not yet frozen). That, is the following sequence of inequalities must hold:
+These state changes must occur in the order listed in the table above, as far as they do occur, except that <tt>thawed</tt> and <tt>finalized</tt> may occur in any order. For example, the contest may never be frozen and hence not thawed either, or, it may be finalized before it is thawed. That, is the following sequence of inequalities must hold:
   started < frozen < ended < thawed    < end_of_updates,
                      ended < finalized < end_of_updates.
 
