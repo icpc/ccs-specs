@@ -260,9 +260,9 @@ A directory, '''submissions''', containing:
 
 ==== File listing ====
 
- submissions/submission.json
- submissions/files.zip
- submissions/reaction.*
+ submissions/<id>/submission.json
+ submissions/<id>/files.zip
+ submissions/<id>/reaction.*
 
 === Judgements ===
 
