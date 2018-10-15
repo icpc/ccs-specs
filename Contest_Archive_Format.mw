@@ -223,19 +223,19 @@ A directory, '''config''', containing:
 
 A directory, '''registration''', containing:
 
-* a JSON file (groups.json) for the /registration/groups endpoint
+* a JSON file (groups.json) for the /groups endpoint
 * a directory for organizations containing:
 ** a directory for each organisation using the organisation ID as directory name, containing:
-*** a JSON file (organization.json) for the /registration/organizatons/<id> endpoint
-*** a file for each endpoint available under /registration/organizatons/<id>
+*** a JSON file (organization.json) for the /organizatons/<id> endpoint
+*** a file for each endpoint available under /organizatons/<id>
 * a directory for teams containing:
 ** a directory for each team using the team ID as directory name, containing:
-*** a JSON file (team.json) for the /registration/teams/<id> endpoint
-*** a file for each endpoint available under /registration/teams/<id>
+*** a JSON file (team.json) for the /teams/<id> endpoint
+*** a file for each endpoint available under /teams/<id>
 * a directory for team-members containing:
 ** a directory for each team member using the team member ID as directory name, containing:
-*** a JSON file (team-member.json) for the /registration/team-members/<id> endpoint
-*** a file for each endpoint available under /registration/team-members/<id>
+*** a JSON file (team-member.json) for the /team-members/<id> endpoint
+*** a file for each endpoint available under /team-members/<id>
 
 ==== File listing ====
 
