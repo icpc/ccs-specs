@@ -207,8 +207,8 @@ A directory, '''config''', containing:
 * a JSON file (judgement-types.json) for the /contests/<id>/judgement-types endpoint
 * a JSON file (languages.json) for the /contests/<id>/languages endpoint
 * system.yaml defined in the [[Contest_Control_System_Requirements#system.yaml | CCSR]].
-* the contest banner, from the /banner endpoint, if available.
-* the contest logo, from the /logo endpoint, if available.
+* the contest banner, from the banner element of /contests/<id>, if available.
+* the contest logo, from the logo element of /contests/<id>, if available.
 
 ==== File listing ====
 
