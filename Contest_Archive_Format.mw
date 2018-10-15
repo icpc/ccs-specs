@@ -27,6 +27,8 @@ Archive metadata is stored in a YAML file called '''archive.yaml''' with the fol
 |-
 | config || ID of format used for '''config'''
 |-
+| problems || ID of format used for '''problems'''
+|-
 | registration || ID of format used for '''registration'''
 |-
 | submissions || ID of format used for '''submissions'''
