@@ -12,7 +12,7 @@ This standard lays out the relative location and format of each type of contest-
 
 == Structure ==
 
-The Contest Archive consists of a single directory (possibly ZIP compressed) with a metadata file ('''archive.yaml''') and at most a single entry for each of the types of data ('''config''', '''problems''', '''registration''',  '''submissions''', '''judgements''', '''runs''', '''clarifications''', '''results''', '''events'''). An entry is either a directory with the same name as the type of data, or a file with same base name as the type of data and any file extension.
+The Contest Archive consists of a single directory (possibly ZIP compressed) with a metadata file ('''archive.yaml''') and at most a single entry for each of the types of data ('''config''', '''problems''', '''registration''',  '''submissions''', '''judgements''', '''runs''', '''clarifications''', '''awards''', '''scoreboard''', '''events'''). An entry is either a directory with the same name as the type of data, or a file with same base name as the type of data and any file extension.
 
 === Metadata ===
 
@@ -39,7 +39,9 @@ Archive metadata is stored in a YAML file called '''archive.yaml''' with the fol
 |-
 | clarifications || ID of format used for '''clarifications'''
 |-
-| results || ID of format used for '''results'''
+| awards || ID of format used for '''awards'''
+|-
+| scoreboard || ID of format used for '''scoreboard'''
 |-
 | events || ID of format used for '''events'''
 |}
@@ -53,6 +55,7 @@ Only '''created-by''' is always required, but if any of content type is not list
  created-by: Kattis
  archive:    contest-api
  problems:   kattis
+ awards:     missing
 
 === Config ===
 
@@ -154,16 +157,30 @@ The following formats may be used:
 | missing || No awards data ||  
 |}
 
-=== Results ===
+=== Scoreboard ===
 
-The final results from the contest.
+Final scoreboard from the contest.
 
 The following formats may be used:
 
 {| class="wikitable"
 ! ID !! Description !! Specification
 |-
-| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_Archive_Format#Results_2
+| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_Archive_Format#Scoreboard_2
+|}
+
+=== Events ===
+
+List of events from the contest.
+
+The following formats may be used:
+
+{| class="wikitable"
+! ID !! Description !! Specification
+|-
+| contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_Archive_Format#Events_2
+|-
+| missing || No events data ||  
 |}
 
 == Contest API archive formats ==
