@@ -275,21 +275,17 @@ A JSON file, '''clarifications.json''' for the /clarifications endpoint
 
  clarifications.json
 
-=== Awards ===
+=== Results ===
 
-A JSON file, '''awards.json''' for the /awards endpoint
+A directory, '''results''', containing:
 
-==== File listing ====
-
- awards.json
-
-=== Scoreboard ===
-
-A JSON file, '''scoreboard.json''' for the /scoreboard endpoint
+* A JSON file, '''awards.json''' for the /awards endpoint
+* A JSON file, '''scoreboard.json''' for the /scoreboard endpoint
 
 ==== File listing ====
 
- scoreboard.json
+ results/awards.json
+ results/scoreboard.json
 
 === Events ===
 
