@@ -87,7 +87,7 @@ The following formats may be used:
 | contest-api || Contest API dump  || https://clics.ecs.baylor.edu/index.php/Contest_Archive_Format#Registration_2
 |}
 
-=== Submissions ===
+=== Activity ===
 
 Activity in the form of submissions, judgements, runs and clarifications from the contest.
 
