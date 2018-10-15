@@ -187,17 +187,10 @@ The following formats may be used:
 
 === General principle ===
 
-==== Endpoints with file references ====
+Endpoints are stored in a single <endpoint>.json file containing the full list of objects. This file is identical to the API call to /<endpoint>. If there are file references in the JSON file these are stored in a subfolder per object, using the object ID as the folder name.
 
-Endpoints that have file references (or are likely to have in the future) are stored in a folder per object, using the endpoint name and id as the folder name:
- <endpoint>/<id>/<endpoint>.json
+ <endpoint>/<endpoint>.json
  <endpoint>/<id>/<other files>
-
-<endpoint>.json is a single JSON element containing one object, identical to the API call to /<endpoint>/<id>. Endpoints that follow this format are: organizations, teams, and submissions.
-
-==== Endpoints without additional child endpoints ====
-
-For endpoints that are not likely to have file references there is a simpler format on disk: a single <endpoint>.json file containing the full list of objects. This file is identical to the API call to /<endpoint>. Endpoints that follow this format are: languages, groups, judgement types, clarifications, and awards.
 
 === Config ===
 
@@ -225,42 +218,42 @@ A directory, '''registration''', containing:
 
 * a JSON file (groups.json) for the /groups endpoint
 * a directory for organizations containing:
+** a JSON file (organizations.json) for the /organizatons endpoint
 ** a directory for each organisation using the organisation ID as directory name, containing:
-*** a JSON file (organization.json) for the /organizatons/<id> endpoint
 *** a file for each endpoint available under /organizatons/<id>
 * a directory for teams containing:
+** a JSON file (teams.json) for the /teams endpoint
 ** a directory for each team using the team ID as directory name, containing:
-*** a JSON file (team.json) for the /teams/<id> endpoint
 *** a file for each endpoint available under /teams/<id>
 * a directory for team-members containing:
+** a JSON file (team-members.json) for the /team-members endpoint
 ** a directory for each team member using the team member ID as directory name, containing:
-*** a JSON file (team-member.json) for the /team-members/<id> endpoint
 *** a file for each endpoint available under /team-members/<id>
 
 ==== File listing ====
 
  registration/groups.json
- registration/organizations/<id>/organization.json
+ registration/organizations.json
  registration/organizations/<id>/logo.png
  registration/organizations/<id>/logo.160px.png
  registration/organizations/<id>/logo.56px.png
- registration/teams/<id>/team.json
+ registration/teams.json
  registration/teams/<id>/photo.{png,jpg}
  registration/teams/<id>/backup.zip
- registration/team-members/<id>/team-member.json
+ registration/team-members.json
  registration/team-members/<id>/photo.{png,jpg}
 
 === Submissions ===
 
 A directory, '''submissions''', containing:
 
+* a JSON file (submissions.json) for the /submissions endpoint
 * a directory for each submission using the submission ID as directory name, containing:
-** a JSON file (submission.json) for the /submissions/<id> endpoint
 ** a file for each endpoint available under /submissions/<id>
 
 ==== File listing ====
 
- submissions/<id>/submission.json
+ submissions.json
  submissions/<id>/files.zip
  submissions/<id>/reaction.*
 
