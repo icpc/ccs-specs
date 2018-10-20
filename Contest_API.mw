@@ -2143,11 +2143,75 @@ The following endpoint is associated with the scoreboard:
 | application/json
 | yes
 | CCS
-| JSON array of scoreboard rows with elements as defined in the table below
+| JSON object with scoreboard data as defined in the table below
 |}
 
-JSON elements of scoreboard row objects. The scoreboard array is
-sorted according to rank and alphabetical on team name within identically ranked teams.
+==== Scoreboard request options ====
+
+The following options can be passed to the scoreboard endpoint.
+
+===== Scoreboard at the time of a given event =====
+
+By passing the an [[#Event feed | event]] ID with the "after_event_id" URL argument, the scoreboard can be requested as it was directly after the specified event:
+
+ /scoreboard?after_event_id=xy1234
+
+This makes it possible for a client to get the scoreboard information that is guaranteed to match a certain contest event.
+In case no "after_event_id" argument is provided, the current scoreboard will be returned.
+
+A suggested efficient server-side implementation to provide this, is to store with each event that changes the scoreboard, the new team scoreboard row.
+
+==== Scoreboard format ====
+
+JSON elements of the scoreboard object.
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Nullable?
+! Source @WF
+! Description
+|-
+| event_id
+| ID
+| yes
+| no
+| CCS
+| Identified of the [[#Event feed | event]] after which this scoreboard was generated. This must be identical to the argument <tt>after_event_id</tt>, if specified.
+|-
+| time
+| TIME
+| yes
+| no
+| CCS
+| Time when the scoreboard was generated.
+|-
+| contest_time
+| RELTIME
+| yes
+| no
+| CCS
+| Contest time when the scoreboard was generated.
+|-
+| state
+| object
+| yes
+| no
+| CCS
+| Identical data as returned by the [[#Contest state | contest state]] endpoint. This is provided here for ease of use and to guarantee the data is synchronized.
+|-
+| rows
+| JSON array of JSON objects
+| yes
+| no
+| CCS
+| A list of rows of team with their associated scores.
+|}
+
+The scoreboard <tt>rows</tt> array is sorted according to rank and
+alphabetical on team name within identically ranked teams. Each JSON
+object in the rows array consists of:
 {| class="wikitable"
 |-
 ! Name
@@ -2255,15 +2319,28 @@ For clients with the '''public''' role, the scoreboard will not include informat
 Request:
   GET https://example.com/api/contests/wf14/scoreboard
 Returned data:
-  [{"rank":1,"team_id":"123","score":{"num_solved":3,"total_time":340},
-    "problems":[
-     {"problem_id":"1","num_judged":3,"num_pending":1,"solved":false},
-     {"problem_id":"2","num_judged":1,"num_pending":0,"solved":true,"time":20},
-     {"problem_id":"3","num_judged":2,"num_pending":0,"solved":true,"time":55},
-     {"problem_id":"4","num_judged":0,"num_pending":0,"solved":false},
-     {"problem_id":"5","num_judged":3,"num_pending":0,"solved":true,"time":205}
-    ]}
-  ]
+  {
+    "event_id": "xy1234",
+    "time": "2014-06-25T14:13:07.832+01",
+    "contest_time": "4:13:07.832",
+    "state": {
+      "started": "2014-06-25T10:00:00+01",
+      "ended": null,
+      "frozen": "2014-06-25T14:00:00+01",
+      "thawed": null,
+      "finalized": null,
+      "end_of_updates": null
+    },
+    "rows": [
+      {"rank":1,"team_id":"123","score":{"num_solved":3,"total_time":340},"problems":[
+        {"problem_id":"1","num_judged":3,"num_pending":1,"solved":false},
+        {"problem_id":"2","num_judged":1,"num_pending":0,"solved":true,"time":20},
+        {"problem_id":"3","num_judged":2,"num_pending":0,"solved":true,"time":55},
+        {"problem_id":"4","num_judged":0,"num_pending":0,"solved":false},
+        {"problem_id":"5","num_judged":3,"num_pending":0,"solved":true,"time":205}
+      ]}
+    ]
+  }
 
 === Event feed ===
 
