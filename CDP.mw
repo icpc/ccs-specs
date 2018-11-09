@@ -4,6 +4,8 @@ This is a draft standard for the ICPC 2016 Finals, upon approval
 this draft status will change to Final Approved status.  The Final
 version will have a version number and date.
 
+Also, note that this format is not intended for archiving contests. Instead one should use the [[Contest Archive Format]].
+
 =Introduction=
 
 Many Contest Control Systems and related tools rely on the 
