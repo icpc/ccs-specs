@@ -173,7 +173,7 @@ The following guidelines are meant to ease extensibility.
 == Interface specification ==
 
 The following list of API endpoints are to be supported. Note that
-<code>contest</code>, <code>scoreboard</code> and <code>event-feed</code> are singular nouns
+<code>state</code>, <code>scoreboard</code> and <code>event-feed</code> are singular nouns
 and indeed contain only a single element.
 
 All endpoints should support '''GET'''; specific details on other
