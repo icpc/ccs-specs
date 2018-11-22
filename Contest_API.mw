@@ -1175,7 +1175,7 @@ JSON elements of organization objects:
 | no
 | yes
 | CDS
-| logo of the organization. Default and only allowed mime type is image/png. System must provide logos of size 56x56 and 160x160 but may provide other sizes as well.
+| logo of the organization. Default and only allowed mime type is image/png. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well.
 |}
 
 ==== Access restrictions at WF ====
