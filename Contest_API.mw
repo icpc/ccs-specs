@@ -76,12 +76,12 @@ Standard [https://en.wikipedia.org/wiki/List_of_HTTP_status_codes HTTP status co
 
 Access to this API is controlled via user roles. The API provider must require authentication to access each role except for optionally the public role.
 The API provider must support [https://en.wikipedia.org/wiki/Basic_access_authentication HTTP basic authentication] ([https://tools.ietf.org/html/rfc7617 RFC]). This provides a standard and flexible method; besides HTTP basic auth, other forms of authentication can be offered as well.
- 
+
 Each provider must support at least the following roles, although additional roles may be supported for specific uses:
 * public (default role: contest data that's available to everyone)
 * admin (data or capability only available to contest administrators)
 
-Role-based access may completely hide some objects from the user, may omit certain attributes, or may embargo or omit objects based on the current contest time. 
+Role-based access may completely hide some objects from the user, may omit certain attributes, or may embargo or omit objects based on the current contest time.
 By default, the public user has read-only access (no '''POST''', '''PUT''', '''PATCH''' or '''DELETE''' methods allowed) and does not have access to judgements and runs from submissions made after the contest freeze time.
 
 === Referential integrity ===
@@ -149,7 +149,7 @@ The '''href''' attributes may be [https://tools.ietf.org/html/rfc3986 absolute o
   "href":"https://example.com/api/contests/wf14/submissions/187/files"
   "href":"contests/wf14/submissions/187/files"
 
-If implementing support for uploading files pointed to by resource links, substitute the href element with a data element with a base64 encoded string of the associated file contents as the value. 
+If implementing support for uploading files pointed to by resource links, substitute the href element with a data element with a base64 encoded string of the associated file contents as the value.
 
 For example
     POST https://example.com/api/contests/wf14/organizations
@@ -305,7 +305,7 @@ Returns a JSON object with the elements below. If there is no current (this may 
 | no
 | yes
 | CDS
-| banner for this contest, intended to be an image with a large aspect ratio around 8:1 or so. Default and only allowed mime type is image/png. 
+| banner for this contest, intended to be an image with a large aspect ratio around 8:1 or so. Default and only allowed mime type is image/png.
 |-
 | logo
 | array of IMAGE
@@ -487,21 +487,21 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 |-
 | TLE
 | Time Limit Exceeded
-| 
+|
 | *
 | RE
 | Too slow
 |-
 | RTE
 | Run-Time Error
-| 
+|
 | *
 | RE
 | Crashes
 |-
 | CE
 | Compile Error
-| 
+|
 | *
 | RE
 | Does not compile
@@ -529,21 +529,21 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 |-
 | EO
 | Excessive Output
-| 
+|
 | WA
 | WA, RE
-| A correct output is produced, but also additional output 
+| A correct output is produced, but also additional output
 |-
 | IO
 | Incomplete Output
-| 
+|
 | WA
 | WA, RE
 | Parts, but not all, of a correct output is produced
 |-
 | NO
 | No Output
-| 
+|
 | WA
 | IO, WA, RE
 | There is no output
@@ -564,60 +564,60 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 |-
 | TCO
 | Time Limit Exceeded - Correct Output
-| 
+|
 | TLE
 | TLE, RE
 | Too slow but producing correct output
 |-
 | TWA
 | Time Limit Exceeded - Wrong Answer
-| 
+|
 | TLE
 | TLE, RE
 | Too slow and also incorrect output
 |-
 | TPE
 | Time Limit Exceeded - Presentation Error
-| 
+|
 | TLE
 | TWA, TLE, RE
 | Too slow and also presentation error
 |-
 | TEO
 | Time Limit Exceeded - Excessive Output
-| 
+|
 | TLE
 | TWA, TLE, RE
 | Too slow and also excessive output
 |-
 | TIO
 | Time Limit Exceeded - Incomplete Output
-| 
+|
 | TLE
 | TWA, TLE, RE
 | Too slow and also incomplete output
 |-
 | TNO
 | Time Limit Exceeded - No Output
-| 
+|
 | TLE
 | TIO, TWA, TLE, RE
 | Too slow and also no output
 |-
 | MLE
 | Memory Limit Exceeded
-| 
+|
 | RTE
 | RTE, RE
 | Uses too much memory
-|- 
+|-
 | SV
 | Security Violation
 | Illegal Function, Restricted Function
 | RTE
 | RTE, RE
 | Uses some functionality that is not allowed by the system
-|- 
+|-
 | IF
 | Illegal Function
 | Illegal Function, Restricted Function
@@ -669,21 +669,21 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 |-
 | CTL
 | Compile Time Limit Exceeded
-| 
+|
 | CE
 | CE, RE
 | Compilation took too long
 |-
 | JE
 | Judging Error
-| 
+|
 | -
 | -
 | Something went wrong with the system
 |-
 | SE
 | Submission Error
-| 
+|
 | -
 | -
 | Something went wrong with the submission
@@ -1941,7 +1941,7 @@ JSON elements of clarification message objects:
 | yes
 | yes
 | CCS
-| identifier of clarification this is in response to, otherwise <tt>null</tt> 
+| identifier of clarification this is in response to, otherwise <tt>null</tt>
 |-
 | problem_id
 | ID
@@ -2066,11 +2066,11 @@ For clients with the '''public''' role, awards will not include information from
 ==== Semantics ====
 
 * Awards are not final until the contest is.
-* If an award is not intended to be updated during the contest it should not be present during the contest. E.g. if "winner" will not be updated with the current leader during the contest, it should not be '''create'''d until the award '''is''' awarded. 
+* If an award is not intended to be updated during the contest it should not be present during the contest. E.g. if "winner" will not be updated with the current leader during the contest, it should not be '''create'''d until the award '''is''' awarded.
 * If an award is present during the contest this means that if the contest would end immediately and then become final, that award would be final. E.g. the "winner" during the contest should be the current leader. This is of course subject to what data the client can see; the public role's winner may not change during the scoreboard freeze but an admin could see the true current winner.
 * If it's not possible to yet determine how the award would end up if the contest would end immediately, it must not be set. E.g. there should be no team ID for the "first-to-solve-a" award if there are still submissions without a judgement on problem A that are earlier than all accepted submissions on problem A.
 
-For some common award cases the following IDs should be used. 
+For some common award cases the following IDs should be used.
 {| class="wikitable"
 ! ID
 ! Meaning during contest
@@ -2393,7 +2393,7 @@ If the id is not specified the event feed will include all events from the begin
 
 ==== Feed format ====
 
-The feed is served as [http://specs.okfnlabs.org/ndjson/ Newline delimited JSON], with every event as its own JSON object. 
+The feed is served as [http://specs.okfnlabs.org/ndjson/ Newline delimited JSON], with every event as its own JSON object.
 
 This document uses the term "element". An element corresponds to a single object (run, judgement, language, team, etc.).
 
@@ -2418,7 +2418,7 @@ The general format for events is:
 | string
 | yes
 | no
-| Type of event, one of the events in the table below. Can be used for filtering. 
+| Type of event, one of the events in the table below. Can be used for filtering.
 |-
 | op
 | string
@@ -2488,7 +2488,7 @@ All event types have a corresponding API endpoint, as specified in the table bel
 The event responses and '''data''' objects contained in it must observe the same restrictions as those of the respective endpoints they represent.
 This means that attributes inside the '''data''' element will be present if and only if the client has access to those at the respective endpoint. The client only receives create, update and delete events of elements it has (partial) access to. When time-based access is granted or revoked, create or delete events are dispatched for each affected entity.
 
-The referential integrity requirement must be strictly adhered to by the event feed. I.e. the API state as defined by the event feed "changelog" must at all points have referential integrity: 
+The referential integrity requirement must be strictly adhered to by the event feed. I.e. the API state as defined by the event feed "changelog" must at all points have referential integrity:
 
 * If an object, A, is deleted and another object, B, refers to it, then the event that shows that B has been updated to not refer to A or that B has been deleted *must* come before the event that shows that A has been deleted.
 * If some data is only available after a specific state change, then the event showing the state change *must* come before any update events making that data available. E.g. problems are only available after contest start for the public role, so the state event showing that the contest has started *must* come before the problems events creating the problems.
