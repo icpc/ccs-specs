@@ -14,6 +14,8 @@ This API is meant to be useful, not only at the ICPC World Finals, but more gene
 
 == General design principles ==
 
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [https://www.ietf.org/rfc/rfc2119.txt RFC 2119].
+
 The interface is implemented as a HTTP REST interface that outputs information in [https://en.wikipedia.org/wiki/JSON JSON] format ([https://tools.ietf.org/html/rfc7159 RFC]). This REST interface should be provided over HTTPS to guard against eavesdropping on sensitive contest data and authentication credentials (see roles below).
 
 === Endpoint URLs ===
@@ -58,7 +60,7 @@ However, for future compatibility below are already listed other methods with th
 ;POST
 : Create a new element. This can only be called on a collection endpoint. No '''id''' attribute should be specified as it is up to the server to assign one, which is returned in the location header.
 ;PUT
-: Replaces a specific element. This method is idempotent and can only be called on a specific element and replaces its contents with the data provided. The payload data should be complete, i.e. no partial updates are allowed. The '''id''' attribute cannot be changed: it does not need to be specified (other than in the URL) and if specified different from in the URL, a '''409 Conflict''' HTTP code should be returned.
+: Replaces a specific element. This method is idempotent and can only be called on a specific element and replaces its contents with the data provided. The payload data must be complete, i.e. no partial updates are allowed. The '''id''' attribute cannot be changed: it does not need to be specified (other than in the URL) and if specified different from in the URL, a '''409 Conflict''' HTTP code should be returned.
 ;PATCH
 : Updates/modifies a specific element. Similar to '''PUT''' but allows partial updates by providing only that data, for example:
 : <code>PATCH https://example.com/api/contests/wf14/teams/10</code>
@@ -101,13 +103,13 @@ mplementations to be consistent within a field, i.e. if the optional .uuu is inc
 ;Floating point numbers
 : (type '''<tt>float</tt>''' in the specification) are arbitrary JSON numbers that are expected to take non-integer values. It is recommended to use a decimal representation.
 ;Fixed point numbers
-: (type '''<tt>decimal</tt>''' in the specification) are JSON numbers that are expected to take non-integer values. They must be in decimal (non-scientific) representation and have at most 3 decimals. That is, they should be a integer multiple of <tt>0.001</tt>.
+: (type '''<tt>decimal</tt>''' in the specification) are JSON numbers that are expected to take non-integer values. They must be in decimal (non-scientific) representation and have at most 3 decimals. That is, they must be a integer multiple of <tt>0.001</tt>.
 ;Absolute timestamps
 : (type '''<tt>TIME</tt>''' in the specification) are strings containing human-readable timestamps, given in [https://en.wikipedia.org/wiki/ISO_8601 ISO 8601] extended combined date/time format with timezone: <tt>yyyy-mm-ddThh:mm:ss(.uuu)?[+-]zz(:mm)?</tt> (or timezone <tt>Z</tt> for UTC).
 ;Relative times
 : (type '''<tt>RELTIME</tt>''' in the specification) are strings containing human-readable time durations, given in a slight modification of the [https://en.wikipedia.org/wiki/ISO_8601 ISO 8601] extended time format: <tt>(-)?(h)*h:mm:ss(.uuu)?</tt>
 ;Identifiers
-: (type '''<tt>ID</tt>''' in the specification) are given as string consisting of characters <tt>[a-zA-Z0-9-_]</tt> of length at most 36 and not starting with a <tt>-</tt> (dash).
+: (type '''<tt>ID</tt>''' in the specification) are given as string consisting of characters <tt>[a-zA-Z0-9-_]</tt> of length at most 36 and not starting with a <tt>-</tt> (dash). IDs are unique within each endpoint.
 : IDs are assigned by the person or system that is the source of the object, and must be maintained by downstream systems. For example, the person configuring a contest on disk will typically define the ID for each team, and any CCS or CDS that exposes the team must use the same ID.
 : Some IDs are also used as identifiable labels and are marked below along with the recommended format. These IDs should be meaningful for human communication (e.g. team "43", problem "A") and are as short as reasonable but not more than 10 characters. IDs not marked as labels may be random characters and cannot be assumed to be suitable for display purposes.
 ;Ordinals
@@ -172,7 +174,7 @@ The following guidelines are meant to ease extensibility.
 
 == Interface specification ==
 
-The following list of API endpoints are to be supported. Note that
+The following list of API endpoints should be supported. Note that
 <code>state</code>, <code>scoreboard</code> and <code>event-feed</code> are singular nouns
 and indeed contain only a single element.
 
@@ -434,7 +436,7 @@ JSON elements of judgement type objects:
 | depends
 | no
 | CCS
-| whether this judgement causes penalty time; should be present if and only if contest:penalty_time is present
+| whether this judgement causes penalty time; must be present if and only if contest:penalty_time is present
 |-
 | solved
 | boolean
@@ -782,6 +784,8 @@ No access restrictions apply to a GET on this endpoint.
 Below is a list of standardized identifiers for known languages.
 When providing one of these languages, the corresponding identifier should be used.
 The language name may be adapted e.g. for localization or to indicate a particular version of the language.
+In case multiple versions of a language are provided, those must have separate, unique identifiers. It is recommended to choose new identifiers with a suffix appended to an existing one. For example <tt>cpp17</tt> to specify the ISO 2017 version of C++.
+
 
 {| class="wikitable"
 ! ID
@@ -1649,8 +1653,8 @@ JSON elements of submission objects:
 | reaction video from team's webcam.
 |}
 
-The '''files''' attribute provides the file(s) of a given submission as a zip archive. These should be stored directly from the root of the zip file, i.e. there should not be extra directories (or files) added unless these are explicitly part of the submission content.
-For '''POST''', '''PUT''' and '''PATCH''' methods, the '''files''' attribute should contain the base64-encoded string of the zip archive.
+The '''files''' attribute provides the file(s) of a given submission as a zip archive. These must be stored directly from the root of the zip file, i.e. there must not be extra directories (or files) added unless these are explicitly part of the submission content.
+For '''POST''', '''PUT''' and '''PATCH''' methods, the '''files''' attribute must contain the base64-encoded string of the zip archive.
 
 ==== Access restrictions at WF ====
 
