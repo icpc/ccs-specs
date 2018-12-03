@@ -2182,7 +2182,7 @@ JSON elements of the scoreboard object.
 | yes
 | no
 | CCS
-| Identified of the [[#Event feed | event]] after which this scoreboard was generated. This must be identical to the argument <tt>after_event_id</tt>, if specified.
+| Identifier of the [[#Event feed | event]] after which this scoreboard was generated. This must be identical to the argument <tt>after_event_id</tt>, if specified.
 |-
 | time
 | TIME
