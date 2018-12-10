@@ -2156,7 +2156,7 @@ The following options can be passed to the scoreboard endpoint.
 
 ===== Scoreboard at the time of a given event =====
 
-By passing the an [[#Event feed | event]] ID with the "after_event_id" URL argument, the scoreboard can be requested as it was directly after the specified event:
+By passing an [[#Event feed | event]] ID with the "after_event_id" URL argument, the scoreboard can be requested as it was directly after the specified event:
 
  /scoreboard?after_event_id=xy1234
 
