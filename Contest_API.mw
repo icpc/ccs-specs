@@ -2189,14 +2189,14 @@ JSON elements of the scoreboard object.
 | yes
 | no
 | CCS
-| Time contained in the associated event. Implementation defined in case the event has no associated time.
+| Time contained in the associated event. Implementation defined if the event has no associated time.
 |-
 | contest_time
 | RELTIME
 | yes
 | no
 | CCS
-| Contest time contained in the associated event. Implementation defined in case the event has no associated contest time.
+| Contest time contained in the associated event. Implementation defined if the event has no associated contest time.
 |-
 | state
 | object
