@@ -230,8 +230,8 @@ When there are multiple non image file references in any given element with the 
 
 A directory, '''results''', containing:
 
-* A JSON file, '''awards.json''' for the /awards endpoint, if available
-* A JSON file, '''scoreboard.json''' for the /scoreboard endpoint
+* A JSON file (awards.json) for the /awards endpoint, if available
+* A JSON file (scoreboard.json) for the /scoreboard endpoint
 
 ==== File listing ====
 
