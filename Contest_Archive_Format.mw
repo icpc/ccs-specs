@@ -155,7 +155,7 @@ When there are multiple banners and logos all except at most one must use the st
  config/judgement-types.json
  config/languages.json
  config/system.yaml
- config/banner.800x1200.png
+ config/banner.800x100.png
  config/logo.png
  config/logo.512x512.png
 
