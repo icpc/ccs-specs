@@ -147,14 +147,17 @@ A directory, '''config''', containing:
 * the contest banner(s), from the banner element of /contests/<id>, if available.
 * the contest logo(s), from the logo element of /contests/<id>, if available.
 
+When there are multiple banners and logos all except at most one must use the string <width>x<height> as a specifier.
+
 ==== File listing ====
 
  config/contest.json
  config/judgement-types.json
  config/languages.json
  config/system.yaml
- config/banner.png
+ config/banner.800x1200.png
  config/logo.png
+ config/logo.512x512.png
 
 === Registration ===
 
