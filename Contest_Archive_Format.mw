@@ -201,17 +201,15 @@ When there are multiple non image file references in any given element with the 
 
 A directory, '''activity''', containing:
 
+* a JSON file (submissions.json) for the /submissions endpoint
 * a directory for submissions containing:
-** a JSON file (submissions.json) for the /submissions endpoint
 ** a directory for each submission using the submission ID as directory name, containing:
 *** a file for each endpoint available under /submissions/<id>
-* a directory for judgements containing:
-** a JSON file (primary.json) for the /judgements endpoint for the primary system
-** a JSON file (shadow{1,2,...}.json) for the /judgements endpoint for a shadow system if any (use number in case of multiple shadows)
-* a directory for runs containing:
-** a JSON file (primary.json) for the /runs endpoint on the primary system
-** a JSON file (shadow{1,2,...}.json) for the /runs endpoint on a shadow system, if available (use numbering in case of multiple shadows)
-* a JSON file, '''clarifications.json''' for the /clarifications endpoint
+* a JSON file (judgements.json) for the /judgements endpoint for the primary system
+* a JSON file (judgements.shadow{1,2,...}.json) for the /judgements endpoint on shadow system(s) if any (use number in case of multiple shadows)
+* a JSON file (runs.json) for the /runs endpoint on the primary system
+* a JSON file (runs.shadow{1,2,...}.json) for the /runs endpoint on shadow system(s), if any (use numbering in case of multiple shadows)
+* a JSON file (clarifications.json) for the /clarifications endpoint
 
 
 ==== File listing ====
@@ -219,10 +217,10 @@ A directory, '''activity''', containing:
  activity/submissions.json
  activity/submissions/<id>/files.zip
  activity/submissions/<id>/reaction.*
- activity/judgements/primary.json
- activity/judgements/shadow.json
- activity/runs/primary.json
- activity/runs/shadow.json
+ activity/judgements.json
+ activity/judgements.shadow.json
+ activity/runs.json
+ activity/runs.shadow.json
  activity/clarifications.json
 
 === Results ===
