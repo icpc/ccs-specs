@@ -164,31 +164,38 @@ When there are multiple banners and logos all except at most one must use the st
 A directory, '''registration''', containing:
 
 * a JSON file (groups.json) for the /groups endpoint
+* a JSON file (organizations.json) for the /organizatons endpoint
 * a directory for organizations containing:
-** a JSON file (organizations.json) for the /organizatons endpoint
 ** a directory for each organisation using the organisation ID as directory name, containing:
-*** a file for each endpoint available under /organizatons/<id>
+*** a file for each file reference available in /organizatons/<id>
+* a JSON file (teams.json) for the /teams endpoint
 * a directory for teams containing:
-** a JSON file (teams.json) for the /teams endpoint
 ** a directory for each team using the team ID as directory name, containing:
-*** a file for each endpoint available under /teams/<id>
+*** a file for each file reference available in /teams/<id>
+* a JSON file (team-members.json) for the /team-members endpoint
 * a directory for team-members containing:
-** a JSON file (team-members.json) for the /team-members endpoint
 ** a directory for each team member using the team member ID as directory name, containing:
-*** a file for each endpoint available under /team-members/<id>
+*** a file for each file reference available in /team-members/<id>
+
+Empty directories should not be included. This means e.g. that organizations that does not have any logos should not have a corresponding directory under /organizatons and if no organization has a logo, there should be no directory /organizatons at all.
+
+When there are multiple images in any given element with the same file ending, all except at most one must use the string <width>x<height> as a specifier.
+
+When there are multiple non image file references in any given element with the same file ending, all except at most one must use some appropriate string as a specifier, making the file name unique.
 
 ==== File listing ====
 
  registration/groups.json
  registration/organizations.json
- registration/organizations/<id>/logo.png
- registration/organizations/<id>/logo.160px.png
- registration/organizations/<id>/logo.56px.png
+ registration/organizations/<id>/logo.56x56.png
+ registration/organizations/<id>/logo.160x160.png
+ registration/organizations/<id>/logo.512x512.png
  registration/teams.json
- registration/teams/<id>/photo.{png,jpg}
+ registration/teams/<id>/photo.png
+ registration/teams/<id>/photo.jpg
  registration/teams/<id>/backup.zip
  registration/team-members.json
- registration/team-members/<id>/photo.{png,jpg}
+ registration/team-members/<id>/photo.jpg
 
 === Activity ===
 
