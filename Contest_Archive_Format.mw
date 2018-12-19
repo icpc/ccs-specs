@@ -242,12 +242,12 @@ A directory, '''results''', containing:
 
 A directory, '''events''', containing:
 
-* a JSON file (primary.json) for the /event-feed endpoint on the primary system
-* a JSON file (shadow{1,2,...}.json) for the /event-feed endpoint on a shadow system, if available (use numbering in case of multiple shadows)
-* a JSON file (*.json) for the /event-feed endpoint on any other system producing events, if available (may not be named "primary" or "shadow*")
+* a JSON file (event-feed.json) for the /event-feed endpoint on the primary system
+* a JSON file (event-feed.shadow{1,2,...}.json) for the /event-feed endpoint on a shadow system, if available (use numbering in case of multiple shadows)
+* a JSON file (event-feed.*.json) for the /event-feed endpoint on any other system producing events, if available (may not be named "primary" or "shadow*")
 
 ==== File listing ====
 
- events/primary.json
- events/shadow.json
- events/cds.json
+ events/event-feed.json
+ events/event-feed.shadow.json
+ events/event-feed.cds.json
