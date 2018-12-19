@@ -131,7 +131,7 @@ The following formats may be used:
 
 === General principle ===
 
-Endpoints are stored in a single <endpoint>.json file containing the full list of objects. This file is identical to the API call to /<endpoint>. If there are file references in the JSON file these are stored in a subfolder per object, using the object ID as the folder name and the element name of the file reference as the base name of the file. When needed (i.e when there are multiple file references that do not have different file endings) a specifier will be added between the base name and type.
+Endpoints are stored in a single <endpoint>.json file containing the full list of objects. This file is identical to the API call to /<endpoint>. If there are file references in the JSON file these are stored in a subfolder per object, using the object ID as the folder name and the element name of the file reference as the base name of the file. When needed (i.e when there are multiple file references that do not have different file endings) a specifier will be added between the base name and type. Empty directories should be omitted.
 
  <endpoint>.json
  <endpoint>/<id>/<other files>
