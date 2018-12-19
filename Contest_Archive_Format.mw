@@ -163,8 +163,8 @@ When there are multiple banners and logos all except at most one must use the st
 
 A directory, '''registration''', containing:
 
-* a JSON file (groups.json) for the /groups endpoint
-* a JSON file (organizations.json) for the /organizatons endpoint
+* a JSON file (groups.json) for the /groups endpoint, if available
+* a JSON file (organizations.json) for the /organizatons endpoint, if available
 * a directory for organizations containing:
 ** a directory for each organisation using the organisation ID as directory name, containing:
 *** a file for each file reference available in /organizatons/<id>
@@ -172,7 +172,7 @@ A directory, '''registration''', containing:
 * a directory for teams containing:
 ** a directory for each team using the team ID as directory name, containing:
 *** a file for each file reference available in /teams/<id>
-* a JSON file (team-members.json) for the /team-members endpoint
+* a JSON file (team-members.json) for the /team-members endpoint, if available
 * a directory for team-members containing:
 ** a directory for each team member using the team member ID as directory name, containing:
 *** a file for each file reference available in /team-members/<id>
