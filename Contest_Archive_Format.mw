@@ -177,7 +177,7 @@ A directory, '''registration''', containing:
 ** a directory for each team member using the team member ID as directory name, containing:
 *** a file for each file reference available in /team-members/<id>
 
-Empty directories should not be included. This means e.g. that organizations that does not have any logos should not have a corresponding directory under /organizatons and if no organization has a logo, there should be no directory /organizatons at all.
+Empty directories should not be included. This means e.g. that organizations that do not have any logos should not have a corresponding directory under /organizatons and if no organization has a logo, there should be no directory /organizatons at all.
 
 When there are multiple images in any given element with the same file ending, all except at most one must use the string <width>x<height> as a specifier.
 
