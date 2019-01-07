@@ -244,7 +244,7 @@ A directory, '''events''', containing:
 
 * a JSON file (event-feed.json) for the /event-feed endpoint on the primary system
 * a JSON file (event-feed.shadow{1,2,...}.json) for the /event-feed endpoint on a shadow system, if available (use numbering in case of multiple shadows)
-* a JSON file (event-feed.*.json) for the /event-feed endpoint on any other system producing events, if available (may not be named "primary" or "shadow*")
+* a JSON file (event-feed.*.json) for the /event-feed endpoint on any other system producing events, if available (may not be named "shadow*")
 
 ==== File listing ====
 
