@@ -219,7 +219,7 @@ When there are multiple non image file references in any given element with the 
 
  activity/submissions.json
  activity/submissions/<id>/files.zip
- activity/submissions/<id>/reaction.*
+ activity/submissions/<id>/reaction.mp4
  activity/judgements.json
  activity/judgements.shadow.json
  activity/runs.json
