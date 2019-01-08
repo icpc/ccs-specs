@@ -132,8 +132,8 @@ Element for file reference objects:
 |-
 | mime
 | string
-| iff default is defined
-| Mime type of resource. Optional if and only if a default mime-type is specified for the reference.
+| no
+| Mime type of resource.
 |-
 | width
 | integer
@@ -307,14 +307,14 @@ Returns a JSON object with the elements below. If there is no current (this may 
 | no
 | yes
 | CDS
-| banner for this contest, intended to be an image with a large aspect ratio around 8:1 or so. Default and only allowed mime type is image/png.
+| banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime type is image/png.
 |-
 | logo
 | array of IMAGE
 | no
 | yes
 | CDS
-| logo for this contest, intended to be an image with aspect ratio near 1:1. Default and only allowed mime type is image/png.
+| logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime type is image/png.
 |}
 
 The expected/typical use of <tt>countdown_pause_time</tt> is that once a <tt>start_time</tt> is defined and close, the countdown may be paused due to unforeseen delays. In this case, <tt>start_time</tt> should be set to <tt>null</tt> and <tt>countdown_pause_time</tt> to the (negative) number of seconds left to countdown. The <tt>countdown_pause_time</tt> may change to indicate approximate delay. Countdown is resumed by setting a new <tt>start_time</tt> and resetting <tt>countdown_pause_time</tt> to <tt>null</tt>.
@@ -1179,7 +1179,7 @@ JSON elements of organization objects:
 | no
 | yes
 | CDS
-| logo of the organization. Default and only allowed mime type is image/png. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well.
+| logo of the organization. Only allowed mime type is image/png. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well.
 |}
 
 ==== Access restrictions at WF ====
@@ -1302,7 +1302,7 @@ JSON elements of team objects:
 | no
 | yes
 | CDS
-| registration photo of the team. Default mime type is image/png
+| registration photo of the team. Only allowed mime type is image/jpeg
 |-
 | video
 | array of VIDEO
@@ -1316,7 +1316,7 @@ JSON elements of team objects:
 | no
 | yes
 | CDS
-| latest file backup of the team machine. Default and only allowed mime type is application/zip.
+| latest file backup of the team machine. Only allowed mime type is application/zip.
 |-
 | desktop
 | array of STREAM
@@ -1438,7 +1438,7 @@ JSON elements of team member objects:
 | no
 | yes
 | CDS
-| registration photo of the team member. Default mime type is image/png
+| registration photo of the team member. Only allowed mime type is image/jpeg
 
 |}
 
@@ -1643,7 +1643,7 @@ JSON elements of submission objects:
 | yes
 | no
 | CCS
-| submission files, contained at the root of the archive. Default and only allowed mime type is application/zip.
+| submission files, contained at the root of the archive. Only allowed mime type is application/zip.
 |-
 | reaction
 | array of VIDEO
