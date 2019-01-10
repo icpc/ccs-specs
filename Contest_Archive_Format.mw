@@ -154,14 +154,14 @@ When there are multiple file references with the same file extension (e.g. multi
 
 ==== Examples of Multiple File References ====
 
- <endpoint>/<id>/banner.800x100.png
- <endpoint>/<id>/banner.80x10.png
+ <endpoint>/<id>/banner.800x100.png # Must be a 800 x 100 px PNG
+ <endpoint>/<id>/banner.80x10.png   # Must be a 80 x 10 px PNG
 
 or:
 
- <endpoint>/<id>/logo.png
- <endpoint>/<id>/logo.56x56.png
- <endpoint>/<id>/logo.160x160.png
+ <endpoint>/<id>/logo.png           # Is probably the source image for the other logo versions. Must be larger than the others.
+ <endpoint>/<id>/logo.56x56.png     # Must be a 56 x 56 px PNG
+ <endpoint>/<id>/logo.160x160.png   # Must be a 160 x 160 px PNG
 
 === Config ===
 
