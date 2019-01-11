@@ -150,7 +150,7 @@ The file extension for each file reference must match the mime type in the REST 
 | application/zip || .zip
 |}
 
-When there are multiple file references with the same file extension (e.g. multiple sizes of a logo), a specifier is added between the base name and file extension. Using the root name in this case is optional, but if used it must be the largest or most important file. For images, the specifier must be the string "<width>x<height>". For other file types use any appropriate specifier.
+When there are multiple file references with the same file extension (e.g. multiple sizes of a logo), a specifier is added between the base name and file extension. Use of the regular file name that does not have the specifier is optional in this case, but if used it must be the largest or most important file, e.g. the source image that the other/smaller images were generated from. For images, the specifier must be the string "<width>x<height>". For other file types use any appropriate specifier.
 
 ==== Examples of Multiple File References ====
 
