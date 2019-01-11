@@ -1302,7 +1302,7 @@ JSON elements of team objects:
 | no
 | yes
 | CDS
-| registration photo of the team. Only allowed mime type is image/jpeg
+| registration photo of the team. Only allowed mime types are image/jpeg and image/png.
 |-
 | video
 | array of VIDEO
@@ -1438,7 +1438,7 @@ JSON elements of team member objects:
 | no
 | yes
 | CDS
-| registration photo of the team member. Only allowed mime type is image/jpeg
+| registration photo of the team member. Only allowed mime types are image/jpeg and image/png.
 
 |}
 
