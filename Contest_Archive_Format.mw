@@ -261,12 +261,12 @@ A directory, '''events''', containing:
 
 == Multiple Archives and Secondary Systems ==
 
-In more complicated contest configurations there may be a secondary CCS that is used to shadow the primary CCS to verify judgements or results, or a Contest Data Server used to serve additional contest data. In these cases it is expected that each system creates its own archive *as if it was the primary system* and then after the contest an automated tool is used to validate that the results are consistent and merge (flatten) the archives into one master archive.
+In more complicated contest configurations there may be a secondary CCS that is used to shadow the primary CCS to verify judgements or results, or a Contest Data Server used to serve additional contest data. In these cases it is expected that each system creates its own archive '''as if it was the primary system''' and then after the contest an automated tool is used to validate that the results are consistent and merge (flatten) the archives into one master archive.
 
-In order to avoid conflicts and reduce size, identical files from a secondary system are ignored, and more important files are copied into the master archive with an extra ".specifier" before the file extension. This allows post-contest tools that are unaware of the additional systems to read the files as specified in the previous sections, while tools that need to understand the differences in the secondary system(s) can easily check for the existence of these additional files.
+In order to avoid conflicts and reduce size, identical files from a secondary system are ignored, and more important files are copied into the master archive with an extra <code>.specifier</code> before the file extension. This allows post-contest tools that are unaware of the additional systems to read the files as specified in the previous sections, while tools that need to understand the differences in the secondary system(s) can easily check for the existence of these additional files.
 
 === Shadow CCS ===
-In the case of a shadow CCS verifying the results of a primary CCS, the specifier ".shadow" must be used. If there are multiple shadows, the specifier must be ".shadow1", ".shadow2", etc.
+In the case of a shadow CCS verifying the results of a primary CCS, the specifier <code>.shadow</code> must be used. If there are multiple shadows, the specifier must be <code>.shadow1</code>, <code>.shadow2</code>, etc.
 
 By definition the submissions must match and the master archive will only have one copy. Before merging, any differences in results or awards must be verified or explained. The remaining files that will get merged into the master archive are:
 
@@ -282,7 +282,7 @@ By definition the submissions must match and the master archive will only have o
 
 === Contest Data Server ===
 
-A contest data server may generate additional non-critical files into the contest archive, such as reactions. Since the CDS does not generate new activity, by definition the submissions, judgements, and runs must match the primary CCS. Results and awards must be verified to match before merging. This leaves the event-feed, which is merged using the ".cds" specifier.
+A contest data server may generate additional non-critical files into the contest archive, such as reactions. Since the CDS does not generate new activity, by definition the submissions, judgements, and runs must match the primary CCS. Results and awards must be verified to match before merging. This leaves the event-feed, which is merged using the <code>.cds</code> specifier.
 
 ==== Example file listing ====
 
