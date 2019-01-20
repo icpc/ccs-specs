@@ -91,16 +91,11 @@
 		"type": "object",
 		"properties": {
 			"href": { "type": "string" },
-			"mime": {
-				"oneOf": [
-					{ "type": "string" },
-					{ "type": "null" }
-				]
-			},
+			"mime": { "type": "string" },
 			"width":  { "type": "integer", "minimum": 1 },
 			"height": { "type": "integer", "minimum": 1 }
 		},
-		"required": ["href"],
+		"required": ["href", "mime"],
 		"$ref": "#/strictproperties"
 	},
 
