@@ -207,8 +207,11 @@ In the tables below, the columns are:
 ;Source @WF: Specifies whether this attribute is implemented at the ICPC World Finals and by whom.
 ;Description: Description of the meaning of the attribute and any special considerations.
 
-Note that if an attribute is required and nullable, then if in a particular instance it is <tt>null</tt>, it may be left out. On the other hand, an attribute that is optional, but not nullable must either always be present (if the server implements/uses it), or never be present (if the server does not implement/use it). If an attribute is not implemented by a server, then it must never be present; this means that if a client sees an attribute, this means that the server implements it.
-
+Note that attributes with <tt>null</tt> value may be left out by the server. Furthermore, optional attributes must still be consistently implemented (or not) *within* each contest. This implies the following for attributes that are:
+;Required and not nullable: The attribute must always be present with a value.
+;Required and nullable:     The attribute may be <tt>null</tt>, and only in that case it may be left out.
+;Optional and not nullable: The attribute may not be implemented, but that implies that no element of the endpoint has the attribute set. If one element has this attribute present, then it must be not <tt>null</tt> and the same must be true for all same type elements within the contest.
+;Optional and nullable:     The attribute may be <tt>null</tt> or not present. In the latter case that can either be because it was a left out <tt>null</tt> value or because it was not implemented.
 
 === Contests ===
 
