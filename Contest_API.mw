@@ -291,7 +291,7 @@ Returns a JSON object with the elements below. If there is no current (this may 
 | scoreboard_freeze_duration
 | RELTIME
 | no
-| no
+| yes
 | CCS
 | how long the scoreboard is frozen before the end of the contest
 |-
