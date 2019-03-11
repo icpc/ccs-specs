@@ -2162,7 +2162,7 @@ By passing an [[#Event feed | event]] ID with the "after_event_id" URL argument,
  /scoreboard?after_event_id=xy1234
 
 This makes it possible for a client to get the scoreboard information that is guaranteed to match a certain contest event.
-In case no "after_event_id" argument is provided, the current scoreboard will be returned.
+In case no "after_event_id" argument is provided, the current scoreboard will be returned. The request will fail with a 400 error if the id is invalid.
 
 A suggested efficient server-side implementation to provide this, is to store with each event that changes the scoreboard, the new team scoreboard row.
 
