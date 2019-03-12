@@ -332,9 +332,9 @@ To replace the [[Contest Start Interface]], at the ICPC World Finals,
 an API provided by a CCS or CDS implementing this specification must have a role
 that has the ability to clear or set the contest start time via a PATCH method.
 
-The PATCH must include a valid JSON element with only two attributes
-allowed: the contest id (used for verification) and a start time (a
-<code>&lt;TIME&gt;</code> value or <code>null</code>).
+The PATCH must include a valid JSON element with only two or three attributes
+allowed: the contest id (used for verification), a start_time (a
+<code>&lt;TIME&gt;</code> value or <code>null</code>), and an optional countdown_pause_time (<code>&lt;RELTIME&gt;</code>). As above, countdown_pause_time can only be non-null when start time is null.
 
 The request should fail with a 401 if the user does not have
 sufficient access rights, or a 403 if the contest is started or within
