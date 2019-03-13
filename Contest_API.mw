@@ -2073,7 +2073,7 @@ For clients with the '''public''' role, awards will not include information from
 ==== Semantics ====
 
 * Awards are not final until the contest is.
-* An award does not have to be present during the contest. However, if it is present, then it must be kept uptodate during the contest. E.g. if "winner" will not be updated with the current leader during the contest, it must not be '''create'''d until the award '''is''' awarded.
+* An award does not have to be present during the contest. However, if it is present, then it must be kept up to date during the contest. E.g. if "winner" will not be updated with the current leader during the contest, it must not be '''create'''d until the award '''is''' awarded.
 * If an award is present during the contest this means that if the contest would end immediately and then become final, that award would be final. E.g. the "winner" during the contest should be the current leader. This is of course subject to what data the client can see; the public role's winner may not change during the scoreboard freeze but an admin could see the true current winner.
 
 For some common award cases the following IDs should be used.
