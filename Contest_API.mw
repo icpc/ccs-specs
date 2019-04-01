@@ -2214,9 +2214,10 @@ JSON elements of the scoreboard object.
 | A list of rows of team with their associated scores.
 |}
 
-The scoreboard <tt>rows</tt> array is sorted according to rank and
-alphabetical on team name within identically ranked teams. Each JSON
-object in the rows array consists of:
+The scoreboard <tt>rows</tt> array is sorted according to rank and alphabetical on team name within identically ranked teams.
+Here alphabetical ordering means according to the [http://www.unicode.org/reports/tr10/ Unicode Collation Algorithm], by default using the <tt>en-US</tt> locale.
+
+Each JSON object in the rows array consists of:
 {| class="wikitable"
 |-
 ! Name
