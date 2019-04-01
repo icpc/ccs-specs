@@ -1018,7 +1018,9 @@ The time of last accepted submission must be -1 if team has not solved a problem
 
 ==== results.tsv ====
 
-A text file consisting of a version  line and one line for each team in the contest, sorted in rank order with alphabetical order on team name as tie breaker. Each line has tab separated fields as defined below.
+A text file consisting of a version line and one line for each team in the contest, sorted in rank order with alphabetical order on team name as tie breaker.
+Here alphabetical ordering means according to the [http://www.unicode.org/reports/tr10/ Unicode Collation Algorithm], by default using the <tt>en-US</tt> locale.
+Each line has tab separated fields as defined below.
 
 The first line has the following format
 {| class="wikitable"
