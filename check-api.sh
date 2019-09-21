@@ -159,11 +159,6 @@ query_endpoint()
 	if [ "${URL/event-feed/}" != "$URL" ]; then
 		TIMEOUT=1
 		CURLOPTS="$CURLOPTS -N --max-time ${FEED_TIMEOUT}"
-		# This is a hack around the --max-time option not working well
-		# on Travis CI for the DOMjudge event-feed endpoint.
-		if [ "${URL/domjudge/}" != "$URL" ]; then
-			ARGS="${ARGS:+$ARGS&}stream=0"
-		fi
 	fi
 
 	HTTPCODE=$(curl $CURLOPTS -w "%{http_code}\n" -o "$OUTPUT" "${URL}${ARGS:+?$ARGS}")
