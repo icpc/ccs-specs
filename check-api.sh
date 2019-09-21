@@ -30,6 +30,12 @@ team-members
 awards
 '
 
+ENDPOINTS_TO_FAIL='
+404:doesnt-exist
+404:doesnt-exist/42
+404:submissions/999999
+'
+
 ENDPOINTS_CHECK_CONSISTENT="$ENDPOINTS"
 for endpoint in $ENDPOINTS_OPTIONAL scoreboard ; do
 	ENDPOINTS_CHECK_CONSISTENT="${ENDPOINTS_CHECK_CONSISTENT/$endpoint/}"
@@ -84,6 +90,7 @@ Options:
   -C       Check internal consistency between REST endpoints and event feed.
   -c OPTS  Options to pass to curl to request API data (default: $CURL_OPTIONS)
   -d       Turn on shell script debugging.
+  -e       Check correct HTTP error codes for non-existent endpoints.
   -h       Snow this help output.
   -j PROG  Specify the path to the 'validate-json' binary.
   -n       Require that all collection endpoints are non-empty.
@@ -102,12 +109,13 @@ CURL_OPTIONS='-n -s'
 URL_ARGS=''
 
 # Parse command-line options:
-while getopts 'a:Cc:dhj:npt:q' OPT ; do
+while getopts 'a:Cc:dehj:npt:q' OPT ; do
 	case "$OPT" in
 		a) URL_ARGS="$OPTARG" ;;
 		C) CHECK_CONSISTENCY=1 ;;
 		c) CURL_OPTIONS="$OPTARG" ;;
 		d) export DEBUG=1 ;;
+		e) CHECK_ERRORS=1 ;;
 		h) usage ; exit 0 ;;
 		j) VALIDATE_JSON="$OPTARG" ;;
 		n) NONEMPTY=1 ;;
@@ -148,6 +156,8 @@ query_endpoint()
 	local OUTPUT="$1"
 	local URL="$2"
 	local OPTIONAL="$3"
+	local EXPECTED_HTTPCODE="$4"
+
 	local HTTPCODE EXITCODE
 
 	local CURLOPTS="$CURL_OPTIONS"
@@ -163,6 +173,15 @@ query_endpoint()
 
 	HTTPCODE=$(curl $CURLOPTS -w "%{http_code}\n" -o "$OUTPUT" "${URL}${ARGS:+?$ARGS}")
 	EXITCODE="$?"
+
+	if [ -n "$EXPECTED_HTTPCODE" ]; then
+		if [ "$HTTPCODE" -ne "$EXPECTED_HTTPCODE" ]; then
+			verbose "Warning: curl returned HTTP status $HTTPCODE != $EXPECTED_HTTPCODE for '$URL'."
+			return 1;
+		fi
+		return 0
+	fi
+
 	if [ $EXITCODE -eq 28 ]; then # timeout
 		if [ -z "$TIMEOUT" ]; then
 			verbose "Warning: curl request timed out for '$URL'."
@@ -288,6 +307,19 @@ for CONTEST in $CONTESTS ; do
 	fi
 
 done
+
+if [ -n "$CHECK_ERRORS" ]; then
+	verbose "Validating errors on missing endpoints..."
+	for i in $ENDPOINTS_TO_FAIL ; do
+		CODE=${i%%:*}
+		ENDPOINT=${i#*:}
+		URL="$CONTEST_URL/$ENDPOINT"
+		verbose '%20s: ' "$ENDPOINT"
+		if query_endpoint /dev/null "$URL" '' "$CODE" ; then
+			verbose 'OK (returned %s)\n' "$CODE"
+		fi
+	done
+fi
 
 [ -n "$DEBUG" ] || rm -rf $TMP
 
