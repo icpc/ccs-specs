@@ -11,7 +11,7 @@
 		"start_time": { "$ref": "common.json#/abstimeornull" },
 		"countdown_pause_time": { "$ref": "common.json#/reltimeornull" },
 		"duration": { "$ref": "common.json#/reltime" },
-		"scoreboard_freeze_duration": { "$ref": "common.json#/reltime" },
+		"scoreboard_freeze_duration": { "$ref": "common.json#/reltimeornull" },
 		"penalty_time": {
 			"type": "integer",
 			"minimum": 0
