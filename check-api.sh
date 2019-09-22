@@ -37,6 +37,8 @@ ENDPOINTS_TO_FAIL='
 404:submissions/xyz9999
 404:submissions/XYZ_999
 404:submissions/XYZ-999
+400:event-feed?since_id=999999
+400:event-feed?since_id=xY-99_
 '
 
 ENDPOINTS_CHECK_CONSISTENT="$ENDPOINTS"
