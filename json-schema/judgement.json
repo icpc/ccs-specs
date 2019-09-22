@@ -11,12 +11,7 @@
 		"start_time": { "$ref": "common.json#/abstime" },
 		"start_contest_time": { "$ref": "common.json#/reltime" },
 		"end_time": { "$ref": "common.json#/abstimeornull" },
-		"end_contest_time": {
-			"oneOf": [
-				{ "$ref": "common.json#/reltime" },
-				{ "type": "null" }
-			]
-		},
+		"end_contest_time": { "$ref": "common.json#/reltimeornull" },
 		"max_run_time": {
 			"oneOf": [
 				{

@@ -41,6 +41,25 @@
 		"pattern": "^-?([1-9][0-9]*)?[0-9]:[0-5][0-9]:[0-5][0-9](\\.[0-9]{3})?$"
 	},
 
+	"reltimeornull": {
+		"oneOf": [
+			{ "$ref": "#/reltime" },
+			{ "type": "null" }
+		]
+	},
+
+	"posreltime": {
+		"type": "string",
+		"pattern": "^([1-9][0-9]*)?[0-9]:[0-5][0-9]:[0-5][0-9](\\.[0-9]{3})?$"
+	},
+
+	"posreltimeornull": {
+		"oneOf": [
+			{ "$ref": "#/posreltime" },
+			{ "type": "null" }
+		]
+	},
+
 	"identifier": {
 		"type": "string",
 		"pattern": "^[A-Za-z0-9_][A-Za-z0-9_-]{0,35}"
