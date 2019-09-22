@@ -9,9 +9,9 @@
 		"name": { "type": "string" },
 		"formal_name": { "type": "string" },
 		"start_time": { "$ref": "common.json#/abstimeornull" },
-		"countdown_pause_time": { "$ref": "common.json#/reltimeornull" },
-		"duration": { "$ref": "common.json#/reltime" },
-		"scoreboard_freeze_duration": { "$ref": "common.json#/reltimeornull" },
+		"countdown_pause_time": { "$ref": "common.json#/posreltimeornull" },
+		"duration": { "$ref": "common.json#/posreltime" },
+		"scoreboard_freeze_duration": { "$ref": "common.json#/posreltimeornull" },
 		"penalty_time": {
 			"type": "integer",
 			"minimum": 0
