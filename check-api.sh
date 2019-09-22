@@ -322,6 +322,9 @@ if [ -n "$CHECK_ERRORS" ]; then
 		verbose '%20s: ' "$ENDPOINT"
 		if query_endpoint /dev/null "$URL" '' "$CODE" ; then
 			verbose 'OK (returned %s)\n' "$CODE"
+		else
+			EXIT=1
+			[ $EXIT -gt $EXITCODE ] && EXITCODE=$EXIT
 		fi
 	done
 fi
