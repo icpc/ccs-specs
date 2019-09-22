@@ -306,7 +306,7 @@ for CONTEST in $CONTESTS ; do
 	fi
 
 	if [ -n "$CHECK_CONSISTENCY" ]; then
-		$MYDIR/check-api-consistency.php "$TMP/$CONTEST" $ENDPOINTS_CHECK_CONSISTENT
+		eval ${EXTRAPROP:-STRICT=1} $MYDIR/check-api-consistency.php "$TMP/$CONTEST" $ENDPOINTS_CHECK_CONSISTENT
 		EXIT=$?
 		[ $EXIT -gt $EXITCODE ] && EXITCODE=$EXIT
 	fi

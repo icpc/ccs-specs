@@ -13,6 +13,7 @@ $endpoints = array_splice($argv, 2);
 $feed_json = json_decode(file_get_contents($dir.'/event-feed.json'), true);
 
 $debug = getenv('DEBUG');
+$strict = getenv('STRICT');
 
 $errors = 0;
 $warnings = 0;
@@ -129,4 +130,5 @@ if ($errors>0) {
 
 if ($warnings>0) {
     echo "Found $warnings warnings.\n";
+    if ($strict) exit(1);
 }
