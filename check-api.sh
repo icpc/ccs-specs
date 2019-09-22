@@ -34,6 +34,9 @@ ENDPOINTS_TO_FAIL='
 404:doesnt-exist
 404:doesnt-exist/42
 404:submissions/999999
+404:submissions/xyz9999
+404:submissions/XYZ_999
+404:submissions/XYZ-999
 '
 
 ENDPOINTS_CHECK_CONSISTENT="$ENDPOINTS"
