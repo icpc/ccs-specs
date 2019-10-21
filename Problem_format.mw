@@ -44,7 +44,7 @@ For languages where there could be several entry points, the default entry point
 |-
 | haskell || Haskell || || .hs ||
 |-
-| java || Java || Main|| .java ||
+| java || Java || Main || .java ||
 |-
 | javascript || JavaScript || main.js  || .js ||
 |-
@@ -84,7 +84,7 @@ The keys are defined as below. Keys are optional unless explicitly stated. Any u
 |-
 | source_url || String || || Link to page for source event. Must not be given if source is not.
 |-
-| license || String || unknown || License under which the problem may be used. Value have to be one of the ones defined below.
+| license || String || unknown || License under which the problem may be used. Value has to be one of the ones defined below.
 |-
 | rights_owner || String || Value of author, if present, otherwise value of source. || Owner of the copyright of the problem. If not present, author is owner. If author is not present either, source is owner. Required if license is something other than "unknown" or "public domain". Forbidden if license is "public domain".
 |-
