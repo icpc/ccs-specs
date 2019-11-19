@@ -50,8 +50,7 @@
 									"minimum": 0
 								},
 								"solved": { "type": "boolean" },
-								"time": { "type": "integer", "minimum": 0 },
-								"first_to_solve": { "type": "boolean" }
+								"time": { "type": "integer", "minimum": 0 }
 							},
 							"oneOf": [
 								{
