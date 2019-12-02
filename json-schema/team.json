@@ -8,6 +8,7 @@
 		"id": { "$ref": "common.json#/identifier" },
 		"icpc_id": { "type": [ "string", "null" ] },
 		"name": { "type": "string" },
+		"display_name": { "type": [ "string", "null" ] },
 		"organization_id": { "$ref": "common.json#/identifierornull" },
 		"group_ids": {
 			"type": "array",
