@@ -1258,6 +1258,13 @@ JSON elements of team objects:
 | CCS
 | name of the team
 |-
+| display_name
+| string
+| no
+| yes
+| CCS
+| display name of the team. If not set, a client should revert to using the name instead.
+|-
 | organization_id
 | ID
 | no
