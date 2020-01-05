@@ -261,7 +261,7 @@ Returns a JSON object with the elements below. If there is no current (this may 
 | yes
 | no
 | CCS
-| display name of the contest
+| short display name of the contest
 |-
 | formal_name
 | string
@@ -1126,7 +1126,7 @@ JSON elements of organization objects:
 | yes
 | no
 | CCS
-| display name of the organization
+| short display name of the organization
 |-
 | formal_name
 | string
