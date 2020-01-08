@@ -513,7 +513,7 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 |-
 | APE
 | Accepted - Presentation Error
-| Presentation Error, also see AC and PE
+| Presentation Error, also see AC, PE, and IOF
 | AC
 | AC
 | Solves the problem, although formatting is wrong
@@ -528,6 +528,13 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 | PE
 | Presentation Error
 | Output Format Error
+| WA
+| WA, RE
+| Data in output is correct, but formatting is wrong
+|-
+| IOF
+| Incorrect Output Format
+| Output Format Error, Presentation Error
 | WA
 | WA, RE
 | Data in output is correct, but formatting is wrong
