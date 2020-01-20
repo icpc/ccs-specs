@@ -471,14 +471,14 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 |-
 | AC
 | Accepted
-| Correct, Yes
+| Correct, Yes (YES)
 | *
 | -
 | Solves the problem
 |-
 | RE
 | Rejected
-| Incorrect, No
+| Incorrect, No (NO)
 | WA?
 | -
 | Does not solve the problem
@@ -527,14 +527,7 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 |-
 | PE
 | Presentation Error
-| Output Format Error
-| WA
-| WA, RE
-| Data in output is correct, but formatting is wrong
-|-
-| IOF
-| Incorrect Output Format
-| Output Format Error, Presentation Error
+| Output Format Error (OFE), Incorrect Output Format (IOF)
 | WA
 | WA, RE
 | Data in output is correct, but formatting is wrong
@@ -625,14 +618,14 @@ The '''Translation''' column lists other judgements the judgement can safely be 
 |-
 | SV
 | Security Violation
-| Illegal Function, Restricted Function
+| Illegal Function (IF), Restricted Function
 | RTE
 | RTE, RE
 | Uses some functionality that is not allowed by the system
 |-
 | IF
 | Illegal Function
-| Illegal Function, Restricted Function
+| Illegal Function (IF), Restricted Function
 | RTE
 | SV, RTE, RE
 | Calls a function that is not allowed by the system
