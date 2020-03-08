@@ -1663,6 +1663,8 @@ JSON elements of submission objects:
 | reaction video from team's webcam.
 |}
 
+The '''entry_point''' attribute must be included for submissions in languages which do not have a single, unambiguous entry point to run the code. In general the entry point is the string that needs to be specified to point to the code to be executed. Specifically, for Python it is the file name that should be run, and for Java and Kotlin it is the fully qualified class name (that is, with any package name included, e.g. <tt>com.example.myclass</tt> for a class in the package <tt>com.example</tt> in Java). For C and C++ no entry point is required and it must therefore be <tt>null</tt>.
+
 The '''files''' attribute provides the file(s) of a given submission as a zip archive. These must be stored directly from the root of the zip file, i.e. there must not be extra directories (or files) added unless these are explicitly part of the submission content.
 For '''POST''', '''PUT''' and '''PATCH''' methods, the '''files''' attribute must contain the base64-encoded string of the zip archive.
 
