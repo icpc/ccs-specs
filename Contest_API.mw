@@ -1328,6 +1328,20 @@ JSON elements of team objects:
 | CDS
 | latest file backup of the team machine. Only allowed mime type is application/zip.
 |-
+| key_log
+| array of FILE
+| no
+| yes
+| CDS
+| latest key log file from the team machine. Only allowed mime type is text/plain.
+|-
+| tool_data
+| array of FILE
+| no
+| yes
+| CDS
+| latest tool data usage file from the team machine. Only allowed mime type is text/plain.
+|-
 | desktop
 | array of STREAM
 | no
