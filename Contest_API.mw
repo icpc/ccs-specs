@@ -1341,6 +1341,13 @@ JSON elements of team objects:
 | yes
 | CDS
 | streaming video of the team webcam.
+|-
+| audio
+| array of STREAM
+| no
+| yes
+| CDS
+| streaming team audio.
 |}
 
 ==== Access restrictions at WF ====
