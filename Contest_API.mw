@@ -2380,7 +2380,108 @@ Returned data:
 
 === Event feed ===
 
-Provides the event feed for the current contest. This is effectively a changelog of create, update and delete events taking place in the REST endpoints. Some endpoints (specifically the [[#Scoreboard | Scoreboard]] and the Event feed itself) are aggregated data, and so these will only ever update due to some other REST endpoint updating. For this reason there is no explicit event for these, since there will always be another event sent. This can also be seen by the fact that there is no scoreboard event in the table of events below.
+Provides the event (notification) feed for the current contest. This is effectively a changelog of create, update or delete events taking place in the REST endpoints. Some endpoints (specifically the [[#Scoreboard | Scoreboard]] and the Event feed itself) are aggregated data, and so these will only ever update due to some other REST endpoint updating. For this reason there is no explicit event for these, since there will always be another event sent. This can also be seen by the fact that there is no scoreboard event in the table of events below.
+
+Every notification provides the current state of a single contest object. There is no guarantee on ordering of events, whether two consecutive changes cause one or two events, duplicate events, or even that different clients will receive the same order or set of events. The only guarantee is that an event will be sent for every change, and the latest event received for any object is the correct/latest state of that object (e.g. if an object was created and deleted you'll always receive a delete event last).
+
+There are two mechanisms that clients can use to receive events: a webhook, or a websocket. Both mechanisms have the same format (payload) and events, but different benefits, drawbacks, and ways to register.
+
+==== Feed format ====
+
+The feed is served as [http://specs.okfnlabs.org/ndjson/ Newline delimited JSON], with every event as its own JSON object.
+
+This document uses the term "element". An element corresponds to a single object (run, judgement, language, team, etc.).
+
+The general format for events is:
+  {"type": "<event type>", "id": "<id>", "op": "<type of operation>", "data": <JSON data for element> }
+
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Nullable?
+! Description
+|-
+| type
+| string
+| yes
+| no
+| Type of event, one of the events in the table below. Can be used for filtering.
+|-
+| id
+| ID
+| yes
+| no
+| Unique identifier for the event.
+|-
+| data
+| object
+| yes
+| no
+| If the object was deleted, the only content will be an '''id''' attribute with the identifier of the deleted element. Otherwise, the data is the object that would be returned if calling the corresponding API endpoint at this time.
+|}
+
+All event types have a corresponding API endpoint, as specified in the table below.
+
+{| class="wikitable"
+|-
+! Event
+! API Endpoint
+|-
+| contests
+| /contests/<id>
+|-
+| judgement-types
+| /contests/<id>/judgement-types/<id>
+|-
+| languages
+| /contests/<id>/languages/<id>
+|-
+| problems
+| /contests/<id>/problems/<id>
+|-
+| groups
+| /contests/<id>/groups/<id>
+|-
+| organizations
+| /contests/<id>/organizations/<id>
+|-
+| teams
+| /contests/<id>/teams/<id>
+|-
+| team-members
+| /contests/<id>/team-members/<id>
+|-
+| state
+| /contests/<id>/state
+|-
+| submissions
+| /contests/<id>/submissions/<id>
+|-
+| judgements
+| /contests/<id>/judgements/<id>
+|-
+| runs
+| /contests/<id>/runs/<id>
+|-
+| clarifications
+| /contests/<id>/clarifications/<id>
+|-
+| awards
+| /contests/<id>/awards/<id>
+|}
+
+==== Webhook ====
+
+
+==== Websocket ====
+
+
+
+**Requires editing below this point**
+
+
 
 Since this is generated data, only the '''GET''' method is allowed here, irrespective of role.
 
@@ -2535,6 +2636,6 @@ The referential integrity requirement must be strictly adhered to by the event f
 Request:
   GET https://example.com/api/contests/wf14/event-feed
 Returned data:
-  {"type":"teams","id":"k-2435","op":"create","data":{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
-  {"type":"teams","id":"k-2436","op":"update","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
-  {"type":"teams","id":"k-2437","op":"delete","data":{"id":"11"}}
+  {"type":"teams","id":"k-2435","data":{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
+  {"type":"teams","id":"k-2436","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
+  {"type":"teams","id":"k-2437","data":{"id":"11"}}
