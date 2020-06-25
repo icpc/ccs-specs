@@ -2380,11 +2380,11 @@ Returned data:
 
 === Event feed ===
 
-Provides the event (notification) feed for the current contest. This is effectively a changelog of create, update or delete events taking place in the REST endpoints. Some endpoints (specifically the [[#Scoreboard | Scoreboard]] and the Event feed itself) are aggregated data, and so these will only ever update due to some other REST endpoint updating. For this reason there is no explicit event for these, since there will always be another event sent. This can also be seen by the fact that there is no scoreboard event in the table of events below.
+Provides the event (notification) feed for the current contest. This is effectively a changelog of create, update, or delete events taking place in the REST endpoints. Some endpoints (specifically the [[#Scoreboard | Scoreboard]] and the Event feed itself) are aggregated data, and so these will only ever update due to some other REST endpoint updating. For this reason there is no explicit event for these, since there will always be another event sent. This can also be seen by the fact that there is no scoreboard event in the table of events below.
 
-Every notification provides the current state of a single contest object. There is no guarantee on ordering of events, whether two consecutive changes cause one or two events, duplicate events, or even that different clients will receive the same order or set of events. The only guarantee is that an event will be sent for every change, and the latest event received for any object is the correct/latest state of that object (e.g. if an object was created and deleted you'll always receive a delete event last).
+Every notification provides the current state of a single contest object. There is no guarantee on ordering of events, whether two consecutive changes cause one or two events, duplicate events, or even that different clients will receive the same order or set of events. The only guarantee is that an event will be sent for every change, and the latest event received for any object is the correct and current state of that object (e.g. if an object was created and deleted you'll always receive a delete event last).
 
-There are two mechanisms that clients can use to receive events: a webhook, or a websocket. Both mechanisms have the same format (payload) and events, but different benefits, drawbacks, and ways to register.
+There are two mechanisms that clients can use to receive events: a webhook, or a websocket. Both mechanisms have the same format (payload) and events, but different benefits, drawbacks, and ways to register. Webhooks are better for internet-scale, asynchronous processing, and disconnected systems; websockets are better for browser-based applications and have low overhead.
 
 ==== Feed format ====
 
@@ -2393,7 +2393,7 @@ The feed is served as [http://specs.okfnlabs.org/ndjson/ Newline delimited JSON]
 This document uses the term "element". An element corresponds to a single object (run, judgement, language, team, etc.).
 
 The general format for events is:
-  {"type": "<event type>", "id": "<id>", "op": "<type of operation>", "data": <JSON data for element> }
+  {"type": "<event type>", "id": "<id>", "data": <JSON data for element> }
 
 {| class="wikitable"
 |-
@@ -2474,8 +2474,65 @@ All event types have a corresponding API endpoint, as specified in the table bel
 
 ==== Webhook ====
 
+A webhook allows you to receive HTTP callbacks whenever there is a change to the contest. Every callback will contain one or more lines of ND-JSON events as specified above.
+
+Responding to each event with a 2xx response code indicates successful receipt and ensures that the events in the payload are never sent again. If the client responds with anything other than 2xx, the server will continue to periodically try again, potentially with different payloads (e.g. as new events accumulate). Callbacks to each client are always sent synchronously and in order; clients do not need to worry about getting callbacks out of order and should always process each callback fully before processing the next one.
+
+If the client fails to respond to multiple requests over a period of time (configured for each contest), it will be assumed deactivated and automatically removed from future callbacks.
+
+To register a webhook, you need to post your server's callback url. The general format to register a webhook is:
+  {"url": "<callback url>", "auth": ... }
+
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Nullable?
+! Description
+|-
+| url
+| string
+| yes
+| no
+| The url for callbacks.
+|-
+| auth
+| string
+| yes
+| no
+| TBD
+|}
+
+===== Example =====
+
+Request:
+  POST https://example.com/api/contests/wf14/webhook
+Payload:
+  {"url": "https://myurl", "auth": ... }
+
+
+Future payload posted to url:
+  POST https://myurl
+Payload:
+  {"type":"teams","id":"k-2435","data":{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
+  {"type":"teams","id":"k-2436","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
+  {"type":"teams","id":"k-2437","data":{"id":"11"}}
+
 
 ==== Websocket ====
+
+
+
+==== Example ====
+
+Request:
+  GET wss://example.com/api/contests/wf14/event-feed
+Returned data:
+  {"type":"teams","id":"k-2435","data":{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
+  {"type":"teams","id":"k-2436","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
+  {"type":"teams","id":"k-2437","data":{"id":"11"}}
+
 
 
 
