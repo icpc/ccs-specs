@@ -2378,11 +2378,11 @@ Returned data:
     ]
   }
 
-=== Event feed ===
+=== Event feed - DRAFT ===
 
 Provides the event (notification) feed for the current contest. This is effectively a changelog of create, update, or delete events taking place in the REST endpoints. Some endpoints (specifically the [[#Scoreboard | Scoreboard]] and the Event feed itself) are aggregated data, and so these will only ever update due to some other REST endpoint updating. For this reason there is no explicit event for these, since there will always be another event sent. This can also be seen by the fact that there is no scoreboard event in the table of events below.
 
-Every notification provides the current state of a single contest object. There is no guarantee on ordering of events, whether two consecutive changes cause one or two events, duplicate events, or even that different clients will receive the same order or set of events. The only guarantee is that an event will be sent for every change, and the latest event received for any object is the correct and current state of that object (e.g. if an object was created and deleted you'll always receive a delete event last).
+Every notification provides the current state of a single contest object. There is no guarantee on ordering of events (TODO: except for consistency requirement?), whether two consecutive changes cause one or two events, duplicate events, or even that different clients will receive the same order or set of events. The only guarantee is that an event will be sent for every change, and the latest event received for any object is the correct and current state of that object (e.g. if an object was created and deleted you'll always receive a delete event last).
 
 As a concrete example, judgement events are usually fired when judging is started, and fired again when the final judgment is available. If a client connects after the judgement, or a client was disconnected during the judgement, they will typically only receive the final (complete) judgement.
 
@@ -2500,6 +2500,8 @@ To register a webhook, you need to post your server's callback url. The general 
 | TBD
 |}
 
+TODO: GET to check for webhook?
+
 ===== Example =====
 
 Request:
@@ -2520,30 +2522,6 @@ Payload:
 
 The event feed is a streaming HTTP endpoint that allows connected clients to receive contest events. Each line is an NDJSON formatted contest event as specified above. The feed does not terminate under normal circumstances, so to ensure keep alive a newline must be sent if there has been no event within 120 seconds.
 
-===== Reconnection =====
-
-If a client loses connection or needs to reconnect after a brief disconnect (e.g. client restart), it can use the 'time' argument to specify the last event it received:
-
- /event-feed?time=xx
-
-If specified, the server will attempt to start sending events around the given time to reduce the volume of events and required reconciliation. If the time passed is too large or the server does not support this attribute, the entire feed will be resent from the beginning.
-
-==== Example ====
-
-Request:
-  GET https://example.com/api/contests/wf14/event-feed
-Returned data:
-  {"type":"teams","data":{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
-  {"type":"teams","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
-  {"type":"teams","data":{"id":"11"}}
-
-
-
-
-**Requires editing below this point**
-
-
-
 Since this is generated data, only the '''GET''' method is allowed here, irrespective of role.
 
 The following endpoint is associated with the event feed:
@@ -2562,8 +2540,25 @@ The following endpoint is associated with the event feed:
 | NDJSON feed of events as defined below
 |}
 
+===== Reconnection =====
 
-==== General access restrictions ====
+If a client loses connection or needs to reconnect after a brief disconnect (e.g. client restart), it can use the 'time' argument to specify the last event it received:
+
+ /event-feed?time=xx
+
+If specified, the server will attempt to start sending events around the given time to reduce the volume of events and required reconciliation. If the time passed is too large or the server does not support this attribute, all objects will be sent.
+
+===== Example =====
+
+Request:
+  GET https://example.com/api/contests/wf14/event-feed
+Returned data:
+  {"type":"teams","data":{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
+  {"type":"teams","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
+  {"type":"teams","data":{"id":"11"}}
+
+
+==== General access restrictions - REQUIRES EDITING ====
 
 The event responses and '''data''' objects contained in it must observe the same restrictions as those of the respective endpoints they represent.
 This means that attributes inside the '''data''' element will be present if and only if the client has access to those at the respective endpoint. The client only receives create, update and delete events of elements it has (partial) access to. When time-based access is granted or revoked, create or delete events are dispatched for each affected entity.
