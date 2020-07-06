@@ -2501,6 +2501,7 @@ To register a webhook, you need to post your server's callback url. The general 
 |}
 
 TODO: GET to check for webhook?
+TODO: Contest id in callback (to make it easier to listen to multiple contests at once)? Maybe as a header?
 
 ===== Example =====
 
@@ -2516,7 +2517,6 @@ Payload:
   {"type":"teams","data":{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
   {"type":"teams","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
   {"type":"teams","data":{"id":"11"}}
-
 
 ==== Event Feed ====
 
