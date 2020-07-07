@@ -2436,7 +2436,7 @@ TODO: GET to check for existing webhook (or determine if you've been removed)?
 
 TODO: Should webhook be moved up a level (or duplicated) to register once for all contests?
 
-==== Payload format ====
+===== Payload format =====
 
 Event payload is its own JSON object, which contains an array of JSON objects corresponds to every change in a single object (run, judgement, language, team, etc.).
 
@@ -2535,7 +2535,7 @@ If a client loses connection or needs to reconnect after a brief disconnect (e.g
 
 If specified, the server will attempt to start sending events around the given time to reduce the volume of events and required reconciliation. If the time passed is too large or the server does not support this attribute, all objects will be sent. There is no guarantee that all updates (e.g. a team name correction, which is not time-based) that occurred during the time the client was disconnected will be reflected.
 
-==== Feed format ====
+===== Feed format =====
 
 The feed is served as [http://specs.okfnlabs.org/ndjson/ Newline delimited JSON], with every event as its own JSON object corresponds to a change in a single object (run, judgement, language, team, etc.). The general format for events is:
   {"endpoint": "<endpoint>", "id": "<id>", "data": <JSON data for element> }
