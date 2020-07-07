@@ -2382,7 +2382,7 @@ Returned data:
 
 Provides the event (notification) feed for the current contest. This is effectively a changelog of create, update, or delete events that have occurred in the REST endpoints. Some endpoints (specifically the [[#Scoreboard | Scoreboard]] and the Event feed itself) are aggregated data, and so these will only ever update due to some other REST endpoint updating. For this reason there is no explicit event for these, since there will always be another event sent. This can also be seen by the fact that there is no scoreboard event in the table of events below.
 
-Every notification provides the current state of a single contest object. There is no guarantee on order of events (except for general requirement below), whether two consecutive changes cause one or two events, duplicate events, or even that different clients will receive the same order or set of events. The only guarantee is that an event will be sent for every change, and the latest event received for any object is the correct and current state of that object (e.g. if an object was created and deleted you'll always receive a delete event last).
+Every notification provides the current state of a single contest object. There is no guarantee on order of events (except for general requirements below), whether two consecutive changes cause one or two events, duplicate events, or even that different clients will receive the same order or set of events. The only guarantee is that an event will be sent for every change, and the latest event received for any object is the correct and current state of that object (e.g. if an object was created and deleted you'll always receive a delete event last).
 
 As a concrete example, judgement events are usually fired when judging is started, and fired again when the final judgment is available. If a client connects after the judgement, or a client was disconnected during the judgement, they will typically only receive the final (complete) judgement.
 
@@ -2395,7 +2395,7 @@ This means that attributes inside the '''data''' element will be present if and 
 
 Referential integrity must be strictly adhered to for new objects. i.e. if there is a new object that refers to another object (e.g. a submission for a team) then the referenced object must already exist and have been notified. There is no such guarantee for deletion: if an object that is referred to is deleted then by definition all of the child objects will be deleted, but the events may not arrive in strict referential order:
 
-* If an object, A, refers to another object, B, then the event that shows that A has been created or updated to refer to B *must* come after the event that shows that A has been created.
+* If an object, A, refers to another object, B, then the event that shows that A has been created or updated to refer to B *must* come after the event that shows that B has been created.
 * If some data is only available after a specific state change, then the event showing the state change *must* come before any update events making that data available. E.g. problems are only available after contest start for the public role, so the state event showing that the contest has started *must* come before the problem events creating the problems.
 * Since nothing must change after the contest has ended, thawed (or never been frozen), and been finalized, no event may come after the state event showing that.
 
@@ -2434,13 +2434,13 @@ To register a webhook, you need to post your server's callback url. The general 
 
 TODO: GET to check for existing webhook (or determine if you've been removed)?
 
+TODO: Should webhook be moved up a level (or duplicated) to register once for all contests?
+
 ==== Payload format ====
 
-Event payload is its own JSON object.
+Event payload is its own JSON object, which contains an array of JSON objects corresponds to every change in a single object (run, judgement, language, team, etc.).
 
-The feed is served as [http://specs.okfnlabs.org/ndjson/ Newline delimited JSON], with every event as its own JSON object corresponds to a change in a single object (run, judgement, language, team, etc.).
-
-The general format for events is:
+The general format for the payload is:
   {"contest_id": "<id>", "events":[
      {"endpoint": "<endpoint>", "id": "<id>", "data": <JSON data for element> }, ...
   ]}
@@ -2505,7 +2505,9 @@ Payload:
 
 ==== HTTP Feed ====
 
-The HTTP event feed is a streaming HTTP endpoint that allows connected clients to receive contest events. Each line is an NDJSON formatted contest event as specified below. The feed does not terminate under normal circumstances, so to ensure keep alive a newline must be sent if there has been no event within 120 seconds.
+The HTTP event feed is a streaming HTTP endpoint that allows connected clients to receive contest events. The feed is a complete log of contest objects that starts 'at the beginning of time' so all existing objects will be sent upon initial connection, but apart from referential integrity requirements they may appear in any order (e.g. teams or problems first).
+
+Each line is an NDJSON formatted contest event as specified below. The feed does not terminate under normal circumstances, so to ensure keep alive a newline must be sent if there has been no event within 120 seconds.
 
 Since this is generated data, only the '''GET''' method is allowed here, irrespective of role.
 
@@ -2531,13 +2533,11 @@ If a client loses connection or needs to reconnect after a brief disconnect (e.g
 
  /event-feed?time=xx
 
-If specified, the server will attempt to start sending events around the given time to reduce the volume of events and required reconciliation. If the time passed is too large or the server does not support this attribute, all objects will be sent. There is no guarantee that all updates (e.g. a team name correction, which is not time-based) that occurred the time the client was disconnected will be reflected.
+If specified, the server will attempt to start sending events around the given time to reduce the volume of events and required reconciliation. If the time passed is too large or the server does not support this attribute, all objects will be sent. There is no guarantee that all updates (e.g. a team name correction, which is not time-based) that occurred during the time the client was disconnected will be reflected.
 
 ==== Feed format ====
 
-The feed is served as [http://specs.okfnlabs.org/ndjson/ Newline delimited JSON], with every event as its own JSON object corresponds to a change in a single object (run, judgement, language, team, etc.).
-
-The general format for events is:
+The feed is served as [http://specs.okfnlabs.org/ndjson/ Newline delimited JSON], with every event as its own JSON object corresponds to a change in a single object (run, judgement, language, team, etc.). The general format for events is:
   {"endpoint": "<endpoint>", "id": "<id>", "data": <JSON data for element> }
 
 {| class="wikitable"
