@@ -2395,10 +2395,9 @@ This means that attributes inside the '''data''' element will be present if and 
 
 Referential integrity must be strictly adhered to for new objects. i.e. if there is a new object that refers to another object (e.g. a submission for a team) then the referenced object must already exist and have been notified. There is no such guarantee for deletion: if an object that is referred to is deleted then by definition all of the child objects will be deleted, but the events may not arrive in strict referential order:
 
-* If an object, A, refers to another object, B, then the event that shows that A has been created or updated to refer to B *must* come after the event that shows that B has been created.
-* If some data is only available after a specific state change, then the event showing the state change *must* come before any update events making that data available. E.g. problems are only available after contest start for the public role, so the state event showing that the contest has started *must* come before the problem events creating the problems.
+* If an object, A, refers to another object, B, then the event that shows that A has been created or updated to refer to B '''must''' come after the event that shows that B has been created.
+* If some data is only available after a specific state change, then the event showing the state change '''must''' come before any update events making that data available. E.g. problems are only available after contest start for the public role, so the state event showing that the contest has started '''must''' come before the problem events creating the problems.
 * Since nothing must change after the contest has ended, thawed (or never been frozen), and been finalized, no event may come after the state event showing that.
-
 
 ==== Webhook ====
 
