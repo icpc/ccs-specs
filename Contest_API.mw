@@ -2382,7 +2382,7 @@ Returned data:
 
 Provides the event (notification) feed for the current contest. This is effectively a changelog of create, update, or delete events that have occurred in the REST endpoints. Some endpoints (specifically the [[#Scoreboard | Scoreboard]] and the Event feed itself) are aggregated data, and so these will only ever update due to some other REST endpoint updating. For this reason there is no explicit event for these, since there will always be another event sent. This can also be seen by the fact that there is no scoreboard event in the table of events below.
 
-Every notification provides the current state of a single contest object. There is no guarantee on order of events (except for general requirements below), whether two consecutive changes cause one or two events, duplicate events, or even that different clients will receive the same order or set of events. The only guarantee is that an event will be sent for every change, and the latest event received for any object is the correct and current state of that object (e.g. if an object was created and deleted you'll always receive a delete event last).
+Every notification provides the current state of a single contest object. There is no guarantee on order of events (except for general requirements below), whether two consecutive changes cause one or two events, duplicate events, or even that different clients will receive the same order or set of events. The only guarantee is that when an object changes one or more times you'll receive an event, and the latest event received for any object is the correct and current state of that object (e.g. if an object was created and deleted you'll always receive a delete event last).
 
 As a concrete example, judgement events are usually fired when judging is started, and fired again when the final judgment is available. If a client connects after the judgement, or a client was disconnected during the judgement, they will typically only receive the final (complete) judgement.
 
@@ -2468,13 +2468,13 @@ The general format for the payload is:
 | endpoint
 | string
 | yes
-| no
+| yes
 | The API endpoint, i.e. type of contest object above. Can be used for filtering.
 |-
 | id
 | string
 | yes
-| no
+| yes
 | The id of the object that changed.
 |-
 | data
