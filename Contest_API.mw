@@ -2399,13 +2399,118 @@ Referential integrity must be strictly adhered to for new objects. i.e. if there
 * If some data is only available after a specific state change, then the event showing the state change '''must''' come before any update events making that data available. E.g. problems are only available after contest start for the public role, so the state event showing that the contest has started '''must''' come before the problem events creating the problems.
 * Since nothing must change after the contest has ended, thawed (or never been frozen), and been finalized, no event may come after the state event showing that.
 
+==== Feed format ====
+
+The feed is served as JSON objects, with every event corresponding to a change in a single object (submission, judgement, language, team, etc.) or full endpoint. The general format for events is:
+  {"contest_id": "<id>", "endpoint": "<endpoint>", "id": "<id>", "data": <JSON data for element> }
+
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Nullable?
+! Description
+|-
+| contest_id
+| string
+| yes
+| no
+| The contest id.
+|-
+| endpoint
+| string
+| yes
+| yes
+| The API endpoint, i.e. type of contest object above. Can be used for filtering
+|-
+| id
+| string
+| yes
+| yes
+| The id of the object that changed
+|-
+| data
+| object
+| yes
+| yes
+| The data is the object that would be returned if calling the corresponding API endpoint at this time, i.e. an object or null for deletions
+|}
+
+===== Filtering =====
+
+TODO - filter by contest id and/or endpoint
+
+===== Examples =====
+
+The following are examples of contest events:
+
+    {"contest_id":"finals","endpoint":"problems","id":null,"data":[
+       {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},
+       {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}]}
+
+    {"contest_id":"finals","endpoint":"state","id":null,"data":{
+       "started": "2014-06-25T10:00:00+01",
+       "ended": null,
+       "frozen": "2014-06-25T14:00:00+01",
+       "thawed": null,
+       "finalized": null,
+       "end_of_updates": null}}
+
+    {"contest_id":"finals","endpoint":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
+
+    {"contest_id":"finals","endpoint":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
+
+    {"contest_id":"finals","endpoint":"teams","id":"11","data":null}
+
+TODO: data is object or array - is that too ugly?
+
+
 ==== Webhook ====
 
-A webhook allows you to receive HTTP callbacks whenever there is a change to the contest. Clients are only notified of future changes; they are expected to use other mechanisms if they need to determine the current state of the contest. Every callback will contain one JSON object as specified below.
+A webhook allows you to receive HTTP callbacks whenever there is a change to the contest. Clients are only notified of future changes; they are expected to use other mechanisms if they need to determine the current state of the contest. Every callback will contain one JSON object as specified above.
 
 Responding to each event with a 2xx response code indicates successful receipt and ensures that the events in the payload are never sent again. If the client responds with anything other than 2xx, the server will continue to periodically try again, potentially with different payloads (e.g. as new events accumulate). Callbacks to each client are always sent synchronously and in order; clients do not need to worry about getting callbacks out of order and should always process each callback fully before processing the next one.
 
 If the client fails to respond to multiple requests over a period of time (configured for each contest), it will be assumed deactivated and automatically removed from future callbacks.
+
+The following endpoint is associated with the webhook:
+{| class="wikitable"
+|-
+! Endpoint
+! Mime-type
+! Required?
+! Source @WF
+! Description
+|-
+| /webhook
+| application/json
+| yes
+| CCS
+| List or register for webhook callbacks
+|}
+
+JSON elements of webhook objects:
+
+{| class="wikitable"
+|-
+! Name
+! Type
+! Required?
+! Nullable?
+! Description
+|-
+| url
+| string
+| yes
+| no
+| The url for callbacks
+|}
+
+TODO: include filter details?
+
+
+===== Adding a webhook =====
 
 To register a webhook, you need to post your server's callback url. The general format to register a webhook is:
   {"url": "<callback url>", "auth": ... }
@@ -2422,91 +2527,38 @@ To register a webhook, you need to post your server's callback url. The general 
 | string
 | yes
 | no
-| The url for callbacks.
+| The url for callbacks
 |-
 | auth
 | string
 | yes
 | no
-| TBD
+| TODO
 |}
-
-TODO: GET to check for existing webhook (or determine if you've been removed)?
-
-TODO: Should webhook be moved up a level (or duplicated) to register once for all contests?
-
-===== Payload format =====
-
-Event payload is its own JSON object, which contains an array of JSON objects corresponds to every change in a single object (run, judgement, language, team, etc.).
-
-The general format for the payload is:
-  {"contest_id": "<id>", "events":[
-     {"endpoint": "<endpoint>", "id": "<id>", "data": <JSON data for element> }, ...
-  ]}
-
-{| class="wikitable"
-|-
-! Name
-! Type
-! Required?
-! Nullable?
-! Description
-|-
-| contest_id
-| string
-| yes
-| no
-| The id of the contest that has changed.
-|-
-| events
-| string
-| yes
-| no
-| An array of JSON objects, each describing a change to an endpoint.
-|-
-| endpoint
-| string
-| yes
-| yes
-| The API endpoint, i.e. type of contest object above. Can be used for filtering.
-|-
-| id
-| string
-| yes
-| yes
-| The id of the object that changed.
-|-
-| data
-| object
-| yes
-| no
-| The data is the object that would be returned if calling the corresponding API endpoint at this time, i.e. an object or null for deletions.
-|}
-
 
 ===== Example =====
 
 Request:
-  POST https://example.com/api/contests/wf14/webhook
+  POST https://example.com/api/webhook
 Payload:
   {"url": "https://myurl", "auth": ... }
 
+Request:
+  GET https://example.com/api/webhook
+Returned data:
+  [{"url":"https://myurl"},{"url":"https://myotherurl"}]
 
 Future payload posted to url:
   POST https://myurl
 Payload:
-  {"contest_id":"finals","events":[
-    {"endpoint":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia"}},
-    {"endpoint":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}},
-    {"endpoint":"teams","id":"11","data":null}
-  ]}
+  {"contest_id":"finals","endpoint":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
 
 
 ==== HTTP Feed ====
 
 The HTTP event feed is a streaming HTTP endpoint that allows connected clients to receive contest events. The feed is a complete log of contest objects that starts 'at the beginning of time' so all existing objects will be sent upon initial connection, but apart from referential integrity requirements they may appear in any order (e.g. teams or problems first).
 
-Each line is an NDJSON formatted contest event as specified below. The feed does not terminate under normal circumstances, so to ensure keep alive a newline must be sent if there has been no event within 120 seconds.
+Each line is an NDJSON formatted contest event as specified above. The feed does not terminate under normal circumstances, so to ensure keep alive a newline must be sent if there has been no event within 120 seconds.
 
 Since this is generated data, only the '''GET''' method is allowed here, irrespective of role.
 
@@ -2533,44 +2585,3 @@ If a client loses connection or needs to reconnect after a brief disconnect (e.g
  /event-feed?time=xx
 
 If specified, the server will attempt to start sending events around the given time to reduce the volume of events and required reconciliation. If the time passed is too large or the server does not support this attribute, all objects will be sent. There is no guarantee that all updates (e.g. a team name correction, which is not time-based) that occurred during the time the client was disconnected will be reflected.
-
-===== Feed format =====
-
-The feed is served as [http://specs.okfnlabs.org/ndjson/ Newline delimited JSON], with every event as its own JSON object corresponds to a change in a single object (run, judgement, language, team, etc.). The general format for events is:
-  {"endpoint": "<endpoint>", "id": "<id>", "data": <JSON data for element> }
-
-{| class="wikitable"
-|-
-! Name
-! Type
-! Required?
-! Nullable?
-! Description
-|-
-| endpoint
-| string
-| yes
-| no
-| The API endpoint, i.e. type of contest object above. Can be used for filtering.
-|-
-| id
-| string
-| yes
-| no
-| The id of the object that changed.
-|-
-| data
-| object
-| yes
-| no
-| The data is the object that would be returned if calling the corresponding API endpoint at this time, i.e. an object or null for deletions.
-|}
-
-===== Example =====
-
-Request:
-  GET https://example.com/api/contests/wf14/event-feed
-Returned data:
-  {"endpoint":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
-  {"endpoint":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
-  {"endpoint":"teams","id":"11","data":null}
