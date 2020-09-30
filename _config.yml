@@ -1,0 +1,18 @@
+title: CCS Specs
+lang: en
+description: CCS Specs
+
+readme_index:
+  with_frontmatter: true
+
+theme: null
+
+remote_theme: rundocs/jekyll-rtd-theme
+
+plugins:
+  - jekyll-remote-theme
+
+markdown: CommonMarkGhPages
+commonmark:
+  options: ['SMART']
+  extensions: ['table']

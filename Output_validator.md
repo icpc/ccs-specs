@@ -1,3 +1,8 @@
+---
+sort: 6
+permalink: /output_validator
+---
+# Output validator
 **This document is deprecated**
 
 ## Summary

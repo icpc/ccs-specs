@@ -1,3 +1,9 @@
+---
+sort: 3
+permalink: /contest_archive_format
+---
+# Contest archive format
+
 This page describes a draft archive format for a contest. It is
 developed in parallel with the [Contest API](Contest_API "wikilink"). It
 might very well end up being very similar to the CDP which has been

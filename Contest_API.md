@@ -1,3 +1,9 @@
+---
+sort: 2
+permalink: /contest_api
+---
+# Contest API
+
 **This is the development draft for the Contest API. See also [the
 version that will be used at WF 2020](Contest_API_2020 "wikilink").**
 
@@ -296,7 +302,7 @@ contain only a single element.
 All endpoints should support **GET**; specific details on other methods
 are mentioned below.
 
-#### Types of endpoints
+### Types of endpoints
 
 The endpoints can be categorised into 3 groups as follows:
 
@@ -323,7 +329,7 @@ event feed, also note that these should not be considered proper REST
 endpoints, and that the `event-feed` endpoint is a streaming feed in
 NDJSON format.
 
-#### Table column description
+### Table column description
 
 In the tables below, the columns are:
 

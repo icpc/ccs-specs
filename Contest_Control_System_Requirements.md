@@ -1,3 +1,8 @@
+---
+sort: 4
+permalink: /ccs_system_requirements
+---
+# CCS System Requirements
 ## Introduction
 
 This document specifies requirements for operation, verification and
