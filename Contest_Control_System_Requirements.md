@@ -1,5 +1,5 @@
 ---
-sort: 4
+sort: 1
 permalink: /ccs_system_requirements
 ---
 # CCS System Requirements
