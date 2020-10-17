@@ -126,13 +126,9 @@ At least the following different types of accounts must be supported:
     available to team clients are as defined in the section on the [team
     interface](#Team_Interface "wikilink").
 
-<!-- end list -->
-
   - Judge: used by judges in the contest. The functions available to
     judge clients are as defined in the section on the [judge
     interface](#Judge_Interface "wikilink").
-
-<!-- end list -->
 
   - Admin: used by contest administrators. The functions available to
     admin clients are as defined in the section on the [admin
@@ -1212,14 +1208,16 @@ A YAML file consisting of a mapping with the following keys:
 
 ##### Example
 
-`# Contest configuration`  
-`---`  
-`name:                     ACM-ICPC World Finals 2011`  
-`short-name:               ICPC WF 2011`  
-`start-time:               2011-02-04T01:23:00Z`  
-`duration:                 5:00:00`  
-`scoreboard-freeze-length: 1:00:00`  
-`penalty-time:             20`
+```yaml
+# Contest configuration  
+---  
+name:                     ACM-ICPC World Finals 2011  
+short-name:               ICPC WF 2011  
+start-time:               2011-02-04T01:23:00Z  
+duration:                 5:00:00  
+scoreboard-freeze-length: 1:00:00  
+penalty-time:             20
+```
 
 #### system.yaml
 
@@ -1253,31 +1251,33 @@ place as few restrictions as possible on the language configuration.
 
 ##### Example
 
-`# System configuration`  
-`---`  
-`default-clars:`  
-`  - No comment, read problem statement.`  
-`  - This will be answered during the answers to questions session.`  
+```yaml
+# System configuration  
+---  
+default-clars:  
+  - No comment, read problem statement.  
+  - This will be answered during the answers to questions session.  
   
-`clar-categories:`  
-`  - General`  
-`  - SysOps`  
-`  - Operations`  
+clar-categories:  
+  - General  
+  - SysOps  
+  - Operations  
   
-`languages:`  
-`  - name: C++`  
-`    compiler: /usr/bin/g++  `  
-`    compiler-args: -O2 -Wall -o a.out -static {files} `  
+languages:  
+  - name: C++  
+    compiler: /usr/bin/g++    
+    compiler-args: -O2 -Wall -o a.out -static {files}   
   
-`  - name: C`  
-`    compiler: /usr/bin/gcc`  
-`    compiler-args: -O2 -Wall -std=gnu99 -o a.out -static {files} -lm`  
-`  `  
-`  - name: Java`  
-`    compiler: /usr/bin/javac`  
-`    compiler-args: -O {files}`  
-`    runner: /usr/bin/java`  
-`    runner-args:`
+  - name: C  
+    compiler: /usr/bin/gcc  
+    compiler-args: -O2 -Wall -std=gnu99 -o a.out -static {files} -lm  
+    
+  - name: Java  
+    compiler: /usr/bin/javac  
+    compiler-args: -O {files}  
+    runner: /usr/bin/java  
+    runner-args:
+```
 
 #### problemset.yaml
 
@@ -1300,33 +1300,35 @@ A sequence of mappings with the following keys:
 
 ##### Example
 
-`# Problem set configuration`  
-`--- `  
-`problems:`  
-`  - letter:     A`  
-`    short-name: apl`  
-`    color:      yellow`  
-`    rgb:        '#ffff00'`  
-`  `  
-`  - letter:     B`  
-`    short-name: barcodes`  
-`    color:      red`  
-`    rgb:        '#ff0000'`  
-`  `  
-`  - letter:     C`  
-`    short-name: biobots`  
-`    color:      green`  
-`    rgb:        '#00ff00'`  
-`  `  
-`  - letter:     D`  
-`    short-name: castles`  
-`    color:      blue`  
-`    rgb:        '#0000ff'`  
-`  `  
-`  - letter:     E`  
-`    short-name: channel`  
-`    color:      white`  
-`    rgb:        '#ffffff'`
+```yaml
+# Problem set configuration  
+---   
+problems:  
+  - letter:     A  
+    short-name: apl  
+    color:      yellow  
+    rgb:        '#ffff00'  
+    
+  - letter:     B  
+    short-name: barcodes  
+    color:      red  
+    rgb:        '#ff0000'  
+    
+  - letter:     C  
+    short-name: biobots  
+    color:      green  
+    rgb:        '#00ff00'  
+    
+  - letter:     D  
+    short-name: castles  
+    color:      blue  
+    rgb:        '#0000ff'  
+    
+  - letter:     E  
+    short-name: channel  
+    color:      white  
+    rgb:        '#ffffff'
+```
 
 #### groups.tsv
 

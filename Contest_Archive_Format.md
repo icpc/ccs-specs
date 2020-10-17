@@ -58,12 +58,14 @@ not listed then **archive** must be specified.
 
 #### Example
 
-`# Contest Archive`  
-`---`  
-`created-by: Kattis`  
-`archive:    contest-api`  
-`problems:   kattis`  
-`events:     missing`
+```yaml
+# Contest Archive  
+---  
+created-by: Kattis  
+archive:    contest-api  
+problems:   kattis  
+events:     missing
+```
 
 ### Config
 
@@ -138,17 +140,19 @@ data.
 
 ### Design principles
 
-Endpoints are stored in a single <endpoint>.json file containing the
+Endpoints are stored in a single \<endpoint>.json file containing the
 full list of objects. This file is identical to the API call to
-/<endpoint>. If there are file references in the JSON file these are
+/\<endpoint>. If there are file references in the JSON file these are
 stored in a subfolder per object, using the object ID as the folder name
 and the element name of the file reference as the base name of the file.
 
-<endpoint>`.json`  
-<endpoint>`/`<id>`/`<referenced files>
+```
+<endpoint>.json  
+<endpoint>/<id>/<referenced files>
+```
 
 Empty directories should be omitted. i.e. if there are no files in
-<endpoint>/<id>, the folder should not exist.
+\<endpoint>/\<id>, the folder should not exist.
 
 The file extension for each file reference must match the mime type in
 the REST endpoint using the following mapping:
@@ -170,40 +174,46 @@ appropriate specifier.
 
 #### Examples of Multiple File References
 
-<endpoint>`/`<id>`/banner.800x100.png # Must be a 800 x 100 px PNG`  
-<endpoint>`/`<id>`/banner.80x10.png   # Must be a 80 x 10 px PNG`
+```
+<endpoint>/<id>/banner.800x100.png # Must be a 800 x 100 px PNG  
+<endpoint>/<id>/banner.80x10.png   # Must be a 80 x 10 px PNG
+```
 
 or:
 
-<endpoint>`/`<id>`/logo.png           # Is probably the source image for the other logo versions. Must be larger than the others.`  
-<endpoint>`/`<id>`/logo.56x56.png     # Must be a 56 x 56 px PNG`  
-<endpoint>`/`<id>`/logo.160x160.png   # Must be a 160 x 160 px PNG`
+```
+<endpoint>/<id>/logo.png           # Is probably the source image for the other logo versions. Must be larger than the others.  
+<endpoint>/<id>/logo.56x56.png     # Must be a 56 x 56 px PNG  
+<endpoint>/<id>/logo.160x160.png   # Must be a 160 x 160 px PNG
+```
 
 ### Config
 
 A directory, **config**, containing:
 
-  - a JSON file (contest.json) for the /contests/<id> endpoint
+  - a JSON file (contest.json) for the /contests/\<id> endpoint
   - a JSON file (judgement-types.json) for the
-    /contests/<id>/judgement-types endpoint
-  - a JSON file (languages.json) for the /contests/<id>/languages
+    /contests/<\id>/judgement-types endpoint
+  - a JSON file (languages.json) for the /contests/\<id>/languages
     endpoint
   - system.yaml defined in the [
     CCSR](Contest_Control_System_Requirements#system.yaml "wikilink").
-  - the contest banner(s), from the banner element of /contests/<id>, if
+  - the contest banner(s), from the banner element of /contests/\<id>, if
     available.
-  - the contest logo(s), from the logo element of /contests/<id>, if
+  - the contest logo(s), from the logo element of /contests/\<id>, if
     available.
 
 #### Example file listing
 
-`config/contest.json`  
-`config/judgement-types.json`  
-`config/languages.json`  
-`config/system.yaml`  
-`config/banner.800x100.png`  
-`config/logo.png`  
-`config/logo.512x512.png`
+```
+config/contest.json  
+config/judgement-types.json  
+config/languages.json  
+config/system.yaml  
+config/banner.800x100.png  
+config/logo.png  
+config/logo.512x512.png
+```
 
 ### Registration
 
@@ -216,33 +226,35 @@ A directory, **registration**, containing:
       - a directory for each organisation using the organisation ID as
         directory name, containing:
           - a file for each file reference available in
-            /organizatons/<id>
+            /organizatons/\<id>
   - a JSON file (teams.json) for the /teams endpoint
   - a directory for teams containing:
       - a directory for each team using the team ID as directory name,
         containing:
-          - a file for each file reference available in /teams/<id>
+          - a file for each file reference available in /teams/\<id>
   - a JSON file (team-members.json) for the /team-members endpoint, if
     available
   - a directory for team-members containing:
       - a directory for each team member using the team member ID as
         directory name, containing:
           - a file for each file reference available in
-            /team-members/<id>
+            /team-members/\<id>
 
 #### Example file listing
 
-`registration/groups.json`  
-`registration/organizations.json`  
-`registration/organizations/`<id>`/logo.56x56.png`  
-`registration/organizations/`<id>`/logo.160x160.png`  
-`registration/organizations/`<id>`/logo.512x512.png`  
-`registration/teams.json`  
-`registration/teams/`<id>`/photo.png`  
-`registration/teams/`<id>`/photo.jpg`  
-`registration/teams/`<id>`/backup.zip`  
-`registration/team-members.json`  
-`registration/team-members/`<id>`/photo.jpg`
+```
+registration/groups.json  
+registration/organizations.json  
+registration/organizations/<id>/logo.56x56.png  
+registration/organizations/<id>/logo.160x160.png  
+registration/organizations/<id>/logo.512x512.png  
+registration/teams.json  
+registration/teams/<id>/photo.png  
+registration/teams/<id>/photo.jpg  
+registration/teams/<id>/backup.zip  
+registration/team-members.json  
+registration/team-members/<id>/photo.jpg
+```
 
 ### Activity
 
@@ -252,7 +264,7 @@ A directory, **activity**, containing:
   - a directory for submissions containing:
       - a directory for each submission using the submission ID as
         directory name, containing:
-          - a file for each endpoint available under /submissions/<id>
+          - a file for each endpoint available under /submissions/\<id>
   - a JSON file (judgements.json) for the /judgements endpoint for the
     primary system
   - a JSON file (runs.json) for the /runs endpoint on the primary system
@@ -260,12 +272,14 @@ A directory, **activity**, containing:
 
 #### Example file listing
 
-`activity/submissions.json`  
-`activity/submissions/`<id>`/files.zip`  
-`activity/submissions/`<id>`/reaction.mp4`  
-`activity/judgements.json`  
-`activity/runs.json`  
-`activity/clarifications.json`
+```
+activity/submissions.json  
+activity/submissions/<id>/files.zip  
+activity/submissions/<id>/reaction.mp4  
+activity/judgements.json  
+activity/runs.json  
+activity/clarifications.json
+```
 
 ### Results
 
@@ -276,8 +290,10 @@ A directory, **results**, containing:
 
 #### Example file listing
 
-`results/awards.json`  
-`results/scoreboard.json`
+```
+results/awards.json  
+results/scoreboard.json
+```
 
 ### Events
 
@@ -288,7 +304,9 @@ A directory, **events**, containing:
 
 #### Example file listing
 
-`events/event-feed.json`
+```
+events/event-feed.json
+```
 
 ## Multiple Archives and Secondary Systems
 
@@ -328,9 +346,11 @@ into the master archive are:
 
 #### Example file listing
 
-`activity/judgements.shadow.json`  
-`activity/runs.shadow.json`  
-`events/event-feed.shadow.json`
+```
+activity/judgements.shadow.json  
+activity/runs.shadow.json  
+events/event-feed.shadow.json
+```
 
 ### Contest Data Server
 
@@ -343,4 +363,6 @@ before merging. This leaves the event-feed, which is merged using the
 
 #### Example file listing
 
-`events/event-feed.cds.json`
+```
+events/event-feed.cds.json
+```
