@@ -59,47 +59,47 @@ indicate the relative paths of API endpoints with respect to a
 We follow standard REST practices so that a whole collection can be
 requested, e.g. at the URL path
 
-` GET `<https://example.com/api/contests/wf14/teams>
+` GET `<https://example.com/api/contests/wf14/teams>
 
 while an element with specific ID is requested as
 
-` GET `<https://example.com/api/contests/wf14/teams/10>
+` GET `<https://example.com/api/contests/wf14/teams/10>
 
 A collection is always returned as a JSON list of objects. Every object
 in the list represents a single element (and always includes the ID).
 When requesting a single element the exact same object is returned. E.g.
 the URL path
 
-`GET baseurl/`<collection>
+`GET baseurl/`<collection>
 
 returns
 
-`[ { "id":`<id1>`, `<element specific data for id1>`},`  
-`  { "id":`<id2>`, `<element specific data for id2>`},`  
-`     ...`  
+`[ { "id":`<id1>`, `<element specific data for id1>`},`  
+`  { "id":`<id2>`, `<element specific data for id2>`},`  
+`     ...`  
 `]`
 
 while the URL path
 
-`GET baseurl/`<collection>`/`<id1>
+`GET baseurl/`<collection>`/`<id1>
 
 returns
 
-`{ "id":`<id1>`, `<element specific data for id1>`}`
+`{ "id":`<id1>`, `<element specific data for id1>`}`
 
 ### HTTP headers
 
 A server should allow cross-origin requests by setting the
 `Access-Control-Allow-Origin` HTTP header:
 
-`Access-Control-Allow-Origin: *`
+`Access-Control-Allow-Origin: *`
 
 A server should specify how clients should cache file downloads by
 setting the `Cache-Control` or `Expires` HTTP headers:
 
-`Cache-Control: public, max-age=3600, s-maxage=18000`
+`Cache-Control: public, max-age=3600, s-maxage=18000`
 
-`Expires: Wed, 18 Jul 2018 07:28:00 GMT`
+`Expires: Wed, 18 Jul 2018 07:28:00 GMT`
 
 ### HTTP methods
 
@@ -257,8 +257,8 @@ interpreted relative to the **baseurl** of the API. For example, if
 **baseurl** is <https://example.com/api>, then the following are
 equivalent JSON response snippets pointing to the same location:
 
-` "href":"`<https://example.com/api/contests/wf14/submissions/187/files>`"`  
-` "href":"contests/wf14/submissions/187/files"`
+` "href":"`<https://example.com/api/contests/wf14/submissions/187/files>`"`  
+` "href":"contests/wf14/submissions/187/files"`
 
 If implementing support for uploading files pointed to by resource
 links, substitute the href element with a data element with a base64
@@ -266,15 +266,15 @@ encoded string of the associated file contents as the value.
 
 For example
 
-`   POST `<https://example.com/api/contests/wf14/organizations>
+`   POST `<https://example.com/api/contests/wf14/organizations>
 
 with JSON data
 
-`   { "id":"inst105",`  
-`     "name":"Carnegie Mellon University",`  
-`     ...`  
-`     "logo": [{"data": "<base64 string>", "width": 160, "height": 160}]`  
-`   }`
+`   { "id":"inst105",`  
+`     "name":"Carnegie Mellon University",`  
+`     ...`  
+`     "logo": [{"data": "<base64 string>", "width": 160, "height": 160}]`  
+`   }`
 
 ### Extensibility
 
@@ -427,59 +427,59 @@ starting, or if the new start time is in the past or within 30s.
 
 Request:
 
-` GET `<https://example.com/api/contests/wf2014>
+` GET `<https://example.com/api/contests/wf2014>
 
 Returned data:
 
 `{`  
-`   "id": "wf2014",`  
-`   "name": "2014 ICPC World Finals",`  
-`   "formal_name": "38th Annual World Finals of the ACM International Collegiate Programming Contest",`  
-`   "start_time": "2014-06-25T10:00:00+01",`  
-`   "duration": "5:00:00",`  
-`   "scoreboard_freeze_duration": "1:00:00",`  
-`   "penalty_time": 20,`  
-`   "banner": [{`  
-`       "href": "`<https://example.com/api/contests/wf2014/banner>`",`  
-`       "width": 1920,`  
-`       "height": 240`  
-`   }]`  
+`   "id": "wf2014",`  
+`   "name": "2014 ICPC World Finals",`  
+`   "formal_name": "38th Annual World Finals of the ACM International Collegiate Programming Contest",`  
+`   "start_time": "2014-06-25T10:00:00+01",`  
+`   "duration": "5:00:00",`  
+`   "scoreboard_freeze_duration": "1:00:00",`  
+`   "penalty_time": 20,`  
+`   "banner": [{`  
+`       "href": "`<https://example.com/api/contests/wf2014/banner>`",`  
+`       "width": 1920,`  
+`       "height": 240`  
+`   }]`  
 `}`
 
 Request:
 
-` GET `<https://example.com/api/contests/dress2016>
+` GET `<https://example.com/api/contests/dress2016>
 
 Returned data:
 
 `{`  
-`   "id": "dress2016",`  
-`   "name": "2016 ICPC World Finals Dress Rehearsal",`  
-`   "start_time": null,`  
-`   "countdown_pause_time": "0:03:38.749",`  
-`   "duration": "2:30:00"`  
+`   "id": "dress2016",`  
+`   "name": "2016 ICPC World Finals Dress Rehearsal",`  
+`   "start_time": null,`  
+`   "countdown_pause_time": "0:03:38.749",`  
+`   "duration": "2:30:00"`  
 `}`
 
 Request:
 
-` PATCH `<https://example.com/api/contests/wf2014>
+` PATCH `<https://example.com/api/contests/wf2014>
 
 Request data:
 
 `{`  
-`   "id": "wf2014",`  
-`   "start_time": "2014-06-25T10:00:00+01"`  
+`   "id": "wf2014",`  
+`   "start_time": "2014-06-25T10:00:00+01"`  
 `}`
 
 Request:
 
-` PATCH `<https://example.com/api/contests/wf2016>
+` PATCH `<https://example.com/api/contests/wf2016>
 
 Request data:
 
 `{`  
-`   "id": "wf2016",`  
-`   "start_time": null`  
+`   "id": "wf2016",`  
+`   "start_time": null`  
 `}`
 
 ### Judgement Types
@@ -559,33 +559,33 @@ safely be translated to, if a system does not support it.
 
 Request:
 
-` GET `<https://example.com/api/contests/wf14/judgement-types>
+` GET `<https://example.com/api/contests/wf14/judgement-types>
 
 Returned data:
 
 `[{`  
-`   "id": "CE",`  
-`   "name": "Compiler Error",`  
-`   "penalty": false,`  
-`   "solved": false`  
-`}, {`  
-`   "id": "AC",`  
-`   "name": "Accepted",`  
-`   "penalty": false,`  
-`   "solved": true`  
+`   "id": "CE",`  
+`   "name": "Compiler Error",`  
+`   "penalty": false,`  
+`   "solved": false`  
+`}, {`  
+`   "id": "AC",`  
+`   "name": "Accepted",`  
+`   "penalty": false,`  
+`   "solved": true`  
 `}]`
 
 Request:
 
-` GET `<https://example.com/api/contests/wf14/judgement-types/AC>
+` GET `<https://example.com/api/contests/wf14/judgement-types/AC>
 
 Returned data:
 
 `{`  
-`   "id": "AC",`  
-`   "name": "Accepted",`  
-`   "penalty": false,`  
-`   "solved": true`  
+`   "id": "AC",`  
+`   "name": "Accepted",`  
+`   "penalty": false,`  
+`   "solved": true`  
 `}`
 
 ### Languages
@@ -646,19 +646,19 @@ version of C++.
 
 Request:
 
-` GET `<https://example.com/api/contests/wf14/languages>
+` GET `<https://example.com/api/contests/wf14/languages>
 
 Returned data:
 
 `[{`  
-`   "id": "java",`  
-`   "name": "Java"`  
-`}, {`  
-`   "id": "cpp",`  
-`   "name": "GNU C++"`  
-`}, {`  
-`   "id": "python2",`  
-`   "name": "Python 2"`  
+`   "id": "java",`  
+`   "name": "Java"`  
+`}, {`  
+`   "id": "cpp",`  
+`   "name": "GNU C++"`  
+`}, {`  
+`   "id": "python2",`  
+`   "name": "Python 2"`  
 `}]`
 
 ### Problems
@@ -695,21 +695,21 @@ array for clients with the **public** role.
 
 Request:
 
-` GET `<https://example.com/api/contests/wf14/problems>
+` GET `<https://example.com/api/contests/wf14/problems>
 
 Returned data:
 
-` [{"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},`  
-`  {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}`  
-` ]`
+` [{"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},`  
+`  {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}`  
+` ]`
 
 Request:
 
-` GET `<https://example.com/api/contests/wf14/problems/asteroids>
+` GET `<https://example.com/api/contests/wf14/problems/asteroids>
 
 Returned data:
 
-` {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10}`
+` {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10}`
 
 ### Groups
 
@@ -745,21 +745,21 @@ No access restrictions apply to a GET on this endpoint.
 
 Request:
 
-` GET `<https://example.com/api/contests/wf14/groups>
+` GET `<https://example.com/api/contests/wf14/groups>
 
 Returned data:
 
-` [{"id":"asia-74324325532","icpc_id":"7593","name":"Asia"}`  
-` ]`
+` [{"id":"asia-74324325532","icpc_id":"7593","name":"Asia"}`  
+` ]`
 
 Request:
 
-` GET `<https://example.com/api/contests/wf14/groups>
+` GET `<https://example.com/api/contests/wf14/groups>
 
 Returned data:
 
-` [{"id":"42425","name":"Division 2","type":"division"}`  
-` ]`
+` [{"id":"42425","name":"Division 2","type":"division"}`  
+` ]`
 
 ### Organizations
 
@@ -802,16 +802,16 @@ No access restrictions apply to a GET on organizations endpoints.
 
 Request:
 
-` GET `<https://example.com/api/contests/><id>`/organizations`
+` GET `<https://example.com/api/contests/><id>`/organizations`
 
 Returned data:
 
-` [{"id":"inst123","icpc_id":"433","name":"Shanghai Jiao Tong U.","formal_name":"Shanghai Jiao Tong University"},`  
-`  {"id":"inst105","name":"Carnegie Mellon University","country":"USA",`  
-`   "logo":[{"href":"`<http://example.com/api/contests/wf14/organizations/inst105/logo/56px>`","width":56,"height":56},`  
-`           {"href":"`<http://example.com/api/contests/wf14/organizations/inst105/logo/160px>`","width":160,"height":160}]`  
-`  }`  
-` ]`
+` [{"id":"inst123","icpc_id":"433","name":"Shanghai Jiao Tong U.","formal_name":"Shanghai Jiao Tong University"},`  
+`  {"id":"inst105","name":"Carnegie Mellon University","country":"USA",`  
+`   "logo":[{"href":"`<http://example.com/api/contests/wf14/organizations/inst105/logo/56px>`","width":56,"height":56},`  
+`           {"href":"`<http://example.com/api/contests/wf14/organizations/inst105/logo/160px>`","width":160,"height":160}]`  
+`  }`  
+` ]`
 
 ### Teams
 
@@ -859,13 +859,13 @@ The following access restrictions apply to a GET on this endpoint:
 
 Request:
 
-` GET `<https://example.com/api/contests/wf14/teams>
+` GET `<https://example.com/api/contests/wf14/teams>
 
 Returned data:
 
-` [{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_ids":["asia-74324325532"]},`  
-`  {"id":"123","name":"CMU1","organization_id":"inst105","group_ids":["8","11"]}`  
-` ]`
+` [{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_ids":["asia-74324325532"]},`  
+`  {"id":"123","name":"CMU1","organization_id":"inst105","group_ids":["8","11"]}`  
+` ]`
 
 ### Team members
 
@@ -899,13 +899,13 @@ No access restrictions apply to a GET on this endpoint.
 
 Request:
 
-` GET `<https://example.com/api/contests/wf14/team-members>
+` GET `<https://example.com/api/contests/wf14/team-members>
 
 Returned data:
 
-` [{"id":"john-smith","team_id":"43","icpc_id":"32442","first_name":"John","last_name":"Smith","sex":"male","role":"contestant"},`  
-`  {"id":"osten-umlautsen","team_id":"43","icpc_id":null,"first_name":"Östen","last_name":"Ümlautsen","sex":null,"role":"coach"}`  
-` ]`
+` [{"id":"john-smith","team_id":"43","icpc_id":"32442","first_name":"John","last_name":"Smith","sex":"male","role":"contestant"},`  
+`  {"id":"osten-umlautsen","team_id":"43","icpc_id":null,"first_name":"Östen","last_name":"Ümlautsen","sex":null,"role":"coach"}`  
+` ]`
 
 ### Contest state
 
@@ -935,8 +935,8 @@ in any order. For example, the contest may never be frozen and hence not
 thawed either, or, it may be finalized before it is thawed. That, is the
 following sequence of inequalities must hold:
 
-` started < frozen < ended < thawed    < end_of_updates,`  
-`                    ended < finalized < end_of_updates.`
+` started < frozen < ended < thawed    < end_of_updates,`  
+`                    ended < finalized < end_of_updates.`
 
 A contest that has ended, has been thawed (or was never frozen) and is
 finalized must not change. Thus, `end_of_updates` can be set once both
@@ -952,18 +952,18 @@ access restrictions for non-privileged users to other endpoints.
 
 Request:
 
-` GET `<https://example.com/api/contests/wf14/state>
+` GET `<https://example.com/api/contests/wf14/state>
 
 Returned data:
 
-` {`  
-`   "started": "2014-06-25T10:00:00+01",`  
-`   "ended": null,`  
-`   "frozen": "2014-06-25T14:00:00+01",`  
-`   "thawed": null,`  
-`   "finalized": null,`  
-`   "end_of_updates": null`  
-` }`
+` {`  
+`   "started": "2014-06-25T10:00:00+01",`  
+`   "ended": null,`  
+`   "frozen": "2014-06-25T14:00:00+01",`  
+`   "thawed": null,`  
+`   "finalized": null,`  
+`   "end_of_updates": null`  
+` }`
 
 ### Submissions
 
@@ -1018,14 +1018,14 @@ not frozen.
 
 Request:
 
-` GET `<https://example.com/api/contests/wf14/submissions>
+` GET `<https://example.com/api/contests/wf14/submissions>
 
 Returned data:
 
-` [{"id":"187","team_id":"123","problem_id":"10-asteroids",`  
-`   "language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034","entry_point":"Main",`  
-`   "files":[{"href":"contests/wf14/submissions/187/files","mime":"application/zip"}]}`  
-` ]`
+` [{"id":"187","team_id":"123","problem_id":"10-asteroids",`  
+`   "language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034","entry_point":"Main",`  
+`   "files":[{"href":"contests/wf14/submissions/187/files","mime":"application/zip"}]}`  
+` ]`
 
 Note that the relative link for `files` points to the location
 <https://example.com/api/contests/wf14/submissions/187/files> since the
@@ -1072,15 +1072,15 @@ after the scoreboard has been thawed.
 
 Request:
 
-` GET `<https://example.com/api/contests/wf14/judgements>
+` GET `<https://example.com/api/contests/wf14/judgements>
 
 Returned data:
 
-` [{"id":"189549","submission_id":"wf2017-32163123xz3132yy","judgement_type_id":"CE","start_time":"2014-06-25T11:22:48.427+01",`  
-`   "start_contest_time":"1:22:48.427","end_time":"2014-06-25T11:23:32.481+01","end_contest_time":"1:23:32.481"},`  
-`  {"id":"189550","submission_id":"wf2017-32163123xz3133ub","judgement_type_id":null,"start_time":"2014-06-25T11:24:03.921+01",`  
-`   "start_contest_time":"1:24:03.921","end_time":null,"end_contest_time":null}`  
-` ]`
+` [{"id":"189549","submission_id":"wf2017-32163123xz3132yy","judgement_type_id":"CE","start_time":"2014-06-25T11:22:48.427+01",`  
+`   "start_contest_time":"1:22:48.427","end_time":"2014-06-25T11:23:32.481+01","end_contest_time":"1:23:32.481"},`  
+`  {"id":"189550","submission_id":"wf2017-32163123xz3133ub","judgement_type_id":null,"start_time":"2014-06-25T11:24:03.921+01",`  
+`   "start_contest_time":"1:24:03.921","end_time":null,"end_contest_time":null}`  
+` ]`
 
 ### Runs
 
@@ -1118,13 +1118,13 @@ has been thawed.
 
 Request:
 
-` GET `<https://example.com/api/contests/wf14/runs>
+` GET `<https://example.com/api/contests/wf14/runs>
 
 Returned data:
 
-` [{"id":"1312","judgement_id":"189549","ordinal":28,"judgement_type_id":"TLE",`  
-`   "time":"2014-06-25T11:22:42.420+01","contest_time":"1:22:42.420"}`  
-` ]`
+` [{"id":"1312","judgement_id":"189549","ordinal":28,"judgement_type_id":"TLE",`  
+`   "time":"2014-06-25T11:22:42.420+01","contest_time":"1:22:42.420"}`  
+` ]`
 
 ### Clarifications
 
@@ -1165,35 +1165,35 @@ and `to_team_id` are `null`.
 
 Request:
 
-` GET `<https://example.com/api/contests/wf14/clarifications>
+` GET `<https://example.com/api/contests/wf14/clarifications>
 
 Returned data:
 
-` [{"id":"wf2017-1","from_team_id":null,"to_team_id":null,"reply_to_id":null,"problem_id":null,`  
-`   "text":"Do not touch anything before the contest starts!","time":"2014-06-25T11:59:27.543+01","contest_time":"-0:15:32.457"}`  
-` ]`
+` [{"id":"wf2017-1","from_team_id":null,"to_team_id":null,"reply_to_id":null,"problem_id":null,`  
+`   "text":"Do not touch anything before the contest starts!","time":"2014-06-25T11:59:27.543+01","contest_time":"-0:15:32.457"}`  
+` ]`
 
 Request:
 
-` GET `<https://example.com/api/contests/wf14/clarifications>
+` GET `<https://example.com/api/contests/wf14/clarifications>
 
 Returned data:
 
-` [{"id":"1","from_team_id":"34","to_team_id":null,"reply_to_id":null,"problem_id":null,`  
-`   "text":"May I ask a question?","time":"2017-06-25T11:59:27.543+01","contest_time":"1:59:27.543"},`  
-`  {"id":"2","from_team_id":null,"to_team_id":"34","reply_to_id":"1","problem_id":null,`  
-`   "text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}`  
-` ]`
+` [{"id":"1","from_team_id":"34","to_team_id":null,"reply_to_id":null,"problem_id":null,`  
+`   "text":"May I ask a question?","time":"2017-06-25T11:59:27.543+01","contest_time":"1:59:27.543"},`  
+`  {"id":"2","from_team_id":null,"to_team_id":"34","reply_to_id":"1","problem_id":null,`  
+`   "text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}`  
+` ]`
 
 Request:
 
-` GET `<https://example.com/api/contests/wf14/clarifications>
+` GET `<https://example.com/api/contests/wf14/clarifications>
 
 Returned data:
 
-` [{"id":"1","from_team_id":"34","text":"May I ask a question?","time":"2017-06-25T11:59:27.543+01","contest_time":"1:59:27.543"},`  
-`  {"id":"2","to_team_id":"34","reply_to_id":"1","text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}`  
-` ]`
+` [{"id":"1","from_team_id":"34","text":"May I ask a question?","time":"2017-06-25T11:59:27.543+01","contest_time":"1:59:27.543"},`  
+`  {"id":"2","to_team_id":"34","reply_to_id":"1","text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}`  
+` ]`
 
 ### Awards
 
@@ -1251,14 +1251,14 @@ For some common award cases the following IDs should be used.
 
 Request:
 
-` GET `<https://example.com/api/contests/wf14/awards>
+` GET `<https://example.com/api/contests/wf14/awards>
 
 Returned data:
 
-` [{"id":"gold-medal","citation":"Gold medal winner","team_ids":["54","23","1","45"]},`  
-`  {"id":"first-to-solve-a","citation":"First to solve problem A","team_ids":["45"]},`  
-`  {"id":"first-to-solve-b","citation":"First to solve problem B","team_ids":[]}`  
-` ]`
+` [{"id":"gold-medal","citation":"Gold medal winner","team_ids":["54","23","1","45"]},`  
+`  {"id":"first-to-solve-a","citation":"First to solve problem A","team_ids":["45"]},`  
+`  {"id":"first-to-solve-b","citation":"First to solve problem B","team_ids":[]}`  
+` ]`
 
 ### Scoreboard
 
@@ -1343,32 +1343,32 @@ has been frozen until it has been thawed.
 
 Request:
 
-` GET `<https://example.com/api/contests/wf14/scoreboard>
+` GET `<https://example.com/api/contests/wf14/scoreboard>
 
 Returned data:
 
-` {`  
-`   "event_id": "xy1234",`  
-`   "time": "2014-06-25T14:13:07.832+01",`  
-`   "contest_time": "4:13:07.832",`  
-`   "state": {`  
-`     "started": "2014-06-25T10:00:00+01",`  
-`     "ended": null,`  
-`     "frozen": "2014-06-25T14:00:00+01",`  
-`     "thawed": null,`  
-`     "finalized": null,`  
-`     "end_of_updates": null`  
-`   },`  
-`   "rows": [`  
-`     {"rank":1,"team_id":"123","score":{"num_solved":3,"total_time":340},"problems":[`  
-`       {"problem_id":"1","num_judged":3,"num_pending":1,"solved":false},`  
-`       {"problem_id":"2","num_judged":1,"num_pending":0,"solved":true,"time":20},`  
-`       {"problem_id":"3","num_judged":2,"num_pending":0,"solved":true,"time":55},`  
-`       {"problem_id":"4","num_judged":0,"num_pending":0,"solved":false},`  
-`       {"problem_id":"5","num_judged":3,"num_pending":0,"solved":true,"time":205}`  
-`     ]}`  
-`   ]`  
-` }`
+` {`  
+`   "event_id": "xy1234",`  
+`   "time": "2014-06-25T14:13:07.832+01",`  
+`   "contest_time": "4:13:07.832",`  
+`   "state": {`  
+`     "started": "2014-06-25T10:00:00+01",`  
+`     "ended": null,`  
+`     "frozen": "2014-06-25T14:00:00+01",`  
+`     "thawed": null,`  
+`     "finalized": null,`  
+`     "end_of_updates": null`  
+`   },`  
+`   "rows": [`  
+`     {"rank":1,"team_id":"123","score":{"num_solved":3,"total_time":340},"problems":[`  
+`       {"problem_id":"1","num_judged":3,"num_pending":1,"solved":false},`  
+`       {"problem_id":"2","num_judged":1,"num_pending":0,"solved":true,"time":20},`  
+`       {"problem_id":"3","num_judged":2,"num_pending":0,"solved":true,"time":55},`  
+`       {"problem_id":"4","num_judged":0,"num_pending":0,"solved":false},`  
+`       {"problem_id":"5","num_judged":3,"num_pending":0,"solved":true,"time":205}`  
+`     ]}`  
+`   ]`  
+` }`
 
 ### Event feed - DRAFT
 
@@ -1443,7 +1443,7 @@ The feed is served as JSON objects, with every event corresponding to a
 change in a single object (submission, judgement, language, team, etc.)
 or full endpoint. The general format for events is:
 
-` {"contest_id": "`<id>`", "endpoint": "`<endpoint>`", "id": "`<id>`", "data": `<JSON data for element>` }`
+` {"contest_id": "`<id>`", "endpoint": "`<endpoint>`", "id": "`<id>`", "data": `<JSON data for element>` }`
 
 | Name        | Type   | Required? | Nullable? | Description                                                                                                                                |
 | ----------- | ------ | --------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1460,23 +1460,23 @@ TODO - filter by contest id and/or endpoint
 
 The following are examples of contest events:
 
-`   {"contest_id":"finals","endpoint":"problems","id":null,"data":[`  
-`      {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},`  
-`      {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}]}`
+`   {"contest_id":"finals","endpoint":"problems","id":null,"data":[`  
+`      {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},`  
+`      {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}]}`
 
-`   {"contest_id":"finals","endpoint":"state","id":null,"data":{`  
-`      "started": "2014-06-25T10:00:00+01",`  
-`      "ended": null,`  
-`      "frozen": "2014-06-25T14:00:00+01",`  
-`      "thawed": null,`  
-`      "finalized": null,`  
-`      "end_of_updates": null}}`
+`   {"contest_id":"finals","endpoint":"state","id":null,"data":{`  
+`      "started": "2014-06-25T10:00:00+01",`  
+`      "ended": null,`  
+`      "frozen": "2014-06-25T14:00:00+01",`  
+`      "thawed": null,`  
+`      "finalized": null,`  
+`      "end_of_updates": null}}`
 
-`   {"contest_id":"finals","endpoint":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}`
+`   {"contest_id":"finals","endpoint":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}`
 
-`   {"contest_id":"finals","endpoint":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}`
+`   {"contest_id":"finals","endpoint":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}`
 
-`   {"contest_id":"finals","endpoint":"teams","id":"11","data":null}`
+`   {"contest_id":"finals","endpoint":"teams","id":"11","data":null}`
 
 TODO: data is object or array - is that too ugly?
 
@@ -1520,7 +1520,7 @@ TODO: include filter details?
 To register a webhook, you need to post your server's callback url. The
 general format to register a webhook is:
 
-` {"url": "`<callback url>`", "auth": ... }`
+` {"url": "`<callback url>`", "auth": ... }`
 
 | Name | Type   | Required? | Nullable? | Description           |
 | ---- | ------ | --------- | --------- | --------------------- |
@@ -1531,27 +1531,27 @@ general format to register a webhook is:
 
 Request:
 
-` POST `<https://example.com/api/webhook>
+` POST `<https://example.com/api/webhook>
 
 Payload:
 
-` {"url": "`<https://myurl>`", "auth": ... }`
+` {"url": "`<https://myurl>`", "auth": ... }`
 
 Request:
 
-` GET `<https://example.com/api/webhook>
+` GET `<https://example.com/api/webhook>
 
 Returned data:
 
-` [{"url":"`<https://myurl>`"},{"url":"`<https://myotherurl>`"}]`
+` [{"url":"`<https://myurl>`"},{"url":"`<https://myotherurl>`"}]`
 
 Future payload posted to url:
 
-` POST `<https://myurl>
+` POST `<https://myurl>
 
 Payload:
 
-` {"contest_id":"finals","endpoint":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}`
+` {"contest_id":"finals","endpoint":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}`
 
 #### HTTP Feed
 
