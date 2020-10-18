@@ -111,14 +111,14 @@ below (see [PATCH start\_time](#PATCH_start_time "wikilink")). However,
 for future compatibility below are already listed other methods with
 their expected behavior, if implemented.
 
-  - GET  
+  - `GET`  
     Read data. This method is idempotent and does not modify any data.
     It can be used to request a whole collection or a specific element.
-  - POST  
+  - `POST`  
     Create a new element. This can only be called on a collection
     endpoint. No **id** attribute should be specified as it is up to the
     server to assign one, which is returned in the location header.
-  - PUT  
+  - `PUT`  
     Replaces a specific element. This method is idempotent and can only
     be called on a specific element and replaces its contents with the
     data provided. The payload data must be complete, i.e. no partial
@@ -126,17 +126,17 @@ their expected behavior, if implemented.
     not need to be specified (other than in the URL) and if specified
     different from in the URL, a **409 Conflict** HTTP code should be
     returned.
-  - PATCH  
+  - `PATCH`  
     Updates/modifies a specific element. Similar to **PUT** but allows
     partial updates by providing only that data, for example:
-    ` PATCH  https://example.com/api/contests/wf14/teams/10`
+    `PATCH  https://example.com/api/contests/wf14/teams/10`
     with JSON contents
     `{"name":"Our cool new team name"}`
     No updates of the **id** attribute are allowed either.
-  - DELETE  
+  - `DELETE`  
     Delete a specific element. Idempotent, but may return a 404 status
     code when repeated. Any provided data is ignored. Example:
-    ` DELETE  https://example.com/api/contests/wf14/teams/8`
+    `DELETE  https://example.com/api/contests/wf14/teams/8`
     Note that deletes must keep [referential
     integrity](#Referential_integrity "wikilink") intact.
 
@@ -375,10 +375,10 @@ Provides information on the current contest.
 
 The following endpoint is associated with contest:
 
-| Endpoint        | Mime-type        | Required? | Source @WF | Description                                                                 |
-| --------------- | ---------------- | --------- | ---------- | --------------------------------------------------------------------------- |
-| /contests       | application/json | yes       | CDS        | JSON array of all contests with elements as defined in the table below      |
-| /contests/\<id> | application/json | yes       | CCS        | JSON object of a single contest with elements as defined in the table below |
+| Endpoint         | Mime-type        | Required? | Source @WF | Description                                                                 |
+| ---------------- | ---------------- | --------- | ---------- | --------------------------------------------------------------------------- |
+| /`contests`      | application/json | yes       | CDS        | JSON array of all contests with elements as defined in the table below      |
+| `/contests/<id>` | application/json | yes       | CCS        | JSON object of a single contest with elements as defined in the table below |
 
 Returns a JSON object with the elements below. If there is no current
 (this may include about to start or just finished) contest, a 404 error
@@ -503,8 +503,8 @@ The following endpoints are associated with judgement types:
 
 | Endpoint                              | Mime-type        | Required? | Source @WF | Description                                                                        |
 | ------------------------------------- | ---------------- | --------- | ---------- | ---------------------------------------------------------------------------------- |
-| /contests/\<id>/judgement-types       | application/json | yes       | CCS        | JSON array of all judgement types with elements as defined in the table below      |
-| /contests/\<id>/judgement-types/\<id> | application/json | yes       | CCS        | JSON object of a single judgement type with elements as defined in the table below |
+| `/contests/<id>/judgement-types`      | application/json | yes       | CCS        | JSON array of all judgement types with elements as defined in the table below      |
+| `/contests/<id>/judgement-types/<id>` | application/json | yes       | CCS        | JSON object of a single judgement type with elements as defined in the table below |
 
 JSON elements of judgement type objects:
 
@@ -612,8 +612,8 @@ The following endpoints are associated with languages:
 
 | Endpoint                        | Mime-type        | Required? | Source @WF | Description                                                                  |
 | ------------------------------- | ---------------- | --------- | ---------- | ---------------------------------------------------------------------------- |
-| /contests/\<id>/languages       | application/json | yes       | CCS        | JSON array of all languages with elements as defined in the table below      |
-| /contests/\<id>/languages/\<id> | application/json | yes       | CCS        | JSON object of a single language with elements as defined in the table below |
+| `/contests/<id>/languages`      | application/json | yes       | CCS        | JSON array of all languages with elements as defined in the table below      |
+| `/contests/<id>/languages/<id>` | application/json | yes       | CCS        | JSON object of a single language with elements as defined in the table below |
 
 JSON elements of language objects:
 
@@ -687,8 +687,8 @@ The following endpoints are associated with problems:
 
 | Endpoint                       | Mime-type        | Required? | Source @WF | Description                                                                 |
 | ------------------------------ | ---------------- | --------- | ---------- | --------------------------------------------------------------------------- |
-| /contests/\<id>/problems       | application/json | yes       | CCS        | JSON array of all problems with elements as defined in the table below      |
-| /contests/\<id>/problems/\<id> | application/json | yes       | CCS        | JSON object of a single problem with elements as defined in the table below |
+| `/contests/<id>/problems`      | application/json | yes       | CCS        | JSON array of all problems with elements as defined in the table below      |
+| `/contests/<id>/problems/<id>` | application/json | yes       | CCS        | JSON object of a single problem with elements as defined in the table below |
 
 JSON elements of problem objects:
 
@@ -741,9 +741,9 @@ regionals these are often different sites.
 The following endpoints are associated with groups:
 
 | Endpoint                     | Mime-type        | Required? | Source @WF | Description                                                               |
-| --------------------------- | ---------------- | --------- | ---------- | ------------------------------------------------------------------------- |
-| /contests/\<id>/groups       | application/json | no        | CCS        | JSON array of all groups with elements as defined in the table below      |
-| /contests/\<id>/groups/\<id> | application/json | no        | CCS        | JSON object of a single group with elements as defined in the table below |
+| ---------------------------- | ---------------- | --------- | ---------- | ------------------------------------------------------------------------- |
+| `/contests/<id>/groups`      | application/json | no        | CCS        | JSON array of all groups with elements as defined in the table below      |
+| `/contests/<id>/groups/<id>` | application/json | no        | CCS        | JSON object of a single group with elements as defined in the table below |
 
 Note that these endpoints must be provided if groups are used. If they
 are not provided no other endpoint may refer to groups (i.e. return any
@@ -799,8 +799,8 @@ The following endpoints are associated with organizations:
 
 | Endpoint                            | Type             | Required? | Source @WF | Description                                                                      |
 | ----------------------------------- | ---------------- | --------- | ---------- | -------------------------------------------------------------------------------- |
-| /contests/\<id>/organizations       | application/json | no        | CCS & CDS  | JSON array of all organizations with elements as defined in the table below      |
-| /contests/\<id>/organizations/\<id> | application/json | no        | CCS & CDS  | JSON object of a single organization with elements as defined in the table below |
+| `/contests/<id>/organizations`      | application/json | no        | CCS & CDS  | JSON array of all organizations with elements as defined in the table below      |
+| `/contests/<id>/organizations/<id>` | application/json | no        | CCS & CDS  | JSON object of a single organization with elements as defined in the table below |
 
 Note that the first two endpoints must be provided if organizations are
 used. If they are not provided no other endpoint may refer to
@@ -851,8 +851,8 @@ The following endpoints are associated with teams:
 
 | Endpoint                    | Mime-type        | Required? | Source @WF | Description                                                              |
 | --------------------------- | ---------------- | --------- | ---------- | ------------------------------------------------------------------------ |
-| /contests/\<id>/teams       | application/json | yes       | CCS & CDS  | JSON array of all teams with elements as defined in the table below      |
-| /contests/\<id>/teams/\<id> | application/json | yes       | CCS & CDS  | JSON object of a single team with elements as defined in the table below |
+| `/contests/id>/teams`      | application/json | yes       | CCS & CDS  | JSON array of all teams with elements as defined in the table below      |
+| `/contests/id>/teams/id>` | application/json | yes       | CCS & CDS  | JSON object of a single team with elements as defined in the table below |
 
 JSON elements of team objects:
 
@@ -907,8 +907,8 @@ The following endpoints are associated with languages:
 
 | Endpoint                           | Mime-type        | Required? | Source @WF | Description                                                                     |
 | ---------------------------------- | ---------------- | --------- | ---------- | ------------------------------------------------------------------------------- |
-| /contests/\<id>/team-members       | application/json | no        | CDS        | JSON array of all team members with elements as defined in the table below      |
-| /contests/\<id>/team-members/\<id> | application/json | no        | CDS        | JSON object of a single team member with elements as defined in the table below |
+| `/contests/<id>/team-members`      | application/json | no        | CDS        | JSON array of all team members with elements as defined in the table below      |
+| `/contests/<id>/team-members/<id>` | application/json | no        | CDS        | JSON object of a single team member with elements as defined in the table below |
 
 JSON elements of team member objects:
 
@@ -948,9 +948,9 @@ scoreboard is frozen or results are final.
 
 The following endpoints are associated with state:
 
-| Endpoint              | Type             | Required? | Source @WF | Description                                                                          |
-| --------------------- | ---------------- | --------- | ---------- | ------------------------------------------------------------------------------------ |
-| /contests/\<id>/state | application/json | yes       | CCS        | JSON object of the current contest state with elements as defined in the table below |
+| Endpoint               | Type             | Required? | Source @WF | Description                                                                          |
+| ---------------------- | ---------------- | --------- | ---------- | ------------------------------------------------------------------------------------ |
+| `/contests/<id>/state` | application/json | yes       | CCS        | JSON object of the current contest state with elements as defined in the table below |
 
 JSON elements of state objects:
 
@@ -1011,8 +1011,8 @@ The following endpoints are associated with submissions:
 
 | Endpoint                          | Type             | Required? | Source @WF | Description                                                                    |
 | --------------------------------- | ---------------- | --------- | ---------- | ------------------------------------------------------------------------------ |
-| /contests/\<id>/submissions       | application/json | yes       | CCS        | JSON array of all submissions with elements as defined in the table below      |
-| /contests/\<id>/submissions/\<id> | application/json | yes       | CCS        | JSON object of a single submission with elements as defined in the table below |
+| `/contests/<id>/submissions`      | application/json | yes       | CCS        | JSON array of all submissions with elements as defined in the table below      |
+| `/contests/<id>/submissions/<id>` | application/json | yes       | CCS        | JSON object of a single submission with elements as defined in the table below |
 
 JSON elements of submission objects:
 
@@ -1079,8 +1079,8 @@ The following endpoints are associated with judgements:
 
 | Endpoint                         | Mime-type        | Required? | Source @WF | Description                                                                   |
 | -------------------------------- | ---------------- | --------- | ---------- | ----------------------------------------------------------------------------- |
-| /contests/\<id>/judgements       | application/json | yes       | CCS        | JSON array of all judgements with elements as defined in the table below      |
-| /contests/\<id>/judgements/\<id> | application/json | yes       | CCS        | JSON object of a single judgement with elements as defined in the table below |
+| `/contests/<id>/judgements`      | application/json | yes       | CCS        | JSON array of all judgements with elements as defined in the table below      |
+| `/contests/<id>/judgements/<id>` | application/json | yes       | CCS        | JSON object of a single judgement with elements as defined in the table below |
 
 JSON elements of judgement objects:
 
@@ -1132,8 +1132,8 @@ The following endpoints are associated with runs:
 
 | Endpoint                   | Mime-type        | Required? | Source @WF | Description                                                             |
 | -------------------------- | ---------------- | --------- | ---------- | ----------------------------------------------------------------------- |
-| /contests/\<id>/runs       | application/json | yes       | CCS        | JSON array of all runs with elements as defined in the table below      |
-| /contests/\<id>/runs/\<id> | application/json | yes       | CCS        | JSON object of a single run with elements as defined in the table below |
+| `/contests/<id>/runs`      | application/json | yes       | CCS        | JSON array of all runs with elements as defined in the table below      |
+| `/contests/<id>/runs/<id>` | application/json | yes       | CCS        | JSON object of a single run with elements as defined in the table below |
 
 JSON elements of run objects:
 
@@ -1180,8 +1180,8 @@ The following endpoints are associated with clarification messages:
 
 | Endpoint                             | Mime-type        | Required? | Source @WF | Description                                                                               |
 | ------------------------------------ | ---------------- | --------- | ---------- | ----------------------------------------------------------------------------------------- |
-| /contests/\<id>/clarifications       | application/json | yes       | CCS        | JSON array of all clarification messages with elements as defined in the table below      |
-| /contests/\<id>/clarifications/\<id> | application/json | yes       | CCS        | JSON object of a single clarification message with elements as defined in the table below |
+| `/contests/<id>/clarifications`      | application/json | yes       | CCS        | JSON array of all clarification messages with elements as defined in the table below      |
+| `/contests/<id>/clarifications/<id>` | application/json | yes       | CCS        | JSON object of a single clarification message with elements as defined in the table below |
 
 JSON elements of clarification message objects:
 
@@ -1253,8 +1253,8 @@ The following endpoints are associated with awards:
 
 | Endpoint                     | Mime-type        | Required? | Source @WF | Description                                                               |
 | ---------------------------- | ---------------- | --------- | ---------- | ------------------------------------------------------------------------- |
-| /contests/\<id>/awards       | application/json | no        | CCS        | JSON array of all awards with elements as defined in the table below      |
-| /contests/\<id>/awards/\<id> | application/json | no        | CCS        | JSON object of a single award with elements as defined in the table below |
+| `/contests/<id>/awards`      | application/json | no        | CCS        | JSON array of all awards with elements as defined in the table below      |
+| `/contests/<id>/awards/<id>` | application/json | no        | CCS        | JSON object of a single award with elements as defined in the table below |
 
 JSON elements of award objects:
 
@@ -1287,15 +1287,15 @@ freeze until it has been unfrozen.
 
 For some common award cases the following IDs should be used.
 
-| ID                        | Meaning during contest                                                                                                    | Meaning when contest is final     | Comment                                                                 |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------- | ----------------------------------------------------------------------- |
-| winner                    | Current leader(s). Empty if no team has scored.                                                                           | Winner(s) of the contest          |                                                                         |
-| gold-medal                | Teams currently placed to receive a gold medal. Empty if no team has scored.                                              | Teams being awarded gold medals   |                                                                         |
-| silver-medal              | Teams currently placed to receive a silver medal. Empty if no team has scored.                                            | Teams being awarded silver medals |                                                                         |
-| bronze-medal              | Teams currently placed to receive a bronze medal, assuming no extra bronze are awarded. Empty if no team has scored.      | Teams being awarded bronze medals |                                                                         |
-| first-to-solve-\<id>      | The team(s), if any, that was first to solve problem <id>. This implies that no unjudged submission made earlier remains. | Same.                             | Must never change once set, except if there are rejudgements.           |
-| group-winner-\<id>        | Current leader(s) in group <id>. Empty if no team has scored.                                                             | Winner(s) of group <id>           |                                                                         |
-| organization-winner-\<id> | Current leader(s) of organization <id>. Empty if no team has scored.                                                      | Winner(s) of organization <id>    | Not useful in contest with only one team per organization (e.g. the WF) |
+| ID                        | Meaning during contest                                                                                                     | Meaning when contest is final     | Comment                                                                 |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------- | --------------------------------- | ----------------------------------------------------------------------- |
+| winner                    | Current leader(s). Empty if no team has scored.                                                                            | Winner(s) of the contest          |                                                                         |
+| gold-medal                | Teams currently placed to receive a gold medal. Empty if no team has scored.                                               | Teams being awarded gold medals   |                                                                         |
+| silver-medal              | Teams currently placed to receive a silver medal. Empty if no team has scored.                                             | Teams being awarded silver medals |                                                                         |
+| bronze-medal              | Teams currently placed to receive a bronze medal, assuming no extra bronze are awarded. Empty if no team has scored.       | Teams being awarded bronze medals |                                                                         |
+| first-to-solve-\<id>      | The team(s), if any, that was first to solve problem \<id>. This implies that no unjudged submission made earlier remains. | Same.                             | Must never change once set, except if there are rejudgements.           |
+| group-winner-\<id>        | Current leader(s) in group \<id>. Empty if no team has scored.                                                             | Winner(s) of group \<id>          |                                                                         |
+| organization-winner-\<id> | Current leader(s) of organization \<id>. Empty if no team has scored.                                                      | Winner(s) of organization \<id>   | Not useful in contest with only one team per organization (e.g. the WF) |
 
 #### Example
 
@@ -1321,9 +1321,9 @@ irrespective of role.
 
 The following endpoint is associated with the scoreboard:
 
-| Endpoint                   | Mime-type        | Required? | Source @WF | Description                                                    |
-| -------------------------- | ---------------- | --------- | ---------- | -------------------------------------------------------------- |
-| /contests/\<id>/scoreboard | application/json | yes       | CCS        | JSON object with scoreboard data as defined in the table below |
+| Endpoint                    | Mime-type        | Required? | Source @WF | Description                                                    |
+| --------------------------- | ---------------- | --------- | ---------- | -------------------------------------------------------------- |
+| `/contests/<id>/scoreboard` | application/json | yes       | CCS        | JSON object with scoreboard data as defined in the table below |
 
 #### Scoreboard request options
 
@@ -1569,9 +1569,9 @@ automatically removed from future callbacks.
 
 The following endpoint is associated with the webhook:
 
-| Endpoint | Mime-type        | Required? | Source @WF | Description                            |
-| -------- | ---------------- | --------- | ---------- | -------------------------------------- |
-| /webhook | application/json | yes       | CCS        | List or register for webhook callbacks |
+| Endpoint   | Mime-type        | Required? | Source @WF | Description                            |
+| ---------- | ---------------- | --------- | ---------- | -------------------------------------- |
+| `/webhook` | application/json | yes       | CCS        | List or register for webhook callbacks |
 
 JSON elements of webhook objects:
 
@@ -1646,9 +1646,9 @@ irrespective of role.
 
 The following endpoint is associated with the event feed:
 
-| Endpoint                   | Mime-type            | Required? | Source @WF | Description                            |
-| -------------------------- | -------------------- | --------- | ---------- | -------------------------------------- |
-| /contests/\<id>/event-feed | application/x-ndjson | yes       | CCS        | NDJSON feed of events as defined below |
+| Endpoint                    | Mime-type            | Required? | Source @WF | Description                            |
+| --------------------------- | -------------------- | --------- | ---------- | -------------------------------------- |
+| `/contests/<id>/event-feed` | application/x-ndjson | yes       | CCS        | NDJSON feed of events as defined below |
 
 ##### Reconnection
 
