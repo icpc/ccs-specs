@@ -140,9 +140,9 @@ data.
 
 ### Design principles
 
-Endpoints are stored in a single \<endpoint>.json file containing the
+Endpoints are stored in a single `<endpoint>.json` file containing the
 full list of objects. This file is identical to the API call to
-/\<endpoint>. If there are file references in the JSON file these are
+`/<endpoint>`. If there are file references in the JSON file these are
 stored in a subfolder per object, using the object ID as the folder name
 and the element name of the file reference as the base name of the file.
 
@@ -152,7 +152,7 @@ and the element name of the file reference as the base name of the file.
 ```
 
 Empty directories should be omitted. i.e. if there are no files in
-\<endpoint>/\<id>, the folder should not exist.
+`<endpoint>/<id>`, the folder should not exist.
 
 The file extension for each file reference must match the mime type in
 the REST endpoint using the following mapping:
@@ -191,16 +191,16 @@ or:
 
 A directory, **config**, containing:
 
-  - a JSON file (contest.json) for the /contests/\<id> endpoint
-  - a JSON file (judgement-types.json) for the
-    /contests/<\id>/judgement-types endpoint
-  - a JSON file (languages.json) for the /contests/\<id>/languages
+  - a JSON file (`contest.json`) for the `/contests/<id>` endpoint
+  - a JSON file (`judgement-types.json`) for the
+    `/contests/<id>/judgement-types` endpoint
+  - a JSON file (`languages.json`) for the `/contests\<id>/languages`
     endpoint
-  - system.yaml defined in the [
+  - `system.yaml` defined in the [
     CCSR](Contest_Control_System_Requirements#system.yaml "wikilink").
-  - the contest banner(s), from the banner element of /contests/\<id>, if
+  - the contest banner(s), from the banner element of `/contests/<id>`, if
     available.
-  - the contest logo(s), from the logo element of /contests/\<id>, if
+  - the contest logo(s), from the logo element of `/contests/<id>`, if
     available.
 
 #### Example file listing
@@ -219,26 +219,26 @@ config/logo.512x512.png
 
 A directory, **registration**, containing:
 
-  - a JSON file (groups.json) for the /groups endpoint, if available
-  - a JSON file (organizations.json) for the /organizatons endpoint, if
+  - a JSON file (`groups.json`) for the `/groups` endpoint, if available
+  - a JSON file (`organizations.json`) for the `/organizatons` endpoint, if
     available
   - a directory for organizations containing:
       - a directory for each organisation using the organisation ID as
         directory name, containing:
           - a file for each file reference available in
-            /organizatons/\<id>
-  - a JSON file (teams.json) for the /teams endpoint
+            `/organizatons/<id>`
+  - a JSON file (`teams.json`) for the `/teams` endpoint
   - a directory for teams containing:
       - a directory for each team using the team ID as directory name,
         containing:
-          - a file for each file reference available in /teams/\<id>
-  - a JSON file (team-members.json) for the /team-members endpoint, if
+          - a file for each file reference available in `/teams/<id>`
+  - a JSON file (`team-members.json`) for the `/team-members` endpoint, if
     available
   - a directory for team-members containing:
       - a directory for each team member using the team member ID as
         directory name, containing:
           - a file for each file reference available in
-            /team-members/\<id>
+            `/team-members/<id>`
 
 #### Example file listing
 
@@ -260,15 +260,15 @@ registration/team-members/<id>/photo.jpg
 
 A directory, **activity**, containing:
 
-  - a JSON file (submissions.json) for the /submissions endpoint
+  - a JSON file (`submissions.json`) for the `/submissions` endpoint
   - a directory for submissions containing:
       - a directory for each submission using the submission ID as
         directory name, containing:
-          - a file for each endpoint available under /submissions/\<id>
-  - a JSON file (judgements.json) for the /judgements endpoint for the
+          - a file for each endpoint available under `/submissions/<id>`
+  - a JSON file (`judgements.json`) for the `/judgements` endpoint for the
     primary system
-  - a JSON file (runs.json) for the /runs endpoint on the primary system
-  - a JSON file (clarifications.json) for the /clarifications endpoint
+  - a JSON file (`runs.json`) for the `/runs` endpoint on the primary system
+  - a JSON file (`clarifications.json`) for the `/clarifications `endpoint
 
 #### Example file listing
 
@@ -285,8 +285,8 @@ activity/clarifications.json
 
 A directory, **results**, containing:
 
-  - A JSON file (awards.json) for the /awards endpoint, if available
-  - A JSON file (scoreboard.json) for the /scoreboard endpoint
+  - A JSON file (`awards.json`) for the `/awards` endpoint, if available
+  - A JSON file (`scoreboard.json`) for the `/scoreboard` endpoint
 
 #### Example file listing
 
@@ -299,7 +299,7 @@ results/scoreboard.json
 
 A directory, **events**, containing:
 
-  - a JSON file (event-feed.json) for the /event-feed endpoint on the
+  - a JSON file (`event-feed.json`) for the `/event-feed` endpoint on the
     primary system
 
 #### Example file listing
@@ -337,11 +337,11 @@ only have one copy. Before merging, any differences in results or awards
 must be verified or explained. The remaining files that will get merged
 into the master archive are:
 
-  - a JSON file (judgements.shadow.json) for the /judgements endpoint on
+  - a JSON file (`judgements.shadow.json`) for the `/judgements` endpoint on
     shadow system(s)
-  - a JSON file (runs.shadow.json) for the /runs endpoint on shadow
+  - a JSON file (`runs.shadow.json`) for the `/runs` endpoint on shadow
     system(s)
-  - a JSON file (event-feed.shadow.json) for the /event-feed endpoint on
+  - a JSON file (`event-feed.shadow.json`) for the `/event-feed` endpoint on
     a shadow system(s)
 
 #### Example file listing
