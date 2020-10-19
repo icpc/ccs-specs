@@ -1,6 +1,6 @@
 # CCS specifications
 
-Main page.
+Website: https://ccs-specs.icpc.io
 
 ```note
 
