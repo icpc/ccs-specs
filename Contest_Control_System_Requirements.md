@@ -7,7 +7,7 @@ permalink: /ccs_system_requirements
 
 This document specifies requirements for operation, verification and
 validation of Programming Contest Control Systems that wish to be
-considered for managing the operation of the [ACM International
+considered for managing the operation of the [International
 Collegiate Programming Contest](http://icpc.baylor.edu) [World
 Finals](http://cm.baylor.edu/ICPCWiki/Wiki.jsp?page=World%20Finals). The
 document defines a set of operations, capabilities, and features which
@@ -82,11 +82,11 @@ document.
 ### Licensing
 
 The CCS must either be freely useable, or must be accompanied by a
-license granting to the ACM-ICPC the non-exclusive, non-revocable,
+license granting to the ICPC the non-exclusive, non-revocable,
 non-transferable rights of use of the CCS both for purposes of
 evaluation and testing and for use in the ICPC World Finals. The CCS may
 not require obtaining any third-party license in order to be used by the
-ACM-ICPC.
+ICPC.
 
 ### Data Persistency
 
@@ -1121,7 +1121,7 @@ ICPC World Finals contest, the following documents must be submitted.
 
   - A text file named "License" containing the license, conforming to
     the the [Licensing](#Licensing "wikilink") section, under which the
-    CCS is made available to the ACM ICPC.
+    CCS is made available to the ICPC.
   - A *Requirements Compliance Document* as defined below.
   - A *Team Guide* as defined below.
   - A *Judge's Guide* as defined below.
@@ -1211,7 +1211,7 @@ A YAML file consisting of a mapping with the following keys:
 ```yaml
 # Contest configuration  
 ---  
-name:                     ACM-ICPC World Finals 2011  
+name:                     ICPC World Finals 2011  
 short-name:               ICPC WF 2011  
 start-time:               2011-02-04T01:23:00Z  
 duration:                 5:00:00  
