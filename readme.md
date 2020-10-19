@@ -1,7 +1,7 @@
 # CCS specifications
 
-Website: https://ccs-specs.icpc.io
-Github: https://github.com/icpc/ccs-specs
+Website: <https://ccs-specs.icpc.io>  
+Github: <https://github.com/icpc/ccs-specs>
 
 ```note
 
