@@ -1,9 +1,11 @@
 # CCS specifications
 
-Website: <https://ccs-specs.icpc.io>  
+Website: <https://ccs-specs.icpc.io>
+
 Github: <https://github.com/icpc/ccs-specs>
 
-```note
+The problem package format specification can be found at: <https://icpc.io/problem-package-format/>
 
-TODO: Add some content here, including links to this site (for when reading the Github readme) and to the problemarchive site. Also explain the 3 documents found here.
-```
+## Development notes
+
+Run the website locally using `bundle exec jekyll serve` from the repository root.
