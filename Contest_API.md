@@ -7,6 +7,10 @@ permalink: /contest_api
 **This is the development draft for the Contest API. See also [the
 version that will be used at WF 2020](Contest_API_2020).**
 
+```note
+TODO: Remove/replace broken links.
+```
+
 ## Introduction
 
 This page describes an API for accessing information provided by a
@@ -31,7 +35,7 @@ source code
 fetching](Draft_2014_REST_interface_for_source_code_fetching),
 and the [Contest start interface](Contest_Start_Interface).
 This REST interface is specified in conjunction with a new [NDJSON event
-feed](#Event_feed), which provides all changes to this
+feed](#event-feed---draft), which provides all changes to this
 interface as CRUD-style events and is meant to supersede the old XML
 [Event Feed](Event_Feed).
 
@@ -106,8 +110,8 @@ setting the `Cache-Control` or `Expires` HTTP headers:
 ### HTTP methods
 
 The current version of this specification only requires support for the
-**GET** method, unless explicitly specified otherwise in an endpoint
-below (see [PATCH start\_time](#PATCH_start_time)). However,
+`GET` method, unless explicitly specified otherwise in an endpoint
+below (see [PATCH start\_time](#patch-starttime)). However,
 for future compatibility below are already listed other methods with
 their expected behavior, if implemented.
 
@@ -116,29 +120,29 @@ their expected behavior, if implemented.
     It can be used to request a whole collection or a specific element.
   - `POST`
     Create a new element. This can only be called on a collection
-    endpoint. No **id** attribute should be specified as it is up to the
+    endpoint. No `id` attribute should be specified as it is up to the
     server to assign one, which is returned in the location header.
   - `PUT`
     Replaces a specific element. This method is idempotent and can only
     be called on a specific element and replaces its contents with the
     data provided. The payload data must be complete, i.e. no partial
-    updates are allowed. The **id** attribute cannot be changed: it does
+    updates are allowed. The `id` attribute cannot be changed: it does
     not need to be specified (other than in the URL) and if specified
-    different from in the URL, a **409 Conflict** HTTP code should be
+    different from in the URL, a `409 Conflict` HTTP code should be
     returned.
   - `PATCH`
-    Updates/modifies a specific element. Similar to **PUT** but allows
+    Updates/modifies a specific element. Similar to `PUT` but allows
     partial updates by providing only that data, for example:
     `PATCH  https://example.com/api/contests/wf14/teams/10`
     with JSON contents
     `{"name":"Our cool new team name"}`
-    No updates of the **id** attribute are allowed either.
+    No updates of the `id` attribute are allowed either.
   - `DELETE`
     Delete a specific element. Idempotent, but may return a 404 status
     code when repeated. Any provided data is ignored. Example:
     `DELETE  https://example.com/api/contests/wf14/teams/8`
     Note that deletes must keep [referential
-    integrity](#Referential_integrity) intact.
+    integrity](#referential-integrity) intact.
 
 Standard [HTTP status
 codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) are
@@ -163,7 +167,7 @@ additional roles may be supported for specific uses:
 Role-based access may completely hide some objects from the user, may
 omit certain attributes, or may embargo or omit objects based on the
 current contest time. By default, the public user has read-only access
-(no **POST**, **PUT**, **PATCH** or **DELETE** methods allowed) and does
+(no `POST`, `PUT`, `PATCH` or `DELETE` methods allowed) and does
 not have access to judgements and runs from submissions made after the
 contest freeze time.
 
@@ -173,8 +177,8 @@ Some attributes in elements are references to IDs of other elements.
 When such an attribute has a non-`null` value, then the referenced
 element must exist. That is, the full set of data exposed by the API
 must at all times be referentially intact. This implies for example that
-before creating a [team](#Teams) with an `organization_id`,
-the [organization](#Organizations) must already exist. In
+before creating a [team](#teams) with an `organization_id`,
+the [organization](#organizations) must already exist. In
 reverse, that organization can only be deleted after the team is
 deleted, or alternatively, the team's `organization_id` is set to
 `null`.
@@ -248,15 +252,15 @@ Element for file reference objects:
 
 | Name   | Type    | Nullable?          | Description                                                                                                                                                                                                                                          |
 | ------ | ------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| href   | string  | no                 | URL where the resource can be found. Relative URLs are relative to the **baseurl**. Must point to a file of intended mime-type. Resource must be accessible using the exact same (possibly none) authentication as the call that returned this data. |
+| href   | string  | no                 | URL where the resource can be found. Relative URLs are relative to the `baseurl`. Must point to a file of intended mime-type. Resource must be accessible using the exact same (possibly none) authentication as the call that returned this data. |
 | mime   | string  | no                 | Mime type of resource.                                                                                                                                                                                                                               |
 | width  | integer | no for **`IMAGE`** | Width of the image, video or stream in pixels. Should not be used for **`ARCHIVE`**.                                                                                                                                                                 |
 | height | integer | no for **`IMAGE`** | Height of the image, video or stream in pixels. Should not be used for **`ARCHIVE`**.                                                                                                                                                                |
 
-The **href** attributes may be [absolute or relative
+The `href` attributes may be [absolute or relative
 URLs](https://tools.ietf.org/html/rfc3986); relative URLs must be
-interpreted relative to the **baseurl** of the API. For example, if
-**baseurl** is <https://example.com/api>, then the following are
+interpreted relative to the `baseurl` of the API. For example, if
+`baseurl` is <https://example.com/api>, then the following are
 equivalent JSON response snippets pointing to the same location:
 
 ` "href":"https://example.com/api/contests/wf14/submissions/187/files"`
@@ -303,7 +307,7 @@ The following list of API endpoints should be supported. Note that
 `state`, `scoreboard` and `event-feed` are singular nouns and indeed
 contain only a single element.
 
-All endpoints should support **GET**; specific details on other methods
+All endpoints should support `GET`; specific details on other methods
 are mentioned below.
 
 ### Types of endpoints
@@ -328,7 +332,7 @@ Inserts and deletes are notified via the event feed. **Note**:
 judgements are the exception to immutability in a weak sense: they get
 updated once with the final verdict.
 
-Aggregate data: Only **GET** makes sense. These are not included in the
+Aggregate data: Only `GET` makes sense. These are not included in the
 event feed, also note that these should not be considered proper REST
 endpoints, and that the `event-feed` endpoint is a streaming feed in
 NDJSON format.
@@ -341,7 +345,7 @@ In the tables below, the columns are:
     `object.attribute`.
     Type: Data type of the attribute; either a [JSON
     type](https://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example)
-    or [a type defined above](#Recurring_details).
+    or [a type defined above](#json-attribute-types).
     Required?: Whether this is a required attribute that **must** be
     implemented to conform to this specification.
     Nullable?: Whether the attribute might be `null` (and thus
@@ -705,9 +709,9 @@ JSON elements of problem objects:
 
 #### Access restrictions at WF
 
-The **public** role can only access these problems after the contest
+The `public` role can only access these problems after the contest
 started. That is, before contest start this endpoint returns an empty
-array for clients with the **public** role.
+array for clients with the `public` role.
 
 #### Examples
 
@@ -862,8 +866,8 @@ JSON elements of team objects:
 | icpc\_id          | string           | no        | yes       | CCS        | external identifier from ICPC CMS                                                                                                                                                                        |
 | name              | string           | yes       | no        | CCS        | name of the team                                                                                                                                                                                         |
 | display\_name     | string           | no        | yes       | CCS        | display name of the team. If not set, a client should revert to using the name instead.                                                                                                                  |
-| organization\_id  | ID               | no        | yes       | CCS        | identifier of the [ organization](#Organizations) (e.g. university or other entity) that this team is affiliated to                                                                           |
-| group\_ids        | array of ID      | no        | no        | CCS        | identifiers of the [ group(s)](#Groups) this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty. |
+| organization\_id  | ID               | no        | yes       | CCS        | identifier of the [ organization](#organizations) (e.g. university or other entity) that this team is affiliated to                                                                           |
+| group\_ids        | array of ID      | no        | no        | CCS        | identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty. |
 | location          | object           | no        | no        | CDS        | JSON object as specified in the rows below                                                                                                                                                               |
 | location.x        | float            | depends   | no        | CDS        | Team's x position in meters. Required iff location is present.                                                                                                                                           |
 | location.y        | float            | depends   | no        | CDS        | Team's y position in meters. Required iff location is present.                                                                                                                                           |
@@ -881,9 +885,9 @@ JSON elements of team objects:
 
 The following access restrictions apply to a GET on this endpoint:
 
-  - **backup** requires the **admin** or **analyst** role for access,
-  - the **desktop** and **webcam** attributes are available for the
-    **public** role only when scoreboard is not frozen.
+  - `backup` requires the `admin` or `analyst` role for access,
+  - the `desktop` and `webcam` attributes are available for the
+    `public` role only when scoreboard is not frozen.
 
 #### Example
 
@@ -916,11 +920,11 @@ JSON elements of team member objects:
 | ----------- | -------------- | --------- | --------- | ---------- | -------------------------------------------------------------------------------------------- |
 | id          | ID             | yes       | no        | CDS        | identifier of the team-member                                                                |
 | icpc\_id    | string         | no        | yes       | CDS        | external identifier from ICPC CMS                                                            |
-| team\_id    | ID             | yes       | no        | CDS        | [ team](#Teams) of this team member                                               |
+| team\_id    | ID             | yes       | no        | CDS        | [ team](#teams) of this team member                                               |
 | first\_name | string         | yes       | no        | CDS        | first name of team member                                                                    |
 | last\_name  | string         | yes       | no        | CDS        | last name of team member                                                                     |
-| sex         | string         | no        | yes       | CDS        | either **male** or **female**, or possibly `null`                                            |
-| role        | string         | yes       | no        | CDS        | one of **contestant** or **coach**                                                           |
+| sex         | string         | no        | yes       | CDS        | either `male` or `female`, or possibly `null`                                            |
+| role        | string         | yes       | no        | CDS        | one of `contestant` or `coach`                                                           |
 | photo       | array of IMAGE | no        | yes       | CDS        | registration photo of the team member. Only allowed mime types are image/jpeg and image/png. |
 
 #### Access restrictions at WF
@@ -956,8 +960,8 @@ JSON elements of state objects:
 
 | Name             | Type | Required? | Nullable? | Source @WF | Description                                                                                                                                                                                                                                                |
 | ---------------- | ---- | --------- | --------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| started          | TIME | yes       | yes       | CCS        | Time when the contest actually started, or `null` if the contest has not started yet. When set, this time must be equal to the [contest](#Contests) `start_time`.                                                                               |
-| frozen           | TIME | depends   | yes       | CCS        | Time when the scoreboard was frozen, or `null` if the scoreboard has not been frozen. Required iff `scoreboard_freeze_duration` is present in the [contest](#Contests) endpoint.                                                                |
+| started          | TIME | yes       | yes       | CCS        | Time when the contest actually started, or `null` if the contest has not started yet. When set, this time must be equal to the [contest](#contests) `start_time`.                                                                               |
+| frozen           | TIME | depends   | yes       | CCS        | Time when the scoreboard was frozen, or `null` if the scoreboard has not been frozen. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint.                                                                |
 | ended            | TIME | yes       | yes       | CCS        | Time when the contest ended, or `null` if the contest has not ended. Must not be set if started is `null`.                                                                                                                                                 |
 | thawed           | TIME | depends   | yes       | CCS        | Time when the scoreboard was thawed (that is, unfrozen again), or `null` if the scoreboard has not been thawed. Required iff `scoreboard_freeze_duration` is present in the [contest](#Contests) endpoint. Must not be set if frozen is `null`. |
 | finalized        | TIME | yes       | yes       | CCS        | Time when the results were finalized, or `null` if results have not been finalized. Must not be set if ended is `null`.                                                                                                                                    |
@@ -1019,16 +1023,16 @@ JSON elements of submission objects:
 | Name          | Type             | Required? | Nullable? | Source @WF | Description                                                                                        |
 | ------------- | ---------------- | --------- | --------- | ---------- | -------------------------------------------------------------------------------------------------- |
 | id            | ID               | yes       | no        | CCS        | identifier of the submission. Usable as a label, typically a low incrementing number               |
-| language\_id  | ID               | yes       | no        | CCS        | identifier of the [ language](#Languages) submitted for                                 |
-| problem\_id   | ID               | yes       | no        | CCS        | identifier of the [ problem](#Problems) submitted for                                   |
-| team\_id      | ID               | yes       | no        | CCS        | identifier of the [ team](#Teams) that made the submission                              |
+| language\_id  | ID               | yes       | no        | CCS        | identifier of the [ language](#languages) submitted for                                 |
+| problem\_id   | ID               | yes       | no        | CCS        | identifier of the [ problem](#problems) submitted for                                   |
+| team\_id      | ID               | yes       | no        | CCS        | identifier of the [ team](#teams) that made the submission                              |
 | time          | TIME             | yes       | no        | CCS        | timestamp of when the submission was made                                                          |
 | contest\_time | RELTIME          | yes       | no        | CCS        | contest relative time when the submission was made                                                 |
 | entry\_point  | string           | yes       | yes       | CCS        | code entry point for specific languages                                                            |
 | files         | array of ARCHIVE | yes       | no        | CCS        | submission files, contained at the root of the archive. Only allowed mime type is application/zip. |
 | reaction      | array of VIDEO   | no        | yes       | CDS        | reaction video from team's webcam.                                                                 |
 
-The **entry\_point** attribute must be included for submissions in
+The `entry_point` attribute must be included for submissions in
 languages which do not have a single, unambiguous entry point to run the
 code. In general the entry point is the string that needs to be
 specified to point to the code to be executed. Specifically, for Python
@@ -1038,18 +1042,18 @@ e.g. `com.example.myclass` for a class in the package `com.example` in
 Java). For C and C++ no entry point is required and it must therefore be
 `null`.
 
-The **files** attribute provides the file(s) of a given submission as a
+The `files` attribute provides the file(s) of a given submission as a
 zip archive. These must be stored directly from the root of the zip
 file, i.e. there must not be extra directories (or files) added unless
-these are explicitly part of the submission content. For **POST**,
-**PUT** and **PATCH** methods, the **files** attribute must contain the
+these are explicitly part of the submission content. For `POST`,
+`PUT` and `PATCH` methods, the `files` attribute must contain the
 base64-encoded string of the zip archive.
 
 #### Access restrictions at WF
 
-The **entry\_point** and **files** attribute are accessible only for
-clients with **admin** or **analyst** role. The **reaction** attribute
-is available to clients with **public** role only when the contest is
+The `entry_point` and `files` attribute are accessible only for
+clients with `admin` or `analyst` role. The `reaction` attribute
+is available to clients with `public` role only when the contest is
 not frozen.
 
 #### Example
@@ -1087,8 +1091,8 @@ JSON elements of judgement objects:
 | Name                 | Type    | Required? | Nullable? | Source @WF | Description                                                     |
 | -------------------- | ------- | --------- | --------- | ---------- | --------------------------------------------------------------- |
 | id                   | ID      | yes       | no        | CCS        | identifier of the judgement                                     |
-| submission\_id       | ID      | yes       | no        | CCS        | identifier of the [ submission](#Submissions) judged |
-| judgement\_type\_id  | ID      | yes       | yes       | CCS        | the [ verdict](#Judgement_Types) of this judgement   |
+| submission\_id       | ID      | yes       | no        | CCS        | identifier of the [ submission](#submissions) judged |
+| judgement\_type\_id  | ID      | yes       | yes       | CCS        | the [ verdict](#judgement-types) of this judgement   |
 | start\_time          | TIME    | yes       | no        | CCS        | absolute time when judgement started                            |
 | start\_contest\_time | RELTIME | yes       | no        | CCS        | contest relative time when judgement started                    |
 | end\_time            | TIME    | yes       | yes       | CCS        | absolute time when judgement completed                          |
@@ -1101,7 +1105,7 @@ judgement is completed.
 
 #### Access restrictions at WF
 
-For clients with the **public** role, judgements will not be included
+For clients with the `public` role, judgements will not be included
 for submissions received while the scoreboard is frozen. This means that
 all judgements for submissions received before the scoreboard has been
 frozen will be sent immediately, and all judgements for submissions
@@ -1140,16 +1144,16 @@ JSON elements of run objects:
 | Name                | Type    | Required? | Nullable? | Source @WF | Description                                                                                                                                                                                 |
 | ------------------- | ------- | --------- | --------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | id                  | ID      | yes       | no        | CCS        | identifier of the run                                                                                                                                                                       |
-| judgement\_id       | ID      | yes       | no        | CCS        | identifier of the [ judgement](#Judgements) this is part of                                                                                                                      |
+| judgement\_id       | ID      | yes       | no        | CCS        | identifier of the [ judgement](#judgements) this is part of                                                                                                                      |
 | ordinal             | ORDINAL | yes       | no        | CCS        | ordering of runs in the judgement. Must be different for every run in a judgement. Runs for the same test case must have the same ordinal. Must be between 1 and `problem:test_data_count`. |
-| judgement\_type\_id | ID      | yes       | no        | CCS        | the [ verdict](#Judgement_Types) of this judgement (i.e. a judgement type)                                                                                                       |
+| judgement\_type\_id | ID      | yes       | no        | CCS        | the [ verdict](#judgement-types) of this judgement (i.e. a judgement type)                                                                                                       |
 | time                | TIME    | yes       | no        | CCS        | absolute time when run completed                                                                                                                                                            |
 | contest\_time       | RELTIME | yes       | no        | CCS        | contest relative time when run completed                                                                                                                                                    |
 | run\_time           | decimal | no        | no        | CCS        | run time in seconds                                                                                                                                                                         |
 
 #### Access restrictions at WF
 
-For clients with the **public** role, runs will not be included for
+For clients with the `public` role, runs will not be included for
 submissions received while the scoreboard is frozen. This means that all
 runs for submissions received before the scoreboard has been frozen will
 be sent immediately, and all runs for submissions received after the
@@ -1188,10 +1192,10 @@ JSON elements of clarification message objects:
 | Name           | Type    | Required? | Nullable? | Source @WF | Description                                                                                                                   |
 | -------------- | ------- | --------- | --------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | id             | ID      | yes       | no        | CCS        | identifier of the clarification                                                                                               |
-| from\_team\_id | ID      | yes       | yes       | CCS        | identifier of [ team](#Teams) sending this clarification request, `null` if a clarification sent by jury           |
-| to\_team\_id   | ID      | yes       | yes       | CCS        | identifier of the [ team](#Teams) receiving this reply, `null` if a reply to all teams or a request sent by a team |
+| from\_team\_id | ID      | yes       | yes       | CCS        | identifier of [ team](#teams) sending this clarification request, `null` if a clarification sent by jury           |
+| to\_team\_id   | ID      | yes       | yes       | CCS        | identifier of the [ team](#teams) receiving this reply, `null` if a reply to all teams or a request sent by a team |
 | reply\_to\_id  | ID      | yes       | yes       | CCS        | identifier of clarification this is in response to, otherwise `null`                                                          |
-| problem\_id    | ID      | yes       | yes       | CCS        | identifier of associated [ problem](#Problems), `null` if not associated to a problem                              |
+| problem\_id    | ID      | yes       | yes       | CCS        | identifier of associated [ problem](#problems), `null` if not associated to a problem                              |
 | text           | string  | yes       | no        | CCS        | question or reply text                                                                                                        |
 | time           | TIME    | yes       | no        | CCS        | time of the question/reply                                                                                                    |
 | contest\_time  | RELTIME | yes       | no        | CCS        | contest time of the question/reply                                                                                            |
@@ -1201,7 +1205,7 @@ Note that at least one of `from_team_id` and `to_team_id` has to be
 
 #### Access restrictions at WF
 
-Clients with the **public** role can only view clarifications replies
+Clients with the `public` role can only view clarifications replies
 from the jury to all teams, that is, messages where both `from_team_id`
 and `to_team_id` are `null`.
 
@@ -1262,11 +1266,11 @@ JSON elements of award objects:
 | --------- | ----------- | --------- | --------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | id        | ID          | yes       | no        | CCS        | identifier of the award.                                                                                                                                 |
 | citation  | string      | yes       | no        | CCS        | award citation, e.g. "Gold medal winner"                                                                                                                 |
-| team\_ids | array of ID | yes       | no        | CCS        | JSON array of [ team](#Teams) ids receiving this award. No meaning must be implied or inferred from the order of IDs. The array may be empty. |
+| team\_ids | array of ID | yes       | no        | CCS        | JSON array of [ team](#teams) ids receiving this award. No meaning must be implied or inferred from the order of IDs. The array may be empty. |
 
 #### Access restrictions at WF
 
-For clients with the **public** role, awards will not include
+For clients with the `public` role, awards will not include
 information from judgements of submissions received after the scoreboard
 freeze until it has been unfrozen.
 
@@ -1316,7 +1320,7 @@ Returned data:
 
 Scoreboard of the contest.
 
-Since this is generated data, only the **GET** method is allowed here,
+Since this is generated data, only the `GET` method is allowed here,
 irrespective of role.
 
 The following endpoint is associated with the scoreboard:
@@ -1331,8 +1335,8 @@ The following options can be passed to the scoreboard endpoint.
 
 ##### Scoreboard at the time of a given event
 
-By passing an [ event](#Event_feed) ID with the
-"after\_event\_id" URL argument, the scoreboard can be requested as it
+By passing an [ event](#event-feed---draft) ID with the
+`after\_event\_id` URL argument, the scoreboard can be requested as it
 was directly after the specified event:
 
 `/scoreboard?after_event_id=xy1234`
@@ -1352,10 +1356,10 @@ JSON elements of the scoreboard object.
 
 | Name          | Type                       | Required? | Nullable? | Source @WF | Description                                                                                                                                                              |
 | ------------- | -------------------------- | --------- | --------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| event\_id     | ID                         | yes       | no        | CCS        | Identifier of the [ event](#Event_feed) after which this scoreboard was generated. This must be identical to the argument `after_event_id`, if specified.     |
+| event\_id     | ID                         | yes       | no        | CCS        | Identifier of the [ event](#event_feed) after which this scoreboard was generated. This must be identical to the argument `after_event_id`, if specified.     |
 | time          | TIME                       | yes       | no        | CCS        | Time contained in the associated event. Implementation defined if the event has no associated time.                                                                      |
 | contest\_time | RELTIME                    | yes       | no        | CCS        | Contest time contained in the associated event. Implementation defined if the event has no associated contest time.                                                      |
-| state         | object                     | yes       | no        | CCS        | Identical data as returned by the [ contest state](#Contest_state) endpoint. This is provided here for ease of use and to guarantee the data is synchronized. |
+| state         | object                     | yes       | no        | CCS        | Identical data as returned by the [ contest state](#contest-state) endpoint. This is provided here for ease of use and to guarantee the data is synchronized. |
 | rows          | JSON array of JSON objects | yes       | no        | CCS        | A list of rows of team with their associated scores.                                                                                                                     |
 
 The scoreboard `rows` array is sorted according to rank and alphabetical
@@ -1369,7 +1373,7 @@ Each JSON object in the rows array consists of:
 | Name              | Type             | Required? | Nullable? | Source @WF | Description                                                                                  |
 | ----------------- | ---------------- | --------- | --------- | ---------- | -------------------------------------------------------------------------------------------- |
 | rank              | integer          | yes       | no        | CCS        | rank of this team, 1-based and duplicate in case of ties                                     |
-| team\_id          | ID               | yes       | no        | CCS        | identifier of the [ team](#Teams)                                                 |
+| team\_id          | ID               | yes       | no        | CCS        | identifier of the [ team](#teams)                                                 |
 | score             | object           | yes       | no        | CCS        | JSON object as specified in the rows below (for possible extension to other scoring methods) |
 | score.num\_solved | integer          | yes       | no        | CCS        | number of problems solved by the team                                                        |
 | score.total\_time | integer          | yes       | no        | CCS        | total penalty time accrued by the team                                                       |
@@ -1379,7 +1383,7 @@ Each problem object within the scoreboard consists of:
 
 | Name         | Type    | Required? | Nullable? | Source @WF | Description                                                                                   |
 | ------------ | ------- | --------- | --------- | ---------- | --------------------------------------------------------------------------------------------- |
-| problem\_id  | ID      | yes       | no        | CCS        | identifier of the [ problem](#Problems)                                            |
+| problem\_id  | ID      | yes       | no        | CCS        | identifier of the [ problem](#problems)                                            |
 | num\_judged  | integer | yes       | no        | CCS        | number of judged submissions (up to and including the first correct one)                      |
 | num\_pending | integer | yes       | no        | CCS        | number of pending submissions (either queued or due to freeze)                                |
 | solved       | boolean | yes       | no        | CCS        | whether the team solved this problem                                                          |
@@ -1387,7 +1391,7 @@ Each problem object within the scoreboard consists of:
 
 #### Access restrictions at WF
 
-For clients with the **public** role, the scoreboard will not include
+For clients with the `public` role, the scoreboard will not include
 information from judgements of submissions received after the scoreboard
 has been frozen until it has been thawed.
 
@@ -1429,7 +1433,7 @@ Returned data:
 Provides the event (notification) feed for the current contest. This is
 effectively a changelog of create, update, or delete events that have
 occurred in the REST endpoints. Some endpoints (specifically the [
-Scoreboard](#Scoreboard) and the Event feed itself) are
+Scoreboard](#scoreboard) and the Event feed itself) are
 aggregated data, and so these will only ever update due to some other
 REST endpoint updating. For this reason there is no explicit event for
 these, since there will always be another event sent. This can also be
@@ -1461,9 +1465,9 @@ browser-based applications and onsite contests.
 
 #### General requirements
 
-The event responses and **data** objects contained in it must observe
+The event responses and `data` objects contained in it must observe
 the same restrictions as those of the respective endpoints they
-represent. This means that attributes inside the **data** element will
+represent. This means that attributes inside the `data` element will
 be present if and only if the client has access to those at the
 respective endpoint. The client only receives create, update and delete
 events of elements it has (partial) access to. When time-based access is
@@ -1641,7 +1645,7 @@ feed does not terminate under normal circumstances, so to ensure keep
 alive a newline must be sent if there has been no event within 120
 seconds.
 
-Since this is generated data, only the **GET** method is allowed here,
+Since this is generated data, only the `GET` method is allowed here,
 irrespective of role.
 
 The following endpoint is associated with the event feed:
