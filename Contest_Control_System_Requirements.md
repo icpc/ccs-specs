@@ -42,7 +42,7 @@ A contest control system may be submitted to the Director of Operations
 for the ICPC World Finals for consideration as a candidate to run the
 World Finals. The items which must be submitted in order to be
 considered are described under [ Certification
-Process](#Certification_Process) in this document. Any
+Process](#certification-process) in this document. Any
 submitted CCS which meets all of the requirements defined in this
 document will be certified as being accepted as a candidate to run the
 World Finals. Meeting or failing to meet each requirement will be
@@ -124,22 +124,22 @@ At least the following different types of accounts must be supported:
 
   - Team: used by teams competing in the contest. The functions
     available to team clients are as defined in the section on the [team
-    interface](#Team_Interface).
+    interface](#team-interface).
 
   - Judge: used by judges in the contest. The functions available to
     judge clients are as defined in the section on the [judge
-    interface](#Judge_Interface).
+    interface](#judge-interface).
 
   - Admin: used by contest administrators. The functions available to
     admin clients are as defined in the section on the [admin
-    interface](#Admin_Interface).
+    interface](#admin-interface).
 
 ### Secure Authentication
 
 The CCS must support a secure authentication mechanism, allowing each
-registered user (being either a [team](#Team_Interface), an
-[admin](#Admin_Interface), or a
-[judge](#Judge_Interface)) to gain access to the contest, and
+registered user (being either a [team](#team-interface), an
+[admin](#admin-interface), or a
+[judge](#judge-interface)) to gain access to the contest, and
 must ensure that:
 
 1.  Only users who supply correct authentication credentials may invoke
@@ -311,7 +311,7 @@ the compiler or interpreter's documentation.
 
 Problems (including judge data, validators, execution time limit, etc)
 are specified and configured using the [Problem
-format](Problem_format). The CCS must support this format
+package format](https://icpc.io/problem-package-format/). The CCS must support this format
 with the following exceptions:
 
   - The CCS does not have to support the use of the following keys in
@@ -321,6 +321,10 @@ with the following exceptions:
     for the key validation in problem.yaml.
   - The CCS does not have to support sections 5 "Included Code", 9
     "Graders" or 10 "Generators".
+
+```note
+TODO: Drop the exceptions above?
+```
 
 The CCS must report an error when importing problems that use any
 unsupported features. The CCS may report an error when unsupported keys
@@ -350,7 +354,7 @@ authenticated as admin.
 The CCS must have a mechanism to disable any account (either an account
 for a human user or for another system), without the need for starting
 or stopping the contest. For example, this includes [team
-accounts](#Secure_Authentication) and judge accounts.
+accounts](#secure-authentication) and judge accounts.
 
 ### Changes To Authentication Data
 
@@ -449,7 +453,7 @@ filters of the following types:
     time T<sub>1</sub>.
 6.  All submissions which have been assigned any specific one of the
     allowable submission judgments as defined in [Judge
-    Responses](#Judge_Responses), or all submissions that
+    Responses](#judge-responses), or all submissions that
     received any judgment other than "Accepted" (that is, all rejected
     submissions).
 7.  All submissions which have been run on a specific computer
@@ -468,7 +472,7 @@ or "all submissions using C++".
 The CCS must support the ability to assign, to a single submission, an
 updated judgment chosen from among any of the allowed submission
 judgments as defined in [Judge
-Responses](Contest_Control_System#Judge_Responses).
+Responses](#judge-responses).
 
 The CCS must require a separate authentication every time a judgment is
 changed manually and all such changes must be logged.
@@ -507,7 +511,7 @@ Finalizing is the procedure to authorize the final results at the end of
 a contest. The [results.tsv](#results.tsv) and
 [scoreboard.tsv](#scoreboard.tsv) files will be generated and
 the [finalized](Event_Feed#Finalized_Event) element will be
-sent on the [Event Feeds](Event_Feed).
+sent on the [Event Feeds](event-feed).
 
 When the contest is over, but not finalized, all scoreboards must show a
 warning that the results are not final.
@@ -519,13 +523,13 @@ applies:
 1.  The contest is still running (i.e., the contest is not over).
 2.  There are un-judged submissions.
 3.  There are submissions judged as [Judging
-    Error](#Exception_Judgments).
+    Error](#exceptional-judgments).
 4.  There are unanswered clarification requests.
 
 The following fields need to be entered before Finalizing the contest:
 
 1.  B, a non-negative integer, as used in [Scoring Data
-    Generation](#Scoring_Data_Generation).
+    Generation](#scoring-data-generation).
 2.  a comment, string, that indicates who approves the Final Results,
     for Example "Finalized by John Doe and Jane Doe".
 
@@ -600,7 +604,7 @@ clarification request if any response has occurred yet.
 
 The CCS must ensure that no team can see the clarification requests of
 any other team, except as provided in the section [ Judge
-Interface](Contest_Control_System#Judge_Interface).
+Interface](#judge-interface).
 
 ### Broadcast Messages
 
@@ -608,7 +612,7 @@ Interface](Contest_Control_System#Judge_Interface).
 
 The CCS must provide each team with a capability for viewing any
 broadcast messages sent by the judges (see [ Issuing Broadcast
-Messages](Contest_Control_System#Issuing_Broadcast_Messages)
+Messages](#issuing-broadcast-messages)
 under Judging).
 
 ### Notifications
@@ -683,7 +687,7 @@ the following operations:
 2.  Sort the list of clarification requests by time.
 3.  Filter the list of clarification requests by:
     1.  A user-specified set of
-        [categories](#Clarification_Categories)
+        [categories](#clarification-categories)
     2.  A team
     3.  Whether the clarification request has been answered.
 4.  Determine, for any specific clarification request, what answer was
@@ -720,16 +724,16 @@ automatically:
 
 1.  Compile (if appropriate for the language) the program contained in
     the submission, enforcing the [compilation time
-    limit](Problem_format#limits).
+    limit](https://icpc.io/problem-package-format/spec/problem_package_format#limits).
 2.  Execute the program contained in the submission, with the
     corresponding contest problem data automatically supplied to the
     program.
 3.  Prevent the submitted program from performing any [prohibited
-    operations](#Prohibited_Operations).
+    operations](#prohibited-operations).
 4.  Enforce any configured [execution time
-    limit](Problem_format#limits), [memory
-    limit](Problem_format#limits), and [output size
-    limit](Problem_format#limits) specified for the
+    limit](https://icpc.io/problem-package-format/spec/problem_package_format#limits), [memory
+    limit](https://icpc.io/problem-package-format/spec/problem_package_format#limits), and [output size
+    limit](https://icpc.io/problem-package-format/spec/problem_package_format#limits) specified for the
     corresponding problem.
       - The execution time limit gives a restriction on the amount of
         *CPU time* that the submission may consume, per test file.
@@ -738,12 +742,12 @@ automatically:
         submissions which spend a long time without using CPU time by
         e.g., sleeping).
 5.  Invoke an external program, known for purposes of this document as a
-    [validator](#External_Validators), passing to it the
+    [validator](#external-validators), passing to it the
     output generated by the program specified in the submission and
     getting back from it an indication of what judgment is to be applied
     to the submission (see the [External
-    Validators](#External_Validators) section).
-6.  Assign an [appropriate judgment](#Judge_Responses) to the
+    Validators](#external-validators) section).
+6.  Assign an [appropriate judgment](#judge-responses) to the
     submission.
 7.  Send a notification about the judgement to the team.
 
@@ -801,7 +805,7 @@ The next two sections define how to assign a judgment to a submission
 for problems with a single input file and with multiple input files,
 respectively. Note however that the **Judging Error** and **Security
 Violation** judgments constitute exceptions to this, as defined in
-[Exceptional Judgments](#Exceptional_Judgments).
+[Exceptional Judgments](#exceptional-judgments).
 
 #### Judging With a Single Input File
 
@@ -809,17 +813,17 @@ To determine which answer to use, the following rules must be applied in
 order:
 
 1.  If the submitted program fails to compile or compilation exceeds the
-    [compilation time limit](Problem_format#limits), the
+    [compilation time limit](https://icpc.io/problem-package-format/spec/problem_package_format#limits), the
     response must be **Compile Error**.
 2.  If the submitted program exceeds the [memory
-    limit](Problem_format#limits) or crashes before the
-    [execution time limit](Problem_format#limits) is
+    limit](https://icpc.io/problem-package-format/spec/problem_package_format#limits) or crashes before the
+    [execution time limit](https://icpc.io/problem-package-format/spec/problem_package_format#limits) is
     exceeded, the answer must be **Run-Time Error**.
 3.  If the submitted program runs longer than the [execution time
-    limit](Problem_format#limits), the answer must be **Time
+    limit](https://icpc.io/problem-package-format/spec/problem_package_format#limits), the answer must be **Time
     Limit Exceeded**.
 4.  If the output of the submitted program exceeds the [output size
-    limit](Problem_format#limits) or if the output of the
+    limit](https://icpc.io/problem-package-format/spec/problem_package_format#limits) or if the output of the
     submitted program is not accepted by the output validator, the
     answer must be **Wrong Answer**.
 5.  If the output of the submitted program is accepted by the output
@@ -831,7 +835,7 @@ If the problem has multiple judge input files the judgment is assigned
 as follows:
 
 1.  For each input file apply the [decision process for a single input
-    file](#Judging_With_a_Single_Input_File).
+    file](#judging-with-a-single-input-file).
 2.  If any file is not judged as **Accepted**, the response must be that
     of the first file, in alphabetical order, that was not judged
     **Accepted**.
@@ -849,7 +853,7 @@ program. However, the following two exceptions apply:
     CCS can not recover from, **Judging Error** must be the judgment.
 2.  If, during any point of the judging process the submitted program
     tries to perform a [prohibited
-    operation](#Prohibited_Operations), **Security
+    operation](#prohibited-operations), **Security
     Violation** may be the judgment.
 
 ### Validators
@@ -876,7 +880,7 @@ data according to the following:
     number of minutes elapsed from the beginning of the contest when the
     submission was made, skipping removed time intervals if specified
     (see [Removing Time
-    Intervals](#Removing_time_intervals)). This is rounded
+    Intervals](#removing-time-intervals)). This is rounded
     *down* to the nearest minute, so 59.99 seconds is 0 minutes.
 2.  The *contest time that a team solved a problem* is the contest time
     of the team's first accepted submission to that problem.
@@ -897,7 +901,7 @@ data according to the following:
 7.  The *rank* of a team is then determined as follows:
     1.  For teams in positions up to and including 12+B, the rank equals
         the position (B is provided when [finalizing the
-        contest](#Finalizing_the_Contest); the default value
+        contest](#finalizing-the-contest); the default value
         is 0).
     2.  Teams that solved fewer problems than the median team are not
         ranked at all.
@@ -978,7 +982,7 @@ each ranked team their rank and:
     solved more than the median number of problems).
 2.  The total penalty time and time of last accepted submission, if the
     team is in rank 1 through 12+B (where B is as defined in [Scoring
-    Data Generation](#Scoring_Data_Generation)).
+    Data Generation](#scoring-data-generation)).
 
 The CCS must be capable of generating an external file containing the
 final results of the World Finals contest. The format of this file must
@@ -1044,7 +1048,7 @@ functions while communicating only with the Primary CCS.
 
 A CCS running in shadow mode must be able to import a complete contest
 configuration as described in the [Importing Contest
-Configuration](#Importing_Contest_Configuration) section of
+Configuration](#importing-contest-configuration) section of
 this Requirements Specification. In particular a shadow-mode CCS must be
 able to import a contest configuration from a single URL and must also
 be able to import the teams.tsv and groups.tsv files as specified in
@@ -1060,14 +1064,14 @@ specification](Draft_CCS_REST_interface). The following
 requirements then apply to the mechanisms used by the Shadow CCS for
 obtaining submissions:
 
-1.  The Shadow CCS should use the **/event-feed** REST endpoint defined
+1.  The Shadow CCS should use the `/event-feed` REST endpoint defined
     in the [CLICS CCS REST interface
     specification](Draft_CCS_REST_interface) to obtain
     notification of team submissions from the Primary CCS (in other
     words, the Shadow CCS should preferably use event-driven operation,
     rather than polling, for team submission notification).
-2.  The Shadow CCS must use the **/submissions/<id>** and
-    **/submissions/<id>/files** REST endpoints defined in the [CLICS CCS
+2.  The Shadow CCS must use the `/submissions/<id>` and
+    `/submissions/<id>/files` REST endpoints defined in the [CLICS CCS
     REST interface specification](Draft_CCS_REST_interface)
     for obtaining submission data from the Primary CCS.
 3.  The Shadow CCS must provide an interface that can display
@@ -1085,8 +1089,8 @@ obtaining submissions:
 
 A CCS running in shadow mode must produce the same set of output files
 as those required of a Primary CCS -- that is, it must produce at least
-the [scoreboard.tsv](#scoreboard.tsv) and
-[results.tsv](#results.tsv) files as defined elsewhere in
+the [scoreboard.tsv](#scoreboardtsv) and
+[results.tsv](#resultstsv) files as defined elsewhere in
 this Requirements Specification.
 
 A CCS running in shadow mode must in addition provide the capability to
@@ -1120,7 +1124,7 @@ In order for a given CCS to be considered as a candidate for running the
 ICPC World Finals contest, the following documents must be submitted.
 
   - A text file named "License" containing the license, conforming to
-    the the [Licensing](#Licensing) section, under which the
+    the the [Licensing](#licensing) section, under which the
     CCS is made available to the ICPC.
   - A *Requirements Compliance Document* as defined below.
   - A *Team Guide* as defined below.
@@ -1396,11 +1400,11 @@ Then follow several lines with the following format (one per account).
 | 3     | Username     | austrin     | string |
 | 4     | Password     | B\!5MWJiy   | string |
 
-Account Types are: **team**, **judge**, **admin**, **analyst**.
+Account Types are: `team`, `judge`, `admin`, `analyst`.
 
-For accounts of type **team** username is on the form "team-nnn" where
+For accounts of type `team` username is on the form "team-nnn" where
 "nnn" is the zero padded team number as given in
-[teams.tsv](#teams.tsv).
+[teams.tsv](#teamstsv).
 
 #### logos.tar.gz
 
@@ -1449,7 +1453,7 @@ Then follow several lines with the following format (one per team).
 |              |                                        |                        |         |
 
 The External ID for a team can be found in the
-[teams.tsv](#teams.tsv).
+[teams.tsv](#teamstsv).
 
 The time when problem was solved must be -1 if the problem was not
 solved.
@@ -1489,14 +1493,14 @@ Group Winner is a string with the name of the group if the team is the
 group winner, otherwise empty.
 
 The External ID for a team can be found in the
-[teams.tsv](#teams.tsv).
+[teams.tsv](#teamstsv).
 
 If the team is not ranked (has no assigned rank) then the Rank in
 contest field is empty.
 
 Award is a string with value "Gold Medal", "Silver Medal", "Bronze
 Medal", "Ranked" or "Honorable" as appropriate, see [Scoring Data
-Generation](#Scoring_Data_Generation) for details.
+Generation](#scoring-data-generation) for details.
 
 #### submissions.tsv
 
