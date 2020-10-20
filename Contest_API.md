@@ -5,18 +5,18 @@ permalink: /contest_api
 # Contest API
 
 **This is the development draft for the Contest API. See also [the
-version that will be used at WF 2020](Contest_API_2020 "wikilink").**
+version that will be used at WF 2020](Contest_API_2020).**
 
 ## Introduction
 
 This page describes an API for accessing information provided by a
-[Contest Control System](Contest_Control_System "wikilink") or [Contest
-Data Server](CDS "wikilink"). Such an API can be used by a multitude of
+[Contest Control System](Contest_Control_System) or [Contest
+Data Server](CDS). Such an API can be used by a multitude of
 clients:
 
   - an external scoreboard
   - a scoreboard resolver application
-  - contest analysis software, such as the [ICAT](ICAT "wikilink")
+  - contest analysis software, such as the [ICAT](ICAT)
     toolset
   - another "shadow" CCS, providing forwarding of submissions and all
     relevant information
@@ -26,14 +26,14 @@ clients:
 This API is meant to be useful, not only at the ICPC World Finals, but
 more generally in any ICPC-style contest setup. It is meant to
 incorporate and supersede the [JSON
-Scoreboard](JSON_Scoreboard_2016 "wikilink"), the [REST interface for
+Scoreboard](JSON_Scoreboard_2016), the [REST interface for
 source code
-fetching](Draft_2014_REST_interface_for_source_code_fetching "wikilink"),
-and the [Contest start interface](Contest_Start_Interface "wikilink").
+fetching](Draft_2014_REST_interface_for_source_code_fetching),
+and the [Contest start interface](Contest_Start_Interface).
 This REST interface is specified in conjunction with a new [NDJSON event
-feed](#Event_feed "wikilink"), which provides all changes to this
+feed](#Event_feed), which provides all changes to this
 interface as CRUD-style events and is meant to supersede the old XML
-[Event Feed](Event_Feed "wikilink").
+[Event Feed](Event_Feed).
 
 ## General design principles
 
@@ -107,7 +107,7 @@ setting the `Cache-Control` or `Expires` HTTP headers:
 
 The current version of this specification only requires support for the
 **GET** method, unless explicitly specified otherwise in an endpoint
-below (see [PATCH start\_time](#PATCH_start_time "wikilink")). However,
+below (see [PATCH start\_time](#PATCH_start_time)). However,
 for future compatibility below are already listed other methods with
 their expected behavior, if implemented.
 
@@ -138,7 +138,7 @@ their expected behavior, if implemented.
     code when repeated. Any provided data is ignored. Example:
     `DELETE  https://example.com/api/contests/wf14/teams/8`
     Note that deletes must keep [referential
-    integrity](#Referential_integrity "wikilink") intact.
+    integrity](#Referential_integrity) intact.
 
 Standard [HTTP status
 codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) are
@@ -173,8 +173,8 @@ Some attributes in elements are references to IDs of other elements.
 When such an attribute has a non-`null` value, then the referenced
 element must exist. That is, the full set of data exposed by the API
 must at all times be referentially intact. This implies for example that
-before creating a [team](#Teams "wikilink") with an `organization_id`,
-the [organization](#Organizations "wikilink") must already exist. In
+before creating a [team](#Teams) with an `organization_id`,
+the [organization](#Organizations) must already exist. In
 reverse, that organization can only be deleted after the team is
 deleted, or alternatively, the team's `organization_id` is set to
 `null`.
@@ -341,7 +341,7 @@ In the tables below, the columns are:
     `object.attribute`.  
     Type: Data type of the attribute; either a [JSON
     type](https://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example)
-    or [a type defined above](#Recurring_details "wikilink").  
+    or [a type defined above](#Recurring_details).  
     Required?: Whether this is a required attribute that **must** be
     implemented to conform to this specification.  
     Nullable?: Whether the attribute might be `null` (and thus
@@ -412,7 +412,7 @@ No access restrictions apply to a GET on this endpoint.
 #### PATCH start\_time
 
 To replace the [Contest Start
-Interface](Contest_Start_Interface "wikilink"), at the ICPC World
+Interface](Contest_Start_Interface), at the ICPC World
 Finals, an API provided by a CCS or CDS implementing this specification
 must have a role that has the ability to clear or set the contest start
 time via a PATCH method.
@@ -862,8 +862,8 @@ JSON elements of team objects:
 | icpc\_id          | string           | no        | yes       | CCS        | external identifier from ICPC CMS                                                                                                                                                                        |
 | name              | string           | yes       | no        | CCS        | name of the team                                                                                                                                                                                         |
 | display\_name     | string           | no        | yes       | CCS        | display name of the team. If not set, a client should revert to using the name instead.                                                                                                                  |
-| organization\_id  | ID               | no        | yes       | CCS        | identifier of the [ organization](#Organizations "wikilink") (e.g. university or other entity) that this team is affiliated to                                                                           |
-| group\_ids        | array of ID      | no        | no        | CCS        | identifiers of the [ group(s)](#Groups "wikilink") this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty. |
+| organization\_id  | ID               | no        | yes       | CCS        | identifier of the [ organization](#Organizations) (e.g. university or other entity) that this team is affiliated to                                                                           |
+| group\_ids        | array of ID      | no        | no        | CCS        | identifiers of the [ group(s)](#Groups) this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty. |
 | location          | object           | no        | no        | CDS        | JSON object as specified in the rows below                                                                                                                                                               |
 | location.x        | float            | depends   | no        | CDS        | Team's x position in meters. Required iff location is present.                                                                                                                                           |
 | location.y        | float            | depends   | no        | CDS        | Team's y position in meters. Required iff location is present.                                                                                                                                           |
@@ -916,7 +916,7 @@ JSON elements of team member objects:
 | ----------- | -------------- | --------- | --------- | ---------- | -------------------------------------------------------------------------------------------- |
 | id          | ID             | yes       | no        | CDS        | identifier of the team-member                                                                |
 | icpc\_id    | string         | no        | yes       | CDS        | external identifier from ICPC CMS                                                            |
-| team\_id    | ID             | yes       | no        | CDS        | [ team](#Teams "wikilink") of this team member                                               |
+| team\_id    | ID             | yes       | no        | CDS        | [ team](#Teams) of this team member                                               |
 | first\_name | string         | yes       | no        | CDS        | first name of team member                                                                    |
 | last\_name  | string         | yes       | no        | CDS        | last name of team member                                                                     |
 | sex         | string         | no        | yes       | CDS        | either **male** or **female**, or possibly `null`                                            |
@@ -956,10 +956,10 @@ JSON elements of state objects:
 
 | Name             | Type | Required? | Nullable? | Source @WF | Description                                                                                                                                                                                                                                                |
 | ---------------- | ---- | --------- | --------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| started          | TIME | yes       | yes       | CCS        | Time when the contest actually started, or `null` if the contest has not started yet. When set, this time must be equal to the [contest](#Contests "wikilink") `start_time`.                                                                               |
-| frozen           | TIME | depends   | yes       | CCS        | Time when the scoreboard was frozen, or `null` if the scoreboard has not been frozen. Required iff `scoreboard_freeze_duration` is present in the [contest](#Contests "wikilink") endpoint.                                                                |
+| started          | TIME | yes       | yes       | CCS        | Time when the contest actually started, or `null` if the contest has not started yet. When set, this time must be equal to the [contest](#Contests) `start_time`.                                                                               |
+| frozen           | TIME | depends   | yes       | CCS        | Time when the scoreboard was frozen, or `null` if the scoreboard has not been frozen. Required iff `scoreboard_freeze_duration` is present in the [contest](#Contests) endpoint.                                                                |
 | ended            | TIME | yes       | yes       | CCS        | Time when the contest ended, or `null` if the contest has not ended. Must not be set if started is `null`.                                                                                                                                                 |
-| thawed           | TIME | depends   | yes       | CCS        | Time when the scoreboard was thawed (that is, unfrozen again), or `null` if the scoreboard has not been thawed. Required iff `scoreboard_freeze_duration` is present in the [contest](#Contests "wikilink") endpoint. Must not be set if frozen is `null`. |
+| thawed           | TIME | depends   | yes       | CCS        | Time when the scoreboard was thawed (that is, unfrozen again), or `null` if the scoreboard has not been thawed. Required iff `scoreboard_freeze_duration` is present in the [contest](#Contests) endpoint. Must not be set if frozen is `null`. |
 | finalized        | TIME | yes       | yes       | CCS        | Time when the results were finalized, or `null` if results have not been finalized. Must not be set if ended is `null`.                                                                                                                                    |
 | end\_of\_updates | TIME | yes       | yes       | CCS        | Time after last update to the contest occurred, or `null` if more updates are still to come. Setting this to non-`null` must be the very last change in the contest.                                                                                       |
 
@@ -1019,9 +1019,9 @@ JSON elements of submission objects:
 | Name          | Type             | Required? | Nullable? | Source @WF | Description                                                                                        |
 | ------------- | ---------------- | --------- | --------- | ---------- | -------------------------------------------------------------------------------------------------- |
 | id            | ID               | yes       | no        | CCS        | identifier of the submission. Usable as a label, typically a low incrementing number               |
-| language\_id  | ID               | yes       | no        | CCS        | identifier of the [ language](#Languages "wikilink") submitted for                                 |
-| problem\_id   | ID               | yes       | no        | CCS        | identifier of the [ problem](#Problems "wikilink") submitted for                                   |
-| team\_id      | ID               | yes       | no        | CCS        | identifier of the [ team](#Teams "wikilink") that made the submission                              |
+| language\_id  | ID               | yes       | no        | CCS        | identifier of the [ language](#Languages) submitted for                                 |
+| problem\_id   | ID               | yes       | no        | CCS        | identifier of the [ problem](#Problems) submitted for                                   |
+| team\_id      | ID               | yes       | no        | CCS        | identifier of the [ team](#Teams) that made the submission                              |
 | time          | TIME             | yes       | no        | CCS        | timestamp of when the submission was made                                                          |
 | contest\_time | RELTIME          | yes       | no        | CCS        | contest relative time when the submission was made                                                 |
 | entry\_point  | string           | yes       | yes       | CCS        | code entry point for specific languages                                                            |
@@ -1087,8 +1087,8 @@ JSON elements of judgement objects:
 | Name                 | Type    | Required? | Nullable? | Source @WF | Description                                                     |
 | -------------------- | ------- | --------- | --------- | ---------- | --------------------------------------------------------------- |
 | id                   | ID      | yes       | no        | CCS        | identifier of the judgement                                     |
-| submission\_id       | ID      | yes       | no        | CCS        | identifier of the [ submission](#Submissions "wikilink") judged |
-| judgement\_type\_id  | ID      | yes       | yes       | CCS        | the [ verdict](#Judgement_Types "wikilink") of this judgement   |
+| submission\_id       | ID      | yes       | no        | CCS        | identifier of the [ submission](#Submissions) judged |
+| judgement\_type\_id  | ID      | yes       | yes       | CCS        | the [ verdict](#Judgement_Types) of this judgement   |
 | start\_time          | TIME    | yes       | no        | CCS        | absolute time when judgement started                            |
 | start\_contest\_time | RELTIME | yes       | no        | CCS        | contest relative time when judgement started                    |
 | end\_time            | TIME    | yes       | yes       | CCS        | absolute time when judgement completed                          |
@@ -1140,9 +1140,9 @@ JSON elements of run objects:
 | Name                | Type    | Required? | Nullable? | Source @WF | Description                                                                                                                                                                                 |
 | ------------------- | ------- | --------- | --------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | id                  | ID      | yes       | no        | CCS        | identifier of the run                                                                                                                                                                       |
-| judgement\_id       | ID      | yes       | no        | CCS        | identifier of the [ judgement](#Judgements "wikilink") this is part of                                                                                                                      |
+| judgement\_id       | ID      | yes       | no        | CCS        | identifier of the [ judgement](#Judgements) this is part of                                                                                                                      |
 | ordinal             | ORDINAL | yes       | no        | CCS        | ordering of runs in the judgement. Must be different for every run in a judgement. Runs for the same test case must have the same ordinal. Must be between 1 and `problem:test_data_count`. |
-| judgement\_type\_id | ID      | yes       | no        | CCS        | the [ verdict](#Judgement_Types "wikilink") of this judgement (i.e. a judgement type)                                                                                                       |
+| judgement\_type\_id | ID      | yes       | no        | CCS        | the [ verdict](#Judgement_Types) of this judgement (i.e. a judgement type)                                                                                                       |
 | time                | TIME    | yes       | no        | CCS        | absolute time when run completed                                                                                                                                                            |
 | contest\_time       | RELTIME | yes       | no        | CCS        | contest relative time when run completed                                                                                                                                                    |
 | run\_time           | decimal | no        | no        | CCS        | run time in seconds                                                                                                                                                                         |
@@ -1188,10 +1188,10 @@ JSON elements of clarification message objects:
 | Name           | Type    | Required? | Nullable? | Source @WF | Description                                                                                                                   |
 | -------------- | ------- | --------- | --------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | id             | ID      | yes       | no        | CCS        | identifier of the clarification                                                                                               |
-| from\_team\_id | ID      | yes       | yes       | CCS        | identifier of [ team](#Teams "wikilink") sending this clarification request, `null` if a clarification sent by jury           |
-| to\_team\_id   | ID      | yes       | yes       | CCS        | identifier of the [ team](#Teams "wikilink") receiving this reply, `null` if a reply to all teams or a request sent by a team |
+| from\_team\_id | ID      | yes       | yes       | CCS        | identifier of [ team](#Teams) sending this clarification request, `null` if a clarification sent by jury           |
+| to\_team\_id   | ID      | yes       | yes       | CCS        | identifier of the [ team](#Teams) receiving this reply, `null` if a reply to all teams or a request sent by a team |
 | reply\_to\_id  | ID      | yes       | yes       | CCS        | identifier of clarification this is in response to, otherwise `null`                                                          |
-| problem\_id    | ID      | yes       | yes       | CCS        | identifier of associated [ problem](#Problems "wikilink"), `null` if not associated to a problem                              |
+| problem\_id    | ID      | yes       | yes       | CCS        | identifier of associated [ problem](#Problems), `null` if not associated to a problem                              |
 | text           | string  | yes       | no        | CCS        | question or reply text                                                                                                        |
 | time           | TIME    | yes       | no        | CCS        | time of the question/reply                                                                                                    |
 | contest\_time  | RELTIME | yes       | no        | CCS        | contest time of the question/reply                                                                                            |
@@ -1262,7 +1262,7 @@ JSON elements of award objects:
 | --------- | ----------- | --------- | --------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | id        | ID          | yes       | no        | CCS        | identifier of the award.                                                                                                                                 |
 | citation  | string      | yes       | no        | CCS        | award citation, e.g. "Gold medal winner"                                                                                                                 |
-| team\_ids | array of ID | yes       | no        | CCS        | JSON array of [ team](#Teams "wikilink") ids receiving this award. No meaning must be implied or inferred from the order of IDs. The array may be empty. |
+| team\_ids | array of ID | yes       | no        | CCS        | JSON array of [ team](#Teams) ids receiving this award. No meaning must be implied or inferred from the order of IDs. The array may be empty. |
 
 #### Access restrictions at WF
 
@@ -1331,7 +1331,7 @@ The following options can be passed to the scoreboard endpoint.
 
 ##### Scoreboard at the time of a given event
 
-By passing an [ event](#Event_feed "wikilink") ID with the
+By passing an [ event](#Event_feed) ID with the
 "after\_event\_id" URL argument, the scoreboard can be requested as it
 was directly after the specified event:
 
@@ -1352,10 +1352,10 @@ JSON elements of the scoreboard object.
 
 | Name          | Type                       | Required? | Nullable? | Source @WF | Description                                                                                                                                                              |
 | ------------- | -------------------------- | --------- | --------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| event\_id     | ID                         | yes       | no        | CCS        | Identifier of the [ event](#Event_feed "wikilink") after which this scoreboard was generated. This must be identical to the argument `after_event_id`, if specified.     |
+| event\_id     | ID                         | yes       | no        | CCS        | Identifier of the [ event](#Event_feed) after which this scoreboard was generated. This must be identical to the argument `after_event_id`, if specified.     |
 | time          | TIME                       | yes       | no        | CCS        | Time contained in the associated event. Implementation defined if the event has no associated time.                                                                      |
 | contest\_time | RELTIME                    | yes       | no        | CCS        | Contest time contained in the associated event. Implementation defined if the event has no associated contest time.                                                      |
-| state         | object                     | yes       | no        | CCS        | Identical data as returned by the [ contest state](#Contest_state "wikilink") endpoint. This is provided here for ease of use and to guarantee the data is synchronized. |
+| state         | object                     | yes       | no        | CCS        | Identical data as returned by the [ contest state](#Contest_state) endpoint. This is provided here for ease of use and to guarantee the data is synchronized. |
 | rows          | JSON array of JSON objects | yes       | no        | CCS        | A list of rows of team with their associated scores.                                                                                                                     |
 
 The scoreboard `rows` array is sorted according to rank and alphabetical
@@ -1369,7 +1369,7 @@ Each JSON object in the rows array consists of:
 | Name              | Type             | Required? | Nullable? | Source @WF | Description                                                                                  |
 | ----------------- | ---------------- | --------- | --------- | ---------- | -------------------------------------------------------------------------------------------- |
 | rank              | integer          | yes       | no        | CCS        | rank of this team, 1-based and duplicate in case of ties                                     |
-| team\_id          | ID               | yes       | no        | CCS        | identifier of the [ team](#Teams "wikilink")                                                 |
+| team\_id          | ID               | yes       | no        | CCS        | identifier of the [ team](#Teams)                                                 |
 | score             | object           | yes       | no        | CCS        | JSON object as specified in the rows below (for possible extension to other scoring methods) |
 | score.num\_solved | integer          | yes       | no        | CCS        | number of problems solved by the team                                                        |
 | score.total\_time | integer          | yes       | no        | CCS        | total penalty time accrued by the team                                                       |
@@ -1379,7 +1379,7 @@ Each problem object within the scoreboard consists of:
 
 | Name         | Type    | Required? | Nullable? | Source @WF | Description                                                                                   |
 | ------------ | ------- | --------- | --------- | ---------- | --------------------------------------------------------------------------------------------- |
-| problem\_id  | ID      | yes       | no        | CCS        | identifier of the [ problem](#Problems "wikilink")                                            |
+| problem\_id  | ID      | yes       | no        | CCS        | identifier of the [ problem](#Problems)                                            |
 | num\_judged  | integer | yes       | no        | CCS        | number of judged submissions (up to and including the first correct one)                      |
 | num\_pending | integer | yes       | no        | CCS        | number of pending submissions (either queued or due to freeze)                                |
 | solved       | boolean | yes       | no        | CCS        | whether the team solved this problem                                                          |
@@ -1429,7 +1429,7 @@ Returned data:
 Provides the event (notification) feed for the current contest. This is
 effectively a changelog of create, update, or delete events that have
 occurred in the REST endpoints. Some endpoints (specifically the [
-Scoreboard](#Scoreboard "wikilink") and the Event feed itself) are
+Scoreboard](#Scoreboard) and the Event feed itself) are
 aggregated data, and so these will only ever update due to some other
 REST endpoint updating. For this reason there is no explicit event for
 these, since there will always be another event sent. This can also be
