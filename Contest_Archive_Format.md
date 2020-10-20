@@ -5,7 +5,7 @@ permalink: /contest_archive_format
 # Contest archive format
 
 This page describes a draft archive format for a contest. It is
-developed in parallel with the [Contest API](Contest_API "wikilink"). It
+developed in parallel with the [Contest API](Contest_API). It
 might very well end up being very similar to the CDP which has been
 suggested to use for this, but which has a slightly different purpose...
 
@@ -22,7 +22,7 @@ disk, including:
 
 This standard lays out the relative location and format of each type of
 contest-related information when reading or writing to disk. The top
-level structure is inspired by the [Contest API](Contest_API "wikilink")
+level structure is inspired by the [Contest API](Contest_API)
 structure, and a dump of the output from that API is one way to store
 the data. That said, the archive format allows for any format whose
 documentation has been registered with the ICPC. The sections below
@@ -134,7 +134,7 @@ The following formats may be used:
 
 **NB\!**: This section should not be in this document, and is only
 included here while WIP. It should either be its own document, or be
-added to the [Contest API](Contest_API "wikilink") document. Every
+added to the [Contest API](Contest_API) document. Every
 subsection defines the on disk format **contest-api** for a type of
 data.
 
@@ -197,7 +197,7 @@ A directory, **config**, containing:
   - a JSON file (`languages.json`) for the `/contests\<id>/languages`
     endpoint
   - `system.yaml` defined in the [
-    CCSR](Contest_Control_System_Requirements#system.yaml "wikilink").
+    CCSR](Contest_Control_System_Requirements#system.yaml).
   - the contest banner(s), from the banner element of `/contests/<id>`, if
     available.
   - the contest logo(s), from the logo element of `/contests/<id>`, if
