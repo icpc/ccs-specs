@@ -492,7 +492,7 @@ freeze time must be treated as pending on a frozen scoreboard.
 
 The exact phrase displayed on the frozen scoreboard must be:
 
-` The scoreboard was frozen with XX minutes remaining - submissions in the last XX minutes of the contest are still shown as pending.`
+` The scoreboard was frozen with XX minutes remaining - submissions in the last XX minutes of the contest are still shown as pending.`
 
 where XX is the number of minutes remaining in the contest at the time
 the scoreboard was frozen.
@@ -1209,14 +1209,14 @@ A YAML file consisting of a mapping with the following keys:
 ##### Example
 
 ```yaml
-# Contest configuration  
+# Contest configuration  
 ---  
-name:                     ICPC World Finals 2011  
-short-name:               ICPC WF 2011  
-start-time:               2011-02-04T01:23:00Z  
-duration:                 5:00:00  
-scoreboard-freeze-length: 1:00:00  
-penalty-time:             20
+name:                     ICPC World Finals 2011  
+short-name:               ICPC WF 2011  
+start-time:               2011-02-04T01:23:00Z  
+duration:                 5:00:00  
+scoreboard-freeze-length: 1:00:00  
+penalty-time:             20
 ```
 
 #### system.yaml
@@ -1252,31 +1252,31 @@ place as few restrictions as possible on the language configuration.
 ##### Example
 
 ```yaml
-# System configuration  
+# System configuration  
 ---  
 default-clars:  
-  - No comment, read problem statement.  
-  - This will be answered during the answers to questions session.  
+  - No comment, read problem statement.  
+  - This will be answered during the answers to questions session.  
   
 clar-categories:  
-  - General  
-  - SysOps  
-  - Operations  
+  - General  
+  - SysOps  
+  - Operations  
   
 languages:  
-  - name: C++  
-    compiler: /usr/bin/g++    
-    compiler-args: -O2 -Wall -o a.out -static {files}   
+  - name: C++  
+    compiler: /usr/bin/g++    
+    compiler-args: -O2 -Wall -o a.out -static {files}   
   
-  - name: C  
-    compiler: /usr/bin/gcc  
-    compiler-args: -O2 -Wall -std=gnu99 -o a.out -static {files} -lm  
-    
-  - name: Java  
-    compiler: /usr/bin/javac  
-    compiler-args: -O {files}  
-    runner: /usr/bin/java  
-    runner-args:
+  - name: C  
+    compiler: /usr/bin/gcc  
+    compiler-args: -O2 -Wall -std=gnu99 -o a.out -static {files} -lm  
+    
+  - name: Java  
+    compiler: /usr/bin/javac  
+    compiler-args: -O {files}  
+    runner: /usr/bin/java  
+    runner-args:
 ```
 
 #### problemset.yaml
@@ -1301,33 +1301,33 @@ A sequence of mappings with the following keys:
 ##### Example
 
 ```yaml
-# Problem set configuration  
----   
+# Problem set configuration  
+---   
 problems:  
-  - letter:     A  
-    short-name: apl  
-    color:      yellow  
-    rgb:        '#ffff00'  
-    
-  - letter:     B  
-    short-name: barcodes  
-    color:      red  
-    rgb:        '#ff0000'  
-    
-  - letter:     C  
-    short-name: biobots  
-    color:      green  
-    rgb:        '#00ff00'  
-    
-  - letter:     D  
-    short-name: castles  
-    color:      blue  
-    rgb:        '#0000ff'  
-    
-  - letter:     E  
-    short-name: channel  
-    color:      white  
-    rgb:        '#ffffff'
+  - letter:     A  
+    short-name: apl  
+    color:      yellow  
+    rgb:        '#ffff00'  
+    
+  - letter:     B  
+    short-name: barcodes  
+    color:      red  
+    rgb:        '#ff0000'  
+    
+  - letter:     C  
+    short-name: biobots  
+    color:      green  
+    rgb:        '#00ff00'  
+    
+  - letter:     D  
+    short-name: castles  
+    color:      blue  
+    rgb:        '#0000ff'  
+    
+  - letter:     E  
+    short-name: channel  
+    color:      white  
+    rgb:        '#ffffff'
 ```
 
 #### groups.tsv
