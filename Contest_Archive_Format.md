@@ -59,11 +59,11 @@ not listed then **archive** must be specified.
 #### Example
 
 ```yaml
-# Contest Archive  
----  
-created-by: Kattis  
-archive:    contest-api  
-problems:   kattis  
+# Contest Archive
+---
+created-by: Kattis
+archive:    contest-api
+problems:   kattis
 events:     missing
 ```
 
@@ -147,7 +147,7 @@ stored in a subfolder per object, using the object ID as the folder name
 and the element name of the file reference as the base name of the file.
 
 ```
-<endpoint>.json  
+<endpoint>.json
 <endpoint>/<id>/<referenced files>
 ```
 
@@ -175,15 +175,15 @@ appropriate specifier.
 #### Examples of Multiple File References
 
 ```
-<endpoint>/<id>/banner.800x100.png # Must be a 800 x 100 px PNG  
+<endpoint>/<id>/banner.800x100.png # Must be a 800 x 100 px PNG
 <endpoint>/<id>/banner.80x10.png   # Must be a 80 x 10 px PNG
 ```
 
 or:
 
 ```
-<endpoint>/<id>/logo.png           # Is probably the source image for the other logo versions. Must be larger than the others.  
-<endpoint>/<id>/logo.56x56.png     # Must be a 56 x 56 px PNG  
+<endpoint>/<id>/logo.png           # Is probably the source image for the other logo versions. Must be larger than the others.
+<endpoint>/<id>/logo.56x56.png     # Must be a 56 x 56 px PNG
 <endpoint>/<id>/logo.160x160.png   # Must be a 160 x 160 px PNG
 ```
 
@@ -206,12 +206,12 @@ A directory, **config**, containing:
 #### Example file listing
 
 ```
-config/contest.json  
-config/judgement-types.json  
-config/languages.json  
-config/system.yaml  
-config/banner.800x100.png  
-config/logo.png  
+config/contest.json
+config/judgement-types.json
+config/languages.json
+config/system.yaml
+config/banner.800x100.png
+config/logo.png
 config/logo.512x512.png
 ```
 
@@ -243,16 +243,16 @@ A directory, **registration**, containing:
 #### Example file listing
 
 ```
-registration/groups.json  
-registration/organizations.json  
-registration/organizations/<id>/logo.56x56.png  
-registration/organizations/<id>/logo.160x160.png  
-registration/organizations/<id>/logo.512x512.png  
-registration/teams.json  
-registration/teams/<id>/photo.png  
-registration/teams/<id>/photo.jpg  
-registration/teams/<id>/backup.zip  
-registration/team-members.json  
+registration/groups.json
+registration/organizations.json
+registration/organizations/<id>/logo.56x56.png
+registration/organizations/<id>/logo.160x160.png
+registration/organizations/<id>/logo.512x512.png
+registration/teams.json
+registration/teams/<id>/photo.png
+registration/teams/<id>/photo.jpg
+registration/teams/<id>/backup.zip
+registration/team-members.json
 registration/team-members/<id>/photo.jpg
 ```
 
@@ -273,11 +273,11 @@ A directory, **activity**, containing:
 #### Example file listing
 
 ```
-activity/submissions.json  
-activity/submissions/<id>/files.zip  
-activity/submissions/<id>/reaction.mp4  
-activity/judgements.json  
-activity/runs.json  
+activity/submissions.json
+activity/submissions/<id>/files.zip
+activity/submissions/<id>/reaction.mp4
+activity/judgements.json
+activity/runs.json
 activity/clarifications.json
 ```
 
@@ -291,7 +291,7 @@ A directory, **results**, containing:
 #### Example file listing
 
 ```
-results/awards.json  
+results/awards.json
 results/scoreboard.json
 ```
 
@@ -347,8 +347,8 @@ into the master archive are:
 #### Example file listing
 
 ```
-activity/judgements.shadow.json  
-activity/runs.shadow.json  
+activity/judgements.shadow.json
+activity/runs.shadow.json
 events/event-feed.shadow.json
 ```
 

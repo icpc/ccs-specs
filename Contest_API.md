@@ -75,9 +75,9 @@ the URL path
 returns
 
 ```json
-[ { "id":<id1>, <element specific data for id1>},  
-  { "id":<id2>, <element specific data for id2>},  
-     ...  
+[ { "id":<id1>, <element specific data for id1>},
+  { "id":<id2>, <element specific data for id2>},
+     ...
 ]
 ```
 
@@ -111,14 +111,14 @@ below (see [PATCH start\_time](#PATCH_start_time)). However,
 for future compatibility below are already listed other methods with
 their expected behavior, if implemented.
 
-  - `GET`  
+  - `GET`
     Read data. This method is idempotent and does not modify any data.
     It can be used to request a whole collection or a specific element.
-  - `POST`  
+  - `POST`
     Create a new element. This can only be called on a collection
     endpoint. No **id** attribute should be specified as it is up to the
     server to assign one, which is returned in the location header.
-  - `PUT`  
+  - `PUT`
     Replaces a specific element. This method is idempotent and can only
     be called on a specific element and replaces its contents with the
     data provided. The payload data must be complete, i.e. no partial
@@ -126,14 +126,14 @@ their expected behavior, if implemented.
     not need to be specified (other than in the URL) and if specified
     different from in the URL, a **409 Conflict** HTTP code should be
     returned.
-  - `PATCH`  
+  - `PATCH`
     Updates/modifies a specific element. Similar to **PUT** but allows
     partial updates by providing only that data, for example:
     `PATCH  https://example.com/api/contests/wf14/teams/10`
     with JSON contents
     `{"name":"Our cool new team name"}`
     No updates of the **id** attribute are allowed either.
-  - `DELETE`  
+  - `DELETE`
     Delete a specific element. Idempotent, but may return a 404 status
     code when repeated. Any provided data is ignored. Example:
     `DELETE  https://example.com/api/contests/wf14/teams/8`
@@ -192,31 +192,31 @@ consistent with respect to the optional parts of each type, e.g. if the
 optional .uuu is included in any absolute timestamp it must be included
 when outputting all absolute timestamps.
 
-  - Integers  
+  - Integers
     (type **`integer`** in the specification) are JSON numbers that are
     restricted to be integer. They should be represented in standard
     integer representation `(-)?[0-9]+`.
-  - Floating point numbers  
+  - Floating point numbers
     (type **`float`** in the specification) are arbitrary JSON numbers
     that are expected to take non-integer values. It is recommended to
     use a decimal representation.
-  - Fixed point numbers  
+  - Fixed point numbers
     (type **`decimal`** in the specification) are JSON numbers that are
     expected to take non-integer values. They must be in decimal
     (non-scientific) representation and have at most 3 decimals. That
     is, they must be a integer multiple of `0.001`.
-  - Absolute timestamps  
+  - Absolute timestamps
     (type **`TIME`** in the specification) are strings containing
     human-readable timestamps, given in
     [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) extended combined
     date/time format with timezone:
     `yyyy-mm-ddThh:mm:ss(.uuu)?[+-]zz(:mm)?` (or timezone `Z` for UTC).
-  - Relative times  
+  - Relative times
     (type **`RELTIME`** in the specification) are strings containing
     human-readable time durations, given in a slight modification of the
     [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) extended time
     format: `(-)?(h)*h:mm:ss(.uuu)?`
-  - Identifiers  
+  - Identifiers
     (type **`ID`** in the specification) are given as string consisting
     of characters `[a-zA-Z0-9_-]` of length at most 36 and not starting
     with a `-` (dash). IDs are unique within each endpoint.
@@ -231,7 +231,7 @@ when outputting all absolute timestamps.
     short as reasonable but not more than 10 characters. IDs not marked
     as labels may be random characters and cannot be assumed to be
     suitable for display purposes.
-  - Ordinals  
+  - Ordinals
     (type **`ORDINAL`** in the specification) are used to give an
     explicit order to a list of objects. Ordinal attributes are integers
     and must be non-negative and unique in a list of objects, and they
@@ -239,7 +239,7 @@ when outputting all absolute timestamps.
     must not assume that the ordinals start at zero nor that they are
     sequential. Instead the ordinal values should be used to sort the
     list of objects.
-  - File references  
+  - File references
     (types **`IMAGE`**, **`VIDEO`**, **`ARCHIVE`** and **`STREAM`** in
     the specification) are represented as a JSON object with elements as
     defined below.
@@ -273,10 +273,10 @@ For example
 with JSON data
 
 ```json
-{ "id":"inst105",  
-  "name":"Carnegie Mellon University",  
-  ...  
-  "logo": [{"data": "<base64 string>", "width": 160, "height": 160}]  
+{ "id":"inst105",
+  "name":"Carnegie Mellon University",
+  ...
+  "logo": [{"data": "<base64 string>", "width": 160, "height": 160}]
 }
 ```
 
@@ -311,9 +311,9 @@ are mentioned below.
 The endpoints can be categorised into 3 groups as follows:
 
   - Configuration: contests, judgement-types, languages, problems,
-    groups, organizations, teams, team-members  
+    groups, organizations, teams, team-members
     Live data: state, submissions, judgements, runs, clarifications,
-    awards  
+    awards
     Aggregate data: scoreboard, event-feed
 
 Configuration is normally set before contest start. Is not expected to,
@@ -338,16 +338,16 @@ NDJSON format.
 In the tables below, the columns are:
 
   - Name: Attribute name; object sub-attributes are indicated as
-    `object.attribute`.  
+    `object.attribute`.
     Type: Data type of the attribute; either a [JSON
     type](https://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example)
-    or [a type defined above](#Recurring_details).  
+    or [a type defined above](#Recurring_details).
     Required?: Whether this is a required attribute that **must** be
-    implemented to conform to this specification.  
+    implemented to conform to this specification.
     Nullable?: Whether the attribute might be `null` (and thus
-    implicitly can also not be present in that case).  
+    implicitly can also not be present in that case).
     Source @WF: Specifies whether this attribute is implemented at the
-    ICPC World Finals and by whom.  
+    ICPC World Finals and by whom.
     Description: Description of the meaning of the attribute and any
     special considerations.
 
@@ -357,14 +357,14 @@ Furthermore, optional attributes must still be consistently implemented
 attributes that are:
 
   - Required and not nullable: The attribute must always be present with
-    a value.  
+    a value.
     Required and nullable: The attribute may be `null`, and only in that
-    case it may be left out.  
+    case it may be left out.
     Optional and not nullable: The attribute may not be implemented, but
     that implies that no element of the endpoint has the attribute set.
     If one element has this attribute present, then it must be not
     `null` and the same must be true for all same type elements within
-    the contest.  
+    the contest.
     Optional and nullable: The attribute may be `null` or not present.
     In the latter case that can either be because it was a left out
     `null` value or because it was not implemented.
@@ -436,19 +436,19 @@ Request:
 Returned data:
 
 ```json
-{  
-   "id": "wf2014",  
-   "name": "2014 ICPC World Finals",  
-   "formal_name": "38th Annual World Finals of the ACM International Collegiate Programming Contest",  
-   "start_time": "2014-06-25T10:00:00+01",  
-   "duration": "5:00:00",  
-   "scoreboard_freeze_duration": "1:00:00",  
-   "penalty_time": 20,  
-   "banner": [{  
-       "href": "https://example.com/api/contests/wf2014/banner",  
-       "width": 1920,  
-       "height": 240  
-   }]  
+{
+   "id": "wf2014",
+   "name": "2014 ICPC World Finals",
+   "formal_name": "38th Annual World Finals of the ACM International Collegiate Programming Contest",
+   "start_time": "2014-06-25T10:00:00+01",
+   "duration": "5:00:00",
+   "scoreboard_freeze_duration": "1:00:00",
+   "penalty_time": 20,
+   "banner": [{
+       "href": "https://example.com/api/contests/wf2014/banner",
+       "width": 1920,
+       "height": 240
+   }]
 }
 ```
 
@@ -459,12 +459,12 @@ Request:
 Returned data:
 
 ```json
-{  
-   "id": "dress2016",  
-   "name": "2016 ICPC World Finals Dress Rehearsal",  
-   "start_time": null,  
-   "countdown_pause_time": "0:03:38.749",  
-   "duration": "2:30:00"  
+{
+   "id": "dress2016",
+   "name": "2016 ICPC World Finals Dress Rehearsal",
+   "start_time": null,
+   "countdown_pause_time": "0:03:38.749",
+   "duration": "2:30:00"
 }
 ```
 
@@ -475,9 +475,9 @@ Request:
 Request data:
 
 ```json
-{  
-   "id": "wf2014",  
-   "start_time": "2014-06-25T10:00:00+01"  
+{
+   "id": "wf2014",
+   "start_time": "2014-06-25T10:00:00+01"
 }
 ```
 
@@ -488,9 +488,9 @@ Request:
 Request data:
 
 ```json
-{  
-   "id": "wf2016",  
-   "start_time": null  
+{
+   "id": "wf2016",
+   "start_time": null
 }
 ```
 
@@ -576,16 +576,16 @@ Request:
 Returned data:
 
 ```json
-[{  
-   "id": "CE",  
-   "name": "Compiler Error",  
-   "penalty": false,  
-   "solved": false  
-}, {  
-   "id": "AC",  
-   "name": "Accepted",  
-   "penalty": false,  
-   "solved": true  
+[{
+   "id": "CE",
+   "name": "Compiler Error",
+   "penalty": false,
+   "solved": false
+}, {
+   "id": "AC",
+   "name": "Accepted",
+   "penalty": false,
+   "solved": true
 }]
 ```
 
@@ -596,11 +596,11 @@ Request:
 Returned data:
 
 ```json
-{  
-   "id": "AC",  
-   "name": "Accepted",  
-   "penalty": false,  
-   "solved": true  
+{
+   "id": "AC",
+   "name": "Accepted",
+   "penalty": false,
+   "solved": true
 }
 ```
 
@@ -667,15 +667,15 @@ Request:
 Returned data:
 
 ```json
-[{  
-   "id": "java",  
-   "name": "Java"  
-}, {  
-   "id": "cpp",  
-   "name": "GNU C++"  
-}, {  
-   "id": "python2",  
-   "name": "Python 2"  
+[{
+   "id": "java",
+   "name": "Java"
+}, {
+   "id": "cpp",
+   "name": "GNU C++"
+}, {
+   "id": "python2",
+   "name": "Python 2"
 }]
 ```
 
@@ -718,8 +718,8 @@ Request:
 Returned data:
 
 ```json
-[{"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},  
- {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}  
+[{"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},
+ {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}
 ]
 ```
 
@@ -785,7 +785,7 @@ Returned data:
 
 ```json
 [
-  {"id":"42425","name":"Division 2","type":"division"}  
+  {"id":"42425","name":"Division 2","type":"division"}
 ]
 ```
 
@@ -835,11 +835,11 @@ Request:
 Returned data:
 
 ```json
-[{"id":"inst123","icpc_id":"433","name":"Shanghai Jiao Tong U.","formal_name":"Shanghai Jiao Tong University"},  
- {"id":"inst105","name":"Carnegie Mellon University","country":"USA",  
-  "logo":[{"href":"http://example.com/api/contests/wf14/organizations/inst105/logo/56px","width":56,"height":56},  
-          {"href":"http://example.com/api/contests/wf14/organizations/inst105/logo/160px","width":160,"height":160}]  
- }  
+[{"id":"inst123","icpc_id":"433","name":"Shanghai Jiao Tong U.","formal_name":"Shanghai Jiao Tong University"},
+ {"id":"inst105","name":"Carnegie Mellon University","country":"USA",
+  "logo":[{"href":"http://example.com/api/contests/wf14/organizations/inst105/logo/56px","width":56,"height":56},
+          {"href":"http://example.com/api/contests/wf14/organizations/inst105/logo/160px","width":160,"height":160}]
+ }
 ]
 ```
 
@@ -894,8 +894,8 @@ Request:
 Returned data:
 
 ```json
-[{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_ids":["asia-74324325532"]},  
- {"id":"123","name":"CMU1","organization_id":"inst105","group_ids":["8","11"]}  
+[{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_ids":["asia-74324325532"]},
+ {"id":"123","name":"CMU1","organization_id":"inst105","group_ids":["8","11"]}
 ]
 ```
 
@@ -936,8 +936,8 @@ Request:
 Returned data:
 
 ```json
-[{"id":"john-smith","team_id":"43","icpc_id":"32442","first_name":"John","last_name":"Smith","sex":"male","role":"contestant"},  
- {"id":"osten-umlautsen","team_id":"43","icpc_id":null,"first_name":"Östen","last_name":"Ümlautsen","sex":null,"role":"coach"}  
+[{"id":"john-smith","team_id":"43","icpc_id":"32442","first_name":"John","last_name":"Smith","sex":"male","role":"contestant"},
+ {"id":"osten-umlautsen","team_id":"43","icpc_id":null,"first_name":"Östen","last_name":"Ümlautsen","sex":null,"role":"coach"}
 ]
 ```
 
@@ -970,7 +970,7 @@ thawed either, or, it may be finalized before it is thawed. That, is the
 following sequence of inequalities must hold:
 
 ```
-started < frozen < ended < thawed    < end_of_updates,  
+started < frozen < ended < thawed    < end_of_updates,
                    ended < finalized < end_of_updates.
 ```
 
@@ -993,13 +993,13 @@ Request:
 Returned data:
 
 ```json
-{  
-  "started": "2014-06-25T10:00:00+01",  
-  "ended": null,  
-  "frozen": "2014-06-25T14:00:00+01",  
-  "thawed": null,  
-  "finalized": null,  
-  "end_of_updates": null  
+{
+  "started": "2014-06-25T10:00:00+01",
+  "ended": null,
+  "frozen": "2014-06-25T14:00:00+01",
+  "thawed": null,
+  "finalized": null,
+  "end_of_updates": null
 }
 ```
 
@@ -1061,9 +1061,9 @@ Request:
 Returned data:
 
 ```json
-[{"id":"187","team_id":"123","problem_id":"10-asteroids",  
-  "language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034","entry_point":"Main",  
-  "files":[{"href":"contests/wf14/submissions/187/files","mime":"application/zip"}]}  
+[{"id":"187","team_id":"123","problem_id":"10-asteroids",
+  "language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034","entry_point":"Main",
+  "files":[{"href":"contests/wf14/submissions/187/files","mime":"application/zip"}]}
 ]
 ```
 
@@ -1117,10 +1117,10 @@ Request:
 Returned data:
 
 ```json
-[{"id":"189549","submission_id":"wf2017-32163123xz3132yy","judgement_type_id":"CE","start_time":"2014-06-25T11:22:48.427+01",  
-  "start_contest_time":"1:22:48.427","end_time":"2014-06-25T11:23:32.481+01","end_contest_time":"1:23:32.481"},  
- {"id":"189550","submission_id":"wf2017-32163123xz3133ub","judgement_type_id":null,"start_time":"2014-06-25T11:24:03.921+01",  
-  "start_contest_time":"1:24:03.921","end_time":null,"end_contest_time":null}  
+[{"id":"189549","submission_id":"wf2017-32163123xz3132yy","judgement_type_id":"CE","start_time":"2014-06-25T11:22:48.427+01",
+  "start_contest_time":"1:22:48.427","end_time":"2014-06-25T11:23:32.481+01","end_contest_time":"1:23:32.481"},
+ {"id":"189550","submission_id":"wf2017-32163123xz3133ub","judgement_type_id":null,"start_time":"2014-06-25T11:24:03.921+01",
+  "start_contest_time":"1:24:03.921","end_time":null,"end_contest_time":null}
 ]
 ```
 
@@ -1165,8 +1165,8 @@ Request:
 Returned data:
 
 ```json
-[{"id":"1312","judgement_id":"189549","ordinal":28,"judgement_type_id":"TLE",  
-  "time":"2014-06-25T11:22:42.420+01","contest_time":"1:22:42.420"}  
+[{"id":"1312","judgement_id":"189549","ordinal":28,"judgement_type_id":"TLE",
+  "time":"2014-06-25T11:22:42.420+01","contest_time":"1:22:42.420"}
 ]
 ```
 
@@ -1214,8 +1214,8 @@ Request:
 Returned data:
 
 ```json
-[{"id":"wf2017-1","from_team_id":null,"to_team_id":null,"reply_to_id":null,"problem_id":null,  
-  "text":"Do not touch anything before the contest starts!","time":"2014-06-25T11:59:27.543+01","contest_time":"-0:15:32.457"}  
+[{"id":"wf2017-1","from_team_id":null,"to_team_id":null,"reply_to_id":null,"problem_id":null,
+  "text":"Do not touch anything before the contest starts!","time":"2014-06-25T11:59:27.543+01","contest_time":"-0:15:32.457"}
 ]
 ```
 
@@ -1226,10 +1226,10 @@ Request:
 Returned data:
 
 ```json
-[{"id":"1","from_team_id":"34","to_team_id":null,"reply_to_id":null,"problem_id":null,  
-  "text":"May I ask a question?","time":"2017-06-25T11:59:27.543+01","contest_time":"1:59:27.543"},  
- {"id":"2","from_team_id":null,"to_team_id":"34","reply_to_id":"1","problem_id":null,  
-  "text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}  
+[{"id":"1","from_team_id":"34","to_team_id":null,"reply_to_id":null,"problem_id":null,
+  "text":"May I ask a question?","time":"2017-06-25T11:59:27.543+01","contest_time":"1:59:27.543"},
+ {"id":"2","from_team_id":null,"to_team_id":"34","reply_to_id":"1","problem_id":null,
+  "text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}
 ]
 ```
 
@@ -1240,8 +1240,8 @@ Request:
 Returned data:
 
 ```json
-[{"id":"1","from_team_id":"34","text":"May I ask a question?","time":"2017-06-25T11:59:27.543+01","contest_time":"1:59:27.543"},  
- {"id":"2","to_team_id":"34","reply_to_id":"1","text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}  
+[{"id":"1","from_team_id":"34","text":"May I ask a question?","time":"2017-06-25T11:59:27.543+01","contest_time":"1:59:27.543"},
+ {"id":"2","to_team_id":"34","reply_to_id":"1","text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}
 ]
 ```
 
@@ -1306,9 +1306,9 @@ Request:
 Returned data:
 
 ```json
-[{"id":"gold-medal","citation":"Gold medal winner","team_ids":["54","23","1","45"]}, 
- {"id":"first-to-solve-a","citation":"First to solve problem A","team_ids":["45"]}, 
- {"id":"first-to-solve-b","citation":"First to solve problem B","team_ids":[]} 
+[{"id":"gold-medal","citation":"Gold medal winner","team_ids":["54","23","1","45"]},
+ {"id":"first-to-solve-a","citation":"First to solve problem A","team_ids":["45"]},
+ {"id":"first-to-solve-b","citation":"First to solve problem B","team_ids":[]}
 ]
 ```
 
@@ -1400,27 +1400,27 @@ Request:
 Returned data:
 
 ```json
-{  
-  "event_id": "xy1234",  
-  "time": "2014-06-25T14:13:07.832+01",  
-  "contest_time": "4:13:07.832",  
-  "state": {  
-    "started": "2014-06-25T10:00:00+01",  
-    "ended": null,  
-    "frozen": "2014-06-25T14:00:00+01",  
-    "thawed": null,  
-    "finalized": null,  
-    "end_of_updates": null  
-  },  
-  "rows": [  
-    {"rank":1,"team_id":"123","score":{"num_solved":3,"total_time":340},"problems":[  
-      {"problem_id":"1","num_judged":3,"num_pending":1,"solved":false},  
-      {"problem_id":"2","num_judged":1,"num_pending":0,"solved":true,"time":20},  
-      {"problem_id":"3","num_judged":2,"num_pending":0,"solved":true,"time":55},  
-      {"problem_id":"4","num_judged":0,"num_pending":0,"solved":false},  
-      {"problem_id":"5","num_judged":3,"num_pending":0,"solved":true,"time":205}  
-    ]}  
-  ]  
+{
+  "event_id": "xy1234",
+  "time": "2014-06-25T14:13:07.832+01",
+  "contest_time": "4:13:07.832",
+  "state": {
+    "started": "2014-06-25T10:00:00+01",
+    "ended": null,
+    "frozen": "2014-06-25T14:00:00+01",
+    "thawed": null,
+    "finalized": null,
+    "end_of_updates": null
+  },
+  "rows": [
+    {"rank":1,"team_id":"123","score":{"num_solved":3,"total_time":340},"problems":[
+      {"problem_id":"1","num_judged":3,"num_pending":1,"solved":false},
+      {"problem_id":"2","num_judged":1,"num_pending":0,"solved":true,"time":20},
+      {"problem_id":"3","num_judged":2,"num_pending":0,"solved":true,"time":55},
+      {"problem_id":"4","num_judged":0,"num_pending":0,"solved":false},
+      {"problem_id":"5","num_judged":3,"num_pending":0,"solved":true,"time":205}
+    ]}
+  ]
 }
 ```
 

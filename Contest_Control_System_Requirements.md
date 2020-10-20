@@ -1209,13 +1209,13 @@ A YAML file consisting of a mapping with the following keys:
 ##### Example
 
 ```yaml
-# Contest configuration  
----  
-name:                     ICPC World Finals 2011  
-short-name:               ICPC WF 2011  
-start-time:               2011-02-04T01:23:00Z  
-duration:                 5:00:00  
-scoreboard-freeze-length: 1:00:00  
+# Contest configuration
+---
+name:                     ICPC World Finals 2011
+short-name:               ICPC WF 2011
+start-time:               2011-02-04T01:23:00Z
+duration:                 5:00:00
+scoreboard-freeze-length: 1:00:00
 penalty-time:             20
 ```
 
@@ -1252,30 +1252,30 @@ place as few restrictions as possible on the language configuration.
 ##### Example
 
 ```yaml
-# System configuration  
----  
-default-clars:  
-  - No comment, read problem statement.  
-  - This will be answered during the answers to questions session.  
-  
-clar-categories:  
-  - General  
-  - SysOps  
-  - Operations  
-  
-languages:  
-  - name: C++  
-    compiler: /usr/bin/g++    
-    compiler-args: -O2 -Wall -o a.out -static {files}   
-  
-  - name: C  
-    compiler: /usr/bin/gcc  
-    compiler-args: -O2 -Wall -std=gnu99 -o a.out -static {files} -lm  
-    
-  - name: Java  
-    compiler: /usr/bin/javac  
-    compiler-args: -O {files}  
-    runner: /usr/bin/java  
+# System configuration
+---
+default-clars:
+  - No comment, read problem statement.
+  - This will be answered during the answers to questions session.
+
+clar-categories:
+  - General
+  - SysOps
+  - Operations
+
+languages:
+  - name: C++
+    compiler: /usr/bin/g++
+    compiler-args: -O2 -Wall -o a.out -static {files}
+
+  - name: C
+    compiler: /usr/bin/gcc
+    compiler-args: -O2 -Wall -std=gnu99 -o a.out -static {files} -lm
+
+  - name: Java
+    compiler: /usr/bin/javac
+    compiler-args: -O {files}
+    runner: /usr/bin/java
     runner-args:
 ```
 
@@ -1301,32 +1301,32 @@ A sequence of mappings with the following keys:
 ##### Example
 
 ```yaml
-# Problem set configuration  
----   
-problems:  
-  - letter:     A  
-    short-name: apl  
-    color:      yellow  
-    rgb:        '#ffff00'  
-    
-  - letter:     B  
-    short-name: barcodes  
-    color:      red  
-    rgb:        '#ff0000'  
-    
-  - letter:     C  
-    short-name: biobots  
-    color:      green  
-    rgb:        '#00ff00'  
-    
-  - letter:     D  
-    short-name: castles  
-    color:      blue  
-    rgb:        '#0000ff'  
-    
-  - letter:     E  
-    short-name: channel  
-    color:      white  
+# Problem set configuration
+---
+problems:
+  - letter:     A
+    short-name: apl
+    color:      yellow
+    rgb:        '#ffff00'
+
+  - letter:     B
+    short-name: barcodes
+    color:      red
+    rgb:        '#ff0000'
+
+  - letter:     C
+    short-name: biobots
+    color:      green
+    rgb:        '#00ff00'
+
+  - letter:     D
+    short-name: castles
+    color:      blue
+    rgb:        '#0000ff'
+
+  - letter:     E
+    short-name: channel
+    color:      white
     rgb:        '#ffffff'
 ```
 
