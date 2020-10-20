@@ -5,7 +5,7 @@ permalink: /contest_archive_format
 # Contest archive format
 
 This page describes a draft archive format for a contest. It is
-developed in parallel with the [Contest API](Contest_API). It
+developed in parallel with the [Contest API](contest_api). It
 might very well end up being very similar to the CDP which has been
 suggested to use for this, but which has a slightly different purpose...
 
@@ -22,7 +22,7 @@ disk, including:
 
 This standard lays out the relative location and format of each type of
 contest-related information when reading or writing to disk. The top
-level structure is inspired by the [Contest API](Contest_API)
+level structure is inspired by the [Contest API](contest_api)
 structure, and a dump of the output from that API is one way to store
 the data. That said, the archive format allows for any format whose
 documentation has been registered with the ICPC. The sections below
@@ -31,30 +31,30 @@ lists all currently known (and thus accepted) formats.
 ## Structure
 
 The Contest Archive consists of a single directory (possibly ZIP
-compressed) with a metadata file (**archive.yaml**) and at most a single
-entry for each of the types of data (**config**, **problems**,
-**registration**, **activity**, **results**, **events**). An entry is
+compressed) with a metadata file (`archive.yaml`) and at most a single
+entry for each of the types of data (`config`, `problems`,
+`registration`, `activity`, `results`, `events`). An entry is
 either a directory with the same name as the type of data, or a file
 with same base name as the type of data and any file extension.
 
 ### Metadata
 
-Archive metadata is stored in a YAML file called **archive.yaml** with
+Archive metadata is stored in a YAML file called `archive.yaml` with
 the following keys:
 
 | Key          | Description                                                    |
 | ------------ | -------------------------------------------------------------- |
 | created-by   | Name of system creating this archive                           |
 | archive      | ID of format used for content types not listed in archive.yaml |
-| config       | ID of format used for **config**                               |
-| problems     | ID of format used for **problems**                             |
-| registration | ID of format used for **registration**                         |
-| activity     | ID of format used for **activity**                             |
-| results      | ID of format used for **results**                              |
-| events       | ID of format used for **events**                               |
+| config       | ID of format used for `config`                               |
+| problems     | ID of format used for `problems`                             |
+| registration | ID of format used for `registration`                         |
+| activity     | ID of format used for `activity`                             |
+| results      | ID of format used for `results`                              |
+| events       | ID of format used for `events`                               |
 
-Only **created-by** is always required, but if any of content type is
-not listed then **archive** must be specified.
+Only `created-by` is always required, but if any of content type is
+not listed then `archive` must be specified.
 
 #### Example
 
@@ -134,8 +134,8 @@ The following formats may be used:
 
 **NB\!**: This section should not be in this document, and is only
 included here while WIP. It should either be its own document, or be
-added to the [Contest API](Contest_API) document. Every
-subsection defines the on disk format **contest-api** for a type of
+added to the [Contest API](contest_api) document. Every
+subsection defines the on disk format `contest-api` for a type of
 data.
 
 ### Design principles
@@ -189,7 +189,7 @@ or:
 
 ### Config
 
-A directory, **config**, containing:
+A directory, `config`, containing:
 
   - a JSON file (`contest.json`) for the `/contests/<id>` endpoint
   - a JSON file (`judgement-types.json`) for the
@@ -197,7 +197,7 @@ A directory, **config**, containing:
   - a JSON file (`languages.json`) for the `/contests\<id>/languages`
     endpoint
   - `system.yaml` defined in the [
-    CCSR](Contest_Control_System_Requirements#system.yaml).
+    CCSR](ccs_system_requirements#systemyaml).
   - the contest banner(s), from the banner element of `/contests/<id>`, if
     available.
   - the contest logo(s), from the logo element of `/contests/<id>`, if
@@ -217,7 +217,7 @@ config/logo.512x512.png
 
 ### Registration
 
-A directory, **registration**, containing:
+A directory, `registration`, containing:
 
   - a JSON file (`groups.json`) for the `/groups` endpoint, if available
   - a JSON file (`organizations.json`) for the `/organizatons` endpoint, if
@@ -258,7 +258,7 @@ registration/team-members/<id>/photo.jpg
 
 ### Activity
 
-A directory, **activity**, containing:
+A directory, `activity`, containing:
 
   - a JSON file (`submissions.json`) for the `/submissions` endpoint
   - a directory for submissions containing:
@@ -283,7 +283,7 @@ activity/clarifications.json
 
 ### Results
 
-A directory, **results**, containing:
+A directory, `results`, containing:
 
   - A JSON file (`awards.json`) for the `/awards` endpoint, if available
   - A JSON file (`scoreboard.json`) for the `/scoreboard` endpoint
@@ -297,7 +297,7 @@ results/scoreboard.json
 
 ### Events
 
-A directory, **events**, containing:
+A directory, `events`, containing:
 
   - a JSON file (`event-feed.json`) for the `/event-feed` endpoint on the
     primary system
