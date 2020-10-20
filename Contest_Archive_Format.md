@@ -59,12 +59,12 @@ not listed then **archive** must be specified.
 #### Example
 
 ```yaml
-# Contest Archive  
+# Contest Archive  
 ---  
-created-by: Kattis  
-archive:    contest-api  
-problems:   kattis  
-events:     missing
+created-by: Kattis  
+archive:    contest-api  
+problems:   kattis  
+events:     missing
 ```
 
 ### Config
@@ -175,16 +175,16 @@ appropriate specifier.
 #### Examples of Multiple File References
 
 ```
-<endpoint>/<id>/banner.800x100.png # Must be a 800 x 100 px PNG  
-<endpoint>/<id>/banner.80x10.png   # Must be a 80 x 10 px PNG
+<endpoint>/<id>/banner.800x100.png # Must be a 800 x 100 px PNG  
+<endpoint>/<id>/banner.80x10.png   # Must be a 80 x 10 px PNG
 ```
 
 or:
 
 ```
-<endpoint>/<id>/logo.png           # Is probably the source image for the other logo versions. Must be larger than the others.  
-<endpoint>/<id>/logo.56x56.png     # Must be a 56 x 56 px PNG  
-<endpoint>/<id>/logo.160x160.png   # Must be a 160 x 160 px PNG
+<endpoint>/<id>/logo.png           # Is probably the source image for the other logo versions. Must be larger than the others.  
+<endpoint>/<id>/logo.56x56.png     # Must be a 56 x 56 px PNG  
+<endpoint>/<id>/logo.160x160.png   # Must be a 160 x 160 px PNG
 ```
 
 ### Config
