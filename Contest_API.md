@@ -1571,65 +1571,74 @@ If the client fails to respond to multiple requests over a period of
 time (configured for each contest), it will be assumed deactivated and
 automatically removed from future callbacks.
 
-The following endpoint is associated with the webhook:
+The following endpoints is associated with the webhook:
 
-| Endpoint   | Mime-type        | Required? | Source @WF | Description                            |
-| ---------- | ---------------- | --------- | ---------- | -------------------------------------- |
-| `/webhook` | application/json | yes       | CCS        | List or register for webhook callbacks |
+| Endpoint         | Mime-type        | Required? | Source @WF | Description                                                                                                          |
+| ---------------- | ---------------- | --------- | ---------- | -------------------------------------------------------------------------------------------------------------------- |
+| `/webhooks`      | application/json | yes       | CCS        | JSON array of all webhook callbacks with elements as defined in the table below. Also used to register new webhooks. |
+| `/webhooks/<id>` | application/json | yes       | CCS        | JSON object of a single webhook callback with elements as defined in the table below                                 |
 
-JSON elements of webhook objects:
+JSON elements of webhook callback objects:
 
-| Name | Type   | Required? | Nullable? | Description           |
-| ---- | ------ | --------- | --------- | --------------------- |
-| url  | string | yes       | no        | The url for callbacks |
+| Name       | Type            | Required? | Nullable? | Description                                                                           |
+| ---------- | --------------- | --------- | --------- | ------------------------------------------------------------------------------------- |
+id           | ID              | yes       | no        | identifier of the webhook.                                                            |
+url          | string          | yes       | no        | The URL to post HTTP callbacks to.                                                    |
+endpoints    | array of string | yes       | no        | Names of endpoints to receive callbacks for. Empty array means all endpoints.         |
+contest\_ids | array of ID     | yes       | no        | ID’s of contests to receive callbacks for. Empty array means all configured contests. |
+active       | boolean         | yes       | no        | Whether the webhook is enabled.                                                       |
 
-TODO: include filter details?
+The idea behind the `active` field is that if the CCS decides a webhook isn’t behaving and wants to disable sending callbacks to it,
+it can update this active field. It also allows one to temporarily disable a webhook using some UI if a CCS implements it.
 
 ##### Adding a webhook
 
-To register a webhook, you need to post your server's callback url. The
-general format to register a webhook is:
+To register a webhook, you need to post your server's callback URL.
+To do so, perform a `POST` request with a JSON body with the fields (except `id`) from the above table to the `/webhooks` endpoint together with one additional field,
+called `token`. In this field put a client-generated token that can be used to verify that callbacks come from the CCS.
 
-```json
-{"url": "<callback url>", "auth": ... }
+```note
+TODO: What about using sane defaults for `endpoints`, `contest_ids` and `active` when adding a new webhook?
 ```
-
-| Name | Type   | Required? | Nullable? | Description           |
-| ---- | ------ | --------- | --------- | --------------------- |
-| url  | string | yes       | no        | The url for callbacks |
-| auth | string | yes       | no        | TODO                  |
 
 ##### Example
 
 Request:
 
-` POST https://example.com/api/webhook`
+` POST https://example.com/api/webhooks`
 
 Payload:
 
 ```json
-{"url": "https://myurl", "auth": ... }
+{"url": "https://myurl", "token": "mysecrettoken" }
 ```
 
 Request:
 
-` GET https://example.com/api/webhook`
+` GET https://example.com/api/webhooks`
 
 Returned data:
 
 ```json
-[{"url":"https://myurl"},{"url":"https://myotherurl"}]
+[{
+    "id":"icpc-live",
+    "url":"https://myurl",
+    "endpoints": [],
+    "contest_ids": [],
+    "active": true
+},{
+    "id":"shadow",
+    "url":"https://myotherurl",
+    "endpoints": ["teams", "problems"],
+    "contest_ids": ["wf2014"],
+    "active": false
+}]
 ```
 
-Future payload posted to url:
-
-` POST https://myurl`
-
-Payload:
-
-```json
-{"contest_id":"finals","endpoint":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
-```
+When the CCS wants to send out a callback, it will check all active webhooks, filter them on applicable endpoint and contest ID and perform a `POST` to the URL.
+The CCS will add a header to this request called `Webhook-Token` which contains the token as supplied when creating the webhook.
+Clients should verify that this token matches with what they expect.
+The body of the request will be in the same format as in the [feed format](#feed-format), i.e. it contains the keys `contest_id`, `endpoint`, `id` and `data`.
 
 #### HTTP Feed
 
