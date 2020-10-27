@@ -381,7 +381,7 @@ The following endpoint is associated with contest:
 
 | Endpoint         | Mime-type        | Required? | Source @WF | Description                                                                 |
 | ---------------- | ---------------- | --------- | ---------- | --------------------------------------------------------------------------- |
-| /`contests`      | application/json | yes       | CDS        | JSON array of all contests with elements as defined in the table below      |
+| `/contests`      | application/json | yes       | CDS        | JSON array of all contests with elements as defined in the table below      |
 | `/contests/<id>` | application/json | yes       | CCS        | JSON object of a single contest with elements as defined in the table below |
 
 Returns a JSON object with the elements below. If there is no current
