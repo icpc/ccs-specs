@@ -14,7 +14,7 @@ TODO: Remove/replace broken links.
 ## Introduction
 
 This page describes an API for accessing information provided by a
-[Contest Control System](Contest_Control_System) or [Contest
+[Contest Control System](ccs_system_requirements) or [Contest
 Data Server](CDS). Such an API can be used by a multitude of
 clients:
 
@@ -29,15 +29,15 @@ clients:
 
 This API is meant to be useful, not only at the ICPC World Finals, but
 more generally in any ICPC-style contest setup. It is meant to
-incorporate and supersede the [JSON
-Scoreboard](JSON_Scoreboard_2016), the [REST interface for
-source code
-fetching](Draft_2014_REST_interface_for_source_code_fetching),
-and the [Contest start interface](Contest_Start_Interface).
+incorporate and supersede a number of
+[deprecated or obsolete specifications](https://clics.ecs.baylor.edu/index.php?title=Main_Page#Deprecated.2C_Old.2C_and_Orphaned_Specifications) amongst which the *JSON Scoreboard*, the
+*REST interface for source code fetching*
+and the *Contest start interface*.
+
 This REST interface is specified in conjunction with a new [NDJSON event
 feed](#event-feed---draft), which provides all changes to this
 interface as CRUD-style events and is meant to supersede the old XML
-[Event Feed](Event_Feed).
+*Event Feed*.
 
 ## General design principles
 
@@ -415,8 +415,7 @@ No access restrictions apply to a GET on this endpoint.
 
 #### PATCH start\_time
 
-To replace the [Contest Start
-Interface](Contest_Start_Interface), at the ICPC World
+To replace the *Contest Start Interface*, at the ICPC World
 Finals, an API provided by a CCS or CDS implementing this specification
 must have a role that has the ability to clear or set the contest start
 time via a PATCH method.

@@ -8,8 +8,8 @@ permalink: /ccs_system_requirements
 This document specifies requirements for operation, verification and
 validation of Programming Contest Control Systems that wish to be
 considered for managing the operation of the [International
-Collegiate Programming Contest](http://icpc.baylor.edu) [World
-Finals](http://cm.baylor.edu/ICPCWiki/Wiki.jsp?page=World%20Finals). The
+Collegiate Programming Contest](https://icpc.global) [World
+Finals](https://icpc.global/worldfinals). The
 document defines a set of operations, capabilities, and features which
 any candidate system must provide, including a set of testability
 criteria which must be satisfied and a set of documentation which must
