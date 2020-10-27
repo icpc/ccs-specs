@@ -1514,4 +1514,3 @@ tab separated fields as defined below.
 | 3     | short problem name     | railway | string from contest.yaml |
 | 4     | submission time in ms  | 2033497 | long integer             |
 | 5     | judge response acronym | AC      | string                   |
-|       |                        |         |                          |
