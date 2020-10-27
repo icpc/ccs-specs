@@ -701,7 +701,7 @@ JSON elements of problem objects:
 | label             | string  | yes       | no        | CCS        | label of the problem on the scoreboard, typically a single capitalized letter                                                                                     |
 | name              | string  | yes       | no        | CCS        | name of the problem                                                                                                                                               |
 | ordinal           | ORDINAL | yes       | no        | CCS        | ordering of problems on the scoreboard                                                                                                                            |
-| rgb               | string  | no        | no        | CCS        | hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](http://en.wikipedia.org/wiki/Web_colors#Hex_triplet), e.g. '\#AC00FF' or '\#fff' |
+| rgb               | string  | no        | no        | CCS        | hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet), e.g. '\#AC00FF' or '\#fff' |
 | color             | string  | no        | no        | CCS        | human readable color description associated to the RGB value                                                                                                      |
 | time\_limit       | decimal | no        | no        | CCS        | time limit in seconds per test data set (i.e. per single run)                                                                                                     |
 | test\_data\_count | integer | yes       | no        | CCS        | number of test data sets                                                                                                                                          |
@@ -1364,7 +1364,7 @@ JSON elements of the scoreboard object.
 The scoreboard `rows` array is sorted according to rank and alphabetical
 on team name within identically ranked teams. Here alphabetical ordering
 means according to the [Unicode Collation
-Algorithm](http://www.unicode.org/reports/tr10/), by default using the
+Algorithm](https://www.unicode.org/reports/tr10/), by default using the
 `en-US` locale.
 
 Each JSON object in the rows array consists of:

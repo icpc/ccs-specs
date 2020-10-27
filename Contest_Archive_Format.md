@@ -85,7 +85,7 @@ The following formats may be used:
 
 | ID     | Description                                               | Specification                                           |
 | ------ | --------------------------------------------------------- | ------------------------------------------------------- |
-| kattis | Kattis problem package format                             | <http://www.problemarchive.org/>                        |
+| kattis | Kattis problem package format                             | <https://www.problemarchive.org/>                        |
 | icpc   | ICPC problem package format (subset of the Kattis format) | <https://clics.ecs.baylor.edu/index.php/Problem_format> |
 
 ### Registration

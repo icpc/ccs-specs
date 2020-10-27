@@ -1466,7 +1466,7 @@ problem.
 A text file consisting of a version line and one line for each team in
 the contest, sorted in rank order with alphabetical order on team name
 as tie breaker. Here alphabetical ordering means according to the
-[Unicode Collation Algorithm](http://www.unicode.org/reports/tr10/), by
+[Unicode Collation Algorithm](https://www.unicode.org/reports/tr10/), by
 default using the `en-US` locale. Each line has tab separated fields as
 defined below.
 
