@@ -797,7 +797,6 @@ specified in the table.
 | Accepted            | AC      | No      | Yes    |
 | Security Violation  | SV      | Yes     | No     |
 | Judging Error       | JE      | No      | No     |
-|                     |         |         |        |
 
 ### Assigning a Judgment
 
@@ -1450,7 +1449,6 @@ Then follow several lines with the following format (one per team).
 | 6            | Time of the last accepted submission   | 233                    | integer |
 | 6 + 2*i* - 1 | Number of submissions for problem *i*  | 2                      | integer |
 | 6 + 2*i*     | Time when problem *i* was solved       | 233                    | integer |
-|              |                                        |                        |         |
 
 The External ID for a team can be found in the
 [teams.tsv](#teamstsv).
