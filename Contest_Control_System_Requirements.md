@@ -41,8 +41,8 @@ contest results, and overall CCS configuration.
 A contest control system may be submitted to the Director of Operations
 for the ICPC World Finals for consideration as a candidate to run the
 World Finals. The items which must be submitted in order to be
-considered are described under [ Certification
-Process](#certification-process) in this document. Any
+considered are described under [Documentation
+Requirements](#documentation-requirements) in this document. Any
 submitted CCS which meets all of the requirements defined in this
 document will be certified as being accepted as a candidate to run the
 World Finals. Meeting or failing to meet each requirement will be
@@ -162,9 +162,9 @@ If the CCS uses a login/password mechanism to enforce secure
 authentication, it must support account creation and password assignment
 according to the following algorithm:
 
-1.  read [teams.tsv](#teams.tsv) defining team accounts to be
+1.  read [teams.tsv](#teamstsv) defining team accounts to be
     created
-2.  read [ accounts.tsv](#accounts.tsv) defining additional
+2.  read [accounts.tsv](#accountstsv) defining additional
     accounts to be created or, for teams, specifying the password of the
     accounts.
 
@@ -249,21 +249,21 @@ be required to make any changes once the contest starts.
 The CCS must be able to import contest configuration from a single URL,
 and use the data at that location to configure the CCS. The
 configuration URL contains all contest configuration data, including the
-contest configuration file ([contest.yaml](#contest.yaml)),
+contest configuration file ([contest.yaml](#contestyaml)),
 problemset configuration file
-([problemset.yaml](#problemset.yaml)), problem definitions,
+([problemset.yaml](#problemsetyaml)), problem definitions,
 teams.tsv, groups.tsv and logos.tar.gz. For example, if the URL is
 <http://10.1.1.0/data>, teams.tsv can be imported from
 <http://10.1.1.0/data/teams.tsv>.
 
-The CCS must be able to read [teams.tsv](#teams.tsv), which
+The CCS must be able to read [teams.tsv](#teamstsv), which
 contains a list of teams registered for the World Finals. It must use
 the data in this file to automatically create whatever internal
 representation is necessary to allow each team (and only the teams)
 specified in the registration list to participate in the World Finals
 contest.
 
-The CCS must be able to read [groups.tsv](#groups.tsv), an
+The CCS must be able to read [groups.tsv](#groupstsv), an
 initialization file containing the list of groups to which the teams
 belong.
 
@@ -277,7 +277,7 @@ on the contest network.
 The CCS must be able to configure predefined answers to clarification
 requests (e.g., "No response, read problem statement." and "This will be
 answered after the practice session.") from the [ contest configuration
-file](#contest.yaml), so that judges can choose to reply to a
+file](#contestyaml), so that judges can choose to reply to a
 clarification request by selecting a predefined answer rather than being
 required to enter a specific answer. One of the predefined answers must
 be the "default" answer.
@@ -286,7 +286,7 @@ be the "default" answer.
 
 The CCS must be able to configure "categories" to which clarification
 requests can be assigned from the [ contest configuration
-file](#contest.yaml). A request belongs to exactly one
+file](#contestyaml). A request belongs to exactly one
 category. Examples of categories are "General", "SysOps", "Operations".
 
 In addition, the CCS must construct one category per problem, i.e.,
@@ -299,7 +299,7 @@ categories named e.g. "Problem A", "Problem B", etc. for each problem.
 The CCS must provide the ability to compile and execute (or interpret,
 as appropriate for the language) submitted source code files for each of
 the languages specified by the [Environment of the World
-Finals](http://icpc.baylor.edu/worldfinals/programming-environment).
+Finals](https://icpc.global/worldfinals/programming-environment).
 
 #### Language Options
 
@@ -380,7 +380,7 @@ in wall-clock time.
 
 Note that removing a time interval changes the wall-clock time when the
 contest ends, as the duration of the contest in
-[contest.yaml](#contest.yaml) is specified in contest time.
+[contest.yaml](#contestyaml) is specified in contest time.
 
 Removing the interval between time T<sub>0</sub> and T<sub>1</sub>,
 where T<sub>0</sub> ≤ T<sub>1</sub>, means that all submissions received
@@ -508,8 +508,8 @@ affecting contest operations in any way.
 ### Finalizing the Contest
 
 Finalizing is the procedure to authorize the final results at the end of
-a contest. The [results.tsv](#results.tsv) and
-[scoreboard.tsv](#scoreboard.tsv) files will be generated and
+a contest. The [results.tsv](#resultstsv) and
+[scoreboard.tsv](#scoreboardtsv) files will be generated and
 the [finalized](Event_Feed#Finalized_Event) element will be
 sent on the [Event Feeds](event-feed).
 
@@ -886,7 +886,7 @@ data according to the following:
     of the team's first accepted submission to that problem.
 3.  A team's *penalty time on a problem* is the contest time that the
     team solved the problem, plus *penaltytime* (from
-    [contest.yaml](#contest.yaml)) minutes for each previous
+    [contest.yaml](#contestyaml)) minutes for each previous
     submission rejected with a judgement that causes penalty time, by
     that team on that problem, or 0 if the team has not solved the
     problem.
@@ -934,7 +934,7 @@ The scoreboard must include at least the following information.
 For each team:
 
 1.  university name
-2.  univerisity logo (see [logos.tar.gz](#logos.tar.gz))
+2.  univerisity logo (see [logos.tar.gz](#logostargz))
 3.  team position
 4.  number of problems solved
 5.  total penalty time
@@ -965,7 +965,7 @@ with the [Event Feed specification](Event_Feed).
 
 The CCS must be capable of generating an external file containing the
 current scoreboard. The format of this file must be as defined in
-[scoreboard.tsv](#scoreboard.tsv).
+[scoreboard.tsv](#scoreboardtsv).
 
 The CCS must automatically save an updated copy of the external scoring
 data file whenever the scoring data itself is updated as described
@@ -986,7 +986,7 @@ each ranked team their rank and:
 
 The CCS must be capable of generating an external file containing the
 final results of the World Finals contest. The format of this file must
-be as defined in the [results.tsv](#results.tsv).
+be as defined in the [results.tsv](#resultstsv).
 
 ## Shadow Mode
 
