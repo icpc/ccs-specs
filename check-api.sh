@@ -1,6 +1,6 @@
 #!/bin/bash
 # Checks whether a Contest API conforms to the specification
-# https://clics.ecs.baylor.edu/index.php/Contest_API
+# https://ccs-specs.icpc.io/contest_api
 
 # Set path to json-validate binary if it's not in PATH:
 #VALIDATE_JSON=/path/to/validate-json
@@ -71,7 +71,7 @@ $(basename $0) - Validate a Contest API implementation with JSON schema.
 Usage: $(basename $0) [option]... URL
 
 This program validates a Contest API implementation against the
-specification: https://clics.ecs.baylor.edu/index.php/Contest_API
+specification: https://ccs-specs.icpc.io/contest_api
 
 The URL must point to the base of the API, for example:
 
