@@ -953,13 +953,13 @@ problem.
 
 ## Data Export
 
-### Event Feed
+### Contest API
 
-It is a requirement that the CCS provide an *external event feed*. This
+It is a requirement that the CCS provide an external *Contest API*. This
 means that the CCS must have a mechanism for external processes to
 connect to the CCS and obtain dynamic real-time updates regarding the
-current state of the contest. The CCS event feed mechanism must comply
-with the [Event Feed specification](Event_Feed).
+current state of the contest. The CCS mechanism must comply
+with the [Contest API specification](../contest_api).
 
 ### Scoreboard Data File
 
