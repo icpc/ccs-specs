@@ -328,7 +328,7 @@ associated timestamp/contest time attributes. Updates are notified via
 the event feed.
 
 Live data is generated during the contest and new elements are expected.
-Data is immutable though, only inserts, no updates or deletes of
+Data is immutable though: only inserts, no updates or deletes of
 elements. It does have associated timestamp/contest time attributes.
 Inserts and deletes are notified via the event feed. **Note**:
 judgements are the exception to immutability in a weak sense: they get
@@ -528,7 +528,8 @@ No access restrictions apply to a GET on this endpoint.
 
 The list below contains standardized identifiers for known judgement
 types. These identifiers should be used by a server. Please send an
-email to <cliccs@ecs.csus.edu> when there are judgement types missing.
+email to <cliccs@ecs.csus.edu> or create a pull request at
+<https://github.com/icpc/ccs-specs> when there are judgement types missing.
 
 The column **Big 5** lists the "big 5" equivalents, if any. A `*` in
 the column means that the judgement is one of the "big 5".
@@ -886,9 +887,9 @@ JSON elements of team objects:
 
 The following access restrictions apply to a GET on this endpoint:
 
-  - `backup` requires the `admin` or `analyst` role for access,
+  - the `backup` attribute requires the `admin` or `analyst` role for access,
   - the `desktop` and `webcam` attributes are available for the
-    `public` role only when scoreboard is not frozen.
+    `public` role only when the scoreboard is not frozen.
 
 #### Example
 
