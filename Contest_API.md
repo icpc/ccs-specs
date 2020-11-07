@@ -263,8 +263,10 @@ interpreted relative to the `baseurl` of the API. For example, if
 `baseurl` is <https://example.com/api>, then the following are
 equivalent JSON response snippets pointing to the same location:
 
-` "href":"https://example.com/api/contests/wf14/submissions/187/files"`
-` "href":"contests/wf14/submissions/187/files"`
+```json
+  "href":"https://example.com/api/contests/wf14/submissions/187/files"
+  "href":"contests/wf14/submissions/187/files"
+```
 
 If implementing support for uploading files pointed to by resource
 links, substitute the href element with a data element with a base64
@@ -316,9 +318,9 @@ The endpoints can be categorised into 3 groups as follows:
 
   - Configuration: contests, judgement-types, languages, problems,
     groups, organizations, teams, team-members
-    Live data: state, submissions, judgements, runs, clarifications,
+  - Live data: state, submissions, judgements, runs, clarifications,
     awards
-    Aggregate data: scoreboard, event-feed
+  - Aggregate data: scoreboard, event-feed
 
 Configuration is normally set before contest start. Is not expected to,
 but could occasionally be updated during a contest. It does not have
@@ -343,16 +345,16 @@ In the tables below, the columns are:
 
   - Name: Attribute name; object sub-attributes are indicated as
     `object.attribute`.
-    Type: Data type of the attribute; either a [JSON
+  - Type: Data type of the attribute; either a [JSON
     type](https://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example)
     or [a type defined above](#json-attribute-types).
-    Required?: Whether this is a required attribute that **must** be
+  - Required?: Whether this is a required attribute that **must** be
     implemented to conform to this specification.
-    Nullable?: Whether the attribute might be `null` (and thus
+  - Nullable?: Whether the attribute might be `null` (and thus
     implicitly can also not be present in that case).
-    Source @WF: Specifies whether this attribute is implemented at the
+  - Source @WF: Specifies whether this attribute is implemented at the
     ICPC World Finals and by whom.
-    Description: Description of the meaning of the attribute and any
+  - Description: Description of the meaning of the attribute and any
     special considerations.
 
 Note that attributes with `null` value may be left out by the server.
@@ -362,14 +364,14 @@ attributes that are:
 
   - Required and not nullable: The attribute must always be present with
     a value.
-    Required and nullable: The attribute may be `null`, and only in that
+  - Required and nullable: The attribute may be `null`, and only in that
     case it may be left out.
-    Optional and not nullable: The attribute may not be implemented, but
+  - Optional and not nullable: The attribute may not be implemented, but
     that implies that no element of the endpoint has the attribute set.
     If one element has this attribute present, then it must be not
     `null` and the same must be true for all same type elements within
     the contest.
-    Optional and nullable: The attribute may be `null` or not present.
+  - Optional and nullable: The attribute may be `null` or not present.
     In the latter case that can either be because it was a left out
     `null` value or because it was not implemented.
 
@@ -528,7 +530,7 @@ The list below contains standardized identifiers for known judgement
 types. These identifiers should be used by a server. Please send an
 email to <cliccs@ecs.csus.edu> when there are judgement types missing.
 
-The column **Big 5** lists the "big 5" equivalents, if any. A **\*** in
+The column **Big 5** lists the "big 5" equivalents, if any. A `*` in
 the column means that the judgement is one of the "big 5".
 
 The **Translation** column lists other judgements the judgement can
@@ -701,7 +703,7 @@ JSON elements of problem objects:
 | label             | string  | yes       | no        | CCS        | label of the problem on the scoreboard, typically a single capitalized letter                                                                                     |
 | name              | string  | yes       | no        | CCS        | name of the problem                                                                                                                                               |
 | ordinal           | ORDINAL | yes       | no        | CCS        | ordering of problems on the scoreboard                                                                                                                            |
-| rgb               | string  | no        | no        | CCS        | hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet), e.g. '\#AC00FF' or '\#fff' |
+| rgb               | string  | no        | no        | CCS        | hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet), e.g. `#AC00FF` or `#fff` |
 | color             | string  | no        | no        | CCS        | human readable color description associated to the RGB value                                                                                                      |
 | time\_limit       | decimal | no        | no        | CCS        | time limit in seconds per test data set (i.e. per single run)                                                                                                     |
 | test\_data\_count | integer | yes       | no        | CCS        | number of test data sets                                                                                                                                          |
@@ -1335,14 +1337,14 @@ The following options can be passed to the scoreboard endpoint.
 ##### Scoreboard at the time of a given event
 
 By passing an [ event](#event-feed---draft) ID with the
-`after\_event\_id` URL argument, the scoreboard can be requested as it
+`after_event_id` URL argument, the scoreboard can be requested as it
 was directly after the specified event:
 
 `/scoreboard?after_event_id=xy1234`
 
 This makes it possible for a client to get the scoreboard information
 that is guaranteed to match a certain contest event. In case no
-"after\_event\_id" argument is provided, the current scoreboard will be
+`after_event_id` argument is provided, the current scoreboard will be
 returned. The request will fail with a 400 error if the id is invalid.
 
 A suggested efficient server-side implementation to provide this, is to
