@@ -1688,6 +1688,27 @@ or full endpoint. The general format for events is:
 | id          | string | yes       | yes       | The id of the object that changed                                                                                                          |
 | data        | object | yes       | yes       | The data is the object that would be returned if calling the corresponding API endpoint at this time, i.e. an object or null for deletions |
 
+All event types have a corresponding API endpoint, as specified in the table below.
+
+| Event           | API Endpoint                          |
+| --------------- | ------------------------------------- |
+| contests        | `/contests/<id>`                      |
+| judgement-types | `/contests/<id>/judgement-types/<id>` |
+| languages       | `/contests/<id>/languages/<id>`       |
+| problems        | `/contests/<id>/problems/<id>`        |
+| groups          | `/contests/<id>/groups/<id>`          |
+| organizations   | `/contests/<id>/organizations/<id>`   |
+| teams           | `/contests/<id>/teams/<id>`           |
+| team-members    | `/contests/<id>/team-members/<id>`    |
+| state           | `/contests/<id>/state`                |
+| submissions     | `/contests/<id>/submissions/<id>`     |
+| judgements      | `/contests/<id>/judgements/<id>`      |
+| runs            | `/contests/<id>/runs/<id>`            |
+| clarifications  | `/contests/<id>/clarifications/<id>`  |
+| awards          | `/contests/<id>/awards/<id>`          |
+
+Note that this does *not* contain `/webhooks/<id>`, since no events will be triggered for that endpoint.
+
 ##### Filtering
 
 TODO - filter by contest id and/or endpoint
@@ -1762,20 +1783,12 @@ id           | ID              | yes       | no        | identifier of the webho
 url          | string          | yes       | no        | The URL to post HTTP callbacks to.                                                    |
 endpoints    | array of string | yes       | no        | Names of endpoints to receive callbacks for. Empty array means all endpoints.         |
 contest\_ids | array of ID     | yes       | no        | ID’s of contests to receive callbacks for. Empty array means all configured contests. |
-active       | boolean         | yes       | no        | Whether the webhook is enabled.                                                       |
-
-The idea behind the `active` field is that if the CCS decides a webhook isn’t behaving and wants to disable sending callbacks to it,
-it can update this active field. It also allows one to temporarily disable a webhook using some UI if a CCS implements it.
 
 ##### Adding a webhook
 
 To register a webhook, you need to post your server's callback URL.
 To do so, perform a `POST` request with a JSON body with the fields (except `id`) from the above table to the `/webhooks` endpoint together with one additional field,
-called `token`. In this field put a client-generated token that can be used to verify that callbacks come from the CCS.
-
-```note
-TODO: What about using sane defaults for `endpoints`, `contest_ids` and `active` when adding a new webhook?
-```
+called `token`. In this field put a client-generated token that can be used to verify that callbacks come from the CCS. If you don't supply `contest_ids` and/or `endpoints`, they will default to `[]`.
 
 ##### Example
 
