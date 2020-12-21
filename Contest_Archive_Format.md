@@ -54,10 +54,9 @@ using a similar naming convention.
 | File name                             | Format | Description | Required |
 | :------------------------------------ | :----- | :---------- | :------- |
 | `config/contest.json`                 | JSON   | [Contest object](#contest-object). | No |
+| `config/contest`                      | Directory | [Contest files](#contest-files). | No |
 | `config/judgement-types.json`         | JSON   | Array of [judgement type objects](#judgement-type-object). | Yes |
 | `config/languages.json`               | JSON   | Array of [langauge objects](#language-object). | Yes |
-| `config/banner[.<size>].<format>`     | Image  | Banner Image. | No |
-| `config/logo[.<size>].<format>`       | Image  | Logo Image. | No |
 | `config/problems.json`                | JSON   | Array of [problem objects](#problem-object). | Yes |
 | `config/problems/<problem-ID>[.kpp]`  | [KPP](https://www.kattis.com/problem-package-format/) | [Problem package](#problem-package) | No |
 | `registration/groups.json`            | JSON   | Array of [group objects](#group-object). | No |
@@ -745,6 +744,18 @@ Problem packages may be left out if (and only if) `config/problems.json`
 contains `uuid` for those problems. This assumes that the problems are
 stored elsewhere and can be found by macthing by the uuid, and this
 should be checked when verifying a contest archive.
+
+### Contest files
+
+The organization directories contain all binary files related to a
+single organization in it's parent JSON file. 
+
+The following files could be in the organization directories:
+
+| Basename | Specifier          | Mime type   | File extension | Description | 
+| :------- | :----------------- | :---------- | :------------- | :---------- |
+| banner   | `<width>x<height>` | `image/png` | `.png`         | Banner for this contest, intended to be an image with a large aspect ratio around 8:1. |
+| logo     | `<width>x<height>` | `image/png` | `.png`         | Logo for this contest, intended to be an image with aspect ratio near 1:1. |
 
 ### Organization files
 
