@@ -1043,9 +1043,7 @@ Java). For C and C++ no entry point is required and it must therefore be
 The `files` attribute provides the file(s) of a given submission as a
 zip archive. These must be stored directly from the root of the zip
 file, i.e. there must not be extra directories (or files) added unless
-these are explicitly part of the submission content. For `POST`,
-`PUT` and `PATCH` methods, the `files` attribute must contain the
-base64-encoded string of the zip archive.
+these are explicitly part of the submission content.
 
 #### Access restrictions at WF
 
@@ -1053,6 +1051,37 @@ The `entry_point` and `files` attribute are accessible only for
 clients with `admin` or `analyst` role. The `reaction` attribute
 is available to clients with `public` role only when the contest is
 not frozen.
+
+#### POST submissions
+
+To add submissions one can use the `POST` method on the submissions endpoint.
+The `POST` must include a valid JSON object with the following attributes:
+
+| Name          | Type             | Required? | Nullable? | Description                                                                                        |
+| ------------- | ---------------- | --------- | --------- | -------------------------------------------------------------------------------------------------- |
+| language\_id  | ID               | yes       | no        | identifier of the [ language](#languages) to submit for                                            |
+| problem\_id   | ID               | yes       | no        | identifier of the [ problem](#problems) to submit for                                              |
+| team\_id      | ID               | yes       | no        | identifier of the [ team](#teams) that made the submission                                         |
+| time          | TIME             | no        | yes       | timestamp of when the submission was made                                                          |
+| entry\_point  | string           | no        | yes       | code entry point for specific languages                                                            |
+| files         | array of ARCHIVE | yes       | no        | submission files, contained at the root of the archive. Only allowed mime type is application/zip. |
+
+The response will be the ID of the newly added submission.
+
+The `time` attribute is optional. If not provided (or `null`) it will default
+to the current time as determined by the server.
+
+The `entry_point` attribute has the same requirements as for the `GET`
+requests, in that it is required for languages that do not have a single,
+unambiguous entry point to run the code.
+
+Since `files` only support application/zip, providing the `mime` field is
+optional. If the CCS supports a `team` role, the `team_id` and `time`
+attributes will be ignored when using a this role. `team_id` will then use
+the ID of the team associated with the request and `time` will always use
+the current time as determined by the server.
+
+The `public` role can never add submissions.
 
 #### Example
 
@@ -1072,6 +1101,30 @@ Returned data:
 Note that the relative link for `files` points to the location
 <https://example.com/api/contests/wf14/submissions/187/files> since the
 base URL for the API is <https://example.com/api>.
+
+Request:
+
+` POST https://example.com/api/contests/wf14/submissions`
+
+Request data:
+
+```json
+{
+   "language_id": "1-java",
+   "problem_id": "10-asteroids",
+   "team_id": "123",
+   "time": "2014-06-25T11:22:05.034+01",
+   "entry_point": "Main",
+   "start_time": "2014-06-25T10:00:00+01",
+   "files": [{"data": "<base64 string>"}]
+}
+```
+
+Returned data:
+
+```json
+"187"
+```
 
 ### Judgements
 
