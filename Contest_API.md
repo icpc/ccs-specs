@@ -1018,17 +1018,17 @@ The following endpoints are associated with submissions:
 
 JSON elements of submission objects:
 
-| Name          | Type             | Required? | Nullable? | Source @WF | Description                                                                                        |
-| ------------- | ---------------- | --------- | --------- | ---------- | -------------------------------------------------------------------------------------------------- |
-| id            | ID               | yes       | no        | CCS        | identifier of the submission. Usable as a label, typically a low incrementing number               |
-| language\_id  | ID               | yes       | no        | CCS        | identifier of the [ language](#languages) submitted for                                 |
-| problem\_id   | ID               | yes       | no        | CCS        | identifier of the [ problem](#problems) submitted for                                   |
-| team\_id      | ID               | yes       | no        | CCS        | identifier of the [ team](#teams) that made the submission                              |
-| time          | TIME             | yes       | no        | CCS        | timestamp of when the submission was made                                                          |
-| contest\_time | RELTIME          | yes       | no        | CCS        | contest relative time when the submission was made                                                 |
-| entry\_point  | string           | yes       | yes       | CCS        | code entry point for specific languages                                                            |
-| files         | array of ARCHIVE | yes       | no        | CCS        | submission files, contained at the root of the archive. Only allowed mime type is application/zip. |
-| reaction      | array of VIDEO   | no        | yes       | CDS        | reaction video from team's webcam.                                                                 |
+| Name          | Type             | Required? | Nullable? | Source @WF | Description                                                                                                                             |
+| ------------- | ---------------- | --------- | --------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| id            | ID               | yes       | no        | CCS        | identifier of the submission. Usable as a label, typically a low incrementing number                                                    |
+| language\_id  | ID               | yes       | no        | CCS        | identifier of the [ language](#languages) submitted for                                                                                 |
+| problem\_id   | ID               | yes       | no        | CCS        | identifier of the [ problem](#problems) submitted for                                                                                   |
+| team\_id      | ID               | yes       | no        | CCS        | identifier of the [ team](#teams) that made the submission                                                                              |
+| time          | TIME             | yes       | no        | CCS        | timestamp of when the submission was made                                                                                               |
+| contest\_time | RELTIME          | yes       | no        | CCS        | contest relative time when the submission was made                                                                                      |
+| entry\_point  | string           | yes       | yes       | CCS        | code entry point for specific languages                                                                                                 |
+| files         | array of ARCHIVE | yes       | no        | CCS        | submission files, contained at the root of the archive. Only allowed mime type is application/zip. Only exactly one archive is allowed. |
+| reaction      | array of VIDEO   | no        | yes       | CDS        | reaction video from team's webcam.                                                                                                      |
 
 The `entry_point` attribute must be included for submissions in
 languages which do not have a single, unambiguous entry point to run the
@@ -1057,14 +1057,14 @@ not frozen.
 To add submissions one can use the `POST` method on the submissions endpoint.
 The `POST` must include a valid JSON object with the following attributes:
 
-| Name          | Type             | Required? | Nullable? | Description                                                                                        |
-| ------------- | ---------------- | --------- | --------- | -------------------------------------------------------------------------------------------------- |
-| language\_id  | ID               | yes       | no        | identifier of the [ language](#languages) to submit for                                            |
-| problem\_id   | ID               | yes       | no        | identifier of the [ problem](#problems) to submit for                                              |
-| team\_id      | ID               | yes       | no        | identifier of the [ team](#teams) that made the submission                                         |
-| time          | TIME             | no        | yes       | timestamp of when the submission was made                                                          |
-| entry\_point  | string           | no        | yes       | code entry point for specific languages                                                            |
-| files         | array of ARCHIVE | yes       | no        | submission files, contained at the root of the archive. Only allowed mime type is application/zip. |
+| Name          | Type             | Required? | Nullable? | Description                                                                                                                             |
+| ------------- | ---------------- | --------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| language\_id  | ID               | yes       | no        | identifier of the [ language](#languages) to submit for                                                                                 |
+| problem\_id   | ID               | yes       | no        | identifier of the [ problem](#problems) to submit for                                                                                   |
+| team\_id      | ID               | yes       | no        | identifier of the [ team](#teams) that made the submission                                                                              |
+| time          | TIME             | no        | yes       | timestamp of when the submission was made                                                                                               |
+| entry\_point  | string           | no        | yes       | code entry point for specific languages                                                                                                 |
+| files         | array of ARCHIVE | yes       | no        | submission files, contained at the root of the archive. Only allowed mime type is application/zip. Only exactly one archive is allowed. |
 
 The response will be the ID of the newly added submission.
 
