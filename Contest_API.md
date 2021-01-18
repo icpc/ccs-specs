@@ -1059,31 +1059,20 @@ not frozen.
 #### POST submissions
 
 To add submissions one can use the `POST` method on the submissions endpoint.
-The `POST` must include a valid JSON object with the following attributes:
+The `POST` must include a valid JSON object with the same attributes the submission
+endpoint returns with a `GET` request with the following exceptions:
 
-| Name          | Type             | Required? | Nullable? | Description                                                                                                                             |
-| ------------- | ---------------- | --------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| language\_id  | ID               | yes       | no        | identifier of the [ language](#languages) to submit for                                                                                 |
-| problem\_id   | ID               | yes       | no        | identifier of the [ problem](#problems) to submit for                                                                                   |
-| team\_id      | ID               | yes       | no        | identifier of the [ team](#teams) that made the submission                                                                              |
-| time          | TIME             | no        | yes       | timestamp of when the submission was made                                                                                               |
-| entry\_point  | string           | no        | yes       | code entry point for specific languages                                                                                                 |
-| files         | array of ARCHIVE | yes       | no        | submission files, contained at the root of the archive. Only allowed mime type is application/zip. Only exactly one archive is allowed. |
+* Any provided `id`, `reaction` and `contest_time` attributes are ignored.
+* The `time` attribute is optional. If not provided (or `null`) it will default
+  to the current time as determined by the server.
+* Since `files` only supports `application/zip`, providing the `mime` field is
+  optional.
+* If the CCS supports a `team` role, the `team_id` and `time`
+  attributes will be ignored when using a this role. `team_id` will then use
+  the ID of the team associated with the request and `time` will always use
+  the current time as determined by the server.
 
 The response will be the ID of the newly added submission.
-
-The `time` attribute is optional. If not provided (or `null`) it will default
-to the current time as determined by the server.
-
-The `entry_point` attribute has the same requirements as for the `GET`
-requests, in that it is required for languages that do not have a single,
-unambiguous entry point to run the code.
-
-Since `files` only support application/zip, providing the `mime` field is
-optional. If the CCS supports a `team` role, the `team_id` and `time`
-attributes will be ignored when using a this role. `team_id` will then use
-the ID of the team associated with the request and `time` will always use
-the current time as determined by the server.
 
 The `public` role can never add submissions.
 
