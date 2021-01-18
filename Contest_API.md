@@ -1062,19 +1062,19 @@ To add submissions one can use the `POST` method on the submissions endpoint.
 The `POST` must include a valid JSON object with the same attributes the submission
 endpoint returns with a `GET` request with the following exceptions:
 
-* Any provided `id`, `reaction` and `contest_time` attributes are ignored.
+* `id`, `reaction` and `contest_time` should not be provided, and are ignored.
 * The `time` attribute is optional. If not provided (or `null`) it will default
   to the current time as determined by the server.
 * Since `files` only supports `application/zip`, providing the `mime` field is
   optional.
 * If the CCS supports a `team` role, the `team_id` and `time`
-  attributes will be ignored when using a this role. `team_id` will then use
+  attributes will be ignored when using this role. `team_id` will then be set to
   the ID of the team associated with the request and `time` will always use
   the current time as determined by the server.
 
 The response will be the ID of the newly added submission.
 
-The `public` role can never add submissions.
+Performing a `POST` by any other roles than `admin` and `team` are not supported.
 
 #### Example
 
