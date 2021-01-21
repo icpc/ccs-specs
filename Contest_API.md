@@ -1108,7 +1108,6 @@ Request data:
    "team_id": "123",
    "time": "2014-06-25T11:22:05.034+01",
    "entry_point": "Main",
-   "start_time": "2014-06-25T10:00:00+01",
    "files": [{"data": "<base64 string>"}]
 }
 ```
