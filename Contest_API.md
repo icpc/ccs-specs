@@ -1058,15 +1058,25 @@ To add submissions one can use the `POST` method on the submissions endpoint.
 The `POST` must include a valid JSON object with the same attributes the submission
 endpoint returns with a `GET` request with the following exceptions:
 
-* `id`, `reaction` and `contest_time` should not be provided, and are ignored.
+* `reaction` and `contest_time` should not be provided, and are ignored.
 * The `time` attribute is optional. If not provided (or `null`) it will default
   to the current time as determined by the server.
 * Since `files` only supports `application/zip`, providing the `mime` field is
   optional.
-* If the CCS supports a `team` role, the `team_id` and `time`
+* If the CCS supports a `team` role, the `team_id`, `time` and `id`
   attributes will be ignored when using this role. `team_id` will then be set to
   the ID of the team associated with the request and `time` will always use
-  the current time as determined by the server.
+  the current time as determined by the server. The CCS will determine an `id`.
+* If an `id` is supplied, the client should make sure it is unique, i.e. not used
+  yet on the CCS.
+
+The request should fail with a 400 if any of the following happens:
+
+* A required attribute is msising.
+* The supplied problem, team or language can not be found.
+* An entrypoint is required for the given language, but not supplied.
+* Something is wrong with the submission file. For example it contains too many
+  files, it is too big, etc.
 
 The response will be the ID of the newly added submission.
 
