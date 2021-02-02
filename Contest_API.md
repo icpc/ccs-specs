@@ -1072,15 +1072,21 @@ endpoint returns with a `GET` request with the following exceptions:
   the ID of the team associated with the request and `time` will always use
   the current time as determined by the server. The CCS will determine an `id`.
 * If an `id` is supplied, the client should make sure it is unique, i.e. not used
-  yet on the CCS.
+  yet on the CCS. The client should normally not supply `id`, but let it be determined
+  by the server. However, for example in a setup with a central CCS with satellite sites
+  where teams submit to a proxy CCS that forwards to the central CCS, this might be
+  useful to make sure that the proxy CCS can accept submissions even when the connection
+  to the central CCS is down. The proxy can then forward these submissions later, when
+  the connection is restored again.
 
 The request should fail with a 400 if any of the following happens:
 
-* A required attribute is msising.
+* A required attribute is missing.
 * The supplied problem, team or language can not be found.
 * An entrypoint is required for the given language, but not supplied.
 * Something is wrong with the submission file. For example it contains too many
   files, it is too big, etc.
+* The provided `id` already exists.
 
 The response will be the ID of the newly added submission.
 
