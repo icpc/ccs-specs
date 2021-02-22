@@ -1062,9 +1062,12 @@ To add a submission one can use the `POST` method on the submissions endpoint.
 The `POST` must include a valid JSON object with the same attributes the submission
 endpoint returns with a `GET` request with the following exceptions:
 
+* The attributes `id`, `team_id`, `time`, and `contest_time` are
+  optional. However, depending on the use case (see below) the server
+  may require attributes to either be absent or present, and should
+  respond with a 400 error code in such cases.
 * Since `files` only supports `application/zip`, providing the `mime` field is
   optional.
-* `contest_time` must not be provided.
 * `reaction` may be provided but a CCS does not have to honour it.
 * The `time` attribute is optional. If not provided (or `null`) it will default
   to the current time as determined by the server.
@@ -1093,6 +1096,58 @@ The request must fail with a 400 error code if any of the following happens:
 The response will be the ID of the newly added submission.
 
 Performing a `POST` by any other roles than `admin` and `team` are not supported.
+
+#### Use cases for POSTing submissions
+
+The `POST submissions` endpoint can be used for a variety of reasons,
+and depending on the use case, the server might require different
+fields to be present. A number of common scenarios are described here
+for informational purposes only.
+
+##### Team client submitting to CCS
+
+The most obvious and probably most common case is where a team
+directly submits to the CCS, e.g. with a command-line submit client.
+
+In this case the client has the `team` role and a specific `team_id`
+already associated with it. The attributes `id`, `team_id`, `time`,
+and `contest_time` should not be specified; the server will
+determine these attributes and should reject submissions specifying
+them, or may ignore a `team_id` that is identical to the one of the
+current team.
+
+##### A proxy server forwarding to a CCS
+
+A proxy server may receive submissions from team clients (like above)
+and forward these to a CCS. This might be useful, for example, in a
+multi-site contest setup, where each site runs a proxy that would
+still be reachable if connectivity with the central CCS is lost, or
+where the proxy forwards the submission to multiple CCS's that run in
+parallel (like the shadowing setup at the ICPC World Finals).
+
+In such a scenario, the proxy server would timestamp the submissions
+and authenticate the submitting team, and then forward the submission
+to the upstream CCS using the `admin` role. The proxy would provide
+`team_id` and `time` attributes and the CCS should then accept and use
+these.
+
+To allow the proxy to return a submission `id` during connectivity
+loss, each site could be assigned a unique prefix such that the proxy
+server can itself generate unique `id`s and then submit to the central
+CCS with the `id` attribute included. The central CCS should then
+accept and use that `id` attribute.
+
+##### Further potential extensions
+
+To allow for any further use cases, the specification is deliberately
+flexible in how the server can handle optional attributes.
+
+* The `contest_time` attribute should normally not be specified when
+  `time` is already specified as it can be calculated from `time` and
+  the wallclock time is unambiguously defined without reference to
+  contest start time. However, in a case where one would want to
+  support a multi-site contest where the sites run out of sync, the
+  use of `contest_time` might be considered.
 
 #### Example
 
