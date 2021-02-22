@@ -1058,7 +1058,7 @@ not frozen.
 
 #### POST submissions
 
-To add submissions one can use the `POST` method on the submissions endpoint.
+To add a submission one can use the `POST` method on the submissions endpoint.
 The `POST` must include a valid JSON object with the same attributes the submission
 endpoint returns with a `GET` request with the following exceptions:
 
@@ -1080,7 +1080,7 @@ endpoint returns with a `GET` request with the following exceptions:
   to the central CCS is down. The proxy can then forward these submissions later, when
   the connection is restored again.
 
-The request should fail with a 400 if any of the following happens:
+The request must fail with a 400 error code if any of the following happens:
 
 * A required attribute is missing.
 * An attribute that must not be provided is provided.
@@ -1088,7 +1088,7 @@ The request should fail with a 400 if any of the following happens:
 * An entrypoint is required for the given language, but not supplied.
 * Something is wrong with the submission file. For example it contains too many
   files, it is too big, etc.
-* The provided `id` already exists.
+* The provided `id` already exists or is otherwise not acceptable.
 
 The response will be the ID of the newly added submission.
 
