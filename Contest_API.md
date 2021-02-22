@@ -1058,15 +1058,16 @@ To add submissions one can use the `POST` method on the submissions endpoint.
 The `POST` must include a valid JSON object with the same attributes the submission
 endpoint returns with a `GET` request with the following exceptions:
 
-* `reaction` and `contest_time` should not be provided, and are ignored.
-* The `time` attribute is optional. If not provided (or `null`) it will default
-  to the current time as determined by the server.
 * Since `files` only supports `application/zip`, providing the `mime` field is
   optional.
-* If the CCS supports a `team` role, the `team_id`, `time` and `id`
-  attributes will be ignored when using this role. `team_id` will then be set to
-  the ID of the team associated with the request and `time` will always use
-  the current time as determined by the server. The CCS will determine an `id`.
+* `contest_time` must not be provided.
+* `reaction` may be provided but a CCS does not have to honour it.
+* The `time` attribute is optional. If not provided (or `null`) it will default
+  to the current time as determined by the server.
+* If the CCS supports a `team` role, `time` and `id`
+  must not be provided when using this role. `team_id` may be provided but then
+  must match the ID of the team associated with the request. `time` will then always
+  use the current time as determined by the server. The CCS will determine an `id`.
 * If an `id` is supplied, the client should make sure it is unique, i.e. not used
   yet on the CCS. The client should normally not supply `id`, but let it be determined
   by the server. However, for example in a setup with a central CCS with satellite sites
@@ -1078,6 +1079,7 @@ endpoint returns with a `GET` request with the following exceptions:
 The request should fail with a 400 if any of the following happens:
 
 * A required attribute is missing.
+* An attribute that must not be provided is provided.
 * The supplied problem, team or language can not be found.
 * An entrypoint is required for the given language, but not supplied.
 * Something is wrong with the submission file. For example it contains too many
