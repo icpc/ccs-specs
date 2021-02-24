@@ -1209,7 +1209,38 @@ Note that at least one of `from_team_id` and `to_team_id` has to be
 
 Clients with the `public` role can only view clarifications replies
 from the jury to all teams, that is, messages where both `from_team_id`
-and `to_team_id` are `null`.
+and `to_team_id` are `null`. Clients with the `team` role can only view
+their own clarifications (sent or received) and public clarifications.
+
+#### POST clarifications
+
+To add a clarification one can use the `POST` method on the clarifications endpoint.
+The `POST` must include a valid JSON object with the same attributes the clarification
+endpoint returns with a `GET` request with the following exceptions:
+
+* If the server supports a `team` role, `id`, `to_team_id`, `reply_to_id`, `time`, and
+  `contest_time` must not be provided. `from_team_id` may be provided but then
+  must match the ID of the team associated with the request. The server will determine
+  an `id` and the current `time` and `contest_time`.
+* When submitting using an `admin` role, `from_team_id`, `to_team_id`, `reply_to_id`,
+  and `problem_id` are optional when they are null. e.g. if `problem_id` is null
+  you do not need to include it.
+* When submitting using an `admin` role, `id`, `time`, and `contest_time` may be
+  required to either be absent or present depending on the use case, e.g.
+  whether the server is the CCS, is acting as a proxy, or a caching
+  proxy. See notes under the submission interface for more detail. In cases where
+  these attributes are not allowed the server will respond with a 400 error code.
+
+The request must fail with a 400 error code if any of the following happens:
+
+* A required attribute is missing.
+* An attribute that must not be provided is provided.
+* The supplied problem, from_team, to_team, or reply_to cannot be found.
+* The provided `id` already exists or is otherwise not acceptable.
+
+The response will be the ID of the newly added clarification.
+
+Performing a `POST` by any roles other than `admin` and `team` is not supported.
 
 #### Examples
 
@@ -1251,6 +1282,25 @@ Returned data:
 ]
 ```
 
+Request:
+
+` POST https://example.com/api/contests/wf14/clarifications`
+
+Request data:
+
+```json
+{
+   "problem_id": "10-asteroids",
+   "from_team_id": "34",
+   "text": "Can I assume the asteroids are round?"
+}
+```
+
+Returned data:
+
+```json
+"187"
+```
 ### Awards
 
 Awards such as medals, first to solve, etc.
