@@ -1218,13 +1218,13 @@ To add a clarification one can use the `POST` method on the clarifications endpo
 The `POST` must include a valid JSON object with the same attributes the clarification
 endpoint returns with a `GET` request with the following exceptions:
 
-* If the server supports a `team` role, `id`, `to_team_id`, `reply_to_id`, `time`, and
+* When an attribute value would be null it is optional - you do not need to include it.
+  e.g. if a clarification is not related to a problem you can chose to include or
+  exclude the `problem_id`.
+* When submitting using a `team` role, `id`, `to_team_id`, `time`, and
   `contest_time` must not be provided. `from_team_id` may be provided but then
   must match the ID of the team associated with the request. The server will determine
   an `id` and the current `time` and `contest_time`.
-* When submitting using an `admin` role, `from_team_id`, `to_team_id`, `reply_to_id`,
-  and `problem_id` are optional when they are null. e.g. if `problem_id` is null
-  you do not need to include it.
 * When submitting using an `admin` role, `id`, `time`, and `contest_time` may be
   required to either be absent or present depending on the use case, e.g.
   whether the server is the CCS, is acting as a proxy, or a caching
@@ -1235,7 +1235,8 @@ The request must fail with a 400 error code if any of the following happens:
 
 * A required attribute is missing.
 * An attribute that must not be provided is provided.
-* The supplied problem, from_team, to_team, or reply_to cannot be found.
+* The supplied problem, from_team, to_team, or reply_to cannot be found or are not
+  visible to the role that's submitting.
 * The provided `id` already exists or is otherwise not acceptable.
 
 The response will be the ID of the newly added clarification.
