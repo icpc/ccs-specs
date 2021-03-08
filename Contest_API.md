@@ -4,24 +4,20 @@ permalink: /contest_api
 ---
 # Contest API
 
-**This is the development draft for the Contest API. See also [the
-version that will be used at WF 2020](Contest_API_2020).**
-
-```note
-TODO: Remove/replace broken links.
-```
+**This is the development draft for the Contest API.
+See also [the version that will be used at WF 2020](https://clics.ecs.baylor.edu/index.php?title=Contest_API_2020).**
 
 ## Introduction
 
 This page describes an API for accessing information provided by a
-[Contest Control System](ccs_system_requirements) or [Contest
-Data Server](CDS). Such an API can be used by a multitude of
-clients:
+[Contest Control System](ccs_system_requirements) or
+[Contest Data Server](https://tools.icpc.global/cds/).
+Such an API can be used by a multitude of clients:
 
   - an external scoreboard
   - a scoreboard resolver application
-  - contest analysis software, such as the [ICAT](ICAT)
-    toolset
+  - contest analysis software, such as the
+    [ICAT](https://clics.ecs.baylor.edu/index.php?title=ICAT) toolset
   - another "shadow" CCS, providing forwarding of submissions and all
     relevant information
   - internally, to interface between the CCS server and judging
