@@ -310,7 +310,7 @@ are mentioned below.
 
 ### Types of endpoints
 
-The endpoints can be categorised into 3 groups as follows:
+The endpoints can be categorized into 3 groups as follows:
 
   - Configuration: contests, judgement-types, languages, problems,
     groups, organizations, teams, team-members
@@ -512,7 +512,7 @@ JSON elements of judgement type objects:
 | Name    | Type    | Required? | Nullable? | Source @WF | Description                                                                                                 |
 | ------- | ------- | --------- | --------- | ---------- | ----------------------------------------------------------------------------------------------------------- |
 | id      | ID      | yes       | no        | CCS        | identifier of the judgement type, a 2-3 letter capitalized shorthand, see table below                       |
-| name    | string  | yes       | no        | CCS        | name of the judgement. (might not match table below, e.g. if localised)                                     |
+| name    | string  | yes       | no        | CCS        | name of the judgement. (might not match table below, e.g. if localized)                                     |
 | penalty | boolean | depends   | no        | CCS        | whether this judgement causes penalty time; must be present if and only if contest:penalty\_time is present |
 | solved  | boolean | yes       | no        | CCS        | whether this judgement is considered correct                                                                |
 
@@ -622,7 +622,7 @@ JSON elements of language objects:
 | Name | Type   | Required? | Nullable? | Source @WF | Description                                                           |
 | ---- | ------ | --------- | --------- | ---------- | --------------------------------------------------------------------- |
 | id   | ID     | yes       | no        | CCS        | identifier of the language from table below                           |
-| name | string | yes       | no        | CCS        | name of the language (might not match table below, e.g. if localised) |
+| name | string | yes       | no        | CCS        | name of the language (might not match table below, e.g. if localized) |
 
 #### Access restrictions at WF
 
@@ -1500,7 +1500,7 @@ object (e.g. if an object was created and deleted you'll always receive
 a delete event last).
 
 As a concrete example, judgement events are usually fired when judging
-is started, and fired again when the final judgment is available. If a
+is started, and fired again when the final judgement is available. If a
 client connects after the judgement, or a client was disconnected during
 the judgement, they will typically only receive the final (complete)
 judgement.
