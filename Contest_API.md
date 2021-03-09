@@ -619,10 +619,13 @@ The following endpoints are associated with languages:
 
 JSON elements of language objects:
 
-| Name | Type   | Required? | Nullable? | Source @WF | Description                                                           |
-| ---- | ------ | --------- | --------- | ---------- | --------------------------------------------------------------------- |
-| id   | ID     | yes       | no        | CCS        | identifier of the language from table below                           |
-| name | string | yes       | no        | CCS        | name of the language (might not match table below, e.g. if localized) |
+| Name                    | Type            | Required? | Nullable? | Source @WF | Description                                                           |
+| ----------------------- | --------------- | --------- | --------- | ---------- | --------------------------------------------------------------------- |
+| id                      | ID              | yes       | no        | CCS        | identifier of the language from table below                           |
+| name                    | string          | yes       | no        | CCS        | name of the language (might not match table below, e.g. if localized) |
+| require_entry_point     | boolean         | yes       | no        | CCS        | if the language requires an entry point                               |
+| entry_point_description | string          | yes       | yes       | CCS        | if entry point is required, the description of the entry point        |
+| extensions              | array of string | yes       | no        | CCS        | file extensions for the language                                      |
 
 #### Access restrictions at WF
 
@@ -639,26 +642,26 @@ identifiers. It is recommended to choose new identifiers with a suffix
 appended to an existing one. For example `cpp17` to specify the ISO 2017
 version of C++.
 
-| ID         | Name        |
-| ---------- | ----------- |
-| ada        | Ada         |
-| c          | C           |
-| cpp        | C++         |
-| csharp     | C\#         |
-| go         | Go          |
-| haskell    | Haskell     |
-| java       | Java        |
-| javascript | JavaScript  |
-| kotlin     | Kotlin      |
-| objectivec | Objective-C |
-| pascal     | Pascal      |
-| php        | PHP         |
-| prolog     | Prolog      |
-| python2    | Python 2    |
-| python3    | Python 3    |
-| ruby       | Ruby        |
-| rust       | Rust        |
-| scala      | Scala       |
+| ID         | Name        | Extensions           |
+| ---------- | ----------- | -------------------- |
+| ada        | Ada         | adb, ads             |
+| c          | C           | c                    |
+| cpp        | C++         | cc, cpp, cxx, c++, C |
+| csharp     | C\#         | cs                   |
+| go         | Go          | go                   |
+| haskell    | Haskell     | hs                   |
+| java       | Java        | java                 |
+| javascript | JavaScript  | js                   |
+| kotlin     | Kotlin      | kt                   |
+| objectivec | Objective-C | m                    |
+| pascal     | Pascal      | pas                  |
+| php        | PHP         | php                  |
+| prolog     | Prolog      | pl                   |
+| python2    | Python 2    | py                   |
+| python3    | Python 3    | py                   |
+| ruby       | Ruby        | rb                   |
+| rust       | Rust        | rs                   |
+| scala      | Scala       | scala                |
 
 #### Example
 
@@ -671,13 +674,22 @@ Returned data:
 ```json
 [{
    "id": "java",
-   "name": "Java"
+   "name": "Java",
+   "require_entry_point": true,
+   "entry_point_description": "Main class",
+   "extensions": ["java"]
 }, {
    "id": "cpp",
-   "name": "GNU C++"
+   "name": "GNU C++",
+   "require_entry_point": false,
+   "entry_point_description": null,
+   "extensions": ["cc", "cpp", "cxx", "c++", "C"]
 }, {
-   "id": "python2",
-   "name": "Python 2"
+   "id": "python3",
+   "name": "Python 3",
+   "require_entry_point": false,
+   "entry_point_description": null,
+   "extensions": ["py"]
 }]
 ```
 
