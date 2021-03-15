@@ -1085,6 +1085,7 @@ The request must fail with a 400 error code if any of the following happens:
 * An attribute that must not be provided is provided.
 * The supplied problem, team or language can not be found.
 * An entrypoint is required for the given language, but not supplied.
+* The mime field in `files` is set but invalid.
 * Something is wrong with the submission file. For example it contains too many
   files, it is too big, etc.
 * The provided `id` already exists or is otherwise not acceptable.
