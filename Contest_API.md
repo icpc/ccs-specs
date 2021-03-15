@@ -1092,7 +1092,7 @@ The request must fail with a 400 error code if any of the following happens:
 
 The response will be the ID of the newly added submission.
 
-Performing a `POST` by any other roles than `admin` and `team` are not supported.
+Performing a `POST` by any other roles than `admin` and `team` is not supported.
 
 #### Use cases for POSTing submissions
 
@@ -1110,8 +1110,8 @@ In this case the client has the `team` role and a specific `team_id`
 already associated with it. The attributes `id`, `team_id`, `time`,
 and `contest_time` should not be specified; the server will
 determine these attributes and should reject submissions specifying
-them, or may ignore a `team_id` that is identical to the one of the
-current team.
+them, or may ignore a `team_id` that is identical to the one that the
+client has authenticated as.
 
 ##### A proxy server forwarding to a CCS
 
@@ -1130,7 +1130,7 @@ these.
 
 To allow the proxy to return a submission `id` during connectivity
 loss, each site could be assigned a unique prefix such that the proxy
-server can itself generate unique `id`s and then submit to the central
+server itself can generate unique `id`s and then submit to the central
 CCS with the `id` attribute included. The central CCS should then
 accept and use that `id` attribute.
 
