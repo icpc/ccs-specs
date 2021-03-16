@@ -619,13 +619,13 @@ The following endpoints are associated with languages:
 
 JSON elements of language objects:
 
-| Name                    | Type            | Required? | Nullable? | Source @WF | Description                                                           |
-| ----------------------- | --------------- | --------- | --------- | ---------- | --------------------------------------------------------------------- |
-| id                      | ID              | yes       | no        | CCS        | identifier of the language from table below                           |
-| name                    | string          | yes       | no        | CCS        | name of the language (might not match table below, e.g. if localized) |
-| require_entry_point     | boolean         | yes       | no        | CCS        | if the language requires an entry point                               |
-| entry_point_description | string          | yes       | yes       | CCS        | if entry point is required, the description of the entry point        |
-| extensions              | array of string | yes       | no        | CCS        | file extensions for the language                                      |
+| Name                 | Type            | Required? | Nullable? | Source @WF | Description                                                                                                             |
+| -------------------- | --------------- | --------- | --------- | ---------- | ----------------------------------------------------------------------------------------------------------------------- |
+| id                   | ID              | yes       | no        | CCS        | identifier of the language from table below                                                                             |
+| name                 | string          | yes       | no        | CCS        | name of the language (might not match table below, e.g. if localized)                                                   |
+| entry_point_required | boolean         | yes       | no        | CCS        | whether the language requires an entry point                                                                            |
+| entry_point_name     | string          | depends   | yes       | CCS        | the name of the type of entry point, such as "Main class" or "Main file"). Required iff entry_point_required is present |
+| extensions           | array of string | yes       | no        | CCS        | file extensions for the language                                                                                        |
 
 #### Access restrictions at WF
 
@@ -633,35 +633,36 @@ No access restrictions apply to a GET on this endpoint.
 
 #### Known languages
 
-Below is a list of standardized identifiers for known languages. When
-providing one of these languages, the corresponding identifier should be
-used. The language name may be adapted e.g. for localization or to
+Below is a list of standardized identifiers for known languages with their
+name, extensions and entry point name (if any). When providing one of these
+languages, the corresponding identifier should be used. The language name
+and entry point name may be adapted e.g. for localization or to
 indicate a particular version of the language. In case multiple versions
 of a language are provided, those must have separate, unique
 identifiers. It is recommended to choose new identifiers with a suffix
 appended to an existing one. For example `cpp17` to specify the ISO 2017
 version of C++.
 
-| ID         | Name        | Extensions           |
-| ---------- | ----------- | -------------------- |
-| ada        | Ada         | adb, ads             |
-| c          | C           | c                    |
-| cpp        | C++         | cc, cpp, cxx, c++, C |
-| csharp     | C\#         | cs                   |
-| go         | Go          | go                   |
-| haskell    | Haskell     | hs                   |
-| java       | Java        | java                 |
-| javascript | JavaScript  | js                   |
-| kotlin     | Kotlin      | kt                   |
-| objectivec | Objective-C | m                    |
-| pascal     | Pascal      | pas                  |
-| php        | PHP         | php                  |
-| prolog     | Prolog      | pl                   |
-| python2    | Python 2    | py                   |
-| python3    | Python 3    | py                   |
-| ruby       | Ruby        | rb                   |
-| rust       | Rust        | rs                   |
-| scala      | Scala       | scala                |
+| ID         | Name        | Extensions           | Entry point name |
+| ---------- | ----------- | -------------------- | ---------------- |
+| ada        | Ada         | adb, ads             |                  |
+| c          | C           | c                    |                  |
+| cpp        | C++         | cc, cpp, cxx, c++, C |                  |
+| csharp     | C\#         | cs                   |                  |
+| go         | Go          | go                   |                  |
+| haskell    | Haskell     | hs                   |                  |
+| java       | Java        | java                 | Main class       |
+| javascript | JavaScript  | js                   | Main file        |
+| kotlin     | Kotlin      | kt                   | Main class       |
+| objectivec | Objective-C | m                    |                  |
+| pascal     | Pascal      | pas                  |                  |
+| php        | PHP         | php                  | Main file        |
+| prolog     | Prolog      | pl                   |                  |
+| python2    | Python 2    | py                   | Main file        |
+| python3    | Python 3    | py                   | Main file        |
+| ruby       | Ruby        | rb                   |                  |
+| rust       | Rust        | rs                   |                  |
+| scala      | Scala       | scala                |                  |
 
 #### Example
 
@@ -675,20 +676,19 @@ Returned data:
 [{
    "id": "java",
    "name": "Java",
-   "require_entry_point": true,
-   "entry_point_description": "Main class",
+   "entry_point_required": true,
+   "entry_point_name": "Main class",
    "extensions": ["java"]
 }, {
    "id": "cpp",
    "name": "GNU C++",
-   "require_entry_point": false,
-   "entry_point_description": null,
+   "entry_point_required": false,
    "extensions": ["cc", "cpp", "cxx", "c++", "C"]
 }, {
    "id": "python3",
    "name": "Python 3",
-   "require_entry_point": false,
-   "entry_point_description": null,
+   "entry_point_required": true,
+   "entry_point_name": "Main file",
    "extensions": ["py"]
 }]
 ```
