@@ -116,7 +116,7 @@ The following JSON types are used.
 
 #### Differences from Contest API
 
-- The `countdown_pause_time` is not included.
+- The `countdown_pause_time` is not included. It is allowed buy the information should be ignored.
 - The `banner` and `logo` elements are not included. They are allowed but the information may be ignored. These files are instead found as `banner[.<size>].<format>` and `logo[.<size>].<format>` in the same directory as the JSON file.
 
 #### Examples
@@ -168,7 +168,7 @@ None.
 
 #### Differences from Contest API
 
-- Includes `compiler` and `runner` that contains the commands to use for compiling and running respectively. 
+None.
 
 #### Examples
 
@@ -254,7 +254,6 @@ None.
 
 - The `time_limit` element is required to be a `number` that is an
   integer multiple of `0.001` in the Contest API. 
-- The `uuid` element is not defined in the Contest API.
 
 #### Examples
 
