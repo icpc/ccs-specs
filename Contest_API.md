@@ -395,7 +395,8 @@ is returned.
 | countdown\_pause\_time       | RELTIME        | no        | yes       | CDS        | The amount of seconds left when countdown to contest start is paused. At no time may both `start_time` and `countdown_pause_time` be non-`null`. |
 | duration                     | RELTIME        | yes       | no        | CCS        | length of the contest                                                                                                                            |
 | scoreboard\_freeze\_duration | RELTIME        | no        | yes       | CCS        | how long the scoreboard is frozen before the end of the contest                                                                                  |
-| penalty\_time                | integer        | no        | no        | CCS        | penalty time for a wrong submission, in minutes                                                                                                  |
+| scoreboard\_type             | string         | no        | yes       | not used   | what type of scoreboard is used for the contest. Must be either `pass-fail` or `score`. Defaults to `pass-fail` if missing or `null`.            |
+| penalty\_time                | integer        | no        | no        | CCS        | penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`.                                               |
 | banner                       | array of IMAGE | no        | yes       | CDS        | banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime type is image/png.                      |
 | logo                         | array of IMAGE | no        | yes       | CDS        | logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime type is image/png.                                  |
 
@@ -444,6 +445,7 @@ Returned data:
    "start_time": "2014-06-25T10:00:00+01",
    "duration": "5:00:00",
    "scoreboard_freeze_duration": "1:00:00",
+   "scoreboard_type": "pass-fail"
    "penalty_time": 20,
    "banner": [{
        "href": "https://example.com/api/contests/wf2014/banner",
@@ -1218,6 +1220,7 @@ JSON elements of judgement objects:
 | id                   | ID      | yes       | no        | CCS        | identifier of the judgement                                     |
 | submission\_id       | ID      | yes       | no        | CCS        | identifier of the [ submission](#submissions) judged |
 | judgement\_type\_id  | ID      | yes       | yes       | CCS        | the [ verdict](#judgement-types) of this judgement   |
+| judgement\_score     | decimal | no        | no        | not used   | score for this judgement. Only relevant if contest:scoreboard_type is `score`. Defaults to `100` if missing. |
 | start\_time          | TIME    | yes       | no        | CCS        | absolute time when judgement started                            |
 | start\_contest\_time | RELTIME | yes       | no        | CCS        | contest relative time when judgement started                    |
 | end\_time            | TIME    | yes       | yes       | CCS        | absolute time when judgement completed                          |
@@ -1590,8 +1593,10 @@ Each JSON object in the rows array consists of:
 | rank              | integer          | yes       | no        | CCS        | rank of this team, 1-based and duplicate in case of ties                                     |
 | team\_id          | ID               | yes       | no        | CCS        | identifier of the [ team](#teams)                                                 |
 | score             | object           | yes       | no        | CCS        | JSON object as specified in the rows below (for possible extension to other scoring methods) |
-| score.num\_solved | integer          | yes       | no        | CCS        | number of problems solved by the team                                                        |
-| score.total\_time | integer          | yes       | no        | CCS        | total penalty time accrued by the team                                                       |
+| score.num\_solved | integer          | depends   | no        | CCS        | number of problems solved by the team. Required iff contest:scoreboard_type is `pass-fail`.  |
+| score.total\_time | integer          | depends   | no        | CCS        | total penalty time accrued by the team. Required iff contest:scoreboard_type is `pass-fail`. |
+| score.score       | decimal          | depends   | no        | not used   | total score of problems by the team. Required iff contest:scoreboard_type is `score`.        |
+| score.time        | integer          | no        | no        | not used   | time of last score improvement used for tiebreaking purposes.                                |
 | problems          | array of objects | yes       | no        | CCS        | JSON array of problems with scoring data, see below for the specification of each element    |
 
 Each problem object within the scoreboard consists of:
@@ -1601,7 +1606,8 @@ Each problem object within the scoreboard consists of:
 | problem\_id  | ID      | yes       | no        | CCS        | identifier of the [ problem](#problems)                                            |
 | num\_judged  | integer | yes       | no        | CCS        | number of judged submissions (up to and including the first correct one)                      |
 | num\_pending | integer | yes       | no        | CCS        | number of pending submissions (either queued or due to freeze)                                |
-| solved       | boolean | yes       | no        | CCS        | whether the team solved this problem                                                          |
+| solved       | boolean | depends   | yes       | CCS        | required iff contest:scoreboard_type is `pass-fail`.                                          |
+| score        | decimal | depends   | no        | not used   | required iff contest:scoreboard_type is `score` and solved is missing. If missing or `null` defaults to `100` if solved is `true` and `0` if solved is `false`. |
 | time         | integer | depends   | no        | CCS        | minutes into the contest when this problem was solved by the team. Required iff `solved=true` |
 
 #### Access restrictions at WF
