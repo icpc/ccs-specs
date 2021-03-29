@@ -313,10 +313,10 @@ are mentioned below.
 The endpoints can be categorized into 3 groups as follows:
 
   - Configuration: contests, judgement-types, languages, problems,
-    groups, organizations, teams, team-members
+    groups, organizations, teams, team-members;
   - Live data: state, submissions, judgements, runs, clarifications,
-    awards
-  - Aggregate data: scoreboard, event-feed
+    awards, commentary;
+  - Aggregate data: scoreboard, event-feed.
 
 Configuration is normally set before contest start. Is not expected to,
 but could occasionally be updated during a contest. It does not have
@@ -1489,6 +1489,43 @@ Returned data:
 [{"id":"gold-medal","citation":"Gold medal winner","team_ids":["54","23","1","45"]},
  {"id":"first-to-solve-a","citation":"First to solve problem A","team_ids":["45"]},
  {"id":"first-to-solve-b","citation":"First to solve problem B","team_ids":[]}
+]
+```
+
+### Commentary
+
+Commentary on events happening in the contest
+
+The following endpoints are associated with commentary:
+
+| Endpoint                         | Mime-type        | Required? | Source @WF | Description                                                                    |
+| -------------------------------- | ---------------- | --------- | ---------- | ------------------------------------------------------------------------------ |
+| `/contests/<id>/commentary`      | application/json | no        | not used   | JSON array of all commentary with elements as defined in the table below       |
+| `/contests/<id>/commentary/<id>` | application/json | no        | not used   | JSON object of a single commentary with elements as defined in the table below |
+
+JSON elements of award objects:
+
+| Name          | Type        | Required? | Nullable? | Source @WF | Description |
+| ------------- | ----------- | --------- | --------- | ---------- | ----------- |
+| id            | ID          | yes       | no        | not used   | identifier of the commentary. |
+| time          | TIME        | yes       | no        | not used   | time of the commentary message. |
+| contest\_time | RELTIME     | yes       | no        | not used   | contest time of the commentary message. |  
+| message       | string      | yes       | no        | not used   | commentary message text. May contain special tags for [teams](#teams) and [problems](#problems) on the format `#t<team ID>` and `#p<problem ID>` respectively.|
+| team\_ids     | array of ID | yes       | yes       | not used   | JSON array of [team](#teams) IDs the message is related to.
+| problem\_ids  | array of ID | yes       | yes       | not used   | JSON array of [problem](#problems) IDs the message is related to.
+
+#### Example
+
+Request:
+
+` GET https://example.com/api/contests/wf14/commentary`
+
+Returned data:
+
+```json
+[{"id":"143730", "time":"2021-03-06T19:02:02.328+00", "contest_time":"0:02:02.328", "message": "#t20 made a submission for #anttyping. If correct, they will solve the first problem and take the lead", "team_ids": ["314089"], "problem_ids": ["anttyping"]}, 
+ {"id": "143736", "time": "2021-03-06T19:02:10.858+00", "contest_time": "0:02:10.858", "message": "#t20 fails its first attempt on #anttyping due to WA", "team_ids": ["314089"], "problem_ids": ["anttyping"]}, 
+ {"id": "143764", "time": "2021-03-06T19:03:07.517+00", "contest_time": "0:03:07.517", "message": "#t24 made a submission for #pmarch6. If correct, they will solve the first problem and take the lead", "team_ids": ["314115"], "problem_ids": ["magictrick"]}
 ]
 ```
 
