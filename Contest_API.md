@@ -218,13 +218,13 @@ when outputting all absolute timestamps.
     format: `(-)?(h)*h:mm:ss(.uuu)?`
   - Identifiers
     (type **`ID`** in the specification) are given as string consisting
-    of characters `[a-zA-Z0-9_-]` of length at most 36 and not starting
-    with a `-` (dash). IDs are unique within each endpoint.
-    IDs are assigned by the person or system that is the source of the
-    object, and must be maintained by downstream systems. For example,
-    the person configuring a contest on disk will typically define the
-    ID for each team, and any CCS or CDS that exposes the team must use
-    the same ID.
+    of characters `[a-zA-Z0-9_-.]` of length at most 36 and not starting
+    with a `-` (dash) or `.` (dot) or ending with a `.` (dot). IDs are 
+    unique within each endpoint. IDs are assigned by the person or system 
+    that is the source of the object, and must be maintained by downstream 
+    systems. For example, the person configuring a contest on disk will 
+    typically define the ID for each team, and any CCS or CDS that exposes 
+    the team must use the same ID.
     Some IDs are also used as identifiable labels and are marked below
     along with the recommended format. These IDs should be meaningful
     for human communication (e.g. team "43", problem "A") and are as
