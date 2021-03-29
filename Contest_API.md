@@ -218,7 +218,7 @@ when outputting all absolute timestamps.
     format: `(-)?(h)*h:mm:ss(.uuu)?`
   - Identifiers
     (type **`ID`** in the specification) are given as string consisting
-    of characters `[a-zA-Z0-9_-.]` of length at most 36 and not starting
+    of characters `[a-zA-Z0-9_.-]` of length at most 36 and not starting
     with a `-` (dash) or `.` (dot) or ending with a `.` (dot). IDs are 
     unique within each endpoint. IDs are assigned by the person or system 
     that is the source of the object, and must be maintained by downstream 
