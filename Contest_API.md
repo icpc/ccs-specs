@@ -640,6 +640,8 @@ JSON elements of Command objects:
 | version         | string | no       | Expected output from running the version-command.                                      |
 | version-command | string | no       | Command to run to get the version. Defaults to `<command> --version` if not specified. |
 
+The compiler and runner elements are intended for informational purposes. It is not expected that systems will synchronize compiler and runner settings via this interface.
+
 #### Access restrictions at WF
 
 No access restrictions apply to a GET on this endpoint.
@@ -737,7 +739,7 @@ JSON elements of problem objects:
 | Name              | Type    | Required? | Nullable? | Source @WF | Description                                                                                                                                                       |
 | ----------------- | ------- | --------- | --------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | id                | ID      | yes       | no        | CCS        | identifier of the problem, at the WFs the directory name of the problem archive                                                                                   |
-| uuid              | string  | no        | yes       | not used   | UUID of the problem. |
+| uuid              | string  | no        | yes       | not used   | UUID of the problem, as defiend in the problem package. |
 | label             | string  | yes       | no        | CCS        | label of the problem on the scoreboard, typically a single capitalized letter                                                                                     |
 | name              | string  | yes       | no        | CCS        | name of the problem                                                                                                                                               |
 | ordinal           | ORDINAL | yes       | no        | CCS        | ordering of problems on the scoreboard                                                                                                                            |
