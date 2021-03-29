@@ -1514,6 +1514,8 @@ JSON elements of award objects:
 | team\_ids     | array of ID | yes       | yes       | not used   | JSON array of [team](#teams) IDs the message is related to.
 | problem\_ids  | array of ID | yes       | yes       | not used   | JSON array of [problem](#problems) IDs the message is related to.
 
+For the message, if an literal `#` is needed, `\#` must be used. Similarly for literal `\`, `\\` must be used.
+
 #### Example
 
 Request:
