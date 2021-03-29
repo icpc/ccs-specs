@@ -445,7 +445,7 @@ Returned data:
    "start_time": "2014-06-25T10:00:00+01",
    "duration": "5:00:00",
    "scoreboard_freeze_duration": "1:00:00",
-   "scoreboard_type": "pass-fail"
+   "scoreboard_type": "pass-fail",
    "penalty_time": 20,
    "banner": [{
        "href": "https://example.com/api/contests/wf2014/banner",
