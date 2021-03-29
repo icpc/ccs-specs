@@ -739,7 +739,7 @@ JSON elements of problem objects:
 | Name              | Type    | Required? | Nullable? | Source @WF | Description                                                                                                                                                       |
 | ----------------- | ------- | --------- | --------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | id                | ID      | yes       | no        | CCS        | identifier of the problem, at the WFs the directory name of the problem archive                                                                                   |
-| uuid              | string  | no        | yes       | not used   | UUID of the problem, as defiend in the problem package. |
+| uuid              | string  | no        | yes       | not used   | UUID of the problem, as defined in the problem package. |
 | label             | string  | yes       | no        | CCS        | label of the problem on the scoreboard, typically a single capitalized letter                                                                                     |
 | name              | string  | yes       | no        | CCS        | name of the problem                                                                                                                                               |
 | ordinal           | ORDINAL | yes       | no        | CCS        | ordering of problems on the scoreboard                                                                                                                            |
