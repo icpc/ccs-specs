@@ -705,7 +705,7 @@ None.
 }
 ```
 
-## Binary files.
+## Binary files
 
 Binary files realted to certain object types are stored in a single
 parent directory with the same name as the object type and
@@ -764,9 +764,10 @@ single organization in it's parent JSON file.
 
 The following files could be in the organization directories:
 
-| Basename | Specifier          | Mime type   | File extension | Description | 
-| :------- | :----------------- | :---------- | :------------- | :---------- |
-| logo     | `<width>x<height>` | `image/png` | `.png`         | Logo of the organization. |
+| Basename     | Specifier          | Mime type   | File extension | Description | 
+| :----------- | :----------------- | :---------- | :------------- | :---------- |
+| logo         | `<width>x<height>` | `image/png` | `.png`         | Logo of the organization. |
+| country_flag | `<width>x<height>` | `image/png` | `.png`         | Country flag of the organization. |
 
 ### Team files
 
