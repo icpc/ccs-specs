@@ -371,6 +371,18 @@ attributes that are:
     In the latter case that can either be because it was a left out
     `null` value or because it was not implemented.
 
+### Filtering
+
+Endpoints that return a JSON array must allow filtering on any
+attribute with type ID (except the `id` field) by passing it as a
+query argument. For example, clarifications can be filtered on the
+recipient by passing `to_team_id=X`. To filter on a `null` value,
+pass an empty string, i.e. `to_team_id=`. It must be possible to
+filter on multiple different fields simultaneously, with the
+meaning that all conditions must be met (they are logically `AND`ed).
+Note that filtering on any other field, including fields with the type
+array of ID, does not have to be supported.
+
 ### Contests
 
 Provides information on the current contest.
