@@ -218,13 +218,13 @@ when outputting all absolute timestamps.
     format: `(-)?(h)*h:mm:ss(.uuu)?`
   - Identifiers
     (type **`ID`** in the specification) are given as string consisting
-    of characters `[a-zA-Z0-9_-]` of length at most 36 and not starting
-    with a `-` (dash). IDs are unique within each endpoint.
-    IDs are assigned by the person or system that is the source of the
-    object, and must be maintained by downstream systems. For example,
-    the person configuring a contest on disk will typically define the
-    ID for each team, and any CCS or CDS that exposes the team must use
-    the same ID.
+    of characters `[a-zA-Z0-9_.-]` of length at most 36 and not starting
+    with a `-` (dash) or `.` (dot) or ending with a `.` (dot). IDs are 
+    unique within each endpoint. IDs are assigned by the person or system 
+    that is the source of the object, and must be maintained by downstream 
+    systems. For example, the person configuring a contest on disk will 
+    typically define the ID for each team, and any CCS or CDS that exposes 
+    the team must use the same ID.
     Some IDs are also used as identifiable labels and are marked below
     along with the recommended format. These IDs should be meaningful
     for human communication (e.g. team "43", problem "A") and are as
@@ -313,10 +313,10 @@ are mentioned below.
 The endpoints can be categorized into 3 groups as follows:
 
   - Configuration: contests, judgement-types, languages, problems,
-    groups, organizations, teams, team-members
+    groups, organizations, teams, team-members;
   - Live data: state, submissions, judgements, runs, clarifications,
-    awards
-  - Aggregate data: scoreboard, event-feed
+    awards, commentary;
+  - Aggregate data: scoreboard, event-feed.
 
 Configuration is normally set before contest start. Is not expected to,
 but could occasionally be updated during a contest. It does not have
@@ -395,7 +395,8 @@ is returned.
 | countdown\_pause\_time       | RELTIME        | no        | yes       | CDS        | The amount of seconds left when countdown to contest start is paused. At no time may both `start_time` and `countdown_pause_time` be non-`null`. |
 | duration                     | RELTIME        | yes       | no        | CCS        | length of the contest                                                                                                                            |
 | scoreboard\_freeze\_duration | RELTIME        | no        | yes       | CCS        | how long the scoreboard is frozen before the end of the contest                                                                                  |
-| penalty\_time                | integer        | no        | no        | CCS        | penalty time for a wrong submission, in minutes                                                                                                  |
+| scoreboard\_type             | string         | no        | yes       | not used   | what type of scoreboard is used for the contest. Must be either `pass-fail` or `score`. Defaults to `pass-fail` if missing or `null`.            |
+| penalty\_time                | integer        | no        | no        | CCS        | penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`.                                               |
 | banner                       | array of IMAGE | no        | yes       | CDS        | banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime type is image/png.                      |
 | logo                         | array of IMAGE | no        | yes       | CDS        | logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime type is image/png.                                  |
 
@@ -444,6 +445,7 @@ Returned data:
    "start_time": "2014-06-25T10:00:00+01",
    "duration": "5:00:00",
    "scoreboard_freeze_duration": "1:00:00",
+   "scoreboard_type": "pass-fail",
    "penalty_time": 20,
    "banner": [{
        "href": "https://example.com/api/contests/wf2014/banner",
@@ -619,12 +621,15 @@ The following endpoints are associated with languages:
 
 JSON elements of language objects:
 
-| Name     | Type   | Required? | Nullable? | Source @WF | Description                                                           |
-| -------- | ------ | --------- | --------- | ---------- | --------------------------------------------------------------------- |
-| id       | ID     | yes       | no        | CCS        | identifier of the language from table below                           |
-| name     | string | yes       | no        | CCS        | name of the language (might not match table below, e.g. if localized) |
-| compiler | Command object | no | yes      | CCS        | Command used for compiling submissions. |
-| runner   | Command object | no | yes      | CCS        | Command used for running submissions. Relevant e.g. for interpreted languages and languages running on a VM. |
+| Name                 | Type   | Required? | Nullable? | Source @WF | Description                                                           |
+| -------------------- | ------ | --------- | --------- | ---------- | --------------------------------------------------------------------- |
+| id                   | ID     | yes       | no        | CCS        | identifier of the language from table below                           |
+| name                 | string | yes       | no        | CCS        | name of the language (might not match table below, e.g. if localized) |
+| compiler             | Command object | no | yes      | CCS        | Command used for compiling submissions. |
+| runner               | Command object | no | yes      | CCS        | Command used for running submissions. Relevant e.g. for interpreted languages and languages running on a VM. |
+| entry_point_required | boolean         | yes       | no        | CCS        | whether the language requires an entry point                                                                            |
+| entry_point_name     | string          | depends   | yes       | CCS        | the name of the type of entry point, such as "Main class" or "Main file"). Required iff entry_point_required is present |
+| extensions           | array of string | yes       | no        | CCS        | file extensions for the language                                                                                        |
 
 JSON elements of Command objects:
 
@@ -643,35 +648,36 @@ No access restrictions apply to a GET on this endpoint.
 
 #### Known languages
 
-Below is a list of standardized identifiers for known languages. When
-providing one of these languages, the corresponding identifier should be
-used. The language name may be adapted e.g. for localization or to
+Below is a list of standardized identifiers for known languages with their
+name, extensions and entry point name (if any). When providing one of these
+languages, the corresponding identifier should be used. The language name
+and entry point name may be adapted e.g. for localization or to
 indicate a particular version of the language. In case multiple versions
 of a language are provided, those must have separate, unique
 identifiers. It is recommended to choose new identifiers with a suffix
 appended to an existing one. For example `cpp17` to specify the ISO 2017
 version of C++.
 
-| ID         | Name        |
-| ---------- | ----------- |
-| ada        | Ada         |
-| c          | C           |
-| cpp        | C++         |
-| csharp     | C\#         |
-| go         | Go          |
-| haskell    | Haskell     |
-| java       | Java        |
-| javascript | JavaScript  |
-| kotlin     | Kotlin      |
-| objectivec | Objective-C |
-| pascal     | Pascal      |
-| php        | PHP         |
-| prolog     | Prolog      |
-| python2    | Python 2    |
-| python3    | Python 3    |
-| ruby       | Ruby        |
-| rust       | Rust        |
-| scala      | Scala       |
+| ID         | Name        | Extensions           | Entry point name |
+| ---------- | ----------- | -------------------- | ---------------- |
+| ada        | Ada         | adb, ads             |                  |
+| c          | C           | c                    |                  |
+| cpp        | C++         | cc, cpp, cxx, c++, C |                  |
+| csharp     | C\#         | cs                   |                  |
+| go         | Go          | go                   |                  |
+| haskell    | Haskell     | hs                   |                  |
+| java       | Java        | java                 | Main class       |
+| javascript | JavaScript  | js                   | Main file        |
+| kotlin     | Kotlin      | kt                   | Main class       |
+| objectivec | Objective-C | m                    |                  |
+| pascal     | Pascal      | pas                  |                  |
+| php        | PHP         | php                  | Main file        |
+| prolog     | Prolog      | pl                   |                  |
+| python2    | Python 2    | py                   | Main file        |
+| python3    | Python 3    | py                   | Main file        |
+| ruby       | Ruby        | rb                   |                  |
+| rust       | Rust        | rs                   |                  |
+| scala      | Scala       | scala                |                  |
 
 #### Example
 
@@ -694,7 +700,10 @@ Returned data:
    "runner": {
       "command": "java",
       "version": "openjdk version \"11.0.4\" 2019-07-16"
-   }
+   },
+   "entry_point_required": true,
+   "entry_point_name": "Main class",
+   "extensions": ["java"]
 }, {
    "id": "cpp",
    "name": "GNU C++",
@@ -702,10 +711,15 @@ Returned data:
       "command": "gcc",
       "args": "-O2 -Wall -o a.out -static {files}",
       "version": "gcc (Ubuntu 8.3.0-6ubuntu1) 8.3.0"
-  }
+   },
+   "entry_point_required": false,
+   "extensions": ["cc", "cpp", "cxx", "c++", "C"]
 }, {
-   "id": "python2",
-   "name": "Python 2"
+   "id": "python3",
+   "name": "Python 3",
+   "entry_point_required": true,
+   "entry_point_name": "Main file",
+   "extensions": ["py"]
 }]
 ```
 
@@ -846,6 +860,7 @@ JSON elements of organization objects:
 | name               | string         | yes       | no        | CCS        | short display name of the organization                                                                                                                    |
 | formal\_name       | string         | no        | yes       | CCS        | full organization name if too long for normal display purposes.                                                                                           |
 | country            | string         | no        | yes       | not used   | [ISO 3-letter code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) of the organization's country                                                       |
+| country_flag       | array of IMAGE | no        | yes       | not used   | flag of the country. Only allowed mime type is image/png. A server is recommended to provide flags of size around 56x56 and 160x160.                      |
 | url                | string         | no        | yes       | CDS        | URL to organization's website                                                                                                                             |
 | twitter\_hashtag   | string         | no        | yes       | CDS        | organization hashtag                                                                                                                                      |
 | location           | object         | no        | yes       | CDS        | JSON object as specified in the rows below                                                                                                                |
@@ -1235,6 +1250,7 @@ JSON elements of judgement objects:
 | id                   | ID      | yes       | no        | CCS        | identifier of the judgement                                     |
 | submission\_id       | ID      | yes       | no        | CCS        | identifier of the [ submission](#submissions) judged |
 | judgement\_type\_id  | ID      | yes       | yes       | CCS        | the [ verdict](#judgement-types) of this judgement   |
+| judgement\_score     | decimal | no        | no        | not used   | score for this judgement. Only relevant if contest:scoreboard_type is `score`. Defaults to `100` if missing. |
 | start\_time          | TIME    | yes       | no        | CCS        | absolute time when judgement started                            |
 | start\_contest\_time | RELTIME | yes       | no        | CCS        | contest relative time when judgement started                    |
 | end\_time            | TIME    | yes       | yes       | CCS        | absolute time when judgement completed                          |
@@ -1509,6 +1525,45 @@ Returned data:
 ]
 ```
 
+### Commentary
+
+Commentary on events happening in the contest
+
+The following endpoints are associated with commentary:
+
+| Endpoint                         | Mime-type        | Required? | Source @WF | Description                                                                    |
+| -------------------------------- | ---------------- | --------- | ---------- | ------------------------------------------------------------------------------ |
+| `/contests/<id>/commentary`      | application/json | no        | not used   | JSON array of all commentary with elements as defined in the table below       |
+| `/contests/<id>/commentary/<id>` | application/json | no        | not used   | JSON object of a single commentary with elements as defined in the table below |
+
+JSON elements of award objects:
+
+| Name          | Type        | Required? | Nullable? | Source @WF | Description |
+| ------------- | ----------- | --------- | --------- | ---------- | ----------- |
+| id            | ID          | yes       | no        | not used   | identifier of the commentary. |
+| time          | TIME        | yes       | no        | not used   | time of the commentary message. |
+| contest\_time | RELTIME     | yes       | no        | not used   | contest time of the commentary message. |  
+| message       | string      | yes       | no        | not used   | commentary message text. May contain special tags for [teams](#teams) and [problems](#problems) on the format `#t<team ID>` and `#p<problem ID>` respectively.|
+| team\_ids     | array of ID | yes       | yes       | not used   | JSON array of [team](#teams) IDs the message is related to.
+| problem\_ids  | array of ID | yes       | yes       | not used   | JSON array of [problem](#problems) IDs the message is related to.
+
+For the message, if an literal `#` is needed, `\#` must be used. Similarly for literal `\`, `\\` must be used.
+
+#### Example
+
+Request:
+
+` GET https://example.com/api/contests/wf14/commentary`
+
+Returned data:
+
+```json
+[{"id":"143730", "time":"2021-03-06T19:02:02.328+00", "contest_time":"0:02:02.328", "message": "#t20 made a submission for #panttyping. If correct, they will solve the first problem and take the lead", "team_ids": ["314089"], "problem_ids": ["anttyping"]}, 
+ {"id": "143736", "time": "2021-03-06T19:02:10.858+00", "contest_time": "0:02:10.858", "message": "#t20 fails its first attempt on #panttyping due to WA", "team_ids": ["314089"], "problem_ids": ["anttyping"]}, 
+ {"id": "143764", "time": "2021-03-06T19:03:07.517+00", "contest_time": "0:03:07.517", "message": "#t24 made a submission for #pmarch6. If correct, they will solve the first problem and take the lead", "team_ids": ["314115"], "problem_ids": ["magictrick"]}
+]
+```
+
 ### Scoreboard
 
 Scoreboard of the contest.
@@ -1568,8 +1623,10 @@ Each JSON object in the rows array consists of:
 | rank              | integer          | yes       | no        | CCS        | rank of this team, 1-based and duplicate in case of ties                                     |
 | team\_id          | ID               | yes       | no        | CCS        | identifier of the [ team](#teams)                                                 |
 | score             | object           | yes       | no        | CCS        | JSON object as specified in the rows below (for possible extension to other scoring methods) |
-| score.num\_solved | integer          | yes       | no        | CCS        | number of problems solved by the team                                                        |
-| score.total\_time | integer          | yes       | no        | CCS        | total penalty time accrued by the team                                                       |
+| score.num\_solved | integer          | depends   | no        | CCS        | number of problems solved by the team. Required iff contest:scoreboard_type is `pass-fail`.  |
+| score.total\_time | integer          | depends   | no        | CCS        | total penalty time accrued by the team. Required iff contest:scoreboard_type is `pass-fail`. |
+| score.score       | decimal          | depends   | no        | not used   | total score of problems by the team. Required iff contest:scoreboard_type is `score`.        |
+| score.time        | integer          | no        | no        | not used   | time of last score improvement used for tiebreaking purposes.                                |
 | problems          | array of objects | yes       | no        | CCS        | JSON array of problems with scoring data, see below for the specification of each element    |
 
 Each problem object within the scoreboard consists of:
@@ -1579,7 +1636,8 @@ Each problem object within the scoreboard consists of:
 | problem\_id  | ID      | yes       | no        | CCS        | identifier of the [ problem](#problems)                                            |
 | num\_judged  | integer | yes       | no        | CCS        | number of judged submissions (up to and including the first correct one)                      |
 | num\_pending | integer | yes       | no        | CCS        | number of pending submissions (either queued or due to freeze)                                |
-| solved       | boolean | yes       | no        | CCS        | whether the team solved this problem                                                          |
+| solved       | boolean | depends   | yes       | CCS        | required iff contest:scoreboard_type is `pass-fail`.                                          |
+| score        | decimal | depends   | no        | not used   | required iff contest:scoreboard_type is `score` and solved is missing. If missing or `null` defaults to `100` if solved is `true` and `0` if solved is `false`. |
 | time         | integer | depends   | no        | CCS        | minutes into the contest when this problem was solved by the team. Required iff `solved=true` |
 
 #### Access restrictions at WF
@@ -1705,6 +1763,27 @@ or full endpoint. The general format for events is:
 | id          | string | yes       | yes       | The id of the object that changed                                                                                                          |
 | data        | object | yes       | yes       | The data is the object that would be returned if calling the corresponding API endpoint at this time, i.e. an object or null for deletions |
 
+All event types have a corresponding API endpoint, as specified in the table below.
+
+| Event           | API Endpoint                          |
+| --------------- | ------------------------------------- |
+| contests        | `/contests/<id>`                      |
+| judgement-types | `/contests/<id>/judgement-types/<id>` |
+| languages       | `/contests/<id>/languages/<id>`       |
+| problems        | `/contests/<id>/problems/<id>`        |
+| groups          | `/contests/<id>/groups/<id>`          |
+| organizations   | `/contests/<id>/organizations/<id>`   |
+| teams           | `/contests/<id>/teams/<id>`           |
+| team-members    | `/contests/<id>/team-members/<id>`    |
+| state           | `/contests/<id>/state`                |
+| submissions     | `/contests/<id>/submissions/<id>`     |
+| judgements      | `/contests/<id>/judgements/<id>`      |
+| runs            | `/contests/<id>/runs/<id>`            |
+| clarifications  | `/contests/<id>/clarifications/<id>`  |
+| awards          | `/contests/<id>/awards/<id>`          |
+
+Note that this does *not* contain `/webhooks/<id>`, since no events will be triggered for that endpoint.
+
 ##### Filtering
 
 TODO - filter by contest id and/or endpoint
@@ -1764,65 +1843,66 @@ If the client fails to respond to multiple requests over a period of
 time (configured for each contest), it will be assumed deactivated and
 automatically removed from future callbacks.
 
-The following endpoint is associated with the webhook:
+The following endpoints is associated with the webhook:
 
-| Endpoint   | Mime-type        | Required? | Source @WF | Description                            |
-| ---------- | ---------------- | --------- | ---------- | -------------------------------------- |
-| `/webhook` | application/json | yes       | CCS        | List or register for webhook callbacks |
+| Endpoint         | Mime-type        | Required? | Source @WF | Description                                                                                                          |
+| ---------------- | ---------------- | --------- | ---------- | -------------------------------------------------------------------------------------------------------------------- |
+| `/webhooks`      | application/json | yes       | CCS        | JSON array of all webhook callbacks with elements as defined in the table below. Also used to register new webhooks. |
+| `/webhooks/<id>` | application/json | yes       | CCS        | JSON object of a single webhook callback with elements as defined in the table below                                 |
 
-JSON elements of webhook objects:
+JSON elements of webhook callback objects:
 
-| Name | Type   | Required? | Nullable? | Description           |
-| ---- | ------ | --------- | --------- | --------------------- |
-| url  | string | yes       | no        | The url for callbacks |
-
-TODO: include filter details?
+| Name       | Type            | Required? | Nullable? | Description                                                                           |
+| ---------- | --------------- | --------- | --------- | ------------------------------------------------------------------------------------- |
+id           | ID              | yes       | no        | identifier of the webhook.                                                            |
+url          | string          | yes       | no        | The URL to post HTTP callbacks to.                                                    |
+endpoints    | array of string | yes       | no        | Names of endpoints to receive callbacks for. Empty array means all endpoints.         |
+contest\_ids | array of ID     | yes       | no        | ID’s of contests to receive callbacks for. Empty array means all configured contests. |
 
 ##### Adding a webhook
 
-To register a webhook, you need to post your server's callback url. The
-general format to register a webhook is:
-
-```json
-{"url": "<callback url>", "auth": ... }
-```
-
-| Name | Type   | Required? | Nullable? | Description           |
-| ---- | ------ | --------- | --------- | --------------------- |
-| url  | string | yes       | no        | The url for callbacks |
-| auth | string | yes       | no        | TODO                  |
+To register a webhook, you need to post your server's callback URL.
+To do so, perform a `POST` request with a JSON body with the fields (except `id`) from the above table to the `/webhooks` endpoint together with one additional field,
+called `token`. In this field put a client-generated token that can be used to verify that callbacks come from the CCS. If you don't supply `contest_ids` and/or `endpoints`, they will default to `[]`.
 
 ##### Example
 
 Request:
 
-` POST https://example.com/api/webhook`
+` POST https://example.com/api/webhooks`
 
 Payload:
 
 ```json
-{"url": "https://myurl", "auth": ... }
+{"url": "https://myurl", "token": "mysecrettoken" }
 ```
 
 Request:
 
-` GET https://example.com/api/webhook`
+` GET https://example.com/api/webhooks`
 
 Returned data:
 
 ```json
-[{"url":"https://myurl"},{"url":"https://myotherurl"}]
+[{
+    "id":"icpc-live",
+    "url":"https://myurl",
+    "endpoints": [],
+    "contest_ids": [],
+    "active": true
+},{
+    "id":"shadow",
+    "url":"https://myotherurl",
+    "endpoints": ["teams", "problems"],
+    "contest_ids": ["wf2014"],
+    "active": false
+}]
 ```
 
-Future payload posted to url:
-
-` POST https://myurl`
-
-Payload:
-
-```json
-{"contest_id":"finals","endpoint":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
-```
+When the CCS wants to send out a callback, it will check all active webhooks, filter them on applicable endpoint and contest ID and perform a `POST` to the URL.
+The CCS will add a header to this request called `Webhook-Token` which contains the token as supplied when creating the webhook.
+Clients should verify that this token matches with what they expect.
+The body of the request will be in the same format as in the [feed format](#feed-format), i.e. it contains the keys `contest_id`, `endpoint`, `id` and `data`.
 
 #### HTTP Feed
 
