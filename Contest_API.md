@@ -631,7 +631,7 @@ JSON elements of Command objects:
 | Name            | Type   | Required | Description |
 | :-------------- | :----- | :------- | :---------- |
 | command         | string | yes      | Command to run.                                              |
-| args            | string | no       | Argument list for command. {files} denotes where to include the file list. |
+| args            | string | no       | Argument list for command. `{files}` denotes where to include the file list. |
 | version         | string | no       | Expected output from running the version-command.            |
 | version-command | string | no       | Command to run to get the version. Defaults to `<command> --version` if not specified. |
 
