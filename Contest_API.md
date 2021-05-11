@@ -185,13 +185,15 @@ deleting an element and then creating a new element with the same ID.
 
 ### JSON attribute types
 
-Attribute types are specified as one of the [standard JSON
-types](https://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example),
-or one of the more specific types below. Implementations must be
-consistent with respect to the optional parts of each type, e.g. if the
-optional .uuu is included in any absolute timestamp it must be included
-when outputting all absolute timestamps.
+Attribute types are specified as one of the standard JSON types, or one of the
+more specific types defined below. Implementations must be consistent with
+respect to the optional parts of each type, e.g. if the optional .uuu is
+included in any absolute timestamp it must be included when outputting all
+absolute timestamps.
 
+  - Strings (type **`string`** in the specification) are built-in JSON strings.
+  - Numbers (type **`number`** in the specification) are built-in JSON numbers.
+  - Booleans (type **`boolean`** in the specification) are built-in JSON booleans.
   - Integers
     (type **`integer`** in the specification) are JSON numbers that are
     restricted to be integer. They should be represented in standard
@@ -234,6 +236,8 @@ when outputting all absolute timestamps.
     (types **`IMAGE`**, **`VIDEO`**, **`ARCHIVE`** and **`STREAM`** in
     the specification) are represented as a JSON object with elements as
     defined below.
+  - Arrays (type **`array of <type>`** in the specification) are built-in JSON 
+    arrays of some type defined above.
 
 Element for file reference objects:
 
