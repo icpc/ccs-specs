@@ -196,10 +196,6 @@ when outputting all absolute timestamps.
     (type **`integer`** in the specification) are JSON numbers that are
     restricted to be integer. They should be represented in standard
     integer representation `(-)?[0-9]+`.
-  - Floating point numbers
-    (type **`float`** in the specification) are arbitrary JSON numbers
-    that are expected to take non-integer values. It is recommended to
-    use a decimal representation.
   - Absolute timestamps
     (type **`TIME`** in the specification) are strings containing
     human-readable timestamps, given in
@@ -711,7 +707,7 @@ JSON elements of problem objects:
 | ordinal           | ORDINAL | yes       | no        | CCS        | ordering of problems on the scoreboard                                                                                                                            |
 | rgb               | string  | no        | no        | CCS        | hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet), e.g. `#AC00FF` or `#fff` |
 | color             | string  | no        | no        | CCS        | human readable color description associated to the RGB value                                                                                                      |
-| time\_limit       | float | no        | no        | CCS        | time limit in seconds per test data set (i.e. per single run). Should have a resolution of at most `0.001` seconds. |
+| time\_limit       | number  | no        | no        | CCS        | time limit in seconds per test data set (i.e. per single run). Should have a resolution of at most `0.001` seconds. |
 | test\_data\_count | integer | yes       | no        | CCS        | number of test data sets                                                                                                                                          |
 
 #### Access restrictions at WF
@@ -830,8 +826,8 @@ JSON elements of organization objects:
 | url                | string         | no        | yes       | CDS        | URL to organization's website                                                                                                                             |
 | twitter\_hashtag   | string         | no        | yes       | CDS        | organization hashtag                                                                                                                                      |
 | location           | object         | no        | yes       | CDS        | JSON object as specified in the rows below                                                                                                                |
-| location.latitude  | float          | depends   | no        | CDS        | Latitude in degrees. Required iff location is present.                                                                                                    |
-| location.longitude | float          | depends   | no        | CDS        | Longitude in degrees. Required iff location is present.                                                                                                   |
+| location.latitude  | number         | depends   | no        | CDS        | Latitude in degrees. Required iff location is present.                                                                                                    |
+| location.longitude | number         | depends   | no        | CDS        | Longitude in degrees. Required iff location is present.                                                                                                   |
 | logo               | array of IMAGE | no        | yes       | CDS        | logo of the organization. Only allowed mime type is image/png. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well. |
 
 #### Access restrictions at WF
@@ -877,9 +873,9 @@ JSON elements of team objects:
 | organization\_id  | ID               | no        | yes       | CCS        | identifier of the [ organization](#organizations) (e.g. university or other entity) that this team is affiliated to                                                                           |
 | group\_ids        | array of ID      | no        | no        | CCS        | identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty. |
 | location          | object           | no        | no        | CDS        | JSON object as specified in the rows below                                                                                                                                                               |
-| location.x        | float            | depends   | no        | CDS        | Team's x position in meters. Required iff location is present.                                                                                                                                           |
-| location.y        | float            | depends   | no        | CDS        | Team's y position in meters. Required iff location is present.                                                                                                                                           |
-| location.rotation | float            | depends   | no        | CDS        | Team's rotation in degrees. Required iff location is present.                                                                                                                                            |
+| location.x        | number           | depends   | no        | CDS        | Team's x position in meters. Required iff location is present.                                                                                                                                           |
+| location.y        | number           | depends   | no        | CDS        | Team's y position in meters. Required iff location is present.                                                                                                                                           |
+| location.rotation | number           | depends   | no        | CDS        | Team's rotation in degrees. Required iff location is present.                                                                                                                                            |
 | photo             | array of IMAGE   | no        | yes       | CDS        | registration photo of the team. Only allowed mime types are image/jpeg and image/png.                                                                                                                    |
 | video             | array of VIDEO   | no        | yes       | CDS        | registration video of the team.                                                                                                                                                                          |
 | backup            | array of ARCHIVE | no        | yes       | CDS        | latest file backup of the team machine. Only allowed mime type is application/zip.                                                                                                                       |
@@ -1216,12 +1212,12 @@ JSON elements of judgement objects:
 | id                   | ID      | yes       | no        | CCS        | identifier of the judgement                                     |
 | submission\_id       | ID      | yes       | no        | CCS        | identifier of the [ submission](#submissions) judged |
 | judgement\_type\_id  | ID      | yes       | yes       | CCS        | the [ verdict](#judgement-types) of this judgement   |
-| judgement\_score     | float | no        | no        | not used   | score for this judgement. Only relevant if contest:scoreboard_type is `score`. Defaults to `100` if missing. |
+| judgement\_score     | number  | no        | no        | not used   | score for this judgement. Only relevant if contest:scoreboard_type is `score`. Defaults to `100` if missing. |
 | start\_time          | TIME    | yes       | no        | CCS        | absolute time when judgement started                            |
 | start\_contest\_time | RELTIME | yes       | no        | CCS        | contest relative time when judgement started                    |
 | end\_time            | TIME    | yes       | yes       | CCS        | absolute time when judgement completed                          |
 | end\_contest\_time   | RELTIME | yes       | yes       | CCS        | contest relative time when judgement completed                  |
-| max\_run\_time       | float | no        | yes       | CCS        | maximum run time in seconds for any test case. Should have a resolution of at most `0.001` seconds. |
+| max\_run\_time       | number  | no        | yes       | CCS        | maximum run time in seconds for any test case. Should have a resolution of at most `0.001` seconds. |
 
 When a judgement is started, each of `judgement_type_id`, `end_time` and
 `end_contest_time` will be `null` (or missing). These are set when the
@@ -1273,7 +1269,7 @@ JSON elements of run objects:
 | judgement\_type\_id | ID      | yes       | no        | CCS        | the [ verdict](#judgement-types) of this judgement (i.e. a judgement type)                                                                                                       |
 | time                | TIME    | yes       | no        | CCS        | absolute time when run completed                                                                                                                                                            |
 | contest\_time       | RELTIME | yes       | no        | CCS        | contest relative time when run completed                                                                                                                                                    |
-| run\_time           | float   | no        | no        | CCS        | run time in seconds. Should have a resolution of at most `0.001` seconds. |
+| run\_time           | number  | no        | no        | CCS        | run time in seconds. Should have a resolution of at most `0.001` seconds. |
 
 #### Access restrictions at WF
 
@@ -1591,7 +1587,7 @@ Each JSON object in the rows array consists of:
 | score             | object           | yes       | no        | CCS        | JSON object as specified in the rows below (for possible extension to other scoring methods) |
 | score.num\_solved | integer          | depends   | no        | CCS        | number of problems solved by the team. Required iff contest:scoreboard_type is `pass-fail`.  |
 | score.total\_time | integer          | depends   | no        | CCS        | total penalty time accrued by the team. Required iff contest:scoreboard_type is `pass-fail`. |
-| score.score       | float            | depends   | no        | not used   | total score of problems by the team. Required iff contest:scoreboard_type is `score`.        |
+| score.score       | number           | depends   | no        | not used   | total score of problems by the team. Required iff contest:scoreboard_type is `score`.        |
 | score.time        | integer          | no        | no        | not used   | time of last score improvement used for tiebreaking purposes.                                |
 | problems          | array of objects | yes       | no        | CCS        | JSON array of problems with scoring data, see below for the specification of each element    |
 
@@ -1603,7 +1599,7 @@ Each problem object within the scoreboard consists of:
 | num\_judged  | integer | yes       | no        | CCS        | number of judged submissions (up to and including the first correct one)                      |
 | num\_pending | integer | yes       | no        | CCS        | number of pending submissions (either queued or due to freeze)                                |
 | solved       | boolean | depends   | yes       | CCS        | required iff contest:scoreboard_type is `pass-fail`.                                          |
-| score        | float   | depends   | no        | not used   | required iff contest:scoreboard_type is `score` and solved is missing. If missing or `null` defaults to `100` if solved is `true` and `0` if solved is `false`. |
+| score        | number  | depends   | no        | not used   | required iff contest:scoreboard_type is `score` and solved is missing. If missing or `null` defaults to `100` if solved is `true` and `0` if solved is `false`. |
 | time         | integer | depends   | no        | CCS        | minutes into the contest when this problem was solved by the team. Required iff `solved=true` |
 
 #### Access restrictions at WF
