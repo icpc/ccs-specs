@@ -142,7 +142,14 @@ their expected behavior, if implemented.
 
 Standard [HTTP status
 codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) are
-returned to indicate success or failure.
+returned to indicate success or failure. When there is a failure, the
+response message body must include a JSON element that contains the attributes 'code' and 'message' with further information suitable for the user making the
+request, as per the following example:
+
+```json
+{"code":"400",
+ "message":"Teams cannot send clarifications to another team"}
+ ```
 
 ### Roles
 
