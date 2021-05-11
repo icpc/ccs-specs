@@ -200,11 +200,6 @@ when outputting all absolute timestamps.
     (type **`float`** in the specification) are arbitrary JSON numbers
     that are expected to take non-integer values. It is recommended to
     use a decimal representation.
-  - Fixed point numbers
-    (type **`decimal`** in the specification) are JSON numbers that are
-    expected to take non-integer values. They must be in decimal
-    (non-scientific) representation and have at most 3 decimals. That
-    is, they must be a integer multiple of `0.001`.
   - Absolute timestamps
     (type **`TIME`** in the specification) are strings containing
     human-readable timestamps, given in
@@ -716,7 +711,7 @@ JSON elements of problem objects:
 | ordinal           | ORDINAL | yes       | no        | CCS        | ordering of problems on the scoreboard                                                                                                                            |
 | rgb               | string  | no        | no        | CCS        | hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet), e.g. `#AC00FF` or `#fff` |
 | color             | string  | no        | no        | CCS        | human readable color description associated to the RGB value                                                                                                      |
-| time\_limit       | decimal | no        | no        | CCS        | time limit in seconds per test data set (i.e. per single run)                                                                                                     |
+| time\_limit       | float | no        | no        | CCS        | time limit in seconds per test data set (i.e. per single run). Should have a resolution of at most `0.001` seconds. |
 | test\_data\_count | integer | yes       | no        | CCS        | number of test data sets                                                                                                                                          |
 
 #### Access restrictions at WF
@@ -1221,12 +1216,12 @@ JSON elements of judgement objects:
 | id                   | ID      | yes       | no        | CCS        | identifier of the judgement                                     |
 | submission\_id       | ID      | yes       | no        | CCS        | identifier of the [ submission](#submissions) judged |
 | judgement\_type\_id  | ID      | yes       | yes       | CCS        | the [ verdict](#judgement-types) of this judgement   |
-| judgement\_score     | decimal | no        | no        | not used   | score for this judgement. Only relevant if contest:scoreboard_type is `score`. Defaults to `100` if missing. |
+| judgement\_score     | float | no        | no        | not used   | score for this judgement. Only relevant if contest:scoreboard_type is `score`. Defaults to `100` if missing. |
 | start\_time          | TIME    | yes       | no        | CCS        | absolute time when judgement started                            |
 | start\_contest\_time | RELTIME | yes       | no        | CCS        | contest relative time when judgement started                    |
 | end\_time            | TIME    | yes       | yes       | CCS        | absolute time when judgement completed                          |
 | end\_contest\_time   | RELTIME | yes       | yes       | CCS        | contest relative time when judgement completed                  |
-| max\_run\_time       | decimal | no        | yes       | CCS        | maximum run time in seconds for any test case                   |
+| max\_run\_time       | float | no        | yes       | CCS        | maximum run time in seconds for any test case. Should have a resolution of at most `0.001` seconds. |
 
 When a judgement is started, each of `judgement_type_id`, `end_time` and
 `end_contest_time` will be `null` (or missing). These are set when the
@@ -1278,7 +1273,7 @@ JSON elements of run objects:
 | judgement\_type\_id | ID      | yes       | no        | CCS        | the [ verdict](#judgement-types) of this judgement (i.e. a judgement type)                                                                                                       |
 | time                | TIME    | yes       | no        | CCS        | absolute time when run completed                                                                                                                                                            |
 | contest\_time       | RELTIME | yes       | no        | CCS        | contest relative time when run completed                                                                                                                                                    |
-| run\_time           | decimal | no        | no        | CCS        | run time in seconds                                                                                                                                                                         |
+| run\_time           | float   | no        | no        | CCS        | run time in seconds. Should have a resolution of at most `0.001` seconds. |
 
 #### Access restrictions at WF
 
@@ -1596,7 +1591,7 @@ Each JSON object in the rows array consists of:
 | score             | object           | yes       | no        | CCS        | JSON object as specified in the rows below (for possible extension to other scoring methods) |
 | score.num\_solved | integer          | depends   | no        | CCS        | number of problems solved by the team. Required iff contest:scoreboard_type is `pass-fail`.  |
 | score.total\_time | integer          | depends   | no        | CCS        | total penalty time accrued by the team. Required iff contest:scoreboard_type is `pass-fail`. |
-| score.score       | decimal          | depends   | no        | not used   | total score of problems by the team. Required iff contest:scoreboard_type is `score`.        |
+| score.score       | float            | depends   | no        | not used   | total score of problems by the team. Required iff contest:scoreboard_type is `score`.        |
 | score.time        | integer          | no        | no        | not used   | time of last score improvement used for tiebreaking purposes.                                |
 | problems          | array of objects | yes       | no        | CCS        | JSON array of problems with scoring data, see below for the specification of each element    |
 
@@ -1608,7 +1603,7 @@ Each problem object within the scoreboard consists of:
 | num\_judged  | integer | yes       | no        | CCS        | number of judged submissions (up to and including the first correct one)                      |
 | num\_pending | integer | yes       | no        | CCS        | number of pending submissions (either queued or due to freeze)                                |
 | solved       | boolean | depends   | yes       | CCS        | required iff contest:scoreboard_type is `pass-fail`.                                          |
-| score        | decimal | depends   | no        | not used   | required iff contest:scoreboard_type is `score` and solved is missing. If missing or `null` defaults to `100` if solved is `true` and `0` if solved is `false`. |
+| score        | float   | depends   | no        | not used   | required iff contest:scoreboard_type is `score` and solved is missing. If missing or `null` defaults to `100` if solved is `true` and `0` if solved is `false`. |
 | time         | integer | depends   | no        | CCS        | minutes into the contest when this problem was solved by the team. Required iff `solved=true` |
 
 #### Access restrictions at WF
