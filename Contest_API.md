@@ -751,8 +751,20 @@ Returned data:
 
 ### Groups
 
-Grouping of teams. At the World Finals these are the super regions, at
-regionals these are often different sites.
+Grouping of teams. At the World Finals these are the super regions; at other contests these
+may be the different sites, divisions, or types of contestants.
+
+Teams may belong to multiple groups. For instance, there may be a group for each site, a group for
+university teams, a group for corporate teams, and a group for ICPC-eligible teams. Teams could
+belong to two or three of these.
+When there are different kinds of groups for different purposes (e.g. sites vs divisions), each
+group or set of groups should have a different type attribute
+(e.g. `"type":"site"` and `"type":"division"`).
+
+Groups must exist for any combination of teams that should be ranked on a
+[group scoreboard](#group-scoreboard), which means groups may be created for combinations.
+For instance, if there's a requirement to show a scoreboard for teams in each of `D`
+divisions at every one of `S` sites, then there will also be `D`x`S` groups with a type like `"type":"site-division"`.
 
 The following endpoints are associated with groups:
 
@@ -773,11 +785,21 @@ JSON elements of group objects:
 | icpc\_id | string  | no        | yes       | CCS        | external identifier from ICPC CMS                                        |
 | name     | string  | yes       | no        | CCS        | name of the group                                                        |
 | type     | string  | no        | yes       | CCS        | type of this group                                                       |
-| hidden   | boolean | no        | yes       | CCS        | if group should be hidden from scoreboard. Defaults to false if missing. |
+| hidden   | boolean | no        | yes       | CCS        | if the group should be excluded from the [scoreboard](#scoreboard). Defaults to false if missing. |
 
 #### Access restrictions at WF
 
 No access restrictions apply to a GET on this endpoint.
+
+#### Known group types
+
+The list below contains standardized identifiers for known group
+types. These identifiers should be used when the purpose
+of a group matches.
+
+| Type  | Name                | Description
+| ----- | ------------------- | ---------------------------------
+| site  | Site                | A physical location where teams are competing, e.g. the "Hawaii site"
 
 #### Examples
 
@@ -1537,7 +1559,7 @@ Returned data:
 
 ### Scoreboard
 
-Scoreboard of the contest.
+Scoreboard for the contest.
 
 Since this is generated data, only the `GET` method is allowed here,
 irrespective of role.
@@ -1568,6 +1590,18 @@ returned. The request will fail with a 400 error if the id is invalid.
 A suggested efficient server-side implementation to provide this, is to
 store with each event that changes the scoreboard, the new team
 scoreboard row.
+
+##### Group scoreboard
+
+By passing `group_id` with a valid group ID a scoreboard can be requested for the teams in a particular group:
+
+`/scoreboard?group_id=site1`
+
+Each group scoreboard is ranked independently and contains only the teams that belong to the
+specified group. If a client wants to know 'local' vs 'global' rank it can query both the group and primary scoreboards.
+
+A 4xx error will be returned if the group id is not valid. Groups that are hidden to the role making
+the request are not valid.
 
 #### Scoreboard format
 
@@ -1613,9 +1647,10 @@ Each problem object within the scoreboard consists of:
 
 #### Access restrictions at WF
 
-For clients with the `public` role, the scoreboard will not include
-information from judgements of submissions received after the scoreboard
-has been frozen until it has been thawed.
+For clients with the `public` or `team` role, the scoreboard will not
+include teams that are in any group that is hidden, nor information
+from judgements of submissions received after the scoreboard has been
+frozen until it has been thawed.
 
 #### Example
 
