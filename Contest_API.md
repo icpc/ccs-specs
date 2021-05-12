@@ -761,10 +761,12 @@ When there are different kinds of groups for different purposes (e.g. sites vs d
 group or set of groups should have a different type attribute
 (e.g. `"type":"site"` and `"type":"division"`).
 
-Groups must exist for any combination of teams that should be ranked on a
-[group scoreboard](#group-scoreboard), which means groups may be created for combinations.
-For instance, if there's a requirement to show a scoreboard for teams in each of `D`
-divisions at every one of `S` sites, then there will also be `D`x`S` groups with a type like `"type":"site-division"`.
+Groups must exist for any combination of teams that must be ranked on a
+[group scoreboard](#group-scoreboard), which means groups may be created for combinations of
+other groups. For instance, if there is a requirement to show a scoreboard for teams in each of `D`
+divisions at every one of `S` sites, then in addition to the `D` + `S` groups there will also be
+`D`x`S` combined/product groups. It is strongly recommended that these groups have a type like
+`"type":"<group1>-<group2>"`, e.g. `"type":"site-division"`.
 
 The following endpoints are associated with groups:
 
@@ -785,7 +787,7 @@ JSON elements of group objects:
 | icpc\_id | string  | no        | yes       | CCS        | external identifier from ICPC CMS                                        |
 | name     | string  | yes       | no        | CCS        | name of the group                                                        |
 | type     | string  | no        | yes       | CCS        | type of this group                                                       |
-| hidden   | boolean | no        | yes       | CCS        | if the group should be excluded from the [scoreboard](#scoreboard). Defaults to false if missing. |
+| hidden   | boolean | no        | yes       | CCS        | if the group is to be excluded from the [scoreboard](#scoreboard). Defaults to false if missing. |
 
 #### Access restrictions at WF
 
