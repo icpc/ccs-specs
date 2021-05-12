@@ -274,20 +274,23 @@ on the contest network.
 
 ### Predefined Clarification Answers
 
-The CCS must be able to configure predefined answers to clarification
-requests (e.g., "No response, read problem statement." and "This will be
-answered after the practice session.") from the [ contest configuration
-file](#contestyaml), so that judges can choose to reply to a
-clarification request by selecting a predefined answer rather than being
-required to enter a specific answer. One of the predefined answers must
-be the "default" answer.
+The CCS must support predefined answers to clarification requests, so
+that judges can choose to reply to a clarification request by selecting
+a predefined answer rather than being required to enter a specific
+answer. At least the following predefined answers must be supported:
+
+* No comment, read problem statement.
+* This will be answered during the answers to questions session.
 
 ### Clarification Categories
 
-The CCS must be able to configure "categories" to which clarification
-requests can be assigned from the [ contest configuration
-file](#contestyaml). A request belongs to exactly one
-category. Examples of categories are "General", "SysOps", "Operations".
+The CCS must support "categories" to which clarification
+requests can be assigned. A request belongs to exactly one
+category. At least the following categories need to be supported:
+
+* General
+* SysOps
+* Operations
 
 In addition, the CCS must construct one category per problem, i.e.,
 categories named e.g. "Problem A", "Problem B", etc. for each problem.
@@ -1220,66 +1223,6 @@ start-time:               2011-02-04T01:23:00Z
 duration:                 5:00:00
 scoreboard-freeze-length: 1:00:00
 penalty-time:             20
-```
-
-#### system.yaml
-
-A YAML file consisting of a mapping with the following keys:
-
-| Key             | Description                                                                                      |
-| --------------- | ------------------------------------------------------------------------------------------------ |
-| default-clars   | Sequence of pre-defined clarification answers. The first is the default and will be pre-selected |
-| clar-categories | Sequence of categories for clarifications.                                                       |
-| languages       | Sequence of mappings with keys as defined below                                                  |
-
-##### languages
-
-A sequence of mappings with the following keys:
-
-| Key           | Description                                                                                |
-| ------------- | ------------------------------------------------------------------------------------------ |
-| name          | Name of language                                                                           |
-| compiler      | Path to compiler                                                                           |
-| compiler-args | Argument list for compiler. {files} denotes where to include the file list                 |
-| runner        | Path to runner. Optional, relevant for interpreted languages and languages running on a VM |
-| runner-args   | Argument list for runner                                                                   |
-
-A CCS may place reasonable requirements on the configuration of
-languages. For instance, a CCS may require that the C compiler is
-configured such that the output binary will be statically linked and
-output a binary with name 'long\_weird\_name'. Such requirements should
-be clearly specified in the CCS documentation. The CCS should not place
-any restrictions on optimization options used, and should in general
-place as few restrictions as possible on the language configuration.
-
-##### Example
-
-```yaml
-# System configuration
----
-default-clars:
-  - No comment, read problem statement.
-  - This will be answered during the answers to questions session.
-
-clar-categories:
-  - General
-  - SysOps
-  - Operations
-
-languages:
-  - name: C++
-    compiler: /usr/bin/g++
-    compiler-args: -O2 -Wall -o a.out -static {files}
-
-  - name: C
-    compiler: /usr/bin/gcc
-    compiler-args: -O2 -Wall -std=gnu99 -o a.out -static {files} -lm
-
-  - name: Java
-    compiler: /usr/bin/javac
-    compiler-args: -O {files}
-    runner: /usr/bin/java
-    runner-args:
 ```
 
 #### problemset.yaml
