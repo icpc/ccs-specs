@@ -621,10 +621,12 @@ The following endpoints are associated with languages:
 
 JSON elements of language objects:
 
-| Name                 | Type            | Required? | Nullable? | Source @WF | Description                                                                                                             |
-| -------------------- | --------------- | --------- | --------- | ---------- | ----------------------------------------------------------------------------------------------------------------------- |
-| id                   | ID              | yes       | no        | CCS        | identifier of the language from table below                                                                             |
-| name                 | string          | yes       | no        | CCS        | name of the language (might not match table below, e.g. if localized)                                                   |
+| Name                 | Type   | Required? | Nullable? | Source @WF | Description                                                           |
+| -------------------- | ------ | --------- | --------- | ---------- | --------------------------------------------------------------------- |
+| id                   | ID     | yes       | no        | CCS        | identifier of the language from table below                           |
+| name                 | string | yes       | no        | CCS        | name of the language (might not match table below, e.g. if localized) |
+| compiler             | Command object | no | yes      | CCS        | Command used for compiling submissions. |
+| runner               | Command object | no | yes      | CCS        | Command used for running submissions. Relevant e.g. for interpreted languages and languages running on a VM. |
 | entry_point_required | boolean         | yes       | no        | CCS        | whether the language requires an entry point                                                                            |
 | entry_point_name     | string          | depends   | yes       | CCS        | the name of the type of entry point, such as "Main class" or "Main file"). Required iff entry_point_required is present |
 | extensions           | array of string | yes       | no        | CCS        | file extensions for the language                                                                                        |
@@ -638,6 +640,17 @@ JSON elements of Command objects:
 | command         | string | yes      | Command to run.                                                                        |
 | args            | string | no       | Argument list for command. {files} denotes where to include the file list.             |
 | version         | string | no       | Expected output from running the version-command.                                      |
+| version-command | string | no       | Command to run to get the version. Defaults to `<command> --version` if not specified. |
+
+The compiler and runner elements are intended for informational purposes. It is not expected that systems will synchronize compiler and runner settings via this interface.
+
+JSON elements of Command objects:
+
+| Name            | Type   | Required | Description |
+| :-------------- | :----- | :------- | :---------- |
+| command         | string | yes      | Command to run.                                              |
+| args            | string | no       | Argument list for command. `{files}` denotes where to include the file list. |
+| version         | string | no       | Expected output from running the version-command.            |
 | version-command | string | no       | Command to run to get the version. Defaults to `<command> --version` if not specified. |
 
 The compiler and runner elements are intended for informational purposes. It is not expected that systems will synchronize compiler and runner settings via this interface.
@@ -691,6 +704,16 @@ Returned data:
 [{
    "id": "java",
    "name": "Java",
+   "compiler": {
+      "command": "javac",
+      "args": "-O {files}",
+      "version": "javac 11.0.4",
+      "version-command": "javac --version"
+   },
+   "runner": {
+      "command": "java",
+      "version": "openjdk version \"11.0.4\" 2019-07-16"
+   },
    "entry_point_required": true,
    "entry_point_name": "Main class",
    "extensions": ["java"],
@@ -707,6 +730,11 @@ Returned data:
 }, {
    "id": "cpp",
    "name": "GNU C++",
+   "compiler": {
+      "command": "gcc",
+      "args": "-O2 -Wall -o a.out -static {files}",
+      "version": "gcc (Ubuntu 8.3.0-6ubuntu1) 8.3.0"
+   },
    "entry_point_required": false,
    "extensions": ["cc", "cpp", "cxx", "c++", "C"],
    "compiler": {
