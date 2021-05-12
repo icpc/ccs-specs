@@ -146,7 +146,7 @@ returned to indicate success or failure. When there is a failure (status codes 4
 response message body must include a JSON element that contains the attributes 'code' (a number, identical to the HTTP status code returned) and 'message' (a string) with further information suitable for the user making the request, as per the following example:
 
 ```json
-{"code":400,
+{"code":403,
  "message":"Teams cannot send clarifications to another team"}
  ```
 
@@ -1364,7 +1364,7 @@ endpoint returns with a `GET` request with the following exceptions:
   proxy. See notes under the submission interface for more detail. In cases where
   these attributes are not allowed the server will respond with a 400 error code.
 
-The request must fail with a 400 error code if any of the following happens:
+The request must fail with a 4xx HTTP status code if any of the following happens:
 
 * A required attribute is missing.
 * An attribute that must not be provided is provided.
