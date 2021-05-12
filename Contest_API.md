@@ -711,7 +711,7 @@ JSON elements of problem objects:
 | ordinal           | ORDINAL | yes       | no        | CCS        | ordering of problems on the scoreboard                                                                                                                            |
 | rgb               | string  | no        | no        | CCS        | hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet), e.g. `#AC00FF` or `#fff` |
 | color             | string  | no        | no        | CCS        | human readable color description associated to the RGB value                                                                                                      |
-| time\_limit       | number  | no        | no        | CCS        | time limit in seconds per test data set (i.e. per single run). Should have a resolution of at most `0.001` seconds. |
+| time\_limit       | number  | no        | no        | CCS        | time limit in seconds per test data set (i.e. per single run). Should be an integer multiple of `0.001`. |
 | test\_data\_count | integer | yes       | no        | CCS        | number of test data sets                                                                                                                                          |
 
 #### Access restrictions at WF
@@ -1221,7 +1221,7 @@ JSON elements of judgement objects:
 | start\_contest\_time | RELTIME | yes       | no        | CCS        | contest relative time when judgement started                    |
 | end\_time            | TIME    | yes       | yes       | CCS        | absolute time when judgement completed                          |
 | end\_contest\_time   | RELTIME | yes       | yes       | CCS        | contest relative time when judgement completed                  |
-| max\_run\_time       | number  | no        | yes       | CCS        | maximum run time in seconds for any test case. Should have a resolution of at most `0.001` seconds. |
+| max\_run\_time       | number  | no        | yes       | CCS        | maximum run time in seconds for any test case. Should be an integer multiple of `0.001`. |
 
 When a judgement is started, each of `judgement_type_id`, `end_time` and
 `end_contest_time` will be `null` (or missing). These are set when the
@@ -1273,7 +1273,7 @@ JSON elements of run objects:
 | judgement\_type\_id | ID      | yes       | no        | CCS        | the [ verdict](#judgement-types) of this judgement (i.e. a judgement type)                                                                                                       |
 | time                | TIME    | yes       | no        | CCS        | absolute time when run completed                                                                                                                                                            |
 | contest\_time       | RELTIME | yes       | no        | CCS        | contest relative time when run completed                                                                                                                                                    |
-| run\_time           | number  | no        | no        | CCS        | run time in seconds. Should have a resolution of at most `0.001` seconds. |
+| run\_time           | number  | no        | no        | CCS        | run time in seconds. Should be an integer multiple of `0.001`. |
 
 #### Access restrictions at WF
 
