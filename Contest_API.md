@@ -1545,6 +1545,19 @@ For some common award cases the following IDs should be used.
 | group-winner-\<id>        | Current leader(s) in group \<id>. Empty if no team has scored.                                                             | Winner(s) of group \<id>          |                                                                         |
 | organization-winner-\<id> | Current leader(s) of organization \<id>. Empty if no team has scored.                                                      | Winner(s) of organization \<id>   | Not useful in contest with only one team per organization (e.g. the WF) |
 
+#### POST, PATCH, and DELETE awards
+
+Clients with the `admin` role may make changes to awards using the normal [HTTP methods](#http-methods) as specified above. Specifically, they can POST new awards, PATCH one or more attributes, or DELETE an existing award. All requests must include the id attribute.
+
+The request must fail with a 4xx HTTP status code if any of the following happens:
+
+* The request doesn't include an award id.
+* A POST when the award id already exists.
+* A POST that is missing one of the required attributes (`citation` and `team_ids`).
+* A PATCH on an award id that doesn't exist.
+* A PATCH that contains an invalid attribute (e.g. null `citation` or `team_ids`).
+* A DELETE on an award id that doesn't exist.
+
 #### Example
 
 Request:
