@@ -759,7 +759,8 @@ university teams, a group for corporate teams, and a group for ICPC-eligible tea
 belong to two or three of these.
 When there are different kinds of groups for different purposes (e.g. sites vs divisions), each
 group or set of groups should have a different type attribute
-(e.g. `"type":"site"` and `"type":"division"`).
+(e.g. `"type":"site"` and `"type":"division"`). It is recommended that each team is in no more
+than one group of a given type.
 
 Groups must exist for any combination of teams that must be ranked on a
 [group scoreboard](#group-scoreboard), which means groups may be created for combinations of
@@ -799,9 +800,9 @@ The list below contains standardized identifiers for known group
 types. These identifiers should be used when the purpose
 of a group matches.
 
-| Type  | Name                | Description
-| ----- | ------------------- | ---------------------------------
-| site  | Site                | A physical location where teams are competing, e.g. the "Hawaii site"
+| Type  | Description
+| ----- | ---------------------------------
+| site  | A physical location where teams are competing, e.g. the "Hawaii site"
 
 #### Examples
 
