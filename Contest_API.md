@@ -1549,6 +1549,10 @@ For some common award cases the following IDs should be used.
 
 Clients with the `admin` role may make changes to awards using the normal [HTTP methods](#http-methods) as specified above. Specifically, they can POST new awards, PATCH one or more attributes, or DELETE an existing award. All requests must include the id attribute.
 
+Each award id may be managed by the server, overridable, or unmanaged (potentially even unknown). Managed awards are assigned by the server and any attempt to change them will fail. Overridable awards will be assigned by the server by default, but once it has been modified externally the server will stop assigning or updating them. Award ids that are unmanaged or unknown to the server are solely up to the client.
+
+For instance, a server may be configured to assign `winner` and `*-medal` awards as managed awards, and these cannot be overridden by clients. The same server may assign `first-to-solve-*` awards by default, but allow a client to override them. This server may have no support for assigning `group-winner-*` and these will only exist if a client adds them. The client can also add other or arbitrary awards like `first-submission-for-country`.
+
 The request must fail with a 4xx HTTP status code if any of the following happens:
 
 * The request doesn't include an award id.
@@ -1557,6 +1561,7 @@ The request must fail with a 4xx HTTP status code if any of the following happen
 * A PATCH on an award id that doesn't exist.
 * A PATCH that contains an invalid attribute (e.g. null `citation` or `team_ids`).
 * A DELETE on an award id that doesn't exist.
+* A POST, PATCH, or DELETE on an award id that the server is managing.
 
 #### Example
 
