@@ -413,10 +413,6 @@ The `countdown_pause_time` may change to indicate approximate delay.
 Countdown is resumed by setting a new `start_time` and resetting
 `countdown_pause_time` to `null`.
 
-#### Access restrictions at WF
-
-No access restrictions apply to a GET on this endpoint.
-
 #### PATCH start\_time
 
 To replace the *Contest Start Interface*, at the ICPC World
@@ -522,10 +518,6 @@ JSON elements of judgement type objects:
 | name    | string  | yes       | no        | Name of the judgement. (might not match table below, e.g. if localized).
 | penalty | boolean | depends   | no        | Whether this judgement causes penalty time; must be present if and only if contest:penalty\_time is present.
 | solved  | boolean | yes       | no        | Whether this judgement is considered correct.
-
-#### Access restrictions at WF
-
-No access restrictions apply to a GET on this endpoint.
 
 #### Known judgement types
 
@@ -647,10 +639,6 @@ JSON elements of Command objects:
 
 The compiler and runner elements are intended for informational purposes. It is not expected that systems will synchronize compiler and runner settings via this interface.
 
-#### Access restrictions at WF
-
-No access restrictions apply to a GET on this endpoint.
-
 #### Known languages
 
 Below is a list of standardized identifiers for known languages with their
@@ -753,12 +741,6 @@ JSON elements of problem objects:
 | time\_limit       | number  | no        | no        | Time limit in seconds per test data set (i.e. per single run). Should be an integer multiple of `0.001`.
 | test\_data\_count | integer | yes       | no        | Number of test data sets.
 
-#### Access restrictions at WF
-
-The `public` role can only access these problems after the contest
-started. That is, before contest start this endpoint returns an empty
-array for clients with the `public` role.
-
 #### Examples
 
 Request:
@@ -808,10 +790,6 @@ JSON elements of group objects:
 | name     | string  | yes       | no        | Name of the group.
 | type     | string  | no        | yes       | Type of this group.
 | hidden   | boolean | no        | yes       | If group should be hidden from scoreboard. Defaults to false if missing.
-
-#### Access restrictions at WF
-
-No access restrictions apply to a GET on this endpoint.
 
 #### Examples
 
@@ -873,10 +851,6 @@ JSON elements of organization objects:
 | location.longitude | number         | depends   | no        | Longitude in degrees. Required iff location is present.
 | logo               | array of IMAGE | no        | yes       | Logo of the organization. Only allowed mime type is image/png. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well.
 
-#### Access restrictions at WF
-
-No access restrictions apply to a GET on organizations endpoints.
-
 #### Example
 
 Request:
@@ -928,14 +902,6 @@ JSON elements of team objects:
 | webcam            | array of STREAM  | no        | yes       | Streaming video of the team webcam.
 | audio             | array of STREAM  | no        | yes       | Streaming team audio.
 
-#### Access restrictions at WF
-
-The following access restrictions apply to a GET on this endpoint:
-
-  - the `backup` attribute requires the `admin` or `analyst` role for access,
-  - the `desktop` and `webcam` attributes are available for the
-    `public` role only when the scoreboard is not frozen.
-
 #### Example
 
 Request:
@@ -973,10 +939,6 @@ JSON elements of team member objects:
 | sex         | string         | no        | yes       | Either `male` or `female`, or possibly `null`.
 | role        | string         | yes       | no        | One of `contestant` or `coach`.
 | photo       | array of IMAGE | no        | yes       | Registration photo of the team member. Only allowed mime types are image/jpeg and image/png.
-
-#### Access restrictions at WF
-
-No access restrictions apply to a GET on this endpoint.
 
 #### Example
 
@@ -1028,12 +990,6 @@ started < frozen < ended < thawed    < end_of_updates,
 A contest that has ended, has been thawed (or was never frozen) and is
 finalized must not change. Thus, `end_of_updates` can be set once both
 `finalized` is set and `thawed` is set if the contest was frozen.
-
-#### Access restrictions at WF
-
-No access restrictions apply to a GET on this endpoint, but note that
-when the `frozen` state is set, but `thawed` not yet, then this implies
-access restrictions for non-privileged users to other endpoints.
 
 #### Example
 
@@ -1093,13 +1049,6 @@ The `files` attribute provides the file(s) of a given submission as a
 zip archive. These must be stored directly from the root of the zip
 file, i.e. there must not be extra directories (or files) added unless
 these are explicitly part of the submission content.
-
-#### Access restrictions at WF
-
-The `entry_point` and `files` attribute are accessible only for
-clients with `admin` or `analyst` role. The `reaction` attribute
-is available to clients with `public` role only when the contest is
-not frozen.
 
 #### POST submissions
 
@@ -1266,15 +1215,6 @@ When a judgement is started, each of `judgement_type_id`, `end_time` and
 `end_contest_time` will be `null` (or missing). These are set when the
 judgement is completed.
 
-#### Access restrictions at WF
-
-For clients with the `public` role, judgements will not be included
-for submissions received while the scoreboard is frozen. This means that
-all judgements for submissions received before the scoreboard has been
-frozen will be sent immediately, and all judgements for submissions
-received after the scoreboard has been frozen will be sent immediately
-after the scoreboard has been thawed.
-
 #### Example
 
 Request:
@@ -1313,15 +1253,6 @@ JSON elements of run objects:
 | time                | TIME    | yes       | no        | Absolute time when run completed.
 | contest\_time       | RELTIME | yes       | no        | Contest relative time when run completed.
 | run\_time           | number  | no        | no        | Run time in seconds. Should be an integer multiple of `0.001`.
-
-#### Access restrictions at WF
-
-For clients with the `public` role, runs will not be included for
-submissions received while the scoreboard is frozen. This means that all
-runs for submissions received before the scoreboard has been frozen will
-be sent immediately, and all runs for submissions received after the
-scoreboard has been frozen will be sent immediately after the scoreboard
-has been thawed.
 
 #### Example
 
@@ -1365,13 +1296,6 @@ JSON elements of clarification message objects:
 
 Note that at least one of `from_team_id` and `to_team_id` has to be
 `null`. That is, teams cannot send messages to other teams.
-
-#### Access restrictions at WF
-
-Clients with the `public` role can only view clarifications replies
-from the jury to all teams, that is, messages where both `from_team_id`
-and `to_team_id` are `null`. Clients with the `team` role can only view
-their own clarifications (sent or received) and public clarifications.
 
 #### POST clarifications
 
@@ -1481,12 +1405,6 @@ JSON elements of award objects:
 | id        | ID          | yes       | no        | Identifier of the award.
 | citation  | string      | yes       | no        | Award citation, e.g. "Gold medal winner".
 | team\_ids | array of ID | yes       | no        | JSON array of [ team](#teams) ids receiving this award. No meaning must be implied or inferred from the order of IDs. The array may be empty.
-
-#### Access restrictions at WF
-
-For clients with the `public` role, awards will not include
-information from judgements of submissions received after the scoreboard
-freeze until it has been unfrozen.
 
 #### Semantics
 
@@ -1657,12 +1575,6 @@ Each problem object within the scoreboard consists of:
 | solved       | boolean | depends   | yes       | Required iff contest:scoreboard_type is `pass-fail`.
 | score        | number  | depends   | no        | Required iff contest:scoreboard_type is `score` and solved is missing. If missing or `null` defaults to `100` if solved is `true` and `0` if solved is `false`.
 | time         | integer | depends   | no        | Minutes into the contest when this problem was solved by the team. Required iff `solved=true`.
-
-#### Access restrictions at WF
-
-For clients with the `public` role, the scoreboard will not include
-information from judgements of submissions received after the scoreboard
-has been frozen until it has been thawed.
 
 #### Example
 

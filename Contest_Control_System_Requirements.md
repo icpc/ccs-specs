@@ -984,6 +984,42 @@ also provide the following endpoints and elements:
 | `/runs`          | `run_time`                   |
 | `/awards`        | All required elements.       |
 
+#### Access Restrictions
+
+The following access restrictions must apply to GETs on the API 
+endpoints:
+
+  - The `public` role can only access the `/problems` endpoint after the
+    contest has started. That is, before contest start `/problems` 
+    returns an empty array for clients with the `public` role.
+  - The `backup` element of the `/teams` endpoint requires the `admin` 
+    or `analyst` role for access.
+  - The `desktop` and `webcam` elements of the `/teams` endpoint are 
+    available for the `public` role only when the scoreboard is not 
+    frozen.
+  - The `entry_point` and `files` elements of the `/submissions` 
+    endpoint are accessible only for clients with `admin` or `analyst` 
+    role. The `reaction` element is available to clients with `public` 
+    role only when the contest is not frozen.
+  - For clients with the `public` role the `/judgements` and `/runs` 
+    endpoints must not include judgements or runs for submissions 
+    received while the scoreboard is frozen. This means that all 
+    judgements and runs for submissions received before the scoreboard 
+    has been frozen will be available immediately, and all judgements 
+    and runs for submissions received after the scoreboard has been 
+    frozen will be available immediately after the scoreboard has been 
+    thawed.
+  - For clients with the `public` role the `/clarifications` endpoint 
+    must only contain replies from the jury to all teams, that is, 
+    messages where both `from_team_id` and `to_team_id` are `null`. For 
+    clients with the `team` role the `/clarifications` endpoint must 
+    only contain their own clarifications (sent or received) and public 
+    clarifications.
+  - For clients with the `public` role the `/awards` and `/scoreboard`
+    endpoints must not include information from judgements of 
+    submissions received after the scoreboard freeze until it has been 
+    thawed.
+
 ### Scoreboard Data File
 
 The CCS must be capable of generating an external file containing the
