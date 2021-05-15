@@ -343,8 +343,6 @@ In the tables below, the columns are:
     implemented to conform to this specification.
   - Nullable?: Whether the attribute might be `null` (and thus
     implicitly can also not be present in that case).
-  - Source @WF: Specifies whether this attribute is implemented at the
-    ICPC World Finals and by whom.
   - Description: Description of the meaning of the attribute and any
     special considerations.
 
@@ -384,28 +382,28 @@ Provides information on the current contest.
 
 The following endpoint is associated with contest:
 
-| Endpoint         | Mime-type        | Required? | Source @WF | Description                                                                 |
-| ---------------- | ---------------- | --------- | ---------- | --------------------------------------------------------------------------- |
-| `/contests`      | application/json | yes       | CDS        | JSON array of all contests with elements as defined in the table below      |
-| `/contests/<id>` | application/json | yes       | CCS        | JSON object of a single contest with elements as defined in the table below |
+| Endpoint         | Mime-type        | Required? | Description                                                                 
+| :--------------- | :--------------- | :-------- | :----------
+| `/contests`      | application/json | yes       | JSON array of all contests with elements as defined in the table below.
+| `/contests/<id>` | application/json | yes       | JSON object of a single contest with elements as defined in the table below.
 
 Returns a JSON object with the elements below. If there is no current
 (this may include about to start or just finished) contest, a 404 error
 is returned.
 
-| Name                         | Type           | Required? | Nullable? | Source @WF | Description                                                                                                                                      |
-| ---------------------------- | -------------- | --------- | --------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| id                           | ID             | yes       | no        | CCS        | identifier of the current contest                                                                                                                |
-| name                         | string         | yes       | no        | CCS        | short display name of the contest                                                                                                                |
-| formal\_name                 | string         | no        | no        | CCS        | full name of the contest                                                                                                                         |
-| start\_time                  | TIME           | yes       | yes       | CCS        | the scheduled start time of the contest, may be `null` if the start time is unknown or the countdown is paused                                   |
-| countdown\_pause\_time       | RELTIME        | no        | yes       | CDS        | The amount of seconds left when countdown to contest start is paused. At no time may both `start_time` and `countdown_pause_time` be non-`null`. |
-| duration                     | RELTIME        | yes       | no        | CCS        | length of the contest                                                                                                                            |
-| scoreboard\_freeze\_duration | RELTIME        | no        | yes       | CCS        | how long the scoreboard is frozen before the end of the contest                                                                                  |
-| scoreboard\_type             | string         | no        | yes       | not used   | what type of scoreboard is used for the contest. Must be either `pass-fail` or `score`. Defaults to `pass-fail` if missing or `null`.            |
-| penalty\_time                | integer        | no        | no        | CCS        | penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`.                                               |
-| banner                       | array of IMAGE | no        | yes       | CDS        | banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime type is image/png.                      |
-| logo                         | array of IMAGE | no        | yes       | CDS        | logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime type is image/png.                                  |
+| Name                         | Type           | Required? | Nullable? | Description
+| :--------------------------- | :------------- | :-------- | :-------- | :----------
+| id                           | ID             | yes       | no        | Identifier of the current contest.
+| name                         | string         | yes       | no        | Short display name of the contest.
+| formal\_name                 | string         | no        | no        | Full name of the contest.
+| start\_time                  | TIME           | yes       | yes       | The scheduled start time of the contest, may be `null` if the start time is unknown or the countdown is paused.
+| countdown\_pause\_time       | RELTIME        | no        | yes       | The amount of seconds left when countdown to contest start is paused. At no time may both `start_time` and `countdown_pause_time` be non-`null`.
+| duration                     | RELTIME        | yes       | no        | Length of the contest.
+| scoreboard\_freeze\_duration | RELTIME        | no        | yes       | How long the scoreboard is frozen before the end of the contest.
+| scoreboard\_type             | string         | no        | yes       | What type of scoreboard is used for the contest. Must be either `pass-fail` or `score`. Defaults to `pass-fail` if missing or `null`.
+| penalty\_time                | integer        | no        | no        | Penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`.
+| banner                       | array of IMAGE | no        | yes       | Banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime type is image/png.
+| logo                         | array of IMAGE | no        | yes       | Logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime type is image/png.
 
 The expected/typical use of `countdown_pause_time` is that once a
 `start_time` is defined and close, the countdown may be paused due to
@@ -511,19 +509,19 @@ a submission.
 
 The following endpoints are associated with judgement types:
 
-| Endpoint                              | Mime-type        | Required? | Source @WF | Description                                                                        |
-| ------------------------------------- | ---------------- | --------- | ---------- | ---------------------------------------------------------------------------------- |
-| `/contests/<id>/judgement-types`      | application/json | yes       | CCS        | JSON array of all judgement types with elements as defined in the table below      |
-| `/contests/<id>/judgement-types/<id>` | application/json | yes       | CCS        | JSON object of a single judgement type with elements as defined in the table below |
+| Endpoint                              | Mime-type        | Required? | Description
+| :------------------------------------ | :--------------- | :-------- | :----------
+| `/contests/<id>/judgement-types`      | application/json | yes       | JSON array of all judgement types with elements as defined in the table below.
+| `/contests/<id>/judgement-types/<id>` | application/json | yes       | JSON object of a single judgement type with elements as defined in the table below.
 
 JSON elements of judgement type objects:
 
-| Name    | Type    | Required? | Nullable? | Source @WF | Description                                                                                                 |
-| ------- | ------- | --------- | --------- | ---------- | ----------------------------------------------------------------------------------------------------------- |
-| id      | ID      | yes       | no        | CCS        | identifier of the judgement type, a 2-3 letter capitalized shorthand, see table below                       |
-| name    | string  | yes       | no        | CCS        | name of the judgement. (might not match table below, e.g. if localized)                                     |
-| penalty | boolean | depends   | no        | CCS        | whether this judgement causes penalty time; must be present if and only if contest:penalty\_time is present |
-| solved  | boolean | yes       | no        | CCS        | whether this judgement is considered correct                                                                |
+| Name    | Type    | Required? | Nullable? | Description
+| :------ | :------ | :-------- | :-------- | :----------
+| id      | ID      | yes       | no        | Identifier of the judgement type, a 2-3 letter capitalized shorthand, see table below.
+| name    | string  | yes       | no        | Name of the judgement. (might not match table below, e.g. if localized).
+| penalty | boolean | depends   | no        | Whether this judgement causes penalty time; must be present if and only if contest:penalty\_time is present.
+| solved  | boolean | yes       | no        | Whether this judgement is considered correct.
 
 #### Access restrictions at WF
 
@@ -543,7 +541,7 @@ The **Translation** column lists other judgements the judgement can
 safely be translated to, if a system does not support it.
 
 | ID  | Name                                     | A.k.a.                                                   | Big 5 | Translation       | Description                                               |
-| --- | ---------------------------------------- | -------------------------------------------------------- | ----- | ----------------- | --------------------------------------------------------- |
+| :-- | :--------------------------------------- | :------------------------------------------------------- | :---- | :---------------- | :-------------------------------------------------------- |
 | AC  | Accepted                                 | Correct, Yes (YES)                                       | \*    | \-                | Solves the problem                                        |
 | RE  | Rejected                                 | Incorrect, No (NO)                                       | WA?   | \-                | Does not solve the problem                                |
 | WA  | Wrong Answer                             |                                                          | \*    | RE                | Output is not correct                                     |
@@ -621,22 +619,22 @@ Languages that are available for submission at the contest.
 
 The following endpoints are associated with languages:
 
-| Endpoint                        | Mime-type        | Required? | Source @WF | Description
-| :------------------------------ | :--------------- | :-------- | :--------- | :----------
-| `/contests/<id>/languages`      | application/json | yes       | CCS        | JSON array of all languages with elements as defined in the table below.
-| `/contests/<id>/languages/<id>` | application/json | yes       | CCS        | JSON object of a single language with elements as defined in the table below.
+| Endpoint                        | Mime-type        | Required? | Description
+| :------------------------------ | :--------------- | :-------- | :----------
+| `/contests/<id>/languages`      | application/json | yes       | JSON array of all languages with elements as defined in the table below.
+| `/contests/<id>/languages/<id>` | application/json | yes       | JSON object of a single language with elements as defined in the table below.
 
 JSON elements of language objects:
 
-| Name                 | Type            | Required? | Nullable? | Source @WF | Description
-| :------------------- | :-------------- | :-------- | :-------- | :--------- | :----------
-| id                   | ID              | yes       | no        | CCS        | Identifier of the language from table below.
-| name                 | string          | yes       | no        | CCS        | Name of the language (might not match table below, e.g. if localized).
-| entry_point_required | boolean         | yes       | no        | CCS        | Whether the language requires an entry point.
-| entry_point_name     | string          | depends   | yes       | CCS        | The name of the type of entry point, such as "Main class" or "Main file"). Required iff entry_point_required is present.
-| extensions           | array of string | yes       | no        | CCS        | File extensions for the language.
-| compiler             | Command object  | no        | yes       | CCS        | Command used for compiling submissions.
-| runner               | Command object  | no        | yes       | CCS        | Command used for running submissions. Relevant e.g. for interpreted languages and languages running on a VM.
+| Name                 | Type            | Required? | Nullable? | Description
+| :------------------- | :-------------- | :-------- | :-------- | :----------
+| id                   | ID              | yes       | no        | Identifier of the language from table below.
+| name                 | string          | yes       | no        | Name of the language (might not match table below, e.g. if localized).
+| entry_point_required | boolean         | yes       | no        | Whether the language requires an entry point.
+| entry_point_name     | string          | depends   | yes       | The name of the type of entry point, such as "Main class" or "Main file"). Required iff entry_point_required is present.
+| extensions           | array of string | yes       | no        | File extensions for the language.
+| compiler             | Command object  | no        | yes       | Command used for compiling submissions.
+| runner               | Command object  | no        | yes       | Command used for running submissions. Relevant e.g. for interpreted languages and languages running on a VM.
 
 JSON elements of Command objects:
 
@@ -736,24 +734,24 @@ The problems to be solved in the contest
 
 The following endpoints are associated with problems:
 
-| Endpoint                       | Mime-type        | Required? | Source @WF | Description                                                                 |
-| ------------------------------ | ---------------- | --------- | ---------- | --------------------------------------------------------------------------- |
-| `/contests/<id>/problems`      | application/json | yes       | CCS        | JSON array of all problems with elements as defined in the table below      |
-| `/contests/<id>/problems/<id>` | application/json | yes       | CCS        | JSON object of a single problem with elements as defined in the table below |
+| Endpoint                       | Mime-type        | Required? | Description
+| :----------------------------- | :--------------- | :-------- | :----------
+| `/contests/<id>/problems`      | application/json | yes       | JSON array of all problems with elements as defined in the table below.
+| `/contests/<id>/problems/<id>` | application/json | yes       | JSON object of a single problem with elements as defined in the table below.
 
 JSON elements of problem objects:
 
-| Name              | Type    | Required? | Nullable? | Source @WF | Description                                                                                                                                                       |
-| ----------------- | ------- | --------- | --------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id                | ID      | yes       | no        | CCS        | identifier of the problem, at the WFs the directory name of the problem archive                                                                                   |
+| Name              | Type    | Required? | Nullable? | Description
+| :---------------- | :------ | :-------- | :-------- | :----------
+| id                | ID      | yes       | no        | Identifier of the problem, at the WFs the directory name of the problem archive.
 | uuid              | string  | no        | yes       | not used   | UUID of the problem, as defined in the problem package. |
-| label             | string  | yes       | no        | CCS        | label of the problem on the scoreboard, typically a single capitalized letter                                                                                     |
-| name              | string  | yes       | no        | CCS        | name of the problem                                                                                                                                               |
-| ordinal           | ORDINAL | yes       | no        | CCS        | ordering of problems on the scoreboard                                                                                                                            |
-| rgb               | string  | no        | no        | CCS        | hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet), e.g. `#AC00FF` or `#fff` |
-| color             | string  | no        | no        | CCS        | human readable color description associated to the RGB value                                                                                                      |
-| time\_limit       | number  | no        | no        | CCS        | time limit in seconds per test data set (i.e. per single run). Should be an integer multiple of `0.001`. |
-| test\_data\_count | integer | yes       | no        | CCS        | number of test data sets                                                                                                                                          |
+| label             | string  | yes       | no        | Label of the problem on the scoreboard, typically a single capitalized letter.
+| name              | string  | yes       | no        | Name of the problem.
+| ordinal           | ORDINAL | yes       | no        | Ordering of problems on the scoreboard.
+| rgb               | string  | no        | no        | Hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet), e.g. `#AC00FF` or `#fff`.
+| color             | string  | no        | no        | Human readable color description associated to the RGB value.
+| time\_limit       | number  | no        | no        | Time limit in seconds per test data set (i.e. per single run). Should be an integer multiple of `0.001`.
+| test\_data\_count | integer | yes       | no        | Number of test data sets.
 
 #### Access restrictions at WF
 
@@ -792,10 +790,10 @@ regionals these are often different sites.
 
 The following endpoints are associated with groups:
 
-| Endpoint                     | Mime-type        | Required? | Source @WF | Description                                                               |
-| ---------------------------- | ---------------- | --------- | ---------- | ------------------------------------------------------------------------- |
-| `/contests/<id>/groups`      | application/json | no        | CCS        | JSON array of all groups with elements as defined in the table below      |
-| `/contests/<id>/groups/<id>` | application/json | no        | CCS        | JSON object of a single group with elements as defined in the table below |
+| Endpoint                     | Mime-type        | Required? | Description
+| :--------------------------- | :--------------- | :-------- | :----------
+| `/contests/<id>/groups`      | application/json | no        | JSON array of all groups with elements as defined in the table below.
+| `/contests/<id>/groups/<id>` | application/json | no        | JSON object of a single group with elements as defined in the table below.
 
 Note that these endpoints must be provided if groups are used. If they
 are not provided no other endpoint may refer to groups (i.e. return any
@@ -803,13 +801,13 @@ group\_ids).
 
 JSON elements of group objects:
 
-| Name     | Type    | Required? | Nullable? | Source @WF | Description                                                              |
-| -------- | ------- | --------- | --------- | ---------- | ------------------------------------------------------------------------ |
-| id       | ID      | yes       | no        | CCS        | identifier of the group                                                  |
-| icpc\_id | string  | no        | yes       | CCS        | external identifier from ICPC CMS                                        |
-| name     | string  | yes       | no        | CCS        | name of the group                                                        |
-| type     | string  | no        | yes       | CCS        | type of this group                                                       |
-| hidden   | boolean | no        | yes       | CCS        | if group should be hidden from scoreboard. Defaults to false if missing. |
+| Name     | Type    | Required? | Nullable? | Description
+| :------- | :------ | :-------- | :-------- | :----------
+| id       | ID      | yes       | no        | Identifier of the group.
+| icpc\_id | string  | no        | yes       | External identifier from ICPC CMS.
+| name     | string  | yes       | no        | Name of the group.
+| type     | string  | no        | yes       | Type of this group.
+| hidden   | boolean | no        | yes       | If group should be hidden from scoreboard. Defaults to false if missing.
 
 #### Access restrictions at WF
 
@@ -849,10 +847,10 @@ universities.
 
 The following endpoints are associated with organizations:
 
-| Endpoint                            | Type             | Required? | Source @WF | Description                                                                      |
-| ----------------------------------- | ---------------- | --------- | ---------- | -------------------------------------------------------------------------------- |
-| `/contests/<id>/organizations`      | application/json | no        | CCS & CDS  | JSON array of all organizations with elements as defined in the table below      |
-| `/contests/<id>/organizations/<id>` | application/json | no        | CCS & CDS  | JSON object of a single organization with elements as defined in the table below |
+| Endpoint                            | Type             | Required? | Description
+| :---------------------------------- | :--------------- | :-------- | :----------
+| `/contests/<id>/organizations`      | application/json | no        | JSON array of all organizations with elements as defined in the table below.
+| `/contests/<id>/organizations/<id>` | application/json | no        | JSON object of a single organization with elements as defined in the table below.
 
 Note that the first two endpoints must be provided if organizations are
 used. If they are not provided no other endpoint may refer to
@@ -860,20 +858,20 @@ organizations (i.e. return any organization\_ids).
 
 JSON elements of organization objects:
 
-| Name               | Type           | Required? | Nullable? | Source @WF | Description                                                                                                                                               |
-| ------------------ | -------------- | --------- | --------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id                 | ID             | yes       | no        | CCS        | identifier of the organization                                                                                                                            |
-| icpc\_id           | string         | no        | yes       | CCS        | external identifier from ICPC CMS                                                                                                                         |
-| name               | string         | yes       | no        | CCS        | short display name of the organization                                                                                                                    |
-| formal\_name       | string         | no        | yes       | CCS        | full organization name if too long for normal display purposes.                                                                                           |
-| country            | string         | no        | yes       | not used   | [ISO 3-letter code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) of the organization's country                                                       |
-| country_flag       | array of IMAGE | no        | yes       | not used   | flag of the country. Only allowed mime type is image/png. A server is recommended to provide flags of size around 56x56 and 160x160.                      |
-| url                | string         | no        | yes       | CDS        | URL to organization's website                                                                                                                             |
-| twitter\_hashtag   | string         | no        | yes       | CDS        | organization hashtag                                                                                                                                      |
-| location           | object         | no        | yes       | CDS        | JSON object as specified in the rows below                                                                                                                |
-| location.latitude  | number         | depends   | no        | CDS        | Latitude in degrees. Required iff location is present.                                                                                                    |
-| location.longitude | number         | depends   | no        | CDS        | Longitude in degrees. Required iff location is present.                                                                                                   |
-| logo               | array of IMAGE | no        | yes       | CDS        | logo of the organization. Only allowed mime type is image/png. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well. |
+| Name               | Type           | Required? | Nullable? | Description
+| :----------------- | :------------- | :-------- | :-------- | :----------
+| id                 | ID             | yes       | no        | Identifier of the organization.
+| icpc\_id           | string         | no        | yes       | External identifier from ICPC CMS.
+| name               | string         | yes       | no        | Short display name of the organization.
+| formal\_name       | string         | no        | yes       | Full organization name if too long for normal display purposes.
+| country            | string         | no        | yes       | [ISO 3-letter code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) of the organization's country.
+| country_flag       | array of IMAGE | no        | yes       | Flag of the country. Only allowed mime type is image/png. A server is recommended to provide flags of size around 56x56 and 160x160.
+| url                | string         | no        | yes       | URL to organization's website.
+| twitter\_hashtag   | string         | no        | yes       | Organization hashtag.
+| location           | object         | no        | yes       | JSON object as specified in the rows below.
+| location.latitude  | number         | depends   | no        | Latitude in degrees. Required iff location is present.
+| location.longitude | number         | depends   | no        | Longitude in degrees. Required iff location is present.
+| logo               | array of IMAGE | no        | yes       | Logo of the organization. Only allowed mime type is image/png. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well.
 
 #### Access restrictions at WF
 
@@ -902,33 +900,33 @@ Teams competing in the contest.
 
 The following endpoints are associated with teams:
 
-| Endpoint                    | Mime-type        | Required? | Source @WF | Description                                                              |
-| --------------------------- | ---------------- | --------- | ---------- | ------------------------------------------------------------------------ |
-| `/contests/id>/teams`      | application/json | yes       | CCS & CDS  | JSON array of all teams with elements as defined in the table below      |
-| `/contests/id>/teams/id>` | application/json | yes       | CCS & CDS  | JSON object of a single team with elements as defined in the table below |
+| Endpoint                    | Mime-type        | Required? | Description
+| :-------------------------- | :--------------- | :-------- | :----------
+| `/contests/id>/teams`       | application/json | yes       | JSON array of all teams with elements as defined in the table below.
+| `/contests/id>/teams/id>`   | application/json | yes       | JSON object of a single team with elements as defined in the table below.
 
 JSON elements of team objects:
 
-| Name              | Type             | Required? | Nullable? | Source @WF | Description                                                                                                                                                                                              |
-| ----------------- | ---------------- | --------- | --------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id                | ID               | yes       | no        | CCS        | identifier of the team. Usable as a label, at WFs normally the team seat number                                                                                                                          |
-| icpc\_id          | string           | no        | yes       | CCS        | external identifier from ICPC CMS                                                                                                                                                                        |
-| name              | string           | yes       | no        | CCS        | name of the team                                                                                                                                                                                         |
-| display\_name     | string           | no        | yes       | CCS        | display name of the team. If not set, a client should revert to using the name instead.                                                                                                                  |
-| organization\_id  | ID               | no        | yes       | CCS        | identifier of the [ organization](#organizations) (e.g. university or other entity) that this team is affiliated to                                                                           |
-| group\_ids        | array of ID      | no        | no        | CCS        | identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty. |
-| location          | object           | no        | no        | CDS        | JSON object as specified in the rows below                                                                                                                                                               |
-| location.x        | number           | depends   | no        | CDS        | Team's x position in meters. Required iff location is present.                                                                                                                                           |
-| location.y        | number           | depends   | no        | CDS        | Team's y position in meters. Required iff location is present.                                                                                                                                           |
-| location.rotation | number           | depends   | no        | CDS        | Team's rotation in degrees. Required iff location is present.                                                                                                                                            |
-| photo             | array of IMAGE   | no        | yes       | CDS        | registration photo of the team. Only allowed mime types are image/jpeg and image/png.                                                                                                                    |
-| video             | array of VIDEO   | no        | yes       | CDS        | registration video of the team.                                                                                                                                                                          |
-| backup            | array of ARCHIVE | no        | yes       | CDS        | latest file backup of the team machine. Only allowed mime type is application/zip.                                                                                                                       |
-| key\_log          | array of FILE    | no        | yes       | CDS        | latest key log file from the team machine. Only allowed mime type is text/plain.                                                                                                                         |
-| tool\_data        | array of FILE    | no        | yes       | CDS        | latest tool data usage file from the team machine. Only allowed mime type is text/plain.                                                                                                                 |
-| desktop           | array of STREAM  | no        | yes       | CDS        | streaming video of the team desktop.                                                                                                                                                                     |
-| webcam            | array of STREAM  | no        | yes       | CDS        | streaming video of the team webcam.                                                                                                                                                                      |
-| audio             | array of STREAM  | no        | yes       | CDS        | streaming team audio.                                                                                                                                                                                    |
+| Name              | Type             | Required? | Nullable? | Description
+| :---------------- | :--------------- | :-------- | :-------- | :----------
+| id                | ID               | yes       | no        | Identifier of the team. Usable as a label, at WFs normally the team seat number.
+| icpc\_id          | string           | no        | yes       | External identifier from ICPC CMS.
+| name              | string           | yes       | no        | Name of the team.
+| display\_name     | string           | no        | yes       | Display name of the team. If not set, a client should revert to using the name instead.
+| organization\_id  | ID               | no        | yes       | Identifier of the [ organization](#organizations) (e.g. university or other entity) that this team is affiliated to.
+| group\_ids        | array of ID      | no        | no        | Identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty.
+| location          | object           | no        | no        | JSON object as specified in the rows below.
+| location.x        | number           | depends   | no        | Team's x position in meters. Required iff location is present.
+| location.y        | number           | depends   | no        | Team's y position in meters. Required iff location is present.
+| location.rotation | number           | depends   | no        | Team's rotation in degrees. Required iff location is present.
+| photo             | array of IMAGE   | no        | yes       | Registration photo of the team. Only allowed mime types are image/jpeg and image/png.
+| video             | array of VIDEO   | no        | yes       | Registration video of the team.
+| backup            | array of ARCHIVE | no        | yes       | Latest file backup of the team machine. Only allowed mime type is application/zip.
+| key\_log          | array of FILE    | no        | yes       | Latest key log file from the team machine. Only allowed mime type is text/plain.
+| tool\_data        | array of FILE    | no        | yes       | Latest tool data usage file from the team machine. Only allowed mime type is text/plain.
+| desktop           | array of STREAM  | no        | yes       | Streaming video of the team desktop.
+| webcam            | array of STREAM  | no        | yes       | Streaming video of the team webcam.
+| audio             | array of STREAM  | no        | yes       | Streaming team audio.
 
 #### Access restrictions at WF
 
@@ -958,23 +956,23 @@ Team members of teams in the contest.
 
 The following endpoints are associated with languages:
 
-| Endpoint                           | Mime-type        | Required? | Source @WF | Description                                                                     |
-| ---------------------------------- | ---------------- | --------- | ---------- | ------------------------------------------------------------------------------- |
-| `/contests/<id>/team-members`      | application/json | no        | CDS        | JSON array of all team members with elements as defined in the table below      |
-| `/contests/<id>/team-members/<id>` | application/json | no        | CDS        | JSON object of a single team member with elements as defined in the table below |
+| Endpoint                           | Mime-type        | Required? | Description
+| :--------------------------------- | :--------------- | :-------- | :----------
+| `/contests/<id>/team-members`      | application/json | no        | JSON array of all team members with elements as defined in the table below.
+| `/contests/<id>/team-members/<id>` | application/json | no        | JSON object of a single team member with elements as defined in the table below.
 
 JSON elements of team member objects:
 
-| Name        | Type           | Required? | Nullable? | Source @WF | Description                                                                                  |
-| ----------- | -------------- | --------- | --------- | ---------- | -------------------------------------------------------------------------------------------- |
-| id          | ID             | yes       | no        | CDS        | identifier of the team-member                                                                |
-| icpc\_id    | string         | no        | yes       | CDS        | external identifier from ICPC CMS                                                            |
-| team\_id    | ID             | yes       | no        | CDS        | [ team](#teams) of this team member                                               |
-| first\_name | string         | yes       | no        | CDS        | first name of team member                                                                    |
-| last\_name  | string         | yes       | no        | CDS        | last name of team member                                                                     |
-| sex         | string         | no        | yes       | CDS        | either `male` or `female`, or possibly `null`                                            |
-| role        | string         | yes       | no        | CDS        | one of `contestant` or `coach`                                                           |
-| photo       | array of IMAGE | no        | yes       | CDS        | registration photo of the team member. Only allowed mime types are image/jpeg and image/png. |
+| Name        | Type           | Required? | Nullable? | Description
+| :---------- | :------------- | :-------- | :-------- | :----------
+| id          | ID             | yes       | no        | Identifier of the team-member.
+| icpc\_id    | string         | no        | yes       | External identifier from ICPC CMS.
+| team\_id    | ID             | yes       | no        | [Team](#teams) of this team member.
+| first\_name | string         | yes       | no        | First name of team member.
+| last\_name  | string         | yes       | no        | Last name of team member.
+| sex         | string         | no        | yes       | Either `male` or `female`, or possibly `null`.
+| role        | string         | yes       | no        | One of `contestant` or `coach`.
+| photo       | array of IMAGE | no        | yes       | Registration photo of the team member. Only allowed mime types are image/jpeg and image/png.
 
 #### Access restrictions at WF
 
@@ -1001,20 +999,20 @@ scoreboard is frozen or results are final.
 
 The following endpoints are associated with state:
 
-| Endpoint               | Type             | Required? | Source @WF | Description                                                                          |
-| ---------------------- | ---------------- | --------- | ---------- | ------------------------------------------------------------------------------------ |
-| `/contests/<id>/state` | application/json | yes       | CCS        | JSON object of the current contest state with elements as defined in the table below |
+| Endpoint               | Type             | Required? | Description
+| :--------------------- | :--------------- | :-------- | :----------
+| `/contests/<id>/state` | application/json | yes       | JSON object of the current contest state with elements as defined in the table below.
 
 JSON elements of state objects:
 
-| Name             | Type | Required? | Nullable? | Source @WF | Description                                                                                                                                                                                                                                                |
-| ---------------- | ---- | --------- | --------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| started          | TIME | yes       | yes       | CCS        | Time when the contest actually started, or `null` if the contest has not started yet. When set, this time must be equal to the [contest](#contests) `start_time`.                                                                               |
-| frozen           | TIME | depends   | yes       | CCS        | Time when the scoreboard was frozen, or `null` if the scoreboard has not been frozen. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint.                                                                |
-| ended            | TIME | yes       | yes       | CCS        | Time when the contest ended, or `null` if the contest has not ended. Must not be set if started is `null`.                                                                                                                                                 |
-| thawed           | TIME | depends   | yes       | CCS        | Time when the scoreboard was thawed (that is, unfrozen again), or `null` if the scoreboard has not been thawed. Required iff `scoreboard_freeze_duration` is present in the [contest](#Contests) endpoint. Must not be set if frozen is `null`. |
-| finalized        | TIME | yes       | yes       | CCS        | Time when the results were finalized, or `null` if results have not been finalized. Must not be set if ended is `null`.                                                                                                                                    |
-| end\_of\_updates | TIME | yes       | yes       | CCS        | Time after last update to the contest occurred, or `null` if more updates are still to come. Setting this to non-`null` must be the very last change in the contest.                                                                                       |
+| Name             | Type | Required? | Nullable? | Description
+| :--------------- | :--- | :-------- | :-------- | :----------
+| started          | TIME | yes       | yes       | Time when the contest actually started, or `null` if the contest has not started yet. When set, this time must be equal to the [contest](#contests) `start_time`.
+| frozen           | TIME | depends   | yes       | Time when the scoreboard was frozen, or `null` if the scoreboard has not been frozen. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint.
+| ended            | TIME | yes       | yes       | Time when the contest ended, or `null` if the contest has not ended. Must not be set if started is `null`.
+| thawed           | TIME | depends   | yes       | Time when the scoreboard was thawed (that is, unfrozen again), or `null` if the scoreboard has not been thawed. Required iff `scoreboard_freeze_duration` is present in the [contest](#Contests) endpoint. Must not be set if frozen is `null`.
+| finalized        | TIME | yes       | yes       | Time when the results were finalized, or `null` if results have not been finalized. Must not be set if ended is `null`.
+| end\_of\_updates | TIME | yes       | yes       | Time after last update to the contest occurred, or `null` if more updates are still to come. Setting this to non-`null` must be the very last change in the contest.
 
 These state changes must occur in the order listed in the table above,
 as far as they do occur, except that `thawed` and `finalized` may occur
@@ -1062,24 +1060,24 @@ Submissions, a.k.a. attempts to solve problems in the contest.
 
 The following endpoints are associated with submissions:
 
-| Endpoint                          | Type             | Required? | Source @WF | Description                                                                    |
-| --------------------------------- | ---------------- | --------- | ---------- | ------------------------------------------------------------------------------ |
-| `/contests/<id>/submissions`      | application/json | yes       | CCS        | JSON array of all submissions with elements as defined in the table below      |
-| `/contests/<id>/submissions/<id>` | application/json | yes       | CCS        | JSON object of a single submission with elements as defined in the table below |
+| Endpoint                          | Type             | Required? | Description
+| :-------------------------------- | :--------------- | :-------- | :----------
+| `/contests/<id>/submissions`      | application/json | yes       | JSON array of all submissions with elements as defined in the table below      |
+| `/contests/<id>/submissions/<id>` | application/json | yes       | JSON object of a single submission with elements as defined in the table below |
 
 JSON elements of submission objects:
 
-| Name          | Type             | Required? | Nullable? | Source @WF | Description                                                                                                                             |
-| ------------- | ---------------- | --------- | --------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| id            | ID               | yes       | no        | CCS        | identifier of the submission. Usable as a label, typically a low incrementing number                                                    |
-| language\_id  | ID               | yes       | no        | CCS        | identifier of the [ language](#languages) submitted for                                                                                 |
-| problem\_id   | ID               | yes       | no        | CCS        | identifier of the [ problem](#problems) submitted for                                                                                   |
-| team\_id      | ID               | yes       | no        | CCS        | identifier of the [ team](#teams) that made the submission                                                                              |
-| time          | TIME             | yes       | no        | CCS        | timestamp of when the submission was made                                                                                               |
-| contest\_time | RELTIME          | yes       | no        | CCS        | contest relative time when the submission was made                                                                                      |
-| entry\_point  | string           | yes       | yes       | CCS        | code entry point for specific languages                                                                                                 |
-| files         | array of ARCHIVE | yes       | no        | CCS        | submission files, contained at the root of the archive. Only allowed mime type is application/zip. Only exactly one archive is allowed. |
-| reaction      | array of VIDEO   | no        | yes       | CDS        | reaction video from team's webcam.                                                                                                      |
+| Name          | Type             | Required? | Nullable? | Description
+| :------------ | :--------------- | :-------- | :-------- | :----------
+| id            | ID               | yes       | no        | Identifier of the submission. Usable as a label, typically a low incrementing number.
+| language\_id  | ID               | yes       | no        | Identifier of the [ language](#languages) submitted for.
+| problem\_id   | ID               | yes       | no        | Identifier of the [ problem](#problems) submitted for.
+| team\_id      | ID               | yes       | no        | Identifier of the [ team](#teams) that made the submission.
+| time          | TIME             | yes       | no        | Timestamp of when the submission was made.
+| contest\_time | RELTIME          | yes       | no        | Contest relative time when the submission was made.
+| entry\_point  | string           | yes       | yes       | Code entry point for specific languages.
+| files         | array of ARCHIVE | yes       | no        | Submission files, contained at the root of the archive. Only allowed mime type is application/zip. Only exactly one archive is allowed.
+| reaction      | array of VIDEO   | no        | yes       | Reaction video from team's webcam.
 
 The `entry_point` attribute must be included for submissions in
 languages which do not have a single, unambiguous entry point to run the
@@ -1245,24 +1243,24 @@ Judgements for submissions in the contest.
 
 The following endpoints are associated with judgements:
 
-| Endpoint                         | Mime-type        | Required? | Source @WF | Description                                                                   |
-| -------------------------------- | ---------------- | --------- | ---------- | ----------------------------------------------------------------------------- |
-| `/contests/<id>/judgements`      | application/json | yes       | CCS        | JSON array of all judgements with elements as defined in the table below      |
-| `/contests/<id>/judgements/<id>` | application/json | yes       | CCS        | JSON object of a single judgement with elements as defined in the table below |
+| Endpoint                         | Mime-type        | Required? | Description
+| :------------------------------- | :--------------- | :-------- | :----------
+| `/contests/<id>/judgements`      | application/json | yes       | JSON array of all judgements with elements as defined in the table below.
+| `/contests/<id>/judgements/<id>` | application/json | yes       | JSON object of a single judgement with elements as defined in the table below.
 
 JSON elements of judgement objects:
 
-| Name                 | Type    | Required? | Nullable? | Source @WF | Description                                                     |
-| -------------------- | ------- | --------- | --------- | ---------- | --------------------------------------------------------------- |
-| id                   | ID      | yes       | no        | CCS        | identifier of the judgement                                     |
-| submission\_id       | ID      | yes       | no        | CCS        | identifier of the [ submission](#submissions) judged |
-| judgement\_type\_id  | ID      | yes       | yes       | CCS        | the [ verdict](#judgement-types) of this judgement   |
-| judgement\_score     | number  | no        | no        | not used   | score for this judgement. Only relevant if contest:scoreboard_type is `score`. Defaults to `100` if missing. |
-| start\_time          | TIME    | yes       | no        | CCS        | absolute time when judgement started                            |
-| start\_contest\_time | RELTIME | yes       | no        | CCS        | contest relative time when judgement started                    |
-| end\_time            | TIME    | yes       | yes       | CCS        | absolute time when judgement completed                          |
-| end\_contest\_time   | RELTIME | yes       | yes       | CCS        | contest relative time when judgement completed                  |
-| max\_run\_time       | number  | no        | yes       | CCS        | maximum run time in seconds for any test case. Should be an integer multiple of `0.001`. |
+| Name                 | Type    | Required? | Nullable? | Description
+| :------------------- | :------ | :-------- | :-------- | :----------
+| id                   | ID      | yes       | no        | Identifier of the judgement.
+| submission\_id       | ID      | yes       | no        | Identifier of the [ submission](#submissions) judged.
+| judgement\_type\_id  | ID      | yes       | yes       | The [ verdict](#judgement-types) of this judgement.
+| judgement\_score     | number  | no        | no        | Score for this judgement. Only relevant if contest:scoreboard_type is `score`. Defaults to `100` if missing.
+| start\_time          | TIME    | yes       | no        | Absolute time when judgement started.
+| start\_contest\_time | RELTIME | yes       | no        | Contest relative time when judgement started.
+| end\_time            | TIME    | yes       | yes       | Absolute time when judgement completed.
+| end\_contest\_time   | RELTIME | yes       | yes       | Contest relative time when judgement completed.
+| max\_run\_time       | number  | no        | yes       | Maximum run time in seconds for any test case. Should be an integer multiple of `0.001`.
 
 When a judgement is started, each of `judgement_type_id`, `end_time` and
 `end_contest_time` will be `null` (or missing). These are set when the
@@ -1299,22 +1297,22 @@ Runs are judgements of individual test cases of a submission.
 
 The following endpoints are associated with runs:
 
-| Endpoint                   | Mime-type        | Required? | Source @WF | Description                                                             |
-| -------------------------- | ---------------- | --------- | ---------- | ----------------------------------------------------------------------- |
-| `/contests/<id>/runs`      | application/json | yes       | CCS        | JSON array of all runs with elements as defined in the table below      |
-| `/contests/<id>/runs/<id>` | application/json | yes       | CCS        | JSON object of a single run with elements as defined in the table below |
+| Endpoint                   | Mime-type        | Required? | Description
+| :------------------------- | :--------------- | :-------- | :----------
+| `/contests/<id>/runs`      | application/json | yes       | JSON array of all runs with elements as defined in the table below.
+| `/contests/<id>/runs/<id>` | application/json | yes       | JSON object of a single run with elements as defined in the table below.
 
 JSON elements of run objects:
 
-| Name                | Type    | Required? | Nullable? | Source @WF | Description                                                                                                                                                                                 |
-| ------------------- | ------- | --------- | --------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id                  | ID      | yes       | no        | CCS        | identifier of the run                                                                                                                                                                       |
-| judgement\_id       | ID      | yes       | no        | CCS        | identifier of the [ judgement](#judgements) this is part of                                                                                                                      |
-| ordinal             | ORDINAL | yes       | no        | CCS        | ordering of runs in the judgement. Must be different for every run in a judgement. Runs for the same test case must have the same ordinal. Must be between 1 and `problem:test_data_count`. |
-| judgement\_type\_id | ID      | yes       | no        | CCS        | the [ verdict](#judgement-types) of this judgement (i.e. a judgement type)                                                                                                       |
-| time                | TIME    | yes       | no        | CCS        | absolute time when run completed                                                                                                                                                            |
-| contest\_time       | RELTIME | yes       | no        | CCS        | contest relative time when run completed                                                                                                                                                    |
-| run\_time           | number  | no        | no        | CCS        | run time in seconds. Should be an integer multiple of `0.001`. |
+| Name                | Type    | Required? | Nullable? | Description
+| :------------------ | :------ | :-------- | :-------- | :----------
+| id                  | ID      | yes       | no        | Identifier of the run.
+| judgement\_id       | ID      | yes       | no        | Identifier of the [ judgement](#judgements) this is part of.
+| ordinal             | ORDINAL | yes       | no        | Ordering of runs in the judgement. Must be different for every run in a judgement. Runs for the same test case must have the same ordinal. Must be between 1 and `problem:test_data_count`.
+| judgement\_type\_id | ID      | yes       | no        | The [ verdict](#judgement-types) of this judgement (i.e. a judgement type).
+| time                | TIME    | yes       | no        | Absolute time when run completed.
+| contest\_time       | RELTIME | yes       | no        | Contest relative time when run completed.
+| run\_time           | number  | no        | no        | Run time in seconds. Should be an integer multiple of `0.001`.
 
 #### Access restrictions at WF
 
@@ -1347,23 +1345,23 @@ clarification requests (questions from teams) and clarifications
 
 The following endpoints are associated with clarification messages:
 
-| Endpoint                             | Mime-type        | Required? | Source @WF | Description                                                                               |
-| ------------------------------------ | ---------------- | --------- | ---------- | ----------------------------------------------------------------------------------------- |
-| `/contests/<id>/clarifications`      | application/json | yes       | CCS        | JSON array of all clarification messages with elements as defined in the table below      |
-| `/contests/<id>/clarifications/<id>` | application/json | yes       | CCS        | JSON object of a single clarification message with elements as defined in the table below |
+| Endpoint                             | Mime-type        | Required? | Description
+| :----------------------------------- | :--------------- | :-------- | :----------
+| `/contests/<id>/clarifications`      | application/json | yes       | JSON array of all clarification messages with elements as defined in the table below.
+| `/contests/<id>/clarifications/<id>` | application/json | yes       | JSON object of a single clarification message with elements as defined in the table below.
 
 JSON elements of clarification message objects:
 
-| Name           | Type    | Required? | Nullable? | Source @WF | Description                                                                                                                   |
-| -------------- | ------- | --------- | --------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| id             | ID      | yes       | no        | CCS        | identifier of the clarification                                                                                               |
-| from\_team\_id | ID      | yes       | yes       | CCS        | identifier of [ team](#teams) sending this clarification request, `null` if a clarification sent by jury           |
-| to\_team\_id   | ID      | yes       | yes       | CCS        | identifier of the [ team](#teams) receiving this reply, `null` if a reply to all teams or a request sent by a team |
-| reply\_to\_id  | ID      | yes       | yes       | CCS        | identifier of clarification this is in response to, otherwise `null`                                                          |
-| problem\_id    | ID      | yes       | yes       | CCS        | identifier of associated [ problem](#problems), `null` if not associated to a problem                              |
-| text           | string  | yes       | no        | CCS        | question or reply text                                                                                                        |
-| time           | TIME    | yes       | no        | CCS        | time of the question/reply                                                                                                    |
-| contest\_time  | RELTIME | yes       | no        | CCS        | contest time of the question/reply                                                                                            |
+| Name           | Type    | Required? | Nullable? | Description
+| :------------- | :------ | :-------- | :-------- | :----------
+| id             | ID      | yes       | no        | Identifier of the clarification.
+| from\_team\_id | ID      | yes       | yes       | Identifier of [ team](#teams) sending this clarification request, `null` if a clarification sent by jury.
+| to\_team\_id   | ID      | yes       | yes       | Identifier of the [ team](#teams) receiving this reply, `null` if a reply to all teams or a request sent by a team.
+| reply\_to\_id  | ID      | yes       | yes       | Identifier of clarification this is in response to, otherwise `null`.
+| problem\_id    | ID      | yes       | yes       | Identifier of associated [ problem](#problems), `null` if not associated to a problem.
+| text           | string  | yes       | no        | Question or reply text.
+| time           | TIME    | yes       | no        | Time of the question/reply.
+| contest\_time  | RELTIME | yes       | no        | Contest time of the question/reply.
 
 Note that at least one of `from_team_id` and `to_team_id` has to be
 `null`. That is, teams cannot send messages to other teams.
@@ -1471,18 +1469,18 @@ Awards such as medals, first to solve, etc.
 
 The following endpoints are associated with awards:
 
-| Endpoint                     | Mime-type        | Required? | Source @WF | Description                                                               |
-| ---------------------------- | ---------------- | --------- | ---------- | ------------------------------------------------------------------------- |
-| `/contests/<id>/awards`      | application/json | no        | CCS        | JSON array of all awards with elements as defined in the table below      |
-| `/contests/<id>/awards/<id>` | application/json | no        | CCS        | JSON object of a single award with elements as defined in the table below |
+| Endpoint                     | Mime-type        | Required? | Description
+| :--------------------------- | :--------------- | :-------- | :----------
+| `/contests/<id>/awards`      | application/json | no        | JSON array of all awards with elements as defined in the table below.
+| `/contests/<id>/awards/<id>` | application/json | no        | JSON object of a single award with elements as defined in the table below.
 
 JSON elements of award objects:
 
-| Name      | Type        | Required? | Nullable? | Source @WF | Description                                                                                                                                              |
-| --------- | ----------- | --------- | --------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id        | ID          | yes       | no        | CCS        | identifier of the award.                                                                                                                                 |
-| citation  | string      | yes       | no        | CCS        | award citation, e.g. "Gold medal winner"                                                                                                                 |
-| team\_ids | array of ID | yes       | no        | CCS        | JSON array of [ team](#teams) ids receiving this award. No meaning must be implied or inferred from the order of IDs. The array may be empty. |
+| Name      | Type        | Required? | Nullable? | Description
+| :-------- | :---------- | :-------- | :-------- | :----------
+| id        | ID          | yes       | no        | Identifier of the award.
+| citation  | string      | yes       | no        | Award citation, e.g. "Gold medal winner".
+| team\_ids | array of ID | yes       | no        | JSON array of [ team](#teams) ids receiving this award. No meaning must be implied or inferred from the order of IDs. The array may be empty.
 
 #### Access restrictions at WF
 
@@ -1507,15 +1505,15 @@ freeze until it has been unfrozen.
 
 For some common award cases the following IDs should be used.
 
-| ID                        | Meaning during contest                                                                                                     | Meaning when contest is final     | Comment                                                                 |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------- | --------------------------------- | ----------------------------------------------------------------------- |
-| winner                    | Current leader(s). Empty if no team has scored.                                                                            | Winner(s) of the contest          |                                                                         |
-| gold-medal                | Teams currently placed to receive a gold medal. Empty if no team has scored.                                               | Teams being awarded gold medals   |                                                                         |
-| silver-medal              | Teams currently placed to receive a silver medal. Empty if no team has scored.                                             | Teams being awarded silver medals |                                                                         |
-| bronze-medal              | Teams currently placed to receive a bronze medal, assuming no extra bronze are awarded. Empty if no team has scored.       | Teams being awarded bronze medals |                                                                         |
-| first-to-solve-\<id>      | The team(s), if any, that was first to solve problem \<id>. This implies that no unjudged submission made earlier remains. | Same.                             | Must never change once set, except if there are rejudgements.           |
-| group-winner-\<id>        | Current leader(s) in group \<id>. Empty if no team has scored.                                                             | Winner(s) of group \<id>          |                                                                         |
-| organization-winner-\<id> | Current leader(s) of organization \<id>. Empty if no team has scored.                                                      | Winner(s) of organization \<id>   | Not useful in contest with only one team per organization (e.g. the WF) |
+| ID                        | Meaning during contest                                                                                                     | Meaning when contest is final     | Comment
+| :------------------------ | :------------------------------------------------------------------------------------------------------------------------- | :-------------------------------- | :------
+| winner                    | Current leader(s). Empty if no team has scored.                                                                            | Winner(s) of the contest          |
+| gold-medal                | Teams currently placed to receive a gold medal. Empty if no team has scored.                                               | Teams being awarded gold medals   |
+| silver-medal              | Teams currently placed to receive a silver medal. Empty if no team has scored.                                             | Teams being awarded silver medals |
+| bronze-medal              | Teams currently placed to receive a bronze medal, assuming no extra bronze are awarded. Empty if no team has scored.       | Teams being awarded bronze medals |
+| first-to-solve-\<id>      | The team(s), if any, that was first to solve problem \<id>. This implies that no unjudged submission made earlier remains. | Same.                             | Must never change once set, except if there are rejudgements.
+| group-winner-\<id>        | Current leader(s) in group \<id>. Empty if no team has scored.                                                             | Winner(s) of group \<id>          |
+| organization-winner-\<id> | Current leader(s) of organization \<id>. Empty if no team has scored.                                                      | Winner(s) of organization \<id>   | Not useful in contest with only one team per organization (e.g. the WF).
 
 #### POST, PATCH, and DELETE awards
 
@@ -1551,21 +1549,21 @@ Commentary on events happening in the contest
 
 The following endpoints are associated with commentary:
 
-| Endpoint                         | Mime-type        | Required? | Source @WF | Description                                                                    |
-| -------------------------------- | ---------------- | --------- | ---------- | ------------------------------------------------------------------------------ |
-| `/contests/<id>/commentary`      | application/json | no        | not used   | JSON array of all commentary with elements as defined in the table below       |
-| `/contests/<id>/commentary/<id>` | application/json | no        | not used   | JSON object of a single commentary with elements as defined in the table below |
+| Endpoint                         | Mime-type        | Required? | Description
+| :------------------------------- | :--------------- | :-------- | :----------
+| `/contests/<id>/commentary`      | application/json | no        | JSON array of all commentary with elements as defined in the table below.
+| `/contests/<id>/commentary/<id>` | application/json | no        | JSON object of a single commentary with elements as defined in the table below.
 
 JSON elements of award objects:
 
-| Name          | Type        | Required? | Nullable? | Source @WF | Description |
-| ------------- | ----------- | --------- | --------- | ---------- | ----------- |
-| id            | ID          | yes       | no        | not used   | identifier of the commentary. |
-| time          | TIME        | yes       | no        | not used   | time of the commentary message. |
-| contest\_time | RELTIME     | yes       | no        | not used   | contest time of the commentary message. |  
-| message       | string      | yes       | no        | not used   | commentary message text. May contain special tags for [teams](#teams) and [problems](#problems) on the format `#t<team ID>` and `#p<problem ID>` respectively.|
-| team\_ids     | array of ID | yes       | yes       | not used   | JSON array of [team](#teams) IDs the message is related to.
-| problem\_ids  | array of ID | yes       | yes       | not used   | JSON array of [problem](#problems) IDs the message is related to.
+| Name          | Type        | Required? | Nullable? | Description
+| :------------ | :---------- | :-------- | :-------- | :----------
+| id            | ID          | yes       | no        | Identifier of the commentary.
+| time          | TIME        | yes       | no        | Time of the commentary message.
+| contest\_time | RELTIME     | yes       | no        | Contest time of the commentary message.
+| message       | string      | yes       | no        | Commentary message text. May contain special tags for [teams](#teams) and [problems](#problems) on the format `#t<team ID>` and `#p<problem ID>` respectively.
+| team\_ids     | array of ID | yes       | yes       | JSON array of [team](#teams) IDs the message is related to.
+| problem\_ids  | array of ID | yes       | yes       | JSON array of [problem](#problems) IDs the message is related to.
 
 For the message, if an literal `#` is needed, `\#` must be used. Similarly for literal `\`, `\\` must be used.
 
@@ -1593,9 +1591,9 @@ irrespective of role.
 
 The following endpoint is associated with the scoreboard:
 
-| Endpoint                    | Mime-type        | Required? | Source @WF | Description                                                    |
-| --------------------------- | ---------------- | --------- | ---------- | -------------------------------------------------------------- |
-| `/contests/<id>/scoreboard` | application/json | yes       | CCS        | JSON object with scoreboard data as defined in the table below |
+| Endpoint                    | Mime-type        | Required? | Description
+| :-------------------------- | :--------------- | :-------- | :----------
+| `/contests/<id>/scoreboard` | application/json | yes       | JSON object with scoreboard data as defined in the table below.
 
 #### Scoreboard request options
 
@@ -1622,13 +1620,13 @@ scoreboard row.
 
 JSON elements of the scoreboard object.
 
-| Name          | Type                       | Required? | Nullable? | Source @WF | Description                                                                                                                                                              |
-| ------------- | -------------------------- | --------- | --------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| event\_id     | ID                         | yes       | no        | CCS        | Identifier of the [ event](#event_feed) after which this scoreboard was generated. This must be identical to the argument `after_event_id`, if specified.     |
-| time          | TIME                       | yes       | no        | CCS        | Time contained in the associated event. Implementation defined if the event has no associated time.                                                                      |
-| contest\_time | RELTIME                    | yes       | no        | CCS        | Contest time contained in the associated event. Implementation defined if the event has no associated contest time.                                                      |
-| state         | object                     | yes       | no        | CCS        | Identical data as returned by the [ contest state](#contest-state) endpoint. This is provided here for ease of use and to guarantee the data is synchronized. |
-| rows          | JSON array of JSON objects | yes       | no        | CCS        | A list of rows of team with their associated scores.                                                                                                                     |
+| Name          | Type                       | Required? | Nullable? | Description
+| :------------ | :------------------------- | :-------- | :-------- | :----------
+| event\_id     | ID                         | yes       | no        | Identifier of the [ event](#event_feed) after which this scoreboard was generated. This must be identical to the argument `after_event_id`, if specified.
+| time          | TIME                       | yes       | no        | Time contained in the associated event. Implementation defined if the event has no associated time.
+| contest\_time | RELTIME                    | yes       | no        | Contest time contained in the associated event. Implementation defined if the event has no associated contest time.
+| state         | object                     | yes       | no        | Identical data as returned by the [ contest state](#contest-state) endpoint. This is provided here for ease of use and to guarantee the data is synchronized.
+| rows          | JSON array of JSON objects | yes       | no        | A list of rows of team with their associated scores.
 
 The scoreboard `rows` array is sorted according to rank and alphabetical
 on team name within identically ranked teams. Here alphabetical ordering
@@ -1638,27 +1636,27 @@ Algorithm](https://www.unicode.org/reports/tr10/), by default using the
 
 Each JSON object in the rows array consists of:
 
-| Name              | Type             | Required? | Nullable? | Source @WF | Description                                                                                  |
-| ----------------- | ---------------- | --------- | --------- | ---------- | -------------------------------------------------------------------------------------------- |
-| rank              | integer          | yes       | no        | CCS        | rank of this team, 1-based and duplicate in case of ties                                     |
-| team\_id          | ID               | yes       | no        | CCS        | identifier of the [ team](#teams)                                                 |
-| score             | object           | yes       | no        | CCS        | JSON object as specified in the rows below (for possible extension to other scoring methods) |
-| score.num\_solved | integer          | depends   | no        | CCS        | number of problems solved by the team. Required iff contest:scoreboard_type is `pass-fail`.  |
-| score.total\_time | integer          | depends   | no        | CCS        | total penalty time accrued by the team. Required iff contest:scoreboard_type is `pass-fail`. |
-| score.score       | number           | depends   | no        | not used   | total score of problems by the team. Required iff contest:scoreboard_type is `score`.        |
-| score.time        | integer          | no        | no        | not used   | time of last score improvement used for tiebreaking purposes.                                |
-| problems          | array of objects | yes       | no        | CCS        | JSON array of problems with scoring data, see below for the specification of each element    |
+| Name              | Type             | Required? | Nullable? | Description
+| :---------------- | :--------------- | :-------- | :-------- | :----------
+| rank              | integer          | yes       | no        | Rank of this team, 1-based and duplicate in case of ties.
+| team\_id          | ID               | yes       | no        | Identifier of the [ team](#teams).
+| score             | object           | yes       | no        | JSON object as specified in the rows below (for possible extension to other scoring methods).
+| score.num\_solved | integer          | depends   | no        | Number of problems solved by the team. Required iff contest:scoreboard_type is `pass-fail`.
+| score.total\_time | integer          | depends   | no        | Total penalty time accrued by the team. Required iff contest:scoreboard_type is `pass-fail`.
+| score.score       | number           | depends   | no        | Total score of problems by the team. Required iff contest:scoreboard_type is `score`.
+| score.time        | integer          | no        | no        | Time of last score improvement used for tiebreaking purposes.
+| problems          | array of objects | yes       | no        | JSON array of problems with scoring data, see below for the specification of each element.
 
 Each problem object within the scoreboard consists of:
 
-| Name         | Type    | Required? | Nullable? | Source @WF | Description                                                                                   |
-| ------------ | ------- | --------- | --------- | ---------- | --------------------------------------------------------------------------------------------- |
-| problem\_id  | ID      | yes       | no        | CCS        | identifier of the [ problem](#problems)                                            |
-| num\_judged  | integer | yes       | no        | CCS        | number of judged submissions (up to and including the first correct one)                      |
-| num\_pending | integer | yes       | no        | CCS        | number of pending submissions (either queued or due to freeze)                                |
-| solved       | boolean | depends   | yes       | CCS        | required iff contest:scoreboard_type is `pass-fail`.                                          |
-| score        | number  | depends   | no        | not used   | required iff contest:scoreboard_type is `score` and solved is missing. If missing or `null` defaults to `100` if solved is `true` and `0` if solved is `false`. |
-| time         | integer | depends   | no        | CCS        | minutes into the contest when this problem was solved by the team. Required iff `solved=true` |
+| Name         | Type    | Required? | Nullable? | Description
+| :----------- | :------ | :-------- | :-------- | :----------
+| problem\_id  | ID      | yes       | no        | Identifier of the [ problem](#problems).
+| num\_judged  | integer | yes       | no        | Number of judged submissions (up to and including the first correct one),
+| num\_pending | integer | yes       | no        | Number of pending submissions (either queued or due to freeze).
+| solved       | boolean | depends   | yes       | Required iff contest:scoreboard_type is `pass-fail`.
+| score        | number  | depends   | no        | Required iff contest:scoreboard_type is `score` and solved is missing. If missing or `null` defaults to `100` if solved is `true` and `0` if solved is `false`.
+| time         | integer | depends   | no        | Minutes into the contest when this problem was solved by the team. Required iff `solved=true`.
 
 #### Access restrictions at WF
 
@@ -1776,17 +1774,17 @@ or full endpoint. The general format for events is:
 {"contest_id": "<id>", "endpoint": "<endpoint>", "id": "<id>", "data": <JSON data for element> }
 ```
 
-| Name        | Type   | Required? | Nullable? | Description                                                                                                                                |
-| ----------- | ------ | --------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| contest\_id | string | yes       | no        | The contest id.                                                                                                                            |
-| endpoint    | string | yes       | yes       | The API endpoint, i.e. type of contest object above. Can be used for filtering                                                             |
-| id          | string | yes       | yes       | The id of the object that changed                                                                                                          |
-| data        | object | yes       | yes       | The data is the object that would be returned if calling the corresponding API endpoint at this time, i.e. an object or null for deletions |
+| Name        | Type   | Required? | Nullable? | Description
+| :---------- | :----- | :-------- | :-------- | :----------
+| contest\_id | string | yes       | no        | The contest id.
+| endpoint    | string | yes       | yes       | The API endpoint, i.e. type of contest object above. Can be used for filtering.
+| id          | string | yes       | yes       | The id of the object that changed.
+| data        | object | yes       | yes       | The data is the object that would be returned if calling the corresponding API endpoint at this time, i.e. an object or null for deletions.
 
 All event types have a corresponding API endpoint, as specified in the table below.
 
 | Event           | API Endpoint                          |
-| --------------- | ------------------------------------- |
+| :-------------- | :------------------------------------ |
 | contests        | `/contests/<id>`                      |
 | judgement-types | `/contests/<id>/judgement-types/<id>` |
 | languages       | `/contests/<id>/languages/<id>`       |
@@ -1865,19 +1863,19 @@ automatically removed from future callbacks.
 
 The following endpoints is associated with the webhook:
 
-| Endpoint         | Mime-type        | Required? | Source @WF | Description                                                                                                          |
-| ---------------- | ---------------- | --------- | ---------- | -------------------------------------------------------------------------------------------------------------------- |
-| `/webhooks`      | application/json | yes       | CCS        | JSON array of all webhook callbacks with elements as defined in the table below. Also used to register new webhooks. |
-| `/webhooks/<id>` | application/json | yes       | CCS        | JSON object of a single webhook callback with elements as defined in the table below                                 |
+| Endpoint         | Mime-type        | Required? | Description
+| ---------------- | ---------------- | :-------- | :----------
+| `/webhooks`      | application/json | yes       | JSON array of all webhook callbacks with elements as defined in the table below. Also used to register new webhooks.
+| `/webhooks/<id>` | application/json | yes       | JSON object of a single webhook callback with elements as defined in the table below.
 
 JSON elements of webhook callback objects:
 
-| Name       | Type            | Required? | Nullable? | Description                                                                           |
-| ---------- | --------------- | --------- | --------- | ------------------------------------------------------------------------------------- |
-id           | ID              | yes       | no        | identifier of the webhook.                                                            |
-url          | string          | yes       | no        | The URL to post HTTP callbacks to.                                                    |
-endpoints    | array of string | yes       | no        | Names of endpoints to receive callbacks for. Empty array means all endpoints.         |
-contest\_ids | array of ID     | yes       | no        | ID’s of contests to receive callbacks for. Empty array means all configured contests. |
+| Name         | Type            | Required? | Nullable? | Description
+| :----------- | :-------------- | :-------- | :-------- | :----------
+| id           | ID              | yes       | no        | identifier of the webhook.
+| url          | string          | yes       | no        | The URL to post HTTP callbacks to.
+| endpoints    | array of string | yes       | no        | Names of endpoints to receive callbacks for. Empty array means all endpoints.
+| contest\_ids | array of ID     | yes       | no        | ID’s of contests to receive callbacks for. Empty array means all configured contests.
 
 ##### Adding a webhook
 
@@ -1943,9 +1941,9 @@ irrespective of role.
 
 The following endpoint is associated with the event feed:
 
-| Endpoint                    | Mime-type            | Required? | Source @WF | Description                            |
-| --------------------------- | -------------------- | --------- | ---------- | -------------------------------------- |
-| `/contests/<id>/event-feed` | application/x-ndjson | yes       | CCS        | NDJSON feed of events as defined below |
+| Endpoint                    | Mime-type            | Required? | Description
+| :-------------------------- | :------------------- | :-------- | :----------
+| `/contests/<id>/event-feed` | application/x-ndjson | yes       | NDJSON feed of events as defined below.
 
 ##### Reconnection
 

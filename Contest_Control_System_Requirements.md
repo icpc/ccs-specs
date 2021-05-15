@@ -955,13 +955,34 @@ problem.
 
 ## Data Export
 
-### Event Feed
+### Contest API
 
-It is a requirement that the CCS provide an *external event feed*. This
-means that the CCS must have a mechanism for external processes to
-connect to the CCS and obtain dynamic real-time updates regarding the
-current state of the contest. The CCS event feed mechanism must comply
-with the [Event Feed specification](Event_Feed).
+It is a requirement that the CCS provide a compliant implmentation of
+the [Contest API](contest_api). In addition to all required endpoints
+and elements (i.e. the minimal compliant implmentation) the CCS must
+also provide the following endpoints and elements:
+
+| Endpoint         | Element                      |
+| :--------------- | :--------------------------- |
+| `/contests`      | `formal_name`                |
+| `/contests`      | `scoreboard_freeze_duration` |
+| `/contests`      | `penalty_time`               |
+| `/languages`     | `compiler`                   |
+| `/languages`     | `runner`                     |
+| `/problems`      | `rgb`                        |
+| `/problems`      | `color`                      |
+| `/problems`      | `time_limit`                 |
+| `/groups`        | `icpc_id`                    |
+| `/organizations` | All required elements.       |
+| `/organizations` | `icpc_id`                    |
+| `/organizations` | `formal_name`                |
+| `/teams`         | `icpc_id`                    |
+| `/teams`         | `display_name`               |
+| `/teams`         | `organization_id`            |
+| `/teams`         | `group_ids`                  |
+| `/judgements`    | `max_run_time`               |
+| `/runs`          | `run_time`                   |
+| `/awards`        | All required elements.       |
 
 ### Scoreboard Data File
 
