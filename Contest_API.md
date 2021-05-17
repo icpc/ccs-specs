@@ -142,7 +142,13 @@ their expected behavior, if implemented.
 
 Standard [HTTP status
 codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) are
-returned to indicate success or failure.
+returned to indicate success or failure. When there is a failure (status codes 4xx or 5xx), the
+response message body must include a JSON element that contains the attributes 'code' (a number, identical to the HTTP status code returned) and 'message' (a string) with further information suitable for the user making the request, as per the following example:
+
+```json
+{"code":403,
+ "message":"Teams cannot send clarifications to another team"}
+ ```
 
 ### Roles
 
@@ -1316,7 +1322,7 @@ endpoint returns with a `GET` request with the following exceptions:
   proxy. See notes under the submission interface for more detail. In cases where
   these attributes are not allowed the server will respond with a 400 error code.
 
-The request must fail with a 400 error code if any of the following happens:
+The request must fail with a 4xx HTTP status code if any of the following happens:
 
 * A required attribute is missing.
 * An attribute that must not be provided is provided.
