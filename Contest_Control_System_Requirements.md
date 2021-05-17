@@ -267,6 +267,10 @@ The CCS must be able to read [groups.tsv](#groupstsv), an
 initialization file containing the list of groups to which the teams
 belong.
 
+The CCS must be able to read language configuration from an archive following
+the [Contest Archive Format](https://ccs-specs.icpc.io/contest_archive_format).
+See specifically the [language object](https://ccs-specs.icpc.io/contest_archive_format#language-object).
+
 ### Clock Synchronization
 
 The CCS must be able to synchronize its clock to an NTP server provided
