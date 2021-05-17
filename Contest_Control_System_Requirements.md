@@ -515,10 +515,9 @@ affecting contest operations in any way.
 ### Finalizing the Contest
 
 Finalizing is the procedure to authorize the final results at the end of
-a contest. The [results.tsv](#resultstsv) and
-[scoreboard.tsv](#scoreboardtsv) files will be generated and
-the [finalized](Event_Feed#Finalized_Event) element will be
-sent on the [Event Feeds](event-feed).
+a contest. The [results.tsv](#resultstsv) file will be generated and the 
+[finalized](Event_Feed#Finalized_Event) element will be sent on the 
+[Event Feeds](event-feed).
 
 When the contest is over, but not finalized, all scoreboards must show a
 warning that the results are not final.
@@ -1024,16 +1023,6 @@ endpoints:
     submissions received after the scoreboard freeze until it has been 
     thawed.
 
-### Scoreboard Data File
-
-The CCS must be capable of generating an external file containing the
-current scoreboard. The format of this file must be as defined in
-[scoreboard.tsv](#scoreboardtsv).
-
-The CCS must automatically save an updated copy of the external scoring
-data file whenever the scoring data itself is updated as described
-above.
-
 ### Final Results Data File
 
 The *final results* lists the ranked teams sorted by rank (with
@@ -1152,9 +1141,8 @@ obtaining submissions:
 
 A CCS running in shadow mode must produce the same set of output files
 as those required of a Primary CCS -- that is, it must produce at least
-the [scoreboard.tsv](#scoreboardtsv) and
-[results.tsv](#resultstsv) files as defined elsewhere in
-this Requirements Specification.
+the [Contest API](contest_api) and the [results.tsv](#resultstsv) file 
+as defined elsewhere in this Requirements Specification.
 
 A CCS running in shadow mode must in addition provide the capability to
 present a “diff” of submissions -- that is, a list of all submissions
@@ -1426,42 +1414,6 @@ The archive may contain other files and folders. These must be ignored
 by the CCS when importing the logos.
 
 ### Output files
-
-#### scoreboard.tsv
-
-A text file consisting of a version line and one line for each team in
-the contest, sorted in position order with alphabetical order on team
-name as tie breaker. Each line has tab separated fields as defined
-below.
-
-The first line has the following format
-
-| Field | Description    | Example    | Type                             |
-| ----- | -------------- | ---------- | -------------------------------- |
-| 1     | Label          | scoreboard | fixed string (always same value) |
-| 2     | Version number | 1          | integer                          |
-
-Then follow several lines with the following format (one per team).
-
-| Field        | Description                            | Example                | Type    |
-| ------------ | -------------------------------------- | ---------------------- | ------- |
-| 1            | Institution name                       | University of Virginia | string  |
-| 2            | External ID                            | 24314                  | integer |
-| 3            | Position in contest                    | 1                      | integer |
-| 4            | Number of problems the team has solved | 4                      | integer |
-| 5            | Total Time                             | 534                    | integer |
-| 6            | Time of the last accepted submission   | 233                    | integer |
-| 6 + 2*i* - 1 | Number of submissions for problem *i*  | 2                      | integer |
-| 6 + 2*i*     | Time when problem *i* was solved       | 233                    | integer |
-
-The External ID for a team can be found in the
-[teams.tsv](#teamstsv).
-
-The time when problem was solved must be -1 if the problem was not
-solved.
-
-The time of last accepted submission must be -1 if team has not solved a
-problem.
 
 #### results.tsv
 
