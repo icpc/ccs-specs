@@ -1503,16 +1503,3 @@ contest field is empty.
 Award is a string with value "Gold Medal", "Silver Medal", "Bronze
 Medal", "Ranked" or "Honorable" as appropriate, see [Scoring Data
 Generation](#scoring-data-generation) for details.
-
-#### submissions.tsv
-
-A text file consisting of a single line per submission. Each line has
-tab separated fields as defined below.
-
-| Field | Description            | Example | Type                     |
-| ----- | ---------------------- | ------- | ------------------------ |
-| 1     | submission id          | 7       | integer                  |
-| 2     | team number            | 12      | integer                  |
-| 3     | short problem name     | railway | string from contest.yaml |
-| 4     | submission time in ms  | 2033497 | long integer             |
-| 5     | judge response acronym | AC      | string                   |
