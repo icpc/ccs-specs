@@ -265,6 +265,12 @@ equivalent JSON response snippets pointing to the same location:
   "href":"contests/wf14/submissions/187/files"
 ```
 
+For images, the supported mime types are image/png, image/jpeg and image/svg+xml.
+
+For images in SVG format, i.e. those having a mime type of image/svg+xml,
+the actual values of `width` and `height` don't matter, only the ratio
+between them.
+
 If implementing support for uploading files pointed to by resource
 links, substitute the href element with a data element with a base64
 encoded string of the associated file contents as the value.
@@ -408,8 +414,8 @@ is returned.
 | scoreboard\_freeze\_duration | RELTIME        | no        | yes       | How long the scoreboard is frozen before the end of the contest.
 | scoreboard\_type             | string         | no        | yes       | What type of scoreboard is used for the contest. Must be either `pass-fail` or `score`. Defaults to `pass-fail` if missing or `null`.
 | penalty\_time                | integer        | no        | no        | Penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`.
-| banner                       | array of IMAGE | no        | yes       | Banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime type is image/png.
-| logo                         | array of IMAGE | no        | yes       | Logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime type is image/png.
+| banner                       | array of IMAGE | no        | yes       | Banner for this contest, intended to be an image with a large aspect ratio around 8:1.
+| logo                         | array of IMAGE | no        | yes       | Logo for this contest, intended to be an image with aspect ratio near 1:1.
 
 The expected/typical use of `countdown_pause_time` is that once a
 `start_time` is defined and close, the countdown may be paused due to
@@ -849,13 +855,13 @@ JSON elements of organization objects:
 | name               | string         | yes       | no        | Short display name of the organization.
 | formal\_name       | string         | no        | yes       | Full organization name if too long for normal display purposes.
 | country            | string         | no        | yes       | [ISO 3-letter code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) of the organization's country.
-| country_flag       | array of IMAGE | no        | yes       | Flag of the country. Only allowed mime type is image/png. A server is recommended to provide flags of size around 56x56 and 160x160.
+| country_flag       | array of IMAGE | no        | yes       | Flag of the country. A server is recommended to provide flags of size around 56x56 and 160x160.
 | url                | string         | no        | yes       | URL to organization's website.
 | twitter\_hashtag   | string         | no        | yes       | Organization hashtag.
 | location           | object         | no        | yes       | JSON object as specified in the rows below.
 | location.latitude  | number         | depends   | no        | Latitude in degrees. Required iff location is present.
 | location.longitude | number         | depends   | no        | Longitude in degrees. Required iff location is present.
-| logo               | array of IMAGE | no        | yes       | Logo of the organization. Only allowed mime type is image/png. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well.
+| logo               | array of IMAGE | no        | yes       | Logo of the organization. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well.
 
 #### Example
 
@@ -899,7 +905,7 @@ JSON elements of team objects:
 | location.x        | number           | depends   | no        | Team's x position in meters. Required iff location is present.
 | location.y        | number           | depends   | no        | Team's y position in meters. Required iff location is present.
 | location.rotation | number           | depends   | no        | Team's rotation in degrees. Required iff location is present.
-| photo             | array of IMAGE   | no        | yes       | Registration photo of the team. Only allowed mime types are image/jpeg and image/png.
+| photo             | array of IMAGE   | no        | yes       | Registration photo of the team.
 | video             | array of VIDEO   | no        | yes       | Registration video of the team.
 | backup            | array of ARCHIVE | no        | yes       | Latest file backup of the team machine. Only allowed mime type is application/zip.
 | key\_log          | array of FILE    | no        | yes       | Latest key log file from the team machine. Only allowed mime type is text/plain.
@@ -944,7 +950,7 @@ JSON elements of team member objects:
 | last\_name  | string         | yes       | no        | Last name of team member.
 | sex         | string         | no        | yes       | Either `male` or `female`, or possibly `null`.
 | role        | string         | yes       | no        | One of `contestant` or `coach`.
-| photo       | array of IMAGE | no        | yes       | Registration photo of the team member. Only allowed mime types are image/jpeg and image/png.
+| photo       | array of IMAGE | no        | yes       | Registration photo of the team member.
 
 #### Example
 
