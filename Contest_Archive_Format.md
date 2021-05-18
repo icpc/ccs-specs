@@ -161,7 +161,7 @@ None.
 
 | Name     | Type           | Required | Description |
 | :------- | :------------- | :------- | :---------- |
-| id       | ID             | yes      | Identifier of the language. Should be one of the IDs specified in the [ICPC Contest API](contest_api#known-languages). |
+| id       | ID             | yes      | Identifier of the language. Should be one of the IDs specified in the [Contest API](contest_api#known-languages). |
 | name     | string         | yes      | Name of the language (might not match table below, e.g. if localised). |
 | compiler | Command object | no       | Command to use for compiling submissions. |
 | runner   | Command object | no       | Command to use for running submissions. Relevant e.g. for interpreted languages and languages running on a VM. |

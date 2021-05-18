@@ -30,8 +30,8 @@ incorporate and supersede a number of
 *REST interface for source code fetching*
 and the *Contest start interface*.
 
-This REST interface is specified in conjunction with a new [NDJSON event
-feed](#event-feed---draft), which provides all changes to this
+This REST interface is specified in conjunction with a new 
+[NDJSON event feed](#event-feed), which provides all changes to this
 interface as CRUD-style events and is meant to supersede the old XML
 *Event Feed*.
 
@@ -533,9 +533,8 @@ JSON elements of judgement type objects:
 
 #### Known judgement types
 
-The list below contains standardized identifiers for known judgement
-types. These identifiers should be used by a server. Please send an
-email to <cliccs@ecs.csus.edu> or create a pull request at
+The list below contains standardized identifiers for known judgement types.
+These identifiers should be used by a server. Please create a pull request at
 <https://github.com/icpc/ccs-specs> when there are judgement types missing.
 
 The column **Big 5** lists the "big 5" equivalents, if any. A `*` in
@@ -854,7 +853,7 @@ JSON elements of organization objects:
 | icpc\_id           | string         | no        | yes       | External identifier from ICPC CMS.
 | name               | string         | yes       | no        | Short display name of the organization.
 | formal\_name       | string         | no        | yes       | Full organization name if too long for normal display purposes.
-| country            | string         | no        | yes       | [ISO 3-letter code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) of the organization's country.
+| country            | string         | no        | yes       | [ISO 3166-1 alpha-3 code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) of the organization's country.
 | country_flag       | array of IMAGE | no        | yes       | Flag of the country. A server is recommended to provide flags of size around 56x56 and 160x160.
 | url                | string         | no        | yes       | URL to organization's website.
 | twitter\_hashtag   | string         | no        | yes       | Organization hashtag.
@@ -984,7 +983,7 @@ JSON elements of state objects:
 | started          | TIME | yes       | yes       | Time when the contest actually started, or `null` if the contest has not started yet. When set, this time must be equal to the [contest](#contests) `start_time`.
 | frozen           | TIME | depends   | yes       | Time when the scoreboard was frozen, or `null` if the scoreboard has not been frozen. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint.
 | ended            | TIME | yes       | yes       | Time when the contest ended, or `null` if the contest has not ended. Must not be set if started is `null`.
-| thawed           | TIME | depends   | yes       | Time when the scoreboard was thawed (that is, unfrozen again), or `null` if the scoreboard has not been thawed. Required iff `scoreboard_freeze_duration` is present in the [contest](#Contests) endpoint. Must not be set if frozen is `null`.
+| thawed           | TIME | depends   | yes       | Time when the scoreboard was thawed (that is, unfrozen again), or `null` if the scoreboard has not been thawed. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint. Must not be set if frozen is `null`.
 | finalized        | TIME | yes       | yes       | Time when the results were finalized, or `null` if results have not been finalized. Must not be set if ended is `null`.
 | end\_of\_updates | TIME | yes       | yes       | Time after last update to the contest occurred, or `null` if more updates are still to come. Setting this to non-`null` must be the very last change in the contest.
 
@@ -1531,7 +1530,7 @@ The following options can be passed to the scoreboard endpoint.
 
 ##### Scoreboard at the time of a given event
 
-By passing an [ event](#event-feed---draft) ID with the
+By passing an [ event](#event-feed) ID with the
 `after_event_id` URL argument, the scoreboard can be requested as it
 was directly after the specified event:
 
@@ -1552,7 +1551,7 @@ JSON elements of the scoreboard object.
 
 | Name          | Type                       | Required? | Nullable? | Description
 | :------------ | :------------------------- | :-------- | :-------- | :----------
-| event\_id     | ID                         | yes       | no        | Identifier of the [ event](#event_feed) after which this scoreboard was generated. This must be identical to the argument `after_event_id`, if specified.
+| event\_id     | ID                         | yes       | no        | Identifier of the [ event](#event-feed) after which this scoreboard was generated. This must be identical to the argument `after_event_id`, if specified.
 | time          | TIME                       | yes       | no        | Time contained in the associated event. Implementation defined if the event has no associated time.
 | contest\_time | RELTIME                    | yes       | no        | Contest time contained in the associated event. Implementation defined if the event has no associated contest time.
 | state         | object                     | yes       | no        | Identical data as returned by the [ contest state](#contest-state) endpoint. This is provided here for ease of use and to guarantee the data is synchronized.
@@ -1621,7 +1620,11 @@ Returned data:
 }
 ```
 
-### Event feed - DRAFT
+### Event feed
+
+```note
+This section is a draft.
+```
 
 Provides the event (notification) feed for the current contest. This is
 effectively a changelog of create, update, or delete events that have
