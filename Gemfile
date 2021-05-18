@@ -21,3 +21,5 @@ group :jekyll_plugins do
   gem 'faraday', '< 1'
   gem 'liquid', '>= 4.0.1'
 end
+
+gem "webrick", "~> 1.7"
