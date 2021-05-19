@@ -515,9 +515,9 @@ affecting contest operations in any way.
 ### Finalizing the Contest
 
 Finalizing is the procedure to authorize the final results at the end of
-a contest. The [results.tsv](#resultstsv) file will be generated and the 
-[finalized](Event_Feed#Finalized_Event) element will be sent on the 
-[Event Feeds](event-feed).
+a contest. When the contest has been finalized the 
+[contest state](contest_api#contest-state) endpoint will be updated to
+reflect this.
 
 When the contest is over, but not finalized, all scoreboards must show a
 warning that the results are not final.
@@ -528,16 +528,20 @@ applies:
 
 1.  The contest is still running (i.e., the contest is not over).
 2.  There are un-judged submissions.
-3.  There are submissions judged as [Judging
-    Error](#exceptional-judgments).
+3.  There are submissions judged as 
+    [Judging Error](#exceptional-judgments).
 4.  There are unanswered clarification requests.
 
-The following fields need to be entered before Finalizing the contest:
+Before finalizing the contest the value B, as used in 
+[Scoring Data Generation](#scoring-data-generation) will be provided. 
+The default value for B must be 0.
 
-1.  B, a non-negative integer, as used in [Scoring Data
-    Generation](#scoring-data-generation).
-2.  a comment, string, that indicates who approves the Final Results,
-    for Example "Finalized by John Doe and Jane Doe".
+If, after providing the correct and final value of B, the 
+[Scoreboard](contest_api#scoreboard) and [Awards](contest_api#awards)
+endpoints contain the correct results, the admin may Finalize the 
+contest. These endpoints must be compared with the ones exposed by the 
+[Shadow CCS](#shadow-mode) and should also be manually sanity checked
+before Finalizing.
 
 ## Team Interface
 
@@ -1023,22 +1027,30 @@ endpoints:
     submissions received after the scoreboard freeze until it has been 
     thawed.
 
-### Final Results Data File
+### Final Results Data Files
 
-The *final results* lists the ranked teams sorted by rank (with
-alphabetical order on team name as tie breaker), followed by the
-unranked teams (sorted alphabetically by team name). It includes for
-each ranked team their rank and:
+The *final results* are contained in the JSON files returned by the
+[Scoreboard](contest_api#scoreboard) and [Awards](contest_api#awards)
+endpoints of the [Contest API](contest_api).
 
-1.  The number of problems solved, if the team is ranked (i.e., if they
-    solved more than the median number of problems).
-2.  The total penalty time and time of last accepted submission, if the
-    team is in rank 1 through 12+B (where B is as defined in [Scoring
-    Data Generation](#scoring-data-generation)).
+The CCS must be capable of generating at least the following awards
+after the contest has ended: 
 
-The CCS must be capable of generating an external file containing the
-final results of the World Finals contest. The format of this file must
-be as defined in the [results.tsv](#resultstsv).
+  - `winner`
+  - `gold-medal`
+  - `silver-medal`
+  - `bronze-medal`
+  - `rank-\<rank>`
+  - `honorable-mention`
+  - `first-to-solve-<id>`
+  - `group-winner-<id>`
+
+The CCS does not have to be able to make them available during the
+contest.
+
+See [Scoring Data Generation](#scoring-data-generation) for details on 
+how the awards must be calculated, and the list of 
+[known awards](contest_api#known-awards) for additional comments.
 
 ## Shadow Mode
 
@@ -1137,17 +1149,12 @@ obtaining submissions:
     judged by the Shadow CCS in the same manner as if it had been
     submitted to the CCS running in non-shadow mode.
 
-### Results
+### Judgement Comparison
 
-A CCS running in shadow mode must produce the same set of output files
-as those required of a Primary CCS -- that is, it must produce at least
-the [Contest API](contest_api) and the [results.tsv](#resultstsv) file 
-as defined elsewhere in this Requirements Specification.
-
-A CCS running in shadow mode must in addition provide the capability to
-present a “diff” of submissions -- that is, a list of all submissions
-which at the current time have a different judgement than that which was
-assigned by the Primary CCS.
+A CCS running in shadow mode must the capability to present a “diff” of
+submissions -- that is, a list of all submissions which at the current
+time have a different judgement than that which was assigned by the
+Primary CCS.
 
 ### Requirements Which May Be Imposed By The CCS
 
@@ -1404,7 +1411,7 @@ compressed using gzip.
 
 The archive must contain a folder named "logos", with a logo in .png
 format, containing an alpha channel, for each team in the contest. The
-logo must be named <team number>.png, where team number is padded with 0
+logo must be named \<team number>.png, where team number is padded with 0
 to 4 digits. Example: 0042.png. This folder may not contain any other
 files. If possible, the logos should be as square as possible and
 600x600 pixels or larger (but don't upsize images or add unnecessary
@@ -1412,46 +1419,3 @@ transparent borders).
 
 The archive may contain other files and folders. These must be ignored
 by the CCS when importing the logos.
-
-### Output files
-
-#### results.tsv
-
-A text file consisting of a version line and one line for each team in
-the contest, sorted in rank order with alphabetical order on team name
-as tie breaker. Here alphabetical ordering means according to the
-[Unicode Collation Algorithm](https://www.unicode.org/reports/tr10/), by
-default using the `en-US` locale. Each line has tab separated fields as
-defined below.
-
-The first line has the following format
-
-| Field | Description    | Example | Type                            |
-| ----- | -------------- | ------- | ------------------------------- |
-| 1     | Label          | results | string (the constant "results") |
-| 2     | Version number | 1       | integer                         |
-
-Then follow several lines with the following format (one per team).
-
-| Field | Description                            | Example        | Type                    |
-| ----- | -------------------------------------- | -------------- | ----------------------- |
-| 1     | External ID                            | 24314          | integer                 |
-| 2     | Rank in contest                        | 1              | integer or empty string |
-| 3     | Award                                  | Gold Medal     | string                  |
-| 4     | Number of problems the team has solved | 4              | integer                 |
-| 5     | Total Time                             | 534            | integer                 |
-| 6     | Time of the last submission            | 233            | integer                 |
-| 7     | Group Winner                           | North American | string                  |
-
-Group Winner is a string with the name of the group if the team is the
-group winner, otherwise empty.
-
-The External ID for a team can be found in the
-[teams.tsv](#teamstsv).
-
-If the team is not ranked (has no assigned rank) then the Rank in
-contest field is empty.
-
-Award is a string with value "Gold Medal", "Silver Medal", "Bronze
-Medal", "Ranked" or "Honorable" as appropriate, see [Scoring Data
-Generation](#scoring-data-generation) for details.
