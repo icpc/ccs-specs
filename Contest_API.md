@@ -1436,17 +1436,17 @@ JSON elements of award objects:
 
 For some common award cases the following IDs should be used.
 
-| ID                        | Meaning during contest                                                                                                     | Meaning when contest is final      | Comment
-| :------------------------ | :------------------------------------------------------------------------------------------------------------------------- | :--------------------------------- | :------
-| winner                    | Current leader(s). Empty if no team has scored.                                                                            | Winner(s) of the contest.          |
-| gold-medal                | Teams currently placed to receive a gold medal. Empty if no team has scored.                                               | Teams being awarded gold medals.   |
-| silver-medal              | Teams currently placed to receive a silver medal. Empty if no team has scored.                                             | Teams being awarded silver medals. |
-| bronze-medal              | Teams currently placed to receive a bronze medal, assuming no extra bronze are awarded. Empty if no team has scored.       | Teams being awarded bronze medals. |
-| rank-\<rank>              | Teams currently placed to recieve rank \<rank>. Empty if no team has scored.                                               | Teams being awarded rank \<rank>.  | Only useful in contests where the final ranking awarded is different from the default ranking of the scoreboard. E.g. at the WF teams *not* getting medals are only ranked based on number of problems solved, and not total penalty time accrued nor time of last score improvement, and teams solving strictly fewer problems than the median team are not ranked at all.  
-| honorable-mention         | Teams currently placed to recieve an honorable mention.                                                                    | Teams being awarded an HM.         |
-| first-to-solve-\<id>      | The team(s), if any, that was first to solve problem \<id>. This implies that no unjudged submission made earlier remains. | Same.                              | Must never change once set, except if there are rejudgements.
-| group-winner-\<id>        | Current leader(s) in group \<id>. Empty if no team has scored.                                                             | Winner(s) of group \<id>.          |
-| organization-winner-\<id> | Current leader(s) of organization \<id>. Empty if no team has scored.                                                      | Winner(s) of organization \<id>.   | Not useful in contest with only one team per organization (e.g. the WF).
+| ID                        | Meaning during contest                                                                                                     | Meaning when contest is final             | Comment
+| :------------------------ | :------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------- | :------
+| winner                    | Current leader(s). Empty if no team has scored.                                                                            | Winner(s) of the contest.                 |
+| gold-medal                | Teams currently placed to receive a gold medal. Empty if no team has scored.                                               | Teams being awarded gold medals.          |
+| silver-medal              | Teams currently placed to receive a silver medal. Empty if no team has scored.                                             | Teams being awarded silver medals.        |
+| bronze-medal              | Teams currently placed to receive a bronze medal, assuming no extra bronze are awarded. Empty if no team has scored.       | Teams being awarded bronze medals.        |
+| rank-\<rank>              | Teams currently placed to receive rank \<rank>. Empty if no team has scored.                                               | Teams being awarded rank \<rank>.         | Only useful in contests where the final ranking awarded is different from the default ranking of the scoreboard. E.g. at the WF teams *not* getting medals are only ranked based on number of problems solved, and not total penalty time accrued nor time of last score improvement, and teams solving strictly fewer problems than the median team are not ranked at all.  
+| honorable-mention         | Teams currently placed to receive an honorable mention.                                                                    | Teams being awarded an honorable mention. |
+| first-to-solve-\<id>      | The team(s), if any, that was first to solve problem \<id>. This implies that no unjudged submission made earlier remains. | Same.                                     | Must never change once set, except if there are rejudgements.
+| group-winner-\<id>        | Current leader(s) in group \<id>. Empty if no team has scored.                                                             | Winner(s) of group \<id>.                 |
+| organization-winner-\<id> | Current leader(s) of organization \<id>. Empty if no team has scored.                                                      | Winner(s) of organization \<id>.          | Not useful in contest with only one team per organization (e.g. the WF).
 
 #### POST, PATCH, and DELETE awards
 
