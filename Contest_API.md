@@ -1452,6 +1452,10 @@ For some common award cases the following IDs should be used.
 
 Clients with the `admin` role may make changes to awards using the normal [HTTP methods](#http-methods) as specified above. Specifically, they can POST new awards, PATCH one or more attributes, or DELETE an existing award. All requests must include the id attribute.
 
+The server may be configured to manage (assign or update) some award ids, and may block clients from modifying them. However, if a client is able to modify an award it must assume that it is responsible for managing that award id unless and until it sees an indication that something else is now managing that award - either a change that it did not request, or a future modification fails.
+
+For example, the server may be configured to assign the `winner` award and not allow any client to modify it. The same server may assign `*-medal` awards by default, but allow clients to modify them. Once a client modifies any of the `*-medal` awards, it is responsible for updating it if anything changes. Likewise, the client could add any arbitrary awards like `first-submission-for-country-*` and would be responsible for managing these.
+
 The request must fail with a 4xx HTTP status code if any of the following happens:
 
 * The request doesn't include an award id.
@@ -1460,6 +1464,7 @@ The request must fail with a 4xx HTTP status code if any of the following happen
 * A PATCH on an award id that doesn't exist.
 * A PATCH that contains an invalid attribute (e.g. null `citation` or `team_ids`).
 * A DELETE on an award id that doesn't exist.
+* A POST, PATCH, or DELETE on an award id that the server is configured to manage exclusively.
 
 #### Example
 
@@ -1474,6 +1479,36 @@ Returned data:
  {"id":"first-to-solve-a","citation":"First to solve problem A","team_ids":["45"]},
  {"id":"first-to-solve-b","citation":"First to solve problem B","team_ids":[]}
 ]
+```
+
+Request:
+
+` POST https://example.com/api/contests/wf14/awards`
+
+Request data:
+
+```json
+{"id":"best-costume","citation":"Best team costuems","team_ids":["42"]}
+```
+
+Request:
+
+` PATCH https://example.com/api/contests/wf14/awards`
+
+Request data:
+
+```json
+{"id":"best-costume","citation":"Best team costumes"}
+```
+
+Request:
+
+` DELETE https://example.com/api/contests/wf14/awards`
+
+Request data:
+
+```json
+{"id":"best-costume"}
 ```
 
 ### Commentary
