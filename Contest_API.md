@@ -265,11 +265,12 @@ equivalent JSON response snippets pointing to the same location:
   "href":"contests/wf14/submissions/187/files"
 ```
 
-For images, the supported mime types are image/png, image/jpeg and image/svg+xml.
+For images, the supported mime types are image/png, image/jpeg, and image/svg+xml.
 
 For images in SVG format, i.e. those having a mime type of image/svg+xml,
-the actual values of `width` and `height` don't matter, only the ratio
-between them.
+the values of `width` and `height` should be the viewBox width and height
+when possible, but otherwise the actual values don't matter as long as they
+are positive and represent the correct aspect ratio.
 
 If implementing support for uploading files pointed to by resource
 links, substitute the href element with a data element with a base64
