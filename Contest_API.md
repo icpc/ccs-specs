@@ -268,7 +268,7 @@ equivalent JSON response snippets pointing to the same location:
 For images, the supported mime types are image/png, image/jpeg, and image/svg+xml.
 
 For images in SVG format, i.e. those having a mime type of image/svg+xml,
-the values of `width` and `height` should be the viewBox width and height
+the values of `width` and `height` should be the viewport width and height in pixels
 when possible, but otherwise the actual values don't matter as long as they
 are positive and represent the correct aspect ratio.
 
