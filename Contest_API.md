@@ -116,8 +116,12 @@ their expected behavior, if implemented.
     It can be used to request a whole collection or a specific element.
   - `POST`
     Create a new element. This can only be called on a collection
-    endpoint. No `id` attribute should be specified as it is up to the
-    server to assign one, which is returned in the location header.
+    endpoint. When using most [roles](#Roles) the `id` attribute may not
+    be specified as it is up to the server to assign one. When using an
+    `admin` role you may specify a new, unused id.
+    The response will contain a `Location` header pointing to the newly
+    created element and the response body will contain the initial
+    state of the element.
   - `PUT`
     Replaces a specific element. This method is idempotent and can only
     be called on a specific element and replaces its contents with the
@@ -125,18 +129,23 @@ their expected behavior, if implemented.
     updates are allowed. The `id` attribute cannot be changed: it does
     not need to be specified (other than in the URL) and if specified
     different from in the URL, a `409 Conflict` HTTP code should be
-    returned.
+    returned. The response body will contain the updated state of the
+    element.
   - `PATCH`
     Updates/modifies a specific element. Similar to `PUT` but allows
     partial updates by providing only that data, for example:
     `PATCH  https://example.com/api/contests/wf14/teams/10`
     with JSON contents
-    `{"name":"Our cool new team name"}`
-    No updates of the `id` attribute are allowed either.
+    `{"name":"Our cool new team name"}`.
+    The `id` attribute cannot be changed: it does
+    not need to be specified (other than in the URL) and if specified
+    different from in the URL, a `409 Conflict` HTTP code should be
+    returned. The response body will contain the updated state of the
+    element.
   - `DELETE`
     Delete a specific element. Idempotent, but may return a 404 status
     code when repeated. Any provided data is ignored. Example:
-    `DELETE  https://example.com/api/contests/wf14/teams/8`
+    `DELETE  https://example.com/api/contests/wf14/teams/8`.
     Note that deletes must keep [referential
     integrity](#referential-integrity) intact.
 
@@ -1099,7 +1108,8 @@ The request must fail with a 400 error code if any of the following happens:
   files, it is too big, etc.
 * The provided `id` already exists or is otherwise not acceptable.
 
-The response will be the ID of the newly added submission.
+The response will contain a `Location` header pointing to the newly created submission
+and the response body will contain the initial state of the submission.
 
 Performing a `POST` by any other roles than `admin` and `team` is not supported.
 
@@ -1182,19 +1192,28 @@ Request data:
 
 ```json
 {
-   "language_id": "1-java",
-   "problem_id": "10-asteroids",
-   "team_id": "123",
-   "time": "2014-06-25T11:22:05.034+01",
-   "entry_point": "Main",
-   "files": [{"data": "<base64 string>"}]
+   "language_id":"1-java",
+   "problem_id":"10-asteroids",
+   "team_id":"123",
+   "time":"2014-06-25T11:22:05.034+01",
+   "entry_point":"Main",
+   "files":[{"data": "<base64 string>"}]
 }
 ```
 
 Returned data:
 
 ```json
-"187"
+{
+   "id":"187",
+   "language_id":"1-java",
+   "problem_id":"10-asteroids",
+   "team_id":"123",
+   "time":"2014-06-25T11:22:05.034+01",
+   "contest_time":"1:22:05.034",
+   "entry_point":"Main",
+   "files":[{"href":"contests/wf14/submissions/187/files","mime":"application/zip"}]
+}
 ```
 
 ### Judgements
@@ -1335,7 +1354,8 @@ The request must fail with a 4xx HTTP status code if any of the following happen
   visible to the role that's submitting.
 * The provided `id` already exists or is otherwise not acceptable.
 
-The response will be the ID of the newly added clarification.
+The response will contain a `Location` header pointing to the newly created clarification
+and the response body will contain the initial state of the clarification.
 
 Performing a `POST` by any roles other than `admin` and `team` is not supported.
 
@@ -1387,16 +1407,23 @@ Request data:
 
 ```json
 {
-   "problem_id": "10-asteroids",
-   "from_team_id": "34",
-   "text": "Can I assume the asteroids are round?"
+   "problem_id":"10-asteroids",
+   "from_team_id":"34",
+   "text":"Can I assume the asteroids are round?"
 }
 ```
 
 Returned data:
 
 ```json
-"187"
+{
+   "id":"clar-43",
+   "problem_id":"10-asteroids",
+   "from_team_id":"34",
+   "text":"Can I assume the asteroids are round?",
+   "time":"2017-06-25T11:59:47.543+01",
+   "contest_time":"1:59:47.543"
+}
 ```
 ### Awards
 
@@ -1448,9 +1475,9 @@ For some common award cases the following IDs should be used.
 | group-winner-\<id>        | Current leader(s) in group \<id>. Empty if no team has scored.                                                             | Winner(s) of group \<id>.                 |
 | organization-winner-\<id> | Current leader(s) of organization \<id>. Empty if no team has scored.                                                      | Winner(s) of organization \<id>.          | Not useful in contest with only one team per organization (e.g. the WF).
 
-#### POST, PATCH, and DELETE awards
+#### POST, PUT, PATCH, and DELETE awards
 
-Clients with the `admin` role may make changes to awards using the normal [HTTP methods](#http-methods) as specified above. Specifically, they can POST new awards, PATCH one or more attributes, or DELETE an existing award. All requests must include the id attribute.
+Clients with the `admin` role may make changes to awards using the normal [HTTP methods](#http-methods) as specified above. Specifically, they can POST new awards, replace one with PUT, PATCH one or more attributes, or DELETE an existing award. POSTs should include the `id` when creating new awards of the known award types above; if the id is omitted the server will assign one.
 
 The server may be configured to manage (assign or update) some award ids, and may block clients from modifying them. However, if a client is able to modify an award it must assume that it is responsible for managing that award id unless and until it sees an indication that something else is now managing that award - either a change that it did not request, or a future modification fails.
 
@@ -1458,13 +1485,12 @@ For example, the server may be configured to assign the `winner` award and not a
 
 The request must fail with a 4xx HTTP status code if any of the following happens:
 
-* The request doesn't include an award id.
-* A POST when the award id already exists.
-* A POST that is missing one of the required attributes (`citation` and `team_ids`).
-* A PATCH on an award id that doesn't exist.
+* A POST that includes an id that already exists.
+* A PUT, PATCH, or DELETE on an award that doesn't exist.
+* A POST or PUT that is missing one of the required attributes (`citation` and `team_ids`).
 * A PATCH that contains an invalid attribute (e.g. null `citation` or `team_ids`).
-* A DELETE on an award id that doesn't exist.
-* A POST, PATCH, or DELETE on an award id that the server is configured to manage exclusively.
+* A PUT, PATCH, or DELETE that includes an award id that don't match the id in the url.
+* A POST, PUT, PATCH, or DELETE on an award id that the server is configured to manage exclusively.
 
 #### Example
 
@@ -1493,23 +1519,27 @@ Request data:
 
 Request:
 
-` PATCH https://example.com/api/contests/wf14/awards`
+` PUT https://example.com/api/contests/wf14/awards/best-costume`
 
 Request data:
 
 ```json
-{"id":"best-costume","citation":"Best team costumes"}
+{"citation":"Best team costuems","team_ids":["24"]}
 ```
 
 Request:
 
-` DELETE https://example.com/api/contests/wf14/awards`
+` PATCH https://example.com/api/contests/wf14/awards/best-costume`
 
 Request data:
 
 ```json
-{"id":"best-costume"}
+{"citation":"Best team costumes"}
 ```
+
+Request:
+
+` DELETE https://example.com/api/contests/wf14/awards/best-costume`
 
 ### Commentary
 
