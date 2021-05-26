@@ -1489,7 +1489,7 @@ The request must fail with a 4xx HTTP status code if any of the following happen
 * A PUT, PATCH, or DELETE on an award that doesn't exist.
 * A POST or PUT that is missing one of the required attributes (`citation` and `team_ids`).
 * A PATCH that contains an invalid attribute (e.g. null `citation` or `team_ids`).
-* A PUT, PATCH, or DELETE that includes an award id that don't match the id in the url.
+* A PUT, PATCH, or DELETE that includes an award id that doesn't match the id in the url.
 * A POST, PUT, PATCH, or DELETE on an award id that the server is configured to manage exclusively.
 
 #### Example
@@ -1514,7 +1514,7 @@ Request:
 Request data:
 
 ```json
-{"id":"best-costume","citation":"Best team costuems","team_ids":["42"]}
+{"id":"best-costume","citation":"Best team costumes","team_ids":["42"]}
 ```
 
 Request:
@@ -1524,7 +1524,7 @@ Request:
 Request data:
 
 ```json
-{"citation":"Best team costuems","team_ids":["24"]}
+{"citation":"Best team costumes","team_ids":["24"]}
 ```
 
 Request:
@@ -1534,7 +1534,7 @@ Request:
 Request data:
 
 ```json
-{"citation":"Best team costumes"}
+{"citation":"Best team cosplay"}
 ```
 
 Request:
