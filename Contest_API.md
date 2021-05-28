@@ -114,45 +114,58 @@ their expected behavior, if implemented.
   - `GET`
     Read data. This method is idempotent and does not modify any data.
     It can be used to request a whole collection or a specific element.
+
   - `POST`
     Create a new element. This can only be called on a collection
-    endpoint. When using most [roles](#Roles) the `id` attribute may not
-    be specified as it is up to the server to assign one. When using an
-    `admin` role you may specify a new, unused id.
-    The response will contain a `Location` header pointing to the newly
-    created element and the response body will contain the initial
-    state of the element.
-  - `PUT`
-    Replaces a specific element. This method is idempotent and can only
-    be called on a specific element and replaces its contents with the
-    data provided. The payload data must be complete, i.e. no partial
-    updates are allowed. The `id` attribute cannot be changed: it does
-    not need to be specified (other than in the URL) and if specified
-    different from in the URL, a `409 Conflict` HTTP code should be
-    returned. The response body will contain the updated state of the
-    element.
-  - `PATCH`
-    Updates/modifies a specific element. Similar to `PUT` but allows
-    partial updates by providing only that data, for example:
-    `PATCH  https://example.com/api/contests/wf14/teams/10`
-    with JSON contents
-    `{"name":"Our cool new team name"}`.
-    The `id` attribute cannot be changed: it does
-    not need to be specified (other than in the URL) and if specified
-    different from in the URL, a `409 Conflict` HTTP code should be
-    returned. The response body will contain the updated state of the
-    element.
-  - `DELETE`
-    Delete a specific element. Idempotent, but may return a 404 status
-    code when repeated. Any provided data is ignored. Example:
-    `DELETE  https://example.com/api/contests/wf14/teams/8`.
-    Note that deletes must keep [referential
-    integrity](#referential-integrity) intact.
+    endpoint, and the `id` attribute may not be specified as it is up
+    to the server to assign one.
+    If successful the response will contain a `Location` header
+    pointing to the newly created element.
 
-Standard [HTTP status
-codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) are
-returned to indicate success or failure. When there is a failure (status codes 4xx or 5xx), the
-response message body must include a JSON element that contains the attributes 'code' (a number, identical to the HTTP status code returned) and 'message' (a string) with further information suitable for the user making the request, as per the following example:
+  - `PUT`
+    Creates or replaces a specific element. This method is idempotent, can only
+    be called on a specific element, and replaces its contents with the
+    data provided. The payload data must be complete, i.e. the `id` is
+    required and no partial updates are allowed.
+
+  - `PATCH`
+    Updates/modifies a specific element. This method is idempotent,
+    can only be called on a specific element, and replaces the given
+    attributes with the data provided. For example
+    `PATCH https://example.com/api/contests/wf14/teams/10`
+    with JSON contents `{"name":"Our cool new team name"}`.
+
+  - `DELETE`
+    Delete a specific element. Idempotent, but will return a `404` error
+    code when repeated. Any provided data is ignored and there is no response body.
+    Example: `DELETE https://example.com/api/contests/wf14/teams/8`.
+    Note that deletes must keep [referential integrity](#referential-integrity) intact.
+
+#### Success, Failure, and HTTP Responses
+
+Standard [HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) are
+returned to indicate success or failure. If successful the response body of every method
+(except for DELETE, and GET on a collection) will contain the current (updated) state of the element.
+
+If a POST, PUT, PATCH would cause any of the following issues it will fail, in addition to any endpoint or element-specific requirements:
+
+* A PATCH on an `id` that doesn't exist. Will return a 404 error code.
+* A PUT or PATCH containing an id that does not match the URL. Will return a 409 error code.
+* A missing required attribute.
+* An attribute that must not be provided is provided.
+* An attribute type that is incorrect or otherwise invalid (e.g. non-nullable attribute set to null).
+* A reference to another element is invalid (to maintain [referential integrity](#referential-integrity)).
+
+A DELETE will fail in the following conditions, in addition to any endpoint or element-specific requirements:
+
+* Deleting an element `id` that doesn't exist. Will return a 404 error code.
+* If the element being deleted is referenced by another element (to maintain [referential integrity](#referential-integrity)).
+
+When there is a failure using any methods the response message body
+must include a JSON element that contains the attributes 'code' (a number,
+identical to the HTTP status code returned) and 'message' (a string) with
+further information suitable for the user making the request, as per the
+following example:
 
 ```json
 {"code":403,
@@ -286,7 +299,7 @@ encoded string of the associated file contents as the value.
 
 For example
 
-`   POST https://example.com/api/contests/wf14/organizations`
+`   PUT https://example.com/api/contests/wf14/organizations/inst105`
 
 with JSON data
 
@@ -436,10 +449,8 @@ Countdown is resumed by setting a new `start_time` and resetting
 
 #### PATCH start\_time
 
-To replace the *Contest Start Interface*, at the ICPC World
-Finals, an API provided by a CCS or CDS implementing this specification
-must have a role that has the ability to clear or set the contest start
-time via a PATCH method.
+Implementations must have an admin role that has the ability to clear or set the
+contest start time via a PATCH method.
 
 The PATCH must include a valid JSON element with only two or three
 attributes allowed: the contest id (used for verification), a
@@ -447,8 +458,8 @@ start\_time (a `<TIME>` value or `null`), and an optional
 countdown\_pause\_time (`<RELTIME>`). As above, countdown\_pause\_time
 can only be non-null when start time is null.
 
-The request should fail with a 401 if the user does not have sufficient
-access rights, or a 403 if the contest is started or within 30s of
+The request should fail with a 401 error code if the user does not have sufficient
+access rights, or a 403 error code if the contest is started or within 30s of
 starting, or if the new start time is in the past or within 30s.
 
 #### Example
@@ -1070,34 +1081,37 @@ zip archive. These must be stored directly from the root of the zip
 file, i.e. there must not be extra directories (or files) added unless
 these are explicitly part of the submission content.
 
-#### POST submissions
+#### POST and PUT submissions
 
-To add a submission one can use the `POST` method on the submissions endpoint.
-The `POST` must include a valid JSON object with the same attributes the submission
+To add a submission one can use the `POST` method on the submissions endpoint or the
+`PUT` method directly on an element url. `POST` is typically used by teams submitting
+to the contest and `PUT` is used by admin users or tools.
+Both must include a valid JSON object with the same attributes the submission
 endpoint returns with a `GET` request with the following exceptions:
 
-* The attributes `id`, `team_id`, `time`, and `contest_time` are
-  optional. However, depending on the use case (see below) the server
+* The attributes `team_id`, `time`, and `contest_time` are
+  optional depending on the use case (see below). The server
   may require attributes to either be absent or present, and should
-  respond with a 400 error code in such cases.
+  respond with a 4xx error code in such cases.
 * Since `files` only supports `application/zip`, providing the `mime` field is
   optional.
 * `reaction` may be provided but a CCS does not have to honour it.
-* The `time` attribute is optional. If not provided (or `null`) it will default
-  to the current time as determined by the server.
-* If the CCS supports a `team` role, `time` and `id`
-  must not be provided when using this role. `team_id` may be provided but then
-  must match the ID of the team associated with the request. `time` will then always
-  use the current time as determined by the server. The CCS will determine an `id`.
-* If an `id` is supplied, the client should make sure it is unique, i.e. not used
-  yet on the CCS. The client should normally not supply `id`, but let it be determined
-  by the server. However, for example in a setup with a central CCS with satellite sites
+* If the CCS supports a `team` role they will only have access to `POST`, and `time`
+  must not be provided when using this role. `time` will always be
+  set to the current time as determined by the server. `team_id` may be provided but then
+  must match the ID of the team associated with the request.
+* Simple proxys using an `admin` role should also use `POST` to let the server
+  determine the `id`. `team_id` must be provided but `time` must not and will be
+  determined by the server.
+* For more advanced scenarios an `admin` role may use a `PUT`. `time` is required and
+  the client is responsible for making sure the provided `id` is unique. For example
+  in a setup with a central CCS with satellite sites
   where teams submit to a proxy CCS that forwards to the central CCS, this might be
   useful to make sure that the proxy CCS can accept submissions even when the connection
   to the central CCS is down. The proxy can then forward these submissions later, when
   the connection is restored again.
 
-The request must fail with a 400 error code if any of the following happens:
+The request must fail with a 4xx error code if any of the following happens:
 
 * A required attribute is missing.
 * An attribute that must not be provided is provided.
@@ -1111,11 +1125,11 @@ The request must fail with a 400 error code if any of the following happens:
 The response will contain a `Location` header pointing to the newly created submission
 and the response body will contain the initial state of the submission.
 
-Performing a `POST` by any other roles than `admin` and `team` is not supported.
+Performing a `POST` or `PUT` by any roles other than `admin` and `team` is not supported.
 
-#### Use cases for POSTing submissions
+#### Use cases for POSTing and PUTting submissions
 
-The `POST submissions` endpoint can be used for a variety of reasons,
+The POST and PUT submissions endpoint can be used for a variety of reasons,
 and depending on the use case, the server might require different
 fields to be present. A number of common scenarios are described here
 for informational purposes only.
@@ -1126,8 +1140,7 @@ The most obvious and probably most common case is where a team
 directly submits to the CCS, e.g. with a command-line submit client.
 
 In this case the client has the `team` role and a specific `team_id`
-already associated with it. The attributes `id`, `team_id`, `time`,
-and `contest_time` should not be specified; the server will
+already associated with it. POST must be used and the attributes `id`, `team_id`, `time`, and `contest_time` should not be specified; the server will
 determine these attributes and should reject submissions specifying
 them, or may ignore a `team_id` that is identical to the one that the
 client has authenticated as.
@@ -1149,7 +1162,7 @@ these.
 
 To allow the proxy to return a submission `id` during connectivity
 loss, each site could be assigned a unique prefix such that the proxy
-server itself can generate unique `id`s and then submit to the central
+server itself can generate unique `id`s and then submit a PUT to the central
 CCS with the `id` attribute included. The central CCS should then
 accept and use that `id` attribute.
 
@@ -1327,26 +1340,26 @@ JSON elements of clarification message objects:
 Note that at least one of `from_team_id` and `to_team_id` has to be
 `null`. That is, teams cannot send messages to other teams.
 
-#### POST clarifications
+#### POST and PUT clarifications
 
-To add a clarification one can use the `POST` method on the clarifications endpoint.
-The `POST` must include a valid JSON object with the same attributes the clarification
+To add a clarification one can use the `POST` or `PUT` method on the clarifications endpoint.
+The `POST` or `PUT` must include a valid JSON object with the same attributes the clarification
 endpoint returns with a `GET` request with the following exceptions:
 
 * When an attribute value would be null it is optional - you do not need to include it.
   e.g. if a clarification is not related to a problem you can chose to include or
   exclude the `problem_id`.
-* When submitting using a `team` role, `id`, `to_team_id`, `time`, and
+* When submitting using a `team` role, `POST` must be used and `id`, `to_team_id`, `time`, and
   `contest_time` must not be provided. `from_team_id` may be provided but then
   must match the ID of the team associated with the request. The server will determine
   an `id` and the current `time` and `contest_time`.
-* When submitting using an `admin` role, `id`, `time`, and `contest_time` may be
+* When submitting using an `admin` role, `POST` or `PUT` may be used and `id`, `time`, and `contest_time` may be
   required to either be absent or present depending on the use case, e.g.
   whether the server is the CCS, is acting as a proxy, or a caching
   proxy. See notes under the submission interface for more detail. In cases where
-  these attributes are not allowed the server will respond with a 400 error code.
+  these attributes are not allowed the server will respond with a 4xx error code.
 
-The request must fail with a 4xx HTTP status code if any of the following happens:
+The request must fail with a 4xx error code if any of the following happens:
 
 * A required attribute is missing.
 * An attribute that must not be provided is provided.
@@ -1357,7 +1370,7 @@ The request must fail with a 4xx HTTP status code if any of the following happen
 The response will contain a `Location` header pointing to the newly created clarification
 and the response body will contain the initial state of the clarification.
 
-Performing a `POST` by any roles other than `admin` and `team` is not supported.
+Performing a `POST` or `PUT` by any roles other than `admin` and `team` is not supported.
 
 #### Examples
 
@@ -1477,15 +1490,15 @@ For some common award cases the following IDs should be used.
 
 #### POST, PUT, PATCH, and DELETE awards
 
-Clients with the `admin` role may make changes to awards using the normal [HTTP methods](#http-methods) as specified above. Specifically, they can POST new awards, replace one with PUT, PATCH one or more attributes, or DELETE an existing award. POSTs should include the `id` when creating new awards of the known award types above; if the id is omitted the server will assign one.
+Clients with the `admin` role may make changes to awards using the normal [HTTP methods](#http-methods) as specified above. Specifically, they can POST new awards, create or replace one with a known id via PUT, PATCH one or more attributes, or DELETE an existing award.
 
 The server may be configured to manage (assign or update) some award ids, and may block clients from modifying them. However, if a client is able to modify an award it must assume that it is responsible for managing that award id unless and until it sees an indication that something else is now managing that award - either a change that it did not request, or a future modification fails.
 
 For example, the server may be configured to assign the `winner` award and not allow any client to modify it. The same server may assign `*-medal` awards by default, but allow clients to modify them. Once a client modifies any of the `*-medal` awards, it is responsible for updating it if anything changes. Likewise, the client could add any arbitrary awards like `first-submission-for-country-*` and would be responsible for managing these.
 
-The request must fail with a 4xx HTTP status code if any of the following happens:
+The request must fail with a 4xx error code if any of the following happens:
 
-* A POST that includes an id that already exists.
+* A POST that includes an id.
 * A PUT, PATCH, or DELETE on an award that doesn't exist.
 * A POST or PUT that is missing one of the required attributes (`citation` and `team_ids`).
 * A PATCH that contains an invalid attribute (e.g. null `citation` or `team_ids`).
@@ -1514,6 +1527,12 @@ Request:
 Request data:
 
 ```json
+{"citation":"Best team costumes","team_ids":["42"]}
+```
+
+Response data:
+
+```json
 {"id":"best-costume","citation":"Best team costumes","team_ids":["42"]}
 ```
 
@@ -1524,7 +1543,7 @@ Request:
 Request data:
 
 ```json
-{"citation":"Best team costumes","team_ids":["24"]}
+{"id":"best-costume","citation":"Best team costumes","team_ids":["24"]}
 ```
 
 Request:
