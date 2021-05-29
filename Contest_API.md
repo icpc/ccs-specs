@@ -137,17 +137,18 @@ their expected behavior, if implemented.
 
   - `DELETE`
     Delete a specific element. Idempotent, but will return a `404` error
-    code when repeated. Any provided data is ignored and there is no response body.
+    code when repeated. Any provided data is ignored, and there is no response body if successful.
     Example: `DELETE https://example.com/api/contests/wf14/teams/8`.
     Note that deletes must keep [referential integrity](#referential-integrity) intact.
 
 #### Success, Failure, and HTTP Responses
 
 Standard [HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) are
-returned to indicate success or failure. If successful the response body of every method
-(except for DELETE, and GET on a collection) will contain the current (updated) state of the element.
+returned to indicate success or failure. If successful DELETE will have no response body,
+GET on a collection will return the collection, and every other method will contain the
+current (updated) state of the element.
 
-If a POST, PUT, PATCH would cause any of the following issues it will fail, in addition to any endpoint or element-specific requirements:
+If a POST, PUT, PATCH would cause any of the following issues it must fail, in addition to any endpoint or element-specific requirements:
 
 * A PATCH on an `id` that doesn't exist. Will return a 404 error code.
 * A PUT or PATCH containing an id that does not match the URL. Will return a 409 error code.
@@ -156,12 +157,12 @@ If a POST, PUT, PATCH would cause any of the following issues it will fail, in a
 * An attribute type that is incorrect or otherwise invalid (e.g. non-nullable attribute set to null).
 * A reference to another element is invalid (to maintain [referential integrity](#referential-integrity)).
 
-A DELETE will fail in the following conditions, in addition to any endpoint or element-specific requirements:
+In addition to any endpoint or element-specific requirements, DELETE must fail
+if the element `id` doesn't exist, and return a 404 error code. 
+If the element being deleted is referenced by another element, the server must either
+fail or implement a cascading delete (to maintain [referential integrity](#referential-integrity))
 
-* Deleting an element `id` that doesn't exist. Will return a 404 error code.
-* If the element being deleted is referenced by another element (to maintain [referential integrity](#referential-integrity)).
-
-When there is a failure using any methods the response message body
+When there is a failure using any method the response message body
 must include a JSON element that contains the attributes 'code' (a number,
 identical to the HTTP status code returned) and 'message' (a string) with
 further information suitable for the user making the request, as per the
@@ -449,7 +450,7 @@ Countdown is resumed by setting a new `start_time` and resetting
 
 #### PATCH start\_time
 
-Implementations must have an admin role that has the ability to clear or set the
+Implementations must have a role that has the ability to clear or set the
 contest start time via a PATCH method.
 
 The PATCH must include a valid JSON element with only two or three
@@ -1100,7 +1101,7 @@ endpoint returns with a `GET` request with the following exceptions:
   must not be provided when using this role. `time` will always be
   set to the current time as determined by the server. `team_id` may be provided but then
   must match the ID of the team associated with the request.
-* Simple proxys using an `admin` role should also use `POST` to let the server
+* Simple proxies using an `admin` role should also use `POST` to let the server
   determine the `id`. `team_id` must be provided but `time` must not and will be
   determined by the server.
 * For more advanced scenarios an `admin` role may use a `PUT`. `time` is required and
@@ -1499,10 +1500,10 @@ For example, the server may be configured to assign the `winner` award and not a
 The request must fail with a 4xx error code if any of the following happens:
 
 * A POST that includes an id.
-* A PUT, PATCH, or DELETE on an award that doesn't exist.
+* A PATCH, or DELETE on an award that doesn't exist.
 * A POST or PUT that is missing one of the required attributes (`citation` and `team_ids`).
 * A PATCH that contains an invalid attribute (e.g. null `citation` or `team_ids`).
-* A PUT, PATCH, or DELETE that includes an award id that doesn't match the id in the url.
+* A PUT or PATCH that includes an award id that doesn't match the id in the url.
 * A POST, PUT, PATCH, or DELETE on an award id that the server is configured to manage exclusively.
 
 #### Example
