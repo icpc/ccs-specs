@@ -836,7 +836,7 @@ JSON elements of group objects:
 | icpc\_id | string  | no        | yes       | External identifier from ICPC CMS.
 | name     | string  | yes       | no        | Name of the group.
 | type     | string  | no        | yes       | Type of this group.
-| hidden   | boolean | no        | yes       | | if the group is to be excluded from the [scoreboard](#scoreboard). Defaults to false if missing.
+| hidden   | boolean | no        | yes       | if the group is to be excluded from the [scoreboard](#scoreboard). Defaults to false if missing.
 
 #### Known group types
 
