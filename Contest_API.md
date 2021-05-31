@@ -765,7 +765,7 @@ Groups must exist for any combination of teams that must be ranked on a
 [group scoreboard](#group-scoreboard), which means groups may be created for combinations of
 other groups. For instance, if there is a requirement to show a scoreboard for teams in each of `D`
 divisions at every one of `S` sites, then in addition to the `D` + `S` groups there will also be
-`D`x`S` combined/product groups. It is strongly recommended that these groups have a type like
+`D`x`S` combined/product groups. It is recommended that these groups have a type like
 `"type":"<group1>-<group2>"`, e.g. `"type":"site-division"`.
 
 The following endpoints are associated with groups:
