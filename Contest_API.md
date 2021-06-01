@@ -800,8 +800,22 @@ Returned data:
 
 ### Groups
 
-Grouping of teams. At the World Finals these are the super regions, at
-regionals these are often different sites.
+Grouping of teams. At the World Finals these are the super regions; at other contests these
+may be the different sites, divisions, or types of contestants.
+
+Teams may belong to multiple groups. For instance, there may be a group for each site, a group for
+university teams, a group for corporate teams, and a group for ICPC-eligible teams. Teams could
+belong to two or three of these.
+When there are different kinds of groups for different purposes (e.g. sites vs divisions), each
+group or set of groups should have a different type attribute
+(e.g. `"type":"site"` and `"type":"division"`).
+
+Groups must exist for any combination of teams that must be ranked on a
+[group scoreboard](#group-scoreboard), which means groups may be created for combinations of
+other groups. For instance, if there is a requirement to show a scoreboard for teams in each of `D`
+divisions at every one of `S` sites, then in addition to the `D` + `S` groups there will also be
+`D`x`S` combined/product groups. It is recommended that these groups have a type like
+`"type":"<group1>-<group2>"`, e.g. `"type":"site-division"`.
 
 The following endpoints are associated with groups:
 
@@ -822,7 +836,17 @@ JSON elements of group objects:
 | icpc\_id | string  | no        | yes       | External identifier from ICPC CMS.
 | name     | string  | yes       | no        | Name of the group.
 | type     | string  | no        | yes       | Type of this group.
-| hidden   | boolean | no        | yes       | If group should be hidden from scoreboard. Defaults to false if missing.
+| hidden   | boolean | no        | yes       | if the group is to be excluded from the [scoreboard](#scoreboard). Defaults to false if missing.
+
+#### Known group types
+
+The list below contains standardized identifiers for known group
+types. These identifiers should be used when the purpose
+of a group matches.
+
+| Type  | Description
+| :---- | :----------
+| site  | A physical location where teams are competing, e.g. the "Hawaii site". Teams generally should not be in more than one group of this type.
 
 #### Examples
 
@@ -1634,6 +1658,18 @@ returned. The request will fail with a 400 error if the id is invalid.
 A suggested efficient server-side implementation to provide this, is to
 store with each event that changes the scoreboard, the new team
 scoreboard row.
+
+##### Group scoreboard
+
+By passing `group_id` with a valid group ID a scoreboard can be requested for the teams in a particular group:
+
+`/scoreboard?group_id=site1`
+
+Each group scoreboard is ranked independently and contains only the teams that belong to the
+specified group. If a client wants to know 'local' vs 'global' rank it can query both the group and primary scoreboards.
+
+A 4xx error code will be returned if the group id is not valid. Groups that are hidden to the role making
+the request are not valid.
 
 #### Scoreboard format
 
