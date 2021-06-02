@@ -835,8 +835,7 @@ JSON elements of group objects:
 | id       | ID      | yes       | no        | Identifier of the group.
 | icpc\_id | string  | no        | yes       | External identifier from ICPC CMS.
 | name     | string  | yes       | no        | Name of the group.
-| type     | string  | no        | yes       | Type of this group.
-| hidden   | boolean | no        | yes       | if the group is to be excluded from the [scoreboard](#scoreboard). Defaults to false if missing.
+| type     | string  | no        | yes       | Type of the group.
 
 #### Known group types
 
@@ -946,6 +945,7 @@ JSON elements of team objects:
 | display\_name     | string           | no        | yes       | Display name of the team. If not set, a client should revert to using the name instead.
 | organization\_id  | ID               | no        | yes       | Identifier of the [ organization](#organizations) (e.g. university or other entity) that this team is affiliated to.
 | group\_ids        | array of ID      | no        | no        | Identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty.
+| hidden            | boolean          | no        | yes       | If the team is to be excluded from the [scoreboard](#scoreboard). Defaults to false if missing.
 | location          | object           | no        | no        | JSON object as specified in the rows below.
 | location.x        | number           | depends   | no        | Team's x position in meters. Required iff location is present.
 | location.y        | number           | depends   | no        | Team's y position in meters. Required iff location is present.
@@ -1668,8 +1668,9 @@ By passing `group_id` with a valid group ID a scoreboard can be requested for th
 Each group scoreboard is ranked independently and contains only the teams that belong to the
 specified group. If a client wants to know 'local' vs 'global' rank it can query both the group and primary scoreboards.
 
-A 4xx error code will be returned if the group id is not valid. Groups that are hidden to the role making
-the request are not valid.
+A 4xx error code will be returned if the group id is not valid. Groups
+that are not included in the groups endpoint for the role making the
+request are not valid.
 
 #### Scoreboard format
 
