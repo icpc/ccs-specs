@@ -1481,16 +1481,18 @@ JSON elements of award objects:
 | :-------- | :---------- | :-------- | :-------- | :----------
 | id        | ID          | yes       | no        | Identifier of the award.
 | citation  | string      | yes       | no        | Award citation, e.g. "Gold medal winner".
-| team\_ids | array of ID | yes       | no        | JSON array of [ team](#teams) ids receiving this award. No meaning must be implied or inferred from the order of IDs. The array may be empty.
+| team\_ids | array of ID | yes       | yes       | JSON array of [team](#teams) ids receiving this award. No meaning must be implied or inferred from the order of IDs. If the value is null this means that the award is not currently being updated. If the value is the empty array this means that the award **is** being updated, but no team has been awarded the award at this time.
 
 #### Semantics
 
   - Awards are not final until the contest is.
-  - An award does not have to be present during the contest. However, if
-    it is present, then it must be kept up to date during the contest.
-    E.g. if "winner" will not be updated with the current leader during
-    the contest, it must not be **create**d until the award **is**
-    awarded.
+  - An award may be created at any time, althought it is recommended 
+    that a system creates the awards it intends to award before the 
+    contest starts.
+  - If an award has a non-null `tesm_ids`, then it must be kept up to 
+    date during the contest. E.g. if "winner" will not be updated with 
+    the current leader during the contest, it must be null until the 
+    award **is** updated.
   - If an award is present during the contest this means that if the
     contest would end immediately and then become final, that award
     would be final. E.g. the "winner" during the contest should be the
@@ -1516,13 +1518,32 @@ For some common award cases the following IDs should be used.
 
 #### POST, PUT, PATCH, and DELETE awards
 
-Clients with the `admin` role may make changes to awards using the normal [HTTP methods](#http-methods) as specified above. Specifically, they can POST new awards, create or replace one with a known id via PUT, PATCH one or more attributes, or DELETE an existing award.
+Clients with the `admin` role may make changes to awards using the
+normal [HTTP methods](#http-methods) as specified above. Specifically,
+they can POST new awards, create or replace one with a known id via PUT,
+PATCH one or more attributes, or DELETE an existing award.
 
-The server may be configured to manage (assign or update) some award ids, and may block clients from modifying them. However, if a client is able to modify an award it must assume that it is responsible for managing that award id unless and until it sees an indication that something else is now managing that award - either a change that it did not request, or a future modification fails.
+The server may be configured to manage (assign or update) some award
+ids, and may block clients from modifying them. However, if a client is
+able to modify an award it must assume that it is responsible for
+managing that award id unless and until it sees an indication that
+something else is now managing that award - either a change that it did
+not request, or a future modification fails.
 
-For example, the server may be configured to assign the `winner` award and not allow any client to modify it. The same server may assign `*-medal` awards by default, but allow clients to modify them. Once a client modifies any of the `*-medal` awards, it is responsible for updating it if anything changes. Likewise, the client could add any arbitrary awards like `first-submission-for-country-*` and would be responsible for managing these.
+For example, the server may be configured to assign the `winner` award
+and not allow any client to modify it. The same server may assign
+`*-medal` awards by default, but allow clients to modify them. Once a
+client modifies any of the `*-medal` awards, it is responsible for
+updating it if anything changes. Likewise, the client could add any
+arbitrary awards like `first-submission-for-country-*` and would be
+responsible for managing these.
 
-The request must fail with a 4xx error code if any of the following happens:
+The server should create all the awards it is configured to manage 
+before the start of the contest, so that clients can know which awards 
+are already handled. 
+
+The request must fail with a 4xx error code if any of the following
+happens:
 
 * A POST that includes an id.
 * A PATCH, or DELETE on an award that doesn't exist.
