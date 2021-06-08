@@ -44,9 +44,9 @@ document are to be interpreted as described in
 
 The interface is implemented as a HTTP REST interface that outputs
 information in [JSON](https://en.wikipedia.org/wiki/JSON) format
-([RFC](https://tools.ietf.org/html/rfc7159)). This REST interface should
-be provided over HTTPS to guard against eavesdropping on sensitive
-contest data and authentication credentials (see roles below).
+([RFC 7159](https://tools.ietf.org/html/rfc7159)). This REST interface 
+should be provided over HTTPS to guard against eavesdropping on
+sensitive contest data and authentication credentials (see roles below).
 
 ### Endpoint URLs
 
@@ -75,8 +75,8 @@ the URL path
 returns
 
 ```json
-[ { "id":<id1>, <element specific data for id1>},
-  { "id":<id2>, <element specific data for id2>},
+[ { "id":<id1>, <element specific data for id1> },
+  { "id":<id2>, <element specific data for id2> },
      ...
 ]
 ```
@@ -87,7 +87,7 @@ while the URL path
 
 returns
 
-`{ "id":<id1>, <element specific data for id1>}`
+`{ "id":<id1>, <element specific data for id1> }`
 
 ### HTTP headers
 
@@ -107,7 +107,7 @@ setting the `Cache-Control` or `Expires` HTTP headers:
 
 The current version of this specification only requires support for the
 `GET` method, unless explicitly specified otherwise in an endpoint
-below (see [PATCH start\_time](#patch-starttime)). However,
+below (see e.g. [PATCH start\_time](#patch-starttime)). However,
 for future compatibility below are already listed other methods with
 their expected behavior, if implemented.
 
@@ -372,9 +372,8 @@ In the tables below, the columns are:
 
   - Name: Attribute name; object sub-attributes are indicated as
     `object.attribute`.
-  - Type: Data type of the attribute; either a [JSON
-    type](https://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example)
-    or [a type defined above](#json-attribute-types).
+  - Type: Data type of the attribute; one of the 
+    [types listed above](#json-attribute-types).
   - Required?: Whether this is a required attribute that **must** be
     implemented to conform to this specification.
   - Nullable?: Whether the attribute might be `null` (and thus
@@ -423,9 +422,7 @@ The following endpoint is associated with contest:
 | `/contests`      | application/json | yes       | JSON array of all contests with elements as defined in the table below.
 | `/contests/<id>` | application/json | yes       | JSON object of a single contest with elements as defined in the table below.
 
-Returns a JSON object with the elements below. If there is no current
-(this may include about to start or just finished) contest, a 404 error
-is returned.
+JSON elements of contest objects:
 
 | Name                         | Type           | Required? | Nullable? | Description
 | :--------------------------- | :------------- | :-------- | :-------- | :----------
@@ -464,7 +461,7 @@ The request should fail with a 401 error code if the user does not have sufficie
 access rights, or a 403 error code if the contest is started or within 30s of
 starting, or if the new start time is in the past or within 30s.
 
-#### Example
+#### Examples
 
 Request:
 
@@ -705,7 +702,7 @@ version of C++.
 | rust       | Rust        | rs                   |                  |
 | scala      | Scala       | scala                |                  |
 
-#### Example
+#### Examples
 
 Request:
 
@@ -765,7 +762,7 @@ JSON elements of problem objects:
 | Name              | Type    | Required? | Nullable? | Description
 | :---------------- | :------ | :-------- | :-------- | :----------
 | id                | ID      | yes       | no        | Identifier of the problem, at the WFs the directory name of the problem archive.
-| uuid              | string  | no        | yes       | not used   | UUID of the problem, as defined in the problem package. |
+| uuid              | string  | no        | yes       | UUID of the problem, as defined in the problem package.
 | label             | string  | yes       | no        | Label of the problem on the scoreboard, typically a single capitalized letter.
 | name              | string  | yes       | no        | Name of the problem.
 | ordinal           | ORDINAL | yes       | no        | Ordering of problems on the scoreboard.
@@ -907,7 +904,7 @@ JSON elements of organization objects:
 | location.longitude | number         | depends   | no        | Longitude in degrees. Required iff location is present.
 | logo               | array of IMAGE | no        | yes       | Logo of the organization. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well.
 
-#### Example
+#### Examples
 
 Request:
 
@@ -930,10 +927,10 @@ Teams competing in the contest.
 
 The following endpoints are associated with teams:
 
-| Endpoint                    | Mime-type        | Required? | Description
-| :-------------------------- | :--------------- | :-------- | :----------
-| `/contests/id>/teams`       | application/json | yes       | JSON array of all teams with elements as defined in the table below.
-| `/contests/id>/teams/id>`   | application/json | yes       | JSON object of a single team with elements as defined in the table below.
+| Endpoint                     | Mime-type        | Required? | Description
+| :--------------------------- | :--------------- | :-------- | :----------
+| `/contests/<id>/teams`       | application/json | yes       | JSON array of all teams with elements as defined in the table below.
+| `/contests/<id>/teams/id>`   | application/json | yes       | JSON object of a single team with elements as defined in the table below.
 
 JSON elements of team objects:
 
@@ -959,7 +956,7 @@ JSON elements of team objects:
 | webcam            | array of STREAM  | no        | yes       | Streaming video of the team webcam.
 | audio             | array of STREAM  | no        | yes       | Streaming team audio.
 
-#### Example
+#### Examples
 
 Request:
 
@@ -997,7 +994,7 @@ JSON elements of team member objects:
 | role        | string         | yes       | no        | One of `contestant` or `coach`.
 | photo       | array of IMAGE | no        | yes       | Registration photo of the team member.
 
-#### Example
+#### Examples
 
 Request:
 
@@ -1048,7 +1045,7 @@ A contest that has ended, has been thawed (or was never frozen) and is
 finalized must not change. Thus, `end_of_updates` can be set once both
 `finalized` is set and `thawed` is set if the contest was frozen.
 
-#### Example
+#### Examples
 
 Request:
 
@@ -1204,7 +1201,7 @@ flexible in how the server can handle optional attributes.
   support a multi-site contest where the sites run out of sync, the
   use of `contest_time` might be considered.
 
-#### Example
+#### Examples
 
 Request:
 
@@ -1284,7 +1281,7 @@ When a judgement is started, each of `judgement_type_id`, `end_time` and
 `end_contest_time` will be `null` (or missing). These are set when the
 judgement is completed.
 
-#### Example
+#### Examples
 
 Request:
 
@@ -1323,7 +1320,7 @@ JSON elements of run objects:
 | contest\_time       | RELTIME | yes       | no        | Contest relative time when run completed.
 | run\_time           | number  | no        | no        | Run time in seconds. Should be an integer multiple of `0.001`.
 
-#### Example
+#### Examples
 
 Request:
 
@@ -1552,7 +1549,7 @@ happens:
 * A PUT or PATCH that includes an award id that doesn't match the id in the url.
 * A POST, PUT, PATCH, or DELETE on an award id that the server is configured to manage exclusively.
 
-#### Example
+#### Examples
 
 Request:
 
@@ -1631,7 +1628,7 @@ JSON elements of award objects:
 
 For the message, if an literal `#` is needed, `\#` must be used. Similarly for literal `\`, `\\` must be used.
 
-#### Example
+#### Examples
 
 Request:
 
@@ -1735,7 +1732,7 @@ Each problem object within the scoreboard consists of:
 | score        | number  | depends   | no        | Required iff contest:scoreboard_type is `score` and solved is missing. If missing or `null` defaults to `100` if solved is `true` and `0` if solved is `false`.
 | time         | integer | depends   | no        | Minutes into the contest when this problem was solved by the team. Required iff `solved=true`.
 
-#### Example
+#### Examples
 
 Request:
 
@@ -1776,8 +1773,8 @@ This section is a draft.
 
 Provides the event (notification) feed for the current contest. This is
 effectively a changelog of create, update, or delete events that have
-occurred in the REST endpoints. Some endpoints (specifically the [
-Scoreboard](#scoreboard) and the Event feed itself) are
+occurred in the REST endpoints. Some endpoints (specifically the 
+[Scoreboard](#scoreboard) and the Event feed itself) are
 aggregated data, and so these will only ever update due to some other
 REST endpoint updating. For this reason there is no explicit event for
 these, since there will always be another event sent. This can also be
@@ -1836,8 +1833,8 @@ referential order:
     that the contest has started **must** come before the problem events
     creating the problems.
   - Since nothing must change after the contest has ended, thawed (or
-    never been frozen), and been finalized, no event may come after the
-    state event showing that.
+    never been frozen), and been finalized, only the `end_of_updates` 
+    event may come after the state event showing that.
 
 #### Feed format
 
@@ -1958,7 +1955,7 @@ To register a webhook, you need to post your server's callback URL.
 To do so, perform a `POST` request with a JSON body with the fields (except `id`) from the above table to the `/webhooks` endpoint together with one additional field,
 called `token`. In this field put a client-generated token that can be used to verify that callbacks come from the CCS. If you don't supply `contest_ids` and/or `endpoints`, they will default to `[]`.
 
-##### Example
+##### Examples
 
 Request:
 
@@ -2001,7 +1998,7 @@ The body of the request will be in the same format as in the [feed format](#feed
 
 The HTTP event feed is a streaming HTTP endpoint that allows connected
 clients to receive contest events. The feed is a complete log of contest
-objects that starts 'at the beginning of time' so all existing objects
+objects that starts "at the beginning of time" so all existing objects
 will be sent upon initial connection, but apart from referential
 integrity requirements they may appear in any order (e.g. teams or
 problems first).
