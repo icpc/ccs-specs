@@ -952,13 +952,70 @@ problem.
 
 ## Data Export
 
-### Event Feed
+### Contest API
 
-It is a requirement that the CCS provide an *external event feed*. This
-means that the CCS must have a mechanism for external processes to
-connect to the CCS and obtain dynamic real-time updates regarding the
-current state of the contest. The CCS event feed mechanism must comply
-with the [Event Feed specification](Event_Feed).
+It is a requirement that the CCS provide a compliant implmentation of
+the [Contest API](contest_api). In addition to all required endpoints
+and elements (i.e. the minimal compliant implmentation) the CCS must
+also provide the following endpoints and elements:
+
+| Endpoint         | Element                      |
+| :--------------- | :--------------------------- |
+| `/contests`      | `formal_name`                |
+| `/contests`      | `scoreboard_freeze_duration` |
+| `/contests`      | `penalty_time`               |
+| `/languages`     | `compiler`                   |
+| `/languages`     | `runner`                     |
+| `/problems`      | `rgb`                        |
+| `/problems`      | `color`                      |
+| `/problems`      | `time_limit`                 |
+| `/groups`        | `icpc_id`                    |
+| `/organizations` | All required elements.       |
+| `/organizations` | `icpc_id`                    |
+| `/organizations` | `formal_name`                |
+| `/teams`         | `icpc_id`                    |
+| `/teams`         | `display_name`               |
+| `/teams`         | `organization_id`            |
+| `/teams`         | `group_ids`                  |
+| `/judgements`    | `max_run_time`               |
+| `/runs`          | `run_time`                   |
+| `/awards`        | All required elements.       |
+
+#### Access Restrictions
+
+The following access restrictions must apply to GETs on the API
+endpoints:
+
+  - The `public` role can only access the `/problems` endpoint after the
+    contest has started. That is, before contest start `/problems`
+    returns an empty array for clients with the `public` role.
+  - The `backup` element of the `/teams` endpoint requires the `admin`
+    or `analyst` role for access.
+  - The `desktop` and `webcam` elements of the `/teams` endpoint are
+    available for the `public` role only when the scoreboard is not
+    frozen.
+  - The `entry_point` and `files` elements of the `/submissions`
+    endpoint are accessible only for clients with `admin` or `analyst`
+    role. The `reaction` element is available to clients with `public`
+    role only when the contest is not frozen.
+  - For clients with the `public` role the `/judgements` and `/runs`
+    endpoints must not include judgements or runs for submissions
+    received while the scoreboard is frozen. This means that all
+    judgements and runs for submissions received before the scoreboard
+    has been frozen will be available immediately, and all judgements
+    and runs for submissions received after the scoreboard has been
+    frozen will be available immediately after the scoreboard has been
+    thawed.
+  - For clients with the `public` role the `/clarifications` endpoint
+    must only contain replies from the jury to all teams, that is,
+    messages where both `from_team_id` and `to_team_id` are `null`. For
+    clients with the `team` role the `/clarifications` endpoint must
+    only contain their own clarifications (sent or received) and public
+    clarifications.
+  - For clients with the `public` role the `/awards` and `/scoreboard`
+    endpoints must not include information from judgements of
+    submissions received after the scoreboard freeze until it has been
+    thawed.
 
 ### Scoreboard Data File
 
