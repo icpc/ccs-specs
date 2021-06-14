@@ -715,8 +715,15 @@ Returned data:
 
 ### Groups
 
-Grouping of teams. At the World Finals these are the super regions, at
-regionals these are often different sites.
+Grouping of teams. At the World Finals these are the super regions; at other contests these
+may be the different sites, divisions, or types of contestants.
+
+Teams may belong to multiple groups. For instance, there may be a group for each site, a group for
+university teams, a group for corporate teams, and a group for ICPC-eligible teams. Teams could
+belong to two or three of these.
+When there are different kinds of groups for different purposes (e.g. sites vs divisions), each
+group or set of groups should have a different type attribute
+(e.g. `"type":"site"` and `"type":"division"`).
 
 The following endpoints are associated with groups:
 
