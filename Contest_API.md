@@ -4,24 +4,20 @@ permalink: /contest_api
 ---
 # Contest API
 
-**This is the development draft for the Contest API. See also [the
-version that will be used at WF 2020](Contest_API_2020).**
-
-```note
-TODO: Remove/replace broken links.
-```
+**This is the development draft for the Contest API.
+See also [the version that will be used at WF 2020](https://clics.ecs.baylor.edu/index.php?title=Contest_API_2020).**
 
 ## Introduction
 
 This page describes an API for accessing information provided by a
-[Contest Control System](ccs_system_requirements) or [Contest
-Data Server](CDS). Such an API can be used by a multitude of
-clients:
+[Contest Control System](ccs_system_requirements) or
+[Contest Data Server](https://tools.icpc.global/cds/).
+Such an API can be used by a multitude of clients:
 
   - an external scoreboard
   - a scoreboard resolver application
-  - contest analysis software, such as the [ICAT](ICAT)
-    toolset
+  - contest analysis software, such as the
+    [ICAT](https://clics.ecs.baylor.edu/index.php?title=ICAT) toolset
   - another "shadow" CCS, providing forwarding of submissions and all
     relevant information
   - internally, to interface between the CCS server and judging
@@ -48,9 +44,9 @@ document are to be interpreted as described in
 
 The interface is implemented as a HTTP REST interface that outputs
 information in [JSON](https://en.wikipedia.org/wiki/JSON) format
-([RFC](https://tools.ietf.org/html/rfc7159)). This REST interface should
-be provided over HTTPS to guard against eavesdropping on sensitive
-contest data and authentication credentials (see roles below).
+([RFC 7159](https://tools.ietf.org/html/rfc7159)). This REST interface
+should be provided over HTTPS to guard against eavesdropping on
+sensitive contest data and authentication credentials (see roles below).
 
 ### Endpoint URLs
 
@@ -514,9 +510,8 @@ JSON elements of judgement type objects:
 
 #### Known judgement types
 
-The list below contains standardized identifiers for known judgement
-types. These identifiers should be used by a server. Please send an
-email to <cliccs@ecs.csus.edu> or create a pull request at
+The list below contains standardized identifiers for known judgement types.
+These identifiers should be used by a server. Please create a pull request at
 <https://github.com/icpc/ccs-specs> when there are judgement types missing.
 
 The column **Big 5** lists the "big 5" equivalents, if any. A `*` in
@@ -923,7 +918,7 @@ JSON elements of state objects:
 | started          | TIME | yes       | yes       | Time when the contest actually started, or `null` if the contest has not started yet. When set, this time must be equal to the [contest](#contests) `start_time`.
 | frozen           | TIME | depends   | yes       | Time when the scoreboard was frozen, or `null` if the scoreboard has not been frozen. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint.
 | ended            | TIME | yes       | yes       | Time when the contest ended, or `null` if the contest has not ended. Must not be set if started is `null`.
-| thawed           | TIME | depends   | yes       | Time when the scoreboard was thawed (that is, unfrozen again), or `null` if the scoreboard has not been thawed. Required iff `scoreboard_freeze_duration` is present in the [contest](#Contests) endpoint. Must not be set if frozen is `null`.
+| thawed           | TIME | depends   | yes       | Time when the scoreboard was thawed (that is, unfrozen again), or `null` if the scoreboard has not been thawed. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint. Must not be set if frozen is `null`.
 | finalized        | TIME | yes       | yes       | Time when the results were finalized, or `null` if results have not been finalized. Must not be set if ended is `null`.
 | end\_of\_updates | TIME | yes       | yes       | Time after last update to the contest occurred, or `null` if more updates are still to come. Setting this to non-`null` must be the very last change in the contest.
 
@@ -1275,7 +1270,7 @@ JSON elements of the scoreboard object.
 
 | Name          | Type                       | Required? | Nullable? | Description
 | :------------ | :------------------------- | :-------- | :-------- | :----------
-| event\_id     | ID                         | yes       | no        | Identifier of the [ event](#event_feed) after which this scoreboard was generated. This must be identical to the argument `after_event_id`, if specified.
+| event\_id     | ID                         | yes       | no        | Identifier of the [ event](#event-feed) after which this scoreboard was generated. This must be identical to the argument `after_event_id`, if specified.
 | time          | TIME                       | yes       | no        | Time contained in the associated event. Implementation defined if the event has no associated time.
 | contest\_time | RELTIME                    | yes       | no        | Contest time contained in the associated event. Implementation defined if the event has no associated contest time.
 | state         | object                     | yes       | no        | Identical data as returned by the [ contest state](#contest-state) endpoint. This is provided here for ease of use and to guarantee the data is synchronized.
