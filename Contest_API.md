@@ -79,8 +79,8 @@ the URL path
 returns
 
 ```json
-[ { "id":<id1>, <element specific data for id1>},
-  { "id":<id2>, <element specific data for id2>},
+[ { "id":<id1>, <element specific data for id1> },
+  { "id":<id2>, <element specific data for id2> },
      ...
 ]
 ```
@@ -91,7 +91,7 @@ while the URL path
 
 returns
 
-`{ "id":<id1>, <element specific data for id1>}`
+`{ "id":<id1>, <element specific data for id1> }`
 
 ### HTTP headers
 
@@ -314,13 +314,13 @@ are mentioned below.
 
 ### Types of endpoints
 
-The endpoints can be categorised into 3 groups as follows:
+The endpoints can be categorized into 3 groups as follows:
 
   - Configuration: contests, judgement-types, languages, problems,
-    groups, organizations, teams, team-members
+    groups, organizations, teams, team-members;
   - Live data: state, submissions, judgements, runs, clarifications,
-    awards
-  - Aggregate data: scoreboard, event-feed
+    awards;
+  - Aggregate data: scoreboard, event-feed.
 
 Configuration is normally set before contest start. Is not expected to,
 but could occasionally be updated during a contest. It does not have
@@ -424,7 +424,7 @@ The request should fail with a 401 if the user does not have sufficient
 access rights, or a 403 if the contest is started or within 30s of
 starting, or if the new start time is in the past or within 30s.
 
-#### Example
+#### Examples
 
 Request:
 
@@ -628,7 +628,7 @@ appended to an existing one. For example `cpp17` to specify the ISO 2017
 version of C++.
 
 | ID         | Name        |
-| ---------- | ----------- |
+| :--------- | :---------- |
 | ada        | Ada         |
 | c          | C           |
 | cpp        | C++         |
@@ -648,7 +648,7 @@ version of C++.
 | rust       | Rust        |
 | scala      | Scala       |
 
-#### Example
+#### Examples
 
 Request:
 
@@ -802,7 +802,7 @@ JSON elements of organization objects:
 | location.longitude | float          | depends   | no        | Longitude in degrees. Required iff location is present.
 | logo               | array of IMAGE | no        | yes       | Logo of the organization. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well.
 
-#### Example
+#### Examples
 
 Request:
 
@@ -853,7 +853,7 @@ JSON elements of team objects:
 | webcam            | array of STREAM  | no        | yes       | Streaming video of the team webcam.
 | audio             | array of STREAM  | no        | yes       | Streaming team audio.
 
-#### Example
+#### Examples
 
 Request:
 
@@ -891,7 +891,7 @@ JSON elements of team member objects:
 | role        | string         | yes       | no        | One of `contestant` or `coach`.
 | photo       | array of IMAGE | no        | yes       | Registration photo of the team member. Only allowed mime types are image/jpeg and image/png.
 
-#### Example
+#### Examples
 
 Request:
 
@@ -942,7 +942,7 @@ A contest that has ended, has been thawed (or was never frozen) and is
 finalized must not change. Thus, `end_of_updates` can be set once both
 `finalized` is set and `thawed` is set if the contest was frozen.
 
-#### Example
+#### Examples
 
 Request:
 
@@ -1003,7 +1003,7 @@ these are explicitly part of the submission content. For `POST`,
 `PUT` and `PATCH` methods, the `files` attribute must contain the
 base64-encoded string of the zip archive.
 
-#### Example
+#### Examples
 
 Request:
 
@@ -1050,7 +1050,7 @@ When a judgement is started, each of `judgement_type_id`, `end_time` and
 `end_contest_time` will be `null` (or missing). These are set when the
 judgement is completed.
 
-#### Example
+#### Examples
 
 Request:
 
@@ -1089,7 +1089,7 @@ JSON elements of run objects:
 | contest\_time       | RELTIME | yes       | no        | Contest relative time when run completed.
 | run\_time           | decimal | no        | no        | Run time in seconds.
 
-#### Example
+#### Examples
 
 Request:
 
@@ -1206,6 +1206,8 @@ JSON elements of award objects:
     can see; the public role's winner may not change during the
     scoreboard freeze but an admin could see the true current winner.
 
+#### Known awards
+
 For some common award cases the following IDs should be used.
 
 | ID                        | Meaning during contest                                                                                                     | Meaning when contest is final      | Comment
@@ -1218,7 +1220,7 @@ For some common award cases the following IDs should be used.
 | group-winner-\<id>        | Current leader(s) in group \<id>. Empty if no team has scored.                                                             | Winner(s) of group \<id>.          |
 | organization-winner-\<id> | Current leader(s) of organization \<id>. Empty if no team has scored.                                                      | Winner(s) of organization \<id>.   | Not useful in contest with only one team per organization (e.g. the WF).
 
-#### Example
+#### Examples
 
 Request:
 
@@ -1306,7 +1308,7 @@ Each problem object within the scoreboard consists of:
 | solved       | boolean | depends   | yes       | Whether the team solved this problem.
 | time         | integer | depends   | no        | Minutes into the contest when this problem was solved by the team. Required iff `solved=true`.
 
-#### Example
+#### Examples
 
 Request:
 
