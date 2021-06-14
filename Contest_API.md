@@ -185,26 +185,24 @@ deleting an element and then creating a new element with the same ID.
 
 ### JSON attribute types
 
-Attribute types are specified as one of the [standard JSON
-types](https://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example),
-or one of the more specific types below. Implementations must be
-consistent with respect to the optional parts of each type, e.g. if the
-optional .uuu is included in any absolute timestamp it must be included
-when outputting all absolute timestamps.
+Attribute types are specified as one of the standard JSON types, or one of the
+more specific types defined below. Implementations must be consistent with
+respect to the optional parts of each type, e.g. if the optional .uuu is
+included in any absolute timestamp it must be included when outputting all
+absolute timestamps.
 
+  - Strings (type **`string`** in the specification) are built-in JSON strings.
+  - Numbers (type **`number`** in the specification) are built-in JSON numbers.
+  - Booleans (type **`boolean`** in the specification) are built-in JSON booleans.
   - Integers
     (type **`integer`** in the specification) are JSON numbers that are
     restricted to be integer. They should be represented in standard
     integer representation `(-)?[0-9]+`.
-  - Floating point numbers
-    (type **`float`** in the specification) are arbitrary JSON numbers
-    that are expected to take non-integer values. It is recommended to
-    use a decimal representation.
   - Fixed point numbers
     (type **`decimal`** in the specification) are JSON numbers that are
     expected to take non-integer values. They must be in decimal
     (non-scientific) representation and have at most 3 decimals. That
-    is, they must be a integer multiple of `0.001`.
+    is, they must be a integer multiple of 0.001.
   - Absolute timestamps
     (type **`TIME`** in the specification) are strings containing
     human-readable timestamps, given in
@@ -218,13 +216,13 @@ when outputting all absolute timestamps.
     format: `(-)?(h)*h:mm:ss(.uuu)?`
   - Identifiers
     (type **`ID`** in the specification) are given as string consisting
-    of characters `[a-zA-Z0-9_-]` of length at most 36 and not starting
-    with a `-` (dash). IDs are unique within each endpoint.
-    IDs are assigned by the person or system that is the source of the
-    object, and must be maintained by downstream systems. For example,
-    the person configuring a contest on disk will typically define the
-    ID for each team, and any CCS or CDS that exposes the team must use
-    the same ID.
+    of characters `[a-zA-Z0-9_.-]` of length at most 36 and not starting
+    with a `-` (dash) or `.` (dot) or ending with a `.` (dot). IDs are
+    unique within each endpoint. IDs are assigned by the person or system
+    that is the source of the object, and must be maintained by downstream
+    systems. For example, the person configuring a contest on disk will
+    typically define the ID for each team, and any CCS or CDS that exposes
+    the team must use the same ID.
     Some IDs are also used as identifiable labels and are marked below
     along with the recommended format. These IDs should be meaningful
     for human communication (e.g. team "43", problem "A") and are as
@@ -243,6 +241,8 @@ when outputting all absolute timestamps.
     (types **`IMAGE`**, **`VIDEO`**, **`ARCHIVE`** and **`STREAM`** in
     the specification) are represented as a JSON object with elements as
     defined below.
+  - Arrays (type **`array of <type>`** in the specification) are built-in JSON
+    arrays of some type defined above.
 
 Element for file reference objects:
 
@@ -263,6 +263,8 @@ equivalent JSON response snippets pointing to the same location:
   "href":"https://example.com/api/contests/wf14/submissions/187/files"
   "href":"contests/wf14/submissions/187/files"
 ```
+
+For images, the supported mime types are image/png and image/jpeg.
 
 If implementing support for uploading files pointed to by resource
 links, substitute the href element with a data element with a base64
@@ -341,9 +343,8 @@ In the tables below, the columns are:
 
   - Name: Attribute name; object sub-attributes are indicated as
     `object.attribute`.
-  - Type: Data type of the attribute; either a [JSON
-    type](https://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example)
-    or [a type defined above](#json-attribute-types).
+  - Type: Data type of the attribute; one of the
+    [types listed above](#json-attribute-types).
   - Required?: Whether this is a required attribute that **must** be
     implemented to conform to this specification.
   - Nullable?: Whether the attribute might be `null` (and thus
@@ -393,7 +394,7 @@ JSON elements of contest objects:
 | scoreboard\_freeze\_duration | RELTIME        | no        | yes       | How long the scoreboard is frozen before the end of the contest.
 | penalty\_time                | integer        | no        | no        | Penalty time for a wrong submission, in minutes.
 | banner                       | array of IMAGE | no        | yes       | Banner for this contest, intended to be an image with a large aspect ratio around 8:1.
-| logo                         | array of IMAGE | no        | yes       | Logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime type is image/png.
+| logo                         | array of IMAGE | no        | yes       | Logo for this contest, intended to be an image with aspect ratio near 1:1.
 
 The expected/typical use of `countdown_pause_time` is that once a
 `start_time` is defined and close, the countdown may be paused due to
@@ -685,7 +686,7 @@ JSON elements of problem objects:
 | ordinal           | ORDINAL | yes       | no        | Ordering of problems on the scoreboard.
 | rgb               | string  | no        | no        | Hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet), e.g. `#AC00FF` or `#fff`.
 | color             | string  | no        | no        | Human readable color description associated to the RGB value.
-| time\_limit       | decimal | no        | no        | Time limit in seconds per test data set (i.e. per single run).
+| time\_limit       | decimal | no        | no        | Time limit in seconds per test data set (i.e. per single run). Should be an integer multiple of `0.001`.
 | test\_data\_count | integer | yes       | no        | Number of test data sets.
 
 #### Examples
@@ -793,8 +794,8 @@ JSON elements of organization objects:
 | url                | string         | no        | yes       | URL to organization's website.
 | twitter\_hashtag   | string         | no        | yes       | Organization hashtag.
 | location           | object         | no        | yes       | JSON object as specified in the rows below.
-| location.latitude  | float          | depends   | no        | Latitude in degrees. Required iff location is present.
-| location.longitude | float          | depends   | no        | Longitude in degrees. Required iff location is present.
+| location.latitude  | number         | depends   | no        | Latitude in degrees. Required iff location is present.
+| location.longitude | number         | depends   | no        | Longitude in degrees. Required iff location is present.
 | logo               | array of IMAGE | no        | yes       | Logo of the organization. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well.
 
 #### Examples
@@ -884,7 +885,7 @@ JSON elements of team member objects:
 | last\_name  | string         | yes       | no        | Last name of team member.
 | sex         | string         | no        | yes       | Either `male` or `female`, or possibly `null`.
 | role        | string         | yes       | no        | One of `contestant` or `coach`.
-| photo       | array of IMAGE | no        | yes       | Registration photo of the team member. Only allowed mime types are image/jpeg and image/png.
+| photo       | array of IMAGE | no        | yes       | Registration photo of the team member.
 
 #### Examples
 
@@ -978,7 +979,7 @@ JSON elements of submission objects:
 | time          | TIME             | yes       | no        | Timestamp of when the submission was made.
 | contest\_time | RELTIME          | yes       | no        | Contest relative time when the submission was made.
 | entry\_point  | string           | yes       | yes       | Code entry point for specific languages.
-| files         | array of ARCHIVE | yes       | no        | Submission files, contained at the root of the archive. Only allowed mime type is application/zip.
+| files         | array of ARCHIVE | yes       | no        | Submission files, contained at the root of the archive. Only allowed mime type is application/zip. Only exactly one archive is allowed.
 | reaction      | array of VIDEO   | no        | yes       | Reaction video from team's webcam.
 
 The `entry_point` attribute must be included for submissions in
@@ -1039,7 +1040,7 @@ JSON elements of judgement objects:
 | start\_contest\_time | RELTIME | yes       | no        | Contest relative time when judgement started.
 | end\_time            | TIME    | yes       | yes       | Absolute time when judgement completed.
 | end\_contest\_time   | RELTIME | yes       | yes       | Contest relative time when judgement completed.
-| max\_run\_time       | decimal | no        | yes       | Maximum run time in seconds for any test case.
+| max\_run\_time       | decimal | no        | yes       | Maximum run time in seconds for any test case. Should be an integer multiple of `0.001`.
 
 When a judgement is started, each of `judgement_type_id`, `end_time` and
 `end_contest_time` will be `null` (or missing). These are set when the
@@ -1082,7 +1083,7 @@ JSON elements of run objects:
 | judgement\_type\_id | ID      | yes       | no        | The [ verdict](#judgement-types) of this judgement (i.e. a judgement type).
 | time                | TIME    | yes       | no        | Absolute time when run completed.
 | contest\_time       | RELTIME | yes       | no        | Contest relative time when run completed.
-| run\_time           | decimal | no        | no        | Run time in seconds.
+| run\_time           | decimal | no        | no        | Run time in seconds. Should be an integer multiple of `0.001`.
 
 #### Examples
 
