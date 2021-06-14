@@ -34,8 +34,8 @@ incorporate and supersede a number of
 *REST interface for source code fetching*
 and the *Contest start interface*.
 
-This REST interface is specified in conjunction with a new [NDJSON event
-feed](#event-feed---draft), which provides all changes to this
+This REST interface is specified in conjunction with a new
+[NDJSON event feed](#event-feed), which provides all changes to this
 interface as CRUD-style events and is meant to supersede the old XML
 *Event Feed*.
 
@@ -1337,7 +1337,7 @@ The following options can be passed to the scoreboard endpoint.
 
 ##### Scoreboard at the time of a given event
 
-By passing an [ event](#event-feed---draft) ID with the
+By passing an [ event](#event-feed) ID with the
 `after_event_id` URL argument, the scoreboard can be requested as it
 was directly after the specified event:
 
@@ -1430,40 +1430,108 @@ Returned data:
 }
 ```
 
-### Event feed - DRAFT
+### Event feed
 
 Provides the event (notification) feed for the current contest. This is
 effectively a changelog of create, update, or delete events that have
-occurred in the REST endpoints. Some endpoints (specifically the [
-Scoreboard](#scoreboard) and the Event feed itself) are
+occurred in the REST endpoints. Some endpoints (specifically the
+[Scoreboard](#scoreboard) and the Event feed itself) are
 aggregated data, and so these will only ever update due to some other
 REST endpoint updating. For this reason there is no explicit event for
 these, since there will always be another event sent. This can also be
 seen by the fact that there is no scoreboard event in the table of
 events below.
 
-Every notification provides the current state of a single contest
-object. There is no guarantee on order of events (except for general
-requirements below), whether two consecutive changes cause one or two
-events, duplicate events, or even that different clients will receive
-the same order or set of events. The only guarantee is that when an
-object changes one or more times you'll receive an event, and the latest
-event received for any object is the correct and current state of that
-object (e.g. if an object was created and deleted you'll always receive
-a delete event last).
+Since this is generated data, only the `GET` method is allowed here,
+irrespective of role.
 
-As a concrete example, judgement events are usually fired when judging
-is started, and fired again when the final judgment is available. If a
-client connects after the judgement, or a client was disconnected during
-the judgement, they will typically only receive the final (complete)
-judgement.
+The following endpoint is associated with the event feed:
 
-There are two mechanisms that clients can use to receive events: a
-webhook, or a streaming HTTP feed. Both mechanisms have the same format
-(payload) and events, but different benefits, drawbacks, and ways to
-register. Webhooks are better for internet-scale, asynchronous
-processing, and disconnected systems; the HTTP feed is better for
-browser-based applications and onsite contests.
+| Endpoint                    | Mime-type            | Required? | Description
+| :-------------------------- | :------------------- | :-------- | :----------
+| `/contests/<id>/event-feed` | application/x-ndjson | yes       | NDJSON feed of events as defined below.
+
+Multiple requests of the event feed must return the exact same events in
+the exact same order, except that events filtered out by the feed
+options must be left out and new elements, if any, are added in later
+requests.
+
+The event feed is a streaming endpoint that does not terminate under
+normal circumstances. To ensure keep alive, if no event is sent in 120
+seconds, a newline must be sent.
+
+
+#### Feed options
+
+There are options for filtering based on events and starting the feed at
+a specified event. Any combination of these may be specified.
+
+##### Filtering events
+
+If a client only wants some types of events the feed can be filtered
+with the "types" URL argument:
+
+```
+/event-feed?types=submissions,teams
+```
+
+If not specified all events will be sent. If specified only events of
+the (comma separated) listed types will be sent.
+
+##### Feed starting point
+
+If a client wants data from some point in time this can be done with the
+"since_id" URL argument:
+
+```
+/event-feed?since_id=dj593
+```
+
+If specified the event feed will include all events strictly after the
+specified id. If a client copies the id of an event and uses that for
+the id URL argument it will get all events after that event. This is
+useful e.g. if a client is disconnected and wants to continue where it
+left off.
+
+If the id is not specified the event feed will include all events from
+the beginning of the feed. The request will fail with a 400 error if the
+id is invalid.
+
+#### Feed format
+
+The feed is served as JSON objects, with every event corresponding to a
+change in a single object (submission, judgement, language, team, etc.)
+The general format for events is:
+
+```json
+{"type": "<event type>", "id": "<event ID>", "op": "<operation>", "data": <JSON data for element> }
+```
+
+| Name        | Type   | Required? | Nullable? | Description
+| :---------- | :----- | :-------- | :-------- | :----------
+| type        | string | yes       | no        | Type of event, one of the events in the table below. Can be used for filtering.
+| id          | ID     | yes       | no        | Unique identifier for the event.
+| op          | string | yes       | no        | Type of operation, one of **create**, **update**, **delete**.
+| data        | object | yes       | no        | For **create** and **update**, the object that would be returned if calling the corresponding API endpoint at this time. For delete an object with only the id attribute with value the identifier of the deleted element.
+
+All event types have a corresponding API endpoint, as specified in the table below.
+
+| Event           | API Endpoint                          |
+| :-------------- | :------------------------------------ |
+| contests        | `/contests/<id>`                      |
+| judgement-types | `/contests/<id>/judgement-types/<id>` |
+| languages       | `/contests/<id>/languages/<id>`       |
+| problems        | `/contests/<id>/problems/<id>`        |
+| groups          | `/contests/<id>/groups/<id>`          |
+| organizations   | `/contests/<id>/organizations/<id>`   |
+| teams           | `/contests/<id>/teams/<id>`           |
+| team-members    | `/contests/<id>/team-members/<id>`    |
+| state           | `/contests/<id>/state`                |
+| submissions     | `/contests/<id>/submissions/<id>`     |
+| judgements      | `/contests/<id>/judgements/<id>`      |
+| runs            | `/contests/<id>/runs/<id>`            |
+| clarifications  | `/contests/<id>/clarifications/<id>`  |
+| awards          | `/contests/<id>/awards/<id>`          |
 
 #### General requirements
 
@@ -1494,179 +1562,19 @@ referential order:
     that the contest has started **must** come before the problem events
     creating the problems.
   - Since nothing must change after the contest has ended, thawed (or
-    never been frozen), and been finalized, no event may come after the
-    state event showing that.
-
-#### Feed format
-
-The feed is served as JSON objects, with every event corresponding to a
-change in a single object (submission, judgement, language, team, etc.)
-or full endpoint. The general format for events is:
-
-```json
-{"contest_id": "<id>", "endpoint": "<endpoint>", "id": "<id>", "data": <JSON data for element> }
-```
-
-| Name        | Type   | Required? | Nullable? | Description                                                                                                                                |
-| ----------- | ------ | --------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| contest\_id | string | yes       | no        | The contest id.                                                                                                                            |
-| endpoint    | string | yes       | yes       | The API endpoint, i.e. type of contest object above. Can be used for filtering                                                             |
-| id          | string | yes       | yes       | The id of the object that changed                                                                                                          |
-| data        | object | yes       | yes       | The data is the object that would be returned if calling the corresponding API endpoint at this time, i.e. an object or null for deletions |
-
-##### Filtering
-
-TODO - filter by contest id and/or endpoint
+    never been frozen), and been finalized, only the `end_of_updates`
+    event may come after the state event showing that.
 
 ##### Examples
 
-The following are examples of contest events:
-
-```json
-{"contest_id":"finals","endpoint":"problems","id":null,"data":[
-   {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},
-   {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}]}
-```
-
-```json
-{"contest_id":"finals","endpoint":"state","id":null,"data":{
-   "started": "2014-06-25T10:00:00+01",
-   "ended": null,
-   "frozen": "2014-06-25T14:00:00+01",
-   "thawed": null,
-   "finalized": null,
-   "end_of_updates": null}}
-```
-
-```json
-{"contest_id":"finals","endpoint":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
-```
-
-```json
-{"contest_id":"finals","endpoint":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
-```
-
-```json
-{"contest_id":"finals","endpoint":"teams","id":"11","data":null}
-```
-
-TODO: data is object or array - is that too ugly?
-
-#### Webhook
-
-A webhook allows you to receive HTTP callbacks whenever there is a
-change to the contest. Clients are only notified of future changes; they
-are expected to use other mechanisms if they need to determine the
-current state of the contest. Every callback will contain one JSON
-object as specified above.
-
-Responding to each event with a 2xx response code indicates successful
-receipt and ensures that the events in the payload are never sent again.
-If the client responds with anything other than 2xx, the server will
-continue to periodically try again, potentially with different payloads
-(e.g. as new events accumulate). Callbacks to each client are always
-sent synchronously and in order; clients do not need to worry about
-getting callbacks out of order and should always process each callback
-fully before processing the next one.
-
-If the client fails to respond to multiple requests over a period of
-time (configured for each contest), it will be assumed deactivated and
-automatically removed from future callbacks.
-
-The following endpoint is associated with the webhook:
-
-| Endpoint   | Mime-type        | Required? | Source @WF | Description                            |
-| ---------- | ---------------- | --------- | ---------- | -------------------------------------- |
-| `/webhook` | application/json | yes       | CCS        | List or register for webhook callbacks |
-
-JSON elements of webhook objects:
-
-| Name | Type   | Required? | Nullable? | Description           |
-| ---- | ------ | --------- | --------- | --------------------- |
-| url  | string | yes       | no        | The url for callbacks |
-
-TODO: include filter details?
-
-##### Adding a webhook
-
-To register a webhook, you need to post your server's callback url. The
-general format to register a webhook is:
-
-```json
-{"url": "<callback url>", "auth": ... }
-```
-
-| Name | Type   | Required? | Nullable? | Description           |
-| ---- | ------ | --------- | --------- | --------------------- |
-| url  | string | yes       | no        | The url for callbacks |
-| auth | string | yes       | no        | TODO                  |
-
-##### Example
-
 Request:
 
-` POST https://example.com/api/webhook`
-
-Payload:
-
-```json
-{"url": "https://myurl", "auth": ... }
-```
-
-Request:
-
-` GET https://example.com/api/webhook`
+` GET https://example.com/api/contests/wf14/event-feed`
 
 Returned data:
 
 ```json
-[{"url":"https://myurl"},{"url":"https://myotherurl"}]
+ {"type":"teams","id":"k-2435","op":"create","data":{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
+ {"type":"teams","id":"k-2436","op":"update","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
+ {"type":"teams","id":"k-2437","op":"delete","data":{"id":"11"}}
 ```
-
-Future payload posted to url:
-
-` POST https://myurl`
-
-Payload:
-
-```json
-{"contest_id":"finals","endpoint":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
-```
-
-#### HTTP Feed
-
-The HTTP event feed is a streaming HTTP endpoint that allows connected
-clients to receive contest events. The feed is a complete log of contest
-objects that starts 'at the beginning of time' so all existing objects
-will be sent upon initial connection, but apart from referential
-integrity requirements they may appear in any order (e.g. teams or
-problems first).
-
-Each line is an NDJSON formatted contest event as specified above. The
-feed does not terminate under normal circumstances, so to ensure keep
-alive a newline must be sent if there has been no event within 120
-seconds.
-
-Since this is generated data, only the `GET` method is allowed here,
-irrespective of role.
-
-The following endpoint is associated with the event feed:
-
-| Endpoint                    | Mime-type            | Required? | Source @WF | Description                            |
-| --------------------------- | -------------------- | --------- | ---------- | -------------------------------------- |
-| `/contests/<id>/event-feed` | application/x-ndjson | yes       | CCS        | NDJSON feed of events as defined below |
-
-##### Reconnection
-
-If a client loses connection or needs to reconnect after a brief
-disconnect (e.g. client restart), it can use the 'time' argument to
-specify the last event it received:
-
-`/event-feed?time=xx`
-
-If specified, the server will attempt to start sending events around the
-given time to reduce the volume of events and required reconciliation.
-If the time passed is too large or the server does not support this
-attribute, all objects will be sent. There is no guarantee that all
-updates (e.g. a team name correction, which is not time-based) that
-occurred during the time the client was disconnected will be reflected.
