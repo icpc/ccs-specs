@@ -116,7 +116,7 @@ The following JSON types are used.
 
 #### Differences from Contest API
 
-- The `countdown_pause_time` is not included.
+- The `countdown_pause_time` is not included. It is allowed but the information should be ignored.
 - The `banner` and `logo` elements are not included. They are allowed but the information may be ignored. These files are instead found as `banner[.<size>].<format>` and `logo[.<size>].<format>` in the same directory as the JSON file.
 
 #### Examples
@@ -705,7 +705,7 @@ None.
 }
 ```
 
-## Binary files.
+## Binary files
 
 Binary files realted to certain object types are stored in a single
 parent directory with the same name as the object type and
