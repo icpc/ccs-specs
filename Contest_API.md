@@ -620,35 +620,36 @@ JSON elements of language objects:
 
 #### Known languages
 
-Below is a list of standardized identifiers for known languages. When
-providing one of these languages, the corresponding identifier should be
-used. The language name may be adapted e.g. for localization or to
+Below is a list of standardized identifiers for known languages with their
+name, extensions and entry point name (if any). When providing one of these
+languages, the corresponding identifier should be used. The language name
+and entry point name may be adapted e.g. for localization or to
 indicate a particular version of the language. In case multiple versions
 of a language are provided, those must have separate, unique
 identifiers. It is recommended to choose new identifiers with a suffix
 appended to an existing one. For example `cpp17` to specify the ISO 2017
 version of C++.
 
-| ID         | Name        |
-| :--------- | :---------- |
-| ada        | Ada         |
-| c          | C           |
-| cpp        | C++         |
-| csharp     | C\#         |
-| go         | Go          |
-| haskell    | Haskell     |
-| java       | Java        |
-| javascript | JavaScript  |
-| kotlin     | Kotlin      |
-| objectivec | Objective-C |
-| pascal     | Pascal      |
-| php        | PHP         |
-| prolog     | Prolog      |
-| python2    | Python 2    |
-| python3    | Python 3    |
-| ruby       | Ruby        |
-| rust       | Rust        |
-| scala      | Scala       |
+| ID         | Name        | Extensions           | Entry point name |
+| :--------- | :---------- | :------------------- | :--------------- |
+| ada        | Ada         | adb, ads             |                  |
+| c          | C           | c                    |                  |
+| cpp        | C++         | cc, cpp, cxx, c++, C |                  |
+| csharp     | C\#         | cs                   |                  |
+| go         | Go          | go                   |                  |
+| haskell    | Haskell     | hs                   |                  |
+| java       | Java        | java                 | Main class       |
+| javascript | JavaScript  | js                   | Main file        |
+| kotlin     | Kotlin      | kt                   | Main class       |
+| objectivec | Objective-C | m                    |                  |
+| pascal     | Pascal      | pas                  |                  |
+| php        | PHP         | php                  | Main file        |
+| prolog     | Prolog      | pl                   |                  |
+| python2    | Python 2    | py                   | Main file        |
+| python3    | Python 3    | py                   | Main file        |
+| ruby       | Ruby        | rb                   |                  |
+| rust       | Rust        | rs                   |                  |
+| scala      | Scala       | scala                |                  |
 
 #### Examples
 
