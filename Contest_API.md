@@ -1483,12 +1483,12 @@ JSON elements of award objects:
 #### Semantics
 
   - Awards are not final until the contest is.
-  - An award may be created at any time, althought it is recommended 
-    that a system creates the awards it intends to award before the 
+  - An award may be created at any time, although it is recommended
+    that a system creates the awards it intends to award before the
     contest starts.
-  - If an award has a non-null `tesm_ids`, then it must be kept up to 
-    date during the contest. E.g. if "winner" will not be updated with 
-    the current leader during the contest, it must be null until the 
+  - If an award has a non-null `team_ids`, then it must be kept up to
+    date during the contest. E.g. if "winner" will not be updated with
+    the current leader during the contest, it must be null until the
     award **is** updated.
   - If an award is present during the contest this means that if the
     contest would end immediately and then become final, that award
