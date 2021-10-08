@@ -856,10 +856,8 @@ data according to the following:
 
 1.  For purposes of scoring, the *contest time of a submission* is the
     number of minutes elapsed from the beginning of the contest when the
-    submission was made, skipping removed time intervals if specified
-    (see [Removing Time
-    Intervals](#removing-time-intervals)). This is rounded
-    *down* to the nearest minute, so 59.99 seconds is 0 minutes.
+    submission was made. This is rounded *down* to the nearest minute, so 59.99
+    seconds is 0 minutes.
 2.  The *contest time that a team solved a problem* is the contest time
     of the team's first accepted submission to that problem.
 3.  A team's *penalty time on a problem* is the contest time that the
