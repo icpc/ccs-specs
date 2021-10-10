@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -eu -o pipefail
 # Checks whether a Contest API conforms to the specification
 # https://ccs-specs.icpc.io/contest_api
 
