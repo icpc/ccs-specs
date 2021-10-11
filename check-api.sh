@@ -43,6 +43,8 @@ ENDPOINTS_TO_FAIL='
 400:event-feed?since_id=xY-99_
 '
 
+# We later re-add optional endpoints to ENDPOINTS_CHECK_CONSISTENT if
+# they were actually found.
 ENDPOINTS_CHECK_CONSISTENT="$ENDPOINTS"
 for endpoint in $ENDPOINTS_OPTIONAL scoreboard ; do
 	ENDPOINTS_CHECK_CONSISTENT="${ENDPOINTS_CHECK_CONSISTENT/$endpoint/}"
@@ -276,6 +278,10 @@ for CONTEST in $CONTESTS ; do
 		if query_endpoint "$OUTPUT" "$URL" $OPTIONAL ; then
 			verbose '%20s: ' "$ENDPOINT"
 			validate_schema "$OUTPUT" "$SCHEMA"
+			if [ -n "$OPTIONAL" ]; then
+				ENDPOINTS_CHECK_CONSISTENT="$ENDPOINTS_CHECK_CONSISTENT
+$ENDPOINT"
+			fi
 			EXIT=$?
 			[ $EXIT -gt $EXITCODE ] && EXITCODE=$EXIT
 		else
