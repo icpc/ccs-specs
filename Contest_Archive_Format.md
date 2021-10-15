@@ -56,7 +56,7 @@ using a similar naming convention.
 | `config/contest.json`                 | JSON   | [Contest object](#contest-object). | No |
 | `config/contest`                      | Directory | [Contest files](#contest-files). | No |
 | `config/judgement-types.json`         | JSON   | Array of [judgement type objects](#judgement-type-object). | Yes |
-| `config/languages.json`               | JSON   | Array of [langauge objects](#language-object). | Yes |
+| `config/languages.json`               | JSON   | Array of [language objects](#language-object). | Yes |
 | `config/problems.json`                | JSON   | Array of [problem objects](#problem-object). | Yes |
 | `config/problems/<problem-ID>[.kpp]`  | [KPP](https://www.kattis.com/problem-package-format/) | [Problem package](#problem-package) | No |
 | `registration/groups.json`            | JSON   | Array of [group objects](#group-object). | No |
@@ -551,7 +551,7 @@ None.
 | :---------------- | :------ | :------- | :---------- |
 | id                | ID      | yes      | Identifier of the run. |
 | judgement_id      | ID      | yes      | Identifier of the judgement this is part of. |
-| ordinal           | integer | yes      | Ordering of runs in the judgement. Must be different for every run in a judgement. Runs for the same test case must have the same ordinal. Must be between 1 and `test_data_count`, inclusive, for the problem referred to by the submission referred to by the judgement reffered to by this run. |
+| ordinal           | integer | yes      | Ordering of runs in the judgement. Must be different for every run in a judgement. Runs for the same test case must have the same ordinal. Must be between 1 and `test_data_count`, inclusive, for the problem referred to by the submission referred to by the judgement referred to by this run. |
 | judgement_type_id | ID      | yes      | The verdict of this judgement. |
 | time              | TIME    | yes      | Absolute time when run completed. |
 | contest_time      | RELTIME | yes      | Contest relative time when run completed. |
@@ -668,7 +668,7 @@ None.
 
 ### Scoreboard object
 
-Exactly as defiend in the [Contest API](contest_api#scoreboard-format)
+Exactly as defined in the [Contest API](contest_api#scoreboard-format)
 
 #### Differences from Contest API
 
@@ -706,7 +706,7 @@ None.
 
 ## Binary files
 
-Binary files realted to certain object types are stored in a single
+Binary files related to certain object types are stored in a single
 parent directory with the same name as the object type and
 subdirectories with the same ID as en element of that object type. The
 JSON file with the same base name as the parent directory is the parent
@@ -734,14 +734,14 @@ object using the following mapping:
 
 ### Problem package
 
-Problems packages are strored in a single directory, or alternatively in
+Problems packages are stored in a single directory, or alternatively in
 a ZIP compressed archive using the file extension `.kpp`, according to
 the [Kattis Problem Package
 Format](https://www.kattis.com/problem-package-format/) specification.
 
 Problem packages may be left out if (and only if) `config/problems.json`
 contains `uuid` for those problems. This assumes that the problems are
-stored elsewhere and can be found by macthing by the uuid, and this
+stored elsewhere and can be found by matching by the uuid, and this
 should be checked when verifying a contest archive.
 
 ### Contest files

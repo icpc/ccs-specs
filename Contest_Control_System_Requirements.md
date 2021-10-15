@@ -942,7 +942,7 @@ The scoreboard must include at least the following information.
 For each team:
 
 1.  university name
-2.  univerisity logo (see [logos.tar.gz](#logostargz))
+2.  university logo (see [logos.tar.gz](#logostargz))
 3.  team position
 4.  number of problems solved
 5.  total penalty time
