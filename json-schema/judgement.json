@@ -15,7 +15,8 @@
 		"max_run_time": {
 			"oneOf": [
 				{
-					"$ref": "common.json#/decimal",
+					"type": "number",
+					"multipleOf": 0.001,
 					"minimum": 0
 				},
 				{ "type": "null" }

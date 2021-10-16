@@ -15,7 +15,8 @@
 		},
 		"color": { "type": "string" },
 		"time_limit": {
-			"$ref": "common.json#/decimal",
+			"type": "number",
+			"multipleOf": 0.001,
 			"minimum": 0
 		},
 		"test_data_count": {
