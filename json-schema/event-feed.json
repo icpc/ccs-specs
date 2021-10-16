@@ -28,7 +28,8 @@
 						{ "$ref": "judgement.json#" },
 						{ "$ref": "run.json#" },
 						{ "$ref": "clarification.json#" },
-						{ "$ref": "award.json#" }
+						{ "$ref": "award.json#" },
+						{ "$ref": "commentary.json#" }
 					]
 				}
 			}

@@ -1,0 +1,25 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "CLICS Contest API - commentary",
+	"description": "Definition of a single commentary object",
+
+	"type": "object",
+	"properties": {
+		"id": { "$ref": "common.json#/identifier" },
+		"time": { "$ref": "common.json#/abstime" },
+		"contest_time": { "$ref": "common.json#/reltime" },
+		"message": { "type": "string" },
+		"team_ids": {
+			"type": "array",
+			"uniqueItems": true,
+			"items": { "$ref": "common.json#/identifier" }
+		},
+		"problem_ids": {
+			"type": "array",
+			"uniqueItems": true,
+			"items": { "$ref": "common.json#/identifier" }
+		}
+	},
+	"required": ["id", "time", "contest_time", "message", "team_ids", "problem_ids"],
+	"$ref": "common.json#/strictproperties"
+}

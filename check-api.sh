@@ -22,6 +22,7 @@ judgements
 runs
 clarifications
 awards
+commentary
 scoreboard
 '
 
@@ -30,6 +31,7 @@ scoreboard
 ENDPOINTS_OPTIONAL='
 team-members
 awards
+commentary
 '
 
 ENDPOINTS_TO_FAIL='
