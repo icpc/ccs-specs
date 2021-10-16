@@ -124,7 +124,18 @@
 		"items": {
 			"$ref": "#/fileref"
 		}
+	},
 
+	"command": {
+		"type": "object",
+		"properties": {
+			"command": { "type": "string" },
+			"args": { "type": "string" },
+			"version": { "type": "string" },
+			"version-command": { "type": "string" }
+		},
+		"required": ["command"],
+		"$ref": "#/strictproperties"
 	},
 
 	"$comment": "Inside here add '\"minItems\": 1' to require all collection endpoints to contain at least one element.",

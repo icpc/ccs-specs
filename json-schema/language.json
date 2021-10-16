@@ -6,8 +6,32 @@
 	"type": "object",
 	"properties": {
 		"id": { "$ref": "common.json#/identifier" },
-		"name": { "type": "string" }
+		"name": { "type": "string" },
+		"entry_point_required": { "type": "boolean" },
+		"entry_point_name": { "type": [ "string", "null" ] },
+		"extensions": {
+			"type": "array",
+			"uniqueItems": true,
+			"items": { "type": "string" }
+		},
+		"compiler": { "$ref": "common.json#/command" },
+		"runner": { "$ref": "common.json#/command" }
 	},
-	"required": ["id", "name"],
+	"oneOf": [
+		{
+			"properties": { "entry_point_required": { "enum": [false] } },
+			"not": { "required": ["entry_point_name"] }
+		},
+		{
+			"properties": { "entry_point_required": { "enum": [false] } },
+			"properties": { "entry_point_name": { "enum": [null] } }
+		},
+		{
+			"properties": { "entry_point_required": { "enum": [true] } },
+			"properties": { "entry_point_name": { "type": "string" } },
+			"required": ["entry_point_name"]
+		}
+	],
+	"required": ["id", "name", "entry_point_required", "extensions"],
 	"$ref": "common.json#/strictproperties"
 }
