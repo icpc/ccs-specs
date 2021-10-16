@@ -25,7 +25,7 @@ level structure is inspired by the [Contest API](contest_api) structure.
 There are four top level directories:
 
 * `config` - configuration and setup
-* `registration` - information about particpants
+* `registration` - information about participants
 * `events` - detailed information about what happened during the contest
 * `results` - end results (this is typically an aggregate of the events)
 
@@ -46,7 +46,7 @@ is no longer available).
 
 In summary, if a system supports the Contest API it is very simple to
 export a correct archive, but it is not required to support the contest
-API to be able to use this archive forrmat.
+API to be able to use this archive format.
 
 The problem package is not available from the contest API but is stored
 using a similar naming convention.
@@ -92,7 +92,7 @@ The following JSON types are used.
 | Name              | Description |
 | :---------------- | :---------- |
 | string            | Built-in.   |
-| number            | Bulit-in.   |
+| number            | Built-in.   |
 | integer           | Built-in.   |
 | boolean           | Built-in.   |
 | ID                | A `string` consisting of characters `[a-zA-Z0-9_-]` of length at most 36 and not starting with a `-` (dash). IDs must be unique within arrays of JSON objects of its type. |
@@ -137,7 +137,7 @@ The following JSON types are used.
 
 | Name    | Type    | Required | Description |
 | :------ | :------ | :------- | :---------- |
-| id      | ID      | yes      | iIdentifier of the judgement type. Must be one of the IDs specified in the [Contest API](contest_api#known-judgement-types). |
+| id      | ID      | yes      | Identifier of the judgement type. Must be one of the IDs specified in the [Contest API](contest_api#known-judgement-types). |
 | name    | string  | yes      | Name of the judgement. (might not match table linked above, e.g. if localised). |
 | penalty | boolean | depends  | Whether this judgement causes penalty time; must be present if and only if `penalty_time` is present in `config/contest.json`. |
 | solved  | boolean | yes      | Whether this judgement is considered correct. |
