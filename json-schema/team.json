@@ -28,8 +28,11 @@
 		"photo": { "$ref": "common.json#/filerefs" },
 		"video": { "$ref": "common.json#/filerefs" },
 		"backup": { "$ref": "common.json#/filerefs" },
+		"key_log": { "$ref": "common.json#/filerefs" },
+		"tool_data": { "$ref": "common.json#/filerefs" },
 		"desktop": { "$ref": "common.json#/filerefs" },
-		"webcam": { "$ref": "common.json#/filerefs" }
+		"webcam": { "$ref": "common.json#/filerefs" },
+		"audio": { "$ref": "common.json#/filerefs" }
 	},
 	"required": ["id", "name"],
 	"$ref": "common.json#/strictproperties"
