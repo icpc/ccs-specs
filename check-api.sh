@@ -180,8 +180,10 @@ query_endpoint()
 		CURLOPTS="$CURLOPTS -N --max-time ${FEED_TIMEOUT}"
 	fi
 
+	set +e
 	HTTPCODE=$(curl $CURLOPTS -w "%{http_code}\n" -o "$OUTPUT" "${URL}${ARGS:+?$ARGS}")
 	EXITCODE="$?"
+	set -e
 
 	if [ -n "$EXPECTED_HTTPCODE" ]; then
 		if [ "$HTTPCODE" -ne "$EXPECTED_HTTPCODE" ]; then
@@ -213,8 +215,10 @@ validate_schema()
 {
 	local DATA="$1" SCHEMA="$2" RESULT EXITCODE
 
+	set +e
 	RESULT=$(${VALIDATE_JSON:-validate-json} "$DATA" "$SCHEMA")
 	EXITCODE=$?
+	set -e
 	verbose '%s' "$RESULT"
 	if [ $EXITCODE -eq 0 ]; then
 		verbose 'OK'
