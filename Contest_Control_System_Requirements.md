@@ -1179,8 +1179,8 @@ In order for a given CCS to be considered as a candidate for running the
 ICPC World Finals contest, the following documents must be submitted.
 
   - A text file named "License" containing the license, conforming to
-    the the [Licensing](#licensing) section, under which the
-    CCS is made available to the ICPC.
+    the [Licensing](#licensing) section, under which the CCS is made
+    available to the ICPC.
   - A *Requirements Compliance Document* as defined below.
   - A *Team Guide* as defined below.
   - A *Judge's Guide* as defined below.
