@@ -15,6 +15,7 @@
 			"uniqueItems": true,
 			"items": { "$ref": "common.json#/identifierornull" }
 		},
+		"hidden": { "type": [ "boolean", "null" ] },
 		"location": {
 			"type": "object",
 			"properties": {
