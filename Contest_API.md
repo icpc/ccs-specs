@@ -1270,7 +1270,7 @@ JSON elements of judgement objects:
 | id                   | ID      | yes       | no        | Identifier of the judgement.
 | submission\_id       | ID      | yes       | no        | Identifier of the [ submission](#submissions) judged.
 | judgement\_type\_id  | ID      | yes       | yes       | The [ verdict](#judgement-types) of this judgement.
-| judgement\_score     | number  | no        | no        | Score for this judgement. Only relevant if contest:scoreboard_type is `score`. Defaults to `100` if missing.
+| score                | number  | no        | no        | Score for this judgement. Only relevant if contest:scoreboard_type is `score`. Defaults to `100` if missing.
 | start\_time          | TIME    | yes       | no        | Absolute time when judgement started.
 | start\_contest\_time | RELTIME | yes       | no        | Contest relative time when judgement started.
 | end\_time            | TIME    | yes       | yes       | Absolute time when judgement completed.
