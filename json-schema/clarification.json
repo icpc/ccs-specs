@@ -11,8 +11,6 @@
 		"reply_to_id": { "$ref": "common.json#/identifierornull" },
 		"problem_id": { "$ref": "common.json#/identifierornull" },
 		"text": { "type": "string" },
-		"from_jury": { "type": "boolean" },
-		"to_all_teams": { "type": "boolean" },
 		"time": { "$ref": "common.json#/abstime" },
 		"contest_time": { "$ref": "common.json#/reltime" }
 	},
