@@ -17,7 +17,7 @@
 			]
 		},
 		"role": { "enum": [ "contestant", "coach" ] },
-		"photo": { "$ref": "common.json#/filerefs" }
+		"photo": { "$ref": "common.json#/imagerefsornull" }
 	},
 	"required": ["id", "team_id", "first_name", "last_name"],
 	"$ref": "common.json#/strictproperties"

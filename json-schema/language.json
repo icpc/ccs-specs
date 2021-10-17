@@ -14,8 +14,8 @@
 			"uniqueItems": true,
 			"items": { "type": "string" }
 		},
-		"compiler": { "$ref": "common.json#/command" },
-		"runner": { "$ref": "common.json#/command" }
+		"compiler": { "$ref": "common.json#/commandornull" },
+		"runner": { "$ref": "common.json#/commandornull" }
 	},
 	"oneOf": [
 		{

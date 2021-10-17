@@ -18,6 +18,7 @@
 				{ "type": "null" }
 			]
 		},
+		"country_flag": { "$ref": "common.json#/imagerefsornull" },
 		"url": { "type": [ "string", "null" ] },
 		"twitter_hashtag": { "type": [ "string", "null" ] },
 		"location": {
@@ -42,7 +43,7 @@
 				{ "type": "null" }
 			]
 		},
-		"logo": { "$ref": "common.json#/filerefs" }
+		"logo": { "$ref": "common.json#/imagerefsornull" }
 	},
 	"required": ["id", "name"],
 	"$ref": "common.json#/strictproperties"

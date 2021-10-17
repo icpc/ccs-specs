@@ -9,16 +9,8 @@
 		"time": { "$ref": "common.json#/abstime" },
 		"contest_time": { "$ref": "common.json#/reltime" },
 		"message": { "type": "string" },
-		"team_ids": {
-			"type": "array",
-			"uniqueItems": true,
-			"items": { "$ref": "common.json#/identifier" }
-		},
-		"problem_ids": {
-			"type": "array",
-			"uniqueItems": true,
-			"items": { "$ref": "common.json#/identifier" }
-		}
+		"team_ids": { "$ref": "common.json#/identifiersornull" },
+		"problem_ids": { "$ref": "common.json#/identifiersornull" }
 	},
 	"required": ["id", "time", "contest_time", "message", "team_ids", "problem_ids"],
 	"$ref": "common.json#/strictproperties"

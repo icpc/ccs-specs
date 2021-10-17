@@ -73,6 +73,19 @@
 		]
 	},
 
+	"identifiers": {
+		"type": "array",
+		"uniqueItems": true,
+		"items": { "$ref": "#/identifier" }
+	},
+
+	"identifiersornull": {
+		"oneOf": [
+			{ "$ref": "#/identifiers" },
+			{ "type": "null" }
+		]
+	},
+
 	"judgementtypeid": {
 		"enum": [
 			"AC", "RE", "WA", "TLE", "RTE", "CE", "APE", "OLE", "PE", "EO", "IO", "NO",
@@ -114,12 +127,50 @@
 		"$ref": "#/strictproperties"
 	},
 
+	"imageref": {
+		"allOf": [
+			{ "$ref": "#/fileref" },
+			{
+				"properties": {
+					"mime": { "enum": ["image/png", "image/jpeg", "image/svg+xml"] }
+				},
+				"required": ["width", "height"]
+			}
+		]
+	},
+
 	"filerefs": {
 		"type": "array",
 		"uniqueItems": true,
 		"items": {
 			"$ref": "#/fileref"
 		}
+	},
+
+	"filerefsornull": {
+		"oneOf": [
+			{
+				"type": "array",
+				"uniqueItems": true,
+				"items": {
+					"$ref": "#/fileref"
+				}
+			},
+			{ "type": "null" }
+		]
+	},
+
+	"imagerefsornull": {
+		"oneOf": [
+			{
+				"type": "array",
+				"uniqueItems": true,
+				"items": {
+					"$ref": "#/imageref"
+				}
+			},
+			{ "type": "null" }
+		]
 	},
 
 	"command": {
@@ -132,6 +183,13 @@
 		},
 		"required": ["command"],
 		"$ref": "#/strictproperties"
+	},
+
+	"commandornull": {
+		"oneOf": [
+			{ "$ref": "#/command" },
+			{ "type": "null" }
+		]
 	},
 
 	"$comment": "Inside here add '\"minItems\": 1' to require all collection endpoints to contain at least one element.",

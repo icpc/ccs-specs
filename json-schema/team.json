@@ -10,11 +10,7 @@
 		"name": { "type": "string" },
 		"display_name": { "type": [ "string", "null" ] },
 		"organization_id": { "$ref": "common.json#/identifierornull" },
-		"group_ids": {
-			"type": "array",
-			"uniqueItems": true,
-			"items": { "$ref": "common.json#/identifierornull" }
-		},
+		"group_ids": { "$ref": "common.json#/identifiersornull" },
 		"hidden": { "type": [ "boolean", "null" ] },
 		"location": {
 			"type": "object",
@@ -26,14 +22,14 @@
 			"required": ["x", "y", "rotation"],
 			"$ref": "common.json#/strictproperties"
 		},
-		"photo": { "$ref": "common.json#/filerefs" },
-		"video": { "$ref": "common.json#/filerefs" },
-		"backup": { "$ref": "common.json#/filerefs" },
-		"key_log": { "$ref": "common.json#/filerefs" },
-		"tool_data": { "$ref": "common.json#/filerefs" },
-		"desktop": { "$ref": "common.json#/filerefs" },
-		"webcam": { "$ref": "common.json#/filerefs" },
-		"audio": { "$ref": "common.json#/filerefs" }
+		"photo": { "$ref": "common.json#/imagerefsornull" },
+		"video": { "$ref": "common.json#/filerefsornull" },
+		"backup": { "$ref": "common.json#/filerefsornull" },
+		"key_log": { "$ref": "common.json#/filerefsornull" },
+		"tool_data": { "$ref": "common.json#/filerefsornull" },
+		"desktop": { "$ref": "common.json#/filerefsornull" },
+		"webcam": { "$ref": "common.json#/filerefsornull" },
+		"audio": { "$ref": "common.json#/filerefsornull" }
 	},
 	"required": ["id", "name"],
 	"$ref": "common.json#/strictproperties"

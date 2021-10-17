@@ -16,8 +16,8 @@
 			"type": "integer",
 			"minimum": 0
 		},
-		"banner": { "$ref": "common.json#/filerefs" },
-		"logo": { "$ref": "common.json#/filerefs" }
+		"banner": { "$ref": "common.json#/imagerefsornull" },
+		"logo": { "$ref": "common.json#/imagerefsornull" }
 	},
 	"required": ["id", "name", "duration"],
 	"$ref": "common.json#/strictproperties"

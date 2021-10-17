@@ -13,7 +13,7 @@
 		"contest_time": { "$ref": "common.json#/reltime" },
 		"entry_point": { "type": [ "string", "null" ] },
 		"files": { "$ref": "common.json#/filerefs" },
-		"reaction": { "$ref": "common.json#/filerefs" }
+		"reaction": { "$ref": "common.json#/filerefsornull" }
 	},
 	"required": ["id", "language_id", "problem_id", "team_id", "time", "contest_time", "files"],
 	"$ref": "common.json#/strictproperties"

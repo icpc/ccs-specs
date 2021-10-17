@@ -7,11 +7,7 @@
 	"properties": {
 		"id": { "$ref": "common.json#/identifier" },
 		"citation": { "type": "string" },
-		"team_ids": {
-			"type": "array",
-			"uniqueItems": true,
-			"items": { "$ref": "common.json#/identifier" }
-		}
+		"team_ids": { "$ref": "common.json#/identifiers" }
 	},
 	"required": ["id", "citation", "team_ids"],
 	"$ref": "common.json#/strictproperties"
