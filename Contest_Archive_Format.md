@@ -746,10 +746,10 @@ should be checked when verifying a contest archive.
 
 ### Contest files
 
-The organization directories contain all binary files related to a
-single organization in it's parent JSON file. 
+The contest directory contain all binary files related to a
+single contest in it's parent JSON file. 
 
-The following files could be in the organization directories:
+The following files could be in the contest directory:
 
 | Basename | Specifier          | Mime type   | File extension | Description | 
 | :------- | :----------------- | :---------- | :------------- | :---------- |
