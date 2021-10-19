@@ -17,7 +17,11 @@
 			"properties": {
 				"x": { "type": "number" },
 				"y": { "type": "number" },
-				"rotation": { "type": "number" }
+				"rotation": {
+					"type": "number",
+					"minimum": 0,
+					"maximum": 360
+				}
 			},
 			"required": ["x", "y", "rotation"],
 			"$ref": "common.json#/strictproperties"

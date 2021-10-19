@@ -8,7 +8,7 @@
 		"id": { "$ref": "common.json#/identifier" },
 		"icpc_id": { "type": [ "string", "null" ] },
 		"name": { "type": "string" },
-		"type": { "type": "string" }
+		"type": { "type": [ "string", "null" ] }
 	},
 	"required": ["id", "name"],
 	"$ref": "common.json#/strictproperties"
