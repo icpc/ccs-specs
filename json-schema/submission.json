@@ -16,5 +16,33 @@
 		"reaction": { "$ref": "common.json#/filerefsornull" }
 	},
 	"required": ["id", "language_id", "problem_id", "team_id", "time", "contest_time", "files"],
+	"oneOf": [
+		{
+			"properties": {
+				"language_id": { "enum": ["java"] }
+			},
+			"required": ["entry_point"]
+		},
+		{
+			"properties": {
+				"language_id": { "enum": ["c", "cpp"] }
+			},
+			"oneOf": [
+				{
+					"not": { "required": ["entry_point"] }
+				},
+				{
+					"properties": { "entry_point": { "type": "null" } }
+				}
+			]
+		},
+		{
+			"not": {
+				"properties": {
+					"language_id": { "enum": ["java", "c", "cpp"] }
+				}
+			}
+		}
+	],
 	"$ref": "common.json#/strictproperties"
 }
