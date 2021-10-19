@@ -330,6 +330,122 @@ are meant to ease extensibility.
     treat an attribute with value `null` equivalently as that attribute
     not being present.
 
+### Notification format
+
+There are two mechanisms that clients can use to receive notifications
+of API updates (events), a webhook and a streaming HTTP feed. Both
+mechanisms use the same payload format, but have different benefits,
+drawbacks, and ways to access. Webhooks are typically better for
+internet-scale, asynchronous processing, and disconnected systems; the
+HTTP feed, on the other hand, might be better for browser-based
+applications and onsite contests.
+
+The notifications are effectively a changelog of create, update, or
+delete events that have occurred in the REST endpoints. Some endpoints
+(specifically the [Scoreboard](#scoreboard) and the Event feed)
+are aggregated data, and so these will only ever update due to some
+other REST endpoint updating. For this reason there is no explicit event
+for these, since there will always be another event sent.
+
+The events are served as JSON objects, with every event corresponding to
+a change in a single object (submission, judgement, language, team,
+etc.) or full endpoint. The general format for events is:
+
+```json
+{"contest_id": "<id>", "endpoint": "<endpoint>", "id": "<id>", "data": <JSON data for element> }
+```
+
+| Name        | Type   | Required? | Nullable? | Description
+| :---------- | :----- | :-------- | :-------- | :----------
+| contest\_id | string | yes       | no        | The contest id.
+| endpoint    | string | yes       | yes       | The API endpoint, i.e. type of contest object above. Can be used for filtering.
+| id          | string | yes       | yes       | The id of the object that changed.
+| data        | object | yes       | yes       | The data is the object that would be returned if calling the corresponding API endpoint at this time, i.e. an object or null for deletions.
+
+
+The meaning of an event is to say that the contents at endpoint
+`/contests/<contest_id>/<endpoint>/<id>` now has the contents of `data`.
+
+#### Examples
+
+Event:
+```json
+{
+   "contest_id": "dress2016",
+   "data": {
+      "id": "dress2016",
+      "name": "2016 ICPC World Finals Dress Rehearsal",
+      "start_time": null,
+      "countdown_pause_time": "0:03:38.749",
+      "duration": "2:30:00"
+  }
+}
+```
+
+Means that endpoint `/contests/dress2016` has been updated to:
+```json
+{
+   "id": "dress2016",
+   "name": "2016 ICPC World Finals Dress Rehearsal",
+   "start_time": null,
+   "countdown_pause_time": "0:03:38.749",
+   "duration": "2:30:00"
+}
+```
+
+Event:
+```json
+{
+   "contest_id": "wf14",
+   "endpoint": "problems",
+   "data": [
+      {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},
+      {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}
+   ]
+}
+```
+
+Means that endpoint `/contests/wf14/problems` has been updated to:
+```json
+[
+   {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},
+   {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}
+]
+```
+
+Event:
+```json
+{
+   "contest_id": "wf14",
+   "endpoint": "submissions",
+   "id": "187",
+   "data": {
+      "id": "187",
+      "team_id": "123",
+      "problem_id": "10-asteroids",
+      "language_id": "1-java",
+      "time": "2014-06-25T11:22:05.034+01",
+      "contest_time": "1:22:05.034",
+      "entry_point": "Main",
+      "files": [{"href":"contests/wf14/submissions/187/files","mime":"application/zip"}]   
+   }
+}
+```
+
+Means that endpoint `/contests/wf14/submissions/187` has been updated to:
+```json
+{
+   "id": "187",
+   "team_id": "123",
+   "problem_id": "10-asteroids",
+   "language_id": "1-java",
+   "time": "2014-06-25T11:22:05.034+01",
+   "contest_time": "1:22:05.034",
+   "entry_point": "Main",
+   "files": [{"href":"contests/wf14/submissions/187/files","mime":"application/zip"}]
+}
+```
+
 ## Interface specification
 
 The following list of API endpoints should be supported. Note that
@@ -1835,44 +1951,6 @@ referential order:
   - Since nothing must change after the contest has ended, thawed (or
     never been frozen), and been finalized, only the `end_of_updates` 
     event may come after the state event showing that.
-
-#### Feed format
-
-The feed is served as JSON objects, with every event corresponding to a
-change in a single object (submission, judgement, language, team, etc.)
-or full endpoint. The general format for events is:
-
-```json
-{"contest_id": "<id>", "endpoint": "<endpoint>", "id": "<id>", "data": <JSON data for element> }
-```
-
-| Name        | Type   | Required? | Nullable? | Description
-| :---------- | :----- | :-------- | :-------- | :----------
-| contest\_id | string | yes       | no        | The contest id.
-| endpoint    | string | yes       | yes       | The API endpoint, i.e. type of contest object above. Can be used for filtering.
-| id          | string | yes       | yes       | The id of the object that changed.
-| data        | object | yes       | yes       | The data is the object that would be returned if calling the corresponding API endpoint at this time, i.e. an object or null for deletions.
-
-All event types have a corresponding API endpoint, as specified in the table below.
-
-| Event           | API Endpoint                          |
-| :-------------- | :------------------------------------ |
-| contests        | `/contests/<id>`                      |
-| judgement-types | `/contests/<id>/judgement-types/<id>` |
-| languages       | `/contests/<id>/languages/<id>`       |
-| problems        | `/contests/<id>/problems/<id>`        |
-| groups          | `/contests/<id>/groups/<id>`          |
-| organizations   | `/contests/<id>/organizations/<id>`   |
-| teams           | `/contests/<id>/teams/<id>`           |
-| team-members    | `/contests/<id>/team-members/<id>`    |
-| state           | `/contests/<id>/state`                |
-| submissions     | `/contests/<id>/submissions/<id>`     |
-| judgements      | `/contests/<id>/judgements/<id>`      |
-| runs            | `/contests/<id>/runs/<id>`            |
-| clarifications  | `/contests/<id>/clarifications/<id>`  |
-| awards          | `/contests/<id>/awards/<id>`          |
-
-Note that this does *not* contain `/webhooks/<id>`, since no events will be triggered for that endpoint.
 
 ##### Filtering
 
