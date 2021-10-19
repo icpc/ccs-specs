@@ -6,6 +6,15 @@
 	"type": "object",
 	"properties": {
 		"id": { "$ref": "common.json#/identifier" },
+		"uuid": {
+			"oneOf": [
+				{
+					"type": "string",
+					"pattern": "^[A-Fa-f0-9]{8}-([A-Fa-f0-9]{4}-){3}[A-Fa-f0-9]{12}$"
+				},
+				{ "type": "null" }
+			]
+		},
 		"label": { "$ref": "common.json#/label" },
 		"name": { "type": "string" },
 		"ordinal": { "$ref": "common.json#/ordinal" },
