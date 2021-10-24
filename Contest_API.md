@@ -1883,78 +1883,61 @@ Returned data:
 
 ### Event feed
 
-```note
-This section is a draft.
-```
+Change [notifications](#notification-format) (events) of the data
+presented by the API.
 
-Provides the event (notification) feed for the current contest. This is
-effectively a changelog of create, update, or delete events that have
-occurred in the REST endpoints. Some endpoints (specifically the 
-[Scoreboard](#scoreboard) and the Event feed itself) are
-aggregated data, and so these will only ever update due to some other
-REST endpoint updating. For this reason there is no explicit event for
-these, since there will always be another event sent. This can also be
-seen by the fact that there is no scoreboard event in the table of
-events below.
+The following endpoint is associated with the event feed:
+
+| Endpoint                    | Mime-type            | Required? | Description
+| :-------------------------- | :------------------- | :-------- | :----------
+| `/contests/<id>/event-feed` | application/x-ndjson | yes       | NDJSON feed of events as defined in [notification format](#notification-format).
+
+The event feed is a streaming HTTP endpoint that allows connected
+clients to receive change notifications. The feed is a complete log of
+contest objects that starts "at the beginning of time" so all existing
+objects will be sent upon initial connection, but may appear in any
+order (e.g. teams or problems first).
+
+Each line is an NDJSON formatted notification. The feed does not
+terminate under normal circumstances, so to ensure keep alive a newline
+must be sent if there has been no event within 120 seconds.
+
+Since this is generated data, only the `GET` method is allowed for this
+endpoint, irrespective of role.
+
+#### General requirements
 
 Every notification provides the current state of a single contest
 object. There is no guarantee on order of events (except for general
 requirements below), whether two consecutive changes cause one or two
 events, duplicate events, or even that different clients will receive
-the same order or set of events. The only guarantee is that when an
-object changes one or more times you'll receive an event, and the latest
-event received for any object is the correct and current state of that
-object (e.g. if an object was created and deleted you'll always receive
-a delete event last).
+the same order or set of events. The only guarantees are:
 
-As a concrete example, judgement events are usually fired when judging
-is started, and fired again when the final judgement is available. If a
-client connects after the judgement, or a client was disconnected during
-the judgement, they will typically only receive the final (complete)
-judgement.
+- when an object changes one or more times a notification will be sent,
+- the latest notification sent for any object is the correct and current
+state of that object. E.g. if an object was created and deleted the
+delete notification will be sent last.
+- when a notification is sent the change it decsribes must alreday have
+happened. I.e. if a client recieves an update for a certain endpoint a
+`GET` from that enpoint will return that satate or possible some later
+state, but never an earlier state.
+- the notification for the [state endpoint](#contest-state) setting
+`end_of_updates` must be the last event in the feed.
 
-There are two mechanisms that clients can use to receive events: a
-webhook, or a streaming HTTP feed. Both mechanisms have the same format
-(payload) and events, but different benefits, drawbacks, and ways to
-register. Webhooks are better for internet-scale, asynchronous
-processing, and disconnected systems; the HTTP feed is better for
-browser-based applications and onsite contests.
+##### Reconnection
 
-#### General requirements
+If a client loses connection or needs to reconnect after a brief
+disconnect (e.g. client restart), it can use the 'time' argument to
+specify the last event it received:
 
-The event responses and `data` objects contained in it must observe
-the same restrictions as those of the respective endpoints they
-represent. This means that attributes inside the `data` element will
-be present if and only if the client has access to those at the
-respective endpoint. The client only receives create, update and delete
-events of elements it has (partial) access to. When time-based access is
-granted or revoked, create or delete events are dispatched for each
-affected entity.
+`/event-feed?time=xx`
 
-Referential integrity must be strictly adhered to for new objects. i.e.
-if there is a new object that refers to another object (e.g. a
-submission for a team) then the referenced object must already exist and
-have been notified. There is no such guarantee for deletion: if an
-object that is referred to is deleted then by definition all of the
-child objects will be deleted, but the events may not arrive in strict
-referential order:
-
-  - If an object, A, refers to another object, B, then the event that
-    shows that A has been created or updated to refer to B **must** come
-    after the event that shows that B has been created.
-  - If some data is only available after a specific state change, then
-    the event showing the state change **must** come before any update
-    events making that data available. E.g. problems are only available
-    after contest start for the public role, so the state event showing
-    that the contest has started **must** come before the problem events
-    creating the problems.
-  - Since nothing must change after the contest has ended, thawed (or
-    never been frozen), and been finalized, only the `end_of_updates` 
-    event may come after the state event showing that.
-
-##### Filtering
-
-TODO - filter by contest id and/or endpoint
+If specified, the server will attempt to start sending events around the
+given time to reduce the volume of events and required reconciliation.
+If the time passed is too large or the server does not support this
+attribute, all objects will be sent. There is no guarantee that all
+updates (e.g. a team name correction, which is not time-based) that
+occurred during the time the client was disconnected will be reflected.
 
 ##### Examples
 
@@ -1987,8 +1970,6 @@ The following are examples of contest events:
 ```json
 {"contest_id":"finals","endpoint":"teams","id":"11","data":null}
 ```
-
-TODO: data is object or array - is that too ugly?
 
 #### Webhook
 
@@ -2071,41 +2052,3 @@ When the CCS wants to send out a callback, it will check all active webhooks, fi
 The CCS will add a header to this request called `Webhook-Token` which contains the token as supplied when creating the webhook.
 Clients should verify that this token matches with what they expect.
 The body of the request will be in the same format as in the [feed format](#feed-format), i.e. it contains the keys `contest_id`, `endpoint`, `id` and `data`.
-
-#### HTTP Feed
-
-The HTTP event feed is a streaming HTTP endpoint that allows connected
-clients to receive contest events. The feed is a complete log of contest
-objects that starts "at the beginning of time" so all existing objects
-will be sent upon initial connection, but apart from referential
-integrity requirements they may appear in any order (e.g. teams or
-problems first).
-
-Each line is an NDJSON formatted contest event as specified above. The
-feed does not terminate under normal circumstances, so to ensure keep
-alive a newline must be sent if there has been no event within 120
-seconds.
-
-Since this is generated data, only the `GET` method is allowed here,
-irrespective of role.
-
-The following endpoint is associated with the event feed:
-
-| Endpoint                    | Mime-type            | Required? | Description
-| :-------------------------- | :------------------- | :-------- | :----------
-| `/contests/<id>/event-feed` | application/x-ndjson | yes       | NDJSON feed of events as defined below.
-
-##### Reconnection
-
-If a client loses connection or needs to reconnect after a brief
-disconnect (e.g. client restart), it can use the 'time' argument to
-specify the last event it received:
-
-`/event-feed?time=xx`
-
-If specified, the server will attempt to start sending events around the
-given time to reduce the volume of events and required reconciliation.
-If the time passed is too large or the server does not support this
-attribute, all objects will be sent. There is no guarantee that all
-updates (e.g. a team name correction, which is not time-based) that
-occurred during the time the client was disconnected will be reflected.
