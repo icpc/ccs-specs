@@ -444,8 +444,8 @@ None.
 | id         | ID     | yes      | Identifier of the team-member. |
 | icpc_id    | string | no       | External identifier from ICPC CMS. |
 | team_id    | ID     | yes      | Team of this team member. |
-| first_name | string | yes      | First name of team member. |
-| last_name  | string | yes      | Last name of team member. |
+| name       | string | yes      | Name of team member. |
+| email      | string | no       | Email of team member. |
 | sex        | string | no       | Either `male` or `female`, or possibly `null`. |
 | role       | string | yes      | One of `contestant` or `coach`. |
 
@@ -462,8 +462,8 @@ None.
   "id": "john-smith",
   "icpc_id": "32442",
   "team_id": "43",
-  "first_name": "John",
-  "last_name": "Smith",
+  "name": "John Smith",
+  "email": "john.smith@kmail.com",
   "sex": "male",
   "role": "contestant"
 }
@@ -473,8 +473,7 @@ None.
  {
   "id":"osten-umlautsen",
   "team_id": "43",
-  "first_name": "Östen",
-  "last_name": "Ümlautsen",
+  "name": "Östen Ümlautsen",
   "sex": null,
   "role": "coach"
 }

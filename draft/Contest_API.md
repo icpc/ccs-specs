@@ -1101,8 +1101,8 @@ JSON elements of team member objects:
 | id          | ID             | yes       | no        | Identifier of the team-member.
 | icpc\_id    | string         | no        | yes       | External identifier from ICPC CMS.
 | team\_id    | ID             | yes       | no        | [Team](#teams) of this team member.
-| first\_name | string         | yes       | no        | First name of team member.
-| last\_name  | string         | yes       | no        | Last name of team member.
+| name        | string         | yes       | no        | Name of team member.
+| email       | string         | no        | yes       | Email of team member.
 | sex         | string         | no        | yes       | Either `male` or `female`, or possibly `null`.
 | role        | string         | yes       | no        | One of `contestant` or `coach`.
 | photo       | array of IMAGE | no        | yes       | Registration photo of the team member.
@@ -1116,8 +1116,8 @@ Request:
 Returned data:
 
 ```json
-[{"id":"john-smith","team_id":"43","icpc_id":"32442","first_name":"John","last_name":"Smith","sex":"male","role":"contestant"},
- {"id":"osten-umlautsen","team_id":"43","icpc_id":null,"first_name":"Östen","last_name":"Ümlautsen","sex":null,"role":"coach"}
+[{"id":"john-smith","team_id":"43","icpc_id":"32442","name":"John Smith","email":"john.smith@kmail.com","sex":"male","role":"contestant"},
+ {"id":"osten-umlautsen","team_id":"43","icpc_id":null,"name":"Östen Ümlautsen","sex":null,"role":"coach"}
 ]
 ```
 
