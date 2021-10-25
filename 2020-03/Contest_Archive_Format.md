@@ -1,6 +1,6 @@
 ---
 sort: 3
-permalink: /contest_archive_format
+permalink: /2020-03/contest_archive_format
 ---
 # Contest Archive Format
 
@@ -25,7 +25,7 @@ level structure is inspired by the [Contest API](contest_api) structure.
 There are four top level directories:
 
 * `config` - configuration and setup
-* `registration` - information about participants
+* `registration` - information about particpants
 * `events` - detailed information about what happened during the contest
 * `results` - end results (this is typically an aggregate of the events)
 
@@ -46,7 +46,7 @@ is no longer available).
 
 In summary, if a system supports the Contest API it is very simple to
 export a correct archive, but it is not required to support the contest
-API to be able to use this archive format.
+API to be able to use this archive forrmat.
 
 The problem package is not available from the contest API but is stored
 using a similar naming convention.
@@ -56,7 +56,7 @@ using a similar naming convention.
 | `config/contest.json`                 | JSON   | [Contest object](#contest-object). | No |
 | `config/contest`                      | Directory | [Contest files](#contest-files). | No |
 | `config/judgement-types.json`         | JSON   | Array of [judgement type objects](#judgement-type-object). | Yes |
-| `config/languages.json`               | JSON   | Array of [language objects](#language-object). | Yes |
+| `config/languages.json`               | JSON   | Array of [langauge objects](#language-object). | Yes |
 | `config/problems.json`                | JSON   | Array of [problem objects](#problem-object). | Yes |
 | `config/problems/<problem-ID>[.kpp]`  | [KPP](https://www.kattis.com/problem-package-format/) | [Problem package](#problem-package) | No |
 | `registration/groups.json`            | JSON   | Array of [group objects](#group-object). | No |
@@ -92,7 +92,7 @@ The following JSON types are used.
 | Name              | Description |
 | :---------------- | :---------- |
 | string            | Built-in.   |
-| number            | Built-in.   |
+| number            | Bulit-in.   |
 | integer           | Built-in.   |
 | boolean           | Built-in.   |
 | ID                | A `string` consisting of characters `[a-zA-Z0-9_-]` of length at most 36 and not starting with a `-` (dash). IDs must be unique within arrays of JSON objects of its type. |
@@ -137,7 +137,7 @@ The following JSON types are used.
 
 | Name    | Type    | Required | Description |
 | :------ | :------ | :------- | :---------- |
-| id      | ID      | yes      | Identifier of the judgement type. Must be one of the IDs specified in the [Contest API](contest_api#known-judgement-types). |
+| id      | ID      | yes      | iIdentifier of the judgement type. Must be one of the IDs specified in the [Contest API](contest_api#known-judgement-types). |
 | name    | string  | yes      | Name of the judgement. (might not match table linked above, e.g. if localised). |
 | penalty | boolean | depends  | Whether this judgement causes penalty time; must be present if and only if `penalty_time` is present in `config/contest.json`. |
 | solved  | boolean | yes      | Whether this judgement is considered correct. |
@@ -168,7 +168,7 @@ None.
 
 #### Differences from Contest API
 
-None.
+- Includes `compiler` and `runner` that contains the commands to use for compiling and running respectively. 
 
 #### Examples
 
@@ -254,6 +254,7 @@ None.
 
 - The `time_limit` element is required to be a `number` that is an
   integer multiple of `0.001` in the Contest API. 
+- The `uuid` element is not defined in the Contest API.
 
 #### Examples
 
@@ -551,7 +552,7 @@ None.
 | :---------------- | :------ | :------- | :---------- |
 | id                | ID      | yes      | Identifier of the run. |
 | judgement_id      | ID      | yes      | Identifier of the judgement this is part of. |
-| ordinal           | integer | yes      | Ordering of runs in the judgement. Must be different for every run in a judgement. Runs for the same test case must have the same ordinal. Must be between 1 and `test_data_count`, inclusive, for the problem referred to by the submission referred to by the judgement referred to by this run. |
+| ordinal           | integer | yes      | Ordering of runs in the judgement. Must be different for every run in a judgement. Runs for the same test case must have the same ordinal. Must be between 1 and `test_data_count`, inclusive, for the problem referred to by the submission referred to by the judgement reffered to by this run. |
 | judgement_type_id | ID      | yes      | The verdict of this judgement. |
 | time              | TIME    | yes      | Absolute time when run completed. |
 | contest_time      | RELTIME | yes      | Contest relative time when run completed. |
@@ -668,7 +669,7 @@ None.
 
 ### Scoreboard object
 
-Exactly as defined in the [Contest API](contest_api#scoreboard-format)
+Exactly as defiend in the [Contest API](contest_api#scoreboard-format)
 
 #### Differences from Contest API
 
@@ -706,7 +707,7 @@ None.
 
 ## Binary files
 
-Binary files related to certain object types are stored in a single
+Binary files realted to certain object types are stored in a single
 parent directory with the same name as the object type and
 subdirectories with the same ID as en element of that object type. The
 JSON file with the same base name as the parent directory is the parent
@@ -734,22 +735,22 @@ object using the following mapping:
 
 ### Problem package
 
-Problems packages are stored in a single directory, or alternatively in
+Problems packages are strored in a single directory, or alternatively in
 a ZIP compressed archive using the file extension `.kpp`, according to
 the [Kattis Problem Package
 Format](https://www.kattis.com/problem-package-format/) specification.
 
 Problem packages may be left out if (and only if) `config/problems.json`
 contains `uuid` for those problems. This assumes that the problems are
-stored elsewhere and can be found by matching by the uuid, and this
+stored elsewhere and can be found by macthing by the uuid, and this
 should be checked when verifying a contest archive.
 
 ### Contest files
 
-The contest directory contain all binary files related to a
-single contest in it's parent JSON file. 
+The organization directories contain all binary files related to a
+single organization in it's parent JSON file. 
 
-The following files could be in the contest directory:
+The following files could be in the organization directories:
 
 | Basename | Specifier          | Mime type   | File extension | Description | 
 | :------- | :----------------- | :---------- | :------------- | :---------- |
@@ -763,10 +764,9 @@ single organization in it's parent JSON file.
 
 The following files could be in the organization directories:
 
-| Basename     | Specifier          | Mime type   | File extension | Description | 
-| :----------- | :----------------- | :---------- | :------------- | :---------- |
-| logo         | `<width>x<height>` | `image/png` | `.png`         | Logo of the organization. |
-| country_flag | `<width>x<height>` | `image/png` | `.png`         | Country flag of the organization. |
+| Basename | Specifier          | Mime type   | File extension | Description | 
+| :------- | :----------------- | :---------- | :------------- | :---------- |
+| logo     | `<width>x<height>` | `image/png` | `.png`         | Logo of the organization. |
 
 ### Team files
 

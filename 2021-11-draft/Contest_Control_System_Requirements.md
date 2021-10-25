@@ -1,6 +1,6 @@
 ---
 sort: 1
-permalink: /ccs_system_requirements
+permalink: /2021-11-draft/ccs_system_requirements
 ---
 # CCS System Requirements
 ## Introduction
