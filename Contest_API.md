@@ -1919,7 +1919,7 @@ state of that object. E.g. if an object was created and deleted the
 delete notification will be sent last.
 - when a notification is sent the change it decsribes must alreday have
 happened. I.e. if a client recieves an update for a certain endpoint a
-`GET` from that enpoint will return that satate or possible some later
+`GET` from that endpoint will return that state or possible some later
 state, but never an earlier state.
 - the notification for the [state endpoint](#contest-state) setting
 `end_of_updates` must be the last event in the feed.
