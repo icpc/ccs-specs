@@ -330,6 +330,122 @@ are meant to ease extensibility.
     treat an attribute with value `null` equivalently as that attribute
     not being present.
 
+### Notification format
+
+There are two mechanisms that clients can use to receive notifications
+of API updates (events), a webhook and a streaming HTTP feed. Both
+mechanisms use the same payload format, but have different benefits,
+drawbacks, and ways to access. Webhooks are typically better for
+internet-scale, asynchronous processing, and disconnected systems; the
+HTTP feed, on the other hand, might be better for browser-based
+applications and on-site contests.
+
+The notifications are effectively a changelog of create, update, or
+delete events that have occurred in the REST endpoints. Some endpoints
+(specifically the [Scoreboard](#scoreboard) and the Event feed)
+are aggregated data, and so these will only ever update due to some
+other REST endpoint updating. For this reason there is no explicit event
+for these, since there will always be another event sent.
+
+The events are served as JSON objects, with every event corresponding to
+a change in a single object (submission, judgement, language, team,
+etc.) or full endpoint. The general format for events is:
+
+```json
+{"contest_id": "<id>", "endpoint": "<endpoint>", "id": "<id>", "data": <JSON data for element> }
+```
+
+| Name        | Type   | Required? | Nullable? | Description
+| :---------- | :----- | :-------- | :-------- | :----------
+| contest\_id | string | yes       | no        | The contest id.
+| endpoint    | string | yes       | yes       | The API endpoint, i.e. type of contest object above. Can be used for filtering.
+| id          | string | yes       | yes       | The id of the object that changed.
+| data        | object | yes       | yes       | The data is the object that would be returned if calling the corresponding API endpoint at this time, i.e. an object or null for deletions.
+
+
+The meaning of an event is to say that the contents at endpoint
+`/contests/<contest_id>/<endpoint>/<id>` now has the contents of `data`.
+
+#### Examples
+
+Event:
+```json
+{
+   "contest_id": "dress2016",
+   "data": {
+      "id": "dress2016",
+      "name": "2016 ICPC World Finals Dress Rehearsal",
+      "start_time": null,
+      "countdown_pause_time": "0:03:38.749",
+      "duration": "2:30:00"
+  }
+}
+```
+
+Means that endpoint `/contests/dress2016` has been updated to:
+```json
+{
+   "id": "dress2016",
+   "name": "2016 ICPC World Finals Dress Rehearsal",
+   "start_time": null,
+   "countdown_pause_time": "0:03:38.749",
+   "duration": "2:30:00"
+}
+```
+
+Event:
+```json
+{
+   "contest_id": "wf14",
+   "endpoint": "problems",
+   "data": [
+      {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},
+      {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}
+   ]
+}
+```
+
+Means that endpoint `/contests/wf14/problems` has been updated to:
+```json
+[
+   {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},
+   {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}
+]
+```
+
+Event:
+```json
+{
+   "contest_id": "wf14",
+   "endpoint": "submissions",
+   "id": "187",
+   "data": {
+      "id": "187",
+      "team_id": "123",
+      "problem_id": "10-asteroids",
+      "language_id": "1-java",
+      "time": "2014-06-25T11:22:05.034+01",
+      "contest_time": "1:22:05.034",
+      "entry_point": "Main",
+      "files": [{"href":"contests/wf14/submissions/187/files","mime":"application/zip"}]   
+   }
+}
+```
+
+Means that endpoint `/contests/wf14/submissions/187` has been updated to:
+```json
+{
+   "id": "187",
+   "team_id": "123",
+   "problem_id": "10-asteroids",
+   "language_id": "1-java",
+   "time": "2014-06-25T11:22:05.034+01",
+   "contest_time": "1:22:05.034",
+   "entry_point": "Main",
+   "files": [{"href":"contests/wf14/submissions/187/files","mime":"application/zip"}]
+}
+```
+
 ## Interface specification
 
 The following list of API endpoints should be supported. Note that
@@ -1770,116 +1886,61 @@ Returned data:
 
 ### Event feed
 
-```note
-This section is a draft.
-```
+Change [notifications](#notification-format) (events) of the data
+presented by the API.
 
-Provides the event (notification) feed for the current contest. This is
-effectively a changelog of create, update, or delete events that have
-occurred in the REST endpoints. Some endpoints (specifically the 
-[Scoreboard](#scoreboard) and the Event feed itself) are
-aggregated data, and so these will only ever update due to some other
-REST endpoint updating. For this reason there is no explicit event for
-these, since there will always be another event sent. This can also be
-seen by the fact that there is no scoreboard event in the table of
-events below.
+The following endpoint is associated with the event feed:
+
+| Endpoint                    | Mime-type            | Required? | Description
+| :-------------------------- | :------------------- | :-------- | :----------
+| `/contests/<id>/event-feed` | application/x-ndjson | yes       | NDJSON feed of events as defined in [notification format](#notification-format).
+
+The event feed is a streaming HTTP endpoint that allows connected
+clients to receive change notifications. The feed is a complete log of
+contest objects that starts "at the beginning of time" so all existing
+objects will be sent upon initial connection, but may appear in any
+order (e.g. teams or problems first).
+
+Each line is an NDJSON formatted notification. The feed does not
+terminate under normal circumstances, so to ensure keep alive a newline
+must be sent if there has been no event within 120 seconds.
+
+Since this is generated data, only the `GET` method is allowed for this
+endpoint, irrespective of role.
+
+#### General requirements
 
 Every notification provides the current state of a single contest
 object. There is no guarantee on order of events (except for general
 requirements below), whether two consecutive changes cause one or two
 events, duplicate events, or even that different clients will receive
-the same order or set of events. The only guarantee is that when an
-object changes one or more times you'll receive an event, and the latest
-event received for any object is the correct and current state of that
-object (e.g. if an object was created and deleted you'll always receive
-a delete event last).
+the same order or set of events. The only guarantees are:
 
-As a concrete example, judgement events are usually fired when judging
-is started, and fired again when the final judgement is available. If a
-client connects after the judgement, or a client was disconnected during
-the judgement, they will typically only receive the final (complete)
-judgement.
+- when an object changes one or more times a notification will be sent,
+- the latest notification sent for any object is the correct and current
+state of that object. E.g. if an object was created and deleted the
+delete notification will be sent last.
+- when a notification is sent the change it describes must already have
+happened. I.e. if a client receives an update for a certain endpoint a
+`GET` from that endpoint will return that state or possible some later
+state, but never an earlier state.
+- the notification for the [state endpoint](#contest-state) setting
+`end_of_updates` must be the last event in the feed.
 
-There are two mechanisms that clients can use to receive events: a
-webhook, or a streaming HTTP feed. Both mechanisms have the same format
-(payload) and events, but different benefits, drawbacks, and ways to
-register. Webhooks are better for internet-scale, asynchronous
-processing, and disconnected systems; the HTTP feed is better for
-browser-based applications and onsite contests.
+##### Reconnection
 
-#### General requirements
+If a client loses connection or needs to reconnect after a brief
+disconnect (e.g. client restart), it can use the 'time' argument to
+specify the last event it received:
 
-The event responses and `data` objects contained in it must observe
-the same restrictions as those of the respective endpoints they
-represent. This means that attributes inside the `data` element will
-be present if and only if the client has access to those at the
-respective endpoint. The client only receives create, update and delete
-events of elements it has (partial) access to. When time-based access is
-granted or revoked, create or delete events are dispatched for each
-affected entity.
+`/event-feed?time=xx`
 
-Referential integrity must be strictly adhered to for new objects. i.e.
-if there is a new object that refers to another object (e.g. a
-submission for a team) then the referenced object must already exist and
-have been notified. There is no such guarantee for deletion: if an
-object that is referred to is deleted then by definition all of the
-child objects will be deleted, but the events may not arrive in strict
-referential order:
-
-  - If an object, A, refers to another object, B, then the event that
-    shows that A has been created or updated to refer to B **must** come
-    after the event that shows that B has been created.
-  - If some data is only available after a specific state change, then
-    the event showing the state change **must** come before any update
-    events making that data available. E.g. problems are only available
-    after contest start for the public role, so the state event showing
-    that the contest has started **must** come before the problem events
-    creating the problems.
-  - Since nothing must change after the contest has ended, thawed (or
-    never been frozen), and been finalized, only the `end_of_updates` 
-    event may come after the state event showing that.
-
-#### Feed format
-
-The feed is served as JSON objects, with every event corresponding to a
-change in a single object (submission, judgement, language, team, etc.)
-or full endpoint. The general format for events is:
-
-```json
-{"contest_id": "<id>", "endpoint": "<endpoint>", "id": "<id>", "data": <JSON data for element> }
-```
-
-| Name        | Type   | Required? | Nullable? | Description
-| :---------- | :----- | :-------- | :-------- | :----------
-| contest\_id | string | yes       | no        | The contest id.
-| endpoint    | string | yes       | yes       | The API endpoint, i.e. type of contest object above. Can be used for filtering.
-| id          | string | yes       | yes       | The id of the object that changed.
-| data        | object | yes       | yes       | The data is the object that would be returned if calling the corresponding API endpoint at this time, i.e. an object or null for deletions.
-
-All event types have a corresponding API endpoint, as specified in the table below.
-
-| Event           | API Endpoint                          |
-| :-------------- | :------------------------------------ |
-| contests        | `/contests/<id>`                      |
-| judgement-types | `/contests/<id>/judgement-types/<id>` |
-| languages       | `/contests/<id>/languages/<id>`       |
-| problems        | `/contests/<id>/problems/<id>`        |
-| groups          | `/contests/<id>/groups/<id>`          |
-| organizations   | `/contests/<id>/organizations/<id>`   |
-| teams           | `/contests/<id>/teams/<id>`           |
-| team-members    | `/contests/<id>/team-members/<id>`    |
-| state           | `/contests/<id>/state`                |
-| submissions     | `/contests/<id>/submissions/<id>`     |
-| judgements      | `/contests/<id>/judgements/<id>`      |
-| runs            | `/contests/<id>/runs/<id>`            |
-| clarifications  | `/contests/<id>/clarifications/<id>`  |
-| awards          | `/contests/<id>/awards/<id>`          |
-
-Note that this does *not* contain `/webhooks/<id>`, since no events will be triggered for that endpoint.
-
-##### Filtering
-
-TODO - filter by contest id and/or endpoint
+If specified, the server will attempt to start sending events around the
+given time to reduce the volume of events and required reconciliation.
+If the time passed is too large or the server does not support this
+attribute, all objects will be sent. There is no guarantee that all
+updates (e.g. a team name correction, which is not time-based) that
+occurred during the time the client was disconnected will be reflected.
 
 ##### Examples
 
@@ -1913,30 +1974,12 @@ The following are examples of contest events:
 {"contest_id":"finals","endpoint":"teams","id":"11","data":null}
 ```
 
-TODO: data is object or array - is that too ugly?
+### Webhooks
 
-#### Webhook
+Webhooks receiving change [notifications](#notification-format) (events)
+of the data presented by the API.
 
-A webhook allows you to receive HTTP callbacks whenever there is a
-change to the contest. Clients are only notified of future changes; they
-are expected to use other mechanisms if they need to determine the
-current state of the contest. Every callback will contain one JSON
-object as specified above.
-
-Responding to each event with a 2xx response code indicates successful
-receipt and ensures that the events in the payload are never sent again.
-If the client responds with anything other than 2xx, the server will
-continue to periodically try again, potentially with different payloads
-(e.g. as new events accumulate). Callbacks to each client are always
-sent synchronously and in order; clients do not need to worry about
-getting callbacks out of order and should always process each callback
-fully before processing the next one.
-
-If the client fails to respond to multiple requests over a period of
-time (configured for each contest), it will be assumed deactivated and
-automatically removed from future callbacks.
-
-The following endpoints is associated with the webhook:
+The following endpoints are associated with webhooks:
 
 | Endpoint         | Mime-type        | Required? | Description
 | ---------------- | ---------------- | :-------- | :----------
@@ -1952,11 +1995,34 @@ JSON elements of webhook callback objects:
 | endpoints    | array of string | yes       | no        | Names of endpoints to receive callbacks for. Empty array means all endpoints.
 | contest\_ids | array of ID     | yes       | no        | ID’s of contests to receive callbacks for. Empty array means all configured contests.
 
+A webhook allows you to receive HTTP callbacks whenever there is a
+change to the contest. Clients are only notified of changes after
+signing up; they are expected to use other mechanisms if they need to
+determine the current state of the contest. Every callback will contain
+one JSON [notifications](#notification-format) object.
+
+Responding to each event with a 2xx response code indicates successful
+receipt and ensures that the events in the payload are never sent again.
+If the client responds with anything other than 2xx, the server will
+continue to periodically try again, potentially with different payloads
+(e.g. as new events accumulate). Callbacks to each client are always
+sent synchronously and in order; clients do not need to worry about
+getting callbacks out of order and should always process each callback
+fully before processing the next one.
+
+If the client fails to respond to multiple requests over a period of
+time (configured for each contest), it will be assumed deactivated and
+automatically removed from future callbacks.
+
 ##### Adding a webhook
 
-To register a webhook, you need to post your server's callback URL.
-To do so, perform a `POST` request with a JSON body with the fields (except `id`) from the above table to the `/webhooks` endpoint together with one additional field,
-called `token`. In this field put a client-generated token that can be used to verify that callbacks come from the CCS. If you don't supply `contest_ids` and/or `endpoints`, they will default to `[]`.
+To register a webhook, you need to post your server's callback URL. To
+do so, perform a `POST` request with a JSON body with the fields (except
+`id`) from the above table to the `/webhooks` endpoint together with one
+additional field, called `token`. In this field put a client-generated
+token that can be used to verify that callbacks come from the CCS. If
+you don't supply `contest_ids` and/or `endpoints`, they will default to
+`[]`.
 
 ##### Examples
 
@@ -1992,45 +2058,11 @@ Returned data:
 }]
 ```
 
-When the CCS wants to send out a callback, it will check all active webhooks, filter them on applicable endpoint and contest ID and perform a `POST` to the URL.
-The CCS will add a header to this request called `Webhook-Token` which contains the token as supplied when creating the webhook.
-Clients should verify that this token matches with what they expect.
-The body of the request will be in the same format as in the [feed format](#feed-format), i.e. it contains the keys `contest_id`, `endpoint`, `id` and `data`.
-
-#### HTTP Feed
-
-The HTTP event feed is a streaming HTTP endpoint that allows connected
-clients to receive contest events. The feed is a complete log of contest
-objects that starts "at the beginning of time" so all existing objects
-will be sent upon initial connection, but apart from referential
-integrity requirements they may appear in any order (e.g. teams or
-problems first).
-
-Each line is an NDJSON formatted contest event as specified above. The
-feed does not terminate under normal circumstances, so to ensure keep
-alive a newline must be sent if there has been no event within 120
-seconds.
-
-Since this is generated data, only the `GET` method is allowed here,
-irrespective of role.
-
-The following endpoint is associated with the event feed:
-
-| Endpoint                    | Mime-type            | Required? | Description
-| :-------------------------- | :------------------- | :-------- | :----------
-| `/contests/<id>/event-feed` | application/x-ndjson | yes       | NDJSON feed of events as defined below.
-
-##### Reconnection
-
-If a client loses connection or needs to reconnect after a brief
-disconnect (e.g. client restart), it can use the 'time' argument to
-specify the last event it received:
-
-`/event-feed?time=xx`
-
-If specified, the server will attempt to start sending events around the
-given time to reduce the volume of events and required reconciliation.
-If the time passed is too large or the server does not support this
-attribute, all objects will be sent. There is no guarantee that all
-updates (e.g. a team name correction, which is not time-based) that
-occurred during the time the client was disconnected will be reflected.
+When a system wants to send out a callback, it will check all active
+webhooks, filter them on applicable endpoint and contest ID and perform
+a `POST` to the URL. The system will add a header to this request called
+`Webhook-Token` which contains the token as supplied when creating the
+webhook. Clients should verify that this token matches with what they
+expect. The body of the request will follow the [notification
+format](#notification-format), i.e. it contains the keys `contest_id`,
+`endpoint`, `id` and `data`.
