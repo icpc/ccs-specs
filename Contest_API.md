@@ -338,7 +338,7 @@ mechanisms use the same payload format, but have different benefits,
 drawbacks, and ways to access. Webhooks are typically better for
 internet-scale, asynchronous processing, and disconnected systems; the
 HTTP feed, on the other hand, might be better for browser-based
-applications and onsite contests.
+applications and on-site contests.
 
 The notifications are effectively a changelog of create, update, or
 delete events that have occurred in the REST endpoints. Some endpoints
