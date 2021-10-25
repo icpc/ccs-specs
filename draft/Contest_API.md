@@ -4,9 +4,6 @@ permalink: /draft/contest_api
 ---
 # Contest API
 
-**This is the development draft for the Contest API.
-See also [the version that will be used at WF 2020](https://clics.ecs.baylor.edu/index.php?title=Contest_API_2020).**
-
 ## Introduction
 
 This page describes an API for accessing information provided by a
