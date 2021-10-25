@@ -1973,7 +1973,7 @@ The following are examples of contest events:
 
 ### Webhooks
 
-Webhooks recieving change [notifications](#notification-format) (events)
+Webhooks receiving change [notifications](#notification-format) (events)
 of the data presented by the API.
 
 The following endpoints are associated with webhooks:
