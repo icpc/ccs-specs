@@ -550,6 +550,9 @@ JSON elements of contest objects:
 | penalty\_time                | integer        | no        | no        | Penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`.
 | banner                       | array of IMAGE | no        | yes       | Banner for this contest, intended to be an image with a large aspect ratio around 8:1.
 | logo                         | array of IMAGE | no        | yes       | Logo for this contest, intended to be an image with aspect ratio near 1:1.
+| location                     | object         | no        | yes       | JSON object as specified in the rows below.
+| location.latitude            | number         | depends   | no        | Latitude in degrees. Required iff location is present.
+| location.longitude           | number         | depends   | no        | Longitude in degrees. Required iff location is present.
 
 The expected/typical use of `countdown_pause_time` is that once a
 `start_time` is defined and close, the countdown may be paused due to
