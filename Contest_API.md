@@ -1971,28 +1971,12 @@ The following are examples of contest events:
 {"contest_id":"finals","endpoint":"teams","id":"11","data":null}
 ```
 
-#### Webhook
+### Webhooks
 
-A webhook allows you to receive HTTP callbacks whenever there is a
-change to the contest. Clients are only notified of future changes; they
-are expected to use other mechanisms if they need to determine the
-current state of the contest. Every callback will contain one JSON
-object as specified above.
+Webhooks recieving change [notifications](#notification-format) (events)
+of the data presented by the API.
 
-Responding to each event with a 2xx response code indicates successful
-receipt and ensures that the events in the payload are never sent again.
-If the client responds with anything other than 2xx, the server will
-continue to periodically try again, potentially with different payloads
-(e.g. as new events accumulate). Callbacks to each client are always
-sent synchronously and in order; clients do not need to worry about
-getting callbacks out of order and should always process each callback
-fully before processing the next one.
-
-If the client fails to respond to multiple requests over a period of
-time (configured for each contest), it will be assumed deactivated and
-automatically removed from future callbacks.
-
-The following endpoints is associated with the webhook:
+The following endpoints are associated with webhooks:
 
 | Endpoint         | Mime-type        | Required? | Description
 | ---------------- | ---------------- | :-------- | :----------
@@ -2008,11 +1992,34 @@ JSON elements of webhook callback objects:
 | endpoints    | array of string | yes       | no        | Names of endpoints to receive callbacks for. Empty array means all endpoints.
 | contest\_ids | array of ID     | yes       | no        | ID’s of contests to receive callbacks for. Empty array means all configured contests.
 
+A webhook allows you to receive HTTP callbacks whenever there is a
+change to the contest. Clients are only notified of changes after
+signing up; they are expected to use other mechanisms if they need to
+determine the current state of the contest. Every callback will contain
+one JSON [notifications](#notification-format) object.
+
+Responding to each event with a 2xx response code indicates successful
+receipt and ensures that the events in the payload are never sent again.
+If the client responds with anything other than 2xx, the server will
+continue to periodically try again, potentially with different payloads
+(e.g. as new events accumulate). Callbacks to each client are always
+sent synchronously and in order; clients do not need to worry about
+getting callbacks out of order and should always process each callback
+fully before processing the next one.
+
+If the client fails to respond to multiple requests over a period of
+time (configured for each contest), it will be assumed deactivated and
+automatically removed from future callbacks.
+
 ##### Adding a webhook
 
-To register a webhook, you need to post your server's callback URL.
-To do so, perform a `POST` request with a JSON body with the fields (except `id`) from the above table to the `/webhooks` endpoint together with one additional field,
-called `token`. In this field put a client-generated token that can be used to verify that callbacks come from the CCS. If you don't supply `contest_ids` and/or `endpoints`, they will default to `[]`.
+To register a webhook, you need to post your server's callback URL. To
+do so, perform a `POST` request with a JSON body with the fields (except
+`id`) from the above table to the `/webhooks` endpoint together with one
+additional field, called `token`. In this field put a client-generated
+token that can be used to verify that callbacks come from the CCS. If
+you don't supply `contest_ids` and/or `endpoints`, they will default to
+`[]`.
 
 ##### Examples
 
@@ -2048,7 +2055,11 @@ Returned data:
 }]
 ```
 
-When the CCS wants to send out a callback, it will check all active webhooks, filter them on applicable endpoint and contest ID and perform a `POST` to the URL.
-The CCS will add a header to this request called `Webhook-Token` which contains the token as supplied when creating the webhook.
-Clients should verify that this token matches with what they expect.
-The body of the request will be in the same format as in the [feed format](#feed-format), i.e. it contains the keys `contest_id`, `endpoint`, `id` and `data`.
+When a system wants to send out a callback, it will check all active
+webhooks, filter them on applicable endpoint and contest ID and perform
+a `POST` to the URL. The system will add a header to this request called
+`Webhook-Token` which contains the token as supplied when creating the
+webhook. Clients should verify that this token matches with what they
+expect. The body of the request will follow the [notification
+format](#notification-format), i.e. it contains the keys `contest_id`,
+`endpoint`, `id` and `data`.
