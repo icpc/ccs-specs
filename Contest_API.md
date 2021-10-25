@@ -338,7 +338,7 @@ mechanisms use the same payload format, but have different benefits,
 drawbacks, and ways to access. Webhooks are typically better for
 internet-scale, asynchronous processing, and disconnected systems; the
 HTTP feed, on the other hand, might be better for browser-based
-applications and onsite contests.
+applications and on-site contests.
 
 The notifications are effectively a changelog of create, update, or
 delete events that have occurred in the REST endpoints. Some endpoints
@@ -553,6 +553,9 @@ JSON elements of contest objects:
 | penalty\_time                | integer        | no        | no        | Penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`.
 | banner                       | array of IMAGE | no        | yes       | Banner for this contest, intended to be an image with a large aspect ratio around 8:1.
 | logo                         | array of IMAGE | no        | yes       | Logo for this contest, intended to be an image with aspect ratio near 1:1.
+| location                     | object         | no        | yes       | JSON object as specified in the rows below.
+| location.latitude            | number         | depends   | no        | Latitude in degrees. Required iff location is present.
+| location.longitude           | number         | depends   | no        | Longitude in degrees. Required iff location is present.
 
 The expected/typical use of `countdown_pause_time` is that once a
 `start_time` is defined and close, the countdown may be paused due to
@@ -1917,9 +1920,9 @@ the same order or set of events. The only guarantees are:
 - the latest notification sent for any object is the correct and current
 state of that object. E.g. if an object was created and deleted the
 delete notification will be sent last.
-- when a notification is sent the change it decsribes must alreday have
-happened. I.e. if a client recieves an update for a certain endpoint a
-`GET` from that enpoint will return that satate or possible some later
+- when a notification is sent the change it describes must already have
+happened. I.e. if a client receives an update for a certain endpoint a
+`GET` from that endpoint will return that state or possible some later
 state, but never an earlier state.
 - the notification for the [state endpoint](#contest-state) setting
 `end_of_updates` must be the last event in the feed.
@@ -1973,7 +1976,7 @@ The following are examples of contest events:
 
 ### Webhooks
 
-Webhooks recieving change [notifications](#notification-format) (events)
+Webhooks receiving change [notifications](#notification-format) (events)
 of the data presented by the API.
 
 The following endpoints are associated with webhooks:
