@@ -53,27 +53,27 @@ using a similar naming convention.
 
 | File name                             | Format | Description | Required |
 | :------------------------------------ | :----- | :---------- | :------- |
-| `config/contest.json`                 | JSON   | [Contest object](#contest-object). | No |
-| `config/contest`                      | Directory | [Contest files](#contest-files). | No |
-| `config/judgement-types.json`         | JSON   | Array of [judgement type objects](#judgement-type-object). | Yes |
-| `config/languages.json`               | JSON   | Array of [language objects](#language-object). | Yes |
-| `config/problems.json`                | JSON   | Array of [problem objects](#problem-object). | Yes |
-| `config/problems/<problem-ID>[.kpp]`  | [KPP](https://www.kattis.com/problem-package-format/) | [Problem package](#problem-package) | No |
-| `registration/groups.json`            | JSON   | Array of [group objects](#group-object). | No |
-| `registration/organizations.json`     | JSON   | Array of [organization objects](#organization-object). | No |
-| `registration/organizations/<organization-ID>` | Directory | [Organization files](#organization-files).| No |
-| `registration/teams.json`             | JSON   | Array of [team objects](#team-object). | Yes |
-| `registration/teams/<team-ID>`        | Directory | [Team files](#team-files). | No |
-| `registration/team-members.json`      | JSON   | Array of [team member objects](#team-member-object). | No |
-| `registration/team-members/<team-member-ID>` | Directory | [Team member files](#team-member-files). | No |
-| `events/submissions.json`             | JSON   | Array of [submission objects](#submission-object). | No |
-| `events/submissions/<submission-ID>`  | Directory | [Submission files](#submission-files). | No |
-| `events/judgements[.<system>].json`   | JSON   | Array of [judgement objects](#judgement-object). | No |
-| `events/runs[.<system>].json`         | JSON   | Array of [run objects](#run-object). | No |
-| `events/clarifications.json`          | JSON   | Array of [clarification objects](#clarification-object). | No |
-| `events/event-feed[.<system>].ndjson` | [NDJSON](http://ndjson.org/) | [Event feed objects](#event-feed-object). | No |
-| `results/awards.json`                 | JSON   | Array of [awards objects](#award-object). | No |
-| `results/scoreboard.json`             | JSON   | [Scoreboard object](#scoreboard-object). | No |
+| `contest.json`                 | JSON   | [Contest object](#contest-object). | No |
+| `contest`                      | Directory | [Contest files](#contest-files). | No |
+| `judgement-types.json`         | JSON   | Array of [judgement type objects](#judgement-type-object). | Yes |
+| `languages.json`               | JSON   | Array of [language objects](#language-object). | Yes |
+| `problems.json`                | JSON   | Array of [problem objects](#problem-object). | Yes |
+| `problems/<problem-ID>[.kpp]`  | [KPP](https://www.kattis.com/problem-package-format/) | [Problem package](#problem-package) | No |
+| `groups.json`            | JSON   | Array of [group objects](#group-object). | No |
+| `organizations.json`     | JSON   | Array of [organization objects](#organization-object). | No |
+| `organizations/<organization-ID>` | Directory | [Organization files](#organization-files).| No |
+| `teams.json`             | JSON   | Array of [team objects](#team-object). | Yes |
+| `teams/<team-ID>`        | Directory | [Team files](#team-files). | No |
+| `team-members.json`      | JSON   | Array of [team member objects](#team-member-object). | No |
+| `team-members/<team-member-ID>` | Directory | [Team member files](#team-member-files). | No |
+| `submissions.json`             | JSON   | Array of [submission objects](#submission-object). | No |
+| `submissions/<submission-ID>`  | Directory | [Submission files](#submission-files). | No |
+| `judgements[.<system>].json`   | JSON   | Array of [judgement objects](#judgement-object). | No |
+| `runs[.<system>].json`         | JSON   | Array of [run objects](#run-object). | No |
+| `clarifications.json`          | JSON   | Array of [clarification objects](#clarification-object). | No |
+| `event-feed[.<system>].ndjson` | [NDJSON](http://ndjson.org/) | [Event feed objects](#event-feed-object). | No |
+| `awards.json`                 | JSON   | Array of [awards objects](#award-object). | No |
+| `scoreboard.json`             | JSON   | [Scoreboard object](#scoreboard-object). | No |
 
 ## JSON objects
 
@@ -117,7 +117,7 @@ The following JSON types are used.
 #### Differences from Contest API
 
 - The `countdown_pause_time` is not included. It is allowed but the information should be ignored.
-- The `banner` and `logo` elements are not included. They are allowed but the information may be ignored. These files are instead found as `banner[.<size>].<format>` and `logo[.<size>].<format>` in the same directory as the JSON file.
+- The `banner` and `logo` elements are not included. They are allowed but the information may be ignored. These files are instead found as `banner[.<size>].<format>` and `logo[.<size>].<format>` in the `contest` directory.
 
 #### Examples
 
@@ -329,7 +329,7 @@ None.
 
 - The `logo` element is not included. It is allowed but the information
   may be ignored. These files are instead found as
-  `logo[.<size>].<format>` in the same directory as the JSON file.
+  `logo[.<size>].<format>` in the `organizations/<organization-ID>` directory.
 
 #### Examples
 
@@ -453,7 +453,7 @@ None.
 
 - The `photo` element is not included. It is allowed but the information
   may be ignored. These files are instead found as
-  `photo[.<size>].<format>` in the same directory as the JSON file.
+  `photo[.<size>].<format>` in the `team-members/<team-member-ID>` directory.
 
 #### Examples
 
@@ -496,7 +496,7 @@ None.
 
 - The `files` and `reaction` elements are not included. They are allowed
   but the information may be ignored. These files are instead found in 
-  the same directory as the JSON file.
+  the `submissions/<submission-ID>` directory.
 
 #### Examples
 
