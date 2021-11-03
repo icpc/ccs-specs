@@ -250,14 +250,6 @@ absolute timestamps.
     short as reasonable but not more than 10 characters. IDs not marked
     as labels may be random characters and cannot be assumed to be
     suitable for display purposes.
-  - Ordinals
-    (type **`ORDINAL`** in the specification) are used to give an
-    explicit order to a list of objects. Ordinal attributes are integers
-    and must be non-negative and unique in a list of objects, and they
-    should typically be low numbers starting from zero. However, clients
-    must not assume that the ordinals start at zero nor that they are
-    sequential. Instead the ordinal values should be used to sort the
-    list of objects.
   - File references
     (types **`IMAGE`**, **`VIDEO`**, **`ARCHIVE`** and **`STREAM`** in
     the specification) are represented as a JSON object with elements as
@@ -878,11 +870,12 @@ JSON elements of problem objects:
 | uuid              | string  | no        | yes       | UUID of the problem, as defined in the problem package.
 | label             | string  | yes       | no        | Label of the problem on the scoreboard, typically a single capitalized letter.
 | name              | string  | yes       | no        | Name of the problem.
-| ordinal           | ORDINAL | yes       | no        | Ordering of problems on the scoreboard.
+| ordinal           | number  | yes       | no        | A unique number useful only to order the problems, e.g. for the scoreboard.
 | rgb               | string  | no        | no        | Hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet), e.g. `#AC00FF` or `#fff`.
 | color             | string  | no        | no        | Human readable color description associated to the RGB value.
 | time\_limit       | number  | no        | no        | Time limit in seconds per test data set (i.e. per single run). Should be an integer multiple of `0.001`.
 | test\_data\_count | integer | yes       | no        | Number of test data sets.
+| max_score         | number  | no        | no        | Maximum expected score, although teams may score higher in some cases. Typically used to indicate scoreboard cell color in scoring contests. Required iff contest:scoreboard_type is `score`.
 
 #### Examples
 
@@ -1383,7 +1376,7 @@ JSON elements of judgement objects:
 | id                   | ID      | yes       | no        | Identifier of the judgement.
 | submission\_id       | ID      | yes       | no        | Identifier of the [ submission](#submissions) judged.
 | judgement\_type\_id  | ID      | yes       | yes       | The [ verdict](#judgement-types) of this judgement.
-| score                | number  | no        | no        | Score for this judgement. Only relevant if contest:scoreboard_type is `score`. Defaults to `100` if missing.
+| score                | number  | no        | no        | Score for this judgement. Required iff contest:scoreboard_type is `score`.
 | start\_time          | TIME    | yes       | no        | Absolute time when judgement started.
 | start\_contest\_time | RELTIME | yes       | no        | Contest relative time when judgement started.
 | end\_time            | TIME    | yes       | yes       | Absolute time when judgement completed.
@@ -1427,7 +1420,7 @@ JSON elements of run objects:
 | :------------------ | :------ | :-------- | :-------- | :----------
 | id                  | ID      | yes       | no        | Identifier of the run.
 | judgement\_id       | ID      | yes       | no        | Identifier of the [ judgement](#judgements) this is part of.
-| ordinal             | ORDINAL | yes       | no        | Ordering of runs in the judgement. Must be different for every run in a judgement. Runs for the same test case must have the same ordinal. Must be between 1 and `problem:test_data_count`.
+| ordinal             | number  | yes       | no        | Ordering of runs in the judgement. Must be different for every run in a judgement. Runs for the same test case must have the same ordinal. Must be between 1 and `problem:test_data_count`.
 | judgement\_type\_id | ID      | yes       | no        | The [ verdict](#judgement-types) of this judgement (i.e. a judgement type).
 | time                | TIME    | yes       | no        | Absolute time when run completed.
 | contest\_time       | RELTIME | yes       | no        | Contest relative time when run completed.
@@ -1842,8 +1835,8 @@ Each problem object within the scoreboard consists of:
 | num\_judged  | integer | yes       | no        | Number of judged submissions (up to and including the first correct one),
 | num\_pending | integer | yes       | no        | Number of pending submissions (either queued or due to freeze).
 | solved       | boolean | depends   | yes       | Required iff contest:scoreboard_type is `pass-fail`.
-| score        | number  | depends   | no        | Required iff contest:scoreboard_type is `score` and solved is missing. If missing or `null` defaults to `100` if solved is `true` and `0` if solved is `false`.
-| time         | integer | depends   | no        | Minutes into the contest when this problem was solved by the team. Required iff `solved=true`.
+| score        | number  | depends   | no        | Required iff contest:scoreboard_type is `score`.
+| time         | integer | depends   | no        | Minutes into the contest when this problem was solved by the team. Required iff `solved=true` or `score>0`.
 
 #### Examples
 
