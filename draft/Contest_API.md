@@ -870,7 +870,7 @@ JSON elements of problem objects:
 | uuid              | string  | no        | yes       | UUID of the problem, as defined in the problem package.
 | label             | string  | yes       | no        | Label of the problem on the scoreboard, typically a single capitalized letter.
 | name              | string  | yes       | no        | Name of the problem.
-| ordinal           | number  | yes       | no        | A unique number useful only to order the problems, e.g. for the scoreboard.
+| ordinal           | number  | yes       | no        | A unique number that determines the order the problems, e.g. on the scoreboard.
 | rgb               | string  | no        | no        | Hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet), e.g. `#AC00FF` or `#fff`.
 | color             | string  | no        | no        | Human readable color description associated to the RGB value.
 | time\_limit       | number  | no        | no        | Time limit in seconds per test data set (i.e. per single run). Should be an integer multiple of `0.001`.
