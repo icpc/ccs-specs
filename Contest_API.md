@@ -348,7 +348,7 @@ etc.) or full endpoint. The general format for events is:
 | :---------- | :----- | :-------- | :-------- | :----------
 | type        | string | yes       | yes       | The type of contest object that changed. Can be used for filtering.
 | id          | string | yes       | yes       | The id of the object that changed, or null for the entire collection/singleton.
-| data        | object | yes       | yes       | The object that would be returned if calling the corresponding API endpoint at this time, i.e. an object, or null for deletions.
+| data        | object | yes       | yes       | The object that would be returned if calling the corresponding API endpoint at this time, i.e. an array, object, or null for deletions.
 
 
 The meaning of an event is to say that the contents at endpoint
