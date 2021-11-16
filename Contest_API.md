@@ -1093,9 +1093,9 @@ JSON elements of people objects:
 | :---------- | :------------- | :-------- | :-------- | :----------
 | id          | ID             | yes       | no        | Identifier of the person.
 | icpc\_id    | string         | no        | yes       | External identifier from ICPC CMS.
-| team\_id    | ID             | no        | no        | [Team](#teams) of this team member.
+| team\_id    | ID             | no        | yes       | [Team](#teams) of this person, if a team member.
 | name        | string         | yes       | no        | Name of the person.
-| title       | string         | no        | no        | Title of the person, e.g. "Technical director".
+| title       | string         | no        | yes       | Title of the person, e.g. "Technical director".
 | email       | string         | no        | yes       | Email of the person.
 | sex         | string         | no        | yes       | Either `male` or `female`, or possibly `null`.
 | role        | string         | yes       | no        | One of `contestant`, `coach`, or `staff`.
