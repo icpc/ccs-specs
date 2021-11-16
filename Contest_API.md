@@ -1131,9 +1131,10 @@ JSON elements of problem objects:
 
 | Name              | Type    | Required? | Nullable? | Description
 | :---------------- | :------ | :-------- | :-------- | :----------
-| id                | ID      | yes       | no        | Identifier of the account, i.e. the username.
+| id                | ID      | yes       | no        | Identifier of the account.
+| user              | string  | yes       | no        | The account username.
 | password          | string  | no        | yes       | The account password.
-| type              | string  | yes       | no        | The type of account, one of `team`, `judge`, `admin`, `analyst`, `staff`.
+| type              | string  | no        | yes       | The type of account, one of `team`, `judge`, `admin`, `analyst`, `staff`.
 | ip                | string  | no        | yes       | IP address associated with this account, used for auto-login.
 | team\_id          | ID      | no        | yes       | The team that this account is for. Required iff type is `team`.
 | people\_id        | ID      | no        | yes       | The person that this account is for, if the account is only for one person.
