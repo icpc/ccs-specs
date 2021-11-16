@@ -250,14 +250,6 @@ absolute timestamps.
     short as reasonable but not more than 10 characters. IDs not marked
     as labels may be random characters and cannot be assumed to be
     suitable for display purposes.
-  - Ordinals
-    (type **`ORDINAL`** in the specification) are used to give an
-    explicit order to a list of objects. Ordinal attributes are integers
-    and must be non-negative and unique in a list of objects, and they
-    should typically be low numbers starting from zero. However, clients
-    must not assume that the ordinals start at zero nor that they are
-    sequential. Instead the ordinal values should be used to sort the
-    list of objects.
   - File references
     (types **`IMAGE`**, **`VIDEO`**, **`ARCHIVE`** and **`STREAM`** in
     the specification) are represented as a JSON object with elements as
@@ -878,7 +870,7 @@ JSON elements of problem objects:
 | uuid              | string  | no        | yes       | UUID of the problem, as defined in the problem package.
 | label             | string  | yes       | no        | Label of the problem on the scoreboard, typically a single capitalized letter.
 | name              | string  | yes       | no        | Name of the problem.
-| ordinal           | ORDINAL | yes       | no        | Ordering of problems on the scoreboard.
+| ordinal           | number  | yes       | no        | A unique number that determines the order the problems, e.g. on the scoreboard.
 | rgb               | string  | no        | no        | Hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet), e.g. `#AC00FF` or `#fff`.
 | color             | string  | no        | no        | Human readable color description associated to the RGB value.
 | time\_limit       | number  | no        | no        | Time limit in seconds per test data set (i.e. per single run). Should be an integer multiple of `0.001`.
@@ -1428,7 +1420,7 @@ JSON elements of run objects:
 | :------------------ | :------ | :-------- | :-------- | :----------
 | id                  | ID      | yes       | no        | Identifier of the run.
 | judgement\_id       | ID      | yes       | no        | Identifier of the [ judgement](#judgements) this is part of.
-| ordinal             | ORDINAL | yes       | no        | Ordering of runs in the judgement. Must be different for every run in a judgement. Runs for the same test case must have the same ordinal. Must be between 1 and `problem:test_data_count`.
+| ordinal             | number  | yes       | no        | Ordering of runs in the judgement. Must be different for every run in a judgement. Runs for the same test case must have the same ordinal. Must be between 1 and `problem:test_data_count`.
 | judgement\_type\_id | ID      | yes       | no        | The [ verdict](#judgement-types) of this judgement (i.e. a judgement type).
 | time                | TIME    | yes       | no        | Absolute time when run completed.
 | contest\_time       | RELTIME | yes       | no        | Contest relative time when run completed.
