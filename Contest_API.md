@@ -1093,7 +1093,7 @@ JSON elements of people objects:
 | :---------- | :------------- | :-------- | :-------- | :----------
 | id          | ID             | yes       | no        | Identifier of the person.
 | icpc\_id    | string         | no        | yes       | External identifier from ICPC CMS.
-| team\_id    | ID             | no        | yes       | [Team](#teams) of this person, if a team member.
+| team\_id    | ID             | no        | yes       | [Team](#teams) of this person. Required iff role is `team`.
 | name        | string         | yes       | no        | Name of the person.
 | title       | string         | no        | yes       | Title of the person, e.g. "Technical director".
 | email       | string         | no        | yes       | Email of the person.
