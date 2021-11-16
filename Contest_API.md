@@ -1132,7 +1132,7 @@ JSON elements of problem objects:
 | Name              | Type    | Required? | Nullable? | Description
 | :---------------- | :------ | :-------- | :-------- | :----------
 | id                | ID      | yes       | no        | Identifier of the account.
-| user              | string  | yes       | no        | The account username.
+| username          | string  | yes       | no        | The account username.
 | password          | string  | no        | yes       | The account password.
 | type              | string  | no        | yes       | The type of account, one of `team`, `judge`, `admin`, `analyst`, `staff`.
 | ip                | string  | no        | yes       | IP address associated with this account, used for auto-login.
