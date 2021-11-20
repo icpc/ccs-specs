@@ -17,6 +17,10 @@ defaults:
     values:
       layout: "default-with-js"
 
+exclude:
+- Gemfile*
+- update_docs.sh
+
 plugins:
   - jekyll-remote-theme
 
