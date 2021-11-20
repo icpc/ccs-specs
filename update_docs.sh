@@ -8,16 +8,15 @@ MY_DIR=$(realpath $(dirname $0))
 mkdir -p "$REPO_DIR"
 rsync -a "$MY_DIR/" "$REPO_DIR/"
 
-rm -rf _site/
+rm -rf docs
 
-bundle exec jekyll build
+bundle exec jekyll build -d docs/
 
 for version in $(cat versions.json | jq -r -c '.[]'); do
-    mkdir -p "_site/$version"
     ( cd "$REPO_DIR" && git checkout "${version}" )
 	ln -sf "$MY_DIR/_layouts" "$REPO_DIR"
     bundle exec jekyll build --config _config.yml -b "/${version}" \
-        -s "$REPO_DIR" -d "_site/${version}/"
+        -s "$REPO_DIR" -d "docs/${version}/"
 done
 
 rm -rf "$TMPDIR"
