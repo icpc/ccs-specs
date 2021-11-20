@@ -1,6 +1,6 @@
 ---
 sort: 2
-permalink: /draft/contest_api
+permalink: /contest_api
 ---
 # Contest API
 
