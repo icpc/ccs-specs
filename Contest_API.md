@@ -1,6 +1,6 @@
 ---
 sort: 2
-permalink: /2020-03/contest_api
+permalink: /contest_api
 ---
 # Contest API
 
@@ -27,7 +27,7 @@ incorporate and supersede a number of
 *REST interface for source code fetching*
 and the *Contest start interface*.
 
-This REST interface is specified in conjunction with a new
+This REST interface is specified in conjunction with a new 
 [NDJSON event feed](#event-feed), which provides all changes to this
 interface as CRUD-style events and is meant to supersede the old XML
 *Event Feed*.
@@ -41,7 +41,7 @@ document are to be interpreted as described in
 
 The interface is implemented as a HTTP REST interface that outputs
 information in [JSON](https://en.wikipedia.org/wiki/JSON) format
-([RFC 7159](https://tools.ietf.org/html/rfc7159)). This REST interface
+([RFC 7159](https://tools.ietf.org/html/rfc7159)). This REST interface 
 should be provided over HTTPS to guard against eavesdropping on
 sensitive contest data and authentication credentials (see roles below).
 
@@ -104,43 +104,66 @@ setting the `Cache-Control` or `Expires` HTTP headers:
 
 The current version of this specification only requires support for the
 `GET` method, unless explicitly specified otherwise in an endpoint
-below (see [PATCH start\_time](#patch-starttime)). However,
+below (see e.g. [PATCH start\_time](#patch-starttime)). However,
 for future compatibility below are already listed other methods with
 their expected behavior, if implemented.
 
   - `GET`
     Read data. This method is idempotent and does not modify any data.
     It can be used to request a whole collection or a specific element.
+
   - `POST`
     Create a new element. This can only be called on a collection
-    endpoint. No `id` attribute should be specified as it is up to the
-    server to assign one, which is returned in the location header.
-  - `PUT`
-    Replaces a specific element. This method is idempotent and can only
-    be called on a specific element and replaces its contents with the
-    data provided. The payload data must be complete, i.e. no partial
-    updates are allowed. The `id` attribute cannot be changed: it does
-    not need to be specified (other than in the URL) and if specified
-    different from in the URL, a `409 Conflict` HTTP code should be
-    returned.
-  - `PATCH`
-    Updates/modifies a specific element. Similar to `PUT` but allows
-    partial updates by providing only that data, for example:
-    `PATCH  https://example.com/api/contests/wf14/teams/10`
-    with JSON contents
-    `{"name":"Our cool new team name"}`
-    No updates of the `id` attribute are allowed either.
-  - `DELETE`
-    Delete a specific element. Idempotent, but may return a 404 status
-    code when repeated. Any provided data is ignored. Example:
-    `DELETE  https://example.com/api/contests/wf14/teams/8`
-    Note that deletes must keep [referential
-    integrity](#referential-integrity) intact.
+    endpoint, and the `id` attribute may not be specified as it is up
+    to the server to assign one.
+    If successful the response will contain a `Location` header
+    pointing to the newly created element.
 
-Standard [HTTP status
-codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) are
-returned to indicate success or failure. When there is a failure (status codes 4xx or 5xx), the
-response message body must include a JSON element that contains the attributes 'code' (a number, identical to the HTTP status code returned) and 'message' (a string) with further information suitable for the user making the request, as per the following example:
+  - `PUT`
+    Creates or replaces a specific element. This method is idempotent, can only
+    be called on a specific element, and replaces its contents with the
+    data provided. The payload data must be complete, i.e. the `id` is
+    required and no partial updates are allowed.
+
+  - `PATCH`
+    Updates/modifies a specific element. This method is idempotent,
+    can only be called on a specific element, and replaces the given
+    attributes with the data provided. For example
+    `PATCH https://example.com/api/contests/wf14/teams/10`
+    with JSON contents `{"name":"Our cool new team name"}`.
+
+  - `DELETE`
+    Delete a specific element. Idempotent, but will return a `404` error
+    code when repeated. Any provided data is ignored, and there is no response body if successful.
+    Example: `DELETE https://example.com/api/contests/wf14/teams/8`.
+    Note that deletes must keep [referential integrity](#referential-integrity) intact.
+
+#### Success, Failure, and HTTP Responses
+
+Standard [HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) are
+returned to indicate success or failure. If successful DELETE will have no response body,
+GET on a collection will return the collection, and every other method will contain the
+current (updated) state of the element.
+
+If a POST, PUT, PATCH would cause any of the following issues it must fail, in addition to any endpoint or element-specific requirements:
+
+* A PATCH on an `id` that doesn't exist. Will return a 404 error code.
+* A PUT or PATCH containing an id that does not match the URL. Will return a 409 error code.
+* A missing required attribute.
+* An attribute that must not be provided is provided.
+* An attribute type that is incorrect or otherwise invalid (e.g. non-nullable attribute set to null).
+* A reference to another element is invalid (to maintain [referential integrity](#referential-integrity)).
+
+In addition to any endpoint or element-specific requirements, DELETE must fail
+if the element `id` doesn't exist, and return a 404 error code. 
+If the element being deleted is referenced by another element, the server must either
+fail or implement a cascading delete (to maintain [referential integrity](#referential-integrity))
+
+When there is a failure using any method the response message body
+must include a JSON element that contains the attributes 'code' (a number,
+identical to the HTTP status code returned) and 'message' (a string) with
+further information suitable for the user making the request, as per the
+following example:
 
 ```json
 {"code":403,
@@ -201,11 +224,6 @@ absolute timestamps.
     (type **`integer`** in the specification) are JSON numbers that are
     restricted to be integer. They should be represented in standard
     integer representation `(-)?[0-9]+`.
-  - Fixed point numbers
-    (type **`decimal`** in the specification) are JSON numbers that are
-    expected to take non-integer values. They must be in decimal
-    (non-scientific) representation and have at most 3 decimals. That
-    is, they must be a integer multiple of 0.001.
   - Absolute timestamps
     (type **`TIME`** in the specification) are strings containing
     human-readable timestamps, given in
@@ -220,11 +238,11 @@ absolute timestamps.
   - Identifiers
     (type **`ID`** in the specification) are given as string consisting
     of characters `[a-zA-Z0-9_.-]` of length at most 36 and not starting
-    with a `-` (dash) or `.` (dot) or ending with a `.` (dot). IDs are
-    unique within each endpoint. IDs are assigned by the person or system
-    that is the source of the object, and must be maintained by downstream
-    systems. For example, the person configuring a contest on disk will
-    typically define the ID for each team, and any CCS or CDS that exposes
+    with a `-` (dash) or `.` (dot) or ending with a `.` (dot). IDs are 
+    unique within each endpoint. IDs are assigned by the person or system 
+    that is the source of the object, and must be maintained by downstream 
+    systems. For example, the person configuring a contest on disk will 
+    typically define the ID for each team, and any CCS or CDS that exposes 
     the team must use the same ID.
     Some IDs are also used as identifiable labels and are marked below
     along with the recommended format. These IDs should be meaningful
@@ -244,7 +262,7 @@ absolute timestamps.
     (types **`IMAGE`**, **`VIDEO`**, **`ARCHIVE`** and **`STREAM`** in
     the specification) are represented as a JSON object with elements as
     defined below.
-  - Arrays (type **`array of <type>`** in the specification) are built-in JSON
+  - Arrays (type **`array of <type>`** in the specification) are built-in JSON 
     arrays of some type defined above.
 
 Element for file reference objects:
@@ -267,7 +285,12 @@ equivalent JSON response snippets pointing to the same location:
   "href":"contests/wf14/submissions/187/files"
 ```
 
-For images, the supported mime types are image/png and image/jpeg.
+For images, the supported mime types are image/png, image/jpeg, and image/svg+xml.
+
+For images in SVG format, i.e. those having a mime type of image/svg+xml,
+the values of `width` and `height` should be the viewport width and height in pixels
+when possible, but otherwise the actual values don't matter as long as they
+are positive and represent the correct aspect ratio.
 
 If implementing support for uploading files pointed to by resource
 links, substitute the href element with a data element with a base64
@@ -275,7 +298,7 @@ encoded string of the associated file contents as the value.
 
 For example
 
-`   POST https://example.com/api/contests/wf14/organizations`
+`   PUT https://example.com/api/contests/wf14/organizations/inst105`
 
 with JSON data
 
@@ -304,6 +327,122 @@ are meant to ease extensibility.
     treat an attribute with value `null` equivalently as that attribute
     not being present.
 
+### Notification format
+
+There are two mechanisms that clients can use to receive notifications
+of API updates (events), a webhook and a streaming HTTP feed. Both
+mechanisms use the same payload format, but have different benefits,
+drawbacks, and ways to access. Webhooks are typically better for
+internet-scale, asynchronous processing, and disconnected systems; the
+HTTP feed, on the other hand, might be better for browser-based
+applications and on-site contests.
+
+The notifications are effectively a changelog of create, update, or
+delete events that have occurred in the REST endpoints. Some endpoints
+(specifically the [Scoreboard](#scoreboard) and the Event feed)
+are aggregated data, and so these will only ever update due to some
+other REST endpoint updating. For this reason there is no explicit event
+for these, since there will always be another event sent.
+
+The events are served as JSON objects, with every event corresponding to
+a change in a single object (submission, judgement, language, team,
+etc.) or full endpoint. The general format for events is:
+
+```json
+{"contest_id": "<id>", "endpoint": "<endpoint>", "id": "<id>", "data": <JSON data for element> }
+```
+
+| Name        | Type   | Required? | Nullable? | Description
+| :---------- | :----- | :-------- | :-------- | :----------
+| contest\_id | string | yes       | no        | The contest id.
+| endpoint    | string | yes       | yes       | The API endpoint, i.e. type of contest object above. Can be used for filtering.
+| id          | string | yes       | yes       | The id of the object that changed.
+| data        | object | yes       | yes       | The data is the object that would be returned if calling the corresponding API endpoint at this time, i.e. an object or null for deletions.
+
+
+The meaning of an event is to say that the contents at endpoint
+`/contests/<contest_id>/<endpoint>/<id>` now has the contents of `data`.
+
+#### Examples
+
+Event:
+```json
+{
+   "contest_id": "dress2016",
+   "data": {
+      "id": "dress2016",
+      "name": "2016 ICPC World Finals Dress Rehearsal",
+      "start_time": null,
+      "countdown_pause_time": "0:03:38.749",
+      "duration": "2:30:00"
+  }
+}
+```
+
+Means that endpoint `/contests/dress2016` has been updated to:
+```json
+{
+   "id": "dress2016",
+   "name": "2016 ICPC World Finals Dress Rehearsal",
+   "start_time": null,
+   "countdown_pause_time": "0:03:38.749",
+   "duration": "2:30:00"
+}
+```
+
+Event:
+```json
+{
+   "contest_id": "wf14",
+   "endpoint": "problems",
+   "data": [
+      {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},
+      {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}
+   ]
+}
+```
+
+Means that endpoint `/contests/wf14/problems` has been updated to:
+```json
+[
+   {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},
+   {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}
+]
+```
+
+Event:
+```json
+{
+   "contest_id": "wf14",
+   "endpoint": "submissions",
+   "id": "187",
+   "data": {
+      "id": "187",
+      "team_id": "123",
+      "problem_id": "10-asteroids",
+      "language_id": "1-java",
+      "time": "2014-06-25T11:22:05.034+01",
+      "contest_time": "1:22:05.034",
+      "entry_point": "Main",
+      "files": [{"href":"contests/wf14/submissions/187/files","mime":"application/zip"}]   
+   }
+}
+```
+
+Means that endpoint `/contests/wf14/submissions/187` has been updated to:
+```json
+{
+   "id": "187",
+   "team_id": "123",
+   "problem_id": "10-asteroids",
+   "language_id": "1-java",
+   "time": "2014-06-25T11:22:05.034+01",
+   "contest_time": "1:22:05.034",
+   "entry_point": "Main",
+   "files": [{"href":"contests/wf14/submissions/187/files","mime":"application/zip"}]
+}
+```
+
 ## Interface specification
 
 The following list of API endpoints should be supported. Note that
@@ -320,7 +459,7 @@ The endpoints can be categorized into 3 groups as follows:
   - Configuration: contests, judgement-types, languages, problems,
     groups, organizations, teams, team-members;
   - Live data: state, submissions, judgements, runs, clarifications,
-    awards;
+    awards, commentary;
   - Aggregate data: scoreboard, event-feed.
 
 Configuration is normally set before contest start. Is not expected to,
@@ -346,7 +485,7 @@ In the tables below, the columns are:
 
   - Name: Attribute name; object sub-attributes are indicated as
     `object.attribute`.
-  - Type: Data type of the attribute; one of the
+  - Type: Data type of the attribute; one of the 
     [types listed above](#json-attribute-types).
   - Required?: Whether this is a required attribute that **must** be
     implemented to conform to this specification.
@@ -373,13 +512,25 @@ attributes that are:
     In the latter case that can either be because it was a left out
     `null` value or because it was not implemented.
 
+### Filtering
+
+Endpoints that return a JSON array must allow filtering on any
+attribute with type ID (except the `id` field) by passing it as a
+query argument. For example, clarifications can be filtered on the
+recipient by passing `to_team_id=X`. To filter on a `null` value,
+pass an empty string, i.e. `to_team_id=`. It must be possible to
+filter on multiple different fields simultaneously, with the
+meaning that all conditions must be met (they are logically `AND`ed).
+Note that filtering on any other field, including fields with the type
+array of ID, does not have to be supported.
+
 ### Contests
 
 Provides information on the current contest.
 
 The following endpoint is associated with contest:
 
-| Endpoint         | Mime-type        | Required? | Description
+| Endpoint         | Mime-type        | Required? | Description                                                                 
 | :--------------- | :--------------- | :-------- | :----------
 | `/contests`      | application/json | yes       | JSON array of all contests with elements as defined in the table below.
 | `/contests/<id>` | application/json | yes       | JSON object of a single contest with elements as defined in the table below.
@@ -395,9 +546,13 @@ JSON elements of contest objects:
 | countdown\_pause\_time       | RELTIME        | no        | yes       | The amount of seconds left when countdown to contest start is paused. At no time may both `start_time` and `countdown_pause_time` be non-`null`.
 | duration                     | RELTIME        | yes       | no        | Length of the contest.
 | scoreboard\_freeze\_duration | RELTIME        | no        | yes       | How long the scoreboard is frozen before the end of the contest.
-| penalty\_time                | integer        | no        | no        | Penalty time for a wrong submission, in minutes.
+| scoreboard\_type             | string         | no        | yes       | What type of scoreboard is used for the contest. Must be either `pass-fail` or `score`. Defaults to `pass-fail` if missing or `null`.
+| penalty\_time                | integer        | no        | no        | Penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`.
 | banner                       | array of IMAGE | no        | yes       | Banner for this contest, intended to be an image with a large aspect ratio around 8:1.
 | logo                         | array of IMAGE | no        | yes       | Logo for this contest, intended to be an image with aspect ratio near 1:1.
+| location                     | object         | no        | yes       | JSON object as specified in the rows below.
+| location.latitude            | number         | depends   | no        | Latitude in degrees. Required iff location is present.
+| location.longitude           | number         | depends   | no        | Longitude in degrees. Required iff location is present.
 
 The expected/typical use of `countdown_pause_time` is that once a
 `start_time` is defined and close, the countdown may be paused due to
@@ -409,10 +564,8 @@ Countdown is resumed by setting a new `start_time` and resetting
 
 #### PATCH start\_time
 
-To replace the *Contest Start Interface*, at the ICPC World
-Finals, an API provided by a CCS or CDS implementing this specification
-must have a role that has the ability to clear or set the contest start
-time via a PATCH method.
+Implementations must have a role that has the ability to clear or set the
+contest start time via a PATCH method.
 
 The PATCH must include a valid JSON element with only two or three
 attributes allowed: the contest id (used for verification), a
@@ -420,8 +573,8 @@ start\_time (a `<TIME>` value or `null`), and an optional
 countdown\_pause\_time (`<RELTIME>`). As above, countdown\_pause\_time
 can only be non-null when start time is null.
 
-The request should fail with a 401 if the user does not have sufficient
-access rights, or a 403 if the contest is started or within 30s of
+The request should fail with a 401 error code if the user does not have sufficient
+access rights, or a 403 error code if the contest is started or within 30s of
 starting, or if the new start time is in the past or within 30s.
 
 #### Examples
@@ -440,6 +593,7 @@ Returned data:
    "start_time": "2014-06-25T10:00:00+01",
    "duration": "5:00:00",
    "scoreboard_freeze_duration": "1:00:00",
+   "scoreboard_type": "pass-fail",
    "penalty_time": 20,
    "banner": [{
        "href": "https://example.com/api/contests/wf2014/banner",
@@ -614,38 +768,55 @@ JSON elements of language objects:
 | :------------------- | :-------------- | :-------- | :-------- | :----------
 | id                   | ID              | yes       | no        | Identifier of the language from table below.
 | name                 | string          | yes       | no        | Name of the language (might not match table below, e.g. if localized).
+| entry_point_required | boolean         | yes       | no        | Whether the language requires an entry point.
+| entry_point_name     | string          | depends   | yes       | The name of the type of entry point, such as "Main class" or "Main file"). Required iff entry_point_required is present.
+| extensions           | array of string | yes       | no        | File extensions for the language.
+| compiler             | Command object  | no        | yes       | Command used for compiling submissions.
+| runner               | Command object  | no        | yes       | Command used for running submissions. Relevant e.g. for interpreted languages and languages running on a VM.
+
+JSON elements of Command objects:
+
+| Name            | Type   | Required | Description
+| :-------------- | :----- | :------- | :----------
+| command         | string | yes      | Command to run.
+| args            | string | no       | Argument list for command. `{files}` denotes where to include the file list.
+| version         | string | no       | Expected output from running the version-command.
+| version-command | string | no       | Command to run to get the version. Defaults to `<command> --version` if not specified.
+
+The compiler and runner elements are intended for informational purposes. It is not expected that systems will synchronize compiler and runner settings via this interface.
 
 #### Known languages
 
-Below is a list of standardized identifiers for known languages. When
-providing one of these languages, the corresponding identifier should be
-used. The language name may be adapted e.g. for localization or to
+Below is a list of standardized identifiers for known languages with their
+name, extensions and entry point name (if any). When providing one of these
+languages, the corresponding identifier should be used. The language name
+and entry point name may be adapted e.g. for localization or to
 indicate a particular version of the language. In case multiple versions
 of a language are provided, those must have separate, unique
 identifiers. It is recommended to choose new identifiers with a suffix
 appended to an existing one. For example `cpp17` to specify the ISO 2017
 version of C++.
 
-| ID         | Name        |
-| :--------- | :---------- |
-| ada        | Ada         |
-| c          | C           |
-| cpp        | C++         |
-| csharp     | C\#         |
-| go         | Go          |
-| haskell    | Haskell     |
-| java       | Java        |
-| javascript | JavaScript  |
-| kotlin     | Kotlin      |
-| objectivec | Objective-C |
-| pascal     | Pascal      |
-| php        | PHP         |
-| prolog     | Prolog      |
-| python2    | Python 2    |
-| python3    | Python 3    |
-| ruby       | Ruby        |
-| rust       | Rust        |
-| scala      | Scala       |
+| ID         | Name        | Extensions           | Entry point name |
+| :--------- | :---------- | :------------------- | :--------------- |
+| ada        | Ada         | adb, ads             |                  |
+| c          | C           | c                    |                  |
+| cpp        | C++         | cc, cpp, cxx, c++, C |                  |
+| csharp     | C\#         | cs                   |                  |
+| go         | Go          | go                   |                  |
+| haskell    | Haskell     | hs                   |                  |
+| java       | Java        | java                 | Main class       |
+| javascript | JavaScript  | js                   | Main file        |
+| kotlin     | Kotlin      | kt                   | Main class       |
+| objectivec | Objective-C | m                    |                  |
+| pascal     | Pascal      | pas                  |                  |
+| php        | PHP         | php                  | Main file        |
+| prolog     | Prolog      | pl                   |                  |
+| python2    | Python 2    | py                   | Main file        |
+| python3    | Python 3    | py                   | Main file        |
+| ruby       | Ruby        | rb                   |                  |
+| rust       | Rust        | rs                   |                  |
+| scala      | Scala       | scala                |                  |
 
 #### Examples
 
@@ -658,13 +829,36 @@ Returned data:
 ```json
 [{
    "id": "java",
-   "name": "Java"
+   "name": "Java",
+   "entry_point_required": true,
+   "entry_point_name": "Main class",
+   "extensions": ["java"],
+   "compiler": {
+      "command": "javac",
+      "args": "-O {files}",
+      "version": "javac 11.0.4",
+      "version-command": "javac --version"
+   },
+   "runner": {
+      "command": "java",
+      "version": "openjdk version \"11.0.4\" 2019-07-16"
+   }
 }, {
    "id": "cpp",
-   "name": "GNU C++"
+   "name": "GNU C++",
+   "compiler": {
+      "command": "gcc",
+      "args": "-O2 -Wall -o a.out -static {files}",
+      "version": "gcc (Ubuntu 8.3.0-6ubuntu1) 8.3.0"
+   },
+   "entry_point_required": false,
+   "extensions": ["cc", "cpp", "cxx", "c++", "C"],
 }, {
-   "id": "python2",
-   "name": "Python 2"
+   "id": "python3",
+   "name": "Python 3",
+   "entry_point_required": true,
+   "entry_point_name": "Main file",
+   "extensions": ["py"]
 }]
 ```
 
@@ -684,12 +878,13 @@ JSON elements of problem objects:
 | Name              | Type    | Required? | Nullable? | Description
 | :---------------- | :------ | :-------- | :-------- | :----------
 | id                | ID      | yes       | no        | Identifier of the problem, at the WFs the directory name of the problem archive.
+| uuid              | string  | no        | yes       | UUID of the problem, as defined in the problem package.
 | label             | string  | yes       | no        | Label of the problem on the scoreboard, typically a single capitalized letter.
 | name              | string  | yes       | no        | Name of the problem.
 | ordinal           | ORDINAL | yes       | no        | Ordering of problems on the scoreboard.
 | rgb               | string  | no        | no        | Hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet), e.g. `#AC00FF` or `#fff`.
 | color             | string  | no        | no        | Human readable color description associated to the RGB value.
-| time\_limit       | decimal | no        | no        | Time limit in seconds per test data set (i.e. per single run). Should be an integer multiple of `0.001`.
+| time\_limit       | number  | no        | no        | Time limit in seconds per test data set (i.e. per single run). Should be an integer multiple of `0.001`.
 | test\_data\_count | integer | yes       | no        | Number of test data sets.
 
 #### Examples
@@ -728,6 +923,13 @@ When there are different kinds of groups for different purposes (e.g. sites vs d
 group or set of groups should have a different type attribute
 (e.g. `"type":"site"` and `"type":"division"`).
 
+Groups must exist for any combination of teams that must be ranked on a
+[group scoreboard](#group-scoreboard), which means groups may be created for combinations of
+other groups. For instance, if there is a requirement to show a scoreboard for teams in each of `D`
+divisions at every one of `S` sites, then in addition to the `D` + `S` groups there will also be
+`D`x`S` combined/product groups. It is recommended that these groups have a type like
+`"type":"<group1>-<group2>"`, e.g. `"type":"site-division"`.
+
 The following endpoints are associated with groups:
 
 | Endpoint                     | Mime-type        | Required? | Description
@@ -746,8 +948,17 @@ JSON elements of group objects:
 | id       | ID      | yes       | no        | Identifier of the group.
 | icpc\_id | string  | no        | yes       | External identifier from ICPC CMS.
 | name     | string  | yes       | no        | Name of the group.
-| type     | string  | no        | yes       | Type of this group.
-| hidden   | boolean | no        | yes       | If group should be hidden from scoreboard. Defaults to false if missing.
+| type     | string  | no        | yes       | Type of the group.
+
+#### Known group types
+
+The list below contains standardized identifiers for known group
+types. These identifiers should be used when the purpose
+of a group matches.
+
+| Type  | Description
+| :---- | :----------
+| site  | A physical location where teams are competing, e.g. the "Hawaii site". Teams generally should not be in more than one group of this type.
 
 #### Examples
 
@@ -801,6 +1012,7 @@ JSON elements of organization objects:
 | name               | string         | yes       | no        | Short display name of the organization.
 | formal\_name       | string         | no        | yes       | Full organization name if too long for normal display purposes.
 | country            | string         | no        | yes       | [ISO 3166-1 alpha-3 code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) of the organization's country.
+| country_flag       | array of IMAGE | no        | yes       | Flag of the country. A server is recommended to provide flags of size around 56x56 and 160x160.
 | url                | string         | no        | yes       | URL to organization's website.
 | twitter\_hashtag   | string         | no        | yes       | Organization hashtag.
 | location           | object         | no        | yes       | JSON object as specified in the rows below.
@@ -846,6 +1058,7 @@ JSON elements of team objects:
 | display\_name     | string           | no        | yes       | Display name of the team. If not set, a client should revert to using the name instead.
 | organization\_id  | ID               | no        | yes       | Identifier of the [ organization](#organizations) (e.g. university or other entity) that this team is affiliated to.
 | group\_ids        | array of ID      | no        | no        | Identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty.
+| hidden            | boolean          | no        | yes       | If the team is to be excluded from the [scoreboard](#scoreboard). Defaults to false if missing.
 | location          | object           | no        | no        | JSON object as specified in the rows below.
 | location.x        | number           | depends   | no        | Team's x position in meters. Required iff location is present.
 | location.y        | number           | depends   | no        | Team's y position in meters. Required iff location is present.
@@ -891,8 +1104,8 @@ JSON elements of team member objects:
 | id          | ID             | yes       | no        | Identifier of the team-member.
 | icpc\_id    | string         | no        | yes       | External identifier from ICPC CMS.
 | team\_id    | ID             | yes       | no        | [Team](#teams) of this team member.
-| first\_name | string         | yes       | no        | First name of team member.
-| last\_name  | string         | yes       | no        | Last name of team member.
+| name        | string         | yes       | no        | Name of team member.
+| email       | string         | no        | yes       | Email of team member.
 | sex         | string         | no        | yes       | Either `male` or `female`, or possibly `null`.
 | role        | string         | yes       | no        | One of `contestant` or `coach`.
 | photo       | array of IMAGE | no        | yes       | Registration photo of the team member.
@@ -906,8 +1119,8 @@ Request:
 Returned data:
 
 ```json
-[{"id":"john-smith","team_id":"43","icpc_id":"32442","first_name":"John","last_name":"Smith","sex":"male","role":"contestant"},
- {"id":"osten-umlautsen","team_id":"43","icpc_id":null,"first_name":"Östen","last_name":"Ümlautsen","sex":null,"role":"coach"}
+[{"id":"john-smith","team_id":"43","icpc_id":"32442","name":"John Smith","email":"john.smith@kmail.com","sex":"male","role":"contestant"},
+ {"id":"osten-umlautsen","team_id":"43","icpc_id":null,"name":"Östen Ümlautsen","sex":null,"role":"coach"}
 ]
 ```
 
@@ -1005,9 +1218,104 @@ Java). For C and C++ no entry point is required and it must therefore be
 The `files` attribute provides the file(s) of a given submission as a
 zip archive. These must be stored directly from the root of the zip
 file, i.e. there must not be extra directories (or files) added unless
-these are explicitly part of the submission content. For `POST`,
-`PUT` and `PATCH` methods, the `files` attribute must contain the
-base64-encoded string of the zip archive.
+these are explicitly part of the submission content.
+
+#### POST and PUT submissions
+
+To add a submission one can use the `POST` method on the submissions endpoint or the
+`PUT` method directly on an element url. `POST` is typically used by teams submitting
+to the contest and `PUT` is used by admin users or tools.
+Both must include a valid JSON object with the same attributes the submission
+endpoint returns with a `GET` request with the following exceptions:
+
+* The attributes `team_id`, `time`, and `contest_time` are
+  optional depending on the use case (see below). The server
+  may require attributes to either be absent or present, and should
+  respond with a 4xx error code in such cases.
+* Since `files` only supports `application/zip`, providing the `mime` field is
+  optional.
+* `reaction` may be provided but a CCS does not have to honour it.
+* If the CCS supports a `team` role they will only have access to `POST`, and `time`
+  must not be provided when using this role. `time` will always be
+  set to the current time as determined by the server. `team_id` may be provided but then
+  must match the ID of the team associated with the request.
+* Simple proxies using an `admin` role should also use `POST` to let the server
+  determine the `id`. `team_id` must be provided but `time` must not and will be
+  determined by the server.
+* For more advanced scenarios an `admin` role may use a `PUT`. `time` is required and
+  the client is responsible for making sure the provided `id` is unique. For example
+  in a setup with a central CCS with satellite sites
+  where teams submit to a proxy CCS that forwards to the central CCS, this might be
+  useful to make sure that the proxy CCS can accept submissions even when the connection
+  to the central CCS is down. The proxy can then forward these submissions later, when
+  the connection is restored again.
+
+The request must fail with a 4xx error code if any of the following happens:
+
+* A required attribute is missing.
+* An attribute that must not be provided is provided.
+* The supplied problem, team or language can not be found.
+* An entrypoint is required for the given language, but not supplied.
+* The mime field in `files` is set but invalid.
+* Something is wrong with the submission file. For example it contains too many
+  files, it is too big, etc.
+* The provided `id` already exists or is otherwise not acceptable.
+
+The response will contain a `Location` header pointing to the newly created submission
+and the response body will contain the initial state of the submission.
+
+Performing a `POST` or `PUT` by any roles other than `admin` and `team` is not supported.
+
+#### Use cases for POSTing and PUTting submissions
+
+The POST and PUT submissions endpoint can be used for a variety of reasons,
+and depending on the use case, the server might require different
+fields to be present. A number of common scenarios are described here
+for informational purposes only.
+
+##### Team client submitting to CCS
+
+The most obvious and probably most common case is where a team
+directly submits to the CCS, e.g. with a command-line submit client.
+
+In this case the client has the `team` role and a specific `team_id`
+already associated with it. POST must be used and the attributes `id`, `team_id`, `time`, and `contest_time` should not be specified; the server will
+determine these attributes and should reject submissions specifying
+them, or may ignore a `team_id` that is identical to the one that the
+client has authenticated as.
+
+##### A proxy server forwarding to a CCS
+
+A proxy server may receive submissions from team clients (like above)
+and forward these to a CCS. This might be useful, for example, in a
+multi-site contest setup, where each site runs a proxy that would
+still be reachable if connectivity with the central CCS is lost, or
+where the proxy forwards the submission to multiple CCS's that run in
+parallel (like the shadowing setup at the ICPC World Finals).
+
+In such a scenario, the proxy server would timestamp the submissions
+and authenticate the submitting team, and then forward the submission
+to the upstream CCS using the `admin` role. The proxy would provide
+`team_id` and `time` attributes and the CCS should then accept and use
+these.
+
+To allow the proxy to return a submission `id` during connectivity
+loss, each site could be assigned a unique prefix such that the proxy
+server itself can generate unique `id`s and then submit a PUT to the central
+CCS with the `id` attribute included. The central CCS should then
+accept and use that `id` attribute.
+
+##### Further potential extensions
+
+To allow for any further use cases, the specification is deliberately
+flexible in how the server can handle optional attributes.
+
+* The `contest_time` attribute should normally not be specified when
+  `time` is already specified as it can be calculated from `time` and
+  the wallclock time is unambiguously defined without reference to
+  contest start time. However, in a case where one would want to
+  support a multi-site contest where the sites run out of sync, the
+  use of `contest_time` might be considered.
 
 #### Examples
 
@@ -1028,6 +1336,38 @@ Note that the relative link for `files` points to the location
 <https://example.com/api/contests/wf14/submissions/187/files> since the
 base URL for the API is <https://example.com/api>.
 
+Request:
+
+` POST https://example.com/api/contests/wf14/submissions`
+
+Request data:
+
+```json
+{
+   "language_id":"1-java",
+   "problem_id":"10-asteroids",
+   "team_id":"123",
+   "time":"2014-06-25T11:22:05.034+01",
+   "entry_point":"Main",
+   "files":[{"data": "<base64 string>"}]
+}
+```
+
+Returned data:
+
+```json
+{
+   "id":"187",
+   "language_id":"1-java",
+   "problem_id":"10-asteroids",
+   "team_id":"123",
+   "time":"2014-06-25T11:22:05.034+01",
+   "contest_time":"1:22:05.034",
+   "entry_point":"Main",
+   "files":[{"href":"contests/wf14/submissions/187/files","mime":"application/zip"}]
+}
+```
+
 ### Judgements
 
 Judgements for submissions in the contest.
@@ -1046,11 +1386,12 @@ JSON elements of judgement objects:
 | id                   | ID      | yes       | no        | Identifier of the judgement.
 | submission\_id       | ID      | yes       | no        | Identifier of the [ submission](#submissions) judged.
 | judgement\_type\_id  | ID      | yes       | yes       | The [ verdict](#judgement-types) of this judgement.
+| score                | number  | no        | no        | Score for this judgement. Only relevant if contest:scoreboard_type is `score`. Defaults to `100` if missing.
 | start\_time          | TIME    | yes       | no        | Absolute time when judgement started.
 | start\_contest\_time | RELTIME | yes       | no        | Contest relative time when judgement started.
 | end\_time            | TIME    | yes       | yes       | Absolute time when judgement completed.
 | end\_contest\_time   | RELTIME | yes       | yes       | Contest relative time when judgement completed.
-| max\_run\_time       | decimal | no        | yes       | Maximum run time in seconds for any test case. Should be an integer multiple of `0.001`.
+| max\_run\_time       | number  | no        | yes       | Maximum run time in seconds for any test case. Should be an integer multiple of `0.001`.
 
 When a judgement is started, each of `judgement_type_id`, `end_time` and
 `end_contest_time` will be `null` (or missing). These are set when the
@@ -1093,7 +1434,7 @@ JSON elements of run objects:
 | judgement\_type\_id | ID      | yes       | no        | The [ verdict](#judgement-types) of this judgement (i.e. a judgement type).
 | time                | TIME    | yes       | no        | Absolute time when run completed.
 | contest\_time       | RELTIME | yes       | no        | Contest relative time when run completed.
-| run\_time           | decimal | no        | no        | Run time in seconds. Should be an integer multiple of `0.001`.
+| run\_time           | number  | no        | no        | Run time in seconds. Should be an integer multiple of `0.001`.
 
 #### Examples
 
@@ -1138,6 +1479,38 @@ JSON elements of clarification message objects:
 Note that at least one of `from_team_id` and `to_team_id` has to be
 `null`. That is, teams cannot send messages to other teams.
 
+#### POST and PUT clarifications
+
+To add a clarification one can use the `POST` or `PUT` method on the clarifications endpoint.
+The `POST` or `PUT` must include a valid JSON object with the same attributes the clarification
+endpoint returns with a `GET` request with the following exceptions:
+
+* When an attribute value would be null it is optional - you do not need to include it.
+  e.g. if a clarification is not related to a problem you can chose to include or
+  exclude the `problem_id`.
+* When submitting using a `team` role, `POST` must be used and `id`, `to_team_id`, `time`, and
+  `contest_time` must not be provided. `from_team_id` may be provided but then
+  must match the ID of the team associated with the request. The server will determine
+  an `id` and the current `time` and `contest_time`.
+* When submitting using an `admin` role, `POST` or `PUT` may be used and `id`, `time`, and `contest_time` may be
+  required to either be absent or present depending on the use case, e.g.
+  whether the server is the CCS, is acting as a proxy, or a caching
+  proxy. See notes under the submission interface for more detail. In cases where
+  these attributes are not allowed the server will respond with a 4xx error code.
+
+The request must fail with a 4xx error code if any of the following happens:
+
+* A required attribute is missing.
+* An attribute that must not be provided is provided.
+* The supplied problem, from_team, to_team, or reply_to cannot be found or are not
+  visible to the role that's submitting.
+* The provided `id` already exists or is otherwise not acceptable.
+
+The response will contain a `Location` header pointing to the newly created clarification
+and the response body will contain the initial state of the clarification.
+
+Performing a `POST` or `PUT` by any roles other than `admin` and `team` is not supported.
+
 #### Examples
 
 Request:
@@ -1178,6 +1551,32 @@ Returned data:
 ]
 ```
 
+Request:
+
+` POST https://example.com/api/contests/wf14/clarifications`
+
+Request data:
+
+```json
+{
+   "problem_id":"10-asteroids",
+   "from_team_id":"34",
+   "text":"Can I assume the asteroids are round?"
+}
+```
+
+Returned data:
+
+```json
+{
+   "id":"clar-43",
+   "problem_id":"10-asteroids",
+   "from_team_id":"34",
+   "text":"Can I assume the asteroids are round?",
+   "time":"2017-06-25T11:59:47.543+01",
+   "contest_time":"1:59:47.543"
+}
+```
 ### Awards
 
 Awards such as medals, first to solve, etc.
@@ -1195,16 +1594,18 @@ JSON elements of award objects:
 | :-------- | :---------- | :-------- | :-------- | :----------
 | id        | ID          | yes       | no        | Identifier of the award.
 | citation  | string      | yes       | no        | Award citation, e.g. "Gold medal winner".
-| team\_ids | array of ID | yes       | no        | JSON array of [ team](#teams) ids receiving this award. No meaning must be implied or inferred from the order of IDs. The array may be empty.
+| team\_ids | array of ID | yes       | yes       | JSON array of [team](#teams) ids receiving this award. No meaning must be implied or inferred from the order of IDs. If the value is null this means that the award is not currently being updated. If the value is the empty array this means that the award **is** being updated, but no team has been awarded the award at this time.
 
 #### Semantics
 
   - Awards are not final until the contest is.
-  - An award does not have to be present during the contest. However, if
-    it is present, then it must be kept up to date during the contest.
-    E.g. if "winner" will not be updated with the current leader during
-    the contest, it must not be **create**d until the award **is**
-    awarded.
+  - An award may be created at any time, although it is recommended
+    that a system creates the awards it intends to award before the
+    contest starts.
+  - If an award has a non-null `team_ids`, then it must be kept up to
+    date during the contest. E.g. if "winner" will not be updated with
+    the current leader during the contest, it must be null until the
+    award **is** updated.
   - If an award is present during the contest this means that if the
     contest would end immediately and then become final, that award
     would be final. E.g. the "winner" during the contest should be the
@@ -1216,17 +1617,53 @@ JSON elements of award objects:
 
 For some common award cases the following IDs should be used.
 
-| ID                        | Meaning during contest                                                                                                     | Meaning when contest is final      | Comment
-| :------------------------ | :------------------------------------------------------------------------------------------------------------------------- | :--------------------------------- | :------
-| winner                    | Current leader(s). Empty if no team has scored.                                                                            | Winner(s) of the contest.          |
-| gold-medal                | Teams currently placed to receive a gold medal. Empty if no team has scored.                                               | Teams being awarded gold medals.   |
-| silver-medal              | Teams currently placed to receive a silver medal. Empty if no team has scored.                                             | Teams being awarded silver medals. |
-| bronze-medal              | Teams currently placed to receive a bronze medal, assuming no extra bronze are awarded. Empty if no team has scored.       | Teams being awarded bronze medals. |
-| rank-\<rank>              | Teams currently placed to receive rank \<rank>. Empty if no team has scored.                                               | Teams being awarded rank \<rank>.  | Only useful in contests where the final ranking awarded is different from the default ranking of the scoreboard. E.g. at the WF teams *not* getting medals are only ranked based on number of problems solved, and not total penalty time accrued nor time of last score improvement, and teams solving strictly fewer problems than the median team are not ranked at all.
-| honorable-mention         | Teams currently placed to receive an honorable mention.                                                                    | Teams being awarded an honorable mention.         |
-| first-to-solve-\<id>      | The team(s), if any, that was first to solve problem \<id>. This implies that no unjudged submission made earlier remains. | Same.                              | Must never change once set, except if there are rejudgements.
-| group-winner-\<id>        | Current leader(s) in group \<id>. Empty if no team has scored.                                                             | Winner(s) of group \<id>.          |
-| organization-winner-\<id> | Current leader(s) of organization \<id>. Empty if no team has scored.                                                      | Winner(s) of organization \<id>.   | Not useful in contest with only one team per organization (e.g. the WF).
+| ID                        | Meaning during contest                                                                                                     | Meaning when contest is final             | Comment
+| :------------------------ | :------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------- | :------
+| winner                    | Current leader(s). Empty if no team has scored.                                                                            | Winner(s) of the contest.                 |
+| gold-medal                | Teams currently placed to receive a gold medal. Empty if no team has scored.                                               | Teams being awarded gold medals.          |
+| silver-medal              | Teams currently placed to receive a silver medal. Empty if no team has scored.                                             | Teams being awarded silver medals.        |
+| bronze-medal              | Teams currently placed to receive a bronze medal, assuming no extra bronze are awarded. Empty if no team has scored.       | Teams being awarded bronze medals.        |
+| rank-\<rank>              | Teams currently placed to receive rank \<rank>. Empty if no team has scored.                                               | Teams being awarded rank \<rank>.         | Only useful in contests where the final ranking awarded is different from the default ranking of the scoreboard. E.g. at the WF teams *not* getting medals are only ranked based on number of problems solved, and not total penalty time accrued nor time of last score improvement, and teams solving strictly fewer problems than the median team are not ranked at all.  
+| honorable-mention         | Teams currently placed to receive an honorable mention.                                                                    | Teams being awarded an honorable mention. |
+| first-to-solve-\<id>      | The team(s), if any, that was first to solve problem \<id>. This implies that no unjudged submission made earlier remains. | Same.                                     | Must never change once set, except if there are rejudgements.
+| group-winner-\<id>        | Current leader(s) in group \<id>. Empty if no team has scored.                                                             | Winner(s) of group \<id>.                 |
+| organization-winner-\<id> | Current leader(s) of organization \<id>. Empty if no team has scored.                                                      | Winner(s) of organization \<id>.          | Not useful in contest with only one team per organization (e.g. the WF).
+
+#### POST, PUT, PATCH, and DELETE awards
+
+Clients with the `admin` role may make changes to awards using the
+normal [HTTP methods](#http-methods) as specified above. Specifically,
+they can POST new awards, create or replace one with a known id via PUT,
+PATCH one or more attributes, or DELETE an existing award.
+
+The server may be configured to manage (assign or update) some award
+ids, and may block clients from modifying them. However, if a client is
+able to modify an award it must assume that it is responsible for
+managing that award id unless and until it sees an indication that
+something else is now managing that award - either a change that it did
+not request, or a future modification fails.
+
+For example, the server may be configured to assign the `winner` award
+and not allow any client to modify it. The same server may assign
+`*-medal` awards by default, but allow clients to modify them. Once a
+client modifies any of the `*-medal` awards, it is responsible for
+updating it if anything changes. Likewise, the client could add any
+arbitrary awards like `first-submission-for-country-*` and would be
+responsible for managing these.
+
+The server should create all the awards it is configured to manage 
+before the start of the contest, so that clients can know which awards 
+are already handled. 
+
+The request must fail with a 4xx error code if any of the following
+happens:
+
+* A POST that includes an id.
+* A PATCH, or DELETE on an award that doesn't exist.
+* A POST or PUT that is missing one of the required attributes (`citation` and `team_ids`).
+* A PATCH that contains an invalid attribute (e.g. null `citation` or `team_ids`).
+* A PUT or PATCH that includes an award id that doesn't match the id in the url.
+* A POST, PUT, PATCH, or DELETE on an award id that the server is configured to manage exclusively.
 
 #### Examples
 
@@ -1240,6 +1677,85 @@ Returned data:
 [{"id":"gold-medal","citation":"Gold medal winner","team_ids":["54","23","1","45"]},
  {"id":"first-to-solve-a","citation":"First to solve problem A","team_ids":["45"]},
  {"id":"first-to-solve-b","citation":"First to solve problem B","team_ids":[]}
+]
+```
+
+Request:
+
+` POST https://example.com/api/contests/wf14/awards`
+
+Request data:
+
+```json
+{"citation":"Best team costumes","team_ids":["42"]}
+```
+
+Response data:
+
+```json
+{"id":"best-costume","citation":"Best team costumes","team_ids":["42"]}
+```
+
+Request:
+
+` PUT https://example.com/api/contests/wf14/awards/best-costume`
+
+Request data:
+
+```json
+{"id":"best-costume","citation":"Best team costumes","team_ids":["24"]}
+```
+
+Request:
+
+` PATCH https://example.com/api/contests/wf14/awards/best-costume`
+
+Request data:
+
+```json
+{"citation":"Best team cosplay"}
+```
+
+Request:
+
+` DELETE https://example.com/api/contests/wf14/awards/best-costume`
+
+### Commentary
+
+Commentary on events happening in the contest
+
+The following endpoints are associated with commentary:
+
+| Endpoint                         | Mime-type        | Required? | Description
+| :------------------------------- | :--------------- | :-------- | :----------
+| `/contests/<id>/commentary`      | application/json | no        | JSON array of all commentary with elements as defined in the table below.
+| `/contests/<id>/commentary/<id>` | application/json | no        | JSON object of a single commentary with elements as defined in the table below.
+
+JSON elements of award objects:
+
+| Name          | Type        | Required? | Nullable? | Description
+| :------------ | :---------- | :-------- | :-------- | :----------
+| id            | ID          | yes       | no        | Identifier of the commentary.
+| time          | TIME        | yes       | no        | Time of the commentary message.
+| contest\_time | RELTIME     | yes       | no        | Contest time of the commentary message.
+| message       | string      | yes       | no        | Commentary message text. May contain special tags for [teams](#teams) and [problems](#problems) on the format `#t<team ID>` and `#p<problem ID>` respectively.
+| team\_ids     | array of ID | yes       | yes       | JSON array of [team](#teams) IDs the message is related to.
+| problem\_ids  | array of ID | yes       | yes       | JSON array of [problem](#problems) IDs the message is related to.
+
+For the message, if an literal `#` is needed, `\#` must be used. Similarly for literal `\`, `\\` must be used.
+
+#### Examples
+
+Request:
+
+` GET https://example.com/api/contests/wf14/commentary`
+
+Returned data:
+
+```json
+[{"id":"143730", "time":"2021-03-06T19:02:02.328+00", "contest_time":"0:02:02.328", "message": "#t20 made a submission for #panttyping. If correct, they will solve the first problem and take the lead", "team_ids": ["314089"], "problem_ids": ["anttyping"]}, 
+ {"id": "143736", "time": "2021-03-06T19:02:10.858+00", "contest_time": "0:02:10.858", "message": "#t20 fails its first attempt on #panttyping due to WA", "team_ids": ["314089"], "problem_ids": ["anttyping"]}, 
+ {"id": "143764", "time": "2021-03-06T19:03:07.517+00", "contest_time": "0:03:07.517", "message": "#t24 made a submission for #pmarch6. If correct, they will solve the first problem and take the lead", "team_ids": ["314115"], "problem_ids": ["magictrick"]}
 ]
 ```
 
@@ -1277,6 +1793,19 @@ A suggested efficient server-side implementation to provide this, is to
 store with each event that changes the scoreboard, the new team
 scoreboard row.
 
+##### Group scoreboard
+
+By passing `group_id` with a valid group ID a scoreboard can be requested for the teams in a particular group:
+
+`/scoreboard?group_id=site1`
+
+Each group scoreboard is ranked independently and contains only the teams that belong to the
+specified group. If a client wants to know 'local' vs 'global' rank it can query both the group and primary scoreboards.
+
+A 4xx error code will be returned if the group id is not valid. Groups
+that are not included in the groups endpoint for the role making the
+request are not valid.
+
 #### Scoreboard format
 
 JSON elements of the scoreboard object.
@@ -1302,8 +1831,10 @@ Each JSON object in the rows array consists of:
 | rank              | integer          | yes       | no        | Rank of this team, 1-based and duplicate in case of ties.
 | team\_id          | ID               | yes       | no        | Identifier of the [ team](#teams).
 | score             | object           | yes       | no        | JSON object as specified in the rows below (for possible extension to other scoring methods).
-| score.num\_solved | integer          | depends   | no        | Number of problems solved by the team.
-| score.total\_time | integer          | depends   | no        | Total penalty time accrued by the team.
+| score.num\_solved | integer          | depends   | no        | Number of problems solved by the team. Required iff contest:scoreboard_type is `pass-fail`.
+| score.total\_time | integer          | depends   | no        | Total penalty time accrued by the team. Required iff contest:scoreboard_type is `pass-fail`.
+| score.score       | number           | depends   | no        | Total score of problems by the team. Required iff contest:scoreboard_type is `score`.
+| score.time        | integer          | no        | no        | Time of last score improvement used for tiebreaking purposes.
 | problems          | array of objects | yes       | no        | JSON array of problems with scoring data, see below for the specification of each element.
 
 Each problem object within the scoreboard consists of:
@@ -1313,7 +1844,8 @@ Each problem object within the scoreboard consists of:
 | problem\_id  | ID      | yes       | no        | Identifier of the [ problem](#problems).
 | num\_judged  | integer | yes       | no        | Number of judged submissions (up to and including the first correct one),
 | num\_pending | integer | yes       | no        | Number of pending submissions (either queued or due to freeze).
-| solved       | boolean | depends   | yes       | Whether the team solved this problem.
+| solved       | boolean | depends   | yes       | Required iff contest:scoreboard_type is `pass-fail`.
+| score        | number  | depends   | no        | Required iff contest:scoreboard_type is `score` and solved is missing. If missing or `null` defaults to `100` if solved is `true` and `0` if solved is `false`.
 | time         | integer | depends   | no        | Minutes into the contest when this problem was solved by the team. Required iff `solved=true`.
 
 #### Examples
@@ -1351,149 +1883,183 @@ Returned data:
 
 ### Event feed
 
-Provides the event (notification) feed for the current contest. This is
-effectively a changelog of create, update, or delete events that have
-occurred in the REST endpoints. Some endpoints (specifically the
-[Scoreboard](#scoreboard) and the Event feed itself) are
-aggregated data, and so these will only ever update due to some other
-REST endpoint updating. For this reason there is no explicit event for
-these, since there will always be another event sent. This can also be
-seen by the fact that there is no scoreboard event in the table of
-events below.
-
-Since this is generated data, only the `GET` method is allowed here,
-irrespective of role.
+Change [notifications](#notification-format) (events) of the data
+presented by the API.
 
 The following endpoint is associated with the event feed:
 
 | Endpoint                    | Mime-type            | Required? | Description
 | :-------------------------- | :------------------- | :-------- | :----------
-| `/contests/<id>/event-feed` | application/x-ndjson | yes       | NDJSON feed of events as defined below.
+| `/contests/<id>/event-feed` | application/x-ndjson | yes       | NDJSON feed of events as defined in [notification format](#notification-format).
 
-Multiple requests of the event feed must return the exact same events in
-the exact same order, except that events filtered out by the feed
-options must be left out and new elements, if any, are added in later
-requests.
+The event feed is a streaming HTTP endpoint that allows connected
+clients to receive change notifications. The feed is a complete log of
+contest objects that starts "at the beginning of time" so all existing
+objects will be sent upon initial connection, but may appear in any
+order (e.g. teams or problems first).
 
-The event feed is a streaming endpoint that does not terminate under
-normal circumstances. To ensure keep alive, if no event is sent in 120
-seconds, a newline must be sent.
+Each line is an NDJSON formatted notification. The feed does not
+terminate under normal circumstances, so to ensure keep alive a newline
+must be sent if there has been no event within 120 seconds.
 
-
-#### Feed options
-
-There are options for filtering based on events and starting the feed at
-a specified event. Any combination of these may be specified.
-
-##### Filtering events
-
-If a client only wants some types of events the feed can be filtered
-with the "types" URL argument:
-
-```
-/event-feed?types=submissions,teams
-```
-
-If not specified all events will be sent. If specified only events of
-the (comma separated) listed types will be sent.
-
-##### Feed starting point
-
-If a client wants data from some point in time this can be done with the
-"since_id" URL argument:
-
-```
-/event-feed?since_id=dj593
-```
-
-If specified the event feed will include all events strictly after the
-specified id. If a client copies the id of an event and uses that for
-the id URL argument it will get all events after that event. This is
-useful e.g. if a client is disconnected and wants to continue where it
-left off.
-
-If the id is not specified the event feed will include all events from
-the beginning of the feed. The request will fail with a 400 error if the
-id is invalid.
-
-#### Feed format
-
-The feed is served as JSON objects, with every event corresponding to a
-change in a single object (submission, judgement, language, team, etc.)
-The general format for events is:
-
-```json
-{"type": "<event type>", "id": "<event ID>", "op": "<operation>", "data": <JSON data for element> }
-```
-
-| Name        | Type   | Required? | Nullable? | Description
-| :---------- | :----- | :-------- | :-------- | :----------
-| type        | string | yes       | no        | Type of event, one of the events in the table below. Can be used for filtering.
-| id          | ID     | yes       | no        | Unique identifier for the event.
-| op          | string | yes       | no        | Type of operation, one of **create**, **update**, **delete**.
-| data        | object | yes       | no        | For **create** and **update**, the object that would be returned if calling the corresponding API endpoint at this time. For delete an object with only the id attribute with value the identifier of the deleted element.
-
-All event types have a corresponding API endpoint, as specified in the table below.
-
-| Event           | API Endpoint                          |
-| :-------------- | :------------------------------------ |
-| contests        | `/contests/<id>`                      |
-| judgement-types | `/contests/<id>/judgement-types/<id>` |
-| languages       | `/contests/<id>/languages/<id>`       |
-| problems        | `/contests/<id>/problems/<id>`        |
-| groups          | `/contests/<id>/groups/<id>`          |
-| organizations   | `/contests/<id>/organizations/<id>`   |
-| teams           | `/contests/<id>/teams/<id>`           |
-| team-members    | `/contests/<id>/team-members/<id>`    |
-| state           | `/contests/<id>/state`                |
-| submissions     | `/contests/<id>/submissions/<id>`     |
-| judgements      | `/contests/<id>/judgements/<id>`      |
-| runs            | `/contests/<id>/runs/<id>`            |
-| clarifications  | `/contests/<id>/clarifications/<id>`  |
-| awards          | `/contests/<id>/awards/<id>`          |
+Since this is generated data, only the `GET` method is allowed for this
+endpoint, irrespective of role.
 
 #### General requirements
 
-The event responses and `data` objects contained in it must observe
-the same restrictions as those of the respective endpoints they
-represent. This means that attributes inside the `data` element will
-be present if and only if the client has access to those at the
-respective endpoint. The client only receives create, update and delete
-events of elements it has (partial) access to. When time-based access is
-granted or revoked, create or delete events are dispatched for each
-affected entity.
+Every notification provides the current state of a single contest
+object. There is no guarantee on order of events (except for general
+requirements below), whether two consecutive changes cause one or two
+events, duplicate events, or even that different clients will receive
+the same order or set of events. The only guarantees are:
 
-Referential integrity must be strictly adhered to for new objects. i.e.
-if there is a new object that refers to another object (e.g. a
-submission for a team) then the referenced object must already exist and
-have been notified. There is no such guarantee for deletion: if an
-object that is referred to is deleted then by definition all of the
-child objects will be deleted, but the events may not arrive in strict
-referential order:
+- when an object changes one or more times a notification will be sent,
+- the latest notification sent for any object is the correct and current
+state of that object. E.g. if an object was created and deleted the
+delete notification will be sent last.
+- when a notification is sent the change it describes must already have
+happened. I.e. if a client receives an update for a certain endpoint a
+`GET` from that endpoint will return that state or possible some later
+state, but never an earlier state.
+- the notification for the [state endpoint](#contest-state) setting
+`end_of_updates` must be the last event in the feed.
 
-  - If an object, A, refers to another object, B, then the event that
-    shows that A has been created or updated to refer to B **must** come
-    after the event that shows that B has been created.
-  - If some data is only available after a specific state change, then
-    the event showing the state change **must** come before any update
-    events making that data available. E.g. problems are only available
-    after contest start for the public role, so the state event showing
-    that the contest has started **must** come before the problem events
-    creating the problems.
-  - Since nothing must change after the contest has ended, thawed (or
-    never been frozen), and been finalized, only the `end_of_updates`
-    event may come after the state event showing that.
+##### Reconnection
+
+If a client loses connection or needs to reconnect after a brief
+disconnect (e.g. client restart), it can use the 'time' argument to
+specify the last event it received:
+
+`/event-feed?time=xx`
+
+If specified, the server will attempt to start sending events around the
+given time to reduce the volume of events and required reconciliation.
+If the time passed is too large or the server does not support this
+attribute, all objects will be sent. There is no guarantee that all
+updates (e.g. a team name correction, which is not time-based) that
+occurred during the time the client was disconnected will be reflected.
+
+##### Examples
+
+The following are examples of contest events:
+
+```json
+{"contest_id":"finals","endpoint":"problems","id":null,"data":[
+   {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},
+   {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}]}
+```
+
+```json
+{"contest_id":"finals","endpoint":"state","id":null,"data":{
+   "started": "2014-06-25T10:00:00+01",
+   "ended": null,
+   "frozen": "2014-06-25T14:00:00+01",
+   "thawed": null,
+   "finalized": null,
+   "end_of_updates": null}}
+```
+
+```json
+{"contest_id":"finals","endpoint":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
+```
+
+```json
+{"contest_id":"finals","endpoint":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
+```
+
+```json
+{"contest_id":"finals","endpoint":"teams","id":"11","data":null}
+```
+
+### Webhooks
+
+Webhooks receiving change [notifications](#notification-format) (events)
+of the data presented by the API.
+
+The following endpoints are associated with webhooks:
+
+| Endpoint         | Mime-type        | Required? | Description
+| ---------------- | ---------------- | :-------- | :----------
+| `/webhooks`      | application/json | yes       | JSON array of all webhook callbacks with elements as defined in the table below. Also used to register new webhooks.
+| `/webhooks/<id>` | application/json | yes       | JSON object of a single webhook callback with elements as defined in the table below.
+
+JSON elements of webhook callback objects:
+
+| Name         | Type            | Required? | Nullable? | Description
+| :----------- | :-------------- | :-------- | :-------- | :----------
+| id           | ID              | yes       | no        | identifier of the webhook.
+| url          | string          | yes       | no        | The URL to post HTTP callbacks to.
+| endpoints    | array of string | yes       | no        | Names of endpoints to receive callbacks for. Empty array means all endpoints.
+| contest\_ids | array of ID     | yes       | no        | ID’s of contests to receive callbacks for. Empty array means all configured contests.
+
+A webhook allows you to receive HTTP callbacks whenever there is a
+change to the contest. Clients are only notified of changes after
+signing up; they are expected to use other mechanisms if they need to
+determine the current state of the contest. Every callback will contain
+one JSON [notifications](#notification-format) object.
+
+Responding to each event with a 2xx response code indicates successful
+receipt and ensures that the events in the payload are never sent again.
+If the client responds with anything other than 2xx, the server will
+continue to periodically try again, potentially with different payloads
+(e.g. as new events accumulate). Callbacks to each client are always
+sent synchronously and in order; clients do not need to worry about
+getting callbacks out of order and should always process each callback
+fully before processing the next one.
+
+If the client fails to respond to multiple requests over a period of
+time (configured for each contest), it will be assumed deactivated and
+automatically removed from future callbacks.
+
+##### Adding a webhook
+
+To register a webhook, you need to post your server's callback URL. To
+do so, perform a `POST` request with a JSON body with the fields (except
+`id`) from the above table to the `/webhooks` endpoint together with one
+additional field, called `token`. In this field put a client-generated
+token that can be used to verify that callbacks come from the CCS. If
+you don't supply `contest_ids` and/or `endpoints`, they will default to
+`[]`.
 
 ##### Examples
 
 Request:
 
-` GET https://example.com/api/contests/wf14/event-feed`
+` POST https://example.com/api/webhooks`
+
+Payload:
+
+```json
+{"url": "https://myurl", "token": "mysecrettoken" }
+```
+
+Request:
+
+` GET https://example.com/api/webhooks`
 
 Returned data:
 
 ```json
- {"type":"teams","id":"k-2435","op":"create","data":{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
- {"type":"teams","id":"k-2436","op":"update","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
- {"type":"teams","id":"k-2437","op":"delete","data":{"id":"11"}}
+[{
+    "id":"icpc-live",
+    "url":"https://myurl",
+    "endpoints": [],
+    "contest_ids": [],
+    "active": true
+},{
+    "id":"shadow",
+    "url":"https://myotherurl",
+    "endpoints": ["teams", "problems"],
+    "contest_ids": ["wf2014"],
+    "active": false
+}]
 ```
+
+When a system wants to send out a callback, it will check all active
+webhooks, filter them on applicable endpoint and contest ID and perform
+a `POST` to the URL. The system will add a header to this request called
+`Webhook-Token` which contains the token as supplied when creating the
+webhook. Clients should verify that this token matches with what they
+expect. The body of the request will follow the [notification
+format](#notification-format), i.e. it contains the keys `contest_id`,
+`endpoint`, `id` and `data`.
