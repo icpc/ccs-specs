@@ -14,7 +14,7 @@ xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
          var availableVersions = JSON.parse(this.responseText);
          var version = document.getElementsByClassName(['version'])[0];
-         currentVersion = version.innerHTML.trim();
+         currentVersion = '{{ site.version | default: "" }}';
          version.innerHTML = '';
          var selectList = document.createElement("select");
          selectList.id = "versionSelect";

@@ -15,8 +15,9 @@ bundle exec jekyll build -d docs/
 for version in $(cat versions.json | jq -r -c '.[]'); do
     ( cd "$REPO_DIR" && git checkout "${version}" )
 	ln -sf "$MY_DIR/_layouts" "$REPO_DIR"
-    bundle exec jekyll build --config _config.yml -b "/${version}" \
-        -s "$REPO_DIR" -d "docs/${version}/"
+	echo "version: ${version}" > "$TMPDIR/version.yml"
+    bundle exec jekyll build --config _config.yml,"$TMPDIR/version.yml" \
+        -b "/${version}" -s "$REPO_DIR" -d "docs/${version}/"
 done
 
 rm -rf "$TMPDIR"
