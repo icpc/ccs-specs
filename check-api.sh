@@ -64,6 +64,7 @@ verbose()
 		if [ $# -eq 1 ]; then
 			echo "$1"
 		else
+			# shellcheck disable=SC2059
 			printf "$@"
 		fi
 	fi
@@ -71,17 +72,18 @@ verbose()
 
 usage()
 {
+	PROGNAME=$(basename "$0")
 	cat <<EOF
-$(basename $0) - Validate a Contest API implementation with JSON schema.
+$PROGNAME - Validate a Contest API implementation with JSON schema.
 
-Usage: $(basename $0) [option]... URL
+Usage: $PROGNAME [option]... URL
 
 This program validates a Contest API implementation against the
 specification: https://ccs-specs.icpc.io/contest_api
 
 The URL must point to the base of the API, for example:
 
-  $(basename $0) -n -c '-knS' -a 'strict=1' https://example.com/api
+  $PROGNAME -n -c '-knS' -a 'strict=1' https://example.com/api
 
 where the options -knS passed to curl make it ignore SSL certificate
 errors, use ~/.netrc for credentials, and be verbose. The option -a
@@ -160,7 +162,7 @@ fi
 
 TMP=$(mktemp -d)
 
-MYDIR=$(dirname $0)
+MYDIR=$(dirname "$0")
 
 query_endpoint()
 {
@@ -183,6 +185,7 @@ query_endpoint()
 	fi
 
 	set +e
+	# shellcheck disable=SC2086
 	HTTPCODE=$(curl $CURLOPTS -w "%{http_code}\n" -o "$OUTPUT" "${URL}${ARGS:+?$ARGS}")
 	EXITCODE="$?"
 	set -e
@@ -203,10 +206,10 @@ query_endpoint()
 	elif [ $EXITCODE -ne 0 ]; then
 		verbose "Warning: curl returned exitcode $EXITCODE for '$URL'."
 		return $EXITCODE
-	elif [ $HTTPCODE -ne 200 ]; then
+	elif [ "$HTTPCODE" -ne 200 ]; then
 		[ -n "$OPTIONAL" ] || verbose "Warning: curl returned HTTP status $HTTPCODE for '$URL'."
 		return 1
-	elif [ ! -e "$OUTPUT" -o ! -s "$OUTPUT" ]; then
+	elif [ ! -e "$OUTPUT" ] || [ ! -s "$OUTPUT" ]; then
 		[ -n "$OPTIONAL" ] || verbose "Warning: no or empty file downloaded by curl."
 		return 1
 	fi
@@ -250,7 +253,7 @@ if query_endpoint "$OUTPUT" "$URL" ; then
 	verbose '%20s: ' "$ENDPOINT"
 	validate_schema "$OUTPUT" "$SCHEMA"
 	EXIT=$?
-	[ $EXIT -ne 0 -a $EXIT -ne 23 ] && exit $EXIT
+	[ $EXIT -ne 0 ] && [ $EXIT -ne 23 ] && exit $EXIT
 	CONTESTS=$(jq -r '.[].id' "$OUTPUT")
 else
 	verbose '%20s: Failed to download\n' "$ENDPOINT"
@@ -314,13 +317,14 @@ $ENDPOINT"
 		validate_schema "$OUTPUT" "$SCHEMA"
 		EXIT=$?
 		[ $EXIT -gt $EXITCODE ] && EXITCODE=$EXIT
-		[ $EXIT -ne 0 -a -n "$DEBUG" ] && cat "$OUTPUT"
+		[ $EXIT -ne 0 ] && [ -n "$DEBUG" ] && cat "$OUTPUT"
 	else
 		verbose '%20s: Failed to download\n' "$ENDPOINT"
 	fi
 
 	if [ -n "$CHECK_CONSISTENCY" ]; then
-		eval ${EXTRAPROP:-STRICT=1} $MYDIR/check-api-consistency.php "$TMP/$CONTEST" $ENDPOINTS_CHECK_CONSISTENT
+		# shellcheck disable=SC2086
+		eval ${EXTRAPROP:-STRICT=1} "$MYDIR"/check-api-consistency.php "$TMP/$CONTEST" $ENDPOINTS_CHECK_CONSISTENT
 		EXIT=$?
 		[ $EXIT -gt $EXITCODE ] && EXITCODE=$EXIT
 	fi
@@ -343,6 +347,6 @@ if [ -n "$CHECK_ERRORS" ]; then
 	done
 fi
 
-[ -n "$DEBUG" ] || rm -rf $TMP
+[ -n "$DEBUG" ] || rm -rf "$TMP"
 
 exit $EXITCODE
