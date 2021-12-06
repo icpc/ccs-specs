@@ -1,6 +1,6 @@
 ---
 sort: 3
-permalink: /draft/contest_archive_format
+permalink: /contest_archive_format
 ---
 # Contest Archive Format
 
