@@ -322,7 +322,7 @@ are meant to ease extensibility.
 ### Notification format
 
 There are two mechanisms that clients can use to receive notifications
-of API updates (events), a webhook and a streaming HTTP feed. Both
+of API updates (events): a webhook and a streaming HTTP feed. Both
 mechanisms use the same payload format, but have different benefits,
 drawbacks, and ways to access. Webhooks are typically better for
 internet-scale, asynchronous processing, and disconnected systems; the
@@ -338,7 +338,7 @@ for these, since there will always be another event sent.
 
 The events are served as JSON objects, with every event corresponding to
 a change in a single object (submission, judgement, language, team,
-etc.) or full endpoint. The general format for events is:
+etc.) or entire collection. The general format for events is:
 
 ```json
 {"type": "<type>", "id": "<id>", "data": <JSON data for element> }
@@ -348,11 +348,17 @@ etc.) or full endpoint. The general format for events is:
 | :---------- | :-------------- | :-------- | :-------- | :----------
 | type        | string          | yes       | yes       | The type of contest object that changed. Can be used for filtering.
 | id          | string          | yes       | yes       | The id of the object that changed, or null for the entire collection/singleton.
-| data        | array or object | yes       | yes       | The object that would be returned if calling the corresponding API endpoint at this time, i.e. an array, object, or null for deletions.
+| data        | array or object | yes       | yes       | The updated value, i.e. what would be returned if calling the corresponding API endpoint at this time: an array, object, or null for deletions.
 
+Each event is a notification that an object or a collection has changed
+(and hence the contents of the corresponding endpoint) to `data`.
 
-The meaning of an event is to say that the contents at endpoint
-`/contests/<contest_id>/<type>/<id>` (or `/contests/<contest_id>/<type>` `/contests/<contest_id>`) now has the contents of `data`.
+If `type` and `id` are both non-null, then the object at
+`/contests/<contest_id>/<type>/<id>` now has the contents of `data`.
+If `id` is null, then the entire collection at `/contests/<contest_id>/<type>`
+now has the contents of `data`. If both are null, then the contest at
+`/contests/<contest_id>` now has the contents of `data`.
+
 
 #### Examples
 
