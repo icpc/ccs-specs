@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: /release-2020-03/sitemap.xml

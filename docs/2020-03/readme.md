@@ -18,7 +18,7 @@ The following specifications are present:
 There are multiple versions of the CCS specifications available on the
 [documentation pages](https://ccs-specs.icpc.io/).
 
-This is the draft of some future version of the CCS specification.
+This is the `2020-03` release of the CCS specification.
 
 ## References
 
