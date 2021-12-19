@@ -1136,7 +1136,7 @@ JSON elements of problem objects:
 | password          | string  | no        | yes       | The account password.
 | type              | string  | no        | yes       | The type of account, e.g. `team`, `judge`, `admin`, `analyst`, `staff`.
 | ip                | string  | no        | yes       | IP address associated with this account, used for auto-login.
-| team\_id          | ID      | no        | yes       | The team that this account is for. Required iff type is `team`.
+| team\_id          | ID      | depends   | yes       | The team that this account is for. Required iff type is `team`.
 | people\_id        | ID      | no        | yes       | The person that this account is for, if the account is only for one person.
 
 Accounts exist in the API primarily for configuration from a contest archive, or an administrator comparing one CCS to another. It is
