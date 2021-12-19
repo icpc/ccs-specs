@@ -346,19 +346,16 @@ etc.) or entire collection. The general format for events is:
 
 | Name        | Type            | Required? | Nullable? | Description
 | :---------- | :-------------- | :-------- | :-------- | :----------
-| type        | string          | yes       | yes       | The type of contest object that changed. Can be used for filtering.
+| type        | string          | yes       | no        | The type of contest object that changed. Can be used for filtering.
 | id          | string          | yes       | yes       | The id of the object that changed, or null for the entire collection/singleton.
 | data        | array or object | yes       | yes       | The updated value, i.e. what would be returned if calling the corresponding API endpoint at this time: an array, object, or null for deletions.
 
 Each event is a notification that an object or a collection has changed
 (and hence the contents of the corresponding endpoint) to `data`.
 
-If `type` and `id` are both non-null, then the object at
-`/contests/<contest_id>/<type>/<id>` now has the contents of `data`.
-If `id` is null, then the entire collection at `/contests/<contest_id>/<type>`
-now has the contents of `data`. If both are null, then the contest at
-`/contests/<contest_id>` now has the contents of `data`.
-
+If `type` is `contest`, then the contest at `/contests/<id>` now has the contents of `data`.
+If `id` is not null, then the object at `/contests/<contest_id>/<type>/<id>` now has the contents of `data`.
+If `id` is null, then the entire collection at `/contests/<contest_id>/<type>` now has the contents of `data`.
 
 #### Examples
 
