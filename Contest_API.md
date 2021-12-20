@@ -350,10 +350,30 @@ etc.) or entire collection. The general format for events is:
 | id          | string          | yes       | yes       | The id of the object that changed, or null for the entire collection/singleton.
 | data        | array or object | yes       | yes       | The updated value, i.e. what would be returned if calling the corresponding API endpoint at this time: an array, object, or null for deletions.
 
+All event types correspond to an API endpoint, as specified in the table below.
+
+| Event           | API Endpoint                          |
+| :-------------- | :------------------------------------ |
+| contest         | `/contests/<id>`                      |
+| judgement-types | `/contests/<id>/judgement-types/<id>` |
+| languages       | `/contests/<id>/languages/<id>`       |
+| problems        | `/contests/<id>/problems/<id>`        |
+| groups          | `/contests/<id>/groups/<id>`          |
+| organizations   | `/contests/<id>/organizations/<id>`   |
+| teams           | `/contests/<id>/teams/<id>`           |
+| people          | `/contests/<id>/people/<id>`          |
+| accounts        | `/contests/<id>/accounts/<id>`        |
+| state           | `/contests/<id>/state`                |
+| submissions     | `/contests/<id>/submissions/<id>`     |
+| judgements      | `/contests/<id>/judgements/<id>`      |
+| runs            | `/contests/<id>/runs/<id>`            |
+| clarifications  | `/contests/<id>/clarifications/<id>`  |
+| awards          | `/contests/<id>/awards/<id>`          |
+
 Each event is a notification that an object or a collection has changed
 (and hence the contents of the corresponding endpoint) to `data`.
 
-If `type` is `contest`, then the contest at `/contests/<id>` now has the contents of `data`.
+If `type` is `contest`, then `id` must be null, and the contest at `/contests/<id>` now has the contents of `data`.
 If `id` is not null, then the object at `/contests/<contest_id>/<type>/<id>` now has the contents of `data`.
 If `id` is null, then the entire collection at `/contests/<contest_id>/<type>` now has the contents of `data`.
 
@@ -362,6 +382,7 @@ If `id` is null, then the entire collection at `/contests/<contest_id>/<type>` n
 Event:
 ```json
 {
+   "type": "contest",
    "data": {
       "id": "dress2016",
       "name": "2016 ICPC World Finals Dress Rehearsal",
