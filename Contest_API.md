@@ -322,7 +322,7 @@ are meant to ease extensibility.
 ### Notification format
 
 There are two mechanisms that clients can use to receive notifications
-of API updates (events), a webhook and a streaming HTTP feed. Both
+of API updates (events): a webhook and a streaming HTTP feed. Both
 mechanisms use the same payload format, but have different benefits,
 drawbacks, and ways to access. Webhooks are typically better for
 internet-scale, asynchronous processing, and disconnected systems; the
@@ -338,29 +338,51 @@ for these, since there will always be another event sent.
 
 The events are served as JSON objects, with every event corresponding to
 a change in a single object (submission, judgement, language, team,
-etc.) or full endpoint. The general format for events is:
+etc.) or entire collection. The general format for events is:
 
 ```json
-{"contest_id": "<id>", "endpoint": "<endpoint>", "id": "<id>", "data": <JSON data for element> }
+{"type": "<type>", "id": "<id>", "data": <JSON data for element> }
 ```
 
-| Name        | Type   | Required? | Nullable? | Description
-| :---------- | :----- | :-------- | :-------- | :----------
-| contest\_id | string | yes       | no        | The contest id.
-| endpoint    | string | yes       | yes       | The API endpoint, i.e. type of contest object above. Can be used for filtering.
-| id          | string | yes       | yes       | The id of the object that changed.
-| data        | object | yes       | yes       | The data is the object that would be returned if calling the corresponding API endpoint at this time, i.e. an object or null for deletions.
+| Name        | Type            | Required? | Nullable? | Description
+| :---------- | :-------------- | :-------- | :-------- | :----------
+| type        | string          | yes       | no        | The type of contest object that changed. Can be used for filtering.
+| id          | string          | yes       | yes       | The id of the object that changed, or null for the entire collection/singleton.
+| data        | array or object | yes       | yes       | The updated value, i.e. what would be returned if calling the corresponding API endpoint at this time: an array, object, or null for deletions.
 
+All event types correspond to an API endpoint, as specified in the table below.
 
-The meaning of an event is to say that the contents at endpoint
-`/contests/<contest_id>/<endpoint>/<id>` now has the contents of `data`.
+| Event           | API Endpoint                          |
+| :-------------- | :------------------------------------ |
+| contest         | `/contests/<id>`                      |
+| judgement-types | `/contests/<id>/judgement-types/<id>` |
+| languages       | `/contests/<id>/languages/<id>`       |
+| problems        | `/contests/<id>/problems/<id>`        |
+| groups          | `/contests/<id>/groups/<id>`          |
+| organizations   | `/contests/<id>/organizations/<id>`   |
+| teams           | `/contests/<id>/teams/<id>`           |
+| people          | `/contests/<id>/people/<id>`          |
+| accounts        | `/contests/<id>/accounts/<id>`        |
+| state           | `/contests/<id>/state`                |
+| submissions     | `/contests/<id>/submissions/<id>`     |
+| judgements      | `/contests/<id>/judgements/<id>`      |
+| runs            | `/contests/<id>/runs/<id>`            |
+| clarifications  | `/contests/<id>/clarifications/<id>`  |
+| awards          | `/contests/<id>/awards/<id>`          |
+
+Each event is a notification that an object or a collection has changed
+(and hence the contents of the corresponding endpoint) to `data`.
+
+If `type` is `contest`, then `id` must be null, and the contest at `/contests/<id>` now has the contents of `data`.
+If `id` is not null, then the object at `/contests/<contest_id>/<type>/<id>` now has the contents of `data`.
+If `id` is null, then the entire collection at `/contests/<contest_id>/<type>` now has the contents of `data`.
 
 #### Examples
 
 Event:
 ```json
 {
-   "contest_id": "dress2016",
+   "type": "contest",
    "data": {
       "id": "dress2016",
       "name": "2016 ICPC World Finals Dress Rehearsal",
@@ -385,8 +407,7 @@ Means that endpoint `/contests/dress2016` has been updated to:
 Event:
 ```json
 {
-   "contest_id": "wf14",
-   "endpoint": "problems",
+   "type": "problems",
    "data": [
       {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},
       {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}
@@ -394,19 +415,19 @@ Event:
 }
 ```
 
-Means that endpoint `/contests/wf14/problems` has been updated to:
+Means that endpoint `/contests/<contest_id>/problems` has been updated to:
 ```json
 [
    {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},
    {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}
 ]
 ```
+and the child endpoints `/contests/<contest_id>/problems/asteroids` and `/contests/<contest_id>/problems/bottles` are updated accordingly.
 
 Event:
 ```json
 {
-   "contest_id": "wf14",
-   "endpoint": "submissions",
+   "type": "submissions",
    "id": "187",
    "data": {
       "id": "187",
@@ -421,7 +442,7 @@ Event:
 }
 ```
 
-Means that endpoint `/contests/wf14/submissions/187` has been updated to:
+Means that endpoint `/contests/<contest_id>/submissions/187` has been updated to:
 ```json
 {
    "id": "187",
@@ -1988,13 +2009,13 @@ occurred during the time the client was disconnected will be reflected.
 The following are examples of contest events:
 
 ```json
-{"contest_id":"finals","endpoint":"problems","id":null,"data":[
+{"type":"problems","id":null,"data":[
    {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},
    {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}]}
 ```
 
 ```json
-{"contest_id":"finals","endpoint":"state","id":null,"data":{
+{"type":"state","id":null,"data":{
    "started": "2014-06-25T10:00:00+01",
    "ended": null,
    "frozen": "2014-06-25T14:00:00+01",
@@ -2004,15 +2025,15 @@ The following are examples of contest events:
 ```
 
 ```json
-{"contest_id":"finals","endpoint":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
+{"type":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
 ```
 
 ```json
-{"contest_id":"finals","endpoint":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
+{"type":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"The Shanghai Tigers","organization_id":"inst123","group_id":"asia"}}
 ```
 
 ```json
-{"contest_id":"finals","endpoint":"teams","id":"11","data":null}
+{"type":"teams","id":"11","data":null}
 ```
 
 ### Webhooks
@@ -2040,9 +2061,14 @@ A webhook allows you to receive HTTP callbacks whenever there is a
 change to the contest. Clients are only notified of changes after
 signing up; they are expected to use other mechanisms if they need to
 determine the current state of the contest. Every callback will contain
-one JSON [notifications](#notification-format) object.
+one JSON object containing the id of the contest that changed and any
+number of [notifications](#notification-format) objects as follows:
 
-Responding to each event with a 2xx response code indicates successful
+```json
+{"contest_id": "<id>", "notifications":[ <JSON notification format>, <JSON notification format> ] }
+```
+
+Responding to each callback with a 2xx response code indicates successful
 receipt and ensures that the events in the payload are never sent again.
 If the client responds with anything other than 2xx, the server will
 continue to periodically try again, potentially with different payloads
@@ -2104,6 +2130,27 @@ webhooks, filter them on applicable endpoint and contest ID and perform
 a `POST` to the URL. The system will add a header to this request called
 `Webhook-Token` which contains the token as supplied when creating the
 webhook. Clients should verify that this token matches with what they
-expect. The body of the request will follow the [notification
-format](#notification-format), i.e. it contains the keys `contest_id`,
-`endpoint`, `id` and `data`.
+expect.
+
+Client callback:
+```json
+{"contest_id":"finals","notifications":[
+  {"type":"teams","id":"11","data":{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_id":"asia"}},
+  {"type":"submissions","id":"187","data":{
+      "id": "187",
+      "team_id": "123",
+      "problem_id": "10-asteroids",
+      "language_id": "1-java",
+      "time": "2014-06-25T11:22:05.034+01",
+      "contest_time": "1:22:05.034",
+      "entry_point": "Main",
+      "files": [{"href":"contests/wf14/submissions/187/files","mime":"application/zip"}]}},
+   {"type":"state","data":{
+      "started": "2014-06-25T10:00:00+01",
+      "ended": null,
+      "frozen": "2014-06-25T14:00:00+01",
+      "thawed": null,
+      "finalized": null,
+      "end_of_updates": null}}
+]}
+```
