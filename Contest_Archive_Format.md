@@ -56,20 +56,20 @@ using a similar naming convention.
 | File path                              | Format | Description | Required |
 | :------------------------------------- | :----- | :---------- | :------- |
 | `<ID>/contest.json`                    | JSON   | [Contest object](#contest-object). | No |
-| `<ID>/contest`                         | Directory | [Contest files](#contest-files). | No |
+| `<ID>/contest`                         | Directory | [Contest files](#binary-files). | No |
 | `<ID>/judgement-types.json`            | JSON   | Array of [judgement type objects](#judgement-type-object). | Yes |
 | `<ID>/languages.json`                  | JSON   | Array of [language objects](#language-object). | Yes |
 | `<ID>/problems.json`                   | JSON   | Array of [problem objects](#problem-object). | Yes |
 | `<ID>/problems/<problem-ID>[.kpp]`     | [KPP](https://www.kattis.com/problem-package-format/) | [Problem package](#problem-package) | No |
 | `<ID>/groups.json`                     | JSON   | Array of [group objects](#group-object). | No |
 | `<ID>/organizations.json`              | JSON   | Array of [organization objects](#organization-object). | No |
-| `<ID>/organizations/<organization-ID>` | Directory | [Organization files](#organization-files).| No |
+| `<ID>/organizations/<organization-ID>` | Directory | [Organization files](#binary-files).| No |
 | `<ID>/teams.json`                      | JSON   | Array of [team objects](#team-object). | Yes |
-| `<ID>/teams/<team-ID>`                 | Directory | [Team files](#team-files). | No |
+| `<ID>/teams/<team-ID>`                 | Directory | [Team files](#binary-files). | No |
 | `<ID>/team-members.json`               | JSON   | Array of [team member objects](#team-member-object). | No |
-| `<ID>/team-members/<team-member-ID>`   | Directory | [Team member files](#team-member-files). | No |
+| `<ID>/team-members/<team-member-ID>`   | Directory | [Team member files](#binary-files). | No |
 | `<ID>/submissions.json`                | JSON   | Array of [submission objects](#submission-object). | No |
-| `<ID>/submissions/<submission-ID>`     | Directory | [Submission files](#submission-files). | No |
+| `<ID>/submissions/<submission-ID>`     | Directory | [Submission files](#binary-files). | No |
 | `<ID>/judgements[.<system>].json`      | JSON   | Array of [judgement objects](#judgement-object). | No |
 | `<ID>/runs[.<system>].json`            | JSON   | Array of [run objects](#run-object). | No |
 | `<ID>/clarifications.json`             | JSON   | Array of [clarification objects](#clarification-object). | No |
@@ -119,7 +119,6 @@ The following JSON types are used.
 #### Differences from Contest API
 
 - The `countdown_pause_time` is not included. It is allowed but the information should be ignored.
-- The `banner` and `logo` elements are not included. They are allowed but the information may be ignored. These files are instead found as `banner[.<size>].<format>` and `logo[.<size>].<format>` in the `contest` directory.
 
 #### Examples
 
@@ -329,9 +328,7 @@ None.
 
 #### Differences from Contest API
 
-- The `logo` element is not included. It is allowed but the information may be
-  ignored. These files are instead found as `logo[.<size>].<format>` in the in
-  the `organizations/<organization-ID>` directory.
+None.
 
 #### Examples
 
@@ -395,10 +392,7 @@ None.
 
 #### Differences from Contest API
 
-- The `photo`, `video`, `backup`, `key_log`, `tool_data`, `desktop`, and
-  `webcam`, `audio` elements are not included. They are allowed but the
-  information may be ignored. These files are instead found in the same
-  directory as the JSON file.
+None.
 
 #### Examples
 
@@ -453,9 +447,7 @@ None.
 
 #### Differences from Contest API
 
-- The `photo` element is not included. It is allowed but the information may
-  be ignored. These files are instead found as `photo[.<size>].<format>` in
-  the `team-members/<team-member-ID>` directory.
+None.
 
 #### Examples
 
@@ -495,9 +487,7 @@ None.
 
 #### Differences from Contest API
 
-- The `files` and `reaction` elements are not included. They are allowed
-  but the information may be ignored. These files are instead found in 
-  the `submissions/<submission-ID>` directory.
+None.
 
 #### Examples
 
@@ -717,21 +707,8 @@ in the parent JSON file.
 If there are no files for some organization (i.e. if a directory would
 be empty) it should be omitted.
 
-The naming scheme used for all files is
-`<basename>.[.<specifier>].<extension>`. If there are multiple files
-with any given basename in a single directory, a specifier must be used
-for all except at most one.
-
-For files that are referred to in the Contest API, the file extension
-for each file reference should match the mime type in the file reference
-object using the following mapping:
-
-| Mime type         | File extension |
-| :---------------- | :------------- |
-| `image/png`       | `.png`         |
-| `image/jpeg`      | `.jpg`         |
-| `application/zip` | `.zip`         |
-| `text/plain`      | `.txt`         |
+The names of files must match the `filename` attribute of the file reference.
+The `href` attribute may not be valid and should be ignored.q
 
 ### Problem package
 
@@ -744,69 +721,3 @@ Problem packages may be left out if (and only if) `config/problems.json`
 contains `uuid` for those problems. This assumes that the problems are
 stored elsewhere and can be found by matching by the uuid, and this
 should be checked when verifying a contest archive.
-
-### Contest files
-
-The contest directory contain all binary files related to a
-single contest in it's parent JSON file. 
-
-The following files could be in the contest directory:
-
-| Basename | Specifier          | Mime type   | File extension | Description | 
-| :------- | :----------------- | :---------- | :------------- | :---------- |
-| banner   | `<width>x<height>` | `image/png` | `.png`         | Banner for this contest, intended to be an image with a large aspect ratio around 8:1. |
-| logo     | `<width>x<height>` | `image/png` | `.png`         | Logo for this contest, intended to be an image with aspect ratio near 1:1. |
-
-### Organization files
-
-The organization directories contain all binary files related to a
-single organization in it's parent JSON file. 
-
-The following files could be in the organization directories:
-
-| Basename     | Specifier          | Mime type   | File extension | Description | 
-| :----------- | :----------------- | :---------- | :------------- | :---------- |
-| logo         | `<width>x<height>` | `image/png` | `.png`         | Logo of the organization. |
-| country_flag | `<width>x<height>` | `image/png` | `.png`         | Country flag of the organization. |
-
-### Team files
-
-The team directories contain all binary files related to a single team
-in it's parent JSON file. 
-
-The following files could be in the team directories:
-
-| Basename  | Specifier          | Mime type   | File extension | Description | 
-| :-------- | :----------------- | :---------- | :------------- | :---------- |
-| photo     | `<width>x<height>` | `image/png` or `image/jpeg`| `.png` | Registration photo of the team. |
-| video     | `<width>x<height>` | `video/*`   | varies | Registration video of the team. |
-| backup    | none               | `application/zip` | `.zip`   | Latest file backup of the team machine. |
-| key_log   | none               | `text/plain` | `.txt`        | Latest key log file from the team machine. |
-| tool_data | none               | `text/plain` | `.txt`        | Latest tool data usage file from the team machine. |
-| desktop   | `<width>x<height>` | `video/*  ` | varies         | Video of the team desktop. |
-| webcam    | `<width>x<height>` | `video/*  ` | varies         | Video from the team webcam. |
-| audio     | none               | `audio/*`   | varies         | Team audio. |
-
-### Team member files
-
-The team member directories contain all binary files related to a single
-team member in it's parent JSON file. 
-
-The following files could be in the team member directories:
-
-| Basename  | Specifier          | Mime type   | File extension | Description | 
-| :-------- | :----------------- | :---------- | :------------- | :---------- |
-| photo     | `<width>x<height>` | `image/png` or `image/jpeg`| `.png` | Registration photo of the team member. |
-
-
-### Submission files
-
-The submission directories contain all binary files related to a single
-submission in it's parent JSON file. 
-
-The following files could be in the submission directories:
-
-| Basename  | Specifier          | Mime type   | File extension | Description | 
-| :-------- | :----------------- | :---------- | :------------- | :---------- |
-| files     | none               | `application/zip` | `.zip`   | Submission files. |
-| reaction  | `<width>x<height>` | `video/*  ` | varies         | Reaction video from team's webcam. |

@@ -259,12 +259,13 @@ absolute timestamps.
 
 Element for file reference objects:
 
-| Name   | Type    | Nullable?          | Description                                                                                                                                                                                                                                          |
-| ------ | ------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| href   | string  | no                 | URL where the resource can be found. Relative URLs are relative to the `baseurl`. Must point to a file of intended mime-type. Resource must be accessible using the exact same (possibly none) authentication as the call that returned this data. |
-| mime   | string  | no                 | Mime type of resource.                                                                                                                                                                                                                               |
-| width  | integer | no for **`IMAGE`** | Width of the image, video or stream in pixels. Should not be used for **`ARCHIVE`**.                                                                                                                                                                 |
-| height | integer | no for **`IMAGE`** | Height of the image, video or stream in pixels. Should not be used for **`ARCHIVE`**.                                                                                                                                                                |
+| Name     | Type    | Nullable?          | Description
+| -------- | ------- | ------------------ | -----------
+| href     | string  | no                 | URL where the resource can be found. Relative URLs are relative to the `baseurl`. Must point to a file of intended mime-type. Resource must be accessible using the exact same (possibly none) authentication as the call that returned this data.
+| filename | string  | no                 | POSIX compliant filename. Filenames must be unique within the endpoint object where they are used. I.e. an organization can have (multiple) `logo` and `country_flag` file references, they must all have a different filename, but different organizations may have files with the same filename.
+| mime     | string  | no                 | Mime type of resource.
+| width    | integer | no for **`IMAGE`** | Width of the image, video or stream in pixels. Should not be used for **`ARCHIVE`**.
+| height   | integer | no for **`IMAGE`** | Height of the image, video or stream in pixels. Should not be used for **`ARCHIVE`**.
 
 The `href` attributes may be [absolute or relative
 URLs](https://tools.ietf.org/html/rfc3986); relative URLs must be
@@ -416,7 +417,7 @@ Event:
       "time": "2014-06-25T11:22:05.034+01",
       "contest_time": "1:22:05.034",
       "entry_point": "Main",
-      "files": [{"href":"contests/wf14/submissions/187/files","mime":"application/zip"}]   
+      "files": [{"href":"contests/wf14/submissions/187/files","filename":"files.zip","mime":"application/zip"}]   
    }
 }
 ```
@@ -431,7 +432,7 @@ Means that endpoint `/contests/wf14/submissions/187` has been updated to:
    "time": "2014-06-25T11:22:05.034+01",
    "contest_time": "1:22:05.034",
    "entry_point": "Main",
-   "files": [{"href":"contests/wf14/submissions/187/files","mime":"application/zip"}]
+   "files": [{"href":"contests/wf14/submissions/187/files","filename":"files.zip","mime":"application/zip"}]
 }
 ```
 
@@ -586,6 +587,8 @@ Returned data:
    "penalty_time": 20,
    "banner": [{
        "href": "https://example.com/api/contests/wf2014/banner",
+       "filename": "banner.png",
+       "mime": "image/png",
        "width": 1920,
        "height": 240
    }]
@@ -1021,8 +1024,8 @@ Returned data:
 ```json
 [{"id":"inst123","icpc_id":"433","name":"Shanghai Jiao Tong U.","formal_name":"Shanghai Jiao Tong University"},
  {"id":"inst105","name":"Carnegie Mellon University","country":"USA",
-  "logo":[{"href":"http://example.com/api/contests/wf14/organizations/inst105/logo/56px","width":56,"height":56},
-          {"href":"http://example.com/api/contests/wf14/organizations/inst105/logo/160px","width":160,"height":160}]
+  "logo":[{"href":"http://example.com/api/contests/wf14/organizations/inst105/logo/56px","filename":"56px.png","mime":"image/png","width":56,"height":56},
+          {"href":"http://example.com/api/contests/wf14/organizations/inst105/logo/160px","filename":"160px.png","mime":"image/png","width":160,"height":160}]
  }
 ]
 ```
@@ -1318,7 +1321,7 @@ Returned data:
 ```json
 [{"id":"187","team_id":"123","problem_id":"10-asteroids",
   "language_id":"1-java","time":"2014-06-25T11:22:05.034+01","contest_time":"1:22:05.034","entry_point":"Main",
-  "files":[{"href":"contests/wf14/submissions/187/files","mime":"application/zip"}]}
+  "files":[{"href":"contests/wf14/submissions/187/files","filename":"files.zip","mime":"application/zip"}]}
 ]
 ```
 
@@ -1354,7 +1357,7 @@ Returned data:
    "time":"2014-06-25T11:22:05.034+01",
    "contest_time":"1:22:05.034",
    "entry_point":"Main",
-   "files":[{"href":"contests/wf14/submissions/187/files","mime":"application/zip"}]
+   "files":[{"href":"contests/wf14/submissions/187/files","filename":"files.zip","mime":"application/zip"}]
 }
 ```
 
