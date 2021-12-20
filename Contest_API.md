@@ -1076,42 +1076,94 @@ Returned data:
 ]
 ```
 
-### Team members
+### People
 
-Team members of teams in the contest.
+People involved in the contest.
 
-The following endpoints are associated with languages:
+The following endpoints are associated with people:
 
-| Endpoint                           | Mime-type        | Required? | Description
-| :--------------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/team-members`      | application/json | no        | JSON array of all team members with elements as defined in the table below.
-| `/contests/<id>/team-members/<id>` | application/json | no        | JSON object of a single team member with elements as defined in the table below.
+| Endpoint                     | Mime-type        | Required? | Description
+| :--------------------------- | :--------------- | :-------- | :----------
+| `/contests/<id>/people`      | application/json | no        | JSON array of all people with elements as defined in the table below.
+| `/contests/<id>/people/<id>` | application/json | no        | JSON object of a single person with elements as defined in the table below.
 
-JSON elements of team member objects:
+JSON elements of people objects:
 
 | Name        | Type           | Required? | Nullable? | Description
 | :---------- | :------------- | :-------- | :-------- | :----------
-| id          | ID             | yes       | no        | Identifier of the team-member.
+| id          | ID             | yes       | no        | Identifier of the person.
 | icpc\_id    | string         | no        | yes       | External identifier from ICPC CMS.
-| team\_id    | ID             | yes       | no        | [Team](#teams) of this team member.
-| name        | string         | yes       | no        | Name of team member.
-| email       | string         | no        | yes       | Email of team member.
+| team\_id    | ID             | no        | yes       | [Team](#teams) of this person. Required iff role is `team`.
+| name        | string         | yes       | no        | Name of the person.
+| title       | string         | no        | yes       | Title of the person, e.g. "Technical director".
+| email       | string         | no        | yes       | Email of the person.
 | sex         | string         | no        | yes       | Either `male` or `female`, or possibly `null`.
-| role        | string         | yes       | no        | One of `contestant` or `coach`.
-| photo       | array of IMAGE | no        | yes       | Registration photo of the team member.
+| role        | string         | yes       | no        | One of `contestant`, `coach`, or `staff`.
+| photo       | array of IMAGE | no        | yes       | Registration photo of the person.
 
 #### Examples
 
 Request:
 
-` GET https://example.com/api/contests/wf14/team-members`
+` GET https://example.com/api/contests/wf14/people`
 
 Returned data:
 
 ```json
 [{"id":"john-smith","team_id":"43","icpc_id":"32442","name":"John Smith","email":"john.smith@kmail.com","sex":"male","role":"contestant"},
- {"id":"osten-umlautsen","team_id":"43","icpc_id":null,"name":"Östen Ümlautsen","sex":null,"role":"coach"}
+ {"id":"osten-umlautsen","team_id":"43","icpc_id":null,"name":"Östen Ümlautsen","sex":null,"role":"coach"},
+ {"id":"bill","name":"Bill Farrell","sex":"male","title":"Executive Director","role":"staff"}
 ]
+```
+
+### Accounts
+
+The accounts used for access to the contest.
+
+The following endpoints are associated with accounts:
+
+| Endpoint                       | Mime-type        | Required? | Description
+| :----------------------------- | :--------------- | :-------- | :----------
+| `/contests/<id>/accounts`      | application/json | yes       | JSON array of all accounts with elements as defined in the table below.
+| `/contests/<id>/accounts/<id>` | application/json | yes       | JSON object of a single account with elements as defined in the table below.
+
+JSON elements of problem objects:
+
+| Name              | Type    | Required? | Nullable? | Description
+| :---------------- | :------ | :-------- | :-------- | :----------
+| id                | ID      | yes       | no        | Identifier of the account.
+| username          | string  | yes       | no        | The account username.
+| password          | string  | no        | yes       | The account password.
+| type              | string  | no        | yes       | The type of account, e.g. `team`, `judge`, `admin`, `analyst`, `staff`.
+| ip                | string  | no        | yes       | IP address associated with this account, used for auto-login.
+| team\_id          | ID      | depends   | yes       | The team that this account is for. Required iff type is `team`.
+| people\_id        | ID      | no        | yes       | The person that this account is for, if the account is only for one person.
+
+Accounts exist in the API primarily for configuration from a contest archive, or an administrator comparing one CCS to another. It is
+expected that non-admin roles never see passwords, and typically do not see accounts other than their own.
+
+#### Examples
+
+Request:
+
+` GET https://example.com/api/contests/wf14/accounts`
+
+Returned data:
+
+```json
+[{"id":"stephan","type":"judge","ip":"10.0.0.1"},
+ {"id":"team45","type":"team","ip":"10.1.1.45","team_id":"45"}
+]
+```
+
+Request:
+
+` GET https://example.com/api/contests/wf14/accounts/nicky`
+
+Returned data:
+
+```json
+{"id":"nicky","type":"admin"}
 ```
 
 ### Contest state
@@ -1189,6 +1241,7 @@ JSON elements of submission objects:
 | language\_id  | ID               | yes       | no        | Identifier of the [ language](#languages) submitted for.
 | problem\_id   | ID               | yes       | no        | Identifier of the [ problem](#problems) submitted for.
 | team\_id      | ID               | yes       | no        | Identifier of the [ team](#teams) that made the submission.
+| account\_id   | ID               | no        | yes       | The account used to create this submission.
 | time          | TIME             | yes       | no        | Timestamp of when the submission was made.
 | contest\_time | RELTIME          | yes       | no        | Contest relative time when the submission was made.
 | entry\_point  | string           | yes       | yes       | Code entry point for specific languages.
@@ -1462,6 +1515,7 @@ JSON elements of clarification message objects:
 | to\_team\_id   | ID      | yes       | yes       | Identifier of the [ team](#teams) receiving this reply, `null` if a reply to all teams or a request sent by a team.
 | reply\_to\_id  | ID      | yes       | yes       | Identifier of clarification this is in response to, otherwise `null`.
 | problem\_id    | ID      | yes       | yes       | Identifier of associated [ problem](#problems), `null` if not associated to a problem.
+| account\_id    | ID      | no        | yes       | The account used to create this clarification.
 | text           | string  | yes       | no        | Question or reply text.
 | time           | TIME    | yes       | no        | Time of the question/reply.
 | contest\_time  | RELTIME | yes       | no        | Contest time of the question/reply.
