@@ -251,7 +251,7 @@ absolute timestamps.
     as labels may be random characters and cannot be assumed to be
     suitable for display purposes.
   - File references
-    (types **`IMAGE`**, **`VIDEO`**, **`ARCHIVE`** and **`STREAM`** in
+    (types **`IMAGE`**, **`VIDEO`**, **`ARCHIVE`**, **`STREAM`**, and **`DOCUMENT`** in
     the specification) are represented as a JSON object with elements as
     defined below.
   - Arrays (type **`array of <type>`** in the specification) are built-in JSON 
@@ -261,8 +261,9 @@ Element for file reference objects:
 
 | Name     | Type    | Nullable?          | Description
 | -------- | ------- | ------------------ | -----------
-| href     | string  | no                 | URL where the resource can be found. Relative URLs are relative to the `baseurl`. Must point to a file of intended mime-type. Resource must be accessible using the exact same (possibly none) authentication as the call that returned this data.
+| href     | string  | yes                | URL where the resource can be found. Relative URLs are relative to the `baseurl`. Must point to a file of intended mime-type. Resource must be accessible using the exact same (possibly none) authentication as the call that returned this data.
 | filename | string  | no                 | POSIX compliant filename. Filenames must be unique within the endpoint object where they are used. I.e. an organization can have (multiple) `logo` and `country_flag` file references, they must all have a different filename, but different organizations may have files with the same filename.
+| hash     | string  | yes                | MD5 hash of the file referenced. 
 | mime     | string  | no                 | Mime type of resource.
 | width    | integer | no for **`IMAGE`** | Width of the image, video or stream in pixels. Should not be used for **`ARCHIVE`**.
 | height   | integer | no for **`IMAGE`** | Height of the image, video or stream in pixels. Should not be used for **`ARCHIVE`**.
@@ -900,6 +901,8 @@ JSON elements of problem objects:
 | time\_limit       | number  | no        | no        | Time limit in seconds per test data set (i.e. per single run). Should be an integer multiple of `0.001`.
 | test\_data\_count | integer | yes       | no        | Number of test data sets.
 | max_score         | number  | no        | no        | Maximum expected score, although teams may score higher in some cases. Typically used to indicate scoreboard cell color in scoring contests. Required iff contest:scoreboard_type is `score`.
+| problem_package   | array of ARCHIVE  | no | yes    | [Problem package](https://www.kattis.com/problem-package-format/). Only allowed mime type is application/zip. Only exactly one archive is allowed. Not expected to actually contain href for package during the contest, but used for configuration and archiving.
+| problem_statememt | array of DOCUMENT | no | yes    | Problem statemet. Expected mime type is application/pdf. 
 
 #### Examples
 
