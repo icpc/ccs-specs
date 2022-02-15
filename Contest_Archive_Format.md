@@ -4,8 +4,9 @@ permalink: /contest_archive_format
 ---
 # Contest Archive Format
 
-This page describes the archive format for a contest. It is developed in
-parallel with, and makes heavy use of, the [Contest API](contest_api).
+This page describes the archive format for a contest. It describes how to
+store the information available through the [Contest API](contest_api) on
+disk.
 
 There are several reasons that contest information will be stored on
 disk, including:
@@ -16,10 +17,6 @@ disk, including:
     tools or for teams to compete against live data
   - As a base for offline analysis
 
-This standard lays out the relative location and format of each type of
-contest-related information when reading or writing to disk. The top
-level structure is inspired by the [Contest API](contest_api) structure.
-
 ## Archive contents
 
 The package consists of a single directory containing files as described
@@ -27,55 +24,48 @@ below, or alternatively, a ZIP compressed archive of the same files. It is
 strongly recommended that the name of the directory or the base name of the
 archive match the contest ID, if a contest ID is specified. 
 
-All JSON and NDJSON files and file directories map to endpoints of the
-[Contest API](contest_api) in the following way.
+A package contains information regarding a single contest (corresponding to
+the `/contests/<id>/*` endpoints of the API). The API can contain information
+for several contests, to store all information a pacakge per contest would be
+needed.
 
-The format of the JSON returned from `<endpoint>` is accepted as the contents
-of `<endpoint>.json` (or `.ndjson` in the case of `event-feed.ndjson`). For
-some files it could make sense to store multiple versions of the file. If so
-the alternate versions must be stored as `<endpoint>.<version>.[nd]json`. One
-example of this could be the judgements from a shadow CCS, which should be
-stored as `judgement.shadow.json`. Some fields that are required in the
-contest API are optional in this file format, to support some non-contest use
-cases.
+Information in the API is always either in JSON format, [NDJSON]
+(contest_api#event-feed) format, or linked using a [file reference]
+(contest_api#json-attribute-types) JSON object.
 
-Also, all files referenced from the JSON of endpoints are stored in the
-`<endpoint>` directory. As such the file reference fields are not
-required. They are allowed to be included, so that post processing of
-API output is not needed, even if the URIs contained may not work after
-a contest (e.g. because they refer to resources on a local network that
-is no longer available).
+- The JSON returned from the endpoint `/contests/<id>` is stored as
+  `contest.json`. (Notice the singular form).
+- The JSON returned from the endpoint `/contests/<id>/<endpoint>` is stored as
+  `<endpoint>.json`.
+- The NDJSON returned from the endpoint `/contests/<id>/<endpoint>` is stored as
+  `<endpoint>.ndjson`. (The only such endpoint is `event-feed`) 
 
-In summary, if a system supports the Contest API it is very simple to
-export a correct archive, but it is not required to support the contest
-API to be able to use this archive format.
 
-The problem package is not available from the contest API but is stored
-using a similar naming convention.
+Files referenced to in `contest.json` are stored as `contest/<filename>`, and
+files referenced to in `<endpoint>.json` as `<endpoint>/<id>/<filename>`,
+where:
+- `<id>` is the ID of the endpoint object the reference is in.
+- `<filename>` is the filename specified in the file reference object.
 
-| File path                              | Format | Description | Required |
-| :------------------------------------- | :----- | :---------- | :------- |
-| `<ID>/contest.json`                    | JSON   | [Contest object](#contest-object). | No |
-| `<ID>/contest`                         | Directory | [Contest files](#binary-files). | No |
-| `<ID>/judgement-types.json`            | JSON   | Array of [judgement type objects](#judgement-type-object). | Yes |
-| `<ID>/languages.json`                  | JSON   | Array of [language objects](#language-object). | Yes |
-| `<ID>/problems.json`                   | JSON   | Array of [problem objects](#problem-object). | Yes |
-| `<ID>/problems/<problem-ID>[.kpp]`     | [KPP](https://www.kattis.com/problem-package-format/) | [Problem package](#problem-package) | No |
-| `<ID>/groups.json`                     | JSON   | Array of [group objects](#group-object). | No |
-| `<ID>/organizations.json`              | JSON   | Array of [organization objects](#organization-object). | No |
-| `<ID>/organizations/<organization-ID>` | Directory | [Organization files](#binary-files).| No |
-| `<ID>/teams.json`                      | JSON   | Array of [team objects](#team-object). | Yes |
-| `<ID>/teams/<team-ID>`                 | Directory | [Team files](#binary-files). | No |
-| `<ID>/team-members.json`               | JSON   | Array of [team member objects](#team-member-object). | No |
-| `<ID>/team-members/<team-member-ID>`   | Directory | [Team member files](#binary-files). | No |
-| `<ID>/submissions.json`                | JSON   | Array of [submission objects](#submission-object). | No |
-| `<ID>/submissions/<submission-ID>`     | Directory | [Submission files](#binary-files). | No |
-| `<ID>/judgements[.<system>].json`      | JSON   | Array of [judgement objects](#judgement-object). | No |
-| `<ID>/runs[.<system>].json`            | JSON   | Array of [run objects](#run-object). | No |
-| `<ID>/clarifications.json`             | JSON   | Array of [clarification objects](#clarification-object). | No |
-| `<ID>/event-feed[.<system>].ndjson`    | [NDJSON](http://ndjson.org/) | [Event feed objects](#event-feed-object). | No |
-| `<ID>/awards.json`                     | JSON   | Array of [awards objects](#award-object). | No |
-| `<ID>/scoreboard.json`                 | JSON   | [Scoreboard object](#scoreboard-object). | No |
+Note that the API specification requires that filenames are unique within
+endpoint objects, so this is always possible.
+
+The href in the file reference may not be valid and should be ignored, but it
+does not have to be removed.
+
+Optionally one could create a Shallow Archive by not storing the files, but
+then the hrefs must be valid. This could be useful in some cases where the
+size of the archive matters.
+
+In some cases it could make sense to merge multiple API sources (of the same
+contest) in a single archive. One example of this would be a contest that was
+running with a primary and [shadow](ccs_system_requirements#shadow-mode) CCS.
+Typically in such cases, most of the data will be identical (or at least the
+differences irrelevant), so only the data that differs (in relevant ways)
+needs to be stored. If there is an additonal source for `<endpoint>` it is
+stored as above, but wherever `<endpoint>` is used in the path, instead use
+`<endpoint>_<system>` where `<system>` is a unique name for the additional
+source.
 
 ## JSON objects
 
