@@ -251,22 +251,21 @@ absolute timestamps.
     as labels may be random characters and cannot be assumed to be
     suitable for display purposes.
   - File references
-    (types **`IMAGE`**, **`VIDEO`**, **`ARCHIVE`**, **`STREAM`**, and **`DOCUMENT`** in
-    the specification) are represented as a JSON object with elements as
-    defined below.
+    (type **`FILE`** in the specification) are represented as a JSON object 
+    with elements as defined below.
   - Arrays (type **`array of <type>`** in the specification) are built-in JSON 
     arrays of some type defined above.
 
 Element for file reference objects:
 
-| Name     | Type    | Nullable?          | Description
-| -------- | ------- | ------------------ | -----------
-| href     | string  | yes                | URL where the resource can be found. Relative URLs are relative to the `baseurl`. Must point to a file of intended mime-type. Resource must be accessible using the exact same (possibly none) authentication as the call that returned this data.
-| filename | string  | no                 | POSIX compliant filename. Filenames must be unique within the endpoint object where they are used. I.e. an organization can have (multiple) `logo` and `country_flag` file references, they must all have a different filename, but different organizations may have files with the same filename.
-| hash     | string  | yes                | MD5 hash of the file referenced. 
-| mime     | string  | no                 | Mime type of resource.
-| width    | integer | no for **`IMAGE`** | Width of the image, video or stream in pixels. Should not be used for **`ARCHIVE`**.
-| height   | integer | no for **`IMAGE`** | Height of the image, video or stream in pixels. Should not be used for **`ARCHIVE`**.
+| Name     | Type    | Nullable? | Description
+| -------- | ------- | --------- | -----------
+| href     | string  | yes       | URL where the resource can be found. Relative URLs are relative to the `baseurl`. Must point to a file of intended mime-type. Resource must be accessible using the exact same (possibly none) authentication as the call that returned this data.
+| filename | string  | no        | POSIX compliant filename. Filenames must be unique within the endpoint object where they are used. I.e. an organization can have (multiple) `logo` and `country_flag` file references, they must all have a different filename, but different organizations may have files with the same filename.
+| hash     | string  | yes       | MD5 hash of the file referenced.
+| mime     | string  | no        | Mime type of resource.
+| width    | integer | depends   | Width of the image, video or stream in pixels. Required for files with mime type image/* and video/*.
+| height   | integer | depends   | Height of the image, video or stream in pixels. Required for files with mime type image/* and video/*.
 
 The `href` attributes may be [absolute or relative
 URLs](https://tools.ietf.org/html/rfc3986); relative URLs must be
@@ -552,19 +551,19 @@ The following endpoint is associated with contest:
 
 JSON elements of contest objects:
 
-| Name                         | Type           | Required? | Nullable? | Description
-| :--------------------------- | :------------- | :-------- | :-------- | :----------
-| id                           | ID             | yes       | no        | Identifier of the current contest.
-| name                         | string         | yes       | no        | Short display name of the contest.
-| formal\_name                 | string         | no        | no        | Full name of the contest.
-| start\_time                  | TIME           | yes       | yes       | The scheduled start time of the contest, may be `null` if the start time is unknown or the countdown is paused.
-| countdown\_pause\_time       | RELTIME        | no        | yes       | The amount of seconds left when countdown to contest start is paused. At no time may both `start_time` and `countdown_pause_time` be non-`null`.
-| duration                     | RELTIME        | yes       | no        | Length of the contest.
-| scoreboard\_freeze\_duration | RELTIME        | no        | yes       | How long the scoreboard is frozen before the end of the contest.
-| scoreboard\_type             | string         | no        | yes       | What type of scoreboard is used for the contest. Must be either `pass-fail` or `score`. Defaults to `pass-fail` if missing or `null`.
-| penalty\_time                | integer        | no        | no        | Penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`.
-| banner                       | array of IMAGE | no        | yes       | Banner for this contest, intended to be an image with a large aspect ratio around 8:1.
-| logo                         | array of IMAGE | no        | yes       | Logo for this contest, intended to be an image with aspect ratio near 1:1.
+| Name                         | Type          | Required? | Nullable? | Description
+| :--------------------------- | :------------ | :-------- | :-------- | :----------
+| id                           | ID            | yes       | no        | Identifier of the current contest.
+| name                         | string        | yes       | no        | Short display name of the contest.
+| formal\_name                 | string        | no        | no        | Full name of the contest.
+| start\_time                  | TIME          | yes       | yes       | The scheduled start time of the contest, may be `null` if the start time is unknown or the countdown is paused.
+| countdown\_pause\_time       | RELTIME       | no        | yes       | The amount of seconds left when countdown to contest start is paused. At no time may both `start_time` and `countdown_pause_time` be non-`null`.
+| duration                     | RELTIME       | yes       | no        | Length of the contest.
+| scoreboard\_freeze\_duration | RELTIME       | no        | yes       | How long the scoreboard is frozen before the end of the contest.
+| scoreboard\_type             | string        | no        | yes       | What type of scoreboard is used for the contest. Must be either `pass-fail` or `score`. Defaults to `pass-fail` if missing or `null`.
+| penalty\_time                | integer       | no        | no        | Penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`.
+| banner                       | array of FILE | no        | yes       | Banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime types are image/*.
+| logo                         | array of FILE | no        | yes       | Logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/*.
 
 The expected/typical use of `countdown_pause_time` is that once a
 `start_time` is defined and close, the countdown may be paused due to
@@ -901,8 +900,8 @@ JSON elements of problem objects:
 | time\_limit       | number  | no        | no        | Time limit in seconds per test data set (i.e. per single run). Should be an integer multiple of `0.001`.
 | test\_data\_count | integer | yes       | no        | Number of test data sets.
 | max_score         | number  | no        | no        | Maximum expected score, although teams may score higher in some cases. Typically used to indicate scoreboard cell color in scoring contests. Required iff contest:scoreboard_type is `score`.
-| problem_package   | array of ARCHIVE  | no | yes    | [Problem package](https://www.kattis.com/problem-package-format/). Only allowed mime type is application/zip. Only exactly one archive is allowed. Not expected to actually contain href for package during the contest, but used for configuration and archiving.
-| problem_statememt | array of DOCUMENT | no | yes    | Problem statemet. Expected mime type is application/pdf. 
+| problem_package   | array of FILE  | no | yes    | [Problem package](https://www.kattis.com/problem-package-format/). Expected mime type is application/zip. Only exactly one archive is allowed. Not expected to actually contain href for package during the contest, but used for configuration and archiving.
+| problem_statememt | array of FILE | no | yes    | Problem statemet. Expected mime type is application/pdf. 
 
 #### Examples
 
@@ -1022,20 +1021,20 @@ organizations (i.e. return any organization\_ids).
 
 JSON elements of organization objects:
 
-| Name               | Type           | Required? | Nullable? | Description
-| :----------------- | :------------- | :-------- | :-------- | :----------
-| id                 | ID             | yes       | no        | Identifier of the organization.
-| icpc\_id           | string         | no        | yes       | External identifier from ICPC CMS.
-| name               | string         | yes       | no        | Short display name of the organization.
-| formal\_name       | string         | no        | yes       | Full organization name if too long for normal display purposes.
-| country            | string         | no        | yes       | [ISO 3166-1 alpha-3 code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) of the organization's country.
-| country_flag       | array of IMAGE | no        | yes       | Flag of the country. A server is recommended to provide flags of size around 56x56 and 160x160.
-| url                | string         | no        | yes       | URL to organization's website.
-| twitter\_hashtag   | string         | no        | yes       | Organization hashtag.
-| location           | object         | no        | yes       | JSON object as specified in the rows below.
-| location.latitude  | number         | depends   | no        | Latitude in degrees. Required iff location is present.
-| location.longitude | number         | depends   | no        | Longitude in degrees. Required iff location is present.
-| logo               | array of IMAGE | no        | yes       | Logo of the organization. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well.
+| Name               | Type          | Required? | Nullable? | Description
+| :----------------- | :------------ | :-------- | :-------- | :----------
+| id                 | ID            | yes       | no        | Identifier of the organization.
+| icpc\_id           | string        | no        | yes       | External identifier from ICPC CMS.
+| name               | string        | yes       | no        | Short display name of the organization.
+| formal\_name       | string        | no        | yes       | Full organization name if too long for normal display purposes.
+| country            | string        | no        | yes       | [ISO 3166-1 alpha-3 code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) of the organization's country.
+| country_flag       | array of FILE | no        | yes       | Flag of the country. A server is recommended to provide flags of size around 56x56 and 160x160. Only allowed mime types are image/*.
+| url                | string        | no        | yes       | URL to organization's website.
+| twitter\_hashtag   | string        | no        | yes       | Organization hashtag.
+| location           | object        | no        | yes       | JSON object as specified in the rows below.
+| location.latitude  | number        | depends   | no        | Latitude in degrees. Required iff location is present.
+| location.longitude | number        | depends   | no        | Longitude in degrees. Required iff location is present.
+| logo               | array of FILE | no        | yes       | Logo of the organization. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well. Only allowed mime types are image/*.
 
 #### Examples
 
@@ -1067,27 +1066,27 @@ The following endpoints are associated with teams:
 
 JSON elements of team objects:
 
-| Name              | Type             | Required? | Nullable? | Description
-| :---------------- | :--------------- | :-------- | :-------- | :----------
-| id                | ID               | yes       | no        | Identifier of the team. Usable as a label, at WFs normally the team seat number.
-| icpc\_id          | string           | no        | yes       | External identifier from ICPC CMS.
-| name              | string           | yes       | no        | Name of the team.
-| display\_name     | string           | no        | yes       | Display name of the team. If not set, a client should revert to using the name instead.
-| organization\_id  | ID               | no        | yes       | Identifier of the [ organization](#organizations) (e.g. university or other entity) that this team is affiliated to.
-| group\_ids        | array of ID      | no        | no        | Identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty.
-| hidden            | boolean          | no        | yes       | If the team is to be excluded from the [scoreboard](#scoreboard). Defaults to false if missing.
-| location          | object           | no        | no        | JSON object as specified in the rows below.
-| location.x        | number           | depends   | no        | Team's x position in meters. Required iff location is present.
-| location.y        | number           | depends   | no        | Team's y position in meters. Required iff location is present.
-| location.rotation | number           | depends   | no        | Team's rotation in degrees. Required iff location is present.
-| photo             | array of IMAGE   | no        | yes       | Registration photo of the team.
-| video             | array of VIDEO   | no        | yes       | Registration video of the team.
-| backup            | array of ARCHIVE | no        | yes       | Latest file backup of the team machine. Only allowed mime type is application/zip.
-| key\_log          | array of FILE    | no        | yes       | Latest key log file from the team machine. Only allowed mime type is text/plain.
-| tool\_data        | array of FILE    | no        | yes       | Latest tool data usage file from the team machine. Only allowed mime type is text/plain.
-| desktop           | array of STREAM  | no        | yes       | Streaming video of the team desktop.
-| webcam            | array of STREAM  | no        | yes       | Streaming video of the team webcam.
-| audio             | array of STREAM  | no        | yes       | Streaming team audio.
+| Name              | Type          | Required? | Nullable? | Description
+| :---------------- | :------------ | :-------- | :-------- | :----------
+| id                | ID            | yes       | no        | Identifier of the team. Usable as a label, at WFs normally the team seat number.
+| icpc\_id          | string        | no        | yes       | External identifier from ICPC CMS.
+| name              | string        | yes       | no        | Name of the team.
+| display\_name     | string        | no        | yes       | Display name of the team. If not set, a client should revert to using the name instead.
+| organization\_id  | ID            | no        | yes       | Identifier of the [ organization](#organizations) (e.g. university or other entity) that this team is affiliated to.
+| group\_ids        | array of ID   | no        | no        | Identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty.
+| hidden            | boolean       | no        | yes       | If the team is to be excluded from the [scoreboard](#scoreboard). Defaults to false if missing.
+| location          | object        | no        | no        | JSON object as specified in the rows below.
+| location.x        | number        | depends   | no        | Team's x position in meters. Required iff location is present.
+| location.y        | number        | depends   | no        | Team's y position in meters. Required iff location is present.
+| location.rotation | number        | depends   | no        | Team's rotation in degrees. Required iff location is present.
+| photo             | array of FILE | no        | yes       | Registration photo of the team. Only allowed mime types are image/*.
+| video             | array of FILE | no        | yes       | Registration video of the team. Only allowed mime types are video/*.
+| backup            | array of FILE | no        | yes       | Latest file backup of the team machine. Only allowed mime type is application/zip.
+| key\_log          | array of FILE | no        | yes       | Latest key log file from the team machine. Only allowed mime type is text/plain.
+| tool\_data        | array of FILE | no        | yes       | Latest tool data usage file from the team machine. Only allowed mime type is text/plain.
+| desktop           | array of FILE | no        | yes       | Streaming video of the team desktop.
+| webcam            | array of FILE | no        | yes       | Streaming video of the team webcam.
+| audio             | array of FILE | no        | yes       | Streaming team audio.
 
 #### Examples
 
@@ -1116,17 +1115,17 @@ The following endpoints are associated with people:
 
 JSON elements of people objects:
 
-| Name        | Type           | Required? | Nullable? | Description
-| :---------- | :------------- | :-------- | :-------- | :----------
-| id          | ID             | yes       | no        | Identifier of the person.
-| icpc\_id    | string         | no        | yes       | External identifier from ICPC CMS.
-| team\_id    | ID             | no        | yes       | [Team](#teams) of this person. Required iff role is `team`.
-| name        | string         | yes       | no        | Name of the person.
-| title       | string         | no        | yes       | Title of the person, e.g. "Technical director".
-| email       | string         | no        | yes       | Email of the person.
-| sex         | string         | no        | yes       | Either `male` or `female`, or possibly `null`.
-| role        | string         | yes       | no        | One of `contestant`, `coach`, or `staff`.
-| photo       | array of IMAGE | no        | yes       | Registration photo of the person.
+| Name        | Type          | Required? | Nullable? | Description
+| :---------- | :------------ | :-------- | :-------- | :----------
+| id          | ID            | yes       | no        | Identifier of the person.
+| icpc\_id    | string        | no        | yes       | External identifier from ICPC CMS.
+| team\_id    | ID            | no        | yes       | [Team](#teams) of this person. Required iff role is `team`.
+| name        | string        | yes       | no        | Name of the person.
+| title       | string        | no        | yes       | Title of the person, e.g. "Technical director".
+| email       | string        | no        | yes       | Email of the person.
+| sex         | string        | no        | yes       | Either `male` or `female`, or possibly `null`.
+| role        | string        | yes       | no        | One of `contestant`, `coach`, or `staff`.
+| photo       | array of FILE | no        | yes       | Registration photo of the person. Only allowed mime types are image/*.
 
 #### Examples
 
@@ -1262,18 +1261,18 @@ The following endpoints are associated with submissions:
 
 JSON elements of submission objects:
 
-| Name          | Type             | Required? | Nullable? | Description
-| :------------ | :--------------- | :-------- | :-------- | :----------
-| id            | ID               | yes       | no        | Identifier of the submission. Usable as a label, typically a low incrementing number.
-| language\_id  | ID               | yes       | no        | Identifier of the [ language](#languages) submitted for.
-| problem\_id   | ID               | yes       | no        | Identifier of the [ problem](#problems) submitted for.
-| team\_id      | ID               | yes       | no        | Identifier of the [ team](#teams) that made the submission.
-| account\_id   | ID               | no        | yes       | The account used to create this submission.
-| time          | TIME             | yes       | no        | Timestamp of when the submission was made.
-| contest\_time | RELTIME          | yes       | no        | Contest relative time when the submission was made.
-| entry\_point  | string           | yes       | yes       | Code entry point for specific languages.
-| files         | array of ARCHIVE | yes       | no        | Submission files, contained at the root of the archive. Only allowed mime type is application/zip. Only exactly one archive is allowed.
-| reaction      | array of VIDEO   | no        | yes       | Reaction video from team's webcam.
+| Name          | Type          | Required? | Nullable? | Description
+| :------------ | :------------ | :-------- | :-------- | :----------
+| id            | ID            | yes       | no        | Identifier of the submission. Usable as a label, typically a low incrementing number.
+| language\_id  | ID            | yes       | no        | Identifier of the [ language](#languages) submitted for.
+| problem\_id   | ID            | yes       | no        | Identifier of the [ problem](#problems) submitted for.
+| team\_id      | ID            | yes       | no        | Identifier of the [ team](#teams) that made the submission.
+| account\_id   | ID            | no        | yes       | The account used to create this submission.
+| time          | TIME          | yes       | no        | Timestamp of when the submission was made.
+| contest\_time | RELTIME       | yes       | no        | Contest relative time when the submission was made.
+| entry\_point  | string        | yes       | yes       | Code entry point for specific languages.
+| files         | array of FILE | yes       | no        | Submission files, contained at the root of the archive. Only allowed mime type is application/zip. Only exactly one archive is allowed.
+| reaction      | array of FILE | no        | yes       | Reaction video from team's webcam. Only allowed mime types are video/*.
 
 The `entry_point` attribute must be included for submissions in
 languages which do not have a single, unambiguous entry point to run the
@@ -1881,13 +1880,13 @@ request are not valid.
 
 JSON elements of the scoreboard object.
 
-| Name          | Type                       | Required? | Nullable? | Description
-| :------------ | :------------------------- | :-------- | :-------- | :----------
-| event\_id     | ID                         | yes       | no        | Identifier of the [ event](#event-feed) after which this scoreboard was generated. This must be identical to the argument `after_event_id`, if specified.
-| time          | TIME                       | yes       | no        | Time contained in the associated event. Implementation defined if the event has no associated time.
-| contest\_time | RELTIME                    | yes       | no        | Contest time contained in the associated event. Implementation defined if the event has no associated contest time.
-| state         | object                     | yes       | no        | Identical data as returned by the [ contest state](#contest-state) endpoint. This is provided here for ease of use and to guarantee the data is synchronized.
-| rows          | JSON array of JSON objects | yes       | no        | A list of rows of team with their associated scores.
+| Name          | Type    | Required? | Nullable? | Description
+| :------------ | :------ | :-------- | :-------- | :----------
+| event\_id     | ID      | yes       | no        | Identifier of the [ event](#event-feed) after which this scoreboard was generated. This must be identical to the argument `after_event_id`, if specified.
+| time          | TIME    | yes       | no        | Time contained in the associated event. Implementation defined if the event has no associated time.
+| contest\_time | RELTIME | yes       | no        | Contest time contained in the associated event. Implementation defined if the event has no associated contest time.
+| state         | object  | yes       | no        | Identical data as returned by the [ contest state](#contest-state) endpoint. This is provided here for ease of use and to guarantee the data is synchronized.
+| rows          | array of scoreboard row objects | yes       | no        | A list of rows of team with their associated scores.
 
 The scoreboard `rows` array is sorted according to rank and alphabetical
 on team name within identically ranked teams. Here alphabetical ordering
@@ -1895,20 +1894,20 @@ means according to the [Unicode Collation
 Algorithm](https://www.unicode.org/reports/tr10/), by default using the
 `en-US` locale.
 
-Each JSON object in the rows array consists of:
+JSON elements of scoreboard row objects:
 
-| Name              | Type             | Required? | Nullable? | Description
-| :---------------- | :--------------- | :-------- | :-------- | :----------
-| rank              | integer          | yes       | no        | Rank of this team, 1-based and duplicate in case of ties.
-| team\_id          | ID               | yes       | no        | Identifier of the [ team](#teams).
-| score             | object           | yes       | no        | JSON object as specified in the rows below (for possible extension to other scoring methods).
-| score.num\_solved | integer          | depends   | no        | Number of problems solved by the team. Required iff contest:scoreboard_type is `pass-fail`.
-| score.total\_time | integer          | depends   | no        | Total penalty time accrued by the team. Required iff contest:scoreboard_type is `pass-fail`.
-| score.score       | number           | depends   | no        | Total score of problems by the team. Required iff contest:scoreboard_type is `score`.
-| score.time        | integer          | no        | no        | Time of last score improvement used for tiebreaking purposes.
-| problems          | array of objects | yes       | no        | JSON array of problems with scoring data, see below for the specification of each element.
+| Name              | Type    | Required? | Nullable? | Description
+| :---------------- | :------ | :-------- | :-------- | :----------
+| rank              | integer | yes       | no        | Rank of this team, 1-based and duplicate in case of ties.
+| team\_id          | ID      | yes       | no        | Identifier of the [ team](#teams).
+| score             | object  | yes       | no        | JSON object as specified in the rows below (for possible extension to other scoring methods).
+| score.num\_solved | integer | depends   | no        | Number of problems solved by the team. Required iff contest:scoreboard_type is `pass-fail`.
+| score.total\_time | integer | depends   | no        | Total penalty time accrued by the team. Required iff contest:scoreboard_type is `pass-fail`.
+| score.score       | number  | depends   | no        | Total score of problems by the team. Required iff contest:scoreboard_type is `score`.
+| score.time        | integer | no        | no        | Time of last score improvement used for tiebreaking purposes.
+| problems          | array of problem data objects | yes       | no        | JSON array of problems with scoring data, see below for the specification of each element.
 
-Each problem object within the scoreboard consists of:
+JSON elements of problem data objects:
 
 | Name         | Type    | Required? | Nullable? | Description
 | :----------- | :------ | :-------- | :-------- | :----------
