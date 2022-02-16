@@ -901,7 +901,7 @@ JSON elements of problem objects:
 | test\_data\_count | integer | yes       | no        | Number of test data sets.
 | max_score         | number  | no        | no        | Maximum expected score, although teams may score higher in some cases. Typically used to indicate scoreboard cell color in scoring contests. Required iff contest:scoreboard_type is `score`.
 | problem_package   | array of FILE  | no | yes    | [Problem package](https://www.kattis.com/problem-package-format/). Expected mime type is application/zip. Only exactly one archive is allowed. Not expected to actually contain href for package during the contest, but used for configuration and archiving.
-| problem_statememt | array of FILE | no | yes    | Problem statemet. Expected mime type is application/pdf. 
+| problem_statement | array of FILE | no | yes    | Problem statement. Expected mime type is application/pdf. 
 
 #### Examples
 
