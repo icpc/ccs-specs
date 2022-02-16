@@ -66,3 +66,102 @@ needs to be stored. If there is an additonal source for `<endpoint>` it is
 stored as above, but wherever `<endpoint>` is used in the path, instead use
 `<endpoint>_<system>` where `<system>` is a unique name for the additional
 source.
+
+## Exampole uses
+
+The rest of the document describes use cases for the Archive Format, listing
+which data would be required for that use case.
+
+### CCS configuration
+
+Used for configuring a CCS (primary or shadow) before a contest. Suitable for
+download from a registration system or similar tool.
+
+Required endpoints:
+- contests
+- languages
+- problems
+- teams
+- accounts
+
+Optional endpoints:
+- judgement-types
+- groups
+- organizations
+- people
+
+#### Example file listing
+
+```
+contest.json
+contest/banner.png
+contest/logo.png
+judgement-types.json
+languages.json
+problems.json
+problems/problemA/problemA.zip
+problems/problemA/problemA.pdf
+problems/problemB/problemB.zip
+problems/problemB/problemB.pdf
+...
+groups.json
+organizations.json
+organizations/kth.se/logo56x56.png
+organizations/kth.se/logo160x160.png
+organizations/baylor.edu/logo56x56.png
+organizations/baylor.edu/logo160x160.png
+...
+teams.json
+teams/team-001/photo.jpg
+teams/team-002/photo.jpg
+teams/team-003/photo.jpg
+...
+people.json
+people/john-smith/photo.jpg
+people/jane-doe/photo.jpg
+....
+accounts.json
+```
+
+### Registration upload
+
+Used for uploading local registration data to a central registration system
+(such as the ICPC CMS).
+
+Required endpoints:
+- teams
+- people
+
+#### Example file listing
+
+```
+teams.json
+teams/team-001/photo.jpg
+teams/team-002/photo.jpg
+teams/team-003/photo.jpg
+...
+people.json
+people/john-smith/photo.jpg
+people/jane-doe/photo.jpg
+....
+```
+
+### Results upload
+
+Used for uploading results from a finished contest to a central repository
+(such as the ICPC CMS).
+
+Required endpoints:
+- teams
+- scoreboard
+
+Optional endpoints:
+- awards
+
+#### Example file listing
+
+```
+teams.json
+scoreboard.json
+awards.json
+```
