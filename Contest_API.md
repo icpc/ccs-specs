@@ -264,8 +264,8 @@ Element for file reference objects:
 | filename | string  | no        | POSIX compliant filename. Filenames must be unique within the endpoint object where they are used. I.e. an organization can have (multiple) `logo` and `country_flag` file references, they must all have a different filename, but different organizations may have files with the same filename.
 | hash     | string  | yes       | MD5 hash of the file referenced.
 | mime     | string  | no        | Mime type of resource.
-| width    | integer | depends   | Width of the image, video or stream in pixels. Required for files with mime type image/* and video/*.
-| height   | integer | depends   | Height of the image, video or stream in pixels. Required for files with mime type image/* and video/*.
+| width    | integer | depends   | Width of the image. Required for files with mime type image/*.
+| height   | integer | depends   | Height of the image. Required for files with mime type image/*.
 
 The `href` attributes may be [absolute or relative
 URLs](https://tools.ietf.org/html/rfc3986); relative URLs must be
