@@ -538,6 +538,38 @@ meaning that all conditions must be met (they are logically `AND`ed).
 Note that filtering on any other field, including fields with the type
 array of ID, does not have to be supported.
 
+### API version
+
+Provides version information for the API.
+
+The following endpoint is associated with API version:
+
+| Endpoint | Mime-type        | Required? | Description
+| :------- | :--------------- | :-------- | :----------
+| `/`      | application/json | yes       | JSON object with version information as defined in the table below.
+
+JSON elements of version object:
+
+| Name        | Type   | Required? | Nullable? | Description
+| :---------- | :----- | :-------- | :-------- | :----------
+| version     | string | yes       | no        | Version of the API. For this version must be the string `2022-07-draft`. Will be on the form `<yyyy>-<mm>`, `<yyyy>-<mm>-draft`, or simply `draft`.
+| version_url | string | yes       | no        | Link to documentation for this version of the API.
+
+#### Examples
+
+Request:
+
+` GET https://example.com/api/`
+
+Returned data:
+
+```json
+{
+   "version": "2022-07-draft",
+   "version_url": "https://ccs-specs.icpc.io/2022-07-draft/contest_api"
+}
+```
+
 ### Contests
 
 Provides information on the current contest.
