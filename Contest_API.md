@@ -542,7 +542,7 @@ array of ID, does not have to be supported.
 
 Provides information on the current contest.
 
-The following endpoint is associated with contest:
+The following endpoints are associated with contest:
 
 | Endpoint         | Mime-type        | Required? | Description                                                                 
 | :--------------- | :--------------- | :-------- | :----------
