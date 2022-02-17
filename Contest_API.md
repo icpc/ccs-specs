@@ -552,7 +552,7 @@ JSON elements of version object:
 
 | Name        | Type   | Required? | Nullable? | Description
 | :---------- | :----- | :-------- | :-------- | :----------
-| version     | string | yes       | no        | Version of the API. For this version must be the string `2022-07-draft`. Will be on the form `<yyyy>-<mm>`, `<yyyy>-<mm>-draft`, or simply `draft`.
+| version     | string | yes       | no        | Version of the API. For this version must be the string `2022-07-draft`. Will be of the form `<yyyy>-<mm>`, `<yyyy>-<mm>-draft`, or simply `draft`.
 | version_url | string | yes       | no        | Link to documentation for this version of the API.
 
 #### Examples
