@@ -26,7 +26,7 @@ archive match the contest ID, if a contest ID is specified.
 
 A package contains information regarding a single contest (corresponding to
 the `/contests/<id>/*` endpoints of the API). The API can contain information
-for several contests, to store all information a pacakge per contest would be
+for several contests, to store all information a package per contest would be
 needed.
 
 Information in the API is always either in JSON format, [NDJSON]
@@ -67,7 +67,7 @@ stored as above, but wherever `<endpoint>` is used in the path, instead use
 `<endpoint>_<system>` where `<system>` is a unique name for the additional
 source.
 
-## Exampole uses
+## Example uses
 
 The rest of the document describes use cases for the Archive Format, listing
 which data would be required for that use case.
