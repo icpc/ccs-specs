@@ -33,6 +33,8 @@ Information in the API is always either in JSON format, [NDJSON]
 (contest_api#event-feed) format, or linked using a [file reference]
 (contest_api#json-attribute-types) JSON object.
 
+- The JSON returned from the endpoint `/` is stored as
+  `api.json`.
 - The JSON returned from the endpoint `/contests/<id>` is stored as
   `contest.json`. (Notice the singular form).
 - The JSON returned from the endpoint `/contests/<id>/<endpoint>` is stored as
@@ -78,6 +80,7 @@ Used for configuring a CCS (primary or shadow) before a contest. Suitable for
 download from a registration system or similar tool.
 
 Required endpoints:
+- api
 - contests
 - languages
 - problems
@@ -93,6 +96,7 @@ Optional endpoints:
 #### Example file listing
 
 ```
+api.json
 contest.json
 contest/banner.png
 contest/logo.png
@@ -129,6 +133,7 @@ Used for uploading local registration data to a central registration system
 (such as the ICPC CMS).
 
 Required endpoints:
+- api
 - organizations
 - teams
 - people
@@ -136,6 +141,7 @@ Required endpoints:
 #### Example file listing
 
 ```
+api.json
 organizations.json
 organizations/kth.se/logo56x56.png
 organizations/kth.se/logo160x160.png
@@ -159,6 +165,7 @@ Used for uploading results from a finished contest to a central repository
 (such as the ICPC CMS).
 
 Required endpoints:
+- api
 - teams
 - scoreboard
 
@@ -168,6 +175,7 @@ Optional endpoints:
 #### Example file listing
 
 ```
+api.json
 teams.json
 scoreboard.json
 awards.json
