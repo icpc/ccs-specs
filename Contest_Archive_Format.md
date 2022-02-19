@@ -129,12 +129,19 @@ Used for uploading local registration data to a central registration system
 (such as the ICPC CMS).
 
 Required endpoints:
+- organizations
 - teams
 - people
 
 #### Example file listing
 
 ```
+organizations.json
+organizations/kth.se/logo56x56.png
+organizations/kth.se/logo160x160.png
+organizations/baylor.edu/logo56x56.png
+organizations/baylor.edu/logo160x160.png
+...
 teams.json
 teams/team-001/photo.jpg
 teams/team-002/photo.jpg
