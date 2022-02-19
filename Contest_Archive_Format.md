@@ -20,7 +20,7 @@ disk, including:
 ## Archive contents
 
 The package consists of a single directory containing files as described
-below, or alternatively, a ZIP compressed archive of the same files. It is
+below, or alternatively, a ZIP compressed archive of the directory. It is
 strongly recommended that the name of the directory or the base name of the
 archive match the contest ID, if a contest ID is specified. 
 
