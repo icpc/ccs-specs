@@ -26,12 +26,12 @@ archive match the contest ID, if a contest ID is specified.
 
 A package contains information regarding a single contest (corresponding to
 the `/contests/<id>/*` endpoints of the API). The API can contain information
-for several contests, to store all information a package per contest would be
-needed.
+for several contests, to store the information for multiple contests a
+package per contest would be needed.
 
-Information in the API is always either in JSON format, [NDJSON]
-(contest_api#event-feed) format, or linked using a [file reference]
-(contest_api#json-attribute-types) JSON object.
+Information in the API is always either in JSON format, [NDJSON](contest_api#event-feed)
+format, or linked using a [file reference](contest_api#json-attribute-types)
+JSON object.
 
 - The JSON returned from the endpoint `/` is stored as
   `api.json`.
@@ -40,12 +40,12 @@ Information in the API is always either in JSON format, [NDJSON]
 - The JSON returned from the endpoint `/contests/<id>/<endpoint>` is stored as
   `<endpoint>.json`.
 - The NDJSON returned from the endpoint `/contests/<id>/<endpoint>` is stored as
-  `<endpoint>.ndjson`. (The only such endpoint is `event-feed`) 
+  `<endpoint>.ndjson`. (The only such endpoint is `event-feed`.) 
 
 
-Files referenced to in `contest.json` are stored as `contest/<filename>`, and
-files referenced to in `<endpoint>.json` as `<endpoint>/<id>/<filename>`,
-where:
+Files referenced in `contest.json` are stored as `contest/<filename>`, and
+files referenced in `<endpoint>.json` are stored as
+`<endpoint>/<id>/<filename>`, where:
 - `<id>` is the ID of the endpoint object the reference is in.
 - `<filename>` is the filename specified in the file reference object.
 
@@ -123,7 +123,7 @@ teams/team-003/photo.jpg
 people.json
 people/john-smith/photo.jpg
 people/jane-doe/photo.jpg
-....
+...
 accounts.json
 ```
 
@@ -156,7 +156,7 @@ teams/team-003/photo.jpg
 people.json
 people/john-smith/photo.jpg
 people/jane-doe/photo.jpg
-....
+...
 ```
 
 ### Results upload
