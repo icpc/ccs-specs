@@ -40,7 +40,7 @@ JSON object.
 - The JSON returned from the endpoint `/contests/<id>/<endpoint>` is stored as
   `<endpoint>.json`.
 - The NDJSON returned from the endpoint `/contests/<id>/<endpoint>` is stored as
-  `<endpoint>.ndjson`. (The only such endpoint is `event-feed`.) 
+  `<endpoint>.ndjson`. (The only such endpoint is `event-feed`.)
 
 
 Files referenced in `contest.json` are stored as `contest/<filename>`, and
@@ -52,12 +52,16 @@ files referenced in `<endpoint>.json` are stored as
 Note that the API specification requires that filenames are unique within
 endpoint objects, so this is always possible.
 
-The href in the file reference may not be valid and should be ignored, but it
-does not have to be removed.
+It is not required that URLs specified in the href is always valid.
+Specifically, in many cases the contest is running in a local network that is
+taken down after the contest, and this the URL would definitely not be
+working. To keep the archiving process as simple as possible, stale URLs do
+not have to be removed from the data, but due to this the URLs should be
+ignored and the file stored as specified above should be used instead.
 
-Optionally one could create a Shallow Archive by not storing the files, but
-then the hrefs must be valid. This could be useful in some cases where the
-size of the archive matters.
+Optionally one could create a Shallow Archive by not storing the files Then
+URLs must be valid. This could be useful in some cases where the size of the
+archive matters.
 
 In some cases it could make sense to merge multiple API sources (of the same
 contest) in a single archive. One example of this would be a contest that was
