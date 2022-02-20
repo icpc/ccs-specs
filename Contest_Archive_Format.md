@@ -52,22 +52,22 @@ files referenced in `<endpoint>.json` are stored as
 Note that the API specification requires that filenames are unique within
 endpoint objects, so this is always possible.
 
-It is not required that URLs specified in the href is always valid.
+It is not required that a URL specified in an href is always valid.
 Specifically, in many cases the contest is running in a local network that is
-taken down after the contest, and this the URL would definitely not be
-working. To keep the archiving process as simple as possible, stale URLs do
-not have to be removed from the data, but due to this the URLs should be
-ignored and the file stored as specified above should be used instead.
+taken down after the contest, and in this case the URL would definitely not
+still be working. To keep the archiving process as simple as possible, stale
+URLs do not have to be removed from the data, but due to this the URLs should
+be ignored and the file stored as specified above should be used instead.
 
-Optionally one could create a Shallow Archive by not storing the files Then
-URLs must be valid. This could be useful in some cases where the size of the
-archive matters.
+Optionally one could create a Shallow Archive by not storing the files, in
+which case the URLs must be valid. This could be useful in some cases where
+the size of the archive matters.
 
 In some cases it could make sense to merge multiple API sources (of the same
 contest) in a single archive. One example of this would be a contest that was
 running with a primary and [shadow](ccs_system_requirements#shadow-mode) CCS.
-Typically in such cases, most of the data will be identical (or at least the
-differences irrelevant), so only the data that differs (in relevant ways)
+Typically in such cases, most of the data is identical (or at least the
+differences are irrelevant), so only the data that differs (in relevant ways)
 needs to be stored. If there is an additonal source for `<endpoint>` it is
 stored as above, but wherever `<endpoint>` is used in the path, instead use
 `<endpoint>_<system>` where `<system>` is a unique name for the additional
