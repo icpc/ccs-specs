@@ -58,13 +58,13 @@ requested, e.g. at the URL path
 
 ` GET https://example.com/api/contests/wf14/teams`
 
-while an element with specific ID is requested as
+while an object with a specific ID is requested as
 
 ` GET https://example.com/api/contests/wf14/teams/10`
 
-A collection is always returned as a JSON list of objects. Every object
-in the list represents a single element (and always includes the ID).
-When requesting a single element the exact same object is returned. E.g.
+A collection is always returned as an array of JSON objects. Every item
+in the array is a single contest object (and always includes the ID).
+When requesting a single object the exact same object is returned. E.g.
 the URL path
 
 `GET baseurl/collection`
@@ -72,8 +72,8 @@ the URL path
 returns
 
 ```json
-[ { "id":<id1>, <element specific data for id1> },
-  { "id":<id2>, <element specific data for id2> },
+[ { "id":<id1>, <object specific data for id1> },
+  { "id":<id2>, <object specific data for id2> },
      ...
 ]
 ```
@@ -84,7 +84,7 @@ while the URL path
 
 returns
 
-`{ "id":<id1>, <element specific data for id1> }`
+`{ "id":<id1>, <object specific data for id1> }`
 
 ### HTTP headers
 
@@ -110,30 +110,30 @@ their expected behavior, if implemented.
 
   - `GET`
     Read data. This method is idempotent and does not modify any data.
-    It can be used to request a whole collection or a specific element.
+    It can be used to request a whole collection or a specific object.
 
   - `POST`
-    Create a new element. This can only be called on a collection
-    endpoint, and the `id` attribute may not be specified as it is up
+    Create a new object. This can only be called on a collection
+    endpoint, and the `id` property may not be specified as it is up
     to the server to assign one.
     If successful the response will contain a `Location` header
-    pointing to the newly created element.
+    pointing to the newly created object.
 
   - `PUT`
-    Creates or replaces a specific element. This method is idempotent, can only
-    be called on a specific element, and replaces its contents with the
+    Creates or replaces a specific object. This method is idempotent, can only
+    be called on a specific object, and replaces its contents with the
     data provided. The payload data must be complete, i.e. the `id` is
     required and no partial updates are allowed.
 
   - `PATCH`
-    Updates/modifies a specific element. This method is idempotent,
-    can only be called on a specific element, and replaces the given
-    attributes with the data provided. For example
+    Updates/modifies a specific object. This method is idempotent,
+    can only be called on a specific object, and replaces the given
+    properties with the data provided. For example
     `PATCH https://example.com/api/contests/wf14/teams/10`
     with JSON contents `{"name":"Our cool new team name"}`.
 
   - `DELETE`
-    Delete a specific element. Idempotent, but will return a `404` error
+    Delete a specific object. Idempotent, but will return a `404` error
     code when repeated. Any provided data is ignored, and there is no response body if successful.
     Example: `DELETE https://example.com/api/contests/wf14/teams/8`.
     Note that deletes must keep [referential integrity](#referential-integrity) intact.
@@ -143,24 +143,24 @@ their expected behavior, if implemented.
 Standard [HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) are
 returned to indicate success or failure. If successful DELETE will have no response body,
 GET on a collection will return the collection, and every other method will contain the
-current (updated) state of the element.
+current (updated) state of the object.
 
-If a POST, PUT, PATCH would cause any of the following issues it must fail, in addition to any endpoint or element-specific requirements:
+If a POST, PUT, PATCH would cause any of the following issues it must fail, in addition to any endpoint or object-specific requirements:
 
 * A PATCH on an `id` that doesn't exist. Will return a 404 error code.
 * A PUT or PATCH containing an id that does not match the URL. Will return a 409 error code.
-* A missing required attribute.
-* An attribute that must not be provided is provided.
-* An attribute type that is incorrect or otherwise invalid (e.g. non-nullable attribute set to null).
-* A reference to another element is invalid (to maintain [referential integrity](#referential-integrity)).
+* A missing required property.
+* A property that must not be provided is provided.
+* A property type that is incorrect or otherwise invalid (e.g. non-nullable property set to null).
+* A reference to another object is invalid (to maintain [referential integrity](#referential-integrity)).
 
-In addition to any endpoint or element-specific requirements, DELETE must fail
-if the element `id` doesn't exist, and return a 404 error code. 
-If the element being deleted is referenced by another element, the server must either
+In addition to any endpoint or object-specific requirements, DELETE must fail
+if the object `id` doesn't exist, and return a 404 error code. 
+If the object being deleted is referenced by another object, the server must either
 fail or implement a cascading delete (to maintain [referential integrity](#referential-integrity))
 
 When there is a failure using any method the response message body
-must include a JSON element that contains the attributes 'code' (a number,
+must include a JSON object that contains the properties 'code' (a number,
 identical to the HTTP status code returned) and 'message' (a string) with
 further information suitable for the user making the request, as per the
 following example:
@@ -187,7 +187,7 @@ additional roles may be supported for specific uses:
   - admin (data or capability only available to contest administrators)
 
 Role-based access may completely hide some objects from the user, may
-omit certain attributes, or may embargo or omit objects based on the
+omit certain properties, or may embargo or omit objects based on the
 current contest time. By default, the public user has read-only access
 (no `POST`, `PUT`, `PATCH` or `DELETE` methods allowed) and does
 not have access to judgements and runs from submissions made after the
@@ -195,9 +195,9 @@ contest freeze time.
 
 ### Referential integrity
 
-Some attributes in elements are references to IDs of other elements.
-When such an attribute has a non-`null` value, then the referenced
-element must exist. That is, the full set of data exposed by the API
+Some properties in an object are references to IDs of other objects.
+When such an property has a non-`null` value, then the referenced
+object must exist. That is, the full set of data exposed by the API
 must at all times be referentially intact. This implies for example that
 before creating a [team](#teams) with an `organization_id`,
 the [organization](#organizations) must already exist. In
@@ -205,13 +205,13 @@ reverse, that organization can only be deleted after the team is
 deleted, or alternatively, the team's `organization_id` is set to
 `null`.
 
-Furthermore, the ID attribute (see below) of elements are not allowed to
+Furthermore, the ID property (see below) of objects are not allowed to
 change. However, note that a particular ID might be reused by first
-deleting an element and then creating a new element with the same ID.
+deleting an object and then creating a new object with the same ID.
 
-### JSON attribute types
+### JSON property types
 
-Attribute types are specified as one of the standard JSON types, or one of the
+Property types are specified as one of the standard JSON types, or one of the
 more specific types defined below. Implementations must be consistent with
 respect to the optional parts of each type, e.g. if the optional .uuu is
 included in any absolute timestamp it must be included when outputting all
@@ -252,11 +252,11 @@ absolute timestamps.
     suitable for display purposes.
   - File references
     (type **`FILE`** in the specification) are represented as a JSON object 
-    with elements as defined below.
+    with properties as defined below.
   - Arrays (type **`array of <type>`** in the specification) are built-in JSON 
     arrays of some type defined above.
 
-Element for file reference objects:
+Properties for file reference objects:
 
 | Name     | Type    | Nullable? | Description
 | -------- | ------- | --------- | -----------
@@ -267,8 +267,8 @@ Element for file reference objects:
 | width    | integer | depends   | Width of the image. Required for files with mime type image/*.
 | height   | integer | depends   | Height of the image. Required for files with mime type image/*.
 
-The `href` attributes may be [absolute or relative
-URLs](https://tools.ietf.org/html/rfc3986); relative URLs must be
+The `href` property may be an [absolute or relative
+URL](https://tools.ietf.org/html/rfc3986); relative URLs must be
 interpreted relative to the `baseurl` of the API. For example, if
 `baseurl` is <https://example.com/api>, then the following are
 equivalent JSON response snippets pointing to the same location:
@@ -286,7 +286,7 @@ when possible, but otherwise the actual values don't matter as long as they
 are positive and represent the correct aspect ratio.
 
 If implementing support for uploading files pointed to by resource
-links, substitute the href element with a data element with a base64
+links, substitute the href property with a data property with a base64
 encoded string of the associated file contents as the value.
 
 For example
@@ -308,16 +308,16 @@ with JSON data
 This specification is meant to cover the basic data of contests, with
 the idea that server/client implementations can extend this with more
 data and/or roles. In particular, this specification already lists some
-endpoints or specific attributes as optional. The following guidelines
+endpoints or specific properties as optional. The following guidelines
 are meant to ease extensibility.
 
-  - Clients should accept extra attributes in endpoints, that are not
+  - Clients should accept extra properties in endpoints, that are not
     specified here.
   - Servers should not expect clients to recognize more than the basic,
     required specification.
-  - In this specification and extensions, an attribute with value `null`
+  - In this specification and extensions, a property with value `null`
     may be left out by the server (i.e. not be present). A client must
-    treat an attribute with value `null` equivalently as that attribute
+    treat an property with value `null` equivalently as that property
     not being present.
 
 ### Notification format
@@ -342,7 +342,7 @@ a change in a single object (submission, judgement, language, team,
 etc.) or entire collection. The general format for events is:
 
 ```json
-{"type": "<type>", "id": "<id>", "data": <JSON data for element> }
+{"type": "<type>", "id": "<id>", "data": <JSON data for object> }
 ```
 
 | Name        | Type            | Required? | Nullable? | Description
@@ -461,7 +461,7 @@ Means that endpoint `/contests/<contest_id>/submissions/187` has been updated to
 
 The following list of API endpoints should be supported. Note that
 `state`, `scoreboard` and `event-feed` are singular nouns and indeed
-contain only a single element.
+contain only a single object.
 
 All endpoints should support `GET`; specific details on other methods
 are mentioned below.
@@ -478,12 +478,12 @@ The endpoints can be categorized into 3 groups as follows:
 
 Configuration is normally set before contest start. Is not expected to,
 but could occasionally be updated during a contest. It does not have
-associated timestamp/contest time attributes. Updates are notified via
+associated timestamp/contest time property. Updates are notified via
 the event feed.
 
-Live data is generated during the contest and new elements are expected.
+Live data is generated during the contest and new objects are expected.
 Data is immutable though: only inserts, no updates or deletes of
-elements. It does have associated timestamp/contest time attributes.
+objects. It does have associated timestamp/contest time property.
 Inserts and deletes are notified via the event feed. **Note**:
 judgements are the exception to immutability in a weak sense: they get
 updated once with the final verdict.
@@ -497,45 +497,45 @@ NDJSON format.
 
 In the tables below, the columns are:
 
-  - Name: Attribute name; object sub-attributes are indicated as
-    `object.attribute`.
-  - Type: Data type of the attribute; one of the 
-    [types listed above](#json-attribute-types).
-  - Required?: Whether this is a required attribute that **must** be
+  - Name: Property name; object sub-properties are indicated as
+    `object.property`.
+  - Type: Data type of the property; one of the 
+    [types listed above](#json-property-types).
+  - Required?: Whether this is a required property that **must** be
     implemented to conform to this specification.
-  - Nullable?: Whether the attribute might be `null` (and thus
+  - Nullable?: Whether the property might be `null` (and thus
     implicitly can also not be present in that case).
-  - Description: Description of the meaning of the attribute and any
+  - Description: Description of the meaning of the property and any
     special considerations.
 
-Note that attributes with `null` value may be left out by the server.
-Furthermore, optional attributes must still be consistently implemented
+Note that properties with `null` value may be left out by the server.
+Furthermore, optional properties must still be consistently implemented
 (or not) \*within\* each contest. This implies the following for
-attributes that are:
+properties that are:
 
-  - Required and not nullable: The attribute must always be present with
+  - Required and not nullable: The property must always be present with
     a value.
-  - Required and nullable: The attribute may be `null`, and only in that
+  - Required and nullable: The property may be `null`, and only in that
     case it may be left out.
-  - Optional and not nullable: The attribute may not be implemented, but
-    that implies that no element of the endpoint has the attribute set.
-    If one element has this attribute present, then it must be not
-    `null` and the same must be true for all same type elements within
+  - Optional and not nullable: The property may not be implemented, but
+    that implies that no object of the endpoint has the property set.
+    If one object has this property present, then it must be not
+    `null` and the same must be true for all same type objects within
     the contest.
-  - Optional and nullable: The attribute may be `null` or not present.
+  - Optional and nullable: The property may be `null` or not present.
     In the latter case that can either be because it was a left out
     `null` value or because it was not implemented.
 
 ### Filtering
 
 Endpoints that return a JSON array must allow filtering on any
-attribute with type ID (except the `id` field) by passing it as a
+property with type ID (except the `id` property) by passing it as a
 query argument. For example, clarifications can be filtered on the
 recipient by passing `to_team_id=X`. To filter on a `null` value,
 pass an empty string, i.e. `to_team_id=`. It must be possible to
-filter on multiple different fields simultaneously, with the
+filter on multiple different properties simultaneously, with the
 meaning that all conditions must be met (they are logically `AND`ed).
-Note that filtering on any other field, including fields with the type
+Note that filtering on any other property, including property with the type
 array of ID, does not have to be supported.
 
 ### API version
@@ -546,9 +546,9 @@ The following endpoint is associated with API version:
 
 | Endpoint | Mime-type        | Required? | Description
 | :------- | :--------------- | :-------- | :----------
-| `/`      | application/json | yes       | JSON object with version information as defined in the table below.
+| `/`      | application/json | yes       | JSON object with properties as defined in the table below.
 
-JSON elements of version object:
+Properties of version object:
 
 | Name        | Type   | Required? | Nullable? | Description
 | :---------- | :----- | :-------- | :-------- | :----------
@@ -578,10 +578,10 @@ The following endpoints are associated with contest:
 
 | Endpoint         | Mime-type        | Required? | Description                                                                 
 | :--------------- | :--------------- | :-------- | :----------
-| `/contests`      | application/json | yes       | JSON array of all contests with elements as defined in the table below.
-| `/contests/<id>` | application/json | yes       | JSON object of a single contest with elements as defined in the table below.
+| `/contests`      | application/json | yes       | JSON array of all contests with properties as defined in the table below.
+| `/contests/<id>` | application/json | yes       | JSON object of a single contest with properties as defined in the table below.
 
-JSON elements of contest objects:
+Properties of contest objects:
 
 | Name                         | Type          | Required? | Nullable? | Description
 | :--------------------------- | :------------ | :-------- | :-------- | :----------
@@ -610,8 +610,8 @@ Countdown is resumed by setting a new `start_time` and resetting
 Implementations must have a role that has the ability to clear or set the
 contest start time via a PATCH method.
 
-The PATCH must include a valid JSON element with only two or three
-attributes allowed: the contest id (used for verification), a
+The PATCH must include a valid JSON object with only two or three
+properties allowed: the contest id (used for verification), a
 start\_time (a `<TIME>` value or `null`), and an optional
 countdown\_pause\_time (`<RELTIME>`). As above, countdown\_pause\_time
 can only be non-null when start time is null.
@@ -699,10 +699,10 @@ The following endpoints are associated with judgement types:
 
 | Endpoint                              | Mime-type        | Required? | Description
 | :------------------------------------ | :--------------- | :-------- | :----------
-| `/contests/<id>/judgement-types`      | application/json | yes       | JSON array of all judgement types with elements as defined in the table below.
-| `/contests/<id>/judgement-types/<id>` | application/json | yes       | JSON object of a single judgement type with elements as defined in the table below.
+| `/contests/<id>/judgement-types`      | application/json | yes       | JSON array of all judgement types with properties as defined in the table below.
+| `/contests/<id>/judgement-types/<id>` | application/json | yes       | JSON object of a single judgement type with properties as defined in the table below.
 
-JSON elements of judgement type objects:
+Properties of judgement type objects:
 
 | Name    | Type    | Required? | Nullable? | Description
 | :------ | :------ | :-------- | :-------- | :----------
@@ -804,10 +804,10 @@ The following endpoints are associated with languages:
 
 | Endpoint                        | Mime-type        | Required? | Description
 | :------------------------------ | :--------------- | :-------- | :----------
-| `/contests/<id>/languages`      | application/json | yes       | JSON array of all languages with elements as defined in the table below.
-| `/contests/<id>/languages/<id>` | application/json | yes       | JSON object of a single language with elements as defined in the table below.
+| `/contests/<id>/languages`      | application/json | yes       | JSON array of all languages with properties as defined in the table below.
+| `/contests/<id>/languages/<id>` | application/json | yes       | JSON object of a single language with properties as defined in the table below.
 
-JSON elements of language objects:
+Properties of language objects:
 
 | Name                 | Type            | Required? | Nullable? | Description
 | :------------------- | :-------------- | :-------- | :-------- | :----------
@@ -819,7 +819,7 @@ JSON elements of language objects:
 | compiler             | Command object  | no        | yes       | Command used for compiling submissions.
 | runner               | Command object  | no        | yes       | Command used for running submissions. Relevant e.g. for interpreted languages and languages running on a VM.
 
-JSON elements of Command objects:
+Properties of Command objects:
 
 | Name            | Type   | Required | Description
 | :-------------- | :----- | :------- | :----------
@@ -828,7 +828,7 @@ JSON elements of Command objects:
 | version         | string | no       | Expected output from running the version-command.
 | version-command | string | no       | Command to run to get the version. Defaults to `<command> --version` if not specified.
 
-The compiler and runner elements are intended for informational purposes. It is not expected that systems will synchronize compiler and runner settings via this interface.
+The compiler and runner objects are intended for informational purposes. It is not expected that systems will synchronize compiler and runner settings via this interface.
 
 #### Known languages
 
@@ -915,10 +915,10 @@ The following endpoints are associated with problems:
 
 | Endpoint                       | Mime-type        | Required? | Description
 | :----------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/problems`      | application/json | yes       | JSON array of all problems with elements as defined in the table below.
-| `/contests/<id>/problems/<id>` | application/json | yes       | JSON object of a single problem with elements as defined in the table below.
+| `/contests/<id>/problems`      | application/json | yes       | JSON array of all problems with properties as defined in the table below.
+| `/contests/<id>/problems/<id>` | application/json | yes       | JSON object of a single problem with properties as defined in the table below.
 
-JSON elements of problem objects:
+Properties of problem objects:
 
 | Name              | Type    | Required? | Nullable? | Description
 | :---------------- | :------ | :-------- | :-------- | :----------
@@ -968,7 +968,7 @@ Teams may belong to multiple groups. For instance, there may be a group for each
 university teams, a group for corporate teams, and a group for ICPC-eligible teams. Teams could
 belong to two or three of these.
 When there are different kinds of groups for different purposes (e.g. sites vs divisions), each
-group or set of groups should have a different type attribute
+group or set of groups should have a different type property
 (e.g. `"type":"site"` and `"type":"division"`).
 
 Groups must exist for any combination of teams that must be ranked on a
@@ -982,14 +982,14 @@ The following endpoints are associated with groups:
 
 | Endpoint                     | Mime-type        | Required? | Description
 | :--------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/groups`      | application/json | no        | JSON array of all groups with elements as defined in the table below.
-| `/contests/<id>/groups/<id>` | application/json | no        | JSON object of a single group with elements as defined in the table below.
+| `/contests/<id>/groups`      | application/json | no        | JSON array of all groups with properties as defined in the table below.
+| `/contests/<id>/groups/<id>` | application/json | no        | JSON object of a single group with properties as defined in the table below.
 
 Note that these endpoints must be provided if groups are used. If they
 are not provided no other endpoint may refer to groups (i.e. return any
 group\_ids).
 
-JSON elements of group objects:
+Properties of group objects:
 
 | Name     | Type    | Required? | Nullable? | Description
 | :------- | :------ | :-------- | :-------- | :----------
@@ -1044,14 +1044,14 @@ The following endpoints are associated with organizations:
 
 | Endpoint                            | Type             | Required? | Description
 | :---------------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/organizations`      | application/json | no        | JSON array of all organizations with elements as defined in the table below.
-| `/contests/<id>/organizations/<id>` | application/json | no        | JSON object of a single organization with elements as defined in the table below.
+| `/contests/<id>/organizations`      | application/json | no        | JSON array of all organizations with properties as defined in the table below.
+| `/contests/<id>/organizations/<id>` | application/json | no        | JSON object of a single organization with properties as defined in the table below.
 
 Note that the first two endpoints must be provided if organizations are
 used. If they are not provided no other endpoint may refer to
 organizations (i.e. return any organization\_ids).
 
-JSON elements of organization objects:
+Properties of organization objects:
 
 | Name               | Type          | Required? | Nullable? | Description
 | :----------------- | :------------ | :-------- | :-------- | :----------
@@ -1093,10 +1093,10 @@ The following endpoints are associated with teams:
 
 | Endpoint                     | Mime-type        | Required? | Description
 | :--------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/teams`       | application/json | yes       | JSON array of all teams with elements as defined in the table below.
-| `/contests/<id>/teams/id>`   | application/json | yes       | JSON object of a single team with elements as defined in the table below.
+| `/contests/<id>/teams`       | application/json | yes       | JSON array of all teams with properties as defined in the table below.
+| `/contests/<id>/teams/id>`   | application/json | yes       | JSON object of a single team with properties as defined in the table below.
 
-JSON elements of team objects:
+Properties of team objects:
 
 | Name              | Type          | Required? | Nullable? | Description
 | :---------------- | :------------ | :-------- | :-------- | :----------
@@ -1142,10 +1142,10 @@ The following endpoints are associated with people:
 
 | Endpoint                     | Mime-type        | Required? | Description
 | :--------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/people`      | application/json | no        | JSON array of all people with elements as defined in the table below.
-| `/contests/<id>/people/<id>` | application/json | no        | JSON object of a single person with elements as defined in the table below.
+| `/contests/<id>/people`      | application/json | no        | JSON array of all people with properties as defined in the table below.
+| `/contests/<id>/people/<id>` | application/json | no        | JSON object of a single person with properties as defined in the table below.
 
-JSON elements of people objects:
+Properties of people objects:
 
 | Name        | Type          | Required? | Nullable? | Description
 | :---------- | :------------ | :-------- | :-------- | :----------
@@ -1182,10 +1182,10 @@ The following endpoints are associated with accounts:
 
 | Endpoint                       | Mime-type        | Required? | Description
 | :----------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/accounts`      | application/json | yes       | JSON array of all accounts with elements as defined in the table below.
-| `/contests/<id>/accounts/<id>` | application/json | yes       | JSON object of a single account with elements as defined in the table below.
+| `/contests/<id>/accounts`      | application/json | yes       | JSON array of all accounts with properties as defined in the table below.
+| `/contests/<id>/accounts/<id>` | application/json | yes       | JSON object of a single account with properties as defined in the table below.
 
-JSON elements of problem objects:
+Properties of problem objects:
 
 | Name              | Type    | Required? | Nullable? | Description
 | :---------------- | :------ | :-------- | :-------- | :----------
@@ -1233,9 +1233,9 @@ The following endpoints are associated with state:
 
 | Endpoint               | Type             | Required? | Description
 | :--------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/state` | application/json | yes       | JSON object of the current contest state with elements as defined in the table below.
+| `/contests/<id>/state` | application/json | yes       | JSON object of the current contest state with properties as defined in the table below.
 
-JSON elements of state objects:
+Properties of state objects:
 
 | Name             | Type | Required? | Nullable? | Description
 | :--------------- | :--- | :-------- | :-------- | :----------
@@ -1288,10 +1288,10 @@ The following endpoints are associated with submissions:
 
 | Endpoint                          | Type             | Required? | Description
 | :-------------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/submissions`      | application/json | yes       | JSON array of all submissions with elements as defined in the table below      |
-| `/contests/<id>/submissions/<id>` | application/json | yes       | JSON object of a single submission with elements as defined in the table below |
+| `/contests/<id>/submissions`      | application/json | yes       | JSON array of all submissions with properties as defined in the table below      |
+| `/contests/<id>/submissions/<id>` | application/json | yes       | JSON object of a single submission with properties as defined in the table below |
 
-JSON elements of submission objects:
+Properties of submission objects:
 
 | Name          | Type          | Required? | Nullable? | Description
 | :------------ | :------------ | :-------- | :-------- | :----------
@@ -1306,7 +1306,7 @@ JSON elements of submission objects:
 | files         | array of FILE | yes       | no        | Submission files, contained at the root of the archive. Only allowed mime type is application/zip. Only exactly one archive is allowed.
 | reaction      | array of FILE | no        | yes       | Reaction video from team's webcam. Only allowed mime types are video/*.
 
-The `entry_point` attribute must be included for submissions in
+The `entry_point` property must be included for submissions in
 languages which do not have a single, unambiguous entry point to run the
 code. In general the entry point is the string that needs to be
 specified to point to the code to be executed. Specifically, for Python
@@ -1316,7 +1316,7 @@ e.g. `com.example.myclass` for a class in the package `com.example` in
 Java). For C and C++ no entry point is required and it must therefore be
 `null`.
 
-The `files` attribute provides the file(s) of a given submission as a
+The `files` property provides the file(s) of a given submission as a
 zip archive. These must be stored directly from the root of the zip
 file, i.e. there must not be extra directories (or files) added unless
 these are explicitly part of the submission content.
@@ -1324,16 +1324,16 @@ these are explicitly part of the submission content.
 #### POST and PUT submissions
 
 To add a submission one can use the `POST` method on the submissions endpoint or the
-`PUT` method directly on an element url. `POST` is typically used by teams submitting
+`PUT` method directly on an object url. `POST` is typically used by teams submitting
 to the contest and `PUT` is used by admin users or tools.
-Both must include a valid JSON object with the same attributes the submission
+Both must include a valid JSON object with the same properties the submission
 endpoint returns with a `GET` request with the following exceptions:
 
-* The attributes `team_id`, `time`, and `contest_time` are
+* The property `team_id`, `time`, and `contest_time` are
   optional depending on the use case (see below). The server
-  may require attributes to either be absent or present, and should
+  may require properties to either be absent or present, and should
   respond with a 4xx error code in such cases.
-* Since `files` only supports `application/zip`, providing the `mime` field is
+* Since `files` only supports `application/zip`, providing the `mime` property is
   optional.
 * `reaction` may be provided but a CCS does not have to honour it.
 * If the CCS supports a `team` role they will only have access to `POST`, and `time`
@@ -1353,11 +1353,11 @@ endpoint returns with a `GET` request with the following exceptions:
 
 The request must fail with a 4xx error code if any of the following happens:
 
-* A required attribute is missing.
-* An attribute that must not be provided is provided.
+* A required property is missing.
+* An property that must not be provided is provided.
 * The supplied problem, team or language can not be found.
 * An entrypoint is required for the given language, but not supplied.
-* The mime field in `files` is set but invalid.
+* The mime property in `files` is set but invalid.
 * Something is wrong with the submission file. For example it contains too many
   files, it is too big, etc.
 * The provided `id` already exists or is otherwise not acceptable.
@@ -1371,7 +1371,7 @@ Performing a `POST` or `PUT` by any roles other than `admin` and `team` is not s
 
 The POST and PUT submissions endpoint can be used for a variety of reasons,
 and depending on the use case, the server might require different
-fields to be present. A number of common scenarios are described here
+properties to be present. A number of common scenarios are described here
 for informational purposes only.
 
 ##### Team client submitting to CCS
@@ -1380,8 +1380,9 @@ The most obvious and probably most common case is where a team
 directly submits to the CCS, e.g. with a command-line submit client.
 
 In this case the client has the `team` role and a specific `team_id`
-already associated with it. POST must be used and the attributes `id`, `team_id`, `time`, and `contest_time` should not be specified; the server will
-determine these attributes and should reject submissions specifying
+already associated with it. POST must be used and the properties `id`,
+`team_id`, `time`, and `contest_time` should not be specified; the server will
+determine these properties and should reject submissions specifying
 them, or may ignore a `team_id` that is identical to the one that the
 client has authenticated as.
 
@@ -1397,21 +1398,21 @@ parallel (like the shadowing setup at the ICPC World Finals).
 In such a scenario, the proxy server would timestamp the submissions
 and authenticate the submitting team, and then forward the submission
 to the upstream CCS using the `admin` role. The proxy would provide
-`team_id` and `time` attributes and the CCS should then accept and use
+`team_id` and `time` properties and the CCS should then accept and use
 these.
 
 To allow the proxy to return a submission `id` during connectivity
 loss, each site could be assigned a unique prefix such that the proxy
 server itself can generate unique `id`s and then submit a PUT to the central
-CCS with the `id` attribute included. The central CCS should then
-accept and use that `id` attribute.
+CCS with the `id` property included. The central CCS should then
+accept and use that `id` property.
 
 ##### Further potential extensions
 
 To allow for any further use cases, the specification is deliberately
-flexible in how the server can handle optional attributes.
+flexible in how the server can handle optional properties.
 
-* The `contest_time` attribute should normally not be specified when
+* The `contest_time` property should normally not be specified when
   `time` is already specified as it can be calculated from `time` and
   the wallclock time is unambiguously defined without reference to
   contest start time. However, in a case where one would want to
@@ -1477,10 +1478,10 @@ The following endpoints are associated with judgements:
 
 | Endpoint                         | Mime-type        | Required? | Description
 | :------------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/judgements`      | application/json | yes       | JSON array of all judgements with elements as defined in the table below.
-| `/contests/<id>/judgements/<id>` | application/json | yes       | JSON object of a single judgement with elements as defined in the table below.
+| `/contests/<id>/judgements`      | application/json | yes       | JSON array of all judgements with properties as defined in the table below.
+| `/contests/<id>/judgements/<id>` | application/json | yes       | JSON object of a single judgement with properties as defined in the table below.
 
-JSON elements of judgement objects:
+Properties of judgement objects:
 
 | Name                 | Type    | Required? | Nullable? | Description
 | :------------------- | :------ | :-------- | :-------- | :----------
@@ -1522,10 +1523,10 @@ The following endpoints are associated with runs:
 
 | Endpoint                   | Mime-type        | Required? | Description
 | :------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/runs`      | application/json | yes       | JSON array of all runs with elements as defined in the table below.
-| `/contests/<id>/runs/<id>` | application/json | yes       | JSON object of a single run with elements as defined in the table below.
+| `/contests/<id>/runs`      | application/json | yes       | JSON array of all runs with properties as defined in the table below.
+| `/contests/<id>/runs/<id>` | application/json | yes       | JSON object of a single run with properties as defined in the table below.
 
-JSON elements of run objects:
+Properties of run objects:
 
 | Name                | Type    | Required? | Nullable? | Description
 | :------------------ | :------ | :-------- | :-------- | :----------
@@ -1561,10 +1562,10 @@ The following endpoints are associated with clarification messages:
 
 | Endpoint                             | Mime-type        | Required? | Description
 | :----------------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/clarifications`      | application/json | yes       | JSON array of all clarification messages with elements as defined in the table below.
-| `/contests/<id>/clarifications/<id>` | application/json | yes       | JSON object of a single clarification message with elements as defined in the table below.
+| `/contests/<id>/clarifications`      | application/json | yes       | JSON array of all clarifications with properties as defined in the table below.
+| `/contests/<id>/clarifications/<id>` | application/json | yes       | JSON object of a single clarification with properties as defined in the table below.
 
-JSON elements of clarification message objects:
+Properties of clarification objects:
 
 | Name           | Type    | Required? | Nullable? | Description
 | :------------- | :------ | :-------- | :-------- | :----------
@@ -1584,10 +1585,10 @@ Note that at least one of `from_team_id` and `to_team_id` has to be
 #### POST and PUT clarifications
 
 To add a clarification one can use the `POST` or `PUT` method on the clarifications endpoint.
-The `POST` or `PUT` must include a valid JSON object with the same attributes the clarification
+The `POST` or `PUT` must include a valid JSON object with the same properties the clarification
 endpoint returns with a `GET` request with the following exceptions:
 
-* When an attribute value would be null it is optional - you do not need to include it.
+* When an property value would be null it is optional - you do not need to include it.
   e.g. if a clarification is not related to a problem you can chose to include or
   exclude the `problem_id`.
 * When submitting using a `team` role, `POST` must be used and `id`, `to_team_id`, `time`, and
@@ -1598,12 +1599,12 @@ endpoint returns with a `GET` request with the following exceptions:
   required to either be absent or present depending on the use case, e.g.
   whether the server is the CCS, is acting as a proxy, or a caching
   proxy. See notes under the submission interface for more detail. In cases where
-  these attributes are not allowed the server will respond with a 4xx error code.
+  these properties are not allowed the server will respond with a 4xx error code.
 
 The request must fail with a 4xx error code if any of the following happens:
 
-* A required attribute is missing.
-* An attribute that must not be provided is provided.
+* A required property is missing.
+* An property that must not be provided is provided.
 * The supplied problem, from_team, to_team, or reply_to cannot be found or are not
   visible to the role that's submitting.
 * The provided `id` already exists or is otherwise not acceptable.
@@ -1687,10 +1688,10 @@ The following endpoints are associated with awards:
 
 | Endpoint                     | Mime-type        | Required? | Description
 | :--------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/awards`      | application/json | no        | JSON array of all awards with elements as defined in the table below.
-| `/contests/<id>/awards/<id>` | application/json | no        | JSON object of a single award with elements as defined in the table below.
+| `/contests/<id>/awards`      | application/json | no        | JSON array of all awards with properties as defined in the table below.
+| `/contests/<id>/awards/<id>` | application/json | no        | JSON object of a single award with properties as defined in the table below.
 
-JSON elements of award objects:
+Properties of award objects:
 
 | Name      | Type        | Required? | Nullable? | Description
 | :-------- | :---------- | :-------- | :-------- | :----------
@@ -1736,7 +1737,7 @@ For some common award cases the following IDs should be used.
 Clients with the `admin` role may make changes to awards using the
 normal [HTTP methods](#http-methods) as specified above. Specifically,
 they can POST new awards, create or replace one with a known id via PUT,
-PATCH one or more attributes, or DELETE an existing award.
+PATCH one or more properties, or DELETE an existing award.
 
 The server may be configured to manage (assign or update) some award
 ids, and may block clients from modifying them. However, if a client is
@@ -1755,15 +1756,15 @@ responsible for managing these.
 
 The server should create all the awards it is configured to manage 
 before the start of the contest, so that clients can know which awards 
-are already handled. 
+are already handled.
 
 The request must fail with a 4xx error code if any of the following
 happens:
 
 * A POST that includes an id.
 * A PATCH, or DELETE on an award that doesn't exist.
-* A POST or PUT that is missing one of the required attributes (`citation` and `team_ids`).
-* A PATCH that contains an invalid attribute (e.g. null `citation` or `team_ids`).
+* A POST or PUT that is missing one of the required properties (`citation` and `team_ids`).
+* A PATCH that contains an invalid property (e.g. null `citation` or `team_ids`).
 * A PUT or PATCH that includes an award id that doesn't match the id in the url.
 * A POST, PUT, PATCH, or DELETE on an award id that the server is configured to manage exclusively.
 
@@ -1830,10 +1831,10 @@ The following endpoints are associated with commentary:
 
 | Endpoint                         | Mime-type        | Required? | Description
 | :------------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/commentary`      | application/json | no        | JSON array of all commentary with elements as defined in the table below.
-| `/contests/<id>/commentary/<id>` | application/json | no        | JSON object of a single commentary with elements as defined in the table below.
+| `/contests/<id>/commentary`      | application/json | no        | JSON array of all commentary with properties as defined in the table below.
+| `/contests/<id>/commentary/<id>` | application/json | no        | JSON object of a single commentary with properties as defined in the table below.
 
-JSON elements of award objects:
+Properties of award objects:
 
 | Name          | Type        | Required? | Nullable? | Description
 | :------------ | :---------- | :-------- | :-------- | :----------
@@ -1910,7 +1911,7 @@ request are not valid.
 
 #### Scoreboard format
 
-JSON elements of the scoreboard object.
+Properties of the scoreboard object.
 
 | Name          | Type    | Required? | Nullable? | Description
 | :------------ | :------ | :-------- | :-------- | :----------
@@ -1926,7 +1927,7 @@ means according to the [Unicode Collation
 Algorithm](https://www.unicode.org/reports/tr10/), by default using the
 `en-US` locale.
 
-JSON elements of scoreboard row objects:
+Properties of scoreboard row objects:
 
 | Name              | Type    | Required? | Nullable? | Description
 | :---------------- | :------ | :-------- | :-------- | :----------
@@ -1937,9 +1938,9 @@ JSON elements of scoreboard row objects:
 | score.total\_time | integer | depends   | no        | Total penalty time accrued by the team. Required iff contest:scoreboard_type is `pass-fail`.
 | score.score       | number  | depends   | no        | Total score of problems by the team. Required iff contest:scoreboard_type is `score`.
 | score.time        | integer | no        | no        | Time of last score improvement used for tiebreaking purposes.
-| problems          | array of problem data objects | yes       | no        | JSON array of problems with scoring data, see below for the specification of each element.
+| problems          | array of problem data objects | yes       | no        | JSON array of problems with scoring data, see below for the specification of each problem.
 
-JSON elements of problem data objects:
+Properties of problem data objects:
 
 | Name         | Type    | Required? | Nullable? | Description
 | :----------- | :------ | :-------- | :-------- | :----------
@@ -2029,7 +2030,7 @@ state, but never an earlier state.
 ##### Reconnection
 
 If a client loses connection or needs to reconnect after a brief
-disconnect (e.g. client restart), it can use the 'time' argument to
+disconnect (e.g. client restart), it can use the 'time' parameter to
 specify the last event it received:
 
 `/event-feed?time=xx`
@@ -2037,7 +2038,7 @@ specify the last event it received:
 If specified, the server will attempt to start sending events around the
 given time to reduce the volume of events and required reconciliation.
 If the time passed is too large or the server does not support this
-attribute, all objects will be sent. There is no guarantee that all
+parameter, all objects will be sent. There is no guarantee that all
 updates (e.g. a team name correction, which is not time-based) that
 occurred during the time the client was disconnected will be reflected.
 
@@ -2082,10 +2083,10 @@ The following endpoints are associated with webhooks:
 
 | Endpoint         | Mime-type        | Required? | Description
 | ---------------- | ---------------- | :-------- | :----------
-| `/webhooks`      | application/json | yes       | JSON array of all webhook callbacks with elements as defined in the table below. Also used to register new webhooks.
-| `/webhooks/<id>` | application/json | yes       | JSON object of a single webhook callback with elements as defined in the table below.
+| `/webhooks`      | application/json | yes       | JSON array of all webhook callbacks with properties as defined in the table below. Also used to register new webhooks.
+| `/webhooks/<id>` | application/json | yes       | JSON object of a single webhook callback with properties as defined in the table below.
 
-JSON elements of webhook callback objects:
+Properties of webhook callback objects:
 
 | Name         | Type            | Required? | Nullable? | Description
 | :----------- | :-------------- | :-------- | :-------- | :----------
@@ -2121,9 +2122,9 @@ automatically removed from future callbacks.
 ##### Adding a webhook
 
 To register a webhook, you need to post your server's callback URL. To
-do so, perform a `POST` request with a JSON body with the fields (except
+do so, perform a `POST` request with a JSON body with the properties (except
 `id`) from the above table to the `/webhooks` endpoint together with one
-additional field, called `token`. In this field put a client-generated
+additional property, called `token`. In this property put a client-generated
 token that can be used to verify that callbacks come from the CCS. If
 you don't supply `contest_ids` and/or `endpoints`, they will default to
 `[]`.
