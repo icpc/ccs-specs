@@ -63,7 +63,7 @@ while an object with a specific ID is requested as
 ` GET https://example.com/api/contests/wf14/teams/10`
 
 A collection is always returned as an array of JSON objects. Every item
-in the array is a single contest object (and always includes the ID).
+in the array is a single object (and always includes the ID).
 When requesting a single object the exact same object is returned. E.g.
 the URL path
 
@@ -72,8 +72,8 @@ the URL path
 returns
 
 ```json
-[ { "id":<id1>, <object specific data for id1> },
-  { "id":<id2>, <object specific data for id2> },
+[ { "id":<id1>, <other properties for object id1> },
+  { "id":<id2>, <other properties for object id2> },
      ...
 ]
 ```
@@ -84,7 +84,9 @@ while the URL path
 
 returns
 
-`{ "id":<id1>, <object specific data for id1> }`
+```json
+{ "id":<id1>, <other properties for object id1> }
+```
 
 ### HTTP headers
 
@@ -145,11 +147,11 @@ returned to indicate success or failure. If successful DELETE will have no respo
 GET on a collection will return the collection, and every other method will contain the
 current (updated) state of the object.
 
-If a POST, PUT, PATCH would cause any of the following issues it must fail, in addition to any endpoint or object-specific requirements:
+If a POST, PUT, PATCH would cause any of the following issues it must fail, in addition to any endpoint or type-specific requirements:
 
 * A PATCH on an `id` that doesn't exist. Will return a 404 error code.
 * A PUT or PATCH containing an id that does not match the URL. Will return a 409 error code.
-* A missing required property.
+* A required property is missing.
 * A property that must not be provided is provided.
 * A property type that is incorrect or otherwise invalid (e.g. non-nullable property set to null).
 * A reference to another object is invalid (to maintain [referential integrity](#referential-integrity)).
@@ -196,7 +198,7 @@ contest freeze time.
 ### Referential integrity
 
 Some properties in an object are references to IDs of other objects.
-When such an property has a non-`null` value, then the referenced
+When such a property has a non-`null` value, then the referenced
 object must exist. That is, the full set of data exposed by the API
 must at all times be referentially intact. This implies for example that
 before creating a [team](#teams) with an `organization_id`,
@@ -317,7 +319,7 @@ are meant to ease extensibility.
     required specification.
   - In this specification and extensions, a property with value `null`
     may be left out by the server (i.e. not be present). A client must
-    treat an property with value `null` equivalently as that property
+    treat a property with value `null` equivalently as that property
     not being present.
 
 ### Notification format
@@ -498,7 +500,7 @@ NDJSON format.
 In the tables below, the columns are:
 
   - Name: Property name; object sub-properties are indicated as
-    `object.property`.
+    `property.subproperty`.
   - Type: Data type of the property; one of the 
     [types listed above](#json-property-types).
   - Required?: Whether this is a required property that **must** be
@@ -546,7 +548,7 @@ The following endpoint is associated with API version:
 
 | Endpoint | Mime-type        | Required? | Description
 | :------- | :--------------- | :-------- | :----------
-| `/`      | application/json | yes       | JSON object with properties as defined in the table below.
+| `/`      | application/json | yes       | JSON object representing the API version with properties as defined in the table below.
 
 Properties of version object:
 
@@ -579,7 +581,7 @@ The following endpoints are associated with contest:
 | Endpoint         | Mime-type        | Required? | Description                                                                 
 | :--------------- | :--------------- | :-------- | :----------
 | `/contests`      | application/json | yes       | JSON array of all contests with properties as defined in the table below.
-| `/contests/<id>` | application/json | yes       | JSON object of a single contest with properties as defined in the table below.
+| `/contests/<id>` | application/json | yes       | JSON object representing a single contest with properties as defined in the table below.
 
 Properties of contest objects:
 
@@ -700,7 +702,7 @@ The following endpoints are associated with judgement types:
 | Endpoint                              | Mime-type        | Required? | Description
 | :------------------------------------ | :--------------- | :-------- | :----------
 | `/contests/<id>/judgement-types`      | application/json | yes       | JSON array of all judgement types with properties as defined in the table below.
-| `/contests/<id>/judgement-types/<id>` | application/json | yes       | JSON object of a single judgement type with properties as defined in the table below.
+| `/contests/<id>/judgement-types/<id>` | application/json | yes       | JSON object representing a single judgement type with properties as defined in the table below.
 
 Properties of judgement type objects:
 
@@ -805,7 +807,7 @@ The following endpoints are associated with languages:
 | Endpoint                        | Mime-type        | Required? | Description
 | :------------------------------ | :--------------- | :-------- | :----------
 | `/contests/<id>/languages`      | application/json | yes       | JSON array of all languages with properties as defined in the table below.
-| `/contests/<id>/languages/<id>` | application/json | yes       | JSON object of a single language with properties as defined in the table below.
+| `/contests/<id>/languages/<id>` | application/json | yes       | JSON object representing a single language with properties as defined in the table below.
 
 Properties of language objects:
 
@@ -916,7 +918,7 @@ The following endpoints are associated with problems:
 | Endpoint                       | Mime-type        | Required? | Description
 | :----------------------------- | :--------------- | :-------- | :----------
 | `/contests/<id>/problems`      | application/json | yes       | JSON array of all problems with properties as defined in the table below.
-| `/contests/<id>/problems/<id>` | application/json | yes       | JSON object of a single problem with properties as defined in the table below.
+| `/contests/<id>/problems/<id>` | application/json | yes       | JSON object representing a single problem with properties as defined in the table below.
 
 Properties of problem objects:
 
@@ -983,7 +985,7 @@ The following endpoints are associated with groups:
 | Endpoint                     | Mime-type        | Required? | Description
 | :--------------------------- | :--------------- | :-------- | :----------
 | `/contests/<id>/groups`      | application/json | no        | JSON array of all groups with properties as defined in the table below.
-| `/contests/<id>/groups/<id>` | application/json | no        | JSON object of a single group with properties as defined in the table below.
+| `/contests/<id>/groups/<id>` | application/json | no        | JSON object representing a single group with properties as defined in the table below.
 
 Note that these endpoints must be provided if groups are used. If they
 are not provided no other endpoint may refer to groups (i.e. return any
@@ -1045,7 +1047,7 @@ The following endpoints are associated with organizations:
 | Endpoint                            | Type             | Required? | Description
 | :---------------------------------- | :--------------- | :-------- | :----------
 | `/contests/<id>/organizations`      | application/json | no        | JSON array of all organizations with properties as defined in the table below.
-| `/contests/<id>/organizations/<id>` | application/json | no        | JSON object of a single organization with properties as defined in the table below.
+| `/contests/<id>/organizations/<id>` | application/json | no        | JSON object representing a single organization with properties as defined in the table below.
 
 Note that the first two endpoints must be provided if organizations are
 used. If they are not provided no other endpoint may refer to
@@ -1094,7 +1096,7 @@ The following endpoints are associated with teams:
 | Endpoint                     | Mime-type        | Required? | Description
 | :--------------------------- | :--------------- | :-------- | :----------
 | `/contests/<id>/teams`       | application/json | yes       | JSON array of all teams with properties as defined in the table below.
-| `/contests/<id>/teams/id>`   | application/json | yes       | JSON object of a single team with properties as defined in the table below.
+| `/contests/<id>/teams/id>`   | application/json | yes       | JSON object representing a single team with properties as defined in the table below.
 
 Properties of team objects:
 
@@ -1143,7 +1145,7 @@ The following endpoints are associated with people:
 | Endpoint                     | Mime-type        | Required? | Description
 | :--------------------------- | :--------------- | :-------- | :----------
 | `/contests/<id>/people`      | application/json | no        | JSON array of all people with properties as defined in the table below.
-| `/contests/<id>/people/<id>` | application/json | no        | JSON object of a single person with properties as defined in the table below.
+| `/contests/<id>/people/<id>` | application/json | no        | JSON object representing a single person with properties as defined in the table below.
 
 Properties of people objects:
 
@@ -1183,7 +1185,7 @@ The following endpoints are associated with accounts:
 | Endpoint                       | Mime-type        | Required? | Description
 | :----------------------------- | :--------------- | :-------- | :----------
 | `/contests/<id>/accounts`      | application/json | yes       | JSON array of all accounts with properties as defined in the table below.
-| `/contests/<id>/accounts/<id>` | application/json | yes       | JSON object of a single account with properties as defined in the table below.
+| `/contests/<id>/accounts/<id>` | application/json | yes       | JSON object representing a single account with properties as defined in the table below.
 
 Properties of problem objects:
 
@@ -1233,7 +1235,7 @@ The following endpoints are associated with state:
 
 | Endpoint               | Type             | Required? | Description
 | :--------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/state` | application/json | yes       | JSON object of the current contest state with properties as defined in the table below.
+| `/contests/<id>/state` | application/json | yes       | JSON object representing the current contest state with properties as defined in the table below.
 
 Properties of state objects:
 
@@ -1289,7 +1291,7 @@ The following endpoints are associated with submissions:
 | Endpoint                          | Type             | Required? | Description
 | :-------------------------------- | :--------------- | :-------- | :----------
 | `/contests/<id>/submissions`      | application/json | yes       | JSON array of all submissions with properties as defined in the table below      |
-| `/contests/<id>/submissions/<id>` | application/json | yes       | JSON object of a single submission with properties as defined in the table below |
+| `/contests/<id>/submissions/<id>` | application/json | yes       | JSON object representing a single submission with properties as defined in the table below |
 
 Properties of submission objects:
 
@@ -1354,7 +1356,7 @@ endpoint returns with a `GET` request with the following exceptions:
 The request must fail with a 4xx error code if any of the following happens:
 
 * A required property is missing.
-* An property that must not be provided is provided.
+* A property that must not be provided is provided.
 * The supplied problem, team or language can not be found.
 * An entrypoint is required for the given language, but not supplied.
 * The mime property in `files` is set but invalid.
@@ -1479,7 +1481,7 @@ The following endpoints are associated with judgements:
 | Endpoint                         | Mime-type        | Required? | Description
 | :------------------------------- | :--------------- | :-------- | :----------
 | `/contests/<id>/judgements`      | application/json | yes       | JSON array of all judgements with properties as defined in the table below.
-| `/contests/<id>/judgements/<id>` | application/json | yes       | JSON object of a single judgement with properties as defined in the table below.
+| `/contests/<id>/judgements/<id>` | application/json | yes       | JSON object representing a single judgement with properties as defined in the table below.
 
 Properties of judgement objects:
 
@@ -1524,7 +1526,7 @@ The following endpoints are associated with runs:
 | Endpoint                   | Mime-type        | Required? | Description
 | :------------------------- | :--------------- | :-------- | :----------
 | `/contests/<id>/runs`      | application/json | yes       | JSON array of all runs with properties as defined in the table below.
-| `/contests/<id>/runs/<id>` | application/json | yes       | JSON object of a single run with properties as defined in the table below.
+| `/contests/<id>/runs/<id>` | application/json | yes       | JSON object representing a single run with properties as defined in the table below.
 
 Properties of run objects:
 
@@ -1563,9 +1565,9 @@ The following endpoints are associated with clarification messages:
 | Endpoint                             | Mime-type        | Required? | Description
 | :----------------------------------- | :--------------- | :-------- | :----------
 | `/contests/<id>/clarifications`      | application/json | yes       | JSON array of all clarifications with properties as defined in the table below.
-| `/contests/<id>/clarifications/<id>` | application/json | yes       | JSON object of a single clarification with properties as defined in the table below.
+| `/contests/<id>/clarifications/<id>` | application/json | yes       | JSON object representing a single clarification with properties as defined in the table below.
 
-Properties of clarification objects:
+Properties of clarification message objects:
 
 | Name           | Type    | Required? | Nullable? | Description
 | :------------- | :------ | :-------- | :-------- | :----------
@@ -1588,7 +1590,7 @@ To add a clarification one can use the `POST` or `PUT` method on the clarificati
 The `POST` or `PUT` must include a valid JSON object with the same properties the clarification
 endpoint returns with a `GET` request with the following exceptions:
 
-* When an property value would be null it is optional - you do not need to include it.
+* When a property value would be null it is optional - you do not need to include it.
   e.g. if a clarification is not related to a problem you can chose to include or
   exclude the `problem_id`.
 * When submitting using a `team` role, `POST` must be used and `id`, `to_team_id`, `time`, and
@@ -1604,7 +1606,7 @@ endpoint returns with a `GET` request with the following exceptions:
 The request must fail with a 4xx error code if any of the following happens:
 
 * A required property is missing.
-* An property that must not be provided is provided.
+* A property that must not be provided is provided.
 * The supplied problem, from_team, to_team, or reply_to cannot be found or are not
   visible to the role that's submitting.
 * The provided `id` already exists or is otherwise not acceptable.
@@ -1689,7 +1691,7 @@ The following endpoints are associated with awards:
 | Endpoint                     | Mime-type        | Required? | Description
 | :--------------------------- | :--------------- | :-------- | :----------
 | `/contests/<id>/awards`      | application/json | no        | JSON array of all awards with properties as defined in the table below.
-| `/contests/<id>/awards/<id>` | application/json | no        | JSON object of a single award with properties as defined in the table below.
+| `/contests/<id>/awards/<id>` | application/json | no        | JSON object representing a single award with properties as defined in the table below.
 
 Properties of award objects:
 
@@ -1832,7 +1834,7 @@ The following endpoints are associated with commentary:
 | Endpoint                         | Mime-type        | Required? | Description
 | :------------------------------- | :--------------- | :-------- | :----------
 | `/contests/<id>/commentary`      | application/json | no        | JSON array of all commentary with properties as defined in the table below.
-| `/contests/<id>/commentary/<id>` | application/json | no        | JSON object of a single commentary with properties as defined in the table below.
+| `/contests/<id>/commentary/<id>` | application/json | no        | JSON object representing a single commentary with properties as defined in the table below.
 
 Properties of award objects:
 
@@ -1938,7 +1940,7 @@ Properties of scoreboard row objects:
 | score.total\_time | integer | depends   | no        | Total penalty time accrued by the team. Required iff contest:scoreboard_type is `pass-fail`.
 | score.score       | number  | depends   | no        | Total score of problems by the team. Required iff contest:scoreboard_type is `score`.
 | score.time        | integer | no        | no        | Time of last score improvement used for tiebreaking purposes.
-| problems          | array of problem data objects | yes       | no        | JSON array of problems with scoring data, see below for the specification of each problem.
+| problems          | array of problem data objects | yes       | no        | JSON array of problems with scoring data, see below for the specification of each object.
 
 Properties of problem data objects:
 
@@ -2084,7 +2086,7 @@ The following endpoints are associated with webhooks:
 | Endpoint         | Mime-type        | Required? | Description
 | ---------------- | ---------------- | :-------- | :----------
 | `/webhooks`      | application/json | yes       | JSON array of all webhook callbacks with properties as defined in the table below. Also used to register new webhooks.
-| `/webhooks/<id>` | application/json | yes       | JSON object of a single webhook callback with properties as defined in the table below.
+| `/webhooks/<id>` | application/json | yes       | JSON object representing a single webhook callback with properties as defined in the table below.
 
 Properties of webhook callback objects:
 
