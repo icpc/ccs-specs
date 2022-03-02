@@ -1900,8 +1900,7 @@ Properties of the scoreboard object.
 
 | Name          | Type    | Required? | Nullable? | Description
 | :------------ | :------ | :-------- | :-------- | :----------
-| event\_id     | ID      | yes       | no        | Identifier of the [ event](#event-feed) after which this scoreboard was generated.
-| time          | TIME    | yes       | no        | Time contained in the associated event. Implementation defined if the event has no associated time.
+| time          | TIME    | yes       | no        | Time contained in the [event](#event-feed) after which this scoreboard was generated. Implementation defined if the event has no associated time.
 | contest\_time | RELTIME | yes       | no        | Contest time contained in the associated event. Implementation defined if the event has no associated contest time.
 | state         | object  | yes       | no        | Identical data as returned by the [ contest state](#contest-state) endpoint. This is provided here for ease of use and to guarantee the data is synchronized.
 | rows          | array of scoreboard row objects | yes       | no        | A list of rows of team with their associated scores.
@@ -1946,7 +1945,6 @@ Returned data:
 
 ```json
 {
-  "event_id": "xy1234",
   "time": "2014-06-25T14:13:07.832+01",
   "contest_time": "4:13:07.832",
   "state": {
