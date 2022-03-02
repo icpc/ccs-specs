@@ -1881,23 +1881,6 @@ The following endpoint is associated with the scoreboard:
 
 The following options can be passed to the scoreboard endpoint.
 
-##### Scoreboard at the time of a given event
-
-By passing an [ event](#event-feed) ID with the
-`after_event_id` URL argument, the scoreboard can be requested as it
-was directly after the specified event:
-
-`/scoreboard?after_event_id=xy1234`
-
-This makes it possible for a client to get the scoreboard information
-that is guaranteed to match a certain contest event. In case no
-`after_event_id` argument is provided, the current scoreboard will be
-returned. The request will fail with a 400 error if the id is invalid.
-
-A suggested efficient server-side implementation to provide this, is to
-store with each event that changes the scoreboard, the new team
-scoreboard row.
-
 ##### Group scoreboard
 
 By passing `group_id` with a valid group ID a scoreboard can be requested for the teams in a particular group:
@@ -1917,7 +1900,7 @@ Properties of the scoreboard object.
 
 | Name          | Type    | Required? | Nullable? | Description
 | :------------ | :------ | :-------- | :-------- | :----------
-| event\_id     | ID      | yes       | no        | Identifier of the [ event](#event-feed) after which this scoreboard was generated. This must be identical to the argument `after_event_id`, if specified.
+| event\_id     | ID      | yes       | no        | Identifier of the [ event](#event-feed) after which this scoreboard was generated.
 | time          | TIME    | yes       | no        | Time contained in the associated event. Implementation defined if the event has no associated time.
 | contest\_time | RELTIME | yes       | no        | Contest time contained in the associated event. Implementation defined if the event has no associated contest time.
 | state         | object  | yes       | no        | Identical data as returned by the [ contest state](#contest-state) endpoint. This is provided here for ease of use and to guarantee the data is synchronized.
