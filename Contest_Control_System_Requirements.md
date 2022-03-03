@@ -963,9 +963,9 @@ problem.
 
 ### Contest API
 
-It is a requirement that the CCS provide a compliant implmentation of
+It is a requirement that the CCS provide a compliant implementation of
 the [Contest API](contest_api). In addition to all required endpoints
-and elements (i.e. the minimal compliant implmentation) the CCS must
+and elements (i.e. the minimal compliant implementation) the CCS must
 also provide the following endpoints and elements:
 
 | Endpoint         | Element                      |

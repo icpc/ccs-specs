@@ -68,7 +68,7 @@ contest) in a single archive. One example of this would be a contest that was
 running with a primary and [shadow](ccs_system_requirements#shadow-mode) CCS.
 Typically in such cases, most of the data is identical (or at least the
 differences are irrelevant), so only the data that differs (in relevant ways)
-needs to be stored. If there is an additonal source for `<endpoint>` it is
+needs to be stored. If there is an additional source for `<endpoint>` it is
 stored as above, but wherever `<endpoint>` is used in the path, instead use
 `<endpoint>_<system>` where `<system>` is a unique name for the additional
 source.
