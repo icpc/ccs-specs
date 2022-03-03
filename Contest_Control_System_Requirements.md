@@ -80,7 +80,7 @@ document.
 
 ### Licensing
 
-The CCS must either be freely useable, or must be accompanied by a
+The CCS must either be freely usable, or must be accompanied by a
 license granting to the ICPC the non-exclusive, non-revocable,
 non-transferable rights of use of the CCS both for purposes of
 evaluation and testing and for use in the ICPC World Finals. The CCS may
@@ -200,7 +200,7 @@ system. The following constraints must be enforced by the CCS:
 #### Number of Problems
 
 The CCS must support at least 15 problems. Specifically any UI,
-scoreboards or other reports should be fully useable with that number of
+scoreboards or other reports should be fully usable with that number of
 problems.
 
 #### Number of Teams
