@@ -322,6 +322,24 @@ are meant to ease extensibility.
     treat a property with value `null` equivalently as that property
     not being present.
 
+### Capabilities
+
+Instead of strict role-based access control, this API defines several
+capabilities that define the behaviours that clients can expect and
+actions they can perform. For instance, a team account will typically
+have access to a "team_submit" capability that allows a team to perform
+POST operations on the submissions endpoint, but doesn't allow it to
+set the submission id or timestamp; an administrator may have access
+to a "control_start_time" capability that allows it to PATCH the start
+time of the contest. These coarse-grained capabilities allow more
+flexibility for contest administrators and tools to define roles that
+match the requirements of a specific contest - e.g. whether teams can
+submit clarifications or not.
+
+The capabilities are defined inline with each endpoint. Clients can use
+the [Account](#account) endpoint to see which capabilities they have
+access to.
+
 ### Notification format
 
 There are two mechanisms that clients can use to receive notifications
@@ -355,7 +373,7 @@ etc.) or entire collection. The general format for events is:
 
 All event types correspond to an API endpoint, as specified in the table below.
 
-| Event           | API Endpoint                          |
+| Type            | API Endpoint                          |
 | :-------------- | :------------------------------------ |
 | contest         | `/contests/<id>`                      |
 | judgement-types | `/contests/<id>/judgement-types/<id>` |
@@ -1187,7 +1205,7 @@ The following endpoints are associated with accounts:
 | `/contests/<id>/accounts`      | application/json | yes       | JSON array of all accounts with properties as defined in the table below.
 | `/contests/<id>/accounts/<id>` | application/json | yes       | JSON object representing a single account with properties as defined in the table below.
 
-Properties of problem objects:
+Properties of account objects:
 
 | Name              | Type    | Required? | Nullable? | Description
 | :---------------- | :------ | :-------- | :-------- | :----------
@@ -1224,6 +1242,70 @@ Returned data:
 
 ```json
 {"id":"nicky","type":"admin"}
+```
+
+### Account
+
+Provides information on which account the client represents within a given contest, which endpoints properties are visible, and what [capabilities](#capabilities) (typically PUT, POST, PATCH, or DELETE actions) this account has access to or can perform.
+
+The following endpoint is associated with an account:
+
+| Endpoint                 | Mime-type        | Required? | Description
+| :----------------------- | :--------------- | :-------- | :----------
+| `/contests/<id>/account` | application/json | yes       | JSON object representing a single account with properties as defined in the table below.
+
+Properties of account objects:
+
+| Name         | Type                  | Required? | Nullable? | Description
+| :----------- | :-------------------- | :-------- | :-------- | :----------
+| id           | ID                    | yes       | no        | Identifier of the account used to make this request.
+| username     | string                | yes       | no        | The account username.
+| team\_id     | ID                    | depends   | yes       | The team that this account is for. Required iff type is `team`.
+| people\_id   | ID                    | no        | yes       | The person that this account is for, if the account is only for one person.
+| capabilities | array of string       | no        | yes       | An array of [capabilities](#capabilities) that the current account has.
+| types        | array of type objects | yes       | no        | An array of type objects, as described below.
+
+Properties of type objects:
+
+| Name         | Type            | Required? | Nullable? | Description
+| :----------- | :-------------- | :-------- | :-------- | :----------
+| type         | string          | yes       | no        | The type of the endpoint, e.g. "problems". See table in [Notification format](#Notificationformat) for the list of types.
+| properties   | array of string | yes       | no        | An array of supported properties that this account has visibility to.
+
+#### Examples
+
+Request:
+
+`GET https://example.com/api/contests/wf14/account`
+
+Returned data:
+
+```json
+{
+   "account_id": "mr-jc",
+   "capabilities": ["patch_time"],
+   "types": [
+   { "type": "contests", "properties": ["id","name","formal_name",...]},
+   { "type": "problems", "properties": ["id","label",...]},
+   { "type": "submissions", "properties": ["id","language_id","reaction",...]}
+     ...
+   ]
+}
+```
+
+or:
+
+```json
+{
+   "account_id": "team57",
+   "capabilities": ["team_submit"],
+   "types": [
+   { "type": "contests", "properties": ["id","name","formal_name",...]},
+   { "type": "problems", "properties": ["id","label",...]},
+   { "type": "submissions", "properties": ["id","language_id",...]},
+   ...
+   ]
+}
 ```
 
 ### Contest state
