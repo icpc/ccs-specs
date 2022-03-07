@@ -1260,7 +1260,7 @@ Properties of account objects:
 | :----------- | :-------------------- | :-------- | :-------- | :----------
 | id           | ID                    | yes       | no        | Identifier of the account used to make this request.
 | username     | string                | yes       | no        | The account username.
-| team\_id     | ID                    | depends   | yes       | The team that this account is for. Required iff type is `team`.
+| team\_id     | ID                    | no        | yes       | The team that this account is for, if the account is for a team, or one team member.
 | people\_id   | ID                    | no        | yes       | The person that this account is for, if the account is only for one person.
 | capabilities | array of string       | no        | yes       | An array of [capabilities](#capabilities) that the current account has.
 | types        | array of type objects | yes       | no        | An array of type objects, as described below.
