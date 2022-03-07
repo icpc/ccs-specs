@@ -80,7 +80,7 @@ document.
 
 ### Licensing
 
-The CCS must either be freely useable, or must be accompanied by a
+The CCS must either be freely usable, or must be accompanied by a
 license granting to the ICPC the non-exclusive, non-revocable,
 non-transferable rights of use of the CCS both for purposes of
 evaluation and testing and for use in the ICPC World Finals. The CCS may
@@ -200,7 +200,7 @@ system. The following constraints must be enforced by the CCS:
 #### Number of Problems
 
 The CCS must support at least 15 problems. Specifically any UI,
-scoreboards or other reports should be fully useable with that number of
+scoreboards or other reports should be fully usable with that number of
 problems.
 
 #### Number of Teams
@@ -963,9 +963,9 @@ problem.
 
 ### Contest API
 
-It is a requirement that the CCS provide a compliant implmentation of
+It is a requirement that the CCS provide a compliant implementation of
 the [Contest API](contest_api). In addition to all required endpoints
-and elements (i.e. the minimal compliant implmentation) the CCS must
+and elements (i.e. the minimal compliant implementation) the CCS must
 also provide the following endpoints and elements:
 
 | Endpoint         | Element                      |
