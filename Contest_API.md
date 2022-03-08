@@ -1204,7 +1204,7 @@ Accounts exist in the API primarily for configuration from a contest archive, or
 expected that non-admin roles never see passwords, and typically do not see accounts other than their own.
 
 The account endpoint exists so that the clients can tell which account (and hence which person or team) they are logged in as. It is not
-expected to exist in a contest archive, and will fail with a 401 error code if the client is not authenticated.
+expected to exist in a contest archive, and will fail with a 403 error code if the client is not authenticated.
 
 #### Examples
 
