@@ -1186,7 +1186,7 @@ The following endpoints are associated with accounts:
 | :----------------------------- | :--------------- | :-------- | :----------
 | `/contests/<id>/accounts`      | application/json | yes       | JSON array of all accounts with properties as defined in the table below.
 | `/contests/<id>/accounts/<id>` | application/json | yes       | JSON object representing a single account with properties as defined in the table below.
-| `/contests/<id>/account`       | application/json | yes       | JSON object representing a single account with properties as defined in the table below.
+| `/contests/<id>/account`       | application/json | yes       | JSON object representing a single account representing the client making the request, with properties as defined in the table below.
 
 Properties of account objects:
 
