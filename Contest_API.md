@@ -1178,7 +1178,7 @@ Returned data:
 
 ### Accounts
 
-The accounts used for access to the contest.
+The accounts used for accessing the contest, including the account representing the client.
 
 The following endpoints are associated with accounts:
 
@@ -1186,6 +1186,7 @@ The following endpoints are associated with accounts:
 | :----------------------------- | :--------------- | :-------- | :----------
 | `/contests/<id>/accounts`      | application/json | yes       | JSON array of all accounts with properties as defined in the table below.
 | `/contests/<id>/accounts/<id>` | application/json | yes       | JSON object representing a single account with properties as defined in the table below.
+| `/contests/<id>/account`       | application/json | yes       | JSON object representing a single account with properties as defined in the table below.
 
 Properties of account objects:
 
@@ -1201,6 +1202,9 @@ Properties of account objects:
 
 Accounts exist in the API primarily for configuration from a contest archive, or an administrator comparing one CCS to another. It is
 expected that non-admin roles never see passwords, and typically do not see accounts other than their own.
+
+The account endpoint exists so that the clients can tell which account (and hence which person or team) they are logged in as. It is not
+expected to exist in a contest archive, and will fail with a 401 error code if the client is not authenticated.
 
 #### Examples
 
@@ -1225,21 +1229,6 @@ Returned data:
 ```json
 {"id":"nicky","type":"admin"}
 ```
-
-### Account
-
-Provides information on which account the client represents within a given contest.
-
-The following endpoint is associated with an account:
-
-| Endpoint                 | Mime-type        | Required? | Description
-| :----------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/account` | application/json | yes       | JSON object representing a single account with properties as defined in the [Accounts](#accounts) table above.
-
-This endpoint exists in the API so that the clients can tell which account (and hence which person or team) they are logged in as. It is not
-expected to exist in a contest archive, and will fail with a 401 error code if the client is not authenticated.
-
-#### Examples
 
 Request:
 
