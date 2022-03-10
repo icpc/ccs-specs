@@ -1178,7 +1178,7 @@ Returned data:
 
 ### Accounts
 
-The accounts used for access to the contest.
+The accounts used for accessing the contest, as well as information about the account currently accessing the API.
 
 The following endpoints are associated with accounts:
 
@@ -1186,8 +1186,9 @@ The following endpoints are associated with accounts:
 | :----------------------------- | :--------------- | :-------- | :----------
 | `/contests/<id>/accounts`      | application/json | yes       | JSON array of all accounts with properties as defined in the table below.
 | `/contests/<id>/accounts/<id>` | application/json | yes       | JSON object representing a single account with properties as defined in the table below.
+| `/contests/<id>/account`       | application/json | yes       | JSON object representing a single account of the client making the request, with properties as defined in the table below.
 
-Properties of problem objects:
+Properties of account objects:
 
 | Name              | Type    | Required? | Nullable? | Description
 | :---------------- | :------ | :-------- | :-------- | :----------
@@ -1201,6 +1202,9 @@ Properties of problem objects:
 
 Accounts exist in the API primarily for configuration from a contest archive, or an administrator comparing one CCS to another. It is
 expected that non-admin roles never see passwords, and typically do not see accounts other than their own.
+
+The account endpoint exists so that the clients can tell which account (and hence which person or team) they are logged in as. It is not
+expected to exist in a contest archive, and will fail with a 404 error code if the client is not authenticated.
 
 #### Examples
 
@@ -1224,6 +1228,16 @@ Returned data:
 
 ```json
 {"id":"nicky","type":"admin"}
+```
+
+Request:
+
+`GET https://example.com/api/contests/wf14/account`
+
+Returned data:
+
+```json
+{"id":"nicky","username":"Nicky"}
 ```
 
 ### Contest state
