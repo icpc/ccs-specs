@@ -43,7 +43,7 @@ The interface is implemented as a HTTP REST interface that outputs
 information in [JSON](https://en.wikipedia.org/wiki/JSON) format
 ([RFC 7159](https://tools.ietf.org/html/rfc7159)). This REST interface 
 should be provided over HTTPS to guard against eavesdropping on
-sensitive contest data and authentication credentials (see roles below).
+sensitive contest data and [authentication](#authentication) credentials.
 
 ### Endpoint URLs
 
@@ -164,7 +164,7 @@ fail or implement a cascading delete (to maintain [referential integrity](#refer
 When there is a failure using any method the response message body
 must include a JSON object that contains the properties 'code' (a number,
 identical to the HTTP status code returned) and 'message' (a string) with
-further information suitable for the user making the request, as per the
+further information suitable for the client making the request, as per the
 following example:
 
 ```json
@@ -172,25 +172,25 @@ following example:
  "message":"Teams cannot send clarifications to another team"}
  ```
 
-### Roles
+### Authentication
 
-Access to this API is controlled via user roles. The API provider must
-require authentication to access each role except for optionally the
-public role. The API provider must support [HTTP basic
+The API provider may allow unauthenticated access to public information,
+but all other access to the API is controlled via authenticated accounts. 
+The API provider must support [HTTP basic
 authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
 ([RFC](https://tools.ietf.org/html/rfc7617)). This provides a standard
 and flexible method; besides HTTP basic auth, other forms of
 authentication can be offered as well.
 
-Each provider must support at least the following roles, although
-additional roles may be supported for specific uses:
+Each provider must support at least the following kinds of accounts, although
+additional ones may be supported for specific uses:
 
-  - public (default role: contest data that's available to everyone)
+  - public (default access: contest data that's available to everyone)
   - admin (data or capability only available to contest administrators)
 
-Role-based access may completely hide some objects from the user, may
+Each kind of account may completely hide some objects from the client, may
 omit certain properties, or may embargo or omit objects based on the
-current contest time. By default, the public user has read-only access
+current contest time. By default, the public has read-only access
 (no `POST`, `PUT`, `PATCH` or `DELETE` methods allowed) and does
 not have access to judgements and runs from submissions made after the
 contest freeze time.
@@ -305,22 +305,36 @@ with JSON data
 }
 ```
 
-### Extensibility
+### Capabilities
 
-This specification is meant to cover the basic data of contests, with
-the idea that server/client implementations can extend this with more
-data and/or roles. In particular, this specification already lists some
-endpoints or specific properties as optional. The following guidelines
-are meant to ease extensibility.
+Instead of strict role-based access control, this API defines several
+capabilities that define behaviours that clients can expect and
+actions they can perform. For instance, a team account will typically
+have access to a "team_submit" capability that allows a team to perform
+POST operations on the submissions endpoint, but doesn't allow it to
+set the submission id or timestamp; an administrator may have access
+to a "contest_start" capability that allows it to PATCH the start
+time of the contest. These coarse-grained capabilities allow more
+flexibility for contest administrators and tools to define capabilities
+that match the requirements of a specific contest - e.g. whether teams
+can submit clarifications or not.
 
-  - Clients should accept extra properties in endpoints, that are not
-    specified here.
-  - Servers should not expect clients to recognize more than the basic,
-    required specification.
-  - In this specification and extensions, a property with value `null`
-    may be left out by the server (i.e. not be present). A client must
-    treat a property with value `null` equivalently as that property
-    not being present.
+All capabilities are listed in the table below, and are defined
+inline with each endpoint. Clients can use
+the [Access](#access) endpoint to see which capabilities they have
+access to.
+
+| Capability                                | Description                                  |
+| :---------------------------------------- | :------------------------------------------- |
+| [contest_start](#contest-capabilties)     | Control the contest's start time             |
+| [team_submit](#submission-capabilities)   | Submit as a team                             |
+| [team_clar](#clarification-capabilities)  | Submit clarifications as a team              |
+| [proxy_submit](#submission-capabilities)  | Submit as a shared team proxy                |
+| [proxy_clar](#clarification-capabilities) | Submit clarifications as a shared team proxy |
+| [admin_submit](#submission-capabilities)  | Submit as an admin                           |
+| [admin_clar](#clarification-capabilities) | Submit clarifications as an admin            |
+
+TODO - add capabilities related to team view, awards, and freeze time.
 
 ### Notification format
 
@@ -355,7 +369,7 @@ etc.) or entire collection. The general format for events is:
 
 All event types correspond to an API endpoint, as specified in the table below.
 
-| Event           | API Endpoint                          |
+| Type            | API Endpoint                          |
 | :-------------- | :------------------------------------ |
 | contest         | `/contests/<id>`                      |
 | judgement-types | `/contests/<id>/judgement-types/<id>` |
@@ -458,6 +472,24 @@ Means that endpoint `/contests/<contest_id>/submissions/187` has been updated to
    "files": [{"href":"contests/wf14/submissions/187/files","filename":"files.zip","mime":"application/zip"}]
 }
 ```
+
+### Extensibility
+
+This specification is meant to cover the basic data of contests, with
+the idea that server/client implementations can extend this with more
+types, properties, and/or capabilities. In particular, this specification
+already lists some endpoints or specific properties as optional. The
+following requirements are meant to ease extensibility further:
+
+  - Clients should accept additional (unknown) event types in notifications.
+  - Clients should accept additional (unknown) properties in endpoints.
+  - Clients should accept additional (unknown) capabilities.
+  - Servers should not expect clients to recognize more than the basic,
+    required specification.
+  - In this specification and extensions, a property with value `null`
+    may be left out by the server (i.e. not be present). A client must
+    treat a property with value `null` equivalently as that property
+    not being present.
 
 ## Interface specification
 
@@ -607,19 +639,19 @@ The `countdown_pause_time` may change to indicate approximate delay.
 Countdown is resumed by setting a new `start_time` and resetting
 `countdown_pause_time` to `null`.
 
-#### PATCH start\_time
+#### Contest capabilties
 
-Implementations must have a role that has the ability to clear or set the
-contest start time via a PATCH method.
+Clients with the `contest_start` [capability](#capabilities) have the ability to
+set or clear the contest start time via a PATCH method.
 
 The PATCH must include a valid JSON object with only two or three
-properties allowed: the contest id (used for verification), a
-start\_time (a `<TIME>` value or `null`), and an optional
-countdown\_pause\_time (`<RELTIME>`). As above, countdown\_pause\_time
+properties allowed: the contest `id` (used for verification), a
+`start_time` (a `<TIME>` value or `null`), and an optional
+`countdown_pause_time` (`<RELTIME>`). As above, `countdown_pause_time`
 can only be non-null when start time is null.
 
-The request should fail with a 401 error code if the user does not have sufficient
-access rights, or a 403 error code if the contest is started or within 30s of
+The request should fail with a 401 error code if the client does not have the
+required capability, or a 403 error code if the contest is started or within 30s of
 starting, or if the new start time is in the past or within 30s.
 
 #### Examples
@@ -1201,7 +1233,7 @@ Properties of account objects:
 | people\_id        | ID      | no        | yes       | The person that this account is for, if the account is only for one person.
 
 Accounts exist in the API primarily for configuration from a contest archive, or an administrator comparing one CCS to another. It is
-expected that non-admin roles never see passwords, and typically do not see accounts other than their own.
+expected that non-admin clients never see passwords, and typically do not see accounts other than their own.
 
 The account endpoint exists so that the clients can tell which account (and hence which person or team) they are logged in as. It is not
 expected to exist in a contest archive, and will fail with a 404 error code if the client is not authenticated.
@@ -1238,6 +1270,77 @@ Returned data:
 
 ```json
 {"id":"nicky","username":"Nicky"}
+```
+
+### Access
+
+Information on which endpoints and properties are visible to the current account, and what [capabilities](#capabilities)
+this account has access to or can perform.
+
+The following endpoint is associated with access:
+
+| Endpoint                | Mime-type        | Required? | Description
+| :---------------------- | :--------------- | :-------- | :----------
+| `/contests/<id>/access` | application/json | yes       | JSON object representing a single access with properties as defined in the table below.
+
+Properties of access objects:
+
+| Name         | Type                      | Required? | Nullable? | Description
+| :----------- | :------------------------ | :-------- | :-------- | :----------
+| capabilities | array of string           | no        | yes       | An array of [capabilities](#capabilities) that the current account has.
+| endpoints    | array of endpoint objects | yes       | no        | An array of endpoint objects, as described below.
+
+Properties of endpoint objects:
+
+| Name         | Type            | Required? | Nullable? | Description
+| :----------- | :-------------- | :-------- | :-------- | :----------
+| type         | string          | yes       | no        | The type of the endpoint, e.g. "problems". See table in [Notification format](#notification-format) for the list of types.
+| properties   | array of string | yes       | no        | An array of supported properties that the current account has visibility to.
+
+This endpoint provides information about what is accessible to a specific
+account in a live contest, and hence will not exist in a contest archive.
+
+This information is provided so that clients know what endpoints are available,
+what notifications may happen, and what capabilities they have, regardless
+of whether objects currently exist or the capability is currently active.
+For instance, a team account would show the problems type and
+team_submit capability before a contest starts, even through they cannot
+see any problems nor submit yet.
+Clients are not expected to call this endpoint more than once
+since the response would not normally change during a contest.
+
+#### Examples
+
+Request:
+
+`GET https://example.com/api/contests/wf14/access`
+
+Returned data:
+
+```json
+{
+   "capabilities": ["patch_time"],
+   "endpoints": [
+     { "type": "contests", "properties": ["id","name","formal_name",...]},
+     { "type": "problems", "properties": ["id","label",...]},
+     { "type": "submissions", "properties": ["id","language_id","reaction",...]}
+     ...
+   ]
+}
+```
+
+or:
+
+```json
+{
+   "capabilities": ["team_submit"],
+   "endpoints": [
+     { "type": "contests", "properties": ["id","name","formal_name",...]},
+     { "type": "problems", "properties": ["id","label",...]},
+     { "type": "submissions", "properties": ["id","language_id",...]},
+     ...
+   ]
+}
 ```
 
 ### Contest state
@@ -1337,13 +1440,20 @@ zip archive. These must be stored directly from the root of the zip
 file, i.e. there must not be extra directories (or files) added unless
 these are explicitly part of the submission content.
 
-#### POST and PUT submissions
+#### Submission capabilities 
 
-To add a submission one can use the `POST` method on the submissions endpoint or the
-`PUT` method directly on an object url. `POST` is typically used by teams submitting
-to the contest and `PUT` is used by admin users or tools.
-Both must include a valid JSON object with the same properties the submission
-endpoint returns with a `GET` request with the following exceptions:
+To add a submission clients can use the `POST` method on the submissions endpoint or the
+`PUT` method directly on an object url. One of the following [capabilities](#capabilities)
+is required to add submissions:
+
+| Name              | Description
+| :---------------- | :----------
+| team_submit       | POST a submissision as a team
+| proxy_submit      | POST a submission as a proxy (able to submit on behalf of a team)
+| admin_submit      | POST or PUT a submission as an admin
+
+All requests must include a valid JSON object with the same properties as the submissions
+endpoint returns from a `GET` request with the following exceptions:
 
 * The property `team_id`, `time`, and `contest_time` are
   optional depending on the use case (see below). The server
@@ -1352,16 +1462,16 @@ endpoint returns with a `GET` request with the following exceptions:
 * Since `files` only supports `application/zip`, providing the `mime` property is
   optional.
 * `reaction` may be provided but a CCS does not have to honour it.
-* If the CCS supports a `team` role they will only have access to `POST`, and `time`
-  must not be provided when using this role. `time` will always be
-  set to the current time as determined by the server. `team_id` may be provided but then
+* The `team_submit` capability only has access to `POST`. `time`
+  must not be provided and will always be set to the
+  current time as determined by the server. `team_id` may be provided but then
   must match the ID of the team associated with the request.
-* Simple proxies using an `admin` role should also use `POST` to let the server
+* The `proxy_submit` capability also uses `POST` and lets the server
   determine the `id`. `team_id` must be provided but `time` must not and will be
   determined by the server.
-* For more advanced scenarios an `admin` role may use a `PUT`. `time` is required and
-  the client is responsible for making sure the provided `id` is unique. For example
-  in a setup with a central CCS with satellite sites
+* For more advanced scenarios the `admin_submit` capability may use a `POST` (must not
+  include an `id`) or `PUT` (client is required to include a unique `id`). In both
+  cases `time` is required. For example in a setup with a central CCS with satellite sites
   where teams submit to a proxy CCS that forwards to the central CCS, this might be
   useful to make sure that the proxy CCS can accept submissions even when the connection
   to the central CCS is down. The proxy can then forward these submissions later, when
@@ -1381,7 +1491,7 @@ The request must fail with a 4xx error code if any of the following happens:
 The response will contain a `Location` header pointing to the newly created submission
 and the response body will contain the initial state of the submission.
 
-Performing a `POST` or `PUT` by any roles other than `admin` and `team` is not supported.
+Performing a `POST` or `PUT` is not supported except when the capabilities are available.
 
 #### Use cases for POSTing and PUTting submissions
 
@@ -1395,7 +1505,7 @@ for informational purposes only.
 The most obvious and probably most common case is where a team
 directly submits to the CCS, e.g. with a command-line submit client.
 
-In this case the client has the `team` role and a specific `team_id`
+In this case the client has the `team_submit` capability and a specific `team_id`
 already associated with it. POST must be used and the properties `id`,
 `team_id`, `time`, and `contest_time` should not be specified; the server will
 determine these properties and should reject submissions specifying
@@ -1413,12 +1523,13 @@ parallel (like the shadowing setup at the ICPC World Finals).
 
 In such a scenario, the proxy server would timestamp the submissions
 and authenticate the submitting team, and then forward the submission
-to the upstream CCS using the `admin` role. The proxy would provide
+to the upstream CCS using the `proxy_submit` capability. The proxy would provide
 `team_id` and `time` properties and the CCS should then accept and use
 these.
 
 To allow the proxy to return a submission `id` during connectivity
-loss, each site could be assigned a unique prefix such that the proxy
+loss, the `admin_submit` capability would be required and each site
+could be assigned a unique prefix such that the proxy
 server itself can generate unique `id`s and then submit a PUT to the central
 CCS with the `id` property included. The central CCS should then
 accept and use that `id` property.
@@ -1598,37 +1709,47 @@ Properties of clarification message objects:
 Note that at least one of `from_team_id` and `to_team_id` has to be
 `null`. That is, teams cannot send messages to other teams.
 
-#### POST and PUT clarifications
+#### Clarification capabilities
 
-To add a clarification one can use the `POST` or `PUT` method on the clarifications endpoint.
-The `POST` or `PUT` must include a valid JSON object with the same properties the clarification
-endpoint returns with a `GET` request with the following exceptions:
+To add a clarification, clients can use the `POST` method on the clarification endpoint or the
+`PUT` method directly on an object url. One of the following [capabilities](#capabilities)
+is required to add clarifications:
+
+| Name              | Description
+| :---------------- | :----------
+| team_clar         | POST a clarification as a team
+| proxy_clar        | POST a clarification as a proxy (able to submit on behalf of a team)
+| admin_clar        | POST or PUT a clarification as an admin
+
+All requests must include a valid JSON object with the same properties as the clarifications
+endpoint returns from a `GET` request with the following exceptions:
 
 * When a property value would be null it is optional - you do not need to include it.
   e.g. if a clarification is not related to a problem you can chose to include or
   exclude the `problem_id`.
-* When submitting using a `team` role, `POST` must be used and `id`, `to_team_id`, `time`, and
+* The `team_clar` capability only has access to `POST`. `id`, `to_team_id`, `time`, and
   `contest_time` must not be provided. `from_team_id` may be provided but then
   must match the ID of the team associated with the request. The server will determine
   an `id` and the current `time` and `contest_time`.
-* When submitting using an `admin` role, `POST` or `PUT` may be used and `id`, `time`, and `contest_time` may be
-  required to either be absent or present depending on the use case, e.g.
-  whether the server is the CCS, is acting as a proxy, or a caching
-  proxy. See notes under the submission interface for more detail. In cases where
-  these properties are not allowed the server will respond with a 4xx error code.
+* The `proxy_clar` capability also uses `POST` and lets the server
+  determine the `id`. `team_id` must be provided but `to_team_id`, `time`, and
+  `contest_time` must not and will be determined by the server.
+* The `admin_clar` capability may use a `POST` (must not
+  include an `id`) or `PUT` (client is required to include a unique `id`).
+  In both cases `time` is required.
 
 The request must fail with a 4xx error code if any of the following happens:
 
 * A required property is missing.
 * A property that must not be provided is provided.
 * The supplied problem, from_team, to_team, or reply_to cannot be found or are not
-  visible to the role that's submitting.
+  visible to the client that's submitting.
 * The provided `id` already exists or is otherwise not acceptable.
 
 The response will contain a `Location` header pointing to the newly created clarification
 and the response body will contain the initial state of the clarification.
 
-Performing a `POST` or `PUT` by any roles other than `admin` and `team` is not supported.
+Performing a `POST` or `PUT` is not supported except when the capabilities are available.
 
 #### Examples
 
@@ -1729,7 +1850,7 @@ Properties of award objects:
     contest would end immediately and then become final, that award
     would be final. E.g. the "winner" during the contest should be the
     current leader. This is of course subject to what data the client
-    can see; the public role's winner may not change during the
+    can see; the public client's winner may not change during the
     scoreboard freeze but an admin could see the true current winner.
 
 #### Known awards
