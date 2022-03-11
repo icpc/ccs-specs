@@ -1288,7 +1288,7 @@ Properties of access objects:
 | Name         | Type                      | Required? | Nullable? | Description
 | :----------- | :------------------------ | :-------- | :-------- | :----------
 | capabilities | array of string           | no        | yes       | An array of [capabilities](#capabilities) that the current account has.
-| endpoints    | array of endpoint objects | yes       | no        | An array of endpoint objects, as described below.
+| endpoints    | array of endpoint objects | yes       | no        | An array of endpoint objects that are visible to the current account, as described below.
 
 Properties of endpoint objects:
 
