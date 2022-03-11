@@ -190,7 +190,7 @@ additional ones may be supported for specific uses:
 
 Each kind of account may completely hide some objects from the client, may
 omit certain properties, or may embargo or omit objects based on the
-current contest time. By default, the public has read-only access
+current contest time. By default, the public client has read-only access
 (no `POST`, `PUT`, `PATCH` or `DELETE` methods allowed) and does
 not have access to judgements and runs from submissions made after the
 contest freeze time.
