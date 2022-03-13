@@ -1442,7 +1442,7 @@ these are explicitly part of the submission content.
 
 #### Submission capabilities 
 
-To add a submission clients can use the `POST` method on the submissions endpoint or the
+To add a submission, clients can use the `POST` method on the submissions endpoint or the
 `PUT` method directly on an object url. One of the following [capabilities](#capabilities)
 is required to add submissions:
 
