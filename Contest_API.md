@@ -327,12 +327,12 @@ access to.
 | Capability                                | Description                                  |
 | :---------------------------------------- | :------------------------------------------- |
 | [contest_start](#contest-capabilties)     | Control the contest's start time             |
-| [team_submit](#submission-capabilities)   | Submit as a team                             |
-| [team_clar](#clarification-capabilities)  | Submit clarifications as a team              |
-| [proxy_submit](#submission-capabilities)  | Submit as a shared team proxy                |
-| [proxy_clar](#clarification-capabilities) | Submit clarifications as a shared team proxy |
-| [admin_submit](#submission-capabilities)  | Submit as an admin                           |
-| [admin_clar](#clarification-capabilities) | Submit clarifications as an admin            |
+| [team_submit](#modifying-submissions)     | Submit as a team                             |
+| [team_clar](#modifying-clarifications)    | Submit clarifications as a team              |
+| [proxy_submit](#modifying-submissions)    | Submit as a shared team proxy                |
+| [proxy_clar](#modifying-clarifications)   | Submit clarifications as a shared team proxy |
+| [admin_submit](#modifying-submissions)    | Submit as an admin                           |
+| [admin_clar](#modifying-clarifications)   | Submit clarifications as an admin            |
 
 TODO - add capabilities related to team view, awards, and freeze time.
 
@@ -639,7 +639,7 @@ The `countdown_pause_time` may change to indicate approximate delay.
 Countdown is resumed by setting a new `start_time` and resetting
 `countdown_pause_time` to `null`.
 
-#### Contest capabilties
+#### Modifying contests
 
 Clients with the `contest_start` [capability](#capabilities) have the ability to
 set or clear the contest start time via a PATCH method.
@@ -1440,7 +1440,7 @@ zip archive. These must be stored directly from the root of the zip
 file, i.e. there must not be extra directories (or files) added unless
 these are explicitly part of the submission content.
 
-#### Submission capabilities 
+#### Modifying submissions 
 
 To add a submission, clients can use the `POST` method on the submissions endpoint or the
 `PUT` method directly on an object url. One of the following [capabilities](#capabilities)
@@ -1449,7 +1449,7 @@ is required to add submissions:
 | Name              | Description
 | :---------------- | :----------
 | team_submit       | POST a submissision as a team
-| proxy_submit      | POST a submission as a proxy (able to submit on behalf of a team)
+| proxy_submit      | POST a submission as a proxy (able to submit on behalf of team(s))
 | admin_submit      | POST or PUT a submission as an admin
 
 All requests must include a valid JSON object with the same properties as the submissions
@@ -1709,16 +1709,16 @@ Properties of clarification message objects:
 Note that at least one of `from_team_id` and `to_team_id` has to be
 `null`. That is, teams cannot send messages to other teams.
 
-#### Clarification capabilities
+#### Modifying clarifications
 
-To add a clarification, clients can use the `POST` method on the clarification endpoint or the
+To add a clarification, clients can use the `POST` method on the clarifications endpoint or the
 `PUT` method directly on an object url. One of the following [capabilities](#capabilities)
 is required to add clarifications:
 
 | Name              | Description
 | :---------------- | :----------
 | team_clar         | POST a clarification as a team
-| proxy_clar        | POST a clarification as a proxy (able to submit on behalf of a team)
+| proxy_clar        | POST a clarification as a proxy (able to submit on behalf of team(s))
 | admin_clar        | POST or PUT a clarification as an admin
 
 All requests must include a valid JSON object with the same properties as the clarifications
