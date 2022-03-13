@@ -188,7 +188,7 @@ additional ones may be supported for specific uses:
   - public (default access: contest data that's available to everyone)
   - admin (data or capability only available to contest administrators)
 
-Each kind of account may completely hide some objects from the client, may
+Depending on the client's capabilities, some objects may be completely hidden from the client, may
 omit certain properties, or may embargo or omit objects based on the
 current contest time. By default, the public client has read-only access
 (no `POST`, `PUT`, `PATCH` or `DELETE` methods allowed) and does
