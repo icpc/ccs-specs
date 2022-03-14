@@ -41,9 +41,7 @@ document are to be interpreted as described in
 
 The interface is implemented as a HTTP REST interface that outputs
 information in [JSON](https://en.wikipedia.org/wiki/JSON) format
-([RFC 7159](https://tools.ietf.org/html/rfc7159)). This REST interface 
-should be provided over HTTPS to guard against eavesdropping on
-sensitive contest data and [authentication](#authentication) credentials.
+([RFC 7159](https://tools.ietf.org/html/rfc7159)).
 
 ### Endpoint URLs
 
@@ -172,28 +170,26 @@ following example:
  "message":"Teams cannot send clarifications to another team"}
  ```
 
-### Authentication
+### HTTPS and Authentication
 
-The API provider may allow unauthenticated access to public information,
-but all other access to the API is controlled via authenticated accounts. 
+The API provider may allow HTTP or unauthenticated access for information
+that is fully public - i.e. may be visible to everyone including
+spectators and teams. If provided this must be read-only access
+(no `POST`, `PUT`, `PATCH` or `DELETE` methods allowed).
+
+All other access to the API must be controlled via
+authenticated accounts, and must be provided over HTTPS to guard against
+eavesdropping on sensitive contest data and authentication credentials.
+
 The API provider must support [HTTP basic
 authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
 ([RFC](https://tools.ietf.org/html/rfc7617)). This provides a standard
 and flexible method; besides HTTP basic auth, other forms of
 authentication can be offered as well.
 
-Each provider must support at least the following kinds of accounts, although
-additional ones may be supported for specific uses:
-
-  - public (default access: contest data that's available to everyone)
-  - admin (data or capability only available to contest administrators)
-
-Depending on the client's capabilities, some objects may be completely hidden from the client, may
-omit certain properties, or may embargo or omit objects based on the
-current contest time. By default, the public client has read-only access
-(no `POST`, `PUT`, `PATCH` or `DELETE` methods allowed) and does
-not have access to judgements and runs from submissions made after the
-contest freeze time.
+Depending on the client account's access, some objects may be completely
+hidden from the client, may omit certain properties, or may embargo or
+omit objects based on the current contest time.
 
 ### Referential integrity
 
@@ -326,7 +322,7 @@ access to.
 
 | Capability                                | Description                                  |
 | :---------------------------------------- | :------------------------------------------- |
-| [contest_start](#contest-capabilties)     | Control the contest's start time             |
+| [contest_start](#modifying-contests)      | Control the contest's start time             |
 | [team_submit](#modifying-submissions)     | Submit as a team                             |
 | [team_clar](#modifying-clarifications)    | Submit clarifications as a team              |
 | [proxy_submit](#modifying-submissions)    | Submit as a shared team proxy                |
@@ -1274,8 +1270,8 @@ Returned data:
 
 ### Access
 
-Information on which endpoints and properties are visible to the current account, and what [capabilities](#capabilities)
-this account has access to or can perform.
+Information on which endpoints and properties are visible to the current client, and what [capabilities](#capabilities)
+this client has access to or can perform.
 
 The following endpoint is associated with access:
 
@@ -1287,23 +1283,23 @@ Properties of access objects:
 
 | Name         | Type                      | Required? | Nullable? | Description
 | :----------- | :------------------------ | :-------- | :-------- | :----------
-| capabilities | array of string           | no        | yes       | An array of [capabilities](#capabilities) that the current account has.
-| endpoints    | array of endpoint objects | yes       | no        | An array of endpoint objects that are visible to the current account, as described below.
+| capabilities | array of string           | no        | yes       | An array of [capabilities](#capabilities) that the current client has.
+| endpoints    | array of endpoint objects | yes       | no        | An array of endpoint objects that are visible to the current client, as described below.
 
 Properties of endpoint objects:
 
 | Name         | Type            | Required? | Nullable? | Description
 | :----------- | :-------------- | :-------- | :-------- | :----------
 | type         | string          | yes       | no        | The type of the endpoint, e.g. "problems". See table in [Notification format](#notification-format) for the list of types.
-| properties   | array of string | yes       | no        | An array of supported properties that the current account has visibility to.
+| properties   | array of string | yes       | no        | An array of supported properties that the current client has visibility to.
 
 This endpoint provides information about what is accessible to a specific
-account in a live contest, and hence will not exist in a contest archive.
+client in a live contest, and hence will not exist in a contest archive.
 
 This information is provided so that clients know what endpoints are available,
 what notifications may happen, and what capabilities they have, regardless
 of whether objects currently exist or the capability is currently active.
-For instance, a team account would show the problems type and
+For instance, a client logged in with a team account would see the problems type and
 team_submit capability before a contest starts, even through they cannot
 see any problems nor submit yet.
 Clients are not expected to call this endpoint more than once
@@ -1444,7 +1440,7 @@ these are explicitly part of the submission content.
 
 To add a submission, clients can use the `POST` method on the submissions endpoint or the
 `PUT` method directly on an object url. One of the following [capabilities](#capabilities)
-is required to add submissions:
+is required to add submissions, with descriptions below:
 
 | Name              | Description
 | :---------------- | :----------
@@ -1713,7 +1709,7 @@ Note that at least one of `from_team_id` and `to_team_id` has to be
 
 To add a clarification, clients can use the `POST` method on the clarifications endpoint or the
 `PUT` method directly on an object url. One of the following [capabilities](#capabilities)
-is required to add clarifications:
+is required to add clarifications, with descriptions below:
 
 | Name              | Description
 | :---------------- | :----------
