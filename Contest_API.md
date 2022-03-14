@@ -42,7 +42,7 @@ document are to be interpreted as described in
 The interface is implemented as a HTTP REST interface that outputs
 information in [JSON](https://en.wikipedia.org/wiki/JSON) format
 ([RFC 7159](https://tools.ietf.org/html/rfc7159)). All access to the API
-should be provided over HTTPS to guard against eavesdropping on
+must be provided over HTTPS to guard against eavesdropping on
 sensitive contest data and [authentication](#authentication) credentials.
 
 ### Endpoint URLs
@@ -180,10 +180,7 @@ spectators and teams. If provided this must be read-only access
 (no `POST`, `PUT`, `PATCH` or `DELETE` methods allowed).
 
 All other access to the API must be controlled via
-authenticated accounts, and must be provided over HTTPS to guard against
-eavesdropping on sensitive contest data and authentication credentials.
-
-The API provider must support [HTTP basic
+authenticated accounts. The API provider must support [HTTP basic
 authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
 ([RFC](https://tools.ietf.org/html/rfc7617)). This provides a standard
 and flexible method; besides HTTP basic auth, other forms of
