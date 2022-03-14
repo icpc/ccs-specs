@@ -41,7 +41,9 @@ document are to be interpreted as described in
 
 The interface is implemented as a HTTP REST interface that outputs
 information in [JSON](https://en.wikipedia.org/wiki/JSON) format
-([RFC 7159](https://tools.ietf.org/html/rfc7159)).
+([RFC 7159](https://tools.ietf.org/html/rfc7159)). All access to the API
+should be provided over HTTPS to guard against eavesdropping on
+sensitive contest data and [authentication](#authentication) credentials.
 
 ### Endpoint URLs
 
@@ -170,9 +172,9 @@ following example:
  "message":"Teams cannot send clarifications to another team"}
  ```
 
-### HTTPS and Authentication
+### Authentication
 
-The API provider may allow HTTP or unauthenticated access for information
+The API provider may allow unauthenticated access for information
 that is fully public - i.e. may be visible to everyone including
 spectators and teams. If provided this must be read-only access
 (no `POST`, `PUT`, `PATCH` or `DELETE` methods allowed).
@@ -189,7 +191,7 @@ authentication can be offered as well.
 
 Depending on the client account's access, some objects may be completely
 hidden from the client, may omit certain properties, or may embargo or
-omit objects based on the current contest time.
+omit objects based on the current state of the contest.
 
 ### Referential integrity
 
@@ -303,7 +305,7 @@ with JSON data
 
 ### Capabilities
 
-Instead of strict role-based access control, this API defines several
+The API specifies several
 capabilities that define behaviours that clients can expect and
 actions they can perform. For instance, a team account will typically
 have access to a "team_submit" capability that allows a team to perform
@@ -646,8 +648,7 @@ properties allowed: the contest `id` (used for verification), a
 `countdown_pause_time` (`<RELTIME>`). As above, `countdown_pause_time`
 can only be non-null when start time is null.
 
-The request should fail with a 401 error code if the client does not have the
-required capability, or a 403 error code if the contest is started or within 30s of
+The request should fail with a 403 error code if the contest is started or within 30s of
 starting, or if the new start time is in the past or within 30s.
 
 #### Examples
@@ -1277,7 +1278,7 @@ The following endpoint is associated with access:
 
 | Endpoint                | Mime-type        | Required? | Description
 | :---------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/access` | application/json | yes       | JSON object representing a single access with properties as defined in the table below.
+| `/contests/<id>/access` | application/json | yes       | JSON object representing the current client's access with properties as defined in the table below.
 
 Properties of access objects:
 
@@ -1444,7 +1445,7 @@ is required to add submissions, with descriptions below:
 
 | Name              | Description
 | :---------------- | :----------
-| team_submit       | POST a submissision as a team
+| team_submit       | POST a submission as a team
 | proxy_submit      | POST a submission as a proxy (able to submit on behalf of team(s))
 | admin_submit      | POST or PUT a submission as an admin
 
@@ -1462,9 +1463,9 @@ endpoint returns from a `GET` request with the following exceptions:
   must not be provided and will always be set to the
   current time as determined by the server. `team_id` may be provided but then
   must match the ID of the team associated with the request.
-* The `proxy_submit` capability also uses `POST` and lets the server
-  determine the `id`. `team_id` must be provided but `time` must not and will be
-  determined by the server.
+* The `proxy_submit` capability only has access to `POST`. `time`
+  must not be provided and will always be set to the
+  current time as determined by the server. `team_id` must be provided.
 * For more advanced scenarios the `admin_submit` capability may use a `POST` (must not
   include an `id`) or `PUT` (client is required to include a unique `id`). In both
   cases `time` is required. For example in a setup with a central CCS with satellite sites
@@ -1727,9 +1728,9 @@ endpoint returns from a `GET` request with the following exceptions:
   `contest_time` must not be provided. `from_team_id` may be provided but then
   must match the ID of the team associated with the request. The server will determine
   an `id` and the current `time` and `contest_time`.
-* The `proxy_clar` capability also uses `POST` and lets the server
-  determine the `id`. `team_id` must be provided but `to_team_id`, `time`, and
-  `contest_time` must not and will be determined by the server.
+* The `proxy_clar` capability only has access to `POST`. `id`, `to_team_id`, `time`, and
+  `contest_time` must not be provided. `from_team_id` must be provided. The server will determine
+  an `id` and the current `time` and `contest_time`.
 * The `admin_clar` capability may use a `POST` (must not
   include an `id`) or `PUT` (client is required to include a unique `id`).
   In both cases `time` is required.
