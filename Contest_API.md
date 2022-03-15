@@ -311,7 +311,7 @@ set the submission id or timestamp; an administrator may have access
 to a "contest_start" capability that allows it to PATCH the start
 time of the contest. These coarse-grained capabilities allow more
 flexibility for contest administrators and tools to define capabilities
-that match the requirements of a specific contest - e.g. whether teams
+that match the requirements of a specific contest, e.g. whether teams
 can submit clarifications or not.
 
 All capabilities are listed in the table below, and are defined
