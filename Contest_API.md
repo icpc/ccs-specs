@@ -1719,7 +1719,7 @@ All requests must include a valid JSON object with the same properties as the cl
 endpoint returns from a `GET` request with the following exceptions:
 
 * When a property value would be null it is optional - you do not need to include it.
-  e.g. if a clarification is not related to a problem you can chose to include or
+  e.g. if a clarification is not related to a problem you can choose to include or
   exclude the `problem_id`.
 * The `team_clar` capability only has access to `POST`. `id`, `to_team_id`, `time`, and
   `contest_time` must not be provided. `from_team_id` may be provided but then
