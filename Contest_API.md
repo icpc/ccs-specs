@@ -1301,7 +1301,7 @@ For instance, a client logged in with a team account would see the problems type
 team_submit capability before a contest starts, even through they cannot
 see any problems nor submit yet.
 Clients are not expected to call this endpoint more than once
-since the response would not normally change during a contest.
+since the response should not normally change during a contest.
 
 #### Examples
 
