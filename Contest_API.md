@@ -303,7 +303,7 @@ with JSON data
 ### Capabilities
 
 The API specifies several
-capabilities that define behaviours that clients can expect and
+capabilities that define behaviors that clients can expect and
 actions they can perform. For instance, a team account will typically
 have access to a "team_submit" capability that allows a team to perform
 POST operations on the submissions endpoint, but doesn't allow it to
