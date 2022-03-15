@@ -186,8 +186,8 @@ authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
 and flexible method; besides HTTP basic auth, other forms of
 authentication can be offered as well.
 
-Depending on the client account's access, some objects may be completely
-hidden from the client, may omit certain properties, or may embargo or
+Depending on the client account's access, the API provider may completely
+hide some objects from the client, may omit certain properties, or may embargo or
 omit objects based on the current state of the contest.
 
 ### Referential integrity
