@@ -1485,7 +1485,7 @@ The request must fail with a 4xx error code if any of the following happens:
 The response will contain a `Location` header pointing to the newly created submission
 and the response body will contain the initial state of the submission.
 
-Performing a `POST` or `PUT` is not supported except when the capabilities are available.
+Performing a `POST` or `PUT` is not supported when these capabilities are not available.
 
 #### Use cases for POSTing and PUTting submissions
 
