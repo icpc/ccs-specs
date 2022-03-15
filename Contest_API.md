@@ -1023,12 +1023,15 @@ group\_ids).
 
 Properties of group objects:
 
-| Name     | Type    | Required? | Nullable? | Description
-| :------- | :------ | :-------- | :-------- | :----------
-| id       | ID      | yes       | no        | Identifier of the group.
-| icpc\_id | string  | no        | yes       | External identifier from ICPC CMS.
-| name     | string  | yes       | no        | Name of the group.
-| type     | string  | no        | yes       | Type of the group.
+| Name               | Type   | Required? | Nullable? | Description
+| :----------------- | :----- | :-------- | :-------- | :----------
+| id                 | ID     | yes       | no        | Identifier of the group.
+| icpc\_id           | string | no        | yes       | External identifier from ICPC CMS.
+| name               | string | yes       | no        | Name of the group.
+| type               | string | no        | yes       | Type of the group.
+| location           | object | no        | yes       | JSON object as specified in the rows below.
+| location.latitude  | number | depends   | no        | Latitude in degrees. Required iff location is present.
+| location.longitude | number | depends   | no        | Longitude in degrees. Required iff location is present.
 
 #### Known group types
 
