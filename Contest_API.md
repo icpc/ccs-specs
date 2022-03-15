@@ -175,7 +175,7 @@ following example:
 ### Authentication
 
 The API provider may allow unauthenticated access to information
-that is fully public - i.e. may be visible to everyone including
+that is fully public, i.e. that may be visible to everyone including
 spectators and teams. If provided this must be read-only access
 (no `POST`, `PUT`, `PATCH` or `DELETE` methods allowed).
 
