@@ -964,31 +964,102 @@ problem.
 ### Contest API
 
 It is a requirement that the CCS provide a compliant implementation of
-the [Contest API](contest_api). In addition to all required endpoints
-and elements (i.e. the minimal compliant implementation) the CCS must
-also provide the following endpoints and elements:
+the [Contest API](contest_api).
 
-| Endpoint         | Element                      |
-| :--------------- | :--------------------------- |
-| `/contests`      | `formal_name`                |
-| `/contests`      | `scoreboard_freeze_duration` |
-| `/contests`      | `penalty_time`               |
-| `/languages`     | `compiler`                   |
-| `/languages`     | `runner`                     |
-| `/problems`      | `rgb`                        |
-| `/problems`      | `color`                      |
-| `/problems`      | `time_limit`                 |
-| `/groups`        | `icpc_id`                    |
-| `/organizations` | All required elements.       |
-| `/organizations` | `icpc_id`                    |
-| `/organizations` | `formal_name`                |
-| `/teams`         | `icpc_id`                    |
-| `/teams`         | `display_name`               |
-| `/teams`         | `organization_id`            |
-| `/teams`         | `group_ids`                  |
-| `/judgements`    | `max_run_time`               |
-| `/runs`          | `run_time`                   |
-| `/awards`        | All required elements.       |
+The CCS must provice access to the Contest API including the `/`, 
+`/access`, `/scoreboard` and `/event-feed` endpoints as well as 
+consistent with (at least) the following return from the `/access` 
+endpoint:
+
+```json
+{
+   "capabilities": [],
+   "endpoints": [
+      { 
+         "type": "contest", 
+         "properties": [
+            "id", "name", "formal_name", "start_time", "duration", 
+            "scoreboard_freeze_duration", "penalty_time"
+         ]
+      },
+      { 
+         "type": "judgement-types", 
+         "properties": [
+            "id", "name", "penalty", "solved"
+         ]
+      },
+      { 
+         "type": "languages", 
+         "properties": [
+            "id", "name", "entry_point_required", "entry_point_name", 
+            "extensions", "compiler.command", "runner.command"
+         ]
+      },
+      { 
+         "type": "problems", 
+         "properties": [
+            "id", "label", "name", "ordinal", "rgb", "color", 
+            "time_limit", "test_data_count"
+         ]
+      },
+      { 
+         "type": "groups", 
+         "properties": [
+            "id", "icpc_id", "name"
+         ]
+      },
+      { 
+         "type": "organizations", 
+         "properties": [
+            "id", "icpc_id", "name", "formal_name"
+         ]
+      },
+      { 
+         "type": "teams", 
+         "properties": [
+            "id", "icpc_id", "name", "display_name", "organization_id",
+            "group_ids"
+         ]
+      },
+      { 
+         "type": "state", 
+         "properties": [
+            "started", "frozen", "ended", "thawed", "finalized",
+            "end_of_updates"
+         ]
+      },
+      { 
+         "type": "submissions", 
+         "properties": [
+            "id", "language_id", "problem_id", "team_id", "time", 
+            "contest_time", "entry_point", "files"
+         ]
+      },
+      { 
+         "type": "judgements", 
+         "properties": [
+            "id", "submission_id", "judgement_type_id", "start_time",
+            "start_contest_time", "end_time", "end_contest_time",
+            "max_run_time"
+         ]
+      },
+      { 
+         "type": "runs", 
+         "properties": [
+            "id", "judgement_id", "ordinal", "judgement_type_id", 
+            "time", "contest_time", "run_time"
+         ]
+      },
+      { 
+         "type": "awards", 
+         "properties": [
+            "id", "citation", "team_ids"
+         ]
+      }
+   ]
+}
+```
+
 
 #### Access Restrictions
 
