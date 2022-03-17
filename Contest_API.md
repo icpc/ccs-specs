@@ -499,13 +499,18 @@ are mentioned below.
 
 ### Types of endpoints
 
-The endpoints can be categorized into 3 groups as follows:
+The endpoints can be categorized into 4 groups as follows:
 
+  - Metadata: `/`, access
   - Configuration: contests, judgement-types, languages, problems,
     groups, organizations, teams, team-members;
   - Live data: state, submissions, judgements, runs, clarifications,
     awards, commentary;
   - Aggregate data: scoreboard, event-feed.
+
+Metadata is data about the API. These are not included in the event feed and
+are always required to be available. The access endpoint specifies which other
+endpoints are offered by the API. 
 
 Configuration is normally set before contest start. Is not expected to,
 but could occasionally be updated during a contest. It does not have
