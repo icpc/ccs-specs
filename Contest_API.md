@@ -261,7 +261,7 @@ Properties for file reference objects:
 | -------- | --------- | -----------
 | href     | string ?  | URL where the resource can be found. Relative URLs are relative to the `baseurl`. Must point to a file of intended mime-type. Resource must be accessible using the exact same (possibly none) authentication as the call that returned this data.
 | filename | string    | POSIX compliant filename. Filenames must be unique within the endpoint object where they are used. I.e. an organization can have (multiple) `logo` and `country_flag` file references, they must all have a different filename, but different organizations may have files with the same filename.
-| hash     | string    | MD5 hash of the file referenced.
+| hash     | string ?  | MD5 hash of the file referenced.
 | mime     | string    | Mime type of resource.
 | width    | integer ? | Width of the image. Required for files with mime type image/*.
 | height   | integer ? | Height of the image. Required for files with mime type image/*.
@@ -546,7 +546,7 @@ Note that all results returned from endpoints:
 
   - Must only have `null` values if the type of the property is `<type> ?`.
   - Must contain all properties specified in the [Access](#access) endpoint
-    with non-`null` values. 
+    that have non-`null` values. 
   - Should not contain any properties not specified in the [Access](#access) 
     endpoint.
 
