@@ -594,6 +594,85 @@ Returned data:
 }
 ```
 
+### Access
+
+Information on which endpoints and properties are visible to the current client, and what [capabilities](#capabilities)
+this client has access to or can perform.
+
+The following endpoint is associated with access:
+
+| Endpoint                | Mime-type        | Description
+| :---------------------- | :--------------- | :----------
+| `/contests/<id>/access` | application/json | JSON object representing the current client's access with properties as defined in the table below.
+
+Properties of access objects:
+
+| Name         | Type                      | Description
+| :----------- | :------------------------ | :----------
+| capabilities | array of string           | An array of [capabilities](#capabilities) that the current client has. The array may be empty.
+| endpoints    | array of endpoint objects | An array of endpoint objects that are visible to the current client, as described below. The array may be empty.
+
+Properties of endpoint objects:
+
+| Name         | Type            | Description
+| :----------- | :-------------- | :----------
+| type         | string          | The type of the endpoint, e.g. "problems". See table in [Notification format](#notification-format) for the list of types.
+| properties   | array of string | An array of supported properties that the current client has visibility to. The array must not be empty. If the array would be empty, the endpoint object should instead not be included in the endpoints array.
+
+This endpoint provides information about what is accessible to a specific
+client in a live contest, and hence will not exist in a contest archive.
+
+The set of properties listed must always support 
+[referential integrity](#referential-integrity), i.e. if a property with a ID 
+value referring to some type of object is present the endpoint representing
+that type of object (and its ID property) must also be present. E.g. if 
+`group_ids` is listed among the properties in the `team` endpoint object, that
+means that there must be an endpoint object with type `groups` containing at 
+least `ID` in its properties.
+
+This information is provided so that clients know what endpoints are available,
+what notifications may happen, and what capabilities they have, regardless
+of whether objects currently exist or the capability is currently active.
+For instance, a client logged in with a team account would see the problems type and
+team_submit capability before a contest starts, even through they cannot
+see any problems nor submit yet.
+Clients are not expected to call this endpoint more than once
+since the response should not normally change during a contest.
+
+#### Examples
+
+Request:
+
+`GET https://example.com/api/contests/wf14/access`
+
+Returned data:
+
+```json
+{
+   "capabilities": ["patch_time"],
+   "endpoints": [
+     { "type": "contests", "properties": ["id","name","formal_name",...]},
+     { "type": "problems", "properties": ["id","label",...]},
+     { "type": "submissions", "properties": ["id","language_id","reaction",...]}
+     ...
+   ]
+}
+```
+
+or:
+
+```json
+{
+   "capabilities": ["team_submit"],
+   "endpoints": [
+     { "type": "contests", "properties": ["id","name","formal_name",...]},
+     { "type": "problems", "properties": ["id","label",...]},
+     { "type": "submissions", "properties": ["id","language_id",...]},
+     ...
+   ]
+}
+```
+
 ### Contests
 
 Provides information on the current contest.
@@ -1262,85 +1341,6 @@ Returned data:
 
 ```json
 {"id":"nicky","username":"Nicky"}
-```
-
-### Access
-
-Information on which endpoints and properties are visible to the current client, and what [capabilities](#capabilities)
-this client has access to or can perform.
-
-The following endpoint is associated with access:
-
-| Endpoint                | Mime-type        | Description
-| :---------------------- | :--------------- | :----------
-| `/contests/<id>/access` | application/json | JSON object representing the current client's access with properties as defined in the table below.
-
-Properties of access objects:
-
-| Name         | Type                      | Description
-| :----------- | :------------------------ | :----------
-| capabilities | array of string           | An array of [capabilities](#capabilities) that the current client has. The array may be empty.
-| endpoints    | array of endpoint objects | An array of endpoint objects that are visible to the current client, as described below. The array may be empty.
-
-Properties of endpoint objects:
-
-| Name         | Type            | Description
-| :----------- | :-------------- | :----------
-| type         | string          | The type of the endpoint, e.g. "problems". See table in [Notification format](#notification-format) for the list of types.
-| properties   | array of string | An array of supported properties that the current client has visibility to. The array must not be empty. If the array would be empty, the endpoint object should instead not be included in the endpoints array.
-
-This endpoint provides information about what is accessible to a specific
-client in a live contest, and hence will not exist in a contest archive.
-
-The set of properties listed must always support 
-[referential integrity](#referential-integrity), i.e. if a property with a ID 
-value referring to some type of object is present the endpoint representing
-that type of object (and its ID property) must also be present. E.g. if 
-`group_ids` is listed among the properties in the `team` endpoint object, that
-means that there must be an endpoint object with type `groups` containing at 
-least `ID` in its properties.
-
-This information is provided so that clients know what endpoints are available,
-what notifications may happen, and what capabilities they have, regardless
-of whether objects currently exist or the capability is currently active.
-For instance, a client logged in with a team account would see the problems type and
-team_submit capability before a contest starts, even through they cannot
-see any problems nor submit yet.
-Clients are not expected to call this endpoint more than once
-since the response should not normally change during a contest.
-
-#### Examples
-
-Request:
-
-`GET https://example.com/api/contests/wf14/access`
-
-Returned data:
-
-```json
-{
-   "capabilities": ["patch_time"],
-   "endpoints": [
-     { "type": "contests", "properties": ["id","name","formal_name",...]},
-     { "type": "problems", "properties": ["id","label",...]},
-     { "type": "submissions", "properties": ["id","language_id","reaction",...]}
-     ...
-   ]
-}
-```
-
-or:
-
-```json
-{
-   "capabilities": ["team_submit"],
-   "endpoints": [
-     { "type": "contests", "properties": ["id","name","formal_name",...]},
-     { "type": "problems", "properties": ["id","label",...]},
-     { "type": "submissions", "properties": ["id","language_id",...]},
-     ...
-   ]
-}
 ```
 
 ### Contest state
