@@ -490,7 +490,7 @@ following requirements are meant to ease extensibility further:
 
 ## Interface specification
 
-The following list of API endpoints should be supported. Note that
+The following list of API endpoints should be supported. Note that `access`,
 `state`, `scoreboard` and `event-feed` are singular nouns and indeed
 contain only a single object.
 
@@ -501,7 +501,7 @@ are mentioned below.
 
 The endpoints can be categorized into 4 groups as follows:
 
-  - Metadata: `/`, access
+  - Metadata: api, access
   - Configuration: contests, judgement-types, languages, problems,
     groups, organizations, teams, team-members;
   - Live data: state, submissions, judgements, runs, clarifications,
@@ -562,15 +562,15 @@ meaning that all conditions must be met (they are logically `AND`ed).
 Note that filtering on any other property, including property with the type
 array of ID, does not have to be supported.
 
-### API version
+### API information
 
-Provides version information for the API.
+Provides information about the API.
 
-The following endpoint is associated with API version:
+The following endpoint is associated with API information:
 
 | Endpoint | Mime-type        | Description
 | :------- | :--------------- | :----------
-| `/`      | application/json | JSON object representing the API version with properties as defined in the table below.
+| `/`      | application/json | JSON object representing information about the API with properties as defined in the table below.
 
 Properties of version object:
 
