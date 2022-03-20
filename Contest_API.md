@@ -474,9 +474,8 @@ Means that endpoint `/contests/<contest_id>/submissions/187` has been updated to
 
 This specification is meant to cover the basic data of contests, with
 the idea that server/client implementations can extend this with more
-types, properties, and/or capabilities. In particular, this specification
-already lists some endpoints or specific properties as optional. The
-following requirements are meant to ease extensibility further:
+endpoints, properties, and/or capabilities. The following requirements 
+are meant to ease extensibility:
 
   - Clients should accept additional (unknown) event types in notifications.
   - Clients should accept additional (unknown) properties in endpoints.
@@ -570,7 +569,7 @@ The following endpoint is associated with API information:
 
 | Endpoint | Mime-type        | Description
 | :------- | :--------------- | :----------
-| `/`      | application/json | JSON object representing information about the API with properties as defined in the table below.
+| `/`      | application/json | JSON object representing information about the API with all properties defined in the table below.
 
 Properties of version object:
 
@@ -603,7 +602,7 @@ The following endpoint is associated with access:
 
 | Endpoint                | Mime-type        | Description
 | :---------------------- | :--------------- | :----------
-| `/contests/<id>/access` | application/json | JSON object representing the current client's access with properties as defined in the table below.
+| `/contests/<id>/access` | application/json | JSON object representing the current client's access with all properties defined in the table below.
 
 Properties of access objects:
 
@@ -681,8 +680,8 @@ The following endpoints are associated with contest:
 
 | Endpoint         | Mime-type        | Description
 | :--------------- | :--------------- | :----------
-| `/contests`      | application/json | JSON array of all contests with properties as defined in the table below.
-| `/contests/<id>` | application/json | JSON object representing a single contest with properties as defined in the table below.
+| `/contests`      | application/json | JSON array of all contests with properties as specified by `/access`.
+| `/contests/<id>` | application/json | JSON object representing a single contest with properties as specified by `/access`.
 
 Properties of contest objects:
 
@@ -701,7 +700,6 @@ Properties of contest objects:
 | logo                         | array of FILE ? | Logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/*.
 | location.latitude            | number ?        | Latitude in degrees. Required iff location.longitude is present.
 | location.longitude           | number ?        | Longitude in degrees. Required iff location.latitude is present.
-
 
 The expected/typical use of `countdown_pause_time` is that once a
 `start_time` is defined and close, the countdown may be paused due to
@@ -804,8 +802,8 @@ The following endpoints are associated with judgement types:
 
 | Endpoint                              | Mime-type        | Description
 | :------------------------------------ | :--------------- | :----------
-| `/contests/<id>/judgement-types`      | application/json | JSON array of all judgement types with properties as defined in the table below.
-| `/contests/<id>/judgement-types/<id>` | application/json | JSON object representing a single judgement type with properties as defined in the table below.
+| `/contests/<id>/judgement-types`      | application/json | JSON array of all judgement types with properties as specified by `/access`.
+| `/contests/<id>/judgement-types/<id>` | application/json | JSON object representing a single judgement type with properties as specified by `/access`.
 
 Properties of judgement type objects:
 
@@ -909,8 +907,8 @@ The following endpoints are associated with languages:
 
 | Endpoint                        | Mime-type        | Description
 | :------------------------------ | :--------------- | :----------
-| `/contests/<id>/languages`      | application/json | JSON array of all languages with properties as defined in the table below.
-| `/contests/<id>/languages/<id>` | application/json | JSON object representing a single language with properties as defined in the table below.
+| `/contests/<id>/languages`      | application/json | JSON array of all languages with properties as specified by `/access`.
+| `/contests/<id>/languages/<id>` | application/json | JSON object representing a single language with properties as specified by `/access`.
 
 Properties of language objects:
 
@@ -1020,8 +1018,8 @@ The following endpoints are associated with problems:
 
 | Endpoint                       | Mime-type        | Description
 | :----------------------------- | :--------------- | :----------
-| `/contests/<id>/problems`      | application/json | JSON array of all problems with properties as defined in the table below.
-| `/contests/<id>/problems/<id>` | application/json | JSON object representing a single problem with properties as defined in the table below.
+| `/contests/<id>/problems`      | application/json | JSON array of all problems with properties as specified by `/access`.
+| `/contests/<id>/problems/<id>` | application/json | JSON object representing a single problem with properties as specified by `/access`.
 
 Properties of problem objects:
 
@@ -1087,8 +1085,8 @@ The following endpoints are associated with groups:
 
 | Endpoint                     | Mime-type        | Description
 | :--------------------------- | :--------------- | :----------
-| `/contests/<id>/groups`      | application/json | JSON array of all groups with properties as defined in the table below.
-| `/contests/<id>/groups/<id>` | application/json | JSON object representing a single group with properties as defined in the table below.
+| `/contests/<id>/groups`      | application/json | JSON array of all groups with properties as specified by `/access`.
+| `/contests/<id>/groups/<id>` | application/json | JSON object representing a single group with properties as specified by `/access`.
 
 Note that these endpoints must be provided if groups are used. If they
 are not provided no other endpoint may refer to groups (i.e. return any
@@ -1151,8 +1149,8 @@ The following endpoints are associated with organizations:
 
 | Endpoint                            | Type             | Description
 | :---------------------------------- | :--------------- | :----------
-| `/contests/<id>/organizations`      | application/json | JSON array of all organizations with properties as defined in the table below.
-| `/contests/<id>/organizations/<id>` | application/json | JSON object representing a single organization with properties as defined in the table below.
+| `/contests/<id>/organizations`      | application/json | JSON array of all organizations with properties as specified by `/access`.
+| `/contests/<id>/organizations/<id>` | application/json | JSON object representing a single organization with properties as specified by `/access`.
 
 Note that the first two endpoints must be provided if organizations are
 used. If they are not provided no other endpoint may refer to
@@ -1199,8 +1197,8 @@ The following endpoints are associated with teams:
 
 | Endpoint                     | Mime-type        | Description
 | :--------------------------- | :--------------- | :----------
-| `/contests/<id>/teams`       | application/json | JSON array of all teams with properties as defined in the table below.
-| `/contests/<id>/teams/id>`   | application/json | JSON object representing a single team with properties as defined in the table below.
+| `/contests/<id>/teams`       | application/json | JSON array of all teams with properties as specified by `/access`.
+| `/contests/<id>/teams/id>`   | application/json | JSON object representing a single team with properties as specified by `/access`.
 
 Properties of team objects:
 
@@ -1247,8 +1245,8 @@ The following endpoints are associated with people:
 
 | Endpoint                     | Mime-type        | Description
 | :--------------------------- | :--------------- | :----------
-| `/contests/<id>/people`      | application/json | JSON array of all people with properties as defined in the table below.
-| `/contests/<id>/people/<id>` | application/json | JSON object representing a single person with properties as defined in the table below.
+| `/contests/<id>/people`      | application/json | JSON array of all people with properties as specified by `/access`.
+| `/contests/<id>/people/<id>` | application/json | JSON object representing a single person with properties as specified by `/access`.
 
 Properties of people objects:
 
@@ -1287,9 +1285,9 @@ The following endpoints are associated with accounts:
 
 | Endpoint                       | Mime-type        | Description
 | :----------------------------- | :--------------- | :----------
-| `/contests/<id>/accounts`      | application/json | JSON array of all accounts with properties as defined in the table below.
-| `/contests/<id>/accounts/<id>` | application/json | JSON object representing a single account with properties as defined in the table below.
-| `/contests/<id>/account`       | application/json | JSON object representing a single account of the client making the request, with properties as defined in the table below.
+| `/contests/<id>/accounts`      | application/json | JSON array of all accounts with properties as specified by `/access`.
+| `/contests/<id>/accounts/<id>` | application/json | JSON object representing a single account with properties as specified by `/access`.
+| `/contests/<id>/account`       | application/json | JSON object representing a single account of the client making the request, with properties as specified by `/access` for `/accounts`.
 
 Properties of account objects:
 
@@ -1352,7 +1350,7 @@ The following endpoints are associated with state:
 
 | Endpoint               | Type             | Description
 | :--------------------- | :--------------- | :----------
-| `/contests/<id>/state` | application/json | JSON object representing the current contest state with properties as defined in the table below.
+| `/contests/<id>/state` | application/json | JSON object representing the current contest state with properties as specified by `/access`.
 
 Properties of state objects:
 
@@ -1407,8 +1405,8 @@ The following endpoints are associated with submissions:
 
 | Endpoint                          | Type             | Description
 | :-------------------------------- | :--------------- | :----------
-| `/contests/<id>/submissions`      | application/json | JSON array of all submissions with properties as defined in the table below      |
-| `/contests/<id>/submissions/<id>` | application/json | JSON object representing a single submission with properties as defined in the table below |
+| `/contests/<id>/submissions`      | application/json | JSON array of all submissions with properties as specified by `/access`.
+| `/contests/<id>/submissions/<id>` | application/json | JSON object representing a single submission with properties as specified by `/access`.
 
 Properties of submission objects:
 
@@ -1605,8 +1603,8 @@ The following endpoints are associated with judgements:
 
 | Endpoint                         | Mime-type        | Description
 | :------------------------------- | :--------------- | :----------
-| `/contests/<id>/judgements`      | application/json | JSON array of all judgements with properties as defined in the table below.
-| `/contests/<id>/judgements/<id>` | application/json | JSON object representing a single judgement with properties as defined in the table below.
+| `/contests/<id>/judgements`      | application/json | JSON array of all judgements with properties as specified by `/access`.
+| `/contests/<id>/judgements/<id>` | application/json | JSON object representing a single judgement with properties as specified by `/access`.
 
 Properties of judgement objects:
 
@@ -1650,8 +1648,8 @@ The following endpoints are associated with runs:
 
 | Endpoint                   | Mime-type        | Description
 | :------------------------- | :--------------- | :----------
-| `/contests/<id>/runs`      | application/json | JSON array of all runs with properties as defined in the table below.
-| `/contests/<id>/runs/<id>` | application/json | JSON object representing a single run with properties as defined in the table below.
+| `/contests/<id>/runs`      | application/json | JSON array of all runs with properties as specified by `/access`.
+| `/contests/<id>/runs/<id>` | application/json | JSON object representing a single run with properties as specified by `/access`.
 
 Properties of run objects:
 
@@ -1689,8 +1687,8 @@ The following endpoints are associated with clarification messages:
 
 | Endpoint                             | Mime-type        | Description
 | :----------------------------------- | :--------------- | :----------
-| `/contests/<id>/clarifications`      | application/json | JSON array of all clarifications with properties as defined in the table below.
-| `/contests/<id>/clarifications/<id>` | application/json | JSON object representing a single clarification with properties as defined in the table below.
+| `/contests/<id>/clarifications`      | application/json | JSON array of all clarifications with properties as specified by `/access`.
+| `/contests/<id>/clarifications/<id>` | application/json | JSON object representing a single clarification with properties as specified by `/access`.
 
 Properties of clarification message objects:
 
@@ -1825,8 +1823,8 @@ The following endpoints are associated with awards:
 
 | Endpoint                     | Mime-type        | Description
 | :--------------------------- | :--------------- | :----------
-| `/contests/<id>/awards`      | application/json | JSON array of all awards with properties as defined in the table below.
-| `/contests/<id>/awards/<id>` | application/json | JSON object representing a single award with properties as defined in the table below.
+| `/contests/<id>/awards`      | application/json | JSON array of all awards with properties as specified by `/access`.
+| `/contests/<id>/awards/<id>` | application/json | JSON object representing a single award with properties as specified by `/access`.
 
 Properties of award objects:
 
@@ -1968,8 +1966,8 @@ The following endpoints are associated with commentary:
 
 | Endpoint                         | Mime-type        | Description
 | :------------------------------- | :--------------- | :----------
-| `/contests/<id>/commentary`      | application/json | JSON array of all commentary with properties as defined in the table below.
-| `/contests/<id>/commentary/<id>` | application/json | JSON object representing a single commentary with properties as defined in the table below.
+| `/contests/<id>/commentary`      | application/json | JSON array of all commentary with properties as specified by `/access`.
+| `/contests/<id>/commentary/<id>` | application/json | JSON object representing a single commentary with properties as specified by `/access`.
 
 Properties of award objects:
 
