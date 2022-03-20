@@ -1613,13 +1613,13 @@ Properties of judgement objects:
 | Name                 | Type      | Description
 | :------------------- | :-------- | :----------
 | id                   | ID        | Identifier of the judgement.
-| submission\_id       | ID        | Identifier of the [ submission](#submissions) judged.
-| judgement\_type\_id  | ID ?      | The [ verdict](#judgement-types) of this judgement.
+| submission\_id       | ID        | Identifier of the [submission](#submissions) judged.
+| judgement\_type\_id  | ID ?      | The [verdict](#judgement-types) of this judgement. Required iff judgement has completed.
 | score                | number    | Score for this judgement. Required iff contest:scoreboard_type is `score`.
 | start\_time          | TIME      | Absolute time when judgement started.
 | start\_contest\_time | RELTIME   | Contest relative time when judgement started.
-| end\_time            | TIME ?    | Absolute time when judgement completed.
-| end\_contest\_time   | RELTIME ? | Contest relative time when judgement completed.
+| end\_time            | TIME ?    | Absolute time when judgement completed. Required iff judgement_type_id is present.
+| end\_contest\_time   | RELTIME ? | Contest relative time when judgement completed. Required iff judgement_type_id is present.
 | max\_run\_time       | number ?  | Maximum run time in seconds for any test case. Should be an integer multiple of `0.001`.
 
 When a judgement is started, each of `judgement_type_id`, `end_time` and

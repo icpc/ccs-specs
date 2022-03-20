@@ -967,7 +967,7 @@ It is a requirement that the CCS provide a compliant implementation of
 the [Contest API](contest_api).
 
 The CCS must provice access to the Contest API including the 
-`/scoreboard` and `/event-feed` endpoints as well as consistent with 
+`/scoreboard` and `/event-feed` endpoints as well as be consistent with 
 (at least) the following return from the `/access` endpoint:
 
 ```json
