@@ -252,17 +252,19 @@ absolute timestamps.
     with properties as defined below.
   - Arrays (type **`array of <type>`** in the specification) are built-in JSON 
     arrays of some type defined above.
+  - Nullable types (type **`<type> ?`** in the specification) are either a
+    value of a type defined above, or `null`.
 
 Properties for file reference objects:
 
-| Name     | Type    | Nullable? | Description
-| -------- | ------- | --------- | -----------
-| href     | string  | yes       | URL where the resource can be found. Relative URLs are relative to the `baseurl`. Must point to a file of intended mime-type. Resource must be accessible using the exact same (possibly none) authentication as the call that returned this data.
-| filename | string  | no        | POSIX compliant filename. Filenames must be unique within the endpoint object where they are used. I.e. an organization can have (multiple) `logo` and `country_flag` file references, they must all have a different filename, but different organizations may have files with the same filename.
-| hash     | string  | yes       | MD5 hash of the file referenced.
-| mime     | string  | no        | Mime type of resource.
-| width    | integer | depends   | Width of the image. Required for files with mime type image/*.
-| height   | integer | depends   | Height of the image. Required for files with mime type image/*.
+| Name     | Type      | Description
+| -------- | --------- | -----------
+| href     | string ?  | URL where the resource can be found. Relative URLs are relative to the `baseurl`. Must point to a file of intended mime-type. Resource must be accessible using the exact same (possibly none) authentication as the call that returned this data.
+| filename | string    | POSIX compliant filename. Filenames must be unique within the endpoint object where they are used. I.e. an organization can have (multiple) `logo` and `country_flag` file references, they must all have a different filename, but different organizations may have files with the same filename.
+| hash     | string ?  | MD5 hash of the file referenced.
+| mime     | string    | Mime type of resource.
+| width    | integer ? | Width of the image. Required for files with mime type image/*.
+| height   | integer ? | Height of the image. Required for files with mime type image/*.
 
 The `href` property may be an [absolute or relative
 URL](https://tools.ietf.org/html/rfc3986); relative URLs must be
@@ -356,11 +358,11 @@ etc.) or entire collection. The general format for events is:
 {"type": "<type>", "id": "<id>", "data": <JSON data for object> }
 ```
 
-| Name        | Type            | Required? | Nullable? | Description
-| :---------- | :-------------- | :-------- | :-------- | :----------
-| type        | string          | yes       | no        | The type of contest object that changed. Can be used for filtering.
-| id          | string          | yes       | yes       | The id of the object that changed, or null for the entire collection/singleton.
-| data        | array or object | yes       | yes       | The updated value, i.e. what would be returned if calling the corresponding API endpoint at this time: an array, object, or null for deletions.
+| Name        | Type              | Description
+| :---------- | :---------------- | :----------
+| type        | string            | The type of contest object that changed. Can be used for filtering.
+| id          | string ?          | The id of the object that changed, or null for the entire collection/singleton.
+| data        | array or object ? | The updated value, i.e. what would be returned if calling the corresponding API endpoint at this time: an array, object, or null for deletions.
 
 All event types correspond to an API endpoint, as specified in the table below.
 
@@ -472,9 +474,8 @@ Means that endpoint `/contests/<contest_id>/submissions/187` has been updated to
 
 This specification is meant to cover the basic data of contests, with
 the idea that server/client implementations can extend this with more
-types, properties, and/or capabilities. In particular, this specification
-already lists some endpoints or specific properties as optional. The
-following requirements are meant to ease extensibility further:
+endpoints, properties, and/or capabilities. The following requirements 
+are meant to ease extensibility:
 
   - Clients should accept additional (unknown) event types in notifications.
   - Clients should accept additional (unknown) properties in endpoints.
@@ -488,7 +489,7 @@ following requirements are meant to ease extensibility further:
 
 ## Interface specification
 
-The following list of API endpoints should be supported. Note that
+The following list of API endpoints should be supported. Note that `access`,
 `state`, `scoreboard` and `event-feed` are singular nouns and indeed
 contain only a single object.
 
@@ -497,13 +498,18 @@ are mentioned below.
 
 ### Types of endpoints
 
-The endpoints can be categorized into 3 groups as follows:
+The endpoints can be categorized into 4 groups as follows:
 
+  - Metadata: api, access
   - Configuration: contests, judgement-types, languages, problems,
     groups, organizations, teams, team-members;
   - Live data: state, submissions, judgements, runs, clarifications,
     awards, commentary;
   - Aggregate data: scoreboard, event-feed.
+
+Metadata is data about the API. These are not included in the event feed and
+are always required to be available. The access endpoint specifies which other
+endpoints are offered by the API. 
 
 Configuration is normally set before contest start. Is not expected to,
 but could occasionally be updated during a contest. It does not have
@@ -530,30 +536,18 @@ In the tables below, the columns are:
     `property.subproperty`.
   - Type: Data type of the property; one of the 
     [types listed above](#json-property-types).
-  - Required?: Whether this is a required property that **must** be
-    implemented to conform to this specification.
-  - Nullable?: Whether the property might be `null` (and thus
-    implicitly can also not be present in that case).
   - Description: Description of the meaning of the property and any
-    special considerations.
+    special considerations. Required means that the property must be present 
+    and must not be `null`. Default values specify how missing or `null` 
+    values should be interpreted.
 
-Note that properties with `null` value may be left out by the server.
-Furthermore, optional properties must still be consistently implemented
-(or not) \*within\* each contest. This implies the following for
-properties that are:
+Note that all results returned from endpoints:
 
-  - Required and not nullable: The property must always be present with
-    a value.
-  - Required and nullable: The property may be `null`, and only in that
-    case it may be left out.
-  - Optional and not nullable: The property may not be implemented, but
-    that implies that no object of the endpoint has the property set.
-    If one object has this property present, then it must be not
-    `null` and the same must be true for all same type objects within
-    the contest.
-  - Optional and nullable: The property may be `null` or not present.
-    In the latter case that can either be because it was a left out
-    `null` value or because it was not implemented.
+  - Must only have `null` values if the type of the property is `<type> ?`.
+  - Must contain all properties specified in the [Access](#access) endpoint
+    that have non-`null` values. 
+  - Should not contain any properties not specified in the [Access](#access) 
+    endpoint.
 
 ### Filtering
 
@@ -567,22 +561,22 @@ meaning that all conditions must be met (they are logically `AND`ed).
 Note that filtering on any other property, including property with the type
 array of ID, does not have to be supported.
 
-### API version
+### API information
 
-Provides version information for the API.
+Provides information about the API.
 
-The following endpoint is associated with API version:
+The following endpoint is associated with API information:
 
-| Endpoint | Mime-type        | Required? | Description
-| :------- | :--------------- | :-------- | :----------
-| `/`      | application/json | yes       | JSON object representing the API version with properties as defined in the table below.
+| Endpoint | Mime-type        | Description
+| :------- | :--------------- | :----------
+| `/`      | application/json | JSON object representing information about the API with all properties defined in the table below.
 
 Properties of version object:
 
-| Name        | Type   | Required? | Nullable? | Description
-| :---------- | :----- | :-------- | :-------- | :----------
-| version     | string | yes       | no        | Version of the API. For this version must be the string `2022-07-draft`. Will be of the form `<yyyy>-<mm>`, `<yyyy>-<mm>-draft`, or simply `draft`.
-| version_url | string | yes       | no        | Link to documentation for this version of the API.
+| Name        | Type   | Description
+| :---------- | :----- | :----------
+| version     | string | Version of the API. For this version must be the string `2022-07-draft`. Will be of the form `<yyyy>-<mm>`, `<yyyy>-<mm>-draft`, or simply `draft`.
+| version_url | string | Link to documentation for this version of the API.
 
 #### Examples
 
@@ -599,36 +593,113 @@ Returned data:
 }
 ```
 
+### Access
+
+Information on which endpoints and properties are visible to the current client, and what [capabilities](#capabilities)
+this client has access to or can perform.
+
+The following endpoint is associated with access:
+
+| Endpoint                | Mime-type        | Description
+| :---------------------- | :--------------- | :----------
+| `/contests/<id>/access` | application/json | JSON object representing the current client's access with all properties defined in the table below.
+
+Properties of access objects:
+
+| Name         | Type                      | Description
+| :----------- | :------------------------ | :----------
+| capabilities | array of string           | An array of [capabilities](#capabilities) that the current client has. The array may be empty.
+| endpoints    | array of endpoint objects | An array of endpoint objects that are visible to the current client, as described below. The array may be empty.
+
+Properties of endpoint objects:
+
+| Name         | Type            | Description
+| :----------- | :-------------- | :----------
+| type         | string          | The type of the endpoint, e.g. "problems". See table in [Notification format](#notification-format) for the list of types.
+| properties   | array of string | An array of supported properties that the current client has visibility to. The array must not be empty. If the array would be empty, the endpoint object should instead not be included in the endpoints array.
+
+This endpoint provides information about what is accessible to a specific
+client in a live contest, and hence will not exist in a contest archive.
+
+The set of properties listed must always support 
+[referential integrity](#referential-integrity), i.e. if a property with a ID 
+value referring to some type of object is present the endpoint representing
+that type of object (and its ID property) must also be present. E.g. if 
+`group_ids` is listed among the properties in the `team` endpoint object, that
+means that there must be an endpoint object with type `groups` containing at 
+least `ID` in its properties.
+
+This information is provided so that clients know what endpoints are available,
+what notifications may happen, and what capabilities they have, regardless
+of whether objects currently exist or the capability is currently active.
+For instance, a client logged in with a team account would see the problems type and
+team_submit capability before a contest starts, even through they cannot
+see any problems nor submit yet.
+Clients are not expected to call this endpoint more than once
+since the response should not normally change during a contest.
+
+#### Examples
+
+Request:
+
+`GET https://example.com/api/contests/wf14/access`
+
+Returned data:
+
+```json
+{
+   "capabilities": ["patch_time"],
+   "endpoints": [
+     { "type": "contests", "properties": ["id","name","formal_name",...]},
+     { "type": "problems", "properties": ["id","label",...]},
+     { "type": "submissions", "properties": ["id","language_id","reaction",...]}
+     ...
+   ]
+}
+```
+
+or:
+
+```json
+{
+   "capabilities": ["team_submit"],
+   "endpoints": [
+     { "type": "contests", "properties": ["id","name","formal_name",...]},
+     { "type": "problems", "properties": ["id","label",...]},
+     { "type": "submissions", "properties": ["id","language_id",...]},
+     ...
+   ]
+}
+```
+
 ### Contests
 
 Provides information on the current contest.
 
 The following endpoints are associated with contest:
 
-| Endpoint         | Mime-type        | Required? | Description                                                                 
-| :--------------- | :--------------- | :-------- | :----------
-| `/contests`      | application/json | yes       | JSON array of all contests with properties as defined in the table below.
-| `/contests/<id>` | application/json | yes       | JSON object representing a single contest with properties as defined in the table below.
+| Endpoint         | Mime-type        | Description
+| :--------------- | :--------------- | :----------
+| `/contests`      | application/json | JSON array of all contests with properties as specified by `/access`.
+| `/contests/<id>` | application/json | JSON object representing a single contest with properties as specified by `/access`.
 
 Properties of contest objects:
 
-| Name                         | Type          | Required? | Nullable? | Description
-| :--------------------------- | :------------ | :-------- | :-------- | :----------
-| id                           | ID            | yes       | no        | Identifier of the current contest.
-| name                         | string        | yes       | no        | Short display name of the contest.
-| formal\_name                 | string        | no        | no        | Full name of the contest.
-| start\_time                  | TIME          | yes       | yes       | The scheduled start time of the contest, may be `null` if the start time is unknown or the countdown is paused.
-| countdown\_pause\_time       | RELTIME       | no        | yes       | The amount of seconds left when countdown to contest start is paused. At no time may both `start_time` and `countdown_pause_time` be non-`null`.
-| duration                     | RELTIME       | yes       | no        | Length of the contest.
-| scoreboard\_freeze\_duration | RELTIME       | no        | yes       | How long the scoreboard is frozen before the end of the contest.
-| scoreboard\_type             | string        | no        | yes       | What type of scoreboard is used for the contest. Must be either `pass-fail` or `score`. Defaults to `pass-fail` if missing or `null`.
-| penalty\_time                | integer       | no        | no        | Penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`.
-| banner                       | array of FILE | no        | yes       | Banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime types are image/*.
-| logo                         | array of FILE | no        | yes       | Logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/*.
-| location                     | object        | no        | yes       | JSON object as specified in the rows below.
-| location.latitude            | number        | depends   | no        | Latitude in degrees. Required iff location is present.
-| location.longitude           | number        | depends   | no        | Longitude in degrees. Required iff location is present.
-
+| Name                         | Type            | Description
+| :--------------------------- | :-------------- | :----------
+| id                           | ID              | Identifier of the current contest.
+| name                         | string          | Short display name of the contest.
+| formal\_name                 | string          | Full name of the contest.
+| start\_time                  | TIME ?          | The scheduled start time of the contest, may be `null` if the start time is unknown or the countdown is paused.
+| countdown\_pause\_time       | RELTIME ?       | The amount of seconds left when countdown to contest start is paused. At no time may both `start_time` and `countdown_pause_time` be non-`null`.
+| duration                     | RELTIME         | Length of the contest.
+| scoreboard\_freeze\_duration | RELTIME ?       | How long the scoreboard is frozen before the end of the contest. Defaults to `0:00:00`.
+| scoreboard\_type             | string ?        | What type of scoreboard is used for the contest. Must be either `pass-fail` or `score`. Defaults to `pass-fail`.
+| penalty\_time                | integer         | Penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`.
+| banner                       | array of FILE ? | Banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime types are image/*.
+| logo                         | array of FILE ? | Logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/*.
+| location.latitude            | number ?        | Latitude in degrees. Required iff location.longitude is present.
+| location.longitude           | number ?        | Longitude in degrees. Required iff location.latitude is present.
 
 The expected/typical use of `countdown_pause_time` is that once a
 `start_time` is defined and close, the countdown may be paused due to
@@ -729,19 +800,19 @@ a submission.
 
 The following endpoints are associated with judgement types:
 
-| Endpoint                              | Mime-type        | Required? | Description
-| :------------------------------------ | :--------------- | :-------- | :----------
-| `/contests/<id>/judgement-types`      | application/json | yes       | JSON array of all judgement types with properties as defined in the table below.
-| `/contests/<id>/judgement-types/<id>` | application/json | yes       | JSON object representing a single judgement type with properties as defined in the table below.
+| Endpoint                              | Mime-type        | Description
+| :------------------------------------ | :--------------- | :----------
+| `/contests/<id>/judgement-types`      | application/json | JSON array of all judgement types with properties as specified by `/access`.
+| `/contests/<id>/judgement-types/<id>` | application/json | JSON object representing a single judgement type with properties as specified by `/access`.
 
 Properties of judgement type objects:
 
-| Name    | Type    | Required? | Nullable? | Description
-| :------ | :------ | :-------- | :-------- | :----------
-| id      | ID      | yes       | no        | Identifier of the judgement type, a 2-3 letter capitalized shorthand, see table below.
-| name    | string  | yes       | no        | Name of the judgement. (might not match table below, e.g. if localized).
-| penalty | boolean | depends   | no        | Whether this judgement causes penalty time; must be present if and only if contest:penalty\_time is present.
-| solved  | boolean | yes       | no        | Whether this judgement is considered correct.
+| Name    | Type      | Description
+| :------ | :-------- | :----------
+| id      | ID        | Identifier of the judgement type, a 2-3 letter capitalized shorthand, see table below.
+| name    | string    | Name of the judgement. (might not match table below, e.g. if localized).
+| penalty | boolean ? | Whether this judgement causes penalty time. Required iff contest:penalty\_time is present.
+| solved  | boolean   | Whether this judgement is considered correct.
 
 #### Known judgement types
 
@@ -834,31 +905,31 @@ Languages that are available for submission at the contest.
 
 The following endpoints are associated with languages:
 
-| Endpoint                        | Mime-type        | Required? | Description
-| :------------------------------ | :--------------- | :-------- | :----------
-| `/contests/<id>/languages`      | application/json | yes       | JSON array of all languages with properties as defined in the table below.
-| `/contests/<id>/languages/<id>` | application/json | yes       | JSON object representing a single language with properties as defined in the table below.
+| Endpoint                        | Mime-type        | Description
+| :------------------------------ | :--------------- | :----------
+| `/contests/<id>/languages`      | application/json | JSON array of all languages with properties as specified by `/access`.
+| `/contests/<id>/languages/<id>` | application/json | JSON object representing a single language with properties as specified by `/access`.
 
 Properties of language objects:
 
-| Name                 | Type            | Required? | Nullable? | Description
-| :------------------- | :-------------- | :-------- | :-------- | :----------
-| id                   | ID              | yes       | no        | Identifier of the language from table below.
-| name                 | string          | yes       | no        | Name of the language (might not match table below, e.g. if localized).
-| entry_point_required | boolean         | yes       | no        | Whether the language requires an entry point.
-| entry_point_name     | string          | depends   | yes       | The name of the type of entry point, such as "Main class" or "Main file"). Required iff entry_point_required is present.
-| extensions           | array of string | yes       | no        | File extensions for the language.
-| compiler             | Command object  | no        | yes       | Command used for compiling submissions.
-| runner               | Command object  | no        | yes       | Command used for running submissions. Relevant e.g. for interpreted languages and languages running on a VM.
+| Name                 | Type             | Description
+| :------------------- | :--------------- | :----------
+| id                   | ID               | Identifier of the language from table below.
+| name                 | string           | Name of the language (might not match table below, e.g. if localized).
+| entry_point_required | boolean ?        | Whether the language requires an entry point. Defaults to `false`.
+| entry_point_name     | string ?         | The name of the type of entry point, such as "Main class" or "Main file"). Required iff entry_point_required is `true`.
+| extensions           | array of string  | File extensions for the language.
+| compiler             | Command object ? | Command used for compiling submissions.
+| runner               | Command object ? | Command used for running submissions. Relevant e.g. for interpreted languages and languages running on a VM.
 
 Properties of Command objects:
 
-| Name            | Type   | Required | Description
-| :-------------- | :----- | :------- | :----------
-| command         | string | yes      | Command to run.
-| args            | string | no       | Argument list for command. `{files}` denotes where to include the file list.
-| version         | string | no       | Expected output from running the version-command.
-| version-command | string | no       | Command to run to get the version. Defaults to `<command> --version` if not specified.
+| Name            | Type     | Description
+| :-------------- | :------- | :----------
+| command         | string   | Command to run.
+| args            | string ? | Argument list for command. `{files}` denotes where to include the file list. Defaults to empty string.
+| version         | string ? | Expected output from running the version-command. Defaults to empty string.
+| version-command | string ? | Command to run to get the version. Defaults to `<command> --version`.
 
 The compiler and runner objects are intended for informational purposes. It is not expected that systems will synchronize compiler and runner settings via this interface.
 
@@ -945,27 +1016,27 @@ The problems to be solved in the contest
 
 The following endpoints are associated with problems:
 
-| Endpoint                       | Mime-type        | Required? | Description
-| :----------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/problems`      | application/json | yes       | JSON array of all problems with properties as defined in the table below.
-| `/contests/<id>/problems/<id>` | application/json | yes       | JSON object representing a single problem with properties as defined in the table below.
+| Endpoint                       | Mime-type        | Description
+| :----------------------------- | :--------------- | :----------
+| `/contests/<id>/problems`      | application/json | JSON array of all problems with properties as specified by `/access`.
+| `/contests/<id>/problems/<id>` | application/json | JSON object representing a single problem with properties as specified by `/access`.
 
 Properties of problem objects:
 
-| Name              | Type    | Required? | Nullable? | Description
-| :---------------- | :------ | :-------- | :-------- | :----------
-| id                | ID      | yes       | no        | Identifier of the problem, at the WFs the directory name of the problem archive.
-| uuid              | string  | no        | yes       | UUID of the problem, as defined in the problem package.
-| label             | string  | yes       | no        | Label of the problem on the scoreboard, typically a single capitalized letter.
-| name              | string  | yes       | no        | Name of the problem.
-| ordinal           | number  | yes       | no        | A unique number that determines the order the problems, e.g. on the scoreboard.
-| rgb               | string  | no        | no        | Hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet), e.g. `#AC00FF` or `#fff`.
-| color             | string  | no        | no        | Human readable color description associated to the RGB value.
-| time\_limit       | number  | no        | no        | Time limit in seconds per test data set (i.e. per single run). Should be an integer multiple of `0.001`.
-| test\_data\_count | integer | yes       | no        | Number of test data sets.
-| max_score         | number  | no        | no        | Maximum expected score, although teams may score higher in some cases. Typically used to indicate scoreboard cell color in scoring contests. Required iff contest:scoreboard_type is `score`.
-| problem_package   | array of FILE  | no | yes    | [Problem package](https://www.kattis.com/problem-package-format/). Expected mime type is application/zip. Only exactly one archive is allowed. Not expected to actually contain href for package during the contest, but used for configuration and archiving.
-| problem_statement | array of FILE | no | yes    | Problem statement. Expected mime type is application/pdf. 
+| Name              | Type      | Required? | Nullable? | Description
+| :---------------- | :-------- | :----------
+| id                | ID        | Identifier of the problem, at the WFs the directory name of the problem archive.
+| uuid              | string ?  | UUID of the problem, as defined in the problem package.
+| label             | string    | Label of the problem on the scoreboard, typically a single capitalized letter.
+| name              | string    | Name of the problem.
+| ordinal           | number    | A unique number that determines the order the problems, e.g. on the scoreboard.
+| rgb               | string ?  | Hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet), e.g. `#AC00FF` or `#fff`.
+| color             | string ?  | Human readable color description associated to the RGB value.
+| time\_limit       | number ?  | Time limit in seconds per test data set (i.e. per single run). Should be an integer multiple of `0.001`.
+| test\_data\_count | integer ? | Number of test data sets.
+| max_score         | number ?  | Maximum expected score, although teams may score higher in some cases. Typically used to indicate scoreboard cell color in scoring contests. Required iff contest:scoreboard_type is `score`.
+| problem_package   | array of FILE ? | [Problem package](https://www.kattis.com/problem-package-format/). Expected mime type is application/zip. Only exactly one archive is allowed. Not expected to actually contain href for package during the contest, but used for configuration and archiving.
+| problem_statement | array of FILE ? | Problem statement. Expected mime type is application/pdf. 
 
 #### Examples
 
@@ -1012,10 +1083,10 @@ divisions at every one of `S` sites, then in addition to the `D` + `S` groups th
 
 The following endpoints are associated with groups:
 
-| Endpoint                     | Mime-type        | Required? | Description
-| :--------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/groups`      | application/json | no        | JSON array of all groups with properties as defined in the table below.
-| `/contests/<id>/groups/<id>` | application/json | no        | JSON object representing a single group with properties as defined in the table below.
+| Endpoint                     | Mime-type        | Description
+| :--------------------------- | :--------------- | :----------
+| `/contests/<id>/groups`      | application/json | JSON array of all groups with properties as specified by `/access`.
+| `/contests/<id>/groups/<id>` | application/json | JSON object representing a single group with properties as specified by `/access`.
 
 Note that these endpoints must be provided if groups are used. If they
 are not provided no other endpoint may refer to groups (i.e. return any
@@ -1023,15 +1094,14 @@ group\_ids).
 
 Properties of group objects:
 
-| Name               | Type   | Required? | Nullable? | Description
-| :----------------- | :----- | :-------- | :-------- | :----------
-| id                 | ID     | yes       | no        | Identifier of the group.
-| icpc\_id           | string | no        | yes       | External identifier from ICPC CMS.
-| name               | string | yes       | no        | Name of the group.
-| type               | string | no        | yes       | Type of the group.
-| location           | object | no        | yes       | JSON object as specified in the rows below.
-| location.latitude  | number | depends   | no        | Latitude in degrees. Required iff location is present.
-| location.longitude | number | depends   | no        | Longitude in degrees. Required iff location is present.
+| Name               | Type     | Description
+| :----------------- | :------- | :----------
+| id                 | ID       | Identifier of the group.
+| icpc\_id           | string ? | External identifier from ICPC CMS.
+| name               | string   | Name of the group.
+| type               | string ? | Type of the group.
+| location.latitude  | number ? | Latitude in degrees. Required iff location.longitude is present.
+| location.longitude | number ? | Longitude in degrees. Required iff location.latitude is present.
 
 #### Known group types
 
@@ -1077,10 +1147,10 @@ universities.
 
 The following endpoints are associated with organizations:
 
-| Endpoint                            | Type             | Required? | Description
-| :---------------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/organizations`      | application/json | no        | JSON array of all organizations with properties as defined in the table below.
-| `/contests/<id>/organizations/<id>` | application/json | no        | JSON object representing a single organization with properties as defined in the table below.
+| Endpoint                            | Type             | Description
+| :---------------------------------- | :--------------- | :----------
+| `/contests/<id>/organizations`      | application/json | JSON array of all organizations with properties as specified by `/access`.
+| `/contests/<id>/organizations/<id>` | application/json | JSON object representing a single organization with properties as specified by `/access`.
 
 Note that the first two endpoints must be provided if organizations are
 used. If they are not provided no other endpoint may refer to
@@ -1088,20 +1158,19 @@ organizations (i.e. return any organization\_ids).
 
 Properties of organization objects:
 
-| Name               | Type          | Required? | Nullable? | Description
-| :----------------- | :------------ | :-------- | :-------- | :----------
-| id                 | ID            | yes       | no        | Identifier of the organization.
-| icpc\_id           | string        | no        | yes       | External identifier from ICPC CMS.
-| name               | string        | yes       | no        | Short display name of the organization.
-| formal\_name       | string        | no        | yes       | Full organization name if too long for normal display purposes.
-| country            | string        | no        | yes       | [ISO 3166-1 alpha-3 code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) of the organization's country.
-| country_flag       | array of FILE | no        | yes       | Flag of the country. A server is recommended to provide flags of size around 56x56 and 160x160. Only allowed mime types are image/*.
-| url                | string        | no        | yes       | URL to organization's website.
-| twitter\_hashtag   | string        | no        | yes       | Organization hashtag.
-| location           | object        | no        | yes       | JSON object as specified in the rows below.
-| location.latitude  | number        | depends   | no        | Latitude in degrees. Required iff location is present.
-| location.longitude | number        | depends   | no        | Longitude in degrees. Required iff location is present.
-| logo               | array of FILE | no        | yes       | Logo of the organization. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well. Only allowed mime types are image/*.
+| Name               | Type            | Description
+| :----------------- | :-------------- | :----------
+| id                 | ID              | Identifier of the organization.
+| icpc\_id           | string ?        | External identifier from ICPC CMS.
+| name               | string          | Short display name of the organization.
+| formal\_name       | string ?        | Full organization name if too long for normal display purposes.
+| country            | string ?        | [ISO 3166-1 alpha-3 code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) of the organization's country.
+| country_flag       | array of FILE ? | Flag of the country. A server is recommended to provide flags of size around 56x56 and 160x160. Only allowed mime types are image/*.
+| url                | string ?        | URL to organization's website.
+| twitter\_hashtag   | string ?        | Organization hashtag.
+| location.latitude  | number ?        | Latitude in degrees. Required iff location.longitude is present.
+| location.longitude | number ?        | Longitude in degrees. Required iff location.latitude is present.
+| logo               | array of FILE ? | Logo of the organization. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well. Only allowed mime types are image/*.
 
 #### Examples
 
@@ -1126,34 +1195,33 @@ Teams competing in the contest.
 
 The following endpoints are associated with teams:
 
-| Endpoint                     | Mime-type        | Required? | Description
-| :--------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/teams`       | application/json | yes       | JSON array of all teams with properties as defined in the table below.
-| `/contests/<id>/teams/id>`   | application/json | yes       | JSON object representing a single team with properties as defined in the table below.
+| Endpoint                     | Mime-type        | Description
+| :--------------------------- | :--------------- | :----------
+| `/contests/<id>/teams`       | application/json | JSON array of all teams with properties as specified by `/access`.
+| `/contests/<id>/teams/id>`   | application/json | JSON object representing a single team with properties as specified by `/access`.
 
 Properties of team objects:
 
-| Name              | Type          | Required? | Nullable? | Description
-| :---------------- | :------------ | :-------- | :-------- | :----------
-| id                | ID            | yes       | no        | Identifier of the team. Usable as a label, at WFs normally the team seat number.
-| icpc\_id          | string        | no        | yes       | External identifier from ICPC CMS.
-| name              | string        | yes       | no        | Name of the team.
-| display\_name     | string        | no        | yes       | Display name of the team. If not set, a client should revert to using the name instead.
-| organization\_id  | ID            | no        | yes       | Identifier of the [ organization](#organizations) (e.g. university or other entity) that this team is affiliated to.
-| group\_ids        | array of ID   | no        | no        | Identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty.
-| hidden            | boolean       | no        | yes       | If the team is to be excluded from the [scoreboard](#scoreboard). Defaults to false if missing.
-| location          | object        | no        | no        | JSON object as specified in the rows below.
-| location.x        | number        | depends   | no        | Team's x position in meters. Required iff location is present.
-| location.y        | number        | depends   | no        | Team's y position in meters. Required iff location is present.
-| location.rotation | number        | depends   | no        | Team's rotation in degrees. Required iff location is present.
-| photo             | array of FILE | no        | yes       | Registration photo of the team. Only allowed mime types are image/*.
-| video             | array of FILE | no        | yes       | Registration video of the team. Only allowed mime types are video/*.
-| backup            | array of FILE | no        | yes       | Latest file backup of the team machine. Only allowed mime type is application/zip.
-| key\_log          | array of FILE | no        | yes       | Latest key log file from the team machine. Only allowed mime type is text/plain.
-| tool\_data        | array of FILE | no        | yes       | Latest tool data usage file from the team machine. Only allowed mime type is text/plain.
-| desktop           | array of FILE | no        | yes       | Streaming video of the team desktop.
-| webcam            | array of FILE | no        | yes       | Streaming video of the team webcam.
-| audio             | array of FILE | no        | yes       | Streaming team audio.
+| Name              | Type            | Description
+| :---------------- | :-------------- | :----------
+| id                | ID              | Identifier of the team. Usable as a label, at WFs normally the team seat number.
+| icpc\_id          | string ?        | External identifier from ICPC CMS.
+| name              | string          | Name of the team.
+| display\_name     | string ?        | Display name of the team. If not set, a client should revert to using the name instead.
+| organization\_id  | ID ?            | Identifier of the [ organization](#organizations) (e.g. university or other entity) that this team is affiliated to.
+| group\_ids        | array of ID ?   | Identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty. Required iff groups endpoint is available.
+| hidden            | boolean ?       | If the team is to be excluded from the [scoreboard](#scoreboard). Defaults to false if missing.
+| location.x        | number ?        | Team's x position in meters. Required iff location.y or location.rotation is present.
+| location.y        | number ?        | Team's y position in meters. Required iff location.x or location.rotation is present.
+| location.rotation | number ?        | Team's rotation in degrees. Required iff location.x or location.y is present.
+| photo             | array of FILE ? | Registration photo of the team. Only allowed mime types are image/*.
+| video             | array of FILE ? | Registration video of the team. Only allowed mime types are video/*.
+| backup            | array of FILE ? | Latest file backup of the team machine. Only allowed mime type is application/zip.
+| key\_log          | array of FILE ? | Latest key log file from the team machine. Only allowed mime type is text/plain.
+| tool\_data        | array of FILE ? | Latest tool data usage file from the team machine. Only allowed mime type is text/plain.
+| desktop           | array of FILE ? | Streaming video of the team desktop.
+| webcam            | array of FILE ? | Streaming video of the team webcam.
+| audio             | array of FILE ? | Streaming team audio.
 
 #### Examples
 
@@ -1175,24 +1243,24 @@ People involved in the contest.
 
 The following endpoints are associated with people:
 
-| Endpoint                     | Mime-type        | Required? | Description
-| :--------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/people`      | application/json | no        | JSON array of all people with properties as defined in the table below.
-| `/contests/<id>/people/<id>` | application/json | no        | JSON object representing a single person with properties as defined in the table below.
+| Endpoint                     | Mime-type        | Description
+| :--------------------------- | :--------------- | :----------
+| `/contests/<id>/people`      | application/json | JSON array of all people with properties as specified by `/access`.
+| `/contests/<id>/people/<id>` | application/json | JSON object representing a single person with properties as specified by `/access`.
 
 Properties of people objects:
 
-| Name        | Type          | Required? | Nullable? | Description
-| :---------- | :------------ | :-------- | :-------- | :----------
-| id          | ID            | yes       | no        | Identifier of the person.
-| icpc\_id    | string        | no        | yes       | External identifier from ICPC CMS.
-| team\_id    | ID            | no        | yes       | [Team](#teams) of this person. Required iff role is `team`.
-| name        | string        | yes       | no        | Name of the person.
-| title       | string        | no        | yes       | Title of the person, e.g. "Technical director".
-| email       | string        | no        | yes       | Email of the person.
-| sex         | string        | no        | yes       | Either `male` or `female`, or possibly `null`.
-| role        | string        | yes       | no        | One of `contestant`, `coach`, or `staff`.
-| photo       | array of FILE | no        | yes       | Registration photo of the person. Only allowed mime types are image/*.
+| Name        | Type            | Description
+| :---------- | :-------------- | :----------
+| id          | ID              | Identifier of the person.
+| icpc\_id    | string ?        | External identifier from ICPC CMS.
+| team\_id    | ID ?            | [Team](#teams) of this person. Required iff role is `team`.
+| name        | string          | Name of the person.
+| title       | string ?        | Title of the person, e.g. "Technical director".
+| email       | string ?        | Email of the person.
+| sex         | string ?        | Either `male` or `female`, or possibly `null`.
+| role        | string          | One of `contestant`, `coach`, or `staff`.
+| photo       | array of FILE ? | Registration photo of the person. Only allowed mime types are image/*.
 
 #### Examples
 
@@ -1215,23 +1283,23 @@ The accounts used for accessing the contest, as well as information about the ac
 
 The following endpoints are associated with accounts:
 
-| Endpoint                       | Mime-type        | Required? | Description
-| :----------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/accounts`      | application/json | yes       | JSON array of all accounts with properties as defined in the table below.
-| `/contests/<id>/accounts/<id>` | application/json | yes       | JSON object representing a single account with properties as defined in the table below.
-| `/contests/<id>/account`       | application/json | yes       | JSON object representing a single account of the client making the request, with properties as defined in the table below.
+| Endpoint                       | Mime-type        | Description
+| :----------------------------- | :--------------- | :----------
+| `/contests/<id>/accounts`      | application/json | JSON array of all accounts with properties as specified by `/access`.
+| `/contests/<id>/accounts/<id>` | application/json | JSON object representing a single account with properties as specified by `/access`.
+| `/contests/<id>/account`       | application/json | JSON object representing a single account of the client making the request, with properties as specified by `/access` for `/accounts`.
 
 Properties of account objects:
 
-| Name              | Type    | Required? | Nullable? | Description
-| :---------------- | :------ | :-------- | :-------- | :----------
-| id                | ID      | yes       | no        | Identifier of the account.
-| username          | string  | yes       | no        | The account username.
-| password          | string  | no        | yes       | The account password.
-| type              | string  | no        | yes       | The type of account, e.g. `team`, `judge`, `admin`, `analyst`, `staff`.
-| ip                | string  | no        | yes       | IP address associated with this account, used for auto-login.
-| team\_id          | ID      | depends   | yes       | The team that this account is for. Required iff type is `team`.
-| people\_id        | ID      | no        | yes       | The person that this account is for, if the account is only for one person.
+| Name              | Type      | Description
+| :---------------- | :-------- | :----------
+| id                | ID        | Identifier of the account.
+| username          | string    | The account username.
+| password          | string ?  | The account password.
+| type              | string ?  | The type of account, e.g. `team`, `judge`, `admin`, `analyst`, `staff`.
+| ip                | string ?  | IP address associated with this account, used for auto-login.
+| team\_id          | ID ?      | The team that this account is for. Required iff type is `team`.
+| people\_id        | ID ?      | The person that this account is for, if the account is only for one person.
 
 Accounts exist in the API primarily for configuration from a contest archive, or an administrator comparing one CCS to another. It is
 expected that non-admin clients never see passwords, and typically do not see accounts other than their own.
@@ -1273,77 +1341,6 @@ Returned data:
 {"id":"nicky","username":"Nicky"}
 ```
 
-### Access
-
-Information on which endpoints and properties are visible to the current client, and what [capabilities](#capabilities)
-this client has access to or can perform.
-
-The following endpoint is associated with access:
-
-| Endpoint                | Mime-type        | Required? | Description
-| :---------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/access` | application/json | yes       | JSON object representing the current client's access with properties as defined in the table below.
-
-Properties of access objects:
-
-| Name         | Type                      | Required? | Nullable? | Description
-| :----------- | :------------------------ | :-------- | :-------- | :----------
-| capabilities | array of string           | no        | yes       | An array of [capabilities](#capabilities) that the current client has.
-| endpoints    | array of endpoint objects | yes       | no        | An array of endpoint objects that are visible to the current client, as described below.
-
-Properties of endpoint objects:
-
-| Name         | Type            | Required? | Nullable? | Description
-| :----------- | :-------------- | :-------- | :-------- | :----------
-| type         | string          | yes       | no        | The type of the endpoint, e.g. "problems". See table in [Notification format](#notification-format) for the list of types.
-| properties   | array of string | yes       | no        | An array of supported properties that the current client has visibility to.
-
-This endpoint provides information about what is accessible to a specific
-client in a live contest, and hence will not exist in a contest archive.
-
-This information is provided so that clients know what endpoints are available,
-what notifications may happen, and what capabilities they have, regardless
-of whether objects currently exist or the capability is currently active.
-For instance, a client logged in with a team account would see the problems type and
-team_submit capability before a contest starts, even through they cannot
-see any problems nor submit yet.
-Clients are not expected to call this endpoint more than once
-since the response should not normally change during a contest.
-
-#### Examples
-
-Request:
-
-`GET https://example.com/api/contests/wf14/access`
-
-Returned data:
-
-```json
-{
-   "capabilities": ["patch_time"],
-   "endpoints": [
-     { "type": "contests", "properties": ["id","name","formal_name",...]},
-     { "type": "problems", "properties": ["id","label",...]},
-     { "type": "submissions", "properties": ["id","language_id","reaction",...]}
-     ...
-   ]
-}
-```
-
-or:
-
-```json
-{
-   "capabilities": ["team_submit"],
-   "endpoints": [
-     { "type": "contests", "properties": ["id","name","formal_name",...]},
-     { "type": "problems", "properties": ["id","label",...]},
-     { "type": "submissions", "properties": ["id","language_id",...]},
-     ...
-   ]
-}
-```
-
 ### Contest state
 
 Current state of the contest, specifying whether it's running, the
@@ -1351,20 +1348,20 @@ scoreboard is frozen or results are final.
 
 The following endpoints are associated with state:
 
-| Endpoint               | Type             | Required? | Description
-| :--------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/state` | application/json | yes       | JSON object representing the current contest state with properties as defined in the table below.
+| Endpoint               | Type             | Description
+| :--------------------- | :--------------- | :----------
+| `/contests/<id>/state` | application/json | JSON object representing the current contest state with properties as specified by `/access`.
 
 Properties of state objects:
 
-| Name             | Type | Required? | Nullable? | Description
-| :--------------- | :--- | :-------- | :-------- | :----------
-| started          | TIME | yes       | yes       | Time when the contest actually started, or `null` if the contest has not started yet. When set, this time must be equal to the [contest](#contests) `start_time`.
-| frozen           | TIME | depends   | yes       | Time when the scoreboard was frozen, or `null` if the scoreboard has not been frozen. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint.
-| ended            | TIME | yes       | yes       | Time when the contest ended, or `null` if the contest has not ended. Must not be set if started is `null`.
-| thawed           | TIME | depends   | yes       | Time when the scoreboard was thawed (that is, unfrozen again), or `null` if the scoreboard has not been thawed. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint. Must not be set if frozen is `null`.
-| finalized        | TIME | yes       | yes       | Time when the results were finalized, or `null` if results have not been finalized. Must not be set if ended is `null`.
-| end\_of\_updates | TIME | yes       | yes       | Time after last update to the contest occurred, or `null` if more updates are still to come. Setting this to non-`null` must be the very last change in the contest.
+| Name             | Type   | Description
+| :--------------- | :----- | :-------- | :-------- | :----------
+| started          | TIME ? | Time when the contest actually started, or `null` if the contest has not started yet. When set, this time must be equal to the [contest](#contests) `start_time`.
+| frozen           | TIME ? | Time when the scoreboard was frozen, or `null` if the scoreboard has not been frozen. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint.
+| ended            | TIME ? | Time when the contest ended, or `null` if the contest has not ended. Must not be set if started is `null`.
+| thawed           | TIME ? | Time when the scoreboard was thawed (that is, unfrozen again), or `null` if the scoreboard has not been thawed. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint. Must not be set if frozen is `null`.
+| finalized        | TIME ? | Time when the results were finalized, or `null` if results have not been finalized. Must not be set if ended is `null`.
+| end\_of\_updates | TIME ? | Time after last update to the contest occurred, or `null` if more updates are still to come. Setting this to non-`null` must be the very last change in the contest.
 
 These state changes must occur in the order listed in the table above,
 as far as they do occur, except that `thawed` and `finalized` may occur
@@ -1406,25 +1403,25 @@ Submissions, a.k.a. attempts to solve problems in the contest.
 
 The following endpoints are associated with submissions:
 
-| Endpoint                          | Type             | Required? | Description
-| :-------------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/submissions`      | application/json | yes       | JSON array of all submissions with properties as defined in the table below      |
-| `/contests/<id>/submissions/<id>` | application/json | yes       | JSON object representing a single submission with properties as defined in the table below |
+| Endpoint                          | Type             | Description
+| :-------------------------------- | :--------------- | :----------
+| `/contests/<id>/submissions`      | application/json | JSON array of all submissions with properties as specified by `/access`.
+| `/contests/<id>/submissions/<id>` | application/json | JSON object representing a single submission with properties as specified by `/access`.
 
 Properties of submission objects:
 
-| Name          | Type          | Required? | Nullable? | Description
-| :------------ | :------------ | :-------- | :-------- | :----------
-| id            | ID            | yes       | no        | Identifier of the submission. Usable as a label, typically a low incrementing number.
-| language\_id  | ID            | yes       | no        | Identifier of the [ language](#languages) submitted for.
-| problem\_id   | ID            | yes       | no        | Identifier of the [ problem](#problems) submitted for.
-| team\_id      | ID            | yes       | no        | Identifier of the [ team](#teams) that made the submission.
-| account\_id   | ID            | no        | yes       | The account used to create this submission.
-| time          | TIME          | yes       | no        | Timestamp of when the submission was made.
-| contest\_time | RELTIME       | yes       | no        | Contest relative time when the submission was made.
-| entry\_point  | string        | yes       | yes       | Code entry point for specific languages.
-| files         | array of FILE | yes       | no        | Submission files, contained at the root of the archive. Only allowed mime type is application/zip. Only exactly one archive is allowed.
-| reaction      | array of FILE | no        | yes       | Reaction video from team's webcam. Only allowed mime types are video/*.
+| Name          | Type            | Description
+| :------------ | :-------------- | :----------
+| id            | ID              | Identifier of the submission. Usable as a label, typically a low incrementing number.
+| language\_id  | ID              | Identifier of the [ language](#languages) submitted for.
+| problem\_id   | ID              | Identifier of the [ problem](#problems) submitted for.
+| team\_id      | ID              | Identifier of the [ team](#teams) that made the submission.
+| account\_id   | ID ?            | The account used to create this submission.
+| time          | TIME            | Timestamp of when the submission was made.
+| contest\_time | RELTIME         | Contest relative time when the submission was made.
+| entry\_point  | string ?        | Code entry point for specific languages.
+| files         | array of FILE   | Submission files, contained at the root of the archive. Only allowed mime type is application/zip. Only exactly one archive is allowed.
+| reaction      | array of FILE ? | Reaction video from team's webcam. Only allowed mime types are video/*.
 
 The `entry_point` property must be included for submissions in
 languages which do not have a single, unambiguous entry point to run the
@@ -1604,24 +1601,24 @@ Judgements for submissions in the contest.
 
 The following endpoints are associated with judgements:
 
-| Endpoint                         | Mime-type        | Required? | Description
-| :------------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/judgements`      | application/json | yes       | JSON array of all judgements with properties as defined in the table below.
-| `/contests/<id>/judgements/<id>` | application/json | yes       | JSON object representing a single judgement with properties as defined in the table below.
+| Endpoint                         | Mime-type        | Description
+| :------------------------------- | :--------------- | :----------
+| `/contests/<id>/judgements`      | application/json | JSON array of all judgements with properties as specified by `/access`.
+| `/contests/<id>/judgements/<id>` | application/json | JSON object representing a single judgement with properties as specified by `/access`.
 
 Properties of judgement objects:
 
-| Name                 | Type    | Required? | Nullable? | Description
-| :------------------- | :------ | :-------- | :-------- | :----------
-| id                   | ID      | yes       | no        | Identifier of the judgement.
-| submission\_id       | ID      | yes       | no        | Identifier of the [ submission](#submissions) judged.
-| judgement\_type\_id  | ID      | yes       | yes       | The [ verdict](#judgement-types) of this judgement.
-| score                | number  | no        | no        | Score for this judgement. Required iff contest:scoreboard_type is `score`.
-| start\_time          | TIME    | yes       | no        | Absolute time when judgement started.
-| start\_contest\_time | RELTIME | yes       | no        | Contest relative time when judgement started.
-| end\_time            | TIME    | yes       | yes       | Absolute time when judgement completed.
-| end\_contest\_time   | RELTIME | yes       | yes       | Contest relative time when judgement completed.
-| max\_run\_time       | number  | no        | yes       | Maximum run time in seconds for any test case. Should be an integer multiple of `0.001`.
+| Name                 | Type      | Description
+| :------------------- | :-------- | :----------
+| id                   | ID        | Identifier of the judgement.
+| submission\_id       | ID        | Identifier of the [submission](#submissions) judged.
+| judgement\_type\_id  | ID ?      | The [verdict](#judgement-types) of this judgement. Required iff judgement has completed.
+| score                | number    | Score for this judgement. Required iff contest:scoreboard_type is `score`.
+| start\_time          | TIME      | Absolute time when judgement started.
+| start\_contest\_time | RELTIME   | Contest relative time when judgement started.
+| end\_time            | TIME ?    | Absolute time when judgement completed. Required iff judgement_type_id is present.
+| end\_contest\_time   | RELTIME ? | Contest relative time when judgement completed. Required iff judgement_type_id is present.
+| max\_run\_time       | number ?  | Maximum run time in seconds for any test case. Should be an integer multiple of `0.001`.
 
 When a judgement is started, each of `judgement_type_id`, `end_time` and
 `end_contest_time` will be `null` (or missing). These are set when the
@@ -1649,22 +1646,22 @@ Runs are judgements of individual test cases of a submission.
 
 The following endpoints are associated with runs:
 
-| Endpoint                   | Mime-type        | Required? | Description
-| :------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/runs`      | application/json | yes       | JSON array of all runs with properties as defined in the table below.
-| `/contests/<id>/runs/<id>` | application/json | yes       | JSON object representing a single run with properties as defined in the table below.
+| Endpoint                   | Mime-type        | Description
+| :------------------------- | :--------------- | :----------
+| `/contests/<id>/runs`      | application/json | JSON array of all runs with properties as specified by `/access`.
+| `/contests/<id>/runs/<id>` | application/json | JSON object representing a single run with properties as specified by `/access`.
 
 Properties of run objects:
 
-| Name                | Type    | Required? | Nullable? | Description
-| :------------------ | :------ | :-------- | :-------- | :----------
-| id                  | ID      | yes       | no        | Identifier of the run.
-| judgement\_id       | ID      | yes       | no        | Identifier of the [ judgement](#judgements) this is part of.
-| ordinal             | number  | yes       | no        | Ordering of runs in the judgement. Must be different for every run in a judgement. Runs for the same test case must have the same ordinal. Must be between 1 and `problem:test_data_count`.
-| judgement\_type\_id | ID      | yes       | no        | The [ verdict](#judgement-types) of this judgement (i.e. a judgement type).
-| time                | TIME    | yes       | no        | Absolute time when run completed.
-| contest\_time       | RELTIME | yes       | no        | Contest relative time when run completed.
-| run\_time           | number  | no        | no        | Run time in seconds. Should be an integer multiple of `0.001`.
+| Name                | Type    | Description
+| :------------------ | :------ | :----------
+| id                  | ID      | Identifier of the run.
+| judgement\_id       | ID      | Identifier of the [ judgement](#judgements) this is part of.
+| ordinal             | number  | Ordering of runs in the judgement. Must be different for every run in a judgement. Runs for the same test case must have the same ordinal. Must be between 1 and `problem:test_data_count`.
+| judgement\_type\_id | ID      | The [ verdict](#judgement-types) of this judgement (i.e. a judgement type).
+| time                | TIME    | Absolute time when run completed.
+| contest\_time       | RELTIME | Contest relative time when run completed.
+| run\_time           | number  | Run time in seconds. Should be an integer multiple of `0.001`.
 
 #### Examples
 
@@ -1688,24 +1685,24 @@ clarification requests (questions from teams) and clarifications
 
 The following endpoints are associated with clarification messages:
 
-| Endpoint                             | Mime-type        | Required? | Description
-| :----------------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/clarifications`      | application/json | yes       | JSON array of all clarifications with properties as defined in the table below.
-| `/contests/<id>/clarifications/<id>` | application/json | yes       | JSON object representing a single clarification with properties as defined in the table below.
+| Endpoint                             | Mime-type        | Description
+| :----------------------------------- | :--------------- | :----------
+| `/contests/<id>/clarifications`      | application/json | JSON array of all clarifications with properties as specified by `/access`.
+| `/contests/<id>/clarifications/<id>` | application/json | JSON object representing a single clarification with properties as specified by `/access`.
 
 Properties of clarification message objects:
 
-| Name           | Type    | Required? | Nullable? | Description
-| :------------- | :------ | :-------- | :-------- | :----------
-| id             | ID      | yes       | no        | Identifier of the clarification.
-| from\_team\_id | ID      | yes       | yes       | Identifier of [ team](#teams) sending this clarification request, `null` if a clarification sent by jury.
-| to\_team\_id   | ID      | yes       | yes       | Identifier of the [ team](#teams) receiving this reply, `null` if a reply to all teams or a request sent by a team.
-| reply\_to\_id  | ID      | yes       | yes       | Identifier of clarification this is in response to, otherwise `null`.
-| problem\_id    | ID      | yes       | yes       | Identifier of associated [ problem](#problems), `null` if not associated to a problem.
-| account\_id    | ID      | no        | yes       | The account used to create this clarification.
-| text           | string  | yes       | no        | Question or reply text.
-| time           | TIME    | yes       | no        | Time of the question/reply.
-| contest\_time  | RELTIME | yes       | no        | Contest time of the question/reply.
+| Name           | Type    | Description
+| :------------- | :------ | :----------
+| id             | ID      | Identifier of the clarification.
+| from\_team\_id | ID ?    | Identifier of [ team](#teams) sending this clarification request, `null` if a clarification sent by jury.
+| to\_team\_id   | ID ?    | Identifier of the [ team](#teams) receiving this reply, `null` if a reply to all teams or a request sent by a team.
+| reply\_to\_id  | ID ?    | Identifier of clarification this is in response to, otherwise `null`.
+| problem\_id    | ID ?    | Identifier of associated [ problem](#problems), `null` if not associated to a problem.
+| account\_id    | ID ?    | The account used to create this clarification.
+| text           | string  | Question or reply text.
+| time           | TIME    | Time of the question/reply.
+| contest\_time  | RELTIME | Contest time of the question/reply.
 
 Note that at least one of `from_team_id` and `to_team_id` has to be
 `null`. That is, teams cannot send messages to other teams.
@@ -1824,18 +1821,18 @@ Awards such as medals, first to solve, etc.
 
 The following endpoints are associated with awards:
 
-| Endpoint                     | Mime-type        | Required? | Description
-| :--------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/awards`      | application/json | no        | JSON array of all awards with properties as defined in the table below.
-| `/contests/<id>/awards/<id>` | application/json | no        | JSON object representing a single award with properties as defined in the table below.
+| Endpoint                     | Mime-type        | Description
+| :--------------------------- | :--------------- | :----------
+| `/contests/<id>/awards`      | application/json | JSON array of all awards with properties as specified by `/access`.
+| `/contests/<id>/awards/<id>` | application/json | JSON object representing a single award with properties as specified by `/access`.
 
 Properties of award objects:
 
-| Name      | Type        | Required? | Nullable? | Description
-| :-------- | :---------- | :-------- | :-------- | :----------
-| id        | ID          | yes       | no        | Identifier of the award.
-| citation  | string      | yes       | no        | Award citation, e.g. "Gold medal winner".
-| team\_ids | array of ID | yes       | yes       | JSON array of [team](#teams) ids receiving this award. No meaning must be implied or inferred from the order of IDs. If the value is null this means that the award is not currently being updated. If the value is the empty array this means that the award **is** being updated, but no team has been awarded the award at this time.
+| Name      | Type          | Description
+| :-------- | :------------ | :----------
+| id        | ID            | Identifier of the award.
+| citation  | string        | Award citation, e.g. "Gold medal winner".
+| team\_ids | array of ID ? | JSON array of [team](#teams) ids receiving this award. No meaning must be implied or inferred from the order of IDs. If the value is null this means that the award is not currently being updated. If the value is the empty array this means that the award **is** being updated, but no team has been awarded the award at this time.
 
 #### Semantics
 
@@ -1967,21 +1964,21 @@ Commentary on events happening in the contest
 
 The following endpoints are associated with commentary:
 
-| Endpoint                         | Mime-type        | Required? | Description
-| :------------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/commentary`      | application/json | no        | JSON array of all commentary with properties as defined in the table below.
-| `/contests/<id>/commentary/<id>` | application/json | no        | JSON object representing a single commentary with properties as defined in the table below.
+| Endpoint                         | Mime-type        | Description
+| :------------------------------- | :--------------- | :----------
+| `/contests/<id>/commentary`      | application/json | JSON array of all commentary with properties as specified by `/access`.
+| `/contests/<id>/commentary/<id>` | application/json | JSON object representing a single commentary with properties as specified by `/access`.
 
 Properties of award objects:
 
-| Name          | Type        | Required? | Nullable? | Description
-| :------------ | :---------- | :-------- | :-------- | :----------
-| id            | ID          | yes       | no        | Identifier of the commentary.
-| time          | TIME        | yes       | no        | Time of the commentary message.
-| contest\_time | RELTIME     | yes       | no        | Contest time of the commentary message.
-| message       | string      | yes       | no        | Commentary message text. May contain special tags for [teams](#teams) and [problems](#problems) on the format `#t<team ID>` and `#p<problem ID>` respectively.
-| team\_ids     | array of ID | yes       | yes       | JSON array of [team](#teams) IDs the message is related to.
-| problem\_ids  | array of ID | yes       | yes       | JSON array of [problem](#problems) IDs the message is related to.
+| Name          | Type          | Description
+| :------------ | :------------ | :----------
+| id            | ID            | Identifier of the commentary.
+| time          | TIME          | Time of the commentary message.
+| contest\_time | RELTIME       | Contest time of the commentary message.
+| message       | string        | Commentary message text. May contain special tags for [teams](#teams) and [problems](#problems) on the format `#t<team ID>` and `#p<problem ID>` respectively.
+| team\_ids     | array of ID ? | JSON array of [team](#teams) IDs the message is related to.
+| problem\_ids  | array of ID ? | JSON array of [problem](#problems) IDs the message is related to.
 
 For the message, if an literal `#` is needed, `\#` must be used. Similarly for literal `\`, `\\` must be used.
 
@@ -2009,9 +2006,9 @@ irrespective of role.
 
 The following endpoint is associated with the scoreboard:
 
-| Endpoint                    | Mime-type        | Required? | Description
-| :-------------------------- | :--------------- | :-------- | :----------
-| `/contests/<id>/scoreboard` | application/json | yes       | JSON object with scoreboard data as defined in the table below.
+| Endpoint                    | Mime-type        | Description
+| :-------------------------- | :--------------- | :----------
+| `/contests/<id>/scoreboard` | application/json | JSON object with scoreboard data as defined in the table below.
 
 #### Scoreboard request options
 
@@ -2034,12 +2031,12 @@ request are not valid.
 
 Properties of the scoreboard object.
 
-| Name          | Type    | Required? | Nullable? | Description
-| :------------ | :------ | :-------- | :-------- | :----------
-| time          | TIME    | yes       | no        | Time contained in the [event](#event-feed) after which this scoreboard was generated. Implementation defined if the event has no associated time.
-| contest\_time | RELTIME | yes       | no        | Contest time contained in the associated event. Implementation defined if the event has no associated contest time.
-| state         | object  | yes       | no        | Identical data as returned by the [ contest state](#contest-state) endpoint. This is provided here for ease of use and to guarantee the data is synchronized.
-| rows          | array of scoreboard row objects | yes       | no        | A list of rows of team with their associated scores.
+| Name          | Type    | Description
+| :------------ | :------ | :----------
+| time          | TIME    | Time contained in the [event](#event-feed) after which this scoreboard was generated. Implementation defined if the event has no associated time.
+| contest\_time | RELTIME | Contest time contained in the associated event. Implementation defined if the event has no associated contest time.
+| state         | object  | Identical data as returned by the [ contest state](#contest-state) endpoint. This is provided here for ease of use and to guarantee the data is synchronized.
+| rows          | array of scoreboard row objects | A list of rows of team with their associated scores.
 
 The scoreboard `rows` array is sorted according to rank and alphabetical
 on team name within identically ranked teams. Here alphabetical ordering
@@ -2049,27 +2046,27 @@ Algorithm](https://www.unicode.org/reports/tr10/), by default using the
 
 Properties of scoreboard row objects:
 
-| Name              | Type    | Required? | Nullable? | Description
-| :---------------- | :------ | :-------- | :-------- | :----------
-| rank              | integer | yes       | no        | Rank of this team, 1-based and duplicate in case of ties.
-| team\_id          | ID      | yes       | no        | Identifier of the [ team](#teams).
-| score             | object  | yes       | no        | JSON object as specified in the rows below (for possible extension to other scoring methods).
-| score.num\_solved | integer | depends   | no        | Number of problems solved by the team. Required iff contest:scoreboard_type is `pass-fail`.
-| score.total\_time | integer | depends   | no        | Total penalty time accrued by the team. Required iff contest:scoreboard_type is `pass-fail`.
-| score.score       | number  | depends   | no        | Total score of problems by the team. Required iff contest:scoreboard_type is `score`.
-| score.time        | integer | no        | no        | Time of last score improvement used for tiebreaking purposes.
-| problems          | array of problem data objects | yes       | no        | JSON array of problems with scoring data, see below for the specification of each object.
+| Name              | Type    | Description
+| :---------------- | :------ | :----------
+| rank              | integer | Rank of this team, 1-based and duplicate in case of ties.
+| team\_id          | ID      | Identifier of the [ team](#teams).
+| score             | object  | JSON object as specified in the rows below (for possible extension to other scoring methods).
+| score.num\_solved | integer | Number of problems solved by the team. Required iff contest:scoreboard_type is `pass-fail`.
+| score.total\_time | integer | Total penalty time accrued by the team. Required iff contest:scoreboard_type is `pass-fail`.
+| score.score       | number  | Total score of problems by the team. Required iff contest:scoreboard_type is `score`.
+| score.time        | integer | Time of last score improvement used for tiebreaking purposes.
+| problems          | array of problem data objects ? | yes       | no        | JSON array of problems with scoring data, see below for the specification of each object.
 
 Properties of problem data objects:
 
-| Name         | Type    | Required? | Nullable? | Description
-| :----------- | :------ | :-------- | :-------- | :----------
-| problem\_id  | ID      | yes       | no        | Identifier of the [ problem](#problems).
-| num\_judged  | integer | yes       | no        | Number of judged submissions (up to and including the first correct one),
-| num\_pending | integer | yes       | no        | Number of pending submissions (either queued or due to freeze).
-| solved       | boolean | depends   | yes       | Required iff contest:scoreboard_type is `pass-fail`.
-| score        | number  | depends   | no        | Required iff contest:scoreboard_type is `score`.
-| time         | integer | depends   | no        | Minutes into the contest when this problem was solved by the team. Required iff `solved=true` or `score>0`.
+| Name         | Type      | Description
+| :----------- | :-------- | :----------
+| problem\_id  | ID        | Identifier of the [ problem](#problems).
+| num\_judged  | integer   | Number of judged submissions (up to and including the first correct one),
+| num\_pending | integer   | Number of pending submissions (either queued or due to freeze).
+| solved       | boolean ? | Required iff contest:scoreboard_type is `pass-fail`.
+| score        | number    | Required iff contest:scoreboard_type is `score`.
+| time         | integer   | Minutes into the contest when this problem was solved by the team. Required iff `solved=true` or `score>0`.
 
 #### Examples
 
@@ -2110,9 +2107,9 @@ presented by the API.
 
 The following endpoint is associated with the event feed:
 
-| Endpoint                    | Mime-type            | Required? | Description
-| :-------------------------- | :------------------- | :-------- | :----------
-| `/contests/<id>/event-feed` | application/x-ndjson | yes       | NDJSON feed of events as defined in [notification format](#notification-format).
+| Endpoint                    | Mime-type            | Description
+| :-------------------------- | :------------------- | :----------
+| `/contests/<id>/event-feed` | application/x-ndjson | NDJSON feed of events as defined in [notification format](#notification-format).
 
 The event feed is a streaming HTTP endpoint that allows connected
 clients to receive change notifications. The feed is a complete log of
@@ -2200,19 +2197,19 @@ of the data presented by the API.
 
 The following endpoints are associated with webhooks:
 
-| Endpoint         | Mime-type        | Required? | Description
-| ---------------- | ---------------- | :-------- | :----------
-| `/webhooks`      | application/json | yes       | JSON array of all webhook callbacks with properties as defined in the table below. Also used to register new webhooks.
-| `/webhooks/<id>` | application/json | yes       | JSON object representing a single webhook callback with properties as defined in the table below.
+| Endpoint         | Mime-type        | Description
+| ---------------- | ---------------- | :----------
+| `/webhooks`      | application/json | JSON array of all webhook callbacks with properties as defined in the table below. Also used to register new webhooks.
+| `/webhooks/<id>` | application/json | JSON object representing a single webhook callback with properties as defined in the table below.
 
 Properties of webhook callback objects:
 
-| Name         | Type            | Required? | Nullable? | Description
-| :----------- | :-------------- | :-------- | :-------- | :----------
-| id           | ID              | yes       | no        | identifier of the webhook.
-| url          | string          | yes       | no        | The URL to post HTTP callbacks to.
-| endpoints    | array of string | yes       | no        | Names of endpoints to receive callbacks for. Empty array means all endpoints.
-| contest\_ids | array of ID     | yes       | no        | ID’s of contests to receive callbacks for. Empty array means all configured contests.
+| Name         | Type            | Description
+| :----------- | :-------------- | :----------
+| id           | ID              | identifier of the webhook.
+| url          | string          | The URL to post HTTP callbacks to.
+| endpoints    | array of string | Names of endpoints to receive callbacks for. Empty array means all endpoints.
+| contest\_ids | array of ID     | ID’s of contests to receive callbacks for. Empty array means all configured contests.
 
 A webhook allows you to receive HTTP callbacks whenever there is a
 change to the contest. Clients are only notified of changes after
