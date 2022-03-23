@@ -689,13 +689,13 @@ Properties of contest objects:
 | :--------------------------- | :-------------- | :----------
 | id                           | ID              | Identifier of the current contest.
 | name                         | string          | Short display name of the contest.
-| formal\_name                 | string          | Full name of the contest.
+| formal\_name                 | string ?        | Full name of the contest.
 | start\_time                  | TIME ?          | The scheduled start time of the contest, may be `null` if the start time is unknown or the countdown is paused.
 | countdown\_pause\_time       | RELTIME ?       | The amount of seconds left when countdown to contest start is paused. At no time may both `start_time` and `countdown_pause_time` be non-`null`.
 | duration                     | RELTIME         | Length of the contest.
 | scoreboard\_freeze\_duration | RELTIME ?       | How long the scoreboard is frozen before the end of the contest. Defaults to `0:00:00`.
 | scoreboard\_type             | string ?        | What type of scoreboard is used for the contest. Must be either `pass-fail` or `score`. Defaults to `pass-fail`.
-| penalty\_time                | integer         | Penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`.
+| penalty\_time                | integer ?       | Penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`.
 | banner                       | array of FILE ? | Banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime types are image/*.
 | logo                         | array of FILE ? | Logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/*.
 | location.latitude            | number ?        | Latitude in degrees. Required iff location.longitude is present.
@@ -1355,7 +1355,7 @@ The following endpoints are associated with state:
 Properties of state objects:
 
 | Name             | Type   | Description
-| :--------------- | :----- | :-------- | :-------- | :----------
+| :--------------- | :----- | :----------
 | started          | TIME ? | Time when the contest actually started, or `null` if the contest has not started yet. When set, this time must be equal to the [contest](#contests) `start_time`.
 | frozen           | TIME ? | Time when the scoreboard was frozen, or `null` if the scoreboard has not been frozen. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint.
 | ended            | TIME ? | Time when the contest ended, or `null` if the contest has not ended. Must not be set if started is `null`.
@@ -1613,7 +1613,7 @@ Properties of judgement objects:
 | id                   | ID        | Identifier of the judgement.
 | submission\_id       | ID        | Identifier of the [submission](#submissions) judged.
 | judgement\_type\_id  | ID ?      | The [verdict](#judgement-types) of this judgement. Required iff judgement has completed.
-| score                | number    | Score for this judgement. Required iff contest:scoreboard_type is `score`.
+| score                | number ?  | Score for this judgement. Required iff contest:scoreboard_type is `score`.
 | start\_time          | TIME      | Absolute time when judgement started.
 | start\_contest\_time | RELTIME   | Contest relative time when judgement started.
 | end\_time            | TIME ?    | Absolute time when judgement completed. Required iff judgement_type_id is present.
@@ -1653,15 +1653,15 @@ The following endpoints are associated with runs:
 
 Properties of run objects:
 
-| Name                | Type    | Description
-| :------------------ | :------ | :----------
-| id                  | ID      | Identifier of the run.
-| judgement\_id       | ID      | Identifier of the [judgement](#judgements) this is part of.
-| ordinal             | number  | Ordering of runs in the judgement. Must be different for every run in a judgement. Runs for the same test case must have the same ordinal. Must be between 1 and `problem:test_data_count`.
-| judgement\_type\_id | ID      | The [verdict](#judgement-types) of this run (i.e. a judgement type).
-| time                | TIME    | Absolute time when run completed.
-| contest\_time       | RELTIME | Contest relative time when run completed.
-| run\_time           | number  | Run time in seconds. Should be an integer multiple of `0.001`.
+| Name                | Type     | Description
+| :------------------ | :------- | :----------
+| id                  | ID       | Identifier of the run.
+| judgement\_id       | ID       | Identifier of the [judgement](#judgements) this is part of.
+| ordinal             | number   | Ordering of runs in the judgement. Must be different for every run in a judgement. Runs for the same test case must have the same ordinal. Must be between 1 and `problem:test_data_count`.
+| judgement\_type\_id | ID       | The [verdict](#judgement-types) of this run (i.e. a judgement type).
+| time                | TIME     | Absolute time when run completed.
+| contest\_time       | RELTIME  | Contest relative time when run completed.
+| run\_time           | number ? | Run time in seconds. Should be an integer multiple of `0.001`.
 
 #### Examples
 
