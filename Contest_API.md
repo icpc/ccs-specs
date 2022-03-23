@@ -1035,8 +1035,8 @@ Properties of problem objects:
 | time\_limit       | number ?  | Time limit in seconds per test data set (i.e. per single run). Should be an integer multiple of `0.001`.
 | test\_data\_count | integer ? | Number of test data sets.
 | max_score         | number ?  | Maximum expected score, although teams may score higher in some cases. Typically used to indicate scoreboard cell color in scoring contests. Required iff contest:scoreboard_type is `score`.
-| problem_package   | array of FILE ? | [Problem package](https://www.kattis.com/problem-package-format/). Expected mime type is application/zip. Only exactly one archive is allowed. Not expected to actually contain href for package during the contest, but used for configuration and archiving.
-| problem_statement | array of FILE ? | Problem statement. Expected mime type is application/pdf. 
+| package           | array of FILE ? | [Problem package](https://www.kattis.com/problem-package-format/). Expected mime type is application/zip. Only exactly one archive is allowed. Not expected to actually contain href for package during the contest, but used for configuration and archiving.
+| statement         | array of FILE ? | Problem statement. Expected mime type is application/pdf. 
 
 #### Examples
 
