@@ -95,7 +95,7 @@ Optional endpoints:
 - judgement-types
 - groups
 - organizations
-- people
+- persons
 
 #### Example file listing
 
@@ -124,9 +124,9 @@ teams/team-001/photo.jpg
 teams/team-002/photo.jpg
 teams/team-003/photo.jpg
 ...
-people.json
-people/john-smith/photo.jpg
-people/jane-doe/photo.jpg
+persons.json
+persons/john-smith/photo.jpg
+persons/jane-doe/photo.jpg
 ...
 accounts.json
 ```
@@ -140,7 +140,7 @@ Required endpoints:
 - api
 - organizations
 - teams
-- people
+- persons
 
 #### Example file listing
 
@@ -157,9 +157,9 @@ teams/team-001/photo.jpg
 teams/team-002/photo.jpg
 teams/team-003/photo.jpg
 ...
-people.json
-people/john-smith/photo.jpg
-people/jane-doe/photo.jpg
+persons.json
+persons/john-smith/photo.jpg
+persons/jane-doe/photo.jpg
 ...
 ```
 
