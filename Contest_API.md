@@ -1023,7 +1023,7 @@ The following endpoints are associated with problems:
 
 Properties of problem objects:
 
-| Name              | Type      | Required? | Nullable? | Description
+| Name              | Type      | Description
 | :---------------- | :-------- | :----------
 | id                | ID        | Identifier of the problem, at the WFs the directory name of the problem archive.
 | uuid              | string ?  | UUID of the problem, as defined in the problem package.
@@ -1355,7 +1355,7 @@ The following endpoints are associated with state:
 Properties of state objects:
 
 | Name             | Type   | Description
-| :--------------- | :----- | :-------- | :-------- | :----------
+| :--------------- | :----- | :----------
 | started          | TIME ? | Time when the contest actually started, or `null` if the contest has not started yet. When set, this time must be equal to the [contest](#contests) `start_time`.
 | frozen           | TIME ? | Time when the scoreboard was frozen, or `null` if the scoreboard has not been frozen. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint.
 | ended            | TIME ? | Time when the contest ended, or `null` if the contest has not ended. Must not be set if started is `null`.
