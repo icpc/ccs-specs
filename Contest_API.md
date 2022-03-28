@@ -1210,7 +1210,7 @@ Properties of team objects:
 | display\_name     | string ?        | Display name of the team. If not set, a client should revert to using the name instead.
 | organization\_id  | ID ?            | Identifier of the [ organization](#organizations) (e.g. university or other entity) that this team is affiliated to.
 | group\_ids        | array of ID     | Identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty. Required iff groups endpoint is available.
-| hidden            | boolean         | If the team is to be excluded from the [scoreboard](#scoreboard). Defaults to false if missing.
+| hidden            | boolean         | If the team is to be excluded from the [scoreboard](#scoreboard). Defaults to `false`.
 | location.x        | number ?        | Team's x position in meters. Required iff location.y or location.rotation is present.
 | location.y        | number ?        | Team's y position in meters. Required iff location.x or location.rotation is present.
 | location.rotation | number ?        | Team's rotation in degrees. Required iff location.x or location.y is present.
