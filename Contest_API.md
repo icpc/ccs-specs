@@ -2055,7 +2055,7 @@ Properties of scoreboard row objects:
 | score.total\_time | integer | Total penalty time accrued by the team. Required iff contest:scoreboard_type is `pass-fail`.
 | score.score       | number  | Total score of problems by the team. Required iff contest:scoreboard_type is `score`.
 | score.time        | integer | Time of last score improvement used for tiebreaking purposes.
-| problems          | array of problem data objects ? | yes       | no        | JSON array of problems with scoring data, see below for the specification of each object.
+| problems          | array of problem data objects ? | JSON array of problems with scoring data, see below for the specification of each object.
 
 Properties of problem data objects:
 
