@@ -375,7 +375,7 @@ All event types correspond to an API endpoint, as specified in the table below.
 | groups          | `/contests/<id>/groups/<id>`          |
 | organizations   | `/contests/<id>/organizations/<id>`   |
 | teams           | `/contests/<id>/teams/<id>`           |
-| people          | `/contests/<id>/people/<id>`          |
+| persons         | `/contests/<id>/persons/<id>`         |
 | accounts        | `/contests/<id>/accounts/<id>`        |
 | state           | `/contests/<id>/state`                |
 | submissions     | `/contests/<id>/submissions/<id>`     |
@@ -1237,18 +1237,18 @@ Returned data:
 ]
 ```
 
-### People
+### Persons
 
-People involved in the contest.
+Persons involved in the contest.
 
-The following endpoints are associated with people:
+The following endpoints are associated with persons:
 
-| Endpoint                     | Mime-type        | Description
-| :--------------------------- | :--------------- | :----------
-| `/contests/<id>/people`      | application/json | JSON array of all people with properties as specified by `/access`.
-| `/contests/<id>/people/<id>` | application/json | JSON object representing a single person with properties as specified by `/access`.
+| Endpoint                      | Mime-type        | Description
+| :---------------------------- | :--------------- | :----------
+| `/contests/<id>/persons`      | application/json | JSON array of all persons with properties as specified by `/access`.
+| `/contests/<id>/persons/<id>` | application/json | JSON object representing a single person with properties as specified by `/access`.
 
-Properties of people objects:
+Properties of person objects:
 
 | Name        | Type            | Description
 | :---------- | :-------------- | :----------
@@ -1266,7 +1266,7 @@ Properties of people objects:
 
 Request:
 
-` GET https://example.com/api/contests/wf14/people`
+` GET https://example.com/api/contests/wf14/persons`
 
 Returned data:
 
@@ -1299,7 +1299,7 @@ Properties of account objects:
 | type              | string ?  | The type of account, e.g. `team`, `judge`, `admin`, `analyst`, `staff`.
 | ip                | string ?  | IP address associated with this account, used for auto-login.
 | team\_id          | ID ?      | The team that this account is for. Required iff type is `team`.
-| people\_id        | ID ?      | The person that this account is for, if the account is only for one person.
+| person\_id        | ID ?      | The person that this account is for, if the account is only for one person.
 
 Accounts exist in the API primarily for configuration from a contest archive, or an administrator comparing one CCS to another. It is
 expected that non-admin clients never see passwords, and typically do not see accounts other than their own.
