@@ -25,7 +25,7 @@ The problem package format specification can be found at: <https://icpc.io/probl
 
 This documentation is build with the script `update_docs.sh` from this
 `gh-pages` branch. That script builds the documentation from each
-relevant branches and writes it to the `gh-pages` branch for publication.
+relevant branches and commits it to the `gh-pages` branch for publication.
 
 To be able to run `update_docs.sh`, you need the following:
 
@@ -34,4 +34,4 @@ To be able to run `update_docs.sh`, you need the following:
 
 Then run `./update_docs.sh` from the root of this repository in the
 `gh-pages` branch. That should update the documentation, which you can
-then commit and push.
+then push.
