@@ -591,7 +591,16 @@ Returned data:
 ```json
 {
    "version": "2022-07-draft",
-   "version_url": "https://ccs-specs.icpc.io/2022-07-draft/contest_api"
+   "version_url": "https://ccs-specs.icpc.io/2022-07-draft/contest_api",
+   "name": "Kattis",
+   "logo": [{
+      "href": "/api/logo",
+      "hash": "36dcf7975b179447783cdfc857ce9ae0",
+      "filename": "logo.png",
+      "mime": "image/png",
+      "width": 600,
+      "height": 600
+   }]
 }
 ```
 
