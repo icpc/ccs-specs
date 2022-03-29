@@ -1969,7 +1969,7 @@ The following endpoints are associated with commentary:
 | `/contests/<id>/commentary`      | application/json | JSON array of all commentary with properties as specified by `/access`.
 | `/contests/<id>/commentary/<id>` | application/json | JSON object representing a single commentary with properties as specified by `/access`.
 
-Properties of award objects:
+Properties of commentary objects:
 
 | Name          | Type          | Description
 | :------------ | :------------ | :----------
