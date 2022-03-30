@@ -256,8 +256,8 @@ The following files and fields must be read by the CCS at a minimum:
   [Data Export: Contest API](#contest-api) as well as the field `logo`.
   This also means the CCS must be able to import the logo's of organizations
   from the contest archive.
-* `accounts.json` with the fields specified in
-  [Data Export: Contest API](#contest-api) as well as the field `password`.
+* `accounts.json` with the following fields: `id`, `username`, `type`,
+  `ip`, `team_id` and `password`.
 
 ### Clock Synchronization
 
@@ -1007,12 +1007,6 @@ The CCS must provice access to the Contest API including the
          "properties": [
             "id", "icpc_id", "name", "display_name", "organization_id",
             "group_ids"
-         ]
-      },
-      { 
-         "type": "accounts", 
-         "properties": [
-            "id", "username", "type", "ip", "team_id"
          ]
       },
       { 
