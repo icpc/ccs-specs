@@ -336,9 +336,6 @@ verbatim.
 The CCS must allow updating of configuration data without restarting or
 stopping the CCS.
 
-The CCS must support the ability to create and save an updated
-contest.json file upon request.
-
 ## Admin Interface
 
 This section describes all the required capabilities for users
