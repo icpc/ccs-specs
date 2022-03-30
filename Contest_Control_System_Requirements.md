@@ -158,8 +158,10 @@ were some user other than that specified by their login credentials.
 #### Authentication Data
 
 If the CCS uses a login/password mechanism to enforce secure
-authentication, it must support account creation and password assignment
+authentication, it must support password assignment
 by reading [accounts.json](#importing-contest-configuration).
+Note that if it sues another mechanism, it should still read that
+file to import (team) account information.
 
 #### Logging Out
 
@@ -241,9 +243,9 @@ be required to make any changes once the contest starts.
 
 The CCS must be able to import contest configuration from a
 [Contest Archive](contest_archive_format),
-and use the data at that location to configure the CCS. The
-configuration URL contains all contest configuration data, including
-contest, problem, organization, group, team and account configuration.
+and use the data to configure the CCS. The archive contains
+all contest configuration data, including contest, problem,
+organization, group, team and account configuration.
 
 The following files and fields must be read by the CCS at a minimum:
 
