@@ -259,6 +259,11 @@ The following files and fields must be read by the CCS at a minimum:
 * `accounts.json` with the following fields: `id`, `username`, `type`,
   `ip`, `team_id` and `password`.
 
+Note that for the files supporting YAML according to the
+[Contest Archive](contest_archive_format) (i.e. `contest.yaml`, `problems.yaml`
+and `accounts.yaml`) the CCS must also be able to import those YAML files
+instead of the JSON version.
+
 ### Clock Synchronization
 
 The CCS must be able to synchronize its clock to an NTP server provided

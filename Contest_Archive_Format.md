@@ -49,6 +49,16 @@ files referenced in `<endpoint>.json` are stored as
 - `<id>` is the ID of the endpoint object the reference is in.
 - `<filename>` is the filename specified in the file reference object.
 
+Some of these API endpoints are often written by humans in an archive.
+For this reason, those files can also be written in YAML instead of JSON.
+This holds for the following files:
+
+- `contest.json`, which them becomes `contest.yaml`.
+- `problems.json`, which them becomes `problems.yaml`.
+- `accounts.json`, which them becomes `accounts.yaml`.
+
+The section [Example YAML files](#example-yaml-files) list example YAML files.
+
 Note that the API specification requires that filenames are unique within
 endpoint objects, so this is always possible.
 
@@ -75,8 +85,8 @@ source.
 
 ## Example uses
 
-The rest of the document describes use cases for the Archive Format, listing
-which data would be required for that use case.
+The next part of this document describes use cases for the Archive Format,
+listing which data would be required for that use case.
 
 ### CCS configuration
 
@@ -183,4 +193,142 @@ api.json
 teams.json
 scoreboard.json
 awards.json
+```
+
+## Example YAML files
+
+This part of this document list YAML alternatives for the files supporting it.
+Each section contains an example JSON with its corresponding YAML equivalent.
+
+### contest.yaml
+
+Original `contest.json` content:
+
+```json
+{
+   "id": "wf2014",
+   "name": "2014 ICPC World Finals",
+   "formal_name": "38th Annual World Finals of the ACM International Collegiate Programming Contest",
+   "start_time": "2014-06-25T10:00:00+01",
+   "duration": "5:00:00",
+   "scoreboard_freeze_duration": "1:00:00",
+   "scoreboard_type": "pass-fail",
+   "penalty_time": 20,
+   "banner": [{
+       "href": "https://example.com/api/contests/wf2014/banner",
+       "filename": "banner.png",
+       "mime": "image/png",
+       "width": 1920,
+       "height": 240
+   }]
+}
+```
+
+Equivalent `contest.yaml` representation:
+
+```yaml
+id: wf2014
+name: 2014 ICPC World Finals
+formal_name: 38th Annual World Finals of the ACM International Collegiate Programming Contest
+start_time: 2014-06-25T10:00:00+01
+duration: 5:00:00
+scoreboard_freeze_duration: 1:00:00
+scoreboard_type: pass-fail
+penalty_time: 20
+banner:
+- href: https://example.com/api/contests/wf2014/banner
+  filename: banner.png
+  mime: image/png
+  width: 1920
+  height: 240
+```
+
+### problems.yaml
+
+Original `problems.json` content:
+
+```json
+[
+    {
+        "id": "asteroids",
+        "label": "A",
+        "name": "Asteroid Rangers",
+        "ordinal": 1,
+        "color": "blue",
+        "rgb": "#00f",
+        "time_limit": 2,
+        "test_data_count": 10
+    },
+    {
+        "id": "bottles",
+        "label": "B",
+        "name": "Curvy Little Bottles",
+        "ordinal": 2,
+        "color": "gray",
+        "rgb": "#808080",
+        "time_limit": 3.5,
+        "test_data_count": 15
+    }
+]
+```
+
+Equivalent `problems.yaml` representation:
+
+```yaml
+- id: asteroids
+  label: A
+  name: Asteroid Rangers
+  ordinal: 1
+  color: blue
+  rgb: '#00f'
+  time_limit: 2
+  test_data_count: 10
+- id: bottles
+  label: B
+  name: Curvy Little Bottles
+  ordinal: 2
+  color: gray
+  rgb: '#808080'
+  time_limit: 3.5
+  test_data_count: 15
+```
+
+### accounts.yaml
+
+Original `accounts.json` content:
+
+```json
+[
+    {
+        "id": "stephan",
+        "username": "stephan",
+        "password": "supersecretpassword",
+        "type": "judge",
+        "ip": "10.0.0.1"
+    },
+    {
+        "id": "team45",
+        "username": "team45",
+        "password": "till-wise-under",
+        "type": "team",
+        "ip": "10.1.1.45",
+        "team_id": "45"
+    }
+]
+```
+
+Equivalent `accounts.yaml` representation:
+
+```yaml
+- id: stephan
+  username: stephan
+  password: supersecretpassword
+  type: judge
+  ip: 10.0.0.1
+- id: team45
+  username: team45
+  password: till-wise-under
+  type: team
+  ip: 10.1.1.45
+  team_id: 45
 ```
