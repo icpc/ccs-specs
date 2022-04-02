@@ -376,36 +376,6 @@ time.
 
 ### Adjusting for Exceptional Circumstances
 
-#### Removing time intervals
-
-It must be possible to, potentially retroactively, specify time
-intervals that will be disregarded for the purpose of scoring. The time
-during all such intervals will not be counted towards a team's penalty
-time for solved problems. Beginning and end of time intervals are given
-in wall-clock time.
-
-Note that removing a time interval changes the wall-clock time when the
-contest ends, as the duration of the contest in
-[contest.yaml](#contestyaml) is specified in contest time.
-
-Removing the interval between time T<sub>0</sub> and T<sub>1</sub>,
-where T<sub>0</sub> ≤ T<sub>1</sub>, means that all submissions received
-between T<sub>0</sub> and T<sub>1</sub> will have the same contest time
-and that the time for all submissions received after T<sub>1</sub> will
-have a contest time that is T<sub>1</sub>-T<sub>0</sub> lower than if
-the interval was not removed.
-
-The removal of a time interval must be reversible. This means that if a
-time interval is removed, the CCS must support the capability of
-subsequently restoring the contest to the state it had prior to the
-removal of the time interval.
-
-Note that time interval removal does not affect the order in which
-submissions arrived to the CCS. If submission S<sub>i</sub> arrived
-before submission S<sub>j</sub> during a removed interval, S<sub>i</sub>
-must still be considered by the CCS to have arrived strictly before
-S<sub>j</sub>.
-
 #### Changing contest length
 
 It must be possible to change the length of the contest at any time
@@ -886,10 +856,8 @@ data according to the following:
 
 1.  For purposes of scoring, the *contest time of a submission* is the
     number of minutes elapsed from the beginning of the contest when the
-    submission was made, skipping removed time intervals if specified
-    (see [Removing Time
-    Intervals](#removing-time-intervals)). This is rounded
-    *down* to the nearest minute, so 59.99 seconds is 0 minutes.
+    submission was made. This is rounded *down* to the nearest minute, so 59.99
+    seconds is 0 minutes.
 2.  The *contest time that a team solved a problem* is the contest time
     of the team's first accepted submission to that problem.
 3.  A team's *penalty time on a problem* is the contest time that the
