@@ -14,7 +14,9 @@ languages
 problems
 groups
 organizations
+persons
 team-members
+accounts
 teams
 state
 submissions
@@ -30,6 +32,8 @@ scoreboard
 
 ENDPOINTS_OPTIONAL='
 team-members
+persons
+accounts
 awards
 commentary
 '

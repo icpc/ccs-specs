@@ -1,0 +1,23 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "CLICS Contest API - account",
+	"description": "Definition of a single account object",
+
+	"type": "object",
+	"properties": {
+		"id": { "$ref": "common.json#/identifier" },
+		"username": { "type": "string" },
+		"password": { "type": ["string", "null"] },
+		"type": {
+			"oneOf": [
+				{ "enum": [ "team", "judge", "admin", "analyst", "staff" ] },
+				{ "type": "null" }
+			]
+		},
+		"ip": { "type": ["string", "null"] },
+		"team_id": { "$ref": "common.json#/identifierornull" },
+		"person_id": { "$ref": "common.json#/identifierornull" }
+	},
+	"required": ["id", "username", "type"],
+	"$ref": "common.json#/strictproperties"
+}
