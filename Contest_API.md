@@ -1000,7 +1000,7 @@ Returned data:
       "version": "gcc (Ubuntu 8.3.0-6ubuntu1) 8.3.0"
    },
    "entry_point_required": false,
-   "extensions": ["cc", "cpp", "cxx", "c++", "C"],
+   "extensions": ["cc", "cpp", "cxx", "c++", "C"]
 }, {
    "id": "python3",
    "name": "Python 3",
@@ -1316,8 +1316,8 @@ Request:
 Returned data:
 
 ```json
-[{"id":"stephan","type":"judge","ip":"10.0.0.1"},
- {"id":"team45","type":"team","ip":"10.1.1.45","team_id":"45"}
+[{"id":"stephan","username":"stephan","type":"judge","ip":"10.0.0.1"},
+ {"id":"team45","username":"team45","type":"team","ip":"10.1.1.45","team_id":"45"}
 ]
 ```
 
@@ -1328,7 +1328,7 @@ Request:
 Returned data:
 
 ```json
-{"id":"nicky","type":"admin"}
+{"id":"nicky","username":"nicky","type":"admin"}
 ```
 
 Request:
@@ -1338,7 +1338,7 @@ Request:
 Returned data:
 
 ```json
-{"id":"nicky","username":"Nicky"}
+{"id":"nicky","username":"Nicky","type":"admin"}
 ```
 
 ### Contest state
