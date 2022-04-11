@@ -330,5 +330,5 @@ Equivalent `accounts.yaml` representation:
   password: till-wise-under
   type: team
   ip: 10.1.1.45
-  team_id: 45
+  team_id: '45'
 ```
