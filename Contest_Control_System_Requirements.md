@@ -158,14 +158,10 @@ were some user other than that specified by their login credentials.
 #### Authentication Data
 
 If the CCS uses a login/password mechanism to enforce secure
-authentication, it must support account creation and password assignment
-according to the following algorithm:
-
-1.  read [teams.tsv](#teamstsv) defining team accounts to be
-    created
-2.  read [accounts.tsv](#accountstsv) defining additional
-    accounts to be created or, for teams, specifying the password of the
-    accounts.
+authentication, it must support password assignment
+by reading [accounts.json](#importing-contest-configuration).
+Note that if it sues another mechanism, it should still read that
+file to import (team) account information.
 
 #### Logging Out
 
@@ -245,30 +241,28 @@ be required to make any changes once the contest starts.
 
 ### Importing Contest Configuration
 
-The CCS must be able to import contest configuration from a single URL,
-and use the data at that location to configure the CCS. The
-configuration URL contains all contest configuration data, including the
-contest configuration file ([contest.yaml](#contestyaml)),
-problemset configuration file
-([problemset.yaml](#problemsetyaml)), problem definitions,
-teams.tsv, groups.tsv and logos.tar.gz. For example, if the URL is
-<http://10.1.1.0/data>, teams.tsv can be imported from
-<http://10.1.1.0/data/teams.tsv>.
+The CCS must be able to import contest configuration from a
+[Contest Archive](contest_archive_format),
+and use the data to configure the CCS. The archive contains
+all contest configuration data, including contest, problem,
+organization, group, team and account configuration.
 
-The CCS must be able to read [teams.tsv](#teamstsv), which
-contains a list of teams registered for the World Finals. It must use
-the data in this file to automatically create whatever internal
-representation is necessary to allow each team (and only the teams)
-specified in the registration list to participate in the World Finals
-contest.
+The following files and fields must be read by the CCS at a minimum:
 
-The CCS must be able to read [groups.tsv](#groupstsv), an
-initialization file containing the list of groups to which the teams
-belong.
+* `contest.json`, `problems.json`, `languages.json`, `groups.json` and
+  `teams.json` with the fields specified in
+  [Data Export: Contest API](#contest-api).
+* `organizations.json` with the fields specified in
+  [Data Export: Contest API](#contest-api) as well as the field `logo`.
+  This also means the CCS must be able to import the logo's of organizations
+  from the contest archive.
+* `accounts.json` with the following fields: `id`, `username`, `type`,
+  `team_id` and `password`.
 
-The CCS must be able to read language configuration from an archive following
-the [Contest Archive Format](https://ccs-specs.icpc.io/contest_archive_format).
-See specifically the [language object](https://ccs-specs.icpc.io/contest_archive_format#language-object).
+Note that for the files supporting YAML according to the
+[Contest Archive](contest_archive_format) (i.e. `contest.yaml`, `problems.yaml`
+and `accounts.yaml`) the CCS must also be able to import those YAML files
+instead of the JSON version.
 
 ### Clock Synchronization
 
@@ -347,9 +341,6 @@ verbatim.
 The CCS must allow updating of configuration data without restarting or
 stopping the CCS.
 
-The CCS must support the ability to create and save an updated
-contest.yaml file upon request.
-
 ## Admin Interface
 
 This section describes all the required capabilities for users
@@ -386,7 +377,7 @@ in wall-clock time.
 
 Note that removing a time interval changes the wall-clock time when the
 contest ends, as the duration of the contest in
-[contest.yaml](#contestyaml) is specified in contest time.
+[contest.json](#importing-contest-configuration) is specified in contest time.
 
 Removing the interval between time T<sub>0</sub> and T<sub>1</sub>,
 where T<sub>0</sub> ≤ T<sub>1</sub>, means that all submissions received
@@ -894,7 +885,7 @@ data according to the following:
     of the team's first accepted submission to that problem.
 3.  A team's *penalty time on a problem* is the contest time that the
     team solved the problem, plus *penaltytime* (from
-    [contest.yaml](#contestyaml)) minutes for each previous
+    [contest.json](#importing-contest-configuration)) minutes for each previous
     submission rejected with a judgement that causes penalty time, by
     that team on that problem, or 0 if the team has not solved the
     problem.
@@ -1183,9 +1174,8 @@ A CCS running in shadow mode must be able to import a complete contest
 configuration as described in the [Importing Contest
 Configuration](#importing-contest-configuration) section of
 this Requirements Specification. In particular a shadow-mode CCS must be
-able to import a contest configuration from a single URL and must also
-be able to import the teams.tsv and groups.tsv files as specified in
-that section.
+able to import a contest configuration from a
+[Contest Archive](contest_archive_format).
 
 ### Submissions
 
@@ -1315,174 +1305,3 @@ WebServer, Browser, database systems, etc., which are required for
 correct operation of the CCS must be listed in the guide, including
 specific version numbers of each tool which the CCS requires for its
 correct operation.
-
-## Appendix: File formats
-
-All files must be encoded in UTF-8.
-
-### Input files
-
-#### contest.yaml
-
-A YAML file consisting of a mapping with the following keys:
-
-| Key                      | Description                                                                                                          |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------- |
-| name                     | Name of contest                                                                                                      |
-| short-name               | Short name of contest                                                                                                |
-| start-time               | Date and time in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601) (wall-clock time that the contest starts) |
-| duration                 | Duration as h:mm:ss (length of contest, in contest time)                                                             |
-| scoreboard-freeze-length | Time length before end of contest when scoreboard will be frozen, in h:mm:ss                                         |
-| penalty-time             | Penalty minutes for rejected submission (optional, default 20)                                                       |
-
-##### Example
-
-```yaml
-# Contest configuration
----
-name:                     ICPC World Finals 2011
-short-name:               ICPC WF 2011
-start-time:               2011-02-04T01:23:00Z
-duration:                 5:00:00
-scoreboard-freeze-length: 1:00:00
-penalty-time:             20
-```
-
-#### problemset.yaml
-
-A YAML file consisting of a mapping with the following keys:
-
-| Key      | Description                                     |
-| -------- | ----------------------------------------------- |
-| problems | Sequence of mappings with keys as defined below |
-
-##### problems
-
-A sequence of mappings with the following keys:
-
-| Key        | Description                                                             |
-| ---------- | ----------------------------------------------------------------------- |
-| letter     | Upper case letter designating the problem                               |
-| short-name | The problem identifier, used to map to the problem data                 |
-| color      | Color of balloon used for this problem                                  |
-| rgb        | RGB values for balloon used for this problem (should match color above) |
-
-##### Example
-
-```yaml
-# Problem set configuration
----
-problems:
-  - letter:     A
-    short-name: apl
-    color:      yellow
-    rgb:        '#ffff00'
-
-  - letter:     B
-    short-name: barcodes
-    color:      red
-    rgb:        '#ff0000'
-
-  - letter:     C
-    short-name: biobots
-    color:      green
-    rgb:        '#00ff00'
-
-  - letter:     D
-    short-name: castles
-    color:      blue
-    rgb:        '#0000ff'
-
-  - letter:     E
-    short-name: channel
-    color:      white
-    rgb:        '#ffffff'
-```
-
-#### groups.tsv
-
-A text file consisting of a version line and one line for each group
-(super regionals at the WF) that needs to be tracked separately with
-regards to results. Each line has tab separated fields as defined below.
-
-The first line has the following format
-
-| Field | Description    | Example | Type                             |
-| ----- | -------------- | ------- | -------------------------------- |
-| 1     | Label          | groups  | fixed string (always same value) |
-| 2     | Version number | 1       | integer                          |
-
-Then follow several lines with the following format (one per team
-group).
-
-| Field | Description | Example       | Type    |
-| ----- | ----------- | ------------- | ------- |
-| 1     | Group ID    | 902           | integer |
-| 2     | Group name  | North America | string  |
-
-#### teams.tsv
-
-A text file consisting of a version line and one line for each team in
-the contest. Each line has tab separated fields as defined below.
-
-The first line has the following format
-
-| Field | Description    | Example | Type                             |
-| ----- | -------------- | ------- | -------------------------------- |
-| 1     | Label          | teams   | fixed string (always same value) |
-| 2     | Version number | 1       | integer                          |
-
-Then follow several lines with the following format (one per team).
-
-| Field | Description            | Example                | Type                      |
-| ----- | ---------------------- | ---------------------- | ------------------------- |
-| 1     | Team Number            | 22                     | integer                   |
-| 2     | External ID            | 24314                  | integer                   |
-| 3     | Group ID               | 4                      | integer                   |
-| 4     | Team name              | Hoos                   | string                    |
-| 5     | Institution name       | University of Virginia | string                    |
-| 6     | Institution short name | U Virginia             | string                    |
-| 7     | Country Code           | USA                    | string ISO 3166-1 alpha-3 |
-
-#### accounts.tsv
-
-A text file consisting of a version line and one line for each account
-in the contest. Each line has tab separated fields as defined below.
-
-The first line has the following format
-
-| Field | Description    | Example  | Type                             |
-| ----- | -------------- | -------- | -------------------------------- |
-| 1     | Label          | accounts | fixed string (always same value) |
-| 2     | Version number | 1        | integer                          |
-
-Then follow several lines with the following format (one per account).
-
-| Field | Description  | Example     | Type   |
-| ----- | ------------ | ----------- | ------ |
-| 1     | Account Type | judge       | string |
-| 2     | Full Name    | Per Austrin | string |
-| 3     | Username     | austrin     | string |
-| 4     | Password     | B\!5MWJiy   | string |
-
-Account Types are: `team`, `judge`, `admin`, `analyst`.
-
-For accounts of type `team` username is on the form "team-nnn" where
-"nnn" is the zero padded team number as given in
-[teams.tsv](#teamstsv).
-
-#### logos.tar.gz
-
-The file contains the logos for all teams, in a tar archive and
-compressed using gzip.
-
-The archive must contain a folder named "logos", with a logo in .png
-format, containing an alpha channel, for each team in the contest. The
-logo must be named \<team number>.png, where team number is padded with 0
-to 4 digits. Example: 0042.png. This folder may not contain any other
-files. If possible, the logos should be as square as possible and
-600x600 pixels or larger (but don't upsize images or add unnecessary
-transparent borders).
-
-The archive may contain other files and folders. These must be ignored
-by the CCS when importing the logos.
