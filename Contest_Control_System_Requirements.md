@@ -257,7 +257,7 @@ The following files and fields must be read by the CCS at a minimum:
   This also means the CCS must be able to import the logo's of organizations
   from the contest archive.
 * `accounts.json` with the following fields: `id`, `username`, `type`,
-  `ip`, `team_id` and `password`.
+  `team_id` and `password`.
 
 Note that for the files supporting YAML according to the
 [Contest Archive](contest_archive_format) (i.e. `contest.yaml`, `problems.yaml`
