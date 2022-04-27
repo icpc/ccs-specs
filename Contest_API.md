@@ -361,8 +361,9 @@ etc.) or entire collection. The general format for events is:
 | Name        | Type              | Description
 | :---------- | :---------------- | :----------
 | type        | string            | The type of contest object that changed. Can be used for filtering.
-| id          | string ?          | The id of the object that changed, or null for the entire collection/singleton.
+| id          | ID ?              | The id of the object that changed, or null for the entire collection/singleton.
 | data        | array or object ? | The updated value, i.e. what would be returned if calling the corresponding API endpoint at this time: an array, object, or null for deletions.
+| token       | string ?          | An optional token used to identify this notification. For one use see event feed [Reconnection](#reconnection) below.
 
 All event types correspond to an API endpoint, as specified in the table below.
 
@@ -2146,17 +2147,35 @@ state, but never an earlier state.
 ##### Reconnection
 
 If a client loses connection or needs to reconnect after a brief
-disconnect (e.g. client restart), it can use the 'time' parameter to
-specify the last event it received:
+disconnect (e.g. client restart), it can use the 'since_token' parameter to
+specify the last notification it received:
 
-`/event-feed?time=xx`
+`/event-feed?since_token=xx`
 
 If specified, the server will attempt to start sending events around the
-given time to reduce the volume of events and required reconciliation.
-If the time passed is too large or the server does not support this
-parameter, all objects will be sent. There is no guarantee that all
+given token to reduce the volume of events and required reconciliation.
+If the token is invalid, the time passed is too large, or the server does
+not support this parameter, the request will fail with a 400 error.
+
+There is no guarantee that all
 updates (e.g. a team name correction, which is not time-based) that
 occurred during the time the client was disconnected will be reflected.
+If the server's notification system is multi-threaded it may
+'repeat' a few notifications to ensure that they were received.
+
+###### Use cases for reconnecting
+
+Some servers may not support any form of reconnection. These providers
+may not include any notification tokens, or may include them just for manual
+debugging/traceability. They will always return 400 when
+using the `since_token` parameter.
+
+Another set of servers may support reconnecting, but only at certain
+checkpoints or time periods. These providers might use timestamps or counters
+as tokens, or only output them in certain events.
+
+Other servers may include tokens in every notification and support
+reconnecting at any point.
 
 ##### Examples
 
