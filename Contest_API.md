@@ -1029,7 +1029,7 @@ Properties of problem objects:
 | uuid              | string ?  | UUID of the problem, as defined in the problem package.
 | label             | string    | Label of the problem on the scoreboard, typically a single capitalized letter.
 | name              | string    | Name of the problem.
-| ordinal           | number    | A unique number that determines the order the problems, e.g. on the scoreboard.
+| ordinal           | integer   | A unique number that determines the order the problems, e.g. on the scoreboard.
 | rgb               | string ?  | Hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet), e.g. `#AC00FF` or `#fff`.
 | color             | string ?  | Human readable color description associated to the RGB value.
 | time\_limit       | number ?  | Time limit in seconds per test data set (i.e. per single run). Should be an integer multiple of `0.001`.
