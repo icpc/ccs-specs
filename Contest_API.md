@@ -689,7 +689,7 @@ Properties of contest objects:
 | :--------------------------- | :-------------- | :----------
 | id                           | ID              | Identifier of the current contest.
 | name                         | string          | Short display name of the contest.
-| formal\_name                 | string          | Full name of the contest.
+| formal\_name                 | string ?        | Full name of the contest. Defaults to value of `name`.
 | start\_time                  | TIME ?          | The scheduled start time of the contest, may be `null` if the start time is unknown or the countdown is paused.
 | countdown\_pause\_time       | RELTIME ?       | The amount of seconds left when countdown to contest start is paused. At no time may both `start_time` and `countdown_pause_time` be non-`null`.
 | duration                     | RELTIME         | Length of the contest.
