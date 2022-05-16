@@ -43,9 +43,9 @@ JSON object.
   `<endpoint>.ndjson`. (The only such endpoint is `event-feed`.)
 
 
-Files referenced in `contest.json` are stored as `contest/<filename>`, and
-files referenced in `<endpoint>.json` are stored as
-`<endpoint>/<id>/<filename>`, where:
+Files referenced in `api.json` and `contest.json` are stored as
+`api/<filename>` and `contest/<filename>` respectively, and files referenced
+in `<endpoint>.json` are stored as `<endpoint>/<id>/<filename>`, where:
 - `<id>` is the ID of the endpoint object the reference is in.
 - `<filename>` is the filename specified in the file reference object.
 
@@ -111,6 +111,7 @@ Optional endpoints:
 
 ```
 api.json
+api/logo.png
 contest.json
 contest/banner.png
 contest/logo.png
@@ -156,6 +157,7 @@ Required endpoints:
 
 ```
 api.json
+api/logo.png
 organizations.json
 organizations/kth.se/logo56x56.png
 organizations/kth.se/logo160x160.png
@@ -190,6 +192,7 @@ Optional endpoints:
 
 ```
 api.json
+api/logo.png
 teams.json
 scoreboard.json
 awards.json
