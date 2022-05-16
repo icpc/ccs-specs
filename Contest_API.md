@@ -578,7 +578,7 @@ Properties of version object:
 | version     | string          | Version of the API. For this version must be the string `2022-07-draft`. Will be of the form `<yyyy>-<mm>`, `<yyyy>-<mm>-draft`, or simply `draft`.
 | version_url | string          | Link to documentation for this version of the API.
 | name        | string ?        | Name of this data provider.
-| logo        | array of FILE ? | Logo for this data provider, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/*. The different files in the array should be different file formats and/or sizes of the same image. If an API combines data from many providers that have logos and wants to represent this it should combine the images into a single image that could then be offered in multiple file formats and/or sizes.
+| logo        | array of FILE ? | Logo for this data provider, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/*. The different files in the array should be different file formats and/or sizes of the same image.
 
 #### Examples
 
