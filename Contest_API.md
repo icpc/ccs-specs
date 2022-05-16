@@ -1209,8 +1209,8 @@ Properties of team objects:
 | name              | string          | Name of the team.
 | display\_name     | string ?        | Display name of the team. If not set, a client should revert to using the name instead.
 | organization\_id  | ID ?            | Identifier of the [ organization](#organizations) (e.g. university or other entity) that this team is affiliated to.
-| group\_ids        | array of ID     | Identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty. Required iff groups endpoint is available.
-| hidden            | boolean         | If the team is to be excluded from the [scoreboard](#scoreboard). Defaults to `false`.
+| group\_ids        | array of ID ?   | Identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty. Required iff groups endpoint is available.
+| hidden            | boolean ?       | If the team is to be excluded from the [scoreboard](#scoreboard). Defaults to `false`.
 | location.x        | number ?        | Team's x position in meters. Required iff location.y or location.rotation is present.
 | location.y        | number ?        | Team's y position in meters. Required iff location.x or location.rotation is present.
 | location.rotation | number ?        | Team's rotation in degrees. Required iff location.x or location.y is present.
@@ -1971,14 +1971,14 @@ The following endpoints are associated with commentary:
 
 Properties of award objects:
 
-| Name          | Type        | Description
-| :------------ | :---------- | :----------
-| id            | ID          | Identifier of the commentary.
-| time          | TIME        | Time of the commentary message.
-| contest\_time | RELTIME     | Contest time of the commentary message.
-| message       | string      | Commentary message text. May contain special tags for [teams](#teams) and [problems](#problems) on the format `#t<team ID>` and `#p<problem ID>` respectively.
-| team\_ids     | array of ID | JSON array of [team](#teams) IDs the message is related to.
-| problem\_ids  | array of ID | JSON array of [problem](#problems) IDs the message is related to.
+| Name          | Type          | Description
+| :------------ | :------------ | :----------
+| id            | ID            | Identifier of the commentary.
+| time          | TIME          | Time of the commentary message.
+| contest\_time | RELTIME       | Contest time of the commentary message.
+| message       | string        | Commentary message text. May contain special tags for [teams](#teams) and [problems](#problems) on the format `#t<team ID>` and `#p<problem ID>` respectively.
+| team\_ids     | array of ID ? | JSON array of [team](#teams) IDs the message is related to.
+| problem\_ids  | array of ID ? | JSON array of [problem](#problems) IDs the message is related to.
 
 For the message, if an literal `#` is needed, `\#` must be used. Similarly for literal `\`, `\\` must be used.
 
