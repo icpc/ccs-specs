@@ -694,8 +694,8 @@ Properties of contest objects:
 | countdown\_pause\_time       | RELTIME ?       | The amount of seconds left when countdown to contest start is paused. At no time may both `start_time` and `countdown_pause_time` be non-`null`.
 | duration                     | RELTIME         | Length of the contest.
 | scoreboard\_freeze\_duration | RELTIME ?       | How long the scoreboard is frozen before the end of the contest. Defaults to `0:00:00`.
-| scoreboard\_type             | string          | What type of scoreboard is used for the contest. Must be either `pass-fail` or `score`. Defaults to `pass-fail`.
-| penalty\_time                | integer         | Penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`. Defaults to `0`.
+| scoreboard\_type             | string          | What type of scoreboard is used for the contest. Must be either `pass-fail` or `score`.
+| penalty\_time                | integer         | Penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`.
 | banner                       | array of FILE ? | Banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime types are image/*.
 | logo                         | array of FILE ? | Logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/*.
 | location.latitude            | number ?        | Latitude in degrees. Required iff location.longitude is present.
@@ -916,7 +916,7 @@ Properties of language objects:
 | :------------------- | :--------------- | :----------
 | id                   | ID               | Identifier of the language from table below.
 | name                 | string           | Name of the language (might not match table below, e.g. if localized).
-| entry_point_required | boolean          | Whether the language requires an entry point. Defaults to `false`.
+| entry_point_required | boolean          | Whether the language requires an entry point.
 | entry_point_name     | string ?         | The name of the type of entry point, such as "Main class" or "Main file"). Required iff entry_point_required is `true`.
 | extensions           | array of string  | File extensions for the language.
 | compiler             | Command object   | Command used for compiling submissions.
