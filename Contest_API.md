@@ -700,13 +700,13 @@ Properties of contest objects:
 | :--------------------------- | :-------------- | :----------
 | id                           | ID              | Identifier of the current contest.
 | name                         | string          | Short display name of the contest.
-| formal\_name                 | string          | Full name of the contest.
+| formal\_name                 | string ?        | Full name of the contest. Defaults to value of `name`.
 | start\_time                  | TIME ?          | The scheduled start time of the contest, may be `null` if the start time is unknown or the countdown is paused.
 | countdown\_pause\_time       | RELTIME ?       | The amount of seconds left when countdown to contest start is paused. At no time may both `start_time` and `countdown_pause_time` be non-`null`.
 | duration                     | RELTIME         | Length of the contest.
 | scoreboard\_freeze\_duration | RELTIME ?       | How long the scoreboard is frozen before the end of the contest. Defaults to `0:00:00`.
-| scoreboard\_type             | string ?        | What type of scoreboard is used for the contest. Must be either `pass-fail` or `score`. Defaults to `pass-fail`.
-| penalty\_time                | integer ?       | Penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`. Defaults to `0`.
+| scoreboard\_type             | string          | What type of scoreboard is used for the contest. Must be either `pass-fail` or `score`.
+| penalty\_time                | integer         | Penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`.
 | banner                       | array of FILE ? | Banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime types are image/*.
 | logo                         | array of FILE ? | Logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/*.
 | location.latitude            | number ?        | Latitude in degrees. Required iff location.longitude is present.
@@ -822,7 +822,7 @@ Properties of judgement type objects:
 | :------ | :-------- | :----------
 | id      | ID        | Identifier of the judgement type, a 2-3 letter capitalized shorthand, see table below.
 | name    | string    | Name of the judgement. (might not match table below, e.g. if localized).
-| penalty | boolean ? | Whether this judgement causes penalty time. Required iff contest:penalty\_time is present.
+| penalty | boolean   | Whether this judgement causes penalty time. Required iff contest:penalty\_time is present.
 | solved  | boolean   | Whether this judgement is considered correct.
 
 #### Known judgement types
@@ -927,11 +927,11 @@ Properties of language objects:
 | :------------------- | :--------------- | :----------
 | id                   | ID               | Identifier of the language from table below.
 | name                 | string           | Name of the language (might not match table below, e.g. if localized).
-| entry_point_required | boolean ?        | Whether the language requires an entry point. Defaults to `false`.
+| entry_point_required | boolean          | Whether the language requires an entry point.
 | entry_point_name     | string ?         | The name of the type of entry point, such as "Main class" or "Main file"). Required iff entry_point_required is `true`.
 | extensions           | array of string  | File extensions for the language.
-| compiler             | Command object ? | Command used for compiling submissions.
-| runner               | Command object ? | Command used for running submissions. Relevant e.g. for interpreted languages and languages running on a VM.
+| compiler             | Command object   | Command used for compiling submissions.
+| runner               | Command object   | Command used for running submissions. Relevant e.g. for interpreted languages and languages running on a VM.
 
 Properties of Command objects:
 
@@ -1043,9 +1043,9 @@ Properties of problem objects:
 | ordinal           | integer   | A unique number that determines the order the problems, e.g. on the scoreboard.
 | rgb               | string ?  | Hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet), e.g. `#AC00FF` or `#fff`.
 | color             | string ?  | Human readable color description associated to the RGB value.
-| time\_limit       | number ?  | Time limit in seconds per test data set (i.e. per single run). Should be an integer multiple of `0.001`.
-| test\_data\_count | integer ? | Number of test data sets.
-| max_score         | number ?  | Maximum expected score, although teams may score higher in some cases. Typically used to indicate scoreboard cell color in scoring contests. Required iff contest:scoreboard_type is `score`.
+| time\_limit       | number    | Time limit in seconds per test data set (i.e. per single run). Should be an integer multiple of `0.001`.
+| test\_data\_count | integer   | Number of test data sets.
+| max_score         | number    | Maximum expected score, although teams may score higher in some cases. Typically used to indicate scoreboard cell color in scoring contests. Required iff contest:scoreboard_type is `score`.
 | package           | array of FILE ? | [Problem package](https://www.kattis.com/problem-package-format/). Expected mime type is application/zip. Only exactly one archive is allowed. Not expected to actually contain href for package during the contest, but used for configuration and archiving.
 | statement         | array of FILE ? | Problem statement. Expected mime type is application/pdf. 
 
@@ -1221,7 +1221,7 @@ Properties of team objects:
 | display\_name     | string ?        | Display name of the team. If not set, a client should revert to using the name instead.
 | organization\_id  | ID ?            | Identifier of the [ organization](#organizations) (e.g. university or other entity) that this team is affiliated to.
 | group\_ids        | array of ID ?   | Identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty. Required iff groups endpoint is available.
-| hidden            | boolean ?       | If the team is to be excluded from the [scoreboard](#scoreboard). Defaults to false if missing.
+| hidden            | boolean ?       | If the team is to be excluded from the [scoreboard](#scoreboard). Defaults to `false`.
 | location.x        | number ?        | Team's x position in meters. Required iff location.y or location.rotation is present.
 | location.y        | number ?        | Team's y position in meters. Required iff location.x or location.rotation is present.
 | location.rotation | number ?        | Team's rotation in degrees. Required iff location.x or location.y is present.
@@ -1307,7 +1307,7 @@ Properties of account objects:
 | id                | ID        | Identifier of the account.
 | username          | string    | The account username.
 | password          | string ?  | The account password.
-| type              | string ?  | The type of account, e.g. `team`, `judge`, `admin`, `analyst`, `staff`.
+| type              | string    | The type of account, e.g. `team`, `judge`, `admin`, `analyst`, `staff`.
 | ip                | string ?  | IP address associated with this account, used for auto-login.
 | team\_id          | ID ?      | The team that this account is for. Required iff type is `team`.
 | person\_id        | ID ?      | The person that this account is for, if the account is only for one person.
@@ -1706,10 +1706,10 @@ Properties of clarification message objects:
 | Name           | Type    | Description
 | :------------- | :------ | :----------
 | id             | ID      | Identifier of the clarification.
-| from\_team\_id | ID ?    | Identifier of [ team](#teams) sending this clarification request, `null` if a clarification sent by jury.
-| to\_team\_id   | ID ?    | Identifier of the [ team](#teams) receiving this reply, `null` if a reply to all teams or a request sent by a team.
+| from\_team\_id | ID ?    | Identifier of [team](#teams) sending this clarification request, `null` iff a clarification sent by jury.
+| to\_team\_id   | ID ?    | Identifier of the [team](#teams) receiving this reply, `null` iff a reply to all teams or a request sent by a team.
 | reply\_to\_id  | ID ?    | Identifier of clarification this is in response to, otherwise `null`.
-| problem\_id    | ID ?    | Identifier of associated [ problem](#problems), `null` if not associated to a problem.
+| problem\_id    | ID ?    | Identifier of associated [problem](#problems), `null` iff not associated to a problem.
 | account\_id    | ID ?    | The account used to create this clarification.
 | text           | string  | Question or reply text.
 | time           | TIME    | Time of the question/reply.
@@ -2075,7 +2075,7 @@ Properties of problem data objects:
 | problem\_id  | ID        | Identifier of the [ problem](#problems).
 | num\_judged  | integer   | Number of judged submissions (up to and including the first correct one),
 | num\_pending | integer   | Number of pending submissions (either queued or due to freeze).
-| solved       | boolean ? | Required iff contest:scoreboard_type is `pass-fail`.
+| solved       | boolean   | Required iff contest:scoreboard_type is `pass-fail`.
 | score        | number    | Required iff contest:scoreboard_type is `score`.
 | time         | integer   | Minutes into the contest when this problem was solved by the team. Required iff `solved=true` or `score>0`.
 
