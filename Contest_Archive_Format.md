@@ -53,9 +53,9 @@ Some of these API endpoints are often written by humans in an archive.
 For this reason, those files can also be written in YAML instead of JSON.
 This holds for the following files:
 
-- `contest.json`, which them becomes `contest.yaml`.
-- `problems.json`, which them becomes `problems.yaml`.
-- `accounts.json`, which them becomes `accounts.yaml`.
+- `contest.json`, which then becomes `contest.yaml`.
+- `problems.json`, which then becomes `problems.yaml`.
+- `accounts.json`, which then becomes `accounts.yaml`.
 
 The section [Example YAML files](#example-yaml-files) list example YAML files.
 
