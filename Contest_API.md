@@ -1987,11 +1987,13 @@ Properties of commentary objects:
 | id            | ID            | Identifier of the commentary.
 | time          | TIME          | Time of the commentary message.
 | contest\_time | RELTIME       | Contest time of the commentary message.
-| message       | string        | Commentary message text. May contain special tags for [teams](#teams) and [problems](#problems) on the format `#t<team ID>` and `#p<problem ID>` respectively.
+| message       | string        | Commentary message text. May contain special tags refering to endpoint objects on the format `{<endpoint>:<object ID>}`. E.g. this is most commonly used for references to [teams](#teams) and [problems](#problems) as `{teams:<team ID>}` and `{problems:<problem ID>}` respectively.
+| priority      | number        | Importance of the commentary message. Higher value means more important. Intended to be used to filter messages.
+| source        | ID ?          | Source [person](#persons) of the commentary message. 
 | team\_ids     | array of ID ? | JSON array of [team](#teams) IDs the message is related to.
 | problem\_ids  | array of ID ? | JSON array of [problem](#problems) IDs the message is related to.
 
-For the message, if an literal `#` is needed, `\#` must be used. Similarly for literal `\`, `\\` must be used.
+For the message, if an literal `{` is needed, `\{` must be used. Similarly for literal `\`, `\\` must be used.
 
 #### Examples
 
