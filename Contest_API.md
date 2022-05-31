@@ -1993,7 +1993,7 @@ Properties of commentary objects:
 | team\_ids     | array of ID ? | JSON array of [team](#teams) IDs the message is related to.
 | problem\_ids  | array of ID ? | JSON array of [problem](#problems) IDs the message is related to.
 
-For the message, if an literal `{` is needed, `\{` must be used. Similarly for literal `\`, `\\` must be used.
+For the message, if a literal `{` is needed, `\{` must be used. Similarly for literal `\`, `\\` must be used.
 
 #### Examples
 
