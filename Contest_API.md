@@ -1989,7 +1989,7 @@ Properties of commentary objects:
 | contest\_time | RELTIME         | Contest time of the commentary message.
 | message       | string          | Commentary message text. May contain special tags refering to endpoint objects on the format `{<endpoint>:<object ID>}`. E.g. this is most commonly used for references to [teams](#teams) and [problems](#problems) as `{teams:<team ID>}` and `{problems:<problem ID>}` respectively.
 | tags          | array of string | JSON array of tags describing the message.
-| source        | ID ?            | Source [person](#persons) of the commentary message. 
+| source_id     | ID ?            | Source [person](#persons) of the commentary message.
 | team\_ids     | array of ID ?   | JSON array of [team](#teams) IDs the message is related to.
 | problem\_ids  | array of ID ?   | JSON array of [problem](#problems) IDs the message is related to.
 
