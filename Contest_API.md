@@ -1982,16 +1982,43 @@ The following endpoints are associated with commentary:
 
 Properties of commentary objects:
 
-| Name          | Type          | Description
-| :------------ | :------------ | :----------
-| id            | ID            | Identifier of the commentary.
-| time          | TIME          | Time of the commentary message.
-| contest\_time | RELTIME       | Contest time of the commentary message.
-| message       | string        | Commentary message text. May contain special tags for [teams](#teams) and [problems](#problems) on the format `#t<team ID>` and `#p<problem ID>` respectively.
-| team\_ids     | array of ID ? | JSON array of [team](#teams) IDs the message is related to.
-| problem\_ids  | array of ID ? | JSON array of [problem](#problems) IDs the message is related to.
+| Name          | Type            | Description
+| :------------ | :-------------- | :----------
+| id            | ID              | Identifier of the commentary.
+| time          | TIME            | Time of the commentary message.
+| contest\_time | RELTIME         | Contest time of the commentary message.
+| message       | string          | Commentary message text. May contain special tags referring to endpoint objects using the format `{<endpoint>:<object ID>}`. This is most commonly used for references to [teams](#teams) and [problems](#problems) as `{teams:<team ID>}` and `{problems:<problem ID>}` respectively.
+| tags          | array of string | JSON array of tags describing the message.
+| source_id     | ID ?            | Source [person](#persons) of the commentary message.
+| team\_ids     | array of ID ?   | JSON array of [team](#teams) IDs the message is related to.
+| problem\_ids  | array of ID ?   | JSON array of [problem](#problems) IDs the message is related to.
 
-For the message, if an literal `#` is needed, `\#` must be used. Similarly for literal `\`, `\\` must be used.
+For the message, if a literal `{` is needed, `\{` must be used. Similarly for a literal `\`, `\\` must be used.
+
+#### Known tags
+
+Below is a list of known tags. If any of the tags below are used, they must
+have the corresponding meaning. If the any of the meanings below are needed,
+the corresponding tag should be used. There is no requirement that any of the
+tags below are used.
+
+| Tag                     | Meaing
+| :---------------------- | :-----
+| submission              | A submission was made.
+| submission-medal        | A submission was made that if accepted would change the set of teams awarded a medal.
+| submission-gold-medal   | A submission was made that if accepted would change the set of teams awarded a gold medal.
+| submission-silver-medal | A submission was made that if accepted would change the set of teams awarded a silver medal.
+| submission-bronze-medal | A submission was made that if accepted would change the set of teams awarded a bronze medal.
+| submission-winner       | A submission was made that if accepted would change the set of teams currently in the lead.
+| submission-\<award>     | A submission was made that if accepted would change the set of teams awarded \<award>. Note that the above 4 are special cases of this.
+| rejected                | A submission was rejected.
+| accepted                | A submission was accepted.
+| accepted-medal          | A submission was accepted that changed the set of teams awarded a medal.
+| accepted-gold-medal     | A submission was accepted that changed the set of teams awarded a gold medal.
+| accepted-silver-medal   | A submission was accepted that changed the set of teams awarded a silver medal.
+| accepted-bronze-medal   | A submission was accepted that changed the set of teams awarded a bronze medal.
+| accepted-winner         | A submission was accepted that changed the set of teams currently in the lead.
+| accepted-\<award>       | A submission was accepted that changed the set of teams awarded \<award>. Note that the above 4 are special cases of this.
 
 #### Examples
 
