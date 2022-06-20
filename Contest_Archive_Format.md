@@ -73,15 +73,27 @@ Optionally one could create a Shallow Archive by not storing the files, in
 which case the URLs must be valid. This could be useful in some cases where
 the size of the archive matters.
 
-In some cases it could make sense to merge multiple API sources (of the same
-contest) in a single archive. One example of this would be a contest that was
-running with a primary and [shadow](ccs_system_requirements#shadow-mode) CCS.
-Typically in such cases, most of the data is identical (or at least the
-differences are irrelevant), so only the data that differs (in relevant ways)
-needs to be stored. If there is an additional source for `<endpoint>` it is
-stored as above, but wherever `<endpoint>` is used in the path, instead use
-`<endpoint>_<system>` where `<system>` is a unique name for the additional
-source.
+### Multiple systems
+
+Some contests are run with multiple systems that provide a Contest API.
+One example of this is a contest run with a primary and
+[shadow](ccs_system_requirements#shadow-mode) CCS. Typically in these cases
+there is relationship between the systems or a lot of common data, so it
+makes sense to merge the data into a single archive.
+
+Data from the primary system (usually the primary CCS) should continue to
+be stored as described in this document. Each additional system should
+store its data using the same format but in a unique sub-folder
+`systems/<system>`, named after the system that produced it.
+Using this pattern means that tools that work against a contest archive
+can be run without change on either the primary contest archive or the
+archives of any of the other systems.
+
+When there is duplicate data (or the differences between systems are
+irrelevant), a system's data can be deleted and replaced with symlinks to
+the data in the parent folder. Using this method reduces the overall size
+of the archive while still maintaining a valid contest archive (the system's
+view of the contest) for each system.
 
 ## Example uses
 
