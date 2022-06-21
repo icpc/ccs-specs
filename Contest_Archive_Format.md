@@ -91,7 +91,7 @@ archives of any of the other systems.
 
 When there is duplicate data (or the differences between systems are
 irrelevant), a system's data can be deleted and replaced with symlinks to
-the data in the parent folder. Using this method reduces the overall size
+the data from the primary system. Using this method reduces the overall size
 of the archive while still maintaining a valid contest archive (the system's
 view of the contest) for each system.
 
