@@ -84,7 +84,7 @@ makes sense to merge the data into a single archive.
 Data from the primary system (usually the primary CCS) should continue to
 be stored as described in this document. Each additional system should
 store its data using the same format but in a unique sub-folder
-`systems/<system>`, named after the system that produced it.
+`other-systems/<system>`, named after the system that produced it.
 Using this pattern means that tools that work against a contest archive
 can be run without change on either the primary contest archive or the
 archives of any of the other systems.
