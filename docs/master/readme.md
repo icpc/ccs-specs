@@ -2,8 +2,8 @@
 
 This repository contains a set of related specifications for
 interoperability between different contest control systems and tooling
-that interact with it. These specifications have been designed and
-used in the contest of the ICPC Word Finals, and have also been used
+that interacts with it. These specifications have been designed and
+used in the contest of the ICPC World Finals, and have also been used
 at various (sub)regionals; they are meant to be useful outside an ICPC
 context as well.
 
