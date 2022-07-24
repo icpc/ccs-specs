@@ -5,23 +5,13 @@
 
 	"type": "object",
 	"properties": {
-		"id": {
-			"oneOf": [
-				{ "$ref": "common.json#/identifier" },
-				{ "type": "null" }
-			]
-		},
-		"token": {
-			"oneOf": [
-				{ "type": "string" },
-				{ "type": "null" }
-			]
-		},
-		"type": { "$ref": "common.json#/endpointssingularcontest" }
+		"id": { "$ref": "common.json#/identifier" },
+		"type": { "$ref": "common.json#/endpoints" }
 	},
 	"oneOf": [
 		{
 			"properties": {
+				"op": { "enum": [ "create", "update" ] },
 				"data": {
 					"$comment": "Use anyOf since some types match others without strict attribute checking.",
 					"anyOf": [
@@ -48,12 +38,18 @@
 		},
 		{
 			"properties": {
+				"op": { "enum": [ "delete" ] },
 				"data": {
-					"type": "null"
+					"type": "object",
+					"properties": {
+						"id": { "$ref": "common.json#/identifier" }
+					},
+					"required": ["id"],
+					"$ref": "common.json#/strictproperties"
 				}
 			}
 		}
 	],
-	"required": ["id", "type", "data"],
+	"required": ["id", "type", "op", "data"],
 	"$ref": "common.json#/strictproperties"
 }

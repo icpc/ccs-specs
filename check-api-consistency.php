@@ -36,6 +36,10 @@ function warning($msg)
 
 foreach ($feed_json as $row) {
     $endpoint = $row['type'];
+    if ($endpoint === 'contest') {
+        // New feed format uses singular for contest
+        $endpoint = 'contests';
+    }
     $id = isset($row['data']['id']) ? $row['data']['id'] : '_single_';
     $feed_data[$endpoint][$id][] = $row;
 }
@@ -62,30 +66,39 @@ foreach ($feed_data as $endpoint => $elements) {
                 error("'state' cannot have ID '$id' set.");
             }
             for ($i=0; $i<count($rows); $i++) {
-                if ($rows[$i]['op']!=='update') {
+                if (isset($rows[$i]['op']) && $rows[$i]['op']!=='update') {
                     error("'state' operation '$rows[$i][op]' not allowed.");
+                } elseif (!isset($rows[$i]['data'])) { // isset also checks for null
+                    error("'state' can not be deleted.");
                 }
             }
         }
     } else {
         foreach ($elements as $id => $rows) {
-            if ($rows[0]['op']!=='create') {
+            if (isset($rows[0]['op']) && $rows[0]['op']!=='create') {
                 error("'$endpoint/$id' not created first.");
             }
             for ($i=1; $i<count($rows); $i++) {
-                switch ($rows[$i]['op']) {
-                case 'create':
-                    warning("'$endpoint/$id' created again.");
-                    break;
-                case 'update':
-                    break;
-                case 'delete':
+                if (isset($rows[$i]['op'])) {
+                    switch ($rows[$i]['op']) {
+                    case 'create':
+                        warning("'$endpoint/$id' created again.");
+                        break;
+                    case 'update':
+                        break;
+                    case 'delete':
+                        if ($i<count($rows)-1) {
+                            error("'$endpoint/$id' deleted before last change.");
+                        }
+                        break;
+                    default:
+                        error("'$endpoint/$id' unknown operation '$rows[$i][op]'.");
+                    }
+                } elseif (!isset($rows[$i]['data']) && $i<count($rows)-1) {
                     if ($i<count($rows)-1) {
                         error("'$endpoint/$id' deleted before last change.");
                     }
                     break;
-                default:
-                    error("'$endpoint/$id' unknown operation '$rows[$i][op]'.");
                 }
             }
         }
@@ -111,7 +124,7 @@ foreach ($endpoints as $endpoint) {
 foreach ($feed_data as $endpoint => $elements) {
     foreach ($elements as $id => $rows) {
         $last = end($rows);
-        if ($last['op']!=='delete') {
+        if ((isset($last['op']) && $last['op']!=='delete') || (!isset($last['op']) && isset($last['data'])) ) {
             if (!isset($endpoint_data[$endpoint][$id])) {
                 error("'$endpoint".($id==='_single_' ? '' : "/$id")."' not found in REST endpoint.");
             } elseif ($last['data']!==$endpoint_data[$endpoint][$id]) {

@@ -4,9 +4,12 @@
 	"description": "JSON array of responses of this NDJSON API call",
 
 	"type": "array",
-	"uniqueItems": true,
 	"$ref": "common.json#/nonemptyarray",
 	"items": {
-		"$ref": "event-feed.json#"
+		"$comment": "Use anyOf since the event type fields overlap between the current and legacy format.",
+		"anyOf": [
+			{ "$ref": "event-feed.json#" },
+			{ "$ref": "legacy-event-feed.json#" }
+		]
 	}
 }
