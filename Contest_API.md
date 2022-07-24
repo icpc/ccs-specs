@@ -501,8 +501,8 @@ are mentioned below.
 The endpoints can be categorized into 4 groups as follows:
 
   - Metadata: api, access
-  - Configuration: contests, judgement-types, languages, problems,
-    groups, organizations, teams, team-members;
+  - Configuration: accounts, contests, judgement-types, languages, problems,
+    groups, organizations, persons, teams;
   - Live data: state, submissions, judgements, runs, clarifications,
     awards, commentary;
   - Aggregate data: scoreboard, event-feed.
