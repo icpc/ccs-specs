@@ -14,8 +14,13 @@ bundle exec jekyll build -d docs/
 
 commits=''
 for version in $(cat versions.json | jq -r -c '.[]'); do
+	branch="${version}"
+	if [ "${version}" = "draft" ];
+	then
+		branch="master"
+	fi
 	cd "$REPO_DIR"
-	git checkout "${version}"
+	git checkout "${branch}"
 	commitsha=$(git rev-parse --short=10 HEAD)
 	commits="${commits}
 - ${version} generated from ${commitsha}"
