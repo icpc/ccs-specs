@@ -387,9 +387,14 @@ All event types correspond to an API endpoint, as specified in the table below.
 Each event is a notification that an object or a collection has changed
 (and hence the contents of the corresponding endpoint) to `data`.
 
-If `type` is `contest`, then `id` must be null, and the contest at `/contests/<id>` now has the contents of `data`.
-If `id` is not null, then the object at `/contests/<contest_id>/<type>/<id>` now has the contents of `data`.
-If `id` is null, then the entire collection at `/contests/<contest_id>/<type>` now has the contents of `data`.
+If `type` is `contest`, then `id` must be null and the endpoint
+`/contests/<id>` will return the contents of `data`.
+
+If `id` is not null, then the endpoint `/contests/<contest_id>/<type>/<id>`
+will return the contents of `data`.
+
+If `id` is null, then the endpoint `/contests/<contest_id>/<type>` will return
+the contents of `data`.
 
 #### Examples
 
