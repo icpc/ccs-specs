@@ -2189,16 +2189,16 @@ specify the last notification token it received:
 
 `/event-feed?since_token=xx`
 
-If specified, the server will attempt to start sending events around the
+If specified, the server will attempt to start sending events since the
 given token to reduce the volume of events and required reconciliation.
 If the token is invalid, the time passed is too large (typically no more
 than 15 minutes), or the server does not support this parameter, the
 request will fail with a 400 error.
 
-There is no guarantee that all updates (e.g. a team name correction,
-which is not time-based) that occurred during the time the client was
-disconnected will be reflected. The server may also resend some
-notifications to ensure that they were received.
+The client is guaranteed to either get a 400 error or receive at
+least all changes since the token (but it could also get a lot more,
+e.g. if the server is multithreaded and needs to resend some events
+to ensure they were received).
 
 ###### Use cases for reconnecting
 
