@@ -2191,8 +2191,9 @@ specify the last notification token it received:
 
 If specified, the server will attempt to start sending events since the
 given token to reduce the volume of events and required reconciliation.
-If the token is invalid, the time passed is too large (typically no more
-than 15 minutes), or the server does not support this parameter, the
+If the token is invalid, the time passed is too large (a server that
+supports since_token should support an expiry time of at least
+15 minutes), or the server does not support this parameter, the
 request will fail with a 400 error.
 
 The client is guaranteed to either get a 400 error or receive at
