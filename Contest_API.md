@@ -2196,7 +2196,7 @@ than 15 minutes), or the server does not support this parameter, the
 request will fail with a 400 error.
 
 The client is guaranteed to either get a 400 error or receive at
-least all changes since the token (but it could also get a lot more,
+least all changes since the token (but it could also get (a lot) more,
 e.g. if the server is multithreaded and needs to resend some events
 to ensure they were received).
 
