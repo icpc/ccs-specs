@@ -2200,7 +2200,7 @@ least all changes since the token (but it could also get (a lot) more,
 e.g. if the server is multithreaded and needs to resend some events
 to ensure they were received).
 
-###### Use cases for reconnecting
+###### Server support for reconnecting
 
 Some servers may not support any form of reconnection and may not
 include any notification tokens, or will always return 400 when the
