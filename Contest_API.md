@@ -361,8 +361,9 @@ etc.) or entire collection. The general format for events is:
 | Name        | Type              | Description
 | :---------- | :---------------- | :----------
 | type        | string            | The type of contest object that changed. Can be used for filtering.
-| id          | string ?          | The id of the object that changed, or null for the entire collection/singleton.
+| id          | ID ?              | The id of the object that changed, or null for the entire collection/singleton.
 | data        | array or object ? | The updated value, i.e. what would be returned if calling the corresponding API endpoint at this time: an array, object, or null for deletions.
+| token       | string ?          | An optional token used to identify this notification. For one use see event feed [Reconnection](#reconnection) below.
 
 All event types correspond to an API endpoint, as specified in the table below.
 
@@ -2178,7 +2179,7 @@ the same order or set of events. The only guarantees are:
 - the latest notification sent for any object is the correct and current
 state of that object. E.g. if an object was created and deleted the
 delete notification will be sent last.
-- when a notification is sent the change it decsribes must already have
+- when a notification is sent the change it describes must already have
 happened. I.e. if a client receives an update for a certain endpoint a
 `GET` from that endpoint will return that state or possible some later
 state, but never an earlier state.
@@ -2188,17 +2189,35 @@ state, but never an earlier state.
 ##### Reconnection
 
 If a client loses connection or needs to reconnect after a brief
-disconnect (e.g. client restart), it can use the 'time' parameter to
-specify the last event it received:
+disconnect (e.g. client restart), it can use the 'since_token' parameter to
+specify the last notification token it received:
 
-`/event-feed?time=xx`
+`/event-feed?since_token=xx`
 
-If specified, the server will attempt to start sending events around the
-given time to reduce the volume of events and required reconciliation.
-If the time passed is too large or the server does not support this
-parameter, all objects will be sent. There is no guarantee that all
-updates (e.g. a team name correction, which is not time-based) that
-occurred during the time the client was disconnected will be reflected.
+If specified, the server will attempt to start sending events since the
+given token to reduce the volume of events and required reconciliation.
+If the token is invalid, the time passed is too large (a server that
+supports since_token should support an expiry time of at least
+15 minutes), or the server does not support this parameter, the
+request will fail with a 400 error.
+
+The client is guaranteed to either get a 400 error or receive at
+least all changes since the token (but it could also get (a lot) more,
+e.g. if the server is multithreaded and needs to resend some events
+to ensure they were received).
+
+###### Server support for reconnecting
+
+Some servers may not support any form of reconnection and may not
+include any notification tokens, or will always return 400 when the
+`since_token` parameter is used.
+
+Other servers may support reconnecting, but only at certain checkpoints
+or time periods. These providers might use timestamps or counters
+as tokens, or only output them in certain events.
+
+Other servers may include tokens in every notification and support
+reconnecting at any point.
 
 ##### Examples
 
