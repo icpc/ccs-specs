@@ -21,6 +21,29 @@ There are multiple versions of the CCS specifications available on the
 This is the draft of the next version of the CCS specification. Target
 release is November 2021.
 
+## Changes compared to the `2020-03` version
+
+These are the main changes made since the `2020-03` version:
+
+* `decimal` types are removed.
+* Images can now also be SVG.
+* Introduced a notification format that replaces the current event feed
+  format and added support for webhooks.
+* Added generic support for filtering on fields with type `ID`.
+* Addded support for scoring contests.
+* Added location to a contest.
+* Added entry point information, extensions and compiler/runner command objects
+  to languages.
+* Added a `uuid` field to problems.
+* Added group scoreboards and removed `hidden` from the groups endpoint.
+* Added country flags to organizations.
+* Added a `hiden` field to teams.
+* Merged `first_name` and `last_name` of team members into `name` and added `email`.
+* Added support for `POST` and `PUT` on submissions.
+* Added support for `POST` on clarifications.
+* Added support for `POST`, `PUT`, `PATCH` and `DELETE` on awards.
+* Added commentary endpoint.
+
 ## References
 
 * Website: <https://ccs-specs.icpc.io>
