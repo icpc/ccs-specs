@@ -636,7 +636,7 @@ Properties of endpoint objects:
 | properties   | array of string | An array of supported properties that the current client has visibility to. The array must not be empty. If the array would be empty, the endpoint object should instead not be included in the endpoints array.
 
 This endpoint provides information about what is accessible to a specific
-client in a live contest, and hence will not exist in a contest archive.
+client in a live contest, and hence will not exist in a contest package.
 
 The set of properties listed must always support 
 [referential integrity](#referential-integrity), i.e. if a property with a ID 
@@ -1042,7 +1042,7 @@ Properties of problem objects:
 
 | Name              | Type      | Description
 | :---------------- | :-------- | :----------
-| id                | ID        | Identifier of the problem, at the WFs the directory name of the problem archive.
+| id                | ID        | Identifier of the problem, at the WFs the directory name of the problem package.
 | uuid              | string ?  | UUID of the problem, as defined in the problem package.
 | label             | string    | Label of the problem on the scoreboard, typically a single capitalized letter.
 | name              | string    | Name of the problem.
@@ -1052,7 +1052,7 @@ Properties of problem objects:
 | time\_limit       | number    | Time limit in seconds per test data set (i.e. per single run). Should be an integer multiple of `0.001`.
 | test\_data\_count | integer   | Number of test data sets.
 | max_score         | number    | Maximum expected score, although teams may score higher in some cases. Typically used to indicate scoreboard cell color in scoring contests. Required iff contest:scoreboard_type is `score`.
-| package           | array of FILE ? | [Problem package](https://www.kattis.com/problem-package-format/). Expected mime type is application/zip. Only exactly one archive is allowed. Not expected to actually contain href for package during the contest, but used for configuration and archiving.
+| package           | array of FILE ? | [Problem package](https://www.kattis.com/problem-package-format/). Expected mime type is application/zip. Only exactly one package is allowed. Not expected to actually contain href for package during the contest, but used for configuration and archiving.
 | statement         | array of FILE ? | Problem statement. Expected mime type is application/pdf. 
 
 #### Examples
@@ -1318,11 +1318,11 @@ Properties of account objects:
 | team\_id          | ID ?      | The team that this account is for. Required iff type is `team`.
 | person\_id        | ID ?      | The person that this account is for, if the account is only for one person.
 
-Accounts exist in the API primarily for configuration from a contest archive, or an administrator comparing one CCS to another. It is
+Accounts exist in the API primarily for configuration from a contest package, or an administrator comparing one CCS to another. It is
 expected that non-admin clients never see passwords, and typically do not see accounts other than their own.
 
 The account endpoint exists so that the clients can tell which account (and hence which person or team) they are logged in as. It is not
-expected to exist in a contest archive, and will fail with a 404 error code if the client is not authenticated.
+expected to exist in a contest package, and will fail with a 404 error code if the client is not authenticated.
 
 #### Examples
 
