@@ -49,6 +49,7 @@ These are the main changes made since the `2021-11` version:
 * It is no longer possible to request the scoreboard at the time of a given event and the `event_id`
   property is dropped from the response.
 * Importing contest configuration is no longer done through TSV files, but using a contest package.
+* Contest Archive has been renamed to Contest Package.
 
 ## References
 
