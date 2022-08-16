@@ -1,10 +1,10 @@
 ---
 sort: 3
-permalink: /contest_archive_format
+permalink: /contest_package
 ---
-# Contest Archive Format
+# Contest Package Format
 
-This page describes the archive format for a contest. It describes how to
+This page describes the format of a contest package. It describes how to
 store the information available through the [Contest API](contest_api) on
 disk.
 
@@ -17,7 +17,7 @@ disk, including:
     tools or for teams to compete against live data
   - As a base for offline analysis
 
-## Archive contents
+## Package contents
 
 The package consists of a single directory containing files as described
 below, or alternatively, a ZIP compressed archive of the directory. It is
@@ -49,7 +49,7 @@ in `<endpoint>.json` are stored as `<endpoint>/<id>/<filename>`, where:
 - `<id>` is the ID of the endpoint object the reference is in.
 - `<filename>` is the filename specified in the file reference object.
 
-Some of these API endpoints are often written by humans in an archive.
+Some of these API endpoints are often written by humans in a package.
 For this reason, those files can also be written in YAML instead of JSON.
 This holds for the following files:
 
@@ -69,9 +69,9 @@ still be working. To keep the archiving process as simple as possible, stale
 URLs do not have to be removed from the data, but due to this the URLs should
 be ignored and the file stored as specified above should be used instead.
 
-Optionally one could create a Shallow Archive by not storing the files, in
+Optionally one could create a Shallow Package by not storing the files, in
 which case the URLs must be valid. This could be useful in some cases where
-the size of the archive matters.
+the size of the package matters.
 
 ### Multiple systems
 
@@ -79,25 +79,25 @@ Some contests are run with multiple systems that provide a Contest API.
 One example of this is a contest run with a primary and
 [shadow](ccs_system_requirements#shadow-mode) CCS. Typically in these cases
 there is relationship between the systems or a lot of common data, so it
-makes sense to merge the data into a single archive.
+makes sense to merge the data into a single package.
 
 Data from the primary system (usually the primary CCS) should continue to
 be stored as described in this document. Each additional system should
 store its data using the same format but in a unique sub-folder
 `other-systems/<system>`, named after the system that produced it.
-Using this pattern means that tools that work against a contest archive
-can be run without change on either the primary contest archive or the
-archives of any of the other systems.
+Using this pattern means that tools that work against a contest package
+can be run without change on either the primary contest package or the
+packages of any of the other systems.
 
 When there is duplicate data (or the differences between systems are
 irrelevant), a system's data can be deleted and replaced with symlinks to
 the data from the primary system. Using this method reduces the overall size
-of the archive while still maintaining a valid contest archive (the system's
+of the package while still maintaining a valid contest package (the system's
 view of the contest) for each system.
 
 ## Example uses
 
-The next part of this document describes use cases for the Archive Format,
+The next part of this document describes use cases for a Contest Package,
 listing which data would be required for that use case.
 
 ### CCS configuration

@@ -242,10 +242,9 @@ be required to make any changes once the contest starts.
 ### Importing Contest Configuration
 
 The CCS must be able to import contest configuration from a
-[Contest Archive](contest_archive_format),
-and use the data to configure the CCS. The archive contains
-all contest configuration data, including contest, problem,
-organization, group, team and account configuration.
+[Contest Package](contest_package), and use the data to configure the
+CCS. The package contains all contest configuration data, including
+contest, problem, organization, group, team and account configuration.
 
 The following files and fields must be read by the CCS at a minimum:
 
@@ -255,12 +254,12 @@ The following files and fields must be read by the CCS at a minimum:
 * `organizations.json` with the fields specified in
   [Data Export: Contest API](#contest-api) as well as the field `logo`.
   This also means the CCS must be able to import the logo's of organizations
-  from the contest archive.
+  from the contest package.
 * `accounts.json` with the following fields: `id`, `username`, `type`,
   `team_id` and `password`.
 
 Note that for the files supporting YAML according to the
-[Contest Archive](contest_archive_format) (i.e. `contest.yaml`, `problems.yaml`
+[Contest Package](contest_package) (i.e. `contest.yaml`, `problems.yaml`
 and `accounts.yaml`) the CCS must also be able to import those YAML files
 instead of the JSON version.
 
@@ -1175,7 +1174,7 @@ configuration as described in the [Importing Contest
 Configuration](#importing-contest-configuration) section of
 this Requirements Specification. In particular a shadow-mode CCS must be
 able to import a contest configuration from a
-[Contest Archive](contest_archive_format).
+[Contest Package](contest_package).
 
 ### Submissions
 
