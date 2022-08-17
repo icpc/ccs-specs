@@ -50,6 +50,7 @@ These are the main changes made since the `2021-11` version:
   property is dropped from the response.
 * Importing contest configuration is no longer done through TSV files, but using a contest package.
 * Contest Archive has been renamed to Contest Package.
+* Add package and statement to Problem endpoint.
 
 ## References
 
