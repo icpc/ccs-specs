@@ -31,7 +31,9 @@
 		"test_data_count": {
 			"type": "integer",
 			"minimum": 0
-		}
+		},
+		"package": { "$ref": "common.json#/filerefsornull" },
+		"statement": { "$ref": "common.json#/filerefsornull" }
 	},
 	"required": ["id", "label", "name", "ordinal", "test_data_count"],
 	"$ref": "common.json#/strictproperties"
