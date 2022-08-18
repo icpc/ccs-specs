@@ -120,10 +120,12 @@
 	"fileref": {
 		"type": "object",
 		"properties": {
-			"href": { "type": "string" },
-			"mime": { "type": "string" },
-			"width":  { "type": "integer", "minimum": 1 },
-			"height": { "type": "integer", "minimum": 1 }
+			"href":     { "type": "string" },
+			"mime":     { "type": "string" },
+			"hash":     { "type": "string" },
+			"filename": { "type": "string" },
+			"width":    { "type": "integer", "minimum": 1 },
+			"height":   { "type": "integer", "minimum": 1 }
 		},
 		"required": ["href", "mime"],
 		"$ref": "#/strictproperties"
