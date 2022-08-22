@@ -20,6 +20,12 @@ There are multiple versions of the CCS specifications available on the
 
 This is the draft of some future version of the CCS specification.
 
+## Changes compared to the `2022-07` version
+
+These are the main changes made since the `2022-07` version:
+
+* None yet.
+
 ## References
 
 * Website: <https://ccs-specs.icpc.io>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: /2022-07/sitemap.xml
