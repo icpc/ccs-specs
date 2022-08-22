@@ -1236,8 +1236,8 @@ Properties of team objects:
 | backup            | array of FILE ? | Latest file backup of the team machine. Only allowed mime type is application/zip.
 | key\_log          | array of FILE ? | Latest key log file from the team machine. Only allowed mime type is text/plain.
 | tool\_data        | array of FILE ? | Latest tool data usage file from the team machine. Only allowed mime type is text/plain.
-| desktop           | array of FILE ? | Streaming video of the team desktop.
-| webcam            | array of FILE ? | Streaming video of the team webcam.
+| desktop           | array of FILE ? | Streaming video of the team desktop. Only allowed mime types are video/*.
+| webcam            | array of FILE ? | Streaming video of the team webcam. Only allowed mime types are video/*.
 | audio             | array of FILE ? | Streaming team audio.
 
 #### Examples
