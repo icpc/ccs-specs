@@ -18,8 +18,7 @@ The following specifications are present:
 There are multiple versions of the CCS specifications available on the
 [documentation pages](https://ccs-specs.icpc.io/).
 
-This is the draft of the next version of the CCS specification. Target
-release is November 2021.
+This is the `2021-11` release of the CCS specification.
 
 ## Changes compared to the `2020-03` version
 
