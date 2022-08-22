@@ -581,7 +581,7 @@ Properties of version object:
 
 | Name        | Type            | Description
 | :---------- | :-------------- | :----------
-| version     | string          | Version of the API. For this version must be the string `2022-07-draft`. Will be of the form `<yyyy>-<mm>`, `<yyyy>-<mm>-draft`, or simply `draft`.
+| version     | string          | Version of the API. For this version must be the string `draft`. Will be of the form `<yyyy>-<mm>`, `<yyyy>-<mm>-draft`, or simply `draft`.
 | version_url | string          | Link to documentation for this version of the API.
 | name        | string ?        | Name of this data provider.
 | logo        | array of FILE ? | Logo for this data provider, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/*. The different files in the array should be different file formats and/or sizes of the same image.
@@ -596,8 +596,8 @@ Returned data:
 
 ```json
 {
-   "version": "2022-07-draft",
-   "version_url": "https://ccs-specs.icpc.io/2022-07-draft/contest_api",
+   "version": "draft",
+   "version_url": "https://ccs-specs.icpc.io/draft/contest_api",
    "name": "Kattis",
    "logo": [{
       "href": "/api/logo",
