@@ -1,0 +1,34 @@
+{% comment %} Based on https://github.com/rundocs/jekyll-rtd-theme/blob/5590dc2c762cb733acc44abc4366f3602af9273e/_includes/templates/breadcrumbs.liquid {% endcomment %}
+<div class="navigation-top d-flex flex-justify-between">
+    <ul class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+        <li class="breadcrumb-item">
+            <a class="no-underline" href="/" title="{{ docs.source.path }}">
+                <i class="fa fa-home"></i>
+            </a>
+        </li>
+        <li class="breadcrumb-item" data-ccs-specs-version-item>
+            <a href="{{ site.baseurl }}/"></a>
+        </li>
+        {%- case page.url -%}
+            {%- when "/search.html" -%}
+                <li class="breadcrumb-item" aria-current="page">
+                    {{ __.search | default: "Search" }}
+                </li>
+            {%- when "/404.html" -%}
+                <li class="breadcrumb-item" aria-current="page">
+                    404
+                </li>
+            {%- else -%}
+                {%- assign blocks = page.path | split: "/" -%}
+                {%- for block in blocks -%}
+                    <li class="breadcrumb-item" {% if forloop.last %}aria-current="page"{% endif %}>
+                        {%- if forloop.last -%}
+                            {{ page.title | default: page.name }}
+                        {%- else -%}
+                            <a href="{{ site.baseurl }}/{% for block in blocks limit: forloop.index %}{{ block }}/{% endfor %}">{{ block }}</a>
+                        {%- endif -%}
+                    </li>
+                {%- endfor -%}
+        {%- endcase -%}
+    </ul>
+</div>

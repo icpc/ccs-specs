@@ -31,4 +31,18 @@ xmlhttp.onreadystatechange = function() {
 };
 xmlhttp.open("GET", '/versions.json', true);
 xmlhttp.send();
+
+var links = document.querySelectorAll('[data-ccs-specs-version-item] a');
+{%- assign version = site.version | default: "" -%}
+{% if version == "" %}
+links[0].innerHTML = 'Contest Control System (CCS) Specifications';
+links[1].parentNode.remove();
+{% else %}
+var version = "{{ version }}";
+version = version.charAt(0).toUpperCase() + version.slice(1);
+var spec = version + " Specification";
+for (var i = 0; i < links.length; i++) {
+    links[i].innerHTML = spec;
+}
+{% endif %}
 </script>
