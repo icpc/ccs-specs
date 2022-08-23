@@ -1,37 +1,27 @@
-# CCS specifications
+# Contest Control System (CCS) Specifications
 
-Multiple versions of the CCS specifications are available from this
-documentation site.
-
-Stable versions will use the naming scheme `<yyyy>-<mm>`. These will
-not change, except for trivial changes such as fixing spelling and
-grammar, as well as adding improved examples or explanations.
-
-Draft versions will either be named `<yyyy>-<mm>-draft` if there is a
-target release date, or simply `draft` for the most bleeding edge (and
-least stable) version, corresponding to the `master` branch in the
-repository. These drafts can change in any way at any time.
+This site contains multiple versions of the CCS specification. Each version of the specification contains a set of related specs for interoperability between different contest control systems and the tools that interact with them. These specifications have been designed and used in the context of the ICPC World Finals and various (sub)regionals, but they are meant to be useful outside the ICPC context as well.
 
 Select a version to browse from the left navigation bar.
+For the current stable release (2022-07), go [here](https://ccs-specs.icpc.io/2022-07).
+
+Draft work on the next (future) version of the spec is done on the `master` branch in the
+repository and can be viewed [here](https://ccs-specs.icpc.io/draft).
+These drafts can change in any way at any time.
+
+### Stable/Released Versions
+
+Once a specification is released it uses the naming scheme `<yyyy>-<mm>`.
+These releases are stable and will not change except for trivial changes such
+as fixing spelling and grammar, or improving examples or explanations.
+
+* [2022-07](https://ccs-specs.icpc.io/2022-07) - Current stable release, planned for use at the ICPC World Finals in Dhaka
+* [2021-11](https://ccs-specs.icpc.io/2021-11) - Used at ICPC World Finals in Moscow
+* [2020-03](https://ccs-specs.icpc.io/2020-03) - Used at past ICPC World Finals
 
 ## References
 
 * Website: <https://ccs-specs.icpc.io>
 * Github: <https://github.com/icpc/ccs-specs>
-
-The problem package format specification can be found at: <https://icpc.io/problem-package-format/>
-
-## Development notes
-
-This documentation is build with the script `update_docs.sh` from this
-`gh-pages` branch. That script builds the documentation from each
-relevant branches and commits it to the `gh-pages` branch for publication.
-
-To be able to run `update_docs.sh`, you need the following:
-
-* Install Ruby and `bundle` and `jekyll`, see <https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll#prerequisites>.
-* Make sure you have `rsync` and `jq` installed.
-
-Then run `./update_docs.sh` from the root of this repository in the
-`gh-pages` branch. That should update the documentation, which you can
-then push.
+* Problem package format specification: <https://icpc.io/problem-package-format/>
+* Development notes on generating this website: <https://ccs-specs.icpc.io/dev-notes.md>
