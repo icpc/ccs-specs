@@ -27,6 +27,8 @@ for version in $(cat versions.json | jq -r -c '.[]'); do
 	cd -
 
 	ln -sf "$MY_DIR/_layouts" "$REPO_DIR"
+	# Needs to be a copy since symlinks are outside the project
+	cp -Rf "$MY_DIR/_includes" "$REPO_DIR"
 	echo "version: ${version}" > "$TMPDIR/version.yml"
 	bundle exec jekyll build --config _config.yml,"$TMPDIR/version.yml" \
 		-b "/${version}" -s "$REPO_DIR" -d "docs/${version}/"
