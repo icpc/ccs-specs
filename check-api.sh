@@ -327,6 +327,7 @@ $ENDPOINT"
 	fi
 
 	if [ -n "$CHECK_CONSISTENCY" ]; then
+		ENDPOINTS_CHECK_CONSISTENT="${ENDPOINTS_CHECK_CONSISTENT/accounts/}"
 		# shellcheck disable=SC2086
 		eval ${EXTRAPROP:-STRICT=1} "$MYDIR"/check-api-consistency.php "$TMP/$CONTEST" $ENDPOINTS_CHECK_CONSISTENT
 		EXIT=$?
