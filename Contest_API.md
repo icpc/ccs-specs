@@ -1049,7 +1049,7 @@ Properties of problem objects:
 | ordinal           | integer   | A unique number that determines the order the problems, e.g. on the scoreboard.
 | rgb               | string ?  | Hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet), e.g. `#AC00FF` or `#fff`.
 | color             | string ?  | Human readable color description associated to the RGB value.
-| time\_limit       | number    | Time limit in seconds per test data set (i.e. per single run). Should be an integer multiple of `0.001`.
+| time\_limit       | number    | Time limit in seconds per test data set (i.e. per single run). Should be a non-negative integer multiple of `0.001`. The reason for this is to not have rounding ambiguities while still using the natural unit of seconds.
 | test\_data\_count | integer   | Number of test data sets.
 | max_score         | number    | Maximum expected score, although teams may score higher in some cases. Typically used to indicate scoreboard cell color in scoring contests. Required iff contest:scoreboard_type is `score`.
 | package           | array of FILE ? | [Problem package](https://www.kattis.com/problem-package-format/). Expected mime type is application/zip. Only exactly one package is allowed. Not expected to actually contain href for package during the contest, but used for configuration and archiving.
@@ -1634,7 +1634,7 @@ Properties of judgement objects:
 | start\_contest\_time | RELTIME   | Contest relative time when judgement started.
 | end\_time            | TIME ?    | Absolute time when judgement completed. Required iff judgement_type_id is present.
 | end\_contest\_time   | RELTIME ? | Contest relative time when judgement completed. Required iff judgement_type_id is present.
-| max\_run\_time       | number ?  | Maximum run time in seconds for any test case. Should be an integer multiple of `0.001`.
+| max\_run\_time       | number ?  | Maximum run time in seconds for any test case. Should be a non-negative integer multiple of `0.001`. The reason for this is to not have rounding ambiguities while still using the natural unit of seconds.
 
 When a judgement is started, each of `judgement_type_id`, `end_time` and
 `end_contest_time` will be `null` (or missing). These are set when the
@@ -1677,7 +1677,7 @@ Properties of run objects:
 | judgement\_type\_id | ID      | The [verdict](#judgement-types) of this run (i.e. a judgement type).
 | time                | TIME    | Absolute time when run completed.
 | contest\_time       | RELTIME | Contest relative time when run completed.
-| run\_time           | number  | Run time in seconds. Should be an integer multiple of `0.001`.
+| run\_time           | number  | Run time in seconds. Should be a non-negative integer multiple of `0.001`. The reason for this is to not have rounding ambiguities while still using the natural unit of seconds.
 
 #### Examples
 
