@@ -1689,7 +1689,7 @@ Returned data:
 
 ```json
 [{"id":"1312","judgement_id":"189549","ordinal":28,"judgement_type_id":"TLE",
-  "time":"2014-06-25T11:22:42.420+01","contest_time":"1:22:42.420"}
+  "time":"2014-06-25T11:22:42.420+01","contest_time":"1:22:42.420","run_time":0.123}
 ]
 ```
 
