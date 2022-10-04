@@ -1313,6 +1313,7 @@ Properties of account objects:
 | id                | ID        | Identifier of the account.
 | username          | string    | The account username.
 | password          | string ?  | The account password.
+| name              | string ?  | The name of the account.
 | type              | string    | The type of account, e.g. `team`, `judge`, `admin`, `analyst`, `staff`.
 | ip                | string ?  | IP address associated with this account, used for auto-login.
 | team\_id          | ID ?      | The team that this account is for. Required iff type is `team`.
@@ -1333,7 +1334,7 @@ Request:
 Returned data:
 
 ```json
-[{"id":"stephan","username":"stephan","type":"judge","ip":"10.0.0.1"},
+[{"id":"stephan","username":"stephan","name":"Stephan's home account","type":"judge","ip":"10.0.0.1"},
  {"id":"team45","username":"team45","type":"team","ip":"10.1.1.45","team_id":"45"}
 ]
 ```
@@ -1355,7 +1356,7 @@ Request:
 Returned data:
 
 ```json
-{"id":"nicky","username":"Nicky","type":"admin"}
+{"id":"nicky","username":"nicky","type":"admin"}
 ```
 
 ### Contest state
