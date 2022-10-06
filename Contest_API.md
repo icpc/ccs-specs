@@ -331,8 +331,6 @@ access to.
 | [admin_submit](#modifying-submissions)    | Submit as an admin                           |
 | [admin_clar](#modifying-clarifications)   | Submit clarifications as an admin            |
 
-TODO - add capabilities related to team view, awards, and freeze time.
-
 ### Notification format
 
 There are two mechanisms that clients can use to receive notifications
@@ -495,10 +493,6 @@ are meant to ease extensibility:
 
 ## Interface specification
 
-The following list of API endpoints should be supported. Note that `access`,
-`state`, `scoreboard` and `event-feed` are singular nouns and indeed
-contain only a single object.
-
 All endpoints should support `GET`; specific details on other methods
 are mentioned below.
 
@@ -513,9 +507,9 @@ The endpoints can be categorized into 4 groups as follows:
     awards, commentary;
   - Aggregate data: scoreboard, event-feed.
 
-Metadata is data about the API. These are not included in the event feed and
-are always required to be available. The access endpoint specifies which other
-endpoints are offered by the API. 
+Metadata is data about the API, and these are the only required API endpoints. 
+These are not included in the event feed. The access endpoint specifies
+which other endpoints are offered by the API.
 
 Configuration is normally set before contest start. Is not expected to,
 but could occasionally be updated during a contest. It does not have
@@ -533,6 +527,33 @@ Aggregate data: Only `GET` makes sense. These are not included in the
 event feed, also note that these should not be considered proper REST
 endpoints, and that the `event-feed` endpoint is a streaming feed in
 NDJSON format.
+
+Note that `access`, `account`, `state`, `scoreboard` and `event-feed`
+are singular nouns and indeed contain only a single object.
+
+### Required and Optional API
+
+The only required endpoints are metadata: `api` and `access`. The
+only required property is `id` (if it exists on the endpoint).
+
+All other endpoints and properties are optional. The only exceptions
+to this are obvious logical requirements (for example, a submission
+must come from a team) and the requirement for referential integrity
+(for example, if a submission has a team_id, then teams must be supported).
+`access` exists so that you can discover which endpoints and properties
+are supported by a given provider.
+
+In practice there are different types of providers that will offer
+similar sets of endpoints. Some examples:
+ - A contest management system will support at least contests and
+   teams, and may support other configuration endpoints.
+ - A Contest Control System (CCS) will support at least submissions,
+   judgements, and dependencies of these, as well as scoreboard and
+   event-feed.
+
+Separate specifications (for example, the CCS System Requirements)
+will provide more information on which endpoints and properties
+can be expected, often in the form of a minimal `access` response.
 
 ### Table column description
 
