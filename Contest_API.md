@@ -1271,7 +1271,7 @@ Properties of person objects:
 | :---------- | :-------------- | :----------
 | id          | ID              | Identifier of the person.
 | icpc\_id    | string ?        | External identifier from ICPC CMS.
-| team\_ids   | array of ID ?   | [Team](#teams) of this person. Required iff role is `contestant` or `coach`.
+| team\_ids   | array of ID ?   | [Team](#teams) of this person. Required to be non-empty iff role is `contestant` or `coach`.
 | name        | string          | Name of the person.
 | title       | string ?        | Title of the person, e.g. "Technical director".
 | email       | string ?        | Email of the person.
