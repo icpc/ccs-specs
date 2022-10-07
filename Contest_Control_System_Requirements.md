@@ -160,7 +160,7 @@ were some user other than that specified by their login credentials.
 If the CCS uses a login/password mechanism to enforce secure
 authentication, it must support password assignment
 by reading [accounts.json](#importing-contest-configuration).
-Note that if it sues another mechanism, it should still read that
+Note that if it uses another mechanism, it should still read that
 file to import (team) account information.
 
 #### Logging Out
