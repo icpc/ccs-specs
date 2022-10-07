@@ -531,7 +531,7 @@ NDJSON format.
 Note that `api`, `access`, `account`, `state`, `scoreboard`, and `event-feed`
 are singular nouns and indeed contain only a single object.
 
-### Required and Optional API
+### Required and optional endpoints
 
 The only required endpoints are metadata: `api` and `access`. The
 only required property is `id` (if it exists on the endpoint).
