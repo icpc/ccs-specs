@@ -528,7 +528,7 @@ event feed, also note that these should not be considered proper REST
 endpoints, and that the `event-feed` endpoint is a streaming feed in
 NDJSON format.
 
-Note that `access`, `account`, `state`, `scoreboard` and `event-feed`
+Note that `api`, `access`, `account`, `state`, `scoreboard`, and `event-feed`
 are singular nouns and indeed contain only a single object.
 
 ### Required and Optional API
