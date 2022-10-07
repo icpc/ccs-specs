@@ -1271,12 +1271,12 @@ Properties of person objects:
 | :---------- | :-------------- | :----------
 | id          | ID              | Identifier of the person.
 | icpc\_id    | string ?        | External identifier from ICPC CMS.
-| team\_id    | ID ?            | [Team](#teams) of this person. Required iff role is `team`.
+| team\_ids   | array of ID ?   | [Team](#teams) of this person. Required to be non-empty iff role is `contestant` or `coach`.
 | name        | string          | Name of the person.
 | title       | string ?        | Title of the person, e.g. "Technical director".
 | email       | string ?        | Email of the person.
 | sex         | string ?        | Either `male` or `female`, or possibly `null`.
-| role        | string          | One of `contestant`, `coach`, or `staff`.
+| role        | string          | One of `contestant`, `coach`, `staff`, or `other`.
 | photo       | array of FILE ? | Registration photo of the person. Only allowed mime types are image/*.
 
 #### Examples
