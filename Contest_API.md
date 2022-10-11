@@ -507,7 +507,7 @@ The endpoints can be categorized into 4 groups as follows:
     awards, commentary;
   - Aggregate data: scoreboard, event-feed.
 
-Metadata is data about the API, and are the only required API endpoints. 
+The metadata endpoints contain data about the API, and are the only required API endpoints. 
 They are not included in the event feed. The access endpoint specifies
 which other endpoints are offered by the API.
 
