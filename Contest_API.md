@@ -493,6 +493,7 @@ are meant to ease extensibility:
 
 ## Interface specification
 
+The following list of API endpoints may be supported.
 All endpoints should support `GET`; specific details on other methods
 are mentioned below.
 
@@ -533,13 +534,14 @@ are singular nouns and indeed contain only a single object.
 
 ### Required and optional endpoints
 
-The only required endpoints are metadata: `api` and `access`. The
-only required property is `id` (if it exists on the endpoint).
-
-All other endpoints and properties are optional. The only exceptions
-to this are obvious logical requirements (for example, a submission
-must come from a team) and the requirement for referential integrity
+The only required endpoints are metadata: `api` and `access`.
+The only requirements for properties are that collections must have
+an `id` property, and all endpoints that are supported must
+have at least some property, i.e. an endpoint can't be empty.
+[Referential integrity](#referential-integrity) must also be kept
 (for example, if a submission has a team_id, then teams must be supported).
+
+All other endpoints and properties are optional.
 `access` exists so that you can discover which endpoints and properties
 are supported by a given provider.
 
