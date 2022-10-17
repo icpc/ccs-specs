@@ -509,7 +509,7 @@ The endpoints can be categorized into 4 groups as follows:
 
 The metadata endpoints contain data about the API, and are the only required API endpoints. 
 They are not included in the event feed. The access endpoint specifies
-which other endpoints are offered by the API.
+which other endpoints are offered by the API. That is, any endpoints and their properties listed in `access` must be provided (possibly with a `null` value when the property is optional), and only these endpoints and properties. 
 
 Configuration is normally set before contest start. Is not expected to,
 but could occasionally be updated during a contest. It does not have
