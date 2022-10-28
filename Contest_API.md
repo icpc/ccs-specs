@@ -7,7 +7,7 @@ permalink: /contest_api
 ## Introduction
 
 This page describes an API for accessing information provided by a
-[Contest Control System](ccs_system_requirements) or
+[Contest Control System](ccs_system_requirements) (CCS) or
 [Contest Data Server](https://tools.icpc.global/cds/).
 Such an API can be used by a multitude of clients:
 
@@ -493,7 +493,7 @@ are meant to ease extensibility:
 
 ## Interface specification
 
-The following list of API endpoints may be supported.
+The following list of API endpoints may be supported, as detailed below.
 All endpoints should support `GET`; specific details on other methods
 are mentioned below.
 
@@ -549,9 +549,9 @@ In practice there are different types of providers that will offer
 similar sets of endpoints. Some examples:
  - A contest management system will support at least contests and
    teams, and may support other configuration endpoints.
- - A Contest Control System (CCS) will support at least submissions,
-   judgements, and dependencies of these, as well as scoreboard and
-   event-feed.
+ - A CCS will support at least submissions, judgements, and
+   dependencies of these. It will likely support a scoreboard, and
+   usually an event-feed.
 
 Separate specifications (for example, the CCS System Requirements)
 will provide more information on which endpoints and properties
@@ -575,7 +575,7 @@ Note that all results returned from endpoints:
   - Must only have `null` values if the type of the property is `<type> ?`.
   - Must contain all properties specified in the [Access](#access) endpoint
     that have non-`null` values. 
-  - Should not contain any properties not specified in the [Access](#access) 
+  - Must not contain any properties not specified in the [Access](#access) 
     endpoint.
 
 ### Filtering
