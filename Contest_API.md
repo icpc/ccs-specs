@@ -536,7 +536,7 @@ are singular nouns and indeed contain only a single object.
 
 The only required endpoints are metadata: `api` and `access`.
 The only requirements for properties are that collections must have
-an `id` property, and all endpoints that are supported must
+an `id` property.
 have at least some property, i.e. an endpoint can't be empty.
 [Referential integrity](#referential-integrity) must also be kept
 (for example, if a submission has a team_id, then teams must be supported).
