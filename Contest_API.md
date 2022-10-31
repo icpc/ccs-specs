@@ -603,7 +603,7 @@ Properties of version object:
 
 | Name        | Type            | Description
 | :---------- | :-------------- | :----------
-| version     | string          | Version of the API. For this version must be the string `2022-07`. Will be of the form `<yyyy>-<mm>`, `<yyyy>-<mm>-draft`, or simply `draft`.
+| version     | string          | Version of the API. For this version must be the string `draft`. Will be of the form `<yyyy>-<mm>`, `<yyyy>-<mm>-draft`, or simply `draft`.
 | version_url | string          | Link to documentation for this version of the API.
 | name        | string ?        | Name of this data provider.
 | logo        | array of FILE ? | Logo for this data provider, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/*. The different files in the array should be different file formats and/or sizes of the same image.
@@ -618,8 +618,8 @@ Returned data:
 
 ```json
 {
-   "version": "2022-07",
-   "version_url": "https://ccs-specs.icpc.io/2022-07/contest_api",
+   "version": "draft",
+   "version_url": "https://ccs-specs.icpc.io/draft/contest_api",
    "name": "Kattis",
    "logo": [{
       "href": "/api/logo",
@@ -1071,7 +1071,7 @@ Properties of problem objects:
 | ordinal           | integer   | A unique number that determines the order the problems, e.g. on the scoreboard.
 | rgb               | string ?  | Hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet), e.g. `#AC00FF` or `#fff`.
 | color             | string ?  | Human readable color description associated to the RGB value.
-| time\_limit       | number    | Time limit in seconds per test data set (i.e. per single run). Should be an integer multiple of `0.001`.
+| time\_limit       | number    | Time limit in seconds per test data set (i.e. per single run). Should be a non-negative integer multiple of `0.001`. The reason for this is to not have rounding ambiguities while still using the natural unit of seconds.
 | test\_data\_count | integer   | Number of test data sets.
 | max_score         | number    | Maximum expected score, although teams may score higher in some cases. Typically used to indicate scoreboard cell color in scoring contests. Required iff contest:scoreboard_type is `score`.
 | package           | array of FILE ? | [Problem package](https://www.kattis.com/problem-package-format/). Expected mime type is application/zip. Only exactly one package is allowed. Not expected to actually contain href for package during the contest, but used for configuration and archiving.
@@ -1206,7 +1206,8 @@ Properties of organization objects:
 | country            | string ?        | [ISO 3166-1 alpha-3 code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) of the organization's country.
 | country_flag       | array of FILE ? | Flag of the country. A server is recommended to provide flags of size around 56x56 and 160x160. Only allowed mime types are image/*.
 | url                | string ?        | URL to organization's website.
-| twitter\_hashtag   | string ?        | Organization hashtag.
+| twitter\_hashtag   | string ?        | Organization Twitter hashtag.
+| twitter\_account   | string ?        | Organization Twitter account.
 | location.latitude  | number ?        | Latitude in degrees. Required iff location.longitude is present.
 | location.longitude | number ?        | Longitude in degrees. Required iff location.latitude is present.
 | logo               | array of FILE ? | Logo of the organization. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well. Only allowed mime types are image/*.
@@ -1293,7 +1294,7 @@ Properties of person objects:
 | :---------- | :-------------- | :----------
 | id          | ID              | Identifier of the person.
 | icpc\_id    | string ?        | External identifier from ICPC CMS.
-| team\_id    | ID ?            | [Team](#teams) of this person. Required iff role is `contestant`.
+| team\_ids   | array of ID ?   | [Team](#teams) of this person. Required to be non-empty iff role is `contestant` or `coach`.
 | name        | string          | Name of the person.
 | title       | string ?        | Title of the person, e.g. "Technical director".
 | email       | string ?        | Email of the person.
@@ -1335,6 +1336,7 @@ Properties of account objects:
 | id                | ID        | Identifier of the account.
 | username          | string    | The account username.
 | password          | string ?  | The account password.
+| name              | string ?  | The name of the account.
 | type              | string    | The type of account, e.g. `team`, `judge`, `admin`, `analyst`, `staff`.
 | ip                | string ?  | IP address associated with this account, used for auto-login.
 | team\_id          | ID ?      | The team that this account is for. Required iff type is `team`.
@@ -1355,7 +1357,7 @@ Request:
 Returned data:
 
 ```json
-[{"id":"stephan","username":"stephan","type":"judge","ip":"10.0.0.1"},
+[{"id":"stephan","username":"stephan","name":"Stephan's home account","type":"judge","ip":"10.0.0.1"},
  {"id":"team45","username":"team45","type":"team","ip":"10.1.1.45","team_id":"45"}
 ]
 ```
@@ -1377,7 +1379,7 @@ Request:
 Returned data:
 
 ```json
-{"id":"nicky","username":"Nicky","type":"admin"}
+{"id":"nicky","username":"nicky","type":"admin"}
 ```
 
 ### Contest state
@@ -1656,7 +1658,7 @@ Properties of judgement objects:
 | start\_contest\_time | RELTIME   | Contest relative time when judgement started.
 | end\_time            | TIME ?    | Absolute time when judgement completed. Required iff judgement_type_id is present.
 | end\_contest\_time   | RELTIME ? | Contest relative time when judgement completed. Required iff judgement_type_id is present.
-| max\_run\_time       | number ?  | Maximum run time in seconds for any test case. Should be an integer multiple of `0.001`.
+| max\_run\_time       | number ?  | Maximum run time in seconds for any test case. Should be a non-negative integer multiple of `0.001`. The reason for this is to not have rounding ambiguities while still using the natural unit of seconds.
 
 When a judgement is started, each of `judgement_type_id`, `end_time` and
 `end_contest_time` will be `null` (or missing). These are set when the
@@ -1699,7 +1701,7 @@ Properties of run objects:
 | judgement\_type\_id | ID      | The [verdict](#judgement-types) of this run (i.e. a judgement type).
 | time                | TIME    | Absolute time when run completed.
 | contest\_time       | RELTIME | Contest relative time when run completed.
-| run\_time           | number  | Run time in seconds. Should be an integer multiple of `0.001`.
+| run\_time           | number  | Run time in seconds. Should be a non-negative integer multiple of `0.001`. The reason for this is to not have rounding ambiguities while still using the natural unit of seconds.
 
 #### Examples
 
