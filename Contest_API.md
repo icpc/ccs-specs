@@ -1184,7 +1184,8 @@ Properties of organization objects:
 | country            | string ?        | [ISO 3166-1 alpha-3 code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) of the organization's country.
 | country_flag       | array of FILE ? | Flag of the country. A server is recommended to provide flags of size around 56x56 and 160x160. Only allowed mime types are image/*.
 | url                | string ?        | URL to organization's website.
-| twitter\_hashtag   | string ?        | Organization hashtag.
+| twitter\_hashtag   | string ?        | Organization Twitter hashtag.
+| twitter\_account   | string ?        | Organization Twitter account.
 | location.latitude  | number ?        | Latitude in degrees. Required iff location.longitude is present.
 | location.longitude | number ?        | Longitude in degrees. Required iff location.latitude is present.
 | logo               | array of FILE ? | Logo of the organization. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well. Only allowed mime types are image/*.
