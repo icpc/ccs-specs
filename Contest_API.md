@@ -315,15 +315,15 @@ inline with each endpoint. Clients can use
 the [Access](#access) endpoint to see which capabilities they have
 access to.
 
-| Capability                                | Description                                  |
-| :---------------------------------------- | :------------------------------------------- |
-| [contest_start](#modifying-contests)      | Control the contest's start time             |
-| [team_submit](#modifying-submissions)     | Submit as a team                             |
-| [team_clar](#modifying-clarifications)    | Submit clarifications as a team              |
-| [proxy_submit](#modifying-submissions)    | Submit as a shared team proxy                |
-| [proxy_clar](#modifying-clarifications)   | Submit clarifications as a shared team proxy |
-| [admin_submit](#modifying-submissions)    | Submit as an admin                           |
-| [admin_clar](#modifying-clarifications)   | Submit clarifications as an admin            |
+| Capability                                | Description
+| :---------------------------------------- | :----------
+| [contest_start](#modifying-contests)      | Control the contest's start time
+| [team_submit](#modifying-submissions)     | Submit as a team
+| [team_clar](#modifying-clarifications)    | Submit clarifications as a team
+| [proxy_submit](#modifying-submissions)    | Submit as a shared team proxy
+| [proxy_clar](#modifying-clarifications)   | Submit clarifications as a shared team proxy
+| [admin_submit](#modifying-submissions)    | Submit as an admin
+| [admin_clar](#modifying-clarifications)   | Submit clarifications as an admin
 
 TODO - add capabilities related to team view, awards, and freeze time.
 
@@ -361,23 +361,23 @@ etc.) or entire collection. The general format for events is:
 
 All event types correspond to an API endpoint, as specified in the table below.
 
-| Type            | API Endpoint                          |
-| :-------------- | :------------------------------------ |
-| contest         | `/contests/<id>`                      |
-| judgement-types | `/contests/<id>/judgement-types/<id>` |
-| languages       | `/contests/<id>/languages/<id>`       |
-| problems        | `/contests/<id>/problems/<id>`        |
-| groups          | `/contests/<id>/groups/<id>`          |
-| organizations   | `/contests/<id>/organizations/<id>`   |
-| teams           | `/contests/<id>/teams/<id>`           |
-| persons         | `/contests/<id>/persons/<id>`         |
-| accounts        | `/contests/<id>/accounts/<id>`        |
-| state           | `/contests/<id>/state`                |
-| submissions     | `/contests/<id>/submissions/<id>`     |
-| judgements      | `/contests/<id>/judgements/<id>`      |
-| runs            | `/contests/<id>/runs/<id>`            |
-| clarifications  | `/contests/<id>/clarifications/<id>`  |
-| awards          | `/contests/<id>/awards/<id>`          |
+| Type            | API Endpoint
+| :-------------- | :-----------
+| contest         | `/contests/<id>`
+| judgement-types | `/contests/<id>/judgement-types/<id>`
+| languages       | `/contests/<id>/languages/<id>`
+| problems        | `/contests/<id>/problems/<id>`
+| groups          | `/contests/<id>/groups/<id>`
+| organizations   | `/contests/<id>/organizations/<id>`
+| teams           | `/contests/<id>/teams/<id>`
+| persons         | `/contests/<id>/persons/<id>`
+| accounts        | `/contests/<id>/accounts/<id>`
+| state           | `/contests/<id>/state`
+| submissions     | `/contests/<id>/submissions/<id>`
+| judgements      | `/contests/<id>/judgements/<id>`
+| runs            | `/contests/<id>/runs/<id>`
+| clarifications  | `/contests/<id>/clarifications/<id>`
+| awards          | `/contests/<id>/awards/<id>`
 
 Each event is a notification that an object or a collection has changed
 (and hence the contents of the corresponding endpoint) to `data`.
@@ -836,41 +836,41 @@ the column means that the judgement is one of the "big 5".
 The **Translation** column lists other judgements the judgement can
 safely be translated to, if a system does not support it.
 
-| ID  | Name                                     | A.k.a.                                                   | Big 5 | Translation       | Description                                               |
-| :-- | :--------------------------------------- | :------------------------------------------------------- | :---- | :---------------- | :-------------------------------------------------------- |
-| AC  | Accepted                                 | Correct, Yes (YES)                                       | \*    | \-                | Solves the problem                                        |
-| RE  | Rejected                                 | Incorrect, No (NO)                                       | WA?   | \-                | Does not solve the problem                                |
-| WA  | Wrong Answer                             |                                                          | \*    | RE                | Output is not correct                                     |
-| TLE | Time Limit Exceeded                      |                                                          | \*    | RE                | Too slow                                                  |
-| RTE | Run-Time Error                           |                                                          | \*    | RE                | Crashes                                                   |
-| CE  | Compile Error                            |                                                          | \*    | RE                | Does not compile                                          |
-| APE | Accepted - Presentation Error            | Presentation Error, also see AC, PE, and IOF             | AC    | AC                | Solves the problem, although formatting is wrong          |
-| OLE | Output Limit Exceeded                    |                                                          | WA    | WA, RE            | Output is larger than allowed                             |
-| PE  | Presentation Error                       | Output Format Error (OFE), Incorrect Output Format (IOF) | WA    | WA, RE            | Data in output is correct, but formatting is wrong        |
-| EO  | Excessive Output                         |                                                          | WA    | WA, RE            | A correct output is produced, but also additional output  |
-| IO  | Incomplete Output                        |                                                          | WA    | WA, RE            | Parts, but not all, of a correct output is produced       |
-| NO  | No Output                                |                                                          | WA    | IO, WA, RE        | There is no output                                        |
-| WTL | Wallclock Time Limit Exceeded            |                                                          | TLE   | TLE, RE           | CPU time limit is not exceeded, but wallclock is          |
-| ILE | Idleness Limit Exceeded                  |                                                          | TLE   | WTL, TLE, RE      | No CPU time used for too long                             |
-| TCO | Time Limit Exceeded - Correct Output     |                                                          | TLE   | TLE, RE           | Too slow but producing correct output                     |
-| TWA | Time Limit Exceeded - Wrong Answer       |                                                          | TLE   | TLE, RE           | Too slow and also incorrect output                        |
-| TPE | Time Limit Exceeded - Presentation Error |                                                          | TLE   | TWA, TLE, RE      | Too slow and also presentation error                      |
-| TEO | Time Limit Exceeded - Excessive Output   |                                                          | TLE   | TWA, TLE, RE      | Too slow and also excessive output                        |
-| TIO | Time Limit Exceeded - Incomplete Output  |                                                          | TLE   | TWA, TLE, RE      | Too slow and also incomplete output                       |
-| TNO | Time Limit Exceeded - No Output          |                                                          | TLE   | TIO, TWA, TLE, RE | Too slow and also no output                               |
-| MLE | Memory Limit Exceeded                    |                                                          | RTE   | RTE, RE           | Uses too much memory                                      |
-| SV  | Security Violation                       | Illegal Function (IF), Restricted Function               | RTE   | RTE, RE           | Uses some functionality that is not allowed by the system |
-| IF  | Illegal Function                         | Illegal Function (IF), Restricted Function               | RTE   | SV, RTE, RE       | Calls a function that is not allowed by the system        |
-| RCO | Run-Time Error - Correct Output          |                                                          | RTE   | RTE, RE           | Crashing but producing correct output                     |
-| RWA | Run-Time Error - Wrong Answer            |                                                          | RTE   | RTE, RE           | Crashing and also incorrect output                        |
-| RPE | Run-Time Error - Presentation Error      |                                                          | RTE   | RWA, RTE, RE      | Crashing and also presentation error                      |
-| REO | Run-Time Error - Excessive Output        |                                                          | RTE   | RWA, RTE, RE      | Crashing and also excessive output                        |
-| RIO | Run-Time Error - Incomplete Output       |                                                          | RTE   | RWA, RTE, RE      | Crashing and also incomplete output                       |
-| RNO | Run-Time Error - No Output               |                                                          | RTE   | RIO, RWA, RTE, RE | Crashing and also no output                               |
-| CTL | Compile Time Limit Exceeded              |                                                          | CE    | CE, RE            | Compilation took too long                                 |
-| JE  | Judging Error                            |                                                          | \-    | \-                | Something went wrong with the system                      |
-| SE  | Submission Error                         |                                                          | \-    | \-                | Something went wrong with the submission                  |
-| CS  | Contact Staff                            | Other                                                    | \-    | \-                | Something went wrong                                      |
+| ID  | Name                                     | A.k.a.                                                   | Big 5 | Translation       | Description
+| :-- | :--------------------------------------- | :------------------------------------------------------- | :---- | :---------------- | :----------
+| AC  | Accepted                                 | Correct, Yes (YES)                                       | \*    | \-                | Solves the problem
+| RE  | Rejected                                 | Incorrect, No (NO)                                       | WA?   | \-                | Does not solve the problem
+| WA  | Wrong Answer                             |                                                          | \*    | RE                | Output is not correct
+| TLE | Time Limit Exceeded                      |                                                          | \*    | RE                | Too slow
+| RTE | Run-Time Error                           |                                                          | \*    | RE                | Crashes
+| CE  | Compile Error                            |                                                          | \*    | RE                | Does not compile
+| APE | Accepted - Presentation Error            | Presentation Error, also see AC, PE, and IOF             | AC    | AC                | Solves the problem, although formatting is wrong
+| OLE | Output Limit Exceeded                    |                                                          | WA    | WA, RE            | Output is larger than allowed
+| PE  | Presentation Error                       | Output Format Error (OFE), Incorrect Output Format (IOF) | WA    | WA, RE            | Data in output is correct, but formatting is wrong
+| EO  | Excessive Output                         |                                                          | WA    | WA, RE            | A correct output is produced, but also additional output
+| IO  | Incomplete Output                        |                                                          | WA    | WA, RE            | Parts, but not all, of a correct output is produced
+| NO  | No Output                                |                                                          | WA    | IO, WA, RE        | There is no output
+| WTL | Wallclock Time Limit Exceeded            |                                                          | TLE   | TLE, RE           | CPU time limit is not exceeded, but wallclock is
+| ILE | Idleness Limit Exceeded                  |                                                          | TLE   | WTL, TLE, RE      | No CPU time used for too long
+| TCO | Time Limit Exceeded - Correct Output     |                                                          | TLE   | TLE, RE           | Too slow but producing correct output
+| TWA | Time Limit Exceeded - Wrong Answer       |                                                          | TLE   | TLE, RE           | Too slow and also incorrect output
+| TPE | Time Limit Exceeded - Presentation Error |                                                          | TLE   | TWA, TLE, RE      | Too slow and also presentation error
+| TEO | Time Limit Exceeded - Excessive Output   |                                                          | TLE   | TWA, TLE, RE      | Too slow and also excessive output
+| TIO | Time Limit Exceeded - Incomplete Output  |                                                          | TLE   | TWA, TLE, RE      | Too slow and also incomplete output
+| TNO | Time Limit Exceeded - No Output          |                                                          | TLE   | TIO, TWA, TLE, RE | Too slow and also no output
+| MLE | Memory Limit Exceeded                    |                                                          | RTE   | RTE, RE           | Uses too much memory
+| SV  | Security Violation                       | Illegal Function (IF), Restricted Function               | RTE   | RTE, RE           | Uses some functionality that is not allowed by the system
+| IF  | Illegal Function                         | Illegal Function (IF), Restricted Function               | RTE   | SV, RTE, RE       | Calls a function that is not allowed by the system
+| RCO | Run-Time Error - Correct Output          |                                                          | RTE   | RTE, RE           | Crashing but producing correct output
+| RWA | Run-Time Error - Wrong Answer            |                                                          | RTE   | RTE, RE           | Crashing and also incorrect output
+| RPE | Run-Time Error - Presentation Error      |                                                          | RTE   | RWA, RTE, RE      | Crashing and also presentation error
+| REO | Run-Time Error - Excessive Output        |                                                          | RTE   | RWA, RTE, RE      | Crashing and also excessive output
+| RIO | Run-Time Error - Incomplete Output       |                                                          | RTE   | RWA, RTE, RE      | Crashing and also incomplete output
+| RNO | Run-Time Error - No Output               |                                                          | RTE   | RIO, RWA, RTE, RE | Crashing and also no output
+| CTL | Compile Time Limit Exceeded              |                                                          | CE    | CE, RE            | Compilation took too long
+| JE  | Judging Error                            |                                                          | \-    | \-                | Something went wrong with the system
+| SE  | Submission Error                         |                                                          | \-    | \-                | Something went wrong with the submission
+| CS  | Contact Staff                            | Other                                                    | \-    | \-                | Something went wrong
 
 #### Examples
 
@@ -955,26 +955,26 @@ identifiers. It is recommended to choose new identifiers with a suffix
 appended to an existing one. For example `cpp17` to specify the ISO 2017
 version of C++.
 
-| ID         | Name        | Extensions           | Entry point name |
-| :--------- | :---------- | :------------------- | :--------------- |
-| ada        | Ada         | adb, ads             |                  |
-| c          | C           | c                    |                  |
-| cpp        | C++         | cc, cpp, cxx, c++, C |                  |
-| csharp     | C\#         | cs                   |                  |
-| go         | Go          | go                   |                  |
-| haskell    | Haskell     | hs                   |                  |
-| java       | Java        | java                 | Main class       |
-| javascript | JavaScript  | js                   | Main file        |
-| kotlin     | Kotlin      | kt                   | Main class       |
-| objectivec | Objective-C | m                    |                  |
-| pascal     | Pascal      | pas                  |                  |
-| php        | PHP         | php                  | Main file        |
-| prolog     | Prolog      | pl                   |                  |
-| python2    | Python 2    | py                   | Main file        |
-| python3    | Python 3    | py                   | Main file        |
-| ruby       | Ruby        | rb                   |                  |
-| rust       | Rust        | rs                   |                  |
-| scala      | Scala       | scala                |                  |
+| ID         | Name        | Extensions           | Entry point name
+| :--------- | :---------- | :------------------- | :---------------
+| ada        | Ada         | adb, ads             |
+| c          | C           | c                    |
+| cpp        | C++         | cc, cpp, cxx, c++, C |
+| csharp     | C\#         | cs                   |
+| go         | Go          | go                   |
+| haskell    | Haskell     | hs                   |
+| java       | Java        | java                 | Main class
+| javascript | JavaScript  | js                   | Main file
+| kotlin     | Kotlin      | kt                   | Main class
+| objectivec | Objective-C | m                    |
+| pascal     | Pascal      | pas                  |
+| php        | PHP         | php                  | Main file
+| prolog     | Prolog      | pl                   |
+| python2    | Python 2    | py                   | Main file
+| python3    | Python 3    | py                   | Main file
+| ruby       | Ruby        | rb                   |
+| rust       | Rust        | rs                   |
+| scala      | Scala       | scala                |
 
 #### Examples
 
