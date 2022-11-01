@@ -13,19 +13,17 @@ Such an API can be used by a multitude of clients:
 
   - an external scoreboard
   - a scoreboard resolver application
-  - contest analysis software, such as the
-    [ICAT](https://clics.ecs.baylor.edu/index.php?title=ICAT) toolset
+  - contest analysis software, such as the ICAT toolset
   - another "shadow" CCS, providing forwarding of submissions and all
     relevant information
   - internally, to interface between the CCS server and judging
     instances
 
 This API is meant to be useful, not only at the ICPC World Finals, but
-more generally in any ICPC-style contest setup. It is meant to
-incorporate and supersede a number of
-[deprecated or obsolete specifications](https://clics.ecs.baylor.edu/index.php?title=Main_Page#Deprecated.2C_Old.2C_and_Orphaned_Specifications) amongst which the *JSON Scoreboard*, the
-*REST interface for source code fetching*
-and the *Contest start interface*.
+more generally in any ICPC-style contest setup. It is meant to incorporate and
+supersede a number of deprecated or obsolete specifications amongst which the
+*JSON Scoreboard*, the *REST interface for source code fetching* and the
+*Contest start interface*.
 
 This REST interface is specified in conjunction with a new 
 [NDJSON event feed](#event-feed), which provides all changes to this
