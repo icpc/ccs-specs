@@ -10,11 +10,11 @@ the information available through the [Contest API](contest_api) on disk.
 There are several reasons that contest information will be stored on disk,
 including:
 
-  - As configuration used to initialize a CCS
-  - As an archive of what happened in a contest
-  - As an archive for replaying a contest, either for testing contest
-    tools or for teams to compete against live data
-  - As a base for offline analysis
+- As configuration used to initialize a CCS
+- As an archive of what happened in a contest
+- As an archive for replaying a contest, either for testing contest tools or for
+  teams to compete against live data
+- As a base for offline analysis
 
 ## Package contents
 
