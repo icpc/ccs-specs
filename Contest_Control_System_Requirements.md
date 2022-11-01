@@ -113,17 +113,16 @@ functions which the client may perform, as described below.
 
 At least the following different types of accounts must be supported:
 
-  - Team: used by teams competing in the contest. The functions available to
-    team clients are as defined in the section on the [team interface]
-    (#team-interface).
+- Team: used by teams competing in the contest. The functions available to team
+  clients are as defined in the section on the [team interface]
+  (#team-interface).
 
-  - Judge: used by judges in the contest. The functions available to judge
-    clients are as defined in the section on the [judge interface]
-    (#judge-interface).
+- Judge: used by judges in the contest. The functions available to judge clients
+  are as defined in the section on the [judge interface](#judge-interface).
 
-  - Admin: used by contest administrators. The functions available to admin
-    clients are as defined in the section on the [admin interface]
-    (#admin-interface).
+- Admin: used by contest administrators. The functions available to admin
+  clients are as defined in the section on the 
+  [admin interface](#admin-interface).
 
 ### Secure Authentication
 
@@ -132,13 +131,13 @@ user (being either a [team](#team-interface), an [admin](#admin-interface), or
 a [judge](#judge-interface)) to gain access to the contest, and must ensure
 that:
 
-1.  Only users who supply correct authentication credentials may invoke
-    contest-related functions.
+- Only users who supply correct authentication credentials may invoke
+  contest-related functions.
 
-2.  Users may only invoke functions corresponding to their authentication 
-    credentials. (In other words, it must not be possible for, e.g., a team to 
-    invoke functions as if they were some other team, or as if they were a 
-    judge.)
+- Users may only invoke functions corresponding to their authentication
+  credentials. (In other words, it must not be possible for, e.g., a team to
+  invoke functions as if they were some other team, or as if they were a
+  judge.)
 
 The CCS may rely on the underlying operating system account login/password
 mechanism for purposes of meeting the requirements of this section, provided
@@ -178,9 +177,9 @@ A timestamp and an integer sequence, called an ID, are assigned to submissions
 and clarification requests at the time they enter the system. The following
 constraints must be enforced by the CCS:
 
-  - Submissions received earlier must have a lower ID than submissions received
-    later. The same holds for the IDs of clarification requests.
-  - Timestamps must have at least second granularity.
+- Submissions received earlier must have a lower ID than submissions received
+  later. The same holds for the IDs of clarification requests.
+- Timestamps must have at least second granularity.
 
 ### Limitations
 
@@ -238,14 +237,14 @@ organization, group, team and account configuration.
 
 The following files and fields must be read by the CCS at a minimum:
 
-* `contest.json`, `problems.json`, `languages.json`, `groups.json` and
+- `contest.json`, `problems.json`, `languages.json`, `groups.json` and
   `teams.json` with the fields specified in
   [Data Export: Contest API](#contest-api).
-* `organizations.json` with the fields specified in
+- `organizations.json` with the fields specified in
   [Data Export: Contest API](#contest-api) as well as the field `logo`. This
   also means the CCS must be able to import the logo's of organizations from
   the contest package.
-* `accounts.json` with the following fields: `id`, `username`, `type`, `team_id`
+- `accounts.json` with the following fields: `id`, `username`, `type`, `team_id`
   and `password`.
 
 Note that for the files supporting YAML according to the
@@ -265,8 +264,8 @@ judges can choose to reply to a clarification request by selecting a predefined
 answer rather than being required to enter a specific answer. At least the
 following predefined answers must be supported:
 
-* No comment, read problem statement.
-* This will be answered during the answers to questions session.
+- No comment, read problem statement.
+- This will be answered during the answers to questions session.
 
 ### Clarification Categories
 
@@ -274,9 +273,9 @@ The CCS must support "categories" to which clarification requests can be
 assigned. A request belongs to exactly one category. At least the following
 categories need to be supported:
 
-* General
-* SysOps
-* Operations
+- General
+- SysOps
+- Operations
 
 In addition, the CCS must construct one category per problem, i.e., categories
 named e.g. "Problem A", "Problem B", etc. for each problem.
@@ -303,13 +302,13 @@ specified and configured using the
 [Problem package format](https://icpc.io/problem-package-format/). The CCS must
 support this format with the following exceptions:
 
-  - The CCS does not have to support the use of the following keys in
-    problem.yaml: type, libraries or languages. This means that the default
-    value will be used.
-  - The CCS does only have to support the values "default" or "custom" for the
-    key validation in problem.yaml.
-  - The CCS does not have to support sections 5 "Included Code", 9
-    "Graders" or 10 "Generators".
+- The CCS does not have to support the use of the following keys in
+  problem.yaml: type, libraries or languages. This means that the default value
+  will be used.
+- The CCS does only have to support the values "default" or "custom" for the key
+  validation in problem.yaml.
+- The CCS does not have to support sections 5 "Included Code", 9 "Graders" or 10 
+  "Generators".
 
 ```note
 TODO: Drop the exceptions above?
@@ -423,19 +422,19 @@ The CCS must provide the ability to specify a filter defining the set of
 submissions to be rejudged. The CCS must support any combination of filters of
 the following types:
 
-1.  A specific (single) submission.
-2.  All submissions for a specific problem.
-3.  All submissions using a specific language.
-4.  All submissions by a specific team or set of teams.
-5.  All submissions between some time T<sub>0</sub> and some subsequent time 
-    T<sub>1</sub>.
-6.  All submissions which have been assigned any specific one of the allowable 
-    submission judgments as defined in [Judge Responses](#judge-responses), or 
-    all submissions that received any judgment other than "Accepted" (that is, 
-    all rejected submissions).
-7.  All submissions which have been run on a specific computer (identified in 
-    some reasonable way, e.g., IP address or hostname). This requirement is only
-    applicable if the CCS uses multiple machines to run submissions.
+- A specific (single) submission.
+- All submissions for a specific problem.
+- All submissions using a specific language.
+- All submissions by a specific team or set of teams.
+- All submissions between some time T<sub>0</sub> and some subsequent time
+  T<sub>1</sub>.
+- All submissions which have been assigned any specific one of the allowable
+  submission judgments as defined in [Judge Responses](#judge-responses), or
+  all submissions that received any judgment other than "Accepted" (that is,
+  all rejected submissions).
+- All submissions which have been run on a specific computer (identified in some
+  reasonable way, e.g., IP address or hostname). This requirement is only
+  applicable if the CCS uses multiple machines to run submissions.
 
 Thus, for example, it must be possible to select "all rejected submissions for
 problem B", "all Time Limit Exceeded submissions using Java for problem
@@ -491,10 +490,10 @@ that the results are not final.
 The CCS must provide a way for admins to finalize the contest. It must *not* be
 possible to finalize a contest if one or more of the following applies:
 
-1.  The contest is still running (i.e., the contest is not over).
-2.  There are un-judged submissions.
-3.  There are submissions judged as [Judging Error](#exceptional-judgments).
-4.  There are unanswered clarification requests.
+- The contest is still running (i.e., the contest is not over).
+- There are un-judged submissions.
+- There are submissions judged as [Judging Error](#exceptional-judgments).
+- There are unanswered clarification requests.
 
 Before finalizing the contest the value B, as used in 
 [Scoring Data Generation](#scoring-data-generation) will be provided. The
@@ -527,9 +526,9 @@ judging system.
 
 A team must be able to specify, for each submission:
 
-1.  the contest problem to which the submission applies;
-2.  the programming language used in the submission;
-3.  the source code file or files comprising the submission.
+- the contest problem to which the submission applies;
+- the programming language used in the submission;
+- the source code file or files comprising the submission.
 
 The CCS must allow teams to specify at least 10 files in a given submission and
 must allow teams to make submissions for any defined contest problem, written
@@ -611,31 +610,31 @@ to simultaneously perform the operations specified in this subsection
 The CCS must provide a human judge with the ability to perform each of the
 following operations:
 
-1.  See a list of all submissions, where the list includes (for each submission) 
+- See a list of all submissions, where the list includes (for each submission) 
     the contest time at which the submission was sent, the problem and language
     specified in the submission, and any judgments applied.
 
-2.  Sort the list of submissions by submission time (newest submissions first).
-3.  Filter the list of submissions by:
-    1.  Problem
-    2.  Team
-    3.  Language
-    4.  Judgement applied.
-4.  View and download the output produced by the submission when run against the 
-    specified input data.
-5.  View and download the source code contained in any specific submission.
-6.  View the compiler output resulting from compiling any specific submission 
-    using the compiler arguments configured in the CCS.
-7.  View the validator output resulting from invoking the external validator 
-    associated with the contest problem for any specific submission.
-8.  View and download the judge's input data file associated with the contest 
-    problem for any specific submission.
-9.  View and download the "judge's output" (the "correct answer" file) 
-    associated with the contest problem for any specific submission.
-10. View the judge data description, if available.
-11. View a diff between team output for the submission and judge answer file for 
-    the problem.
-12. View previous submissions by the same team on the same problem.
+- Sort the list of submissions by submission time (newest submissions first).
+- Filter the list of submissions by:
+  - Problem
+  - Team
+  - Language
+  - Judgement applied.
+- View and download the output produced by the submission when run against the
+  specified input data.
+- View and download the source code contained in any specific submission.
+- View the compiler output resulting from compiling any specific submission
+  using the compiler arguments configured in the CCS.
+- View the validator output resulting from invoking the external validator
+  associated with the contest problem for any specific submission.
+- View and download the judge's input data file associated with the contest
+  problem for any specific submission.
+- View and download the "judge's output" (the "correct answer" file) associated
+  with the contest problem for any specific submission.
+- View the judge data description, if available.
+- View a diff between team output for the submission and judge answer file for
+  the problem.
+- View previous submissions by the same team on the same problem.
 
 In addition, any additional analytical capabilities allowing the judges to track
 differences between submissions are appreciated.
@@ -645,22 +644,22 @@ differences between submissions are appreciated.
 The CCS must provide a human judge with the ability to perform each of the
 following operations:
 
-1.  See a list of all clarification requests, where the list includes (for each 
-    clar) the team which submitted the request, the contest time at which the 
-    clar was submitted, and an indication of whether or not an answer to the 
-    clar has been sent to the team which submitted it.
-2.  Sort the list of clarification requests by time.
-3.  Filter the list of clarification requests by:
-    1.  A user-specified set of [categories](#clarification-categories)
-    2.  A team
-    3.  Whether the clarification request has been answered.
-4.  Determine, for any specific clarification request, what answer was returned 
-    to the team if the clar has already been answered.
-5.  Compose an answer to the clar and send it, along with the text of the 
-    original clarification request, to the team.
-6.  Optionally choose to also send the clarification request text and answer to 
-    all teams in the contest.
-7.  Change the category of a clarification request.
+- See a list of all clarification requests, where the list includes (for each
+  clar) the team which submitted the request, the contest time at which the
+  clar was submitted, and an indication of whether or not an answer to the clar
+  has been sent to the team which submitted it.
+- Sort the list of clarification requests by time.
+- Filter the list of clarification requests by:
+  - A user-specified set of [categories](#clarification-categories)
+  - A team
+  - Whether the clarification request has been answered.
+- Determine, for any specific clarification request, what answer was returned to
+  the team if the clar has already been answered.
+- Compose an answer to the clar and send it, along with the text of the original
+  clarification request, to the team.
+- Optionally choose to also send the clarification request text and answer to
+  all teams in the contest.
+- Change the category of a clarification request.
 
 ### Issuing Broadcast Messages
 
@@ -720,10 +719,10 @@ connecting to a shared server).
 The CCS must use auto-judge machines efficiently and fairly. At a minimum it
 needs to ensure:
 
-1.  Submissions must not be left in queue if there are unused auto-judge
-    machines.
-2.  The system must prevent a single team from starving other teams out
-    of auto-judge machines.
+- Submissions must not be left in queue if there are unused auto-judge
+  machines.
+- The system must prevent a single team from starving other teams out of
+  auto-judge machines.
 
 ### Prohibited Operations
 
@@ -732,13 +731,13 @@ non-trivial outside effects.
 
 The prohibited operations are:
 
-1.  Using libraries except those explicitly allowed
-2.  Executing other programs
-3.  Reading any files
-4.  Creating files
-5.  Sending signals to other programs
-6.  Side-stepping time or memory limits
-7.  Sending or receiving network traffic, e.g. opening sockets
+- Using libraries except those explicitly allowed
+- Executing other programs
+- Reading any files
+- Creating files
+- Sending signals to other programs
+- Side-stepping time or memory limits
+- Sending or receiving network traffic, e.g. opening sockets
 
 ### Judge Responses
 
@@ -882,19 +881,19 @@ The scoreboard must include at least the following information.
 
 For each team:
 
-1.  university name
-2.  university logo (see [logos.tar.gz](#logostargz))
-3.  team position
-4.  number of problems solved
-5.  total penalty time
+- university name
+- university logo (see [logos.tar.gz](#logostargz))
+- team position
+- number of problems solved
+- total penalty time
 
 For each team and problem:
 
-1.  number of submissions from that team on that problem,
-2.  whether the problem is solved, unsolved or a judgement is pending,
-3.  if the problem is solved, the contest time at which it was solved,
-4.  if the problem is pending judgement, how many submissions are pending 
-    judgement on that problem,
+- number of submissions from that team on that problem,
+- whether the problem is solved, unsolved or a judgement is pending,
+- if the problem is solved, the contest time at which it was solved,
+- if the problem is pending judgement, how many submissions are pending
+  judgement on that problem,
 
 A problem is pending judgement if any submission on it is pending judgement and
 there is not an earlier accepted submission on that problem.
@@ -1004,32 +1003,32 @@ return from the `/access` endpoint:
 
 The following access restrictions must apply to GETs on the API endpoints:
 
-  - The `public` role can only access the `/problems` endpoint after the contest
-    has started. That is, before contest start `/problems` returns an empty
-    array for clients with the `public` role.
-  - The `backup` element of the `/teams` endpoint requires the `admin` or
-    `analyst` role for access.
-  - The `desktop` and `webcam` elements of the `/teams` endpoint are available
-    for the `public` role only when the scoreboard is not frozen.
-  - The `entry_point` and `files` elements of the `/submissions` endpoint are
-    accessible only for clients with `admin` or `analyst` role. The `reaction`
-    element is available to clients with `public` role only when the contest is
-    not frozen.
-  - For clients with the `public` role the `/judgements` and `/runs` endpoints
-    must not include judgements or runs for submissions received while the
-    scoreboard is frozen. This means that all judgements and runs for
-    submissions received before the scoreboard has been frozen will be
-    available immediately, and all judgements and runs for submissions received
-    after the scoreboard has been frozen will be available immediately after
-    the scoreboard has been thawed.
-  - For clients with the `public` role the `/clarifications` endpoint must only
-    contain replies from the jury to all teams, that is, messages where both
-    `from_team_id` and `to_team_id` are `null`. For clients with the `team`
-    role the `/clarifications` endpoint must only contain their own
-    clarifications (sent or received) and public clarifications.
-  - For clients with the `public` role the `/awards` and `/scoreboard` endpoints
-    must not include information from judgements of submissions received after
-    the scoreboard freeze until it has been thawed.
+- The `public` role can only access the `/problems` endpoint after the contest
+  has started. That is, before contest start `/problems` returns an empty array
+  for clients with the `public` role.
+- The `backup` element of the `/teams` endpoint requires the `admin` or
+  `analyst` role for access.
+- The `desktop` and `webcam` elements of the `/teams` endpoint are available for
+  the `public` role only when the scoreboard is not frozen.
+- The `entry_point` and `files` elements of the `/submissions` endpoint are
+  accessible only for clients with `admin` or `analyst` role. The `reaction`
+  element is available to clients with `public` role only when the contest is
+  not frozen.
+- For clients with the `public` role the `/judgements` and `/runs` endpoints
+  must not include judgements or runs for submissions received while the
+  scoreboard is frozen. This means that all judgements and runs for submissions
+  received before the scoreboard has been frozen will be available immediately,
+  and all judgements and runs for submissions received after the scoreboard has
+  been frozen will be available immediately after the scoreboard has been
+  thawed.
+- For clients with the `public` role the `/clarifications` endpoint must only
+  contain replies from the jury to all teams, that is, messages where both
+  `from_team_id` and `to_team_id` are `null`. For clients with the `team` role
+  the `/clarifications` endpoint must only contain their own clarifications
+  (sent or received) and public clarifications.
+- For clients with the `public` role the `/awards` and `/scoreboard` endpoints
+  must not include information from judgements of submissions received after
+  the scoreboard freeze until it has been thawed.
 
 ### Final Results Data Files
 
@@ -1040,14 +1039,14 @@ of the[Contest API](contest_api).
 The CCS must be capable of generating at least the following awards after the
 contest has ended: 
 
-  - `winner`
-  - `gold-medal`
-  - `silver-medal`
-  - `bronze-medal`
-  - `rank-\<rank>`
-  - `honorable-mention`
-  - `first-to-solve-<id>`
-  - `group-winner-<id>`
+- `winner`
+- `gold-medal`
+- `silver-medal`
+- `bronze-medal`
+- `rank-\<rank>`
+- `honorable-mention`
+- `first-to-solve-<id>`
+- `group-winner-<id>`
 
 The CCS does not have to be able to make them available during the contest.
 
@@ -1126,25 +1125,24 @@ specification, the Primary CCS must implement the endpoints defined in the
 [Contest API](contest_api). The following requirements then apply to the
 mechanisms used by the Shadow CCS for obtaining submissions:
 
-1.  The Shadow CCS should use the `/event-feed` endpoint defined in the 
-    [Contest API](contest_api) to obtain notification of team  submissions from 
-    the Primary CCS (in other words, the Shadow CCS should preferably use 
-    event-driven operation, rather than polling, for team submission 
-    notification).
-2.  The Shadow CCS must use the `/submissions/<id>` and 
-    `/submissions/<id>/files` endpoints defined in the 
-    [Contest API](contest_api) for obtaining submission data from the Primary 
-    CCS.
-3.  The Shadow CCS must provide an interface that can display information 
-    regarding any submission by looking up the submission using the submission 
-    id assigned by the Primary CCS.
-4.  The Shadow CCS must use the timestamp assigned to a submission by the 
-    Primary CCS as the time of the submission for purposes of computing 
-    standings, regardless of the time at which the submission is actually 
-    obtained by the Shadow CCS.
-5.  A submission obtained from the Primary CCS must be executed and judged by 
-    the Shadow CCS in the same manner as if it had been submitted to the CCS 
-    running in non-shadow mode.
+- The Shadow CCS should use the `/event-feed` endpoint defined in the
+  [Contest API](contest_api) to obtain notification of team  submissions from
+  the Primary CCS (in other words, the Shadow CCS should preferably use
+  event-driven operation, rather than polling, for team submission
+  notification).
+- The Shadow CCS must use the `/submissions/<id>` and `/submissions/<id>/files`
+  endpoints defined in the[Contest API](contest_api) for obtaining submission
+  data from the Primary CCS.
+- The Shadow CCS must provide an interface that can display information
+  regarding any submission by looking up the submission using the submission id
+  assigned by the Primary CCS.
+- The Shadow CCS must use the timestamp assigned to a submission by the Primary
+  CCS as the time of the submission for purposes of computing standings,
+  regardless of the time at which the submission is actually obtained by the
+  Shadow CCS.
+- A submission obtained from the Primary CCS must be executed and judged by the
+  Shadow CCS in the same manner as if it had been submitted to the CCS running
+  in non-shadow mode.
 
 ### Judgement Comparison
 
@@ -1157,17 +1155,17 @@ have a different judgement than that which was assigned by the Primary CCS.
 A CCS may require the following conditions to exist in order to guarantee
 support for shadow-mode operations:
 
-  - The Shadow CCS is provided with “auto-judging” hardware which is the same as
-    that being used by the Primary CCS.
-  - The Shadow CCS has a network connection to both the Event Feed and the REST
-    services provided by the Primary CCS.
-  - The Shadow CCS is provided with credentials which allow appropriate access
-    to the required Primary CCS REST endpoints.
-  - SubmissionIDs for submissions are unique contest-wide, even in the event of
-    a contest with multiple independent sites being managed by a single
-    distributed Primary CCS.
-  - The Shadow CCS has access to the same contest configuration files as those
-    used to configure the Primary CCS.
+- The Shadow CCS is provided with “auto-judging” hardware which is the same as
+  that being used by the Primary CCS.
+- The Shadow CCS has a network connection to both the Event Feed and the REST
+  services provided by the Primary CCS.
+- The Shadow CCS is provided with credentials which allow appropriate access to
+  the required Primary CCS REST endpoints.
+- SubmissionIDs for submissions are unique contest-wide, even in the event of a
+  contest with multiple independent sites being managed by a single distributed
+  Primary CCS.
+- The Shadow CCS has access to the same contest configuration files as those
+  used to configure the Primary CCS.
 
 A CCS may not require any conditions not specified above to exist in order to
 guarantee support for shadow-mode operations.
@@ -1177,14 +1175,14 @@ guarantee support for shadow-mode operations.
 In order for a given CCS to be considered as a candidate for running the ICPC
 World Finals contest, the following documents must be submitted.
 
-  - A text file named "License" containing the license, conforming to the
-    [Licensing](#licensing) section, under which the CCS is made available to
-    the ICPC.
-  - A *Requirements Compliance Document* as defined below.
-  - A *Team Guide* as defined below.
-  - A *Judge's Guide* as defined below.
-  - A *Contest Administrator's Guide* as defined below.
-  - A *System Manager's Guide* as defined below.
+- A text file named "License" containing the license, conforming to the
+  [Licensing](#licensing) section, under which the CCS is made available to the
+  ICPC.
+- A *Requirements Compliance Document* as defined below.
+- A *Team Guide* as defined below.
+- A *Judge's Guide* as defined below.
+- A *Contest Administrator's Guide* as defined below.
+- A *System Manager's Guide* as defined below.
 
 ### Requirements Compliance Document
 
