@@ -331,6 +331,8 @@ access to.
 | [admin_submit](#modifying-submissions)    | Submit as an admin                           |
 | [admin_clar](#modifying-clarifications)   | Submit clarifications as an admin            |
 
+TODO - add capabilities related to team view, awards, and freeze time.
+
 ### Notification format
 
 There are two mechanisms that clients can use to receive notifications
