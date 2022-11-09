@@ -4,37 +4,35 @@ permalink: /contest_package
 ---
 # Contest Package Format
 
-This page describes the format of a contest package. It describes how to
-store the information available through the [Contest API](contest_api) on
-disk.
+This page describes the format of a contest package. It describes how to store
+the information available through the [Contest API](contest_api) on disk.
 
-There are several reasons that contest information will be stored on
-disk, including:
+There are several reasons that contest information will be stored on disk,
+including:
 
-  - As configuration used to initialize a CCS
-  - As an archive of what happened in a contest
-  - As an archive for replaying a contest, either for testing contest
-    tools or for teams to compete against live data
-  - As a base for offline analysis
+- As configuration used to initialize a CCS
+- As an archive of what happened in a contest
+- As an archive for replaying a contest, either for testing contest tools or for
+  teams to compete against live data
+- As a base for offline analysis
 
 ## Package contents
 
-The package consists of a single directory containing files as described
-below, or alternatively, a ZIP compressed archive of the directory. It is
-strongly recommended that the name of the directory or the base name of the
-archive match the contest ID, if a contest ID is specified. 
+The package consists of a single directory containing files as described below,
+or alternatively, a ZIP compressed archive of the directory. It is strongly
+recommended that the name of the directory or the base name of the archive
+match the contest ID, if a contest ID is specified. 
 
-A package contains information regarding a single contest (corresponding to
-the `/contests/<id>/*` endpoints of the API). The API can contain information
-for several contests, to store the information for multiple contests a
-package per contest would be needed.
+A package contains information regarding a single contest (corresponding to the
+`/contests/<id>/*` endpoints of the API). The API can contain information for
+several contests, to store the information for multiple contests a package per
+contest would be needed.
 
-Information in the API is always either in JSON format, [NDJSON](contest_api#event-feed)
-format, or linked using a [file reference](contest_api#json-attribute-types)
-JSON object.
+Information in the API is always either in JSON format, 
+[NDJSON](contest_api#event-feed) format, or linked using a 
+[file reference](contest_api#json-attribute-types) JSON object.
 
-- The JSON returned from the endpoint `/` is stored as
-  `api.json`.
+- The JSON returned from the endpoint `/` is stored as `api.json`.
 - The JSON returned from the endpoint `/contests/<id>` is stored as
   `contest.json`. (Notice the singular form).
 - The JSON returned from the endpoint `/contests/<id>/<endpoint>` is stored as
@@ -43,15 +41,16 @@ JSON object.
   `<endpoint>.ndjson`. (The only such endpoint is `event-feed`.)
 
 
-Files referenced in `api.json` and `contest.json` are stored as
-`api/<filename>` and `contest/<filename>` respectively, and files referenced
-in `<endpoint>.json` are stored as `<endpoint>/<id>/<filename>`, where:
+Files referenced in `api.json` and `contest.json` are stored as `api/<filename>`
+and `contest/<filename>` respectively, and files referenced in
+`<endpoint>.json` are stored as `<endpoint>/<id>/<filename>`, where:
+
 - `<id>` is the ID of the endpoint object the reference is in.
 - `<filename>` is the filename specified in the file reference object.
 
-Some of these API endpoints are often written by humans in a package.
-For this reason, those files can also be written in YAML instead of JSON.
-This holds for the following files:
+Some of these API endpoints are often written by humans in a package. For this
+reason, those files can also be written in YAML instead of JSON. This holds for
+the following files:
 
 - `contest.json`, which then becomes `contest.yaml`.
 - `problems.json`, which then becomes `problems.yaml`.
@@ -69,31 +68,30 @@ still be working. To keep the archiving process as simple as possible, stale
 URLs do not have to be removed from the data, but due to this the URLs should
 be ignored and the file stored as specified above should be used instead.
 
-Optionally one could create a Shallow Package by not storing the files, in
-which case the URLs must be valid. This could be useful in some cases where
-the size of the package matters.
+Optionally one could create a Shallow Package by not storing the files, in which
+case the URLs must be valid. This could be useful in some cases where the size
+of the package matters.
 
 ### Multiple systems
 
-Some contests are run with multiple systems that provide a Contest API.
-One example of this is a contest run with a primary and
+Some contests are run with multiple systems that provide a Contest API. One
+example of this is a contest run with a primary and
 [shadow](ccs_system_requirements#shadow-mode) CCS. Typically in these cases
-there is relationship between the systems or a lot of common data, so it
-makes sense to merge the data into a single package.
+there is relationship between the systems or a lot of common data, so it makes
+sense to merge the data into a single package.
 
-Data from the primary system (usually the primary CCS) should continue to
-be stored as described in this document. Each additional system should
-store its data using the same format but in a unique sub-folder
-`other-systems/<system>`, named after the system that produced it.
-Using this pattern means that tools that work against a contest package
-can be run without change on either the primary contest package or the
-packages of any of the other systems.
+Data from the primary system (usually the primary CCS) should continue to be
+stored as described in this document. Each additional system should store its
+data using the same format but in a unique sub-folder `other-systems/<system>`,
+named after the system that produced it. Using this pattern means that tools
+that work against a contest package can be run without change on either the
+primary contest package or the packages of any of the other systems.
 
 When there is duplicate data (or the differences between systems are
-irrelevant), a system's data can be deleted and replaced with symlinks to
-the data from the primary system. Using this method reduces the overall size
-of the package while still maintaining a valid contest package (the system's
-view of the contest) for each system.
+irrelevant), a system's data can be deleted and replaced with symlinks to the
+data from the primary system. Using this method reduces the overall size of the
+package while still maintaining a valid contest package (the system's view of
+the contest) for each system.
 
 ## Example uses
 

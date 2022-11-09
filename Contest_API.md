@@ -11,23 +11,20 @@ This page describes an API for accessing information provided by a
 [Contest Data Server](https://tools.icpc.global/cds/).
 Such an API can be used by a multitude of clients:
 
-  - an external scoreboard
-  - a scoreboard resolver application
-  - contest analysis software, such as the
-    [ICAT](https://clics.ecs.baylor.edu/index.php?title=ICAT) toolset
-  - another "shadow" CCS, providing forwarding of submissions and all
-    relevant information
-  - internally, to interface between the CCS server and judging
-    instances
+- an external scoreboard
+- a scoreboard resolver application
+- contest analysis software, such as the ICAT toolset
+- another "shadow" CCS, providing forwarding of submissions and all relevant
+  information
+- internally, to interface between the CCS server and judging instances
 
-This API is meant to be useful, not only at the ICPC World Finals, but
-more generally in any ICPC-style contest setup. It is meant to
-incorporate and supersede a number of
-[deprecated or obsolete specifications](https://clics.ecs.baylor.edu/index.php?title=Main_Page#Deprecated.2C_Old.2C_and_Orphaned_Specifications) amongst which the *JSON Scoreboard*, the
-*REST interface for source code fetching*
-and the *Contest start interface*.
+This API is meant to be useful, not only at the ICPC World Finals, but more
+generally in any ICPC-style contest setup. It is meant to incorporate and
+supersede a number of deprecated or obsolete specifications amongst which the
+*JSON Scoreboard*, the *REST interface for source code fetching* and the
+*Contest start interface*.
 
-This REST interface is specified in conjunction with a new 
+This REST interface is specified in conjunction with a new
 [NDJSON event feed](#event-feed), which provides all changes to this
 interface as CRUD-style events and is meant to supersede the old XML
 *Event Feed*.
@@ -110,35 +107,35 @@ below (see e.g. [PATCH start\_time](#patch-starttime)). However,
 for future compatibility below are already listed other methods with
 their expected behavior, if implemented.
 
-  - `GET`
-    Read data. This method is idempotent and does not modify any data.
-    It can be used to request a whole collection or a specific object.
+- `GET`
+  Read data. This method is idempotent and does not modify any data. It can be
+  used to request a whole collection or a specific object.
 
-  - `POST`
-    Create a new object. This can only be called on a collection
-    endpoint, and the `id` property may not be specified as it is up
-    to the server to assign one.
-    If successful the response will contain a `Location` header
-    pointing to the newly created object.
+- `POST`
+  Create a new object. This can only be called on a collection endpoint, and
+  the `id` property may not be specified as it is up to the server to assign
+  one. If successful the response will contain a `Location` header pointing
+  to the newly created object.
 
-  - `PUT`
-    Creates or replaces a specific object. This method is idempotent, can only
-    be called on a specific object, and replaces its contents with the
-    data provided. The payload data must be complete, i.e. the `id` is
-    required and no partial updates are allowed.
+- `PUT`
+  Creates or replaces a specific object. This method is idempotent, can only
+  be called on a specific object, and replaces its contents with the data
+  provided. The payload data must be complete, i.e. the `id` is required and
+  no partial updates are allowed.
 
-  - `PATCH`
-    Updates/modifies a specific object. This method is idempotent,
-    can only be called on a specific object, and replaces the given
-    properties with the data provided. For example
-    `PATCH https://example.com/api/contests/wf14/teams/10`
-    with JSON contents `{"name":"Our cool new team name"}`.
+- `PATCH`
+  Updates/modifies a specific object. This method is idempotent, can only be
+  called on a specific object, and replaces the given properties with the
+  data provided. For example
+  `PATCH https://example.com/api/contests/wf14/teams/10` with JSON contents
+  `{"name":"Our cool new team name"}`.
 
-  - `DELETE`
-    Delete a specific object. Idempotent, but will return a `404` error
-    code when repeated. Any provided data is ignored, and there is no response body if successful.
-    Example: `DELETE https://example.com/api/contests/wf14/teams/8`.
-    Note that deletes must keep [referential integrity](#referential-integrity) intact.
+- `DELETE`
+  Delete a specific object. Idempotent, but will return a `404` error code
+  when repeated. Any provided data is ignored, and there is no response body
+  if successful. Example:
+  `DELETE https://example.com/api/contests/wf14/teams/8`. Note that deletes
+  must keep [referential integrity](#referential-integrity) intact.
 
 #### Success, Failure, and HTTP Responses
 
@@ -149,23 +146,26 @@ current (updated) state of the object.
 
 If a POST, PUT, PATCH would cause any of the following issues it must fail, in addition to any endpoint or type-specific requirements:
 
-* A PATCH on an `id` that doesn't exist. Will return a 404 error code.
-* A PUT or PATCH containing an id that does not match the URL. Will return a 409 error code.
-* A required property is missing.
-* A property that must not be provided is provided.
-* A property type that is incorrect or otherwise invalid (e.g. non-nullable property set to null).
-* A reference to another object is invalid (to maintain [referential integrity](#referential-integrity)).
+- A PATCH on an `id` that doesn't exist. Will return a 404 error code.
+- A PUT or PATCH containing an id that does not match the URL. Will return a 409
+  error code.
+- A required property is missing.
+- A property that must not be provided is provided.
+- A property type that is incorrect or otherwise invalid (e.g. non-nullable
+  property set to null).
+- A reference to another object is invalid (to maintain
+  [referential integrity](#referential-integrity)).
 
-In addition to any endpoint or object-specific requirements, DELETE must fail
-if the object `id` doesn't exist, and return a 404 error code. 
-If the object being deleted is referenced by another object, the server must either
-fail or implement a cascading delete (to maintain [referential integrity](#referential-integrity))
+In addition to any endpoint or object-specific requirements, DELETE must fail if
+the object `id` doesn't exist, and return a 404 error code. If the object being
+deleted is referenced by another object, the server must either fail or
+implement a cascading delete (to maintain
+[referential integrity](#referential-integrity))
 
-When there is a failure using any method the response message body
-must include a JSON object that contains the properties 'code' (a number,
-identical to the HTTP status code returned) and 'message' (a string) with
-further information suitable for the client making the request, as per the
-following example:
+When there is a failure using any method the response message body must include
+a JSON object that contains the properties 'code' (a number, identical to the
+HTTP status code returned) and 'message' (a string) with further information
+suitable for the client making the request, as per the following example:
 
 ```json
 {"code":403,
@@ -214,46 +214,40 @@ respect to the optional parts of each type, e.g. if the optional .uuu is
 included in any absolute timestamp it must be included when outputting all
 absolute timestamps.
 
-  - Strings (type **`string`** in the specification) are built-in JSON strings.
-  - Numbers (type **`number`** in the specification) are built-in JSON numbers.
-  - Booleans (type **`boolean`** in the specification) are built-in JSON booleans.
-  - Integers
-    (type **`integer`** in the specification) are JSON numbers that are
-    restricted to be integer. They should be represented in standard
-    integer representation `(-)?[0-9]+`.
-  - Absolute timestamps
-    (type **`TIME`** in the specification) are strings containing
-    human-readable timestamps, given in
-    [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) extended combined
-    date/time format with timezone:
-    `yyyy-mm-ddThh:mm:ss(.uuu)?[+-]zz(:mm)?` (or timezone `Z` for UTC).
-  - Relative times
-    (type **`RELTIME`** in the specification) are strings containing
-    human-readable time durations, given in a slight modification of the
-    [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) extended time
-    format: `(-)?(h)*h:mm:ss(.uuu)?`
-  - Identifiers
-    (type **`ID`** in the specification) are given as string consisting
-    of characters `[a-zA-Z0-9_.-]` of length at most 36 and not starting
-    with a `-` (dash) or `.` (dot) or ending with a `.` (dot). IDs are 
-    unique within each endpoint. IDs are assigned by the person or system 
-    that is the source of the object, and must be maintained by downstream 
-    systems. For example, the person configuring a contest on disk will 
-    typically define the ID for each team, and any CCS or CDS that exposes 
-    the team must use the same ID.
-    Some IDs are also used as identifiable labels and are marked below
-    along with the recommended format. These IDs should be meaningful
-    for human communication (e.g. team "43", problem "A") and are as
-    short as reasonable but not more than 10 characters. IDs not marked
-    as labels may be random characters and cannot be assumed to be
-    suitable for display purposes.
-  - File references
-    (type **`FILE`** in the specification) are represented as a JSON object 
-    with properties as defined below.
-  - Arrays (type **`array of <type>`** in the specification) are built-in JSON 
-    arrays of some type defined above.
-  - Nullable types (type **`<type> ?`** in the specification) are either a
-    value of a type defined above, or `null`.
+- Strings (type **`string`** in the specification) are built-in JSON strings.
+- Numbers (type **`number`** in the specification) are built-in JSON numbers.
+- Booleans (type **`boolean`** in the specification) are built-in JSON
+  booleans.
+- Integers (type **`integer`** in the specification) are JSON numbers that are
+  restricted to be integer. They should be represented in standard integer
+  representation `(-)?[0-9]+`.
+- Absolute timestamps (type **`TIME`** in the specification) are strings
+  containing human-readable timestamps, given in
+  [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) extended combined date/time
+  format with timezone: `yyyy-mm-ddThh:mm:ss(.uuu)?[+-]zz(:mm)?` (or timezone
+  `Z` for UTC).
+- Relative times (type **`RELTIME`** in the specification) are strings
+  containing human-readable time durations, given in a slight modification of
+  the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) extended time format:
+  `(-)?(h)*h:mm:ss(.uuu)?`
+- Identifiers (type **`ID`** in the specification) are given as string
+  consisting of characters `[a-zA-Z0-9_.-]` of length at most 36 and not
+  starting with a `-` (dash) or `.` (dot) or ending with a `.` (dot). IDs are
+  unique within each endpoint. IDs are assigned by the person or system that is
+  the source of the object, and must be maintained by downstream systems. For
+  example, the person configuring a contest on disk will typically define the
+  ID for each team, and any CCS or CDS that exposes the team must use the same
+  ID. Some IDs are also used as identifiable labels and are marked below along
+  with the recommended format. These IDs should be meaningful for human
+  communication (e.g. team "43", problem "A") and are as short as reasonable
+  but not more than 10 characters. IDs not marked as labels may be random
+  characters and cannot be assumed to be suitable for display purposes.
+- File references (type **`FILE`** in the specification) are represented as a
+  JSON object with properties as defined below.
+- Arrays (type **`array of <type>`** in the specification) are built-in JSON
+  arrays of some type defined above.
+- Nullable types (type **`<type> ?`** in the specification) are either a value
+  of a type defined above, or `null`.
 
 Properties for file reference objects:
 
@@ -321,15 +315,15 @@ inline with each endpoint. Clients can use
 the [Access](#access) endpoint to see which capabilities they have
 access to.
 
-| Capability                                | Description                                  |
-| :---------------------------------------- | :------------------------------------------- |
-| [contest_start](#modifying-contests)      | Control the contest's start time             |
-| [team_submit](#modifying-submissions)     | Submit as a team                             |
-| [team_clar](#modifying-clarifications)    | Submit clarifications as a team              |
-| [proxy_submit](#modifying-submissions)    | Submit as a shared team proxy                |
-| [proxy_clar](#modifying-clarifications)   | Submit clarifications as a shared team proxy |
-| [admin_submit](#modifying-submissions)    | Submit as an admin                           |
-| [admin_clar](#modifying-clarifications)   | Submit clarifications as an admin            |
+| Capability                                | Description
+| :---------------------------------------- | :----------
+| [contest_start](#modifying-contests)      | Control the contest's start time
+| [team_submit](#modifying-submissions)     | Submit as a team
+| [team_clar](#modifying-clarifications)    | Submit clarifications as a team
+| [proxy_submit](#modifying-submissions)    | Submit as a shared team proxy
+| [proxy_clar](#modifying-clarifications)   | Submit clarifications as a shared team proxy
+| [admin_submit](#modifying-submissions)    | Submit as an admin
+| [admin_clar](#modifying-clarifications)   | Submit clarifications as an admin
 
 TODO - add capabilities related to team view, awards, and freeze time.
 
@@ -367,23 +361,23 @@ etc.) or entire collection. The general format for events is:
 
 All event types correspond to an API endpoint, as specified in the table below.
 
-| Type            | API Endpoint                          |
-| :-------------- | :------------------------------------ |
-| contest         | `/contests/<id>`                      |
-| judgement-types | `/contests/<id>/judgement-types/<id>` |
-| languages       | `/contests/<id>/languages/<id>`       |
-| problems        | `/contests/<id>/problems/<id>`        |
-| groups          | `/contests/<id>/groups/<id>`          |
-| organizations   | `/contests/<id>/organizations/<id>`   |
-| teams           | `/contests/<id>/teams/<id>`           |
-| persons         | `/contests/<id>/persons/<id>`         |
-| accounts        | `/contests/<id>/accounts/<id>`        |
-| state           | `/contests/<id>/state`                |
-| submissions     | `/contests/<id>/submissions/<id>`     |
-| judgements      | `/contests/<id>/judgements/<id>`      |
-| runs            | `/contests/<id>/runs/<id>`            |
-| clarifications  | `/contests/<id>/clarifications/<id>`  |
-| awards          | `/contests/<id>/awards/<id>`          |
+| Type            | API Endpoint
+| :-------------- | :-----------
+| contest         | `/contests/<id>`
+| judgement-types | `/contests/<id>/judgement-types/<id>`
+| languages       | `/contests/<id>/languages/<id>`
+| problems        | `/contests/<id>/problems/<id>`
+| groups          | `/contests/<id>/groups/<id>`
+| organizations   | `/contests/<id>/organizations/<id>`
+| teams           | `/contests/<id>/teams/<id>`
+| persons         | `/contests/<id>/persons/<id>`
+| accounts        | `/contests/<id>/accounts/<id>`
+| state           | `/contests/<id>/state`
+| submissions     | `/contests/<id>/submissions/<id>`
+| judgements      | `/contests/<id>/judgements/<id>`
+| runs            | `/contests/<id>/runs/<id>`
+| clarifications  | `/contests/<id>/clarifications/<id>`
+| awards          | `/contests/<id>/awards/<id>`
 
 Each event is a notification that an object or a collection has changed
 (and hence the contents of the corresponding endpoint) to `data`.
@@ -480,18 +474,17 @@ Means that endpoint `/contests/<contest_id>/submissions/187` has been updated to
 
 This specification is meant to cover the basic data of contests, with
 the idea that server/client implementations can extend this with more
-endpoints, properties, and/or capabilities. The following requirements 
+endpoints, properties, and/or capabilities. The following requirements
 are meant to ease extensibility:
 
-  - Clients should accept additional (unknown) event types in notifications.
-  - Clients should accept additional (unknown) properties in endpoints.
-  - Clients should accept additional (unknown) capabilities.
-  - Servers should not expect clients to recognize more than the basic,
-    required specification.
-  - In this specification and extensions, a property with value `null`
-    may be left out by the server (i.e. not be present). A client must
-    treat a property with value `null` equivalently as that property
-    not being present.
+- Clients should accept additional (unknown) event types in notifications.
+- Clients should accept additional (unknown) properties in endpoints.
+- Clients should accept additional (unknown) capabilities.
+- Servers should not expect clients to recognize more than the basic, required
+  specification.
+- In this specification and extensions, a property with value `null` may be left
+  out by the server (i.e. not be present). A client must treat a property with
+  value `null` equivalently as that property not being present.
 
 ## Interface specification
 
@@ -503,16 +496,19 @@ are mentioned below.
 
 The endpoints can be categorized into 4 groups as follows:
 
-  - Metadata: api, access
-  - Configuration: accounts, contests, judgement-types, languages, problems,
-    groups, organizations, persons, teams;
-  - Live data: state, submissions, judgements, runs, clarifications,
-    awards, commentary;
-  - Aggregate data: scoreboard, event-feed.
+- Metadata: api, access
+- Configuration: accounts, contests, judgement-types, languages, problems,
+  groups, organizations, persons, teams;
+- Live data: state, submissions, judgements, runs, clarifications, awards,
+  commentary;
+- Aggregate data: scoreboard, event-feed.
 
-The metadata endpoints contain data about the API, and are the only required API endpoints. 
-They are not included in the event feed. The access endpoint specifies
-which other endpoints are offered by the API. That is, any endpoints and their properties listed in `access` must be provided (possibly with a `null` value when the property is optional), and only these endpoints and properties. 
+The metadata endpoints contain data about the API, and are the only required API
+endpoints. They are not included in the event feed. The access endpoint
+specifies which other endpoints are offered by the API. That is, any endpoints
+and their properties listed in `access` must be provided (possibly with a
+`null` value when the property is optional), and only these endpoints and
+properties. 
 
 Configuration is normally set before contest start. Is not expected to,
 but could occasionally be updated during a contest. It does not have
@@ -562,22 +558,22 @@ can be expected, often in the form of a minimal `access` response.
 
 In the tables below, the columns are:
 
-  - Name: Property name; object sub-properties are indicated as
-    `property.subproperty`.
-  - Type: Data type of the property; one of the 
-    [types listed above](#json-property-types).
-  - Description: Description of the meaning of the property and any
-    special considerations. Required means that the property must be present 
-    and must not be `null`. Default values specify how missing or `null` 
-    values should be interpreted.
+- Name: Property name; object sub-properties are indicated as
+  `property.subproperty`.
+- Type: Data type of the property; one of the
+  [types listed above](#json-property-types).
+- Description: Description of the meaning of the property and any special
+  considerations. Required means that the property must be present and must not
+  be `null`. Default values specify how missing or `null` values should be
+  interpreted.
 
 Note that all results returned from endpoints:
 
-  - Must only have `null` values if the type of the property is `<type> ?`.
-  - Must contain all properties specified in the [Access](#access) endpoint
-    that have non-`null` values. 
-  - Must not contain any properties not specified in the [Access](#access) 
-    endpoint.
+- Must only have `null` values if the type of the property is `<type> ?`.
+- Must contain all properties specified in the [Access](#access) endpoint that
+  have non-`null` values.
+- Should not contain any properties not specified in the [Access](#access)
+  endpoint.
 
 ### Filtering
 
@@ -867,41 +863,41 @@ the column means that the judgement is one of the "big 5".
 The **Translation** column lists other judgements the judgement can
 safely be translated to, if a system does not support it.
 
-| ID  | Name                                     | A.k.a.                                                   | Big 5 | Translation       | Description                                               |
-| :-- | :--------------------------------------- | :------------------------------------------------------- | :---- | :---------------- | :-------------------------------------------------------- |
-| AC  | Accepted                                 | Correct, Yes (YES)                                       | \*    | \-                | Solves the problem                                        |
-| RE  | Rejected                                 | Incorrect, No (NO)                                       | WA?   | \-                | Does not solve the problem                                |
-| WA  | Wrong Answer                             |                                                          | \*    | RE                | Output is not correct                                     |
-| TLE | Time Limit Exceeded                      |                                                          | \*    | RE                | Too slow                                                  |
-| RTE | Run-Time Error                           |                                                          | \*    | RE                | Crashes                                                   |
-| CE  | Compile Error                            |                                                          | \*    | RE                | Does not compile                                          |
-| APE | Accepted - Presentation Error            | Presentation Error, also see AC, PE, and IOF             | AC    | AC                | Solves the problem, although formatting is wrong          |
-| OLE | Output Limit Exceeded                    |                                                          | WA    | WA, RE            | Output is larger than allowed                             |
-| PE  | Presentation Error                       | Output Format Error (OFE), Incorrect Output Format (IOF) | WA    | WA, RE            | Data in output is correct, but formatting is wrong        |
-| EO  | Excessive Output                         |                                                          | WA    | WA, RE            | A correct output is produced, but also additional output  |
-| IO  | Incomplete Output                        |                                                          | WA    | WA, RE            | Parts, but not all, of a correct output is produced       |
-| NO  | No Output                                |                                                          | WA    | IO, WA, RE        | There is no output                                        |
-| WTL | Wallclock Time Limit Exceeded            |                                                          | TLE   | TLE, RE           | CPU time limit is not exceeded, but wallclock is          |
-| ILE | Idleness Limit Exceeded                  |                                                          | TLE   | WTL, TLE, RE      | No CPU time used for too long                             |
-| TCO | Time Limit Exceeded - Correct Output     |                                                          | TLE   | TLE, RE           | Too slow but producing correct output                     |
-| TWA | Time Limit Exceeded - Wrong Answer       |                                                          | TLE   | TLE, RE           | Too slow and also incorrect output                        |
-| TPE | Time Limit Exceeded - Presentation Error |                                                          | TLE   | TWA, TLE, RE      | Too slow and also presentation error                      |
-| TEO | Time Limit Exceeded - Excessive Output   |                                                          | TLE   | TWA, TLE, RE      | Too slow and also excessive output                        |
-| TIO | Time Limit Exceeded - Incomplete Output  |                                                          | TLE   | TWA, TLE, RE      | Too slow and also incomplete output                       |
-| TNO | Time Limit Exceeded - No Output          |                                                          | TLE   | TIO, TWA, TLE, RE | Too slow and also no output                               |
-| MLE | Memory Limit Exceeded                    |                                                          | RTE   | RTE, RE           | Uses too much memory                                      |
-| SV  | Security Violation                       | Illegal Function (IF), Restricted Function               | RTE   | RTE, RE           | Uses some functionality that is not allowed by the system |
-| IF  | Illegal Function                         | Illegal Function (IF), Restricted Function               | RTE   | SV, RTE, RE       | Calls a function that is not allowed by the system        |
-| RCO | Run-Time Error - Correct Output          |                                                          | RTE   | RTE, RE           | Crashing but producing correct output                     |
-| RWA | Run-Time Error - Wrong Answer            |                                                          | RTE   | RTE, RE           | Crashing and also incorrect output                        |
-| RPE | Run-Time Error - Presentation Error      |                                                          | RTE   | RWA, RTE, RE      | Crashing and also presentation error                      |
-| REO | Run-Time Error - Excessive Output        |                                                          | RTE   | RWA, RTE, RE      | Crashing and also excessive output                        |
-| RIO | Run-Time Error - Incomplete Output       |                                                          | RTE   | RWA, RTE, RE      | Crashing and also incomplete output                       |
-| RNO | Run-Time Error - No Output               |                                                          | RTE   | RIO, RWA, RTE, RE | Crashing and also no output                               |
-| CTL | Compile Time Limit Exceeded              |                                                          | CE    | CE, RE            | Compilation took too long                                 |
-| JE  | Judging Error                            |                                                          | \-    | \-                | Something went wrong with the system                      |
-| SE  | Submission Error                         |                                                          | \-    | \-                | Something went wrong with the submission                  |
-| CS  | Contact Staff                            | Other                                                    | \-    | \-                | Something went wrong                                      |
+| ID  | Name                                     | A.k.a.                                                   | Big 5 | Translation       | Description
+| :-- | :--------------------------------------- | :------------------------------------------------------- | :---- | :---------------- | :----------
+| AC  | Accepted                                 | Correct, Yes (YES)                                       | \*    | \-                | Solves the problem
+| RE  | Rejected                                 | Incorrect, No (NO)                                       | WA?   | \-                | Does not solve the problem
+| WA  | Wrong Answer                             |                                                          | \*    | RE                | Output is not correct
+| TLE | Time Limit Exceeded                      |                                                          | \*    | RE                | Too slow
+| RTE | Run-Time Error                           |                                                          | \*    | RE                | Crashes
+| CE  | Compile Error                            |                                                          | \*    | RE                | Does not compile
+| APE | Accepted - Presentation Error            | Presentation Error, also see AC, PE, and IOF             | AC    | AC                | Solves the problem, although formatting is wrong
+| OLE | Output Limit Exceeded                    |                                                          | WA    | WA, RE            | Output is larger than allowed
+| PE  | Presentation Error                       | Output Format Error (OFE), Incorrect Output Format (IOF) | WA    | WA, RE            | Data in output is correct, but formatting is wrong
+| EO  | Excessive Output                         |                                                          | WA    | WA, RE            | A correct output is produced, but also additional output
+| IO  | Incomplete Output                        |                                                          | WA    | WA, RE            | Parts, but not all, of a correct output is produced
+| NO  | No Output                                |                                                          | WA    | IO, WA, RE        | There is no output
+| WTL | Wallclock Time Limit Exceeded            |                                                          | TLE   | TLE, RE           | CPU time limit is not exceeded, but wallclock is
+| ILE | Idleness Limit Exceeded                  |                                                          | TLE   | WTL, TLE, RE      | No CPU time used for too long
+| TCO | Time Limit Exceeded - Correct Output     |                                                          | TLE   | TLE, RE           | Too slow but producing correct output
+| TWA | Time Limit Exceeded - Wrong Answer       |                                                          | TLE   | TLE, RE           | Too slow and also incorrect output
+| TPE | Time Limit Exceeded - Presentation Error |                                                          | TLE   | TWA, TLE, RE      | Too slow and also presentation error
+| TEO | Time Limit Exceeded - Excessive Output   |                                                          | TLE   | TWA, TLE, RE      | Too slow and also excessive output
+| TIO | Time Limit Exceeded - Incomplete Output  |                                                          | TLE   | TWA, TLE, RE      | Too slow and also incomplete output
+| TNO | Time Limit Exceeded - No Output          |                                                          | TLE   | TIO, TWA, TLE, RE | Too slow and also no output
+| MLE | Memory Limit Exceeded                    |                                                          | RTE   | RTE, RE           | Uses too much memory
+| SV  | Security Violation                       | Illegal Function (IF), Restricted Function               | RTE   | RTE, RE           | Uses some functionality that is not allowed by the system
+| IF  | Illegal Function                         | Illegal Function (IF), Restricted Function               | RTE   | SV, RTE, RE       | Calls a function that is not allowed by the system
+| RCO | Run-Time Error - Correct Output          |                                                          | RTE   | RTE, RE           | Crashing but producing correct output
+| RWA | Run-Time Error - Wrong Answer            |                                                          | RTE   | RTE, RE           | Crashing and also incorrect output
+| RPE | Run-Time Error - Presentation Error      |                                                          | RTE   | RWA, RTE, RE      | Crashing and also presentation error
+| REO | Run-Time Error - Excessive Output        |                                                          | RTE   | RWA, RTE, RE      | Crashing and also excessive output
+| RIO | Run-Time Error - Incomplete Output       |                                                          | RTE   | RWA, RTE, RE      | Crashing and also incomplete output
+| RNO | Run-Time Error - No Output               |                                                          | RTE   | RIO, RWA, RTE, RE | Crashing and also no output
+| CTL | Compile Time Limit Exceeded              |                                                          | CE    | CE, RE            | Compilation took too long
+| JE  | Judging Error                            |                                                          | \-    | \-                | Something went wrong with the system
+| SE  | Submission Error                         |                                                          | \-    | \-                | Something went wrong with the submission
+| CS  | Contact Staff                            | Other                                                    | \-    | \-                | Something went wrong
 
 #### Examples
 
@@ -986,26 +982,26 @@ identifiers. It is recommended to choose new identifiers with a suffix
 appended to an existing one. For example `cpp17` to specify the ISO 2017
 version of C++.
 
-| ID         | Name        | Extensions           | Entry point name |
-| :--------- | :---------- | :------------------- | :--------------- |
-| ada        | Ada         | adb, ads             |                  |
-| c          | C           | c                    |                  |
-| cpp        | C++         | cc, cpp, cxx, c++, C |                  |
-| csharp     | C\#         | cs                   |                  |
-| go         | Go          | go                   |                  |
-| haskell    | Haskell     | hs                   |                  |
-| java       | Java        | java                 | Main class       |
-| javascript | JavaScript  | js                   | Main file        |
-| kotlin     | Kotlin      | kt                   | Main class       |
-| objectivec | Objective-C | m                    |                  |
-| pascal     | Pascal      | pas                  |                  |
-| php        | PHP         | php                  | Main file        |
-| prolog     | Prolog      | pl                   |                  |
-| python2    | Python 2    | py                   | Main file        |
-| python3    | Python 3    | py                   | Main file        |
-| ruby       | Ruby        | rb                   |                  |
-| rust       | Rust        | rs                   |                  |
-| scala      | Scala       | scala                |                  |
+| ID         | Name        | Extensions           | Entry point name
+| :--------- | :---------- | :------------------- | :---------------
+| ada        | Ada         | adb, ads             |
+| c          | C           | c                    |
+| cpp        | C++         | cc, cpp, cxx, c++, C |
+| csharp     | C\#         | cs                   |
+| go         | Go          | go                   |
+| haskell    | Haskell     | hs                   |
+| java       | Java        | java                 | Main class
+| javascript | JavaScript  | js                   | Main file
+| kotlin     | Kotlin      | kt                   | Main class
+| objectivec | Objective-C | m                    |
+| pascal     | Pascal      | pas                  |
+| php        | PHP         | php                  | Main file
+| prolog     | Prolog      | pl                   |
+| python2    | Python 2    | py                   | Main file
+| python3    | Python 3    | py                   | Main file
+| ruby       | Ruby        | rb                   |
+| rust       | Rust        | rs                   |
+| scala      | Scala       | scala                |
 
 #### Examples
 
@@ -1495,38 +1491,38 @@ is required to add submissions, with descriptions below:
 All requests must include a valid JSON object with the same properties as the submissions
 endpoint returns from a `GET` request with the following exceptions:
 
-* The property `team_id`, `time`, and `contest_time` are
-  optional depending on the use case (see below). The server
-  may require properties to either be absent or present, and should
-  respond with a 4xx error code in such cases.
-* Since `files` only supports `application/zip`, providing the `mime` property is
-  optional.
-* `reaction` may be provided but a CCS does not have to honour it.
-* The `team_submit` capability only has access to `POST`. `time`
-  must not be provided and will always be set to the
-  current time as determined by the server. `team_id` may be provided but then
-  must match the ID of the team associated with the request.
-* The `proxy_submit` capability only has access to `POST`. `time`
-  must not be provided and will always be set to the
-  current time as determined by the server. `team_id` must be provided.
-* For more advanced scenarios the `admin_submit` capability may use a `POST` (must not
-  include an `id`) or `PUT` (client is required to include a unique `id`). In both
-  cases `time` is required. For example in a setup with a central CCS with satellite sites
-  where teams submit to a proxy CCS that forwards to the central CCS, this might be
-  useful to make sure that the proxy CCS can accept submissions even when the connection
-  to the central CCS is down. The proxy can then forward these submissions later, when
-  the connection is restored again.
+- The property `team_id`, `time`, and `contest_time` are optional depending on
+  the use case (see below). The server may require properties to either be
+  absent or present, and should respond with a 4xx error code in such cases.
+- Since `files` only supports `application/zip`, providing the `mime` property
+  is optional.
+- `reaction` may be provided but a CCS does not have to honour it.
+- The `team_submit` capability only has access to `POST`. `time` must not be
+  provided and will always be set to the current time as determined by the
+  server. `team_id` may be provided but then must match the ID of the team
+  associated with the request.
+- The `proxy_submit` capability only has access to `POST`. `time` must not be
+  provided and will always be set to the current time as determined by the
+  server. `team_id` must be provided.
+- For more advanced scenarios the `admin_submit` capability may use a `POST`
+  (must not include an `id`) or `PUT` (client is required to include a unique
+  `id`). In both cases `time` is required. For example in a setup with a
+  central CCS with satellite sites where teams submit to a proxy CCS that
+  forwards to the central CCS, this might be useful to make sure that the proxy
+  CCS can accept submissions even when the connection to the central CCS is
+  down. The proxy can then forward these submissions later, when the connection
+  is restored again.
 
 The request must fail with a 4xx error code if any of the following happens:
 
-* A required property is missing.
-* A property that must not be provided is provided.
-* The supplied problem, team or language can not be found.
-* An entrypoint is required for the given language, but not supplied.
-* The mime property in `files` is set but invalid.
-* Something is wrong with the submission file. For example it contains too many
+- A required property is missing.
+- A property that must not be provided is provided.
+- The supplied problem, team or language can not be found.
+- An entrypoint is required for the given language, but not supplied.
+- The mime property in `files` is set but invalid.
+- Something is wrong with the submission file. For example it contains too many
   files, it is too big, etc.
-* The provided `id` already exists or is otherwise not acceptable.
+- The provided `id` already exists or is otherwise not acceptable.
 
 The response will contain a `Location` header pointing to the newly created submission
 and the response body will contain the initial state of the submission.
@@ -1579,12 +1575,11 @@ accept and use that `id` property.
 To allow for any further use cases, the specification is deliberately
 flexible in how the server can handle optional properties.
 
-* The `contest_time` property should normally not be specified when
-  `time` is already specified as it can be calculated from `time` and
-  the wallclock time is unambiguously defined without reference to
-  contest start time. However, in a case where one would want to
-  support a multi-site contest where the sites run out of sync, the
-  use of `contest_time` might be considered.
+- The `contest_time` property should normally not be specified when `time` is
+  already specified as it can be calculated from `time` and the wallclock time
+  is unambiguously defined without reference to contest start time. However, in
+  a case where one would want to support a multi-site contest where the sites
+  run out of sync, the use of `contest_time` might be considered.
 
 #### Examples
 
@@ -1760,30 +1755,32 @@ is required to add clarifications, with descriptions below:
 | proxy_clar        | POST a clarification as a proxy (able to submit on behalf of team(s))
 | admin_clar        | POST or PUT a clarification as an admin
 
-All requests must include a valid JSON object with the same properties as the clarifications
-endpoint returns from a `GET` request with the following exceptions:
+All requests must include a valid JSON object with the same properties as the
+clarifications endpoint returns from a `GET` request with the following
+exceptions:
 
-* When a property value would be null it is optional - you do not need to include it.
-  e.g. if a clarification is not related to a problem you can choose to include or
-  exclude the `problem_id`.
-* The `team_clar` capability only has access to `POST`. `id`, `to_team_id`, `time`, and
-  `contest_time` must not be provided. `from_team_id` may be provided but then
-  must match the ID of the team associated with the request. The server will determine
-  an `id` and the current `time` and `contest_time`.
-* The `proxy_clar` capability only has access to `POST`. `id`, `to_team_id`, `time`, and
-  `contest_time` must not be provided. `from_team_id` must be provided. The server will determine
-  an `id` and the current `time` and `contest_time`.
-* The `admin_clar` capability may use a `POST` (must not
-  include an `id`) or `PUT` (client is required to include a unique `id`).
-  In both cases `time` is required.
+- When a property value would be null it is optional - you do not need to
+  include it. e.g. if a clarification is not related to a problem you can
+  choose to include or exclude the `problem_id`.
+- The `team_clar` capability only has access to `POST`. `id`, `to_team_id`,
+  `time`, and `contest_time` must not be provided. `from_team_id` may be
+  provided but then must match the ID of the team associated with the request.
+  The server will determine an `id` and the current `time` and `contest_time`.
+- The `proxy_clar` capability only has access to `POST`. `id`, `to_team_id`,
+  `time`, and `contest_time` must not be provided. `from_team_id` must be
+  provided. The server will determine an `id` and the current `time` and
+  `contest_time`.
+- The `admin_clar` capability may use a `POST` (must not include an `id`) or
+  `PUT` (client is required to include a unique `id`). In both cases `time` is
+  required.
 
 The request must fail with a 4xx error code if any of the following happens:
 
-* A required property is missing.
-* A property that must not be provided is provided.
-* The supplied problem, from_team, to_team, or reply_to cannot be found or are not
-  visible to the client that's submitting.
-* The provided `id` already exists or is otherwise not acceptable.
+- A required property is missing.
+- A property that must not be provided is provided.
+- The supplied problem, from_team, to_team, or reply_to cannot be found or are
+  not visible to the client that's submitting.
+- The provided `id` already exists or is otherwise not acceptable.
 
 The response will contain a `Location` header pointing to the newly created clarification
 and the response body will contain the initial state of the clarification.
@@ -1877,20 +1874,18 @@ Properties of award objects:
 
 #### Semantics
 
-  - Awards are not final until the contest is.
-  - An award may be created at any time, although it is recommended
-    that a system creates the awards it intends to award before the
-    contest starts.
-  - If an award has a non-null `team_ids`, then it must be kept up to
-    date during the contest. E.g. if "winner" will not be updated with
-    the current leader during the contest, it must be null until the
-    award **is** updated.
-  - If an award is present during the contest this means that if the
-    contest would end immediately and then become final, that award
-    would be final. E.g. the "winner" during the contest should be the
-    current leader. This is of course subject to what data the client
-    can see; the public client's winner may not change during the
-    scoreboard freeze but an admin could see the true current winner.
+- Awards are not final until the contest is.
+- An award may be created at any time, although it is recommended that a system
+  creates the awards it intends to award before the contest starts.
+- If an award has a non-null `team_ids`, then it must be kept up to date during
+  the contest. E.g. if "winner" will not be updated with the current leader
+  during the contest, it must be null until the award **is** updated.
+- If an award is present during the contest this means that if the contest would
+  end immediately and then become final, that award would be final. E.g.
+  the "winner" during the contest should be the current leader. This is of
+  course subject to what data the client can see; the public client's winner
+  may not change during the scoreboard freeze but an admin could see the true
+  current winner.
 
 #### Known awards
 
@@ -1937,12 +1932,16 @@ are already handled.
 The request must fail with a 4xx error code if any of the following
 happens:
 
-* A POST that includes an id.
-* A PATCH, or DELETE on an award that doesn't exist.
-* A POST or PUT that is missing one of the required properties (`citation` and `team_ids`).
-* A PATCH that contains an invalid property (e.g. null `citation` or `team_ids`).
-* A PUT or PATCH that includes an award id that doesn't match the id in the url.
-* A POST, PUT, PATCH, or DELETE on an award id that the server is configured to manage exclusively.
+- A POST that includes an id.
+- A PATCH, or DELETE on an award that doesn't exist.
+- A POST or PUT that is missing one of the required properties (`citation` and
+  `team_ids`).
+- A PATCH that contains an invalid property (e.g. null `citation` or
+  `team_ids`).
+- A PUT or PATCH that includes an award id that doesn't match the id in the
+  url.
+- A POST, PUT, PATCH, or DELETE on an award id that the server is configured to
+  manage exclusively.
 
 #### Examples
 
