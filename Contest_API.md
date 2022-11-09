@@ -7,7 +7,7 @@ permalink: /contest_api
 ## Introduction
 
 This page describes an API for accessing information provided by a
-[Contest Control System](ccs_system_requirements) or
+[Contest Control System](ccs_system_requirements) (CCS) or
 [Contest Data Server](https://tools.icpc.global/cds/).
 Such an API can be used by a multitude of clients:
 
@@ -488,10 +488,7 @@ are meant to ease extensibility:
 
 ## Interface specification
 
-The following list of API endpoints should be supported. Note that `access`,
-`state`, `scoreboard` and `event-feed` are singular nouns and indeed
-contain only a single object.
-
+The following list of API endpoints may be supported, as detailed below.
 All endpoints should support `GET`; specific details on other methods
 are mentioned below.
 
@@ -506,9 +503,12 @@ The endpoints can be categorized into 4 groups as follows:
   commentary;
 - Aggregate data: scoreboard, event-feed.
 
-Metadata is data about the API. These are not included in the event feed and
-are always required to be available. The access endpoint specifies which other
-endpoints are offered by the API.
+The metadata endpoints contain data about the API, and are the only required API
+endpoints. They are not included in the event feed. The access endpoint
+specifies which other endpoints are offered by the API. That is, any endpoints
+and their properties listed in `access` must be provided (possibly with a
+`null` value when the property is optional), and only these endpoints and
+properties. 
 
 Configuration is normally set before contest start. Is not expected to,
 but could occasionally be updated during a contest. It does not have
@@ -526,6 +526,33 @@ Aggregate data: Only `GET` makes sense. These are not included in the
 event feed, also note that these should not be considered proper REST
 endpoints, and that the `event-feed` endpoint is a streaming feed in
 NDJSON format.
+
+Note that `api`, `access`, `account`, `state`, `scoreboard`, and `event-feed`
+are singular nouns and indeed contain only a single object.
+
+### Required and optional endpoints
+
+The only required endpoints are metadata: `api` and `access`.
+The only requirements for properties are that collections must have
+an `id` property.
+[Referential integrity](#referential-integrity) must also be kept
+(for example, if a submission has a team_id, then teams must be supported).
+
+All other endpoints and properties are optional.
+`access` exists so that you can discover which endpoints and properties
+are supported by a given provider.
+
+In practice there are different types of providers that will offer
+similar sets of endpoints. Some examples:
+ - A contest management system will support at least contests and
+   teams, and may support other configuration endpoints.
+ - A CCS will support at least submissions, judgements, and
+   dependencies of these. It will likely support a scoreboard, and
+   usually an event-feed.
+
+Separate specifications (for example, the CCS System Requirements)
+will provide more information on which endpoints and properties
+can be expected, often in the form of a minimal `access` response.
 
 ### Table column description
 
