@@ -1,5 +1,5 @@
 ---
-sort: 3
+sort: 4
 permalink: /contest_package
 ---
 # Contest Package Format

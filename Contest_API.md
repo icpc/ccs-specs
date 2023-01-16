@@ -1,5 +1,5 @@
 ---
-sort: 2
+sort: 3
 permalink: /contest_api
 ---
 # Contest API
@@ -205,96 +205,6 @@ deleted, or alternatively, the team's `organization_id` is set to
 Furthermore, the ID property (see below) of objects are not allowed to
 change. However, note that a particular ID might be reused by first
 deleting an object and then creating a new object with the same ID.
-
-### JSON property types
-
-Property types are specified as one of the standard JSON types, or one of the
-more specific types defined below. Implementations must be consistent with
-respect to the optional parts of each type, e.g. if the optional .uuu is
-included in any absolute timestamp it must be included when outputting all
-absolute timestamps.
-
-- Strings (type **`string`** in the specification) are built-in JSON strings.
-- Numbers (type **`number`** in the specification) are built-in JSON numbers.
-- Booleans (type **`boolean`** in the specification) are built-in JSON
-  booleans.
-- Integers (type **`integer`** in the specification) are JSON numbers that are
-  restricted to be integer. They should be represented in standard integer
-  representation `(-)?[0-9]+`.
-- Absolute timestamps (type **`TIME`** in the specification) are strings
-  containing human-readable timestamps, given in
-  [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) extended combined date/time
-  format with timezone: `yyyy-mm-ddThh:mm:ss(.uuu)?[+-]zz(:mm)?` (or timezone
-  `Z` for UTC).
-- Relative times (type **`RELTIME`** in the specification) are strings
-  containing human-readable time durations, given in a slight modification of
-  the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) extended time format:
-  `(-)?(h)*h:mm:ss(.uuu)?`
-- Identifiers (type **`ID`** in the specification) are given as string
-  consisting of characters `[a-zA-Z0-9_.-]` of length at most 36 and not
-  starting with a `-` (dash) or `.` (dot) or ending with a `.` (dot). IDs are
-  unique within each endpoint. IDs are assigned by the person or system that is
-  the source of the object, and must be maintained by downstream systems. For
-  example, the person configuring a contest on disk will typically define the
-  ID for each team, and any CCS or CDS that exposes the team must use the same
-  ID. Some IDs are also used as identifiable labels and are marked below along
-  with the recommended format. These IDs should be meaningful for human
-  communication (e.g. team "43", problem "A") and are as short as reasonable
-  but not more than 10 characters. IDs not marked as labels may be random
-  characters and cannot be assumed to be suitable for display purposes.
-- File references (type **`FILE`** in the specification) are represented as a
-  JSON object with properties as defined below.
-- Arrays (type **`array of <type>`** in the specification) are built-in JSON
-  arrays of some type defined above.
-- Nullable types (type **`<type> ?`** in the specification) are either a value
-  of a type defined above, or `null`.
-
-Properties for file reference objects:
-
-| Name     | Type      | Description
-| -------- | --------- | -----------
-| href     | string ?  | URL where the resource can be found. Relative URLs are relative to the `baseurl`. Must point to a file of intended mime-type. Resource must be accessible using the exact same (possibly none) authentication as the call that returned this data.
-| filename | string    | POSIX compliant filename. Filenames must be unique within the endpoint object where they are used. I.e. an organization can have (multiple) `logo` and `country_flag` file references, they must all have a different filename, but different organizations may have files with the same filename.
-| hash     | string ?  | MD5 hash of the file referenced.
-| mime     | string    | Mime type of resource.
-| width    | integer ? | Width of the image. Required for files with mime type image/*.
-| height   | integer ? | Height of the image. Required for files with mime type image/*.
-
-The `href` property may be an [absolute or relative
-URL](https://tools.ietf.org/html/rfc3986); relative URLs must be
-interpreted relative to the `baseurl` of the API. For example, if
-`baseurl` is <https://example.com/api>, then the following are
-equivalent JSON response snippets pointing to the same location:
-
-```json
-  "href":"https://example.com/api/contests/wf14/submissions/187/files"
-  "href":"contests/wf14/submissions/187/files"
-```
-
-For images, the supported mime types are image/png, image/jpeg, and image/svg+xml.
-
-For images in SVG format, i.e. those having a mime type of image/svg+xml,
-the values of `width` and `height` should be the viewport width and height in pixels
-when possible, but otherwise the actual values don't matter as long as they
-are positive and represent the correct aspect ratio.
-
-If implementing support for uploading files pointed to by resource
-links, substitute the href property with a data property with a base64
-encoded string of the associated file contents as the value.
-
-For example
-
-`   PUT https://example.com/api/contests/wf14/organizations/inst105`
-
-with JSON data
-
-```json
-{ "id":"inst105",
-  "name":"Carnegie Mellon University",
-  ...
-  "logo": [{"data": "<base64 string>", "width": 160, "height": 160}]
-}
-```
 
 ### Capabilities
 
