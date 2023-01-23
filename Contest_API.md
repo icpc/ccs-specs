@@ -262,7 +262,7 @@ Properties for file reference objects:
 
 | Name     | Type      | Description
 | -------- | --------- | -----------
-| href     | string ?  | URL where the resource can be found. Relative URLs are relative to the `baseurl`. Must point to a file of intended mime-type. Resource must be accessible using the exact same (possibly none) authentication as the call that returned this data.
+| href     | string ?  | URL where the resource can be found. Relative URLs are relative to the `baseurl`. Must point to a file of intended mime-type. Resource must be accessible using the exact same (possibly none) authentication as the call that returned this data. Required when served from an API, but optional inside a [Contest Package].
 | filename | string    | POSIX compliant filename. Filenames must be unique within the endpoint object where they are used. I.e. an organization can have (multiple) `logo` and `country_flag` file references, they must all have a different filename, but different organizations may have files with the same filename.
 | hash     | string ?  | MD5 hash of the file referenced.
 | mime     | string    | Mime type of resource.
