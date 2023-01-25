@@ -765,7 +765,7 @@ starting, or if the new start time is in the past or within 30s.
 Clients with the `contest_thaw` [capability](#capabilities) have the ability to
 set a time when the contest will be thawed via a PATCH method.
 
-The Patch must include a valid JSON object with exactly three properties:
+The Patch must include a valid JSON object with exactly two properties:
 the contest `id` (used for verification) and a `contest_thaw_time`, which can
 either be a `<TIME>` value or the special string value `"now"`, which indicates
 the contest should be thawed at the current time.
