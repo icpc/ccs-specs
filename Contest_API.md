@@ -767,10 +767,10 @@ set a time when the contest will be thawed via a PATCH method.
 
 The Patch must include a valid JSON object with exactly three properties:
 the contest `id` (used for verification) and a `contest_thaw_time`, which can
-either be a `<TIME>` value or the specialstring value `"now"`, which indicates
+either be a `<TIME>` value or the special string value `"now"`, which indicates
 the contest should be thawed at the current time.
 
-The request should fail with a 4xx error code if the contest can't be thawed at the given
+The request should fail with a 403 error code if the contest can't be thawed at the given
 time, for example because the thaw time is before the contest end, the contest is already thawed
 or the server does not support setting a specific thaw time.
 
