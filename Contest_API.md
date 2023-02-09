@@ -1236,7 +1236,7 @@ The following endpoints are associated with teams:
 | Endpoint                     | Mime-type        | Description
 | :--------------------------- | :--------------- | :----------
 | `/contests/<id>/teams`       | application/json | JSON array of all teams with properties as specified by `/access`.
-| `/contests/<id>/teams/id>`   | application/json | JSON object representing a single team with properties as specified by `/access`.
+| `/contests/<id>/teams/<id>`   | application/json | JSON object representing a single team with properties as specified by `/access`.
 
 Properties of team objects:
 
