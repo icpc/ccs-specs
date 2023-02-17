@@ -21,28 +21,7 @@
 		"country_flag": { "$ref": "common.json#/imagerefsornull" },
 		"url": { "type": [ "string", "null" ] },
 		"twitter_hashtag": { "type": [ "string", "null" ] },
-		"location": {
-			"oneOf": [
-				{
-					"type": "object",
-					"properties": {
-						"latitude": {
-							"type": "number",
-							"minimum": -90,
-							"maximum":  90
-						},
-						"longitude": {
-							"type": "number",
-							"minimum": -180,
-							"maximum":  180
-						}
-					},
-					"required": ["latitude", "longitude"],
-					"$ref": "common.json#/strictproperties"
-				},
-				{ "type": "null" }
-			]
-		},
+		"location": { "$ref": "common.json#/locationornull" },
 		"logo": { "$ref": "common.json#/imagerefsornull" }
 	},
 	"required": ["id", "name"],

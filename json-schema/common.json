@@ -197,6 +197,31 @@
 		]
 	},
 
+	"location": {
+		"type": "object",
+		"properties": {
+			"latitude": {
+				"type": "number",
+				"minimum": -90,
+				"maximum":  90
+			},
+			"longitude": {
+				"type": "number",
+				"minimum": -180,
+				"maximum":  180
+			}
+		},
+		"required": ["latitude", "longitude"],
+		"$ref": "common.json#/strictproperties"
+	},
+
+	"locationornull": {
+		"oneOf": [
+			{ "$ref": "#/location" },
+			{ "type": "null" }
+		]
+	},
+
 	"command": {
 		"type": "object",
 		"properties": {
