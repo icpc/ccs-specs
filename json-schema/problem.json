@@ -18,7 +18,7 @@
 		},
 		"label": { "type": "string" },
 		"name": { "type": "string" },
-		"ordinal": { "$ref": "common.json#/ordinal" },
+		"ordinal": { "type": "integer" },
 		"rgb": {
 			"type": "string",
 			"pattern": "^#[A-Fa-f0-9]{3}([A-Fa-f0-9]{3})?$"

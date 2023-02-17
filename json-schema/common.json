@@ -126,11 +126,6 @@
 		]
 	},
 
-	"ordinal": {
-		"type": "integer",
-		"minimum": 0
-	},
-
 	"fileref": {
 		"type": "object",
 		"properties": {

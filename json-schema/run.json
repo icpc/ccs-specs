@@ -8,7 +8,7 @@
 	"properties": {
 		"id": { "$ref": "common.json#/identifier" },
 		"judgement_id": { "$ref": "common.json#/identifier" },
-		"ordinal": { "$ref": "common.json#/ordinal" },
+		"ordinal": { "type": "integer" },
 		"judgement_type_id": { "$ref": "common.json#/judgementtypeid" },
 		"time": { "$ref": "common.json#/abstime" },
 		"contest_time": { "$ref": "common.json#/reltime" },
