@@ -12,6 +12,7 @@
 		"countdown_pause_time": { "$ref": "common.json#/posreltimeornull" },
 		"duration": { "$ref": "common.json#/posreltime" },
 		"scoreboard_freeze_duration": { "$ref": "common.json#/posreltimeornull" },
+		"scoreboard_type": { "enum": ["pass-fail", "score"] },
 		"penalty_time": {
 			"type": "integer",
 			"minimum": 0
@@ -19,6 +20,30 @@
 		"banner": { "$ref": "common.json#/imagerefsornull" },
 		"logo": { "$ref": "common.json#/imagerefsornull" }
 	},
-	"required": ["id", "name", "duration"],
+	"allOf": [
+		{
+			"if": {
+				"properties": {
+					"scoreboard_type": { "const": "pass-fail" }
+				},
+				"required": ["scoreboard_type"]
+			},
+			"then": {
+				"required": ["penalty_time"]
+			}
+		},
+		{
+			"if": {
+				"properties": {
+					"scoreboard_type": { "const": "score" }
+				},
+				"required": ["scoreboard_type"]
+			},
+			"then": {
+				"not": { "required": ["penalty_time"] }
+			}
+		}
+	],
+	"required": ["id", "name", "duration", "scoreboard_type"],
 	"$ref": "common.json#/strictproperties"
 }

@@ -32,6 +32,7 @@
 			"type": "integer",
 			"minimum": 0
 		},
+		"max_score": { "type": "number" },
 		"package": { "$ref": "common.json#/filerefsornull" },
 		"statement": { "$ref": "common.json#/filerefsornull" }
 	},

@@ -30,9 +30,25 @@
 							"total_time": {
 								"type": "integer",
 								"minimum": 0
+							},
+							"score": {
+								"type": "number"
+							},
+							"time": {
+								"type": "integer",
+								"minimum": 0
 							}
 						},
-						"required": ["num_solved", "total_time"],
+						"oneOf": [
+							{
+								"required": ["num_solved", "total_time"],
+								"not": { "required": ["score"] }
+							},
+							{
+								"not": { "required": ["num_solved", "total_time"] },
+								"required": ["score"]
+							}
+						],
 						"$ref": "common.json#/strictproperties"
 					},
 					"problems": {
@@ -50,24 +66,40 @@
 									"minimum": 0
 								},
 								"solved": { "type": "boolean" },
+								"score": {
+									"type": "number",
+									"minimum": 0
+								},
 								"time": { "type": "integer", "minimum": 0 }
 							},
 							"oneOf": [
-								{
-									"properties": { "solved": { "enum": [false] } },
-									"not": { "required": ["time"] }
-								},
-								{
-									"properties": { "solved": { "enum": [true] } },
-									"required": ["time"]
-								}
+								{ "required": ["solved"] },
+								{ "required": ["score"] }
 							],
-							"required": ["problem_id", "num_judged", "num_pending", "solved"],
+							"if": {
+								"oneOf": [
+									{
+										"not": { "properties": { "solved": { "const": true } } },
+										"required": ["solved"]
+									},
+									{
+										"properties": { "score": { "const": 0 } },
+										"required": ["score"]
+									}
+								]
+							},
+							"then": {
+								"not": { "required": ["time"] }
+							},
+							"else": {
+								"required": ["time"]
+							},
+							"required": ["problem_id", "num_judged", "num_pending"],
 							"$ref": "common.json#/strictproperties"
 						}
 					}
 				},
-				"required": ["rank", "team_id", "score", "problems"],
+				"required": ["rank", "team_id", "score"],
 				"$ref": "common.json#/strictproperties"
 			}
 		}
