@@ -1,8 +1,9 @@
 #!/bin/bash
 set -e -o pipefail
 
-# Checks whether a Contest API conforms to the specification
-# https://ccs-specs.icpc.io/contest_api
+# This should match the API version this script tests as found at the
+# URL https://ccs-specs.icpc.io/$API_VERSION/contest_api
+API_VERSION=draft
 
 # Set path to json-validate binary if it's not in PATH:
 #VALIDATE_JSON=/path/to/validate-json
@@ -74,6 +75,12 @@ verbose()
 	fi
 }
 
+version()
+{
+	PROGNAME=$(basename "$0")
+	echo "$PROGNAME for Contest API version $API_VERSION"
+}
+
 usage()
 {
 	PROGNAME=$(basename "$0")
@@ -83,7 +90,7 @@ $PROGNAME - Validate a Contest API implementation with JSON schema.
 Usage: $PROGNAME [option]... URL
 
 This program validates a Contest API implementation against the
-specification: https://ccs-specs.icpc.io/contest_api
+specification at https://ccs-specs.icpc.io/$API_VERSION/contest_api
 
 The URL must point to the base of the API, for example:
 
@@ -94,11 +101,12 @@ errors, use ~/.netrc for credentials, and be verbose. The option -a
 makes that 'strict=1' is appended as argument to each API call.
 
 This script requires:
-- the curl command line client
-- the validate-json binary from https://github.com/justinrainbow/json-schema
+- the cURL command line client
+- the \`validate-json\` binary from https://github.com/justinrainbow/json-schema
   which can be installed with \`composer require justinrainbow/json-schema\`
 - the jq program from https://github.com/stedolan/jq
   which is available as the \`jq\` package in Debian and Ubuntu.
+- the PHP command line executable to run the helper script \`check-api-consistency.php\`
 
 Options:
 
@@ -108,12 +116,13 @@ Options:
   -c OPTS  Options to pass to curl to request API data (default: $CURL_OPTIONS)
   -d       Turn on shell script debugging.
   -e       Check correct HTTP error codes for non-existent endpoints.
-  -h       Snow this help output.
   -j PROG  Specify the path to the 'validate-json' binary.
   -n       Require that all collection endpoints are non-empty.
   -p       Allow extra properties beyond those defined in the Contest API.
   -t TIME  Timeout in seconds for downloading event feed (default: $FEED_TIMEOUT)
   -q       Quiet mode: suppress all output except script errors.
+  -h       Show this help output.
+  -v       Show version information including API version.
 
 The script reports endpoints checked and validations errors.
 In quiet mode only the exit code indicates successful validation.
@@ -126,19 +135,20 @@ CURL_OPTIONS='-n -s'
 URL_ARGS=''
 
 # Parse command-line options:
-while getopts 'a:Cc:dehj:npt:q' OPT ; do
+while getopts 'a:Cc:dej:npt:qhv' OPT ; do
 	case "$OPT" in
 		a) URL_ARGS="$OPTARG" ;;
 		C) CHECK_CONSISTENCY=1 ;;
 		c) CURL_OPTIONS="$OPTARG" ;;
 		d) export DEBUG=1 ;;
 		e) CHECK_ERRORS=1 ;;
-		h) usage ; exit 0 ;;
 		j) VALIDATE_JSON="$OPTARG" ;;
 		n) NONEMPTY=1 ;;
 		p) EXTRAPROP=1 ;;
 		t) FEED_TIMEOUT="$OPTARG" ;;
 		q) QUIET=1 ;;
+		h) usage ; exit 0 ;;
+		v) version ; exit 0 ;;
 		:)
 			error "option '$OPTARG' requires an argument."
 			exit 1
