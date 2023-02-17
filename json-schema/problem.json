@@ -15,7 +15,7 @@
 				{ "type": "null" }
 			]
 		},
-		"label": { "$ref": "common.json#/label" },
+		"label": { "type": "string" },
 		"name": { "type": "string" },
 		"ordinal": { "$ref": "common.json#/ordinal" },
 		"rgb": {
