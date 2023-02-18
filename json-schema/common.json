@@ -115,7 +115,7 @@
 	"judgementtypeid": {
 		"enum": [
 			"AC", "RE", "WA", "TLE", "RTE", "CE", "APE", "OLE", "PE", "EO", "IO", "NO",
-			"WTL", "ILE", "TCO", "TWA", "TPE", "TEO", "TIO", "TNO", "MLE", "SV",
+			"WTL", "ILE", "TCO", "TWA", "TPE", "TEO", "TIO", "TNO", "MLE", "SV", "IF",
 			"RCO", "RWA", "RPE", "REO", "RIO", "RNO", "CTL", "JE", "SE", "CS"
 		]
 	},
