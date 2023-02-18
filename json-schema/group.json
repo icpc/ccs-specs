@@ -1,4 +1,5 @@
 {
+	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/group.json",
 	"$schema": "http://json-schema.org/draft/2020-12/schema",
 	"title": "CLICS Contest API - group",
 	"description": "Definition of a single group object",

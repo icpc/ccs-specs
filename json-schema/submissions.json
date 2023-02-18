@@ -1,4 +1,5 @@
 {
+	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/submissions.json",
 	"$schema": "http://json-schema.org/draft/2020-12/schema",
 	"title": "CLICS Contest API: submissions",
 	"description": "JSON response of this API call",

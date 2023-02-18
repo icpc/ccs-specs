@@ -1,4 +1,5 @@
 {
+	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/award.json",
 	"$schema": "http://json-schema.org/draft/2020-12/schema",
 	"title": "CLICS Contest API - award",
 	"description": "Definition of a single award object",
