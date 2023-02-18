@@ -8,6 +8,29 @@
 	"properties": {
 		"type": { "$ref": "common.json#/endpointssingularcontest" },
 		"id": { "$ref": "common.json#/identifierornull" },
+		"data": {
+			"$comment": "Use anyOf since some types match others without strict attribute checking.",
+			"anyOf": [
+				{ "$ref": "contest.json#" },
+				{ "$ref": "judgement-type.json#" },
+				{ "$ref": "language.json#" },
+				{ "$ref": "problem.json#" },
+				{ "$ref": "group.json#" },
+				{ "$ref": "organization.json#" },
+				{ "$ref": "team.json#" },
+				{ "$ref": "person.json#" },
+				{ "$ref": "team-member.json#" },
+				{ "$ref": "account.json#" },
+				{ "$ref": "state.json#" },
+				{ "$ref": "submission.json#" },
+				{ "$ref": "judgement.json#" },
+				{ "$ref": "run.json#" },
+				{ "$ref": "clarification.json#" },
+				{ "$ref": "award.json#" },
+				{ "$ref": "commentary.json#" },
+				{ "type": "null" }
+			]
+		},
 		"token": {
 			"oneOf": [
 				{ "type": "string" },
@@ -15,41 +38,6 @@
 			]
 		}
 	},
-	"oneOf": [
-		{
-			"properties": {
-				"data": {
-					"$comment": "Use anyOf since some types match others without strict attribute checking.",
-					"anyOf": [
-						{ "$ref": "contest.json#" },
-						{ "$ref": "judgement-type.json#" },
-						{ "$ref": "language.json#" },
-						{ "$ref": "problem.json#" },
-						{ "$ref": "group.json#" },
-						{ "$ref": "organization.json#" },
-						{ "$ref": "team.json#" },
-						{ "$ref": "person.json#" },
-						{ "$ref": "team-member.json#" },
-						{ "$ref": "account.json#" },
-						{ "$ref": "state.json#" },
-						{ "$ref": "submission.json#" },
-						{ "$ref": "judgement.json#" },
-						{ "$ref": "run.json#" },
-						{ "$ref": "clarification.json#" },
-						{ "$ref": "award.json#" },
-						{ "$ref": "commentary.json#" }
-					]
-				}
-			}
-		},
-		{
-			"properties": {
-				"data": {
-					"type": "null"
-				}
-			}
-		}
-	],
 	"required": ["id", "type", "data"],
 	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 }
