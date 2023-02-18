@@ -6,19 +6,14 @@
 
 	"type": "object",
 	"properties": {
-		"id": {
-			"oneOf": [
-				{ "$ref": "common.json#/identifier" },
-				{ "type": "null" }
-			]
-		},
+		"type": { "$ref": "common.json#/endpointssingularcontest" },
+		"id": { "$ref": "common.json#/identifierornull" },
 		"token": {
 			"oneOf": [
 				{ "type": "string" },
 				{ "type": "null" }
 			]
-		},
-		"type": { "$ref": "common.json#/endpointssingularcontest" }
+		}
 	},
 	"oneOf": [
 		{
