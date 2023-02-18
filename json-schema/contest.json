@@ -19,7 +19,8 @@
 			"minimum": 0
 		},
 		"banner": { "$ref": "common.json#/imagerefsornull" },
-		"logo": { "$ref": "common.json#/imagerefsornull" }
+		"logo": { "$ref": "common.json#/imagerefsornull" },
+		"location": { "$ref": "common.json#/locationornull" }
 	},
 	"not": {
 		"properties": {

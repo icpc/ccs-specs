@@ -9,7 +9,8 @@
 		"id": { "$ref": "common.json#/identifier" },
 		"icpc_id": { "type": [ "string", "null" ] },
 		"name": { "type": "string" },
-		"type": { "type": [ "string", "null" ] }
+		"type": { "type": [ "string", "null" ] },
+		"location": { "$ref": "common.json#/locationornull" }
 	},
 	"required": ["id", "name"],
 	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
