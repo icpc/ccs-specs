@@ -13,5 +13,5 @@
 		"problem_ids": { "$ref": "common.json#/identifiersornull" }
 	},
 	"required": ["id", "time", "contest_time", "message", "team_ids", "problem_ids"],
-	"$ref": "common.json#/strictproperties"
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 }

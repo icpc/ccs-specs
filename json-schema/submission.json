@@ -44,5 +44,5 @@
 			}
 		}
 	],
-	"$ref": "common.json#/strictproperties"
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 }

@@ -143,7 +143,7 @@
 			"height":   { "type": "integer", "minimum": 1 }
 		},
 		"required": ["href", "mime"],
-		"$ref": "#/strictproperties"
+		"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 	},
 
 	"imageref": {
@@ -207,7 +207,7 @@
 			}
 		},
 		"required": ["latitude", "longitude"],
-		"$ref": "common.json#/strictproperties"
+		"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 	},
 
 	"locationornull": {
@@ -226,7 +226,7 @@
 			"version-command": { "type": "string" }
 		},
 		"required": ["command"],
-		"$ref": "#/strictproperties"
+		"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 	},
 
 	"commandornull": {

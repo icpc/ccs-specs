@@ -37,5 +37,5 @@
 		"statement": { "$ref": "common.json#/filerefsornull" }
 	},
 	"required": ["id", "label", "name", "ordinal", "test_data_count"],
-	"$ref": "common.json#/strictproperties"
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 }

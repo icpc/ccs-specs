@@ -22,5 +22,5 @@
 		"required": ["from_team_id", "to_team_id"]
 	},
 	"required": ["id", "text", "time", "contest_time"],
-	"$ref": "common.json#/strictproperties"
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 }

@@ -10,5 +10,5 @@
 		"team_ids": { "$ref": "common.json#/identifiers" }
 	},
 	"required": ["id", "citation", "team_ids"],
-	"$ref": "common.json#/strictproperties"
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 }

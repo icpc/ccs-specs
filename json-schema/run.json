@@ -18,5 +18,5 @@
 		}
 	},
 	"required": ["id", "judgement_id", "ordinal", "judgement_type_id", "time", "contest_time"],
-	"$ref": "common.json#/strictproperties"
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 }

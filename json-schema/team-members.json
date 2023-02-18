@@ -5,7 +5,7 @@
 
 	"type": "array",
 	"uniqueItems": true,
-	"$ref": "common.json#/nonemptyarray",
+	"$comment": "TEMPLATE_TO_REQUIRE_NONEMPTY_ENDPOINTS",
 	"items": {
 		"$ref": "team-member.json#"
 	}

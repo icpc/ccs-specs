@@ -25,5 +25,5 @@
 		"logo": { "$ref": "common.json#/imagerefsornull" }
 	},
 	"required": ["id", "name"],
-	"$ref": "common.json#/strictproperties"
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 }

@@ -5,7 +5,7 @@
 
 	"type": "array",
 	"uniqueItems": true,
-	"$ref": "common.json#/nonemptyarray",
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_NONEMPTY_ENDPOINTS",
 	"items": {
 		"$ref": "submission.json#"
 	}

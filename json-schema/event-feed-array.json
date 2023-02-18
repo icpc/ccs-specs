@@ -4,7 +4,7 @@
 	"description": "JSON array of responses of this NDJSON API call",
 
 	"type": "array",
-	"$ref": "common.json#/nonemptyarray",
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_NONEMPTY_ENDPOINTS",
 	"items": {
 		"$ref": "event-feed.json#"
 	}

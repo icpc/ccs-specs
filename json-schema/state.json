@@ -13,5 +13,5 @@
 		"end_of_updates": { "$ref": "common.json#/abstimeornull" }
 	},
 	"required": ["started", "ended", "finalized", "end_of_updates"],
-	"$ref": "common.json#/strictproperties"
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 }

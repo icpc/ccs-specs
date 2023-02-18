@@ -252,10 +252,10 @@ cp -a "$MYDIR/json-schema" "$TMP"
 
 if [ -n "$NONEMPTY" ]; then
 	# Don't understand why the first '\t' needs a double escape...
-	sed -i '/"nonemptyarray":/a \\t\t"minItems": 1' "$TMP/json-schema/common.json"
+	sed -i '/ANCHOR_TO_INSERT_REQUIRE_NONEMPTY_ENDPOINTS/i \\t\t"minItems": 1,' "$TMP/json-schema/"*.json
 fi
 if [ -z "$EXTRAPROP" ]; then
-	sed -i '/"strictproperties":/a \\t\t"additionalProperties": false' "$TMP/json-schema/common.json"
+	sed -i '/ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES/i \\t\t"additionalProperties": false,' "$TMP/json-schema/"*.json
 fi
 
 # First validate and get all contests

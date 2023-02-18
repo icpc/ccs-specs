@@ -24,7 +24,7 @@
 				}
 			},
 			"required": ["x", "y", "rotation"],
-			"$ref": "common.json#/strictproperties"
+			"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 		},
 		"photo": { "$ref": "common.json#/imagerefsornull" },
 		"video": { "$ref": "common.json#/filerefsornull" },
@@ -36,5 +36,5 @@
 		"audio": { "$ref": "common.json#/filerefsornull" }
 	},
 	"required": ["id", "name"],
-	"$ref": "common.json#/strictproperties"
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 }

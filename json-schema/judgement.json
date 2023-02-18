@@ -24,5 +24,5 @@
 		}
 	},
 	"required": ["id", "submission_id", "start_time", "start_contest_time", "end_time", "end_contest_time"],
-	"$ref": "common.json#/strictproperties"
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 }

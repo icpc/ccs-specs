@@ -19,5 +19,5 @@
 		"person_id": { "$ref": "common.json#/identifierornull" }
 	},
 	"required": ["id", "username", "type"],
-	"$ref": "common.json#/strictproperties"
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 }
