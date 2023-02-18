@@ -766,9 +766,14 @@ Clients with the `contest_thaw` [capability](#capabilities) have the ability to
 set a time when the contest will be thawed via a PATCH method.
 
 The Patch must include a valid JSON object with exactly two properties:
-the contest `id` (used for verification) and a `contest_thaw_time`, which can
-either be a `<TIME>` value or the special string value `"now"`, which indicates
-the contest should be thawed at the current time.
+the contest `id` (used for verification) and a `contest_thaw_time`, a `<TIME>` value.
+
+The request should succeed with a 204 response code with no body if the server changed the
+thaw time to the time specified.
+
+The server may also thaw the contest at the current server time if the provided `contest_thaw_time`
+is in the past. In that case the server must reply with a 200 response code and the modified contest
+as body, so the client knows the server used a different thaw time.
 
 The request should fail with a 403 error code if the contest can't be thawed at the given
 time, for example because the thaw time is before the contest end, the contest is already thawed
