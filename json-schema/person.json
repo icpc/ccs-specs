@@ -7,7 +7,7 @@
 	"type": "object",
 	"properties": {
 		"id": { "$ref": "common.json#/identifier" },
-		"team_id": { "$ref": "common.json#/identifier" },
+		"team_ids": { "$ref": "common.json#/identifiers" },
 		"icpc_id": { "type": [ "string", "null" ] },
 		"name": { "type": "string" },
 		"title": { "type": [ "string", "null" ] },
@@ -18,9 +18,24 @@
 				{ "type": "null" }
 			]
 		},
-		"role": { "enum": [ "contestant", "coach", "staff" ] },
+		"role": { "enum": [ "contestant", "coach", "staff", "other" ] },
 		"photo": { "$ref": "common.json#/imagerefsornull" }
 	},
-	"required": ["id", "team_id", "name", "role"],
+	"if": {
+		"properties": {
+			"role": { "enum": [ "contestant", "coach" ] }
+		},
+		"required": [ "role" ]
+	},
+	"then": {
+		"properties": {
+			"team_ids": {
+				"type": "array",
+				"minItems": 1
+			}
+		},
+		"required": [ "team_ids" ]
+	},
+	"required": ["id", "name", "role"],
 	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 }
