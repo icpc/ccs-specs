@@ -22,6 +22,7 @@
 		"country_flag": { "$ref": "common.json#/imagerefsornull" },
 		"url": { "type": [ "string", "null" ] },
 		"twitter_hashtag": { "type": [ "string", "null" ] },
+		"twitter_account": { "type": [ "string", "null" ] },
 		"location": { "$ref": "common.json#/locationornull" },
 		"logo": { "$ref": "common.json#/imagerefsornull" }
 	},
