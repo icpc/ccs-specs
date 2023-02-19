@@ -7,6 +7,7 @@ API_VERSION=draft
 
 ENDPOINTS='
 contests
+access
 judgement-types
 languages
 problems
@@ -261,7 +262,20 @@ if [ -z "$EXTRAPROP" ]; then
 	sed -i '/ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES/i \\t\t"additionalProperties": false,' "$TMP/json-schema/"*.json
 fi
 
-# First validate and get all contests
+# First check the API information endpoint
+ENDPOINT='api_information'
+URL="${API_URL%/}/"
+SCHEMA="$TMP/json-schema/$ENDPOINT.json"
+OUTPUT="$TMP/$ENDPOINT.json"
+if query_endpoint "$OUTPUT" "$URL" ; then
+	verbose '%20s: ' "$ENDPOINT"
+	validate_schema "$OUTPUT" "$SCHEMA"
+else
+	verbose '%20s: Failed to download\n' "$ENDPOINT"
+	exit 1
+fi
+
+# Then validate and get all contests
 ENDPOINT='contests'
 URL="${API_URL%/}/$ENDPOINT"
 SCHEMA="$TMP/json-schema/$ENDPOINT.json"
