@@ -5,9 +5,6 @@ set -e -o pipefail
 # URL https://ccs-specs.icpc.io/$API_VERSION/contest_api
 API_VERSION=draft
 
-# Set path to json-validate binary if it's not in PATH:
-#VALIDATE_JSON=/path/to/validate-json
-
 ENDPOINTS='
 contests
 judgement-types
@@ -102,8 +99,7 @@ makes that 'strict=1' is appended as argument to each API call.
 
 This script requires:
 - the cURL command line client
-- the \`validate-json\` binary from https://github.com/justinrainbow/json-schema
-  which can be installed with \`composer require justinrainbow/json-schema\`
+- the \`yajsv\` binary from https://github.com/neilpa/yajsv
 - the jq program from https://github.com/stedolan/jq
   which is available as the \`jq\` package in Debian and Ubuntu.
 - the PHP command line executable to run the helper script \`check-api-consistency.php\`
@@ -116,7 +112,7 @@ Options:
   -c OPTS  Options to pass to curl to request API data (default: $CURL_OPTIONS)
   -d       Turn on shell script debugging.
   -e       Check correct HTTP error codes for non-existent endpoints.
-  -j PROG  Specify the path to the 'validate-json' binary.
+  -j PROG  Specify the path to the 'yajsv' binary.
   -n       Require that all collection endpoints are non-empty.
   -p       Allow extra properties beyond those defined in the Contest API.
   -t TIME  Timeout in seconds for downloading event feed (default: $FEED_TIMEOUT)
@@ -133,6 +129,7 @@ EOF
 FEED_TIMEOUT=10
 CURL_OPTIONS='-n -s'
 URL_ARGS=''
+YAJSV_BINARY='yajsv'
 
 # Parse command-line options:
 while getopts 'a:Cc:dej:npt:qhv' OPT ; do
@@ -142,7 +139,7 @@ while getopts 'a:Cc:dej:npt:qhv' OPT ; do
 		c) CURL_OPTIONS="$OPTARG" ;;
 		d) export DEBUG=1 ;;
 		e) CHECK_ERRORS=1 ;;
-		j) VALIDATE_JSON="$OPTARG" ;;
+		j) YAJSV_BINARY="$OPTARG" ;;
 		n) NONEMPTY=1 ;;
 		p) EXTRAPROP=1 ;;
 		t) FEED_TIMEOUT="$OPTARG" ;;
@@ -234,8 +231,9 @@ validate_schema()
 {
 	local DATA="$1" SCHEMA="$2" RESULT EXITCODE
 
+	SCHEMADIR="$(dirname "$SCHEMA")"
 	set +e
-	RESULT=$(${VALIDATE_JSON:-validate-json} "$DATA" "$SCHEMA")
+	RESULT=$($YAJSV_BINARY -q -s "$SCHEMA" -r "$SCHEMADIR"'/*.json' "$DATA")
 	EXITCODE=$?
 	set -e
 	verbose '%s' "$RESULT"
@@ -243,6 +241,9 @@ validate_schema()
 		verbose 'OK'
 	else
 		verbose ''
+	fi
+	if [ $EXITCODE -ge 4 ]; then
+		error "$YAJSV_BINARY detected usage or schema definiton errors"
 	fi
 	return $EXITCODE
 }
@@ -266,8 +267,6 @@ OUTPUT="$TMP/$ENDPOINT.json"
 if query_endpoint "$OUTPUT" "$URL" ; then
 	verbose '%20s: ' "$ENDPOINT"
 	validate_schema "$OUTPUT" "$SCHEMA"
-	EXIT=$?
-	[ $EXIT -ne 0 ] && [ $EXIT -ne 23 ] && exit $EXIT
 	CONTESTS=$(jq -r '.[].id' "$OUTPUT")
 else
 	verbose '%20s: Failed to download\n' "$ENDPOINT"
