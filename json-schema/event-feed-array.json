@@ -6,10 +6,6 @@
 	"type": "array",
 	"$ref": "common.json#/nonemptyarray",
 	"items": {
-		"$comment": "Use anyOf since the event type fields overlap between the current and legacy format.",
-		"anyOf": [
-			{ "$ref": "event-feed.json#" },
-			{ "$ref": "legacy-event-feed.json#" }
-		]
+		"$ref": "event-feed.json#"
 	}
 }
