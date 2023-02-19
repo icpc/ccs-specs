@@ -18,21 +18,16 @@
 		"compiler": { "$ref": "common.json#/commandornull" },
 		"runner": { "$ref": "common.json#/commandornull" }
 	},
-	"oneOf": [
-		{
-			"properties": { "entry_point_required": { "enum": [false] } },
-			"not": { "required": ["entry_point_name"] }
-		},
-		{
-			"properties": { "entry_point_required": { "enum": [false] } },
-			"properties": { "entry_point_name": { "enum": [null] } }
-		},
-		{
-			"properties": { "entry_point_required": { "enum": [true] } },
-			"properties": { "entry_point_name": { "type": "string" } },
-			"required": ["entry_point_name"]
-		}
-	],
+	"if": {
+		"properties": { "entry_point_required": { "const": true } },
+		"required": ["entry_point_required"]
+	},
+	"then": {
+		"required": ["entry_point_name"]
+	},
+	"else": {
+		"not": { "required": ["entry_point_name"] }
+	},
 	"required": ["id", "name", "entry_point_required", "extensions"],
 	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 }
