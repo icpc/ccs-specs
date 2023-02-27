@@ -777,7 +777,7 @@ as body, so the client knows the server used a different thaw time.
 
 The request should fail with a 403 error code if the contest can't be thawed at the given
 time, for example because the thaw time is before the contest end, the contest is already thawed
-or the server does not support setting a specific thaw time.
+or the server does not support setting this specific thaw time.
 
 #### Examples
 
