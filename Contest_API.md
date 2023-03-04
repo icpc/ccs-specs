@@ -965,7 +965,7 @@ Properties of Command objects:
 | :--------------- | :------- | :----------
 | command          | string   | Command to run.
 | args             | string ? | Argument list for command. `{files}` denotes where to include the file list. Defaults to empty string.
-| version          | string ? | Expected output from running the version\_command. Defaults to empty string.
+| version          | string ? | Expected output from running the version command. Defaults to empty string.
 | version\_command | string ? | Command to run to get the version. Defaults to `<command> --version`.
 
 The compiler and runner objects are intended for informational purposes. It is not expected that systems will synchronize compiler and runner settings via this interface.
