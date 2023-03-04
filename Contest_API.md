@@ -961,12 +961,12 @@ Properties of language objects:
 
 Properties of Command objects:
 
-| Name            | Type     | Description
-| :-------------- | :------- | :----------
-| command         | string   | Command to run.
-| args            | string ? | Argument list for command. `{files}` denotes where to include the file list. Defaults to empty string.
-| version         | string ? | Expected output from running the version-command. Defaults to empty string.
-| version-command | string ? | Command to run to get the version. Defaults to `<command> --version`.
+| Name             | Type     | Description
+| :--------------- | :------- | :----------
+| command          | string   | Command to run.
+| args             | string ? | Argument list for command. `{files}` denotes where to include the file list. Defaults to empty string.
+| version          | string ? | Expected output from running the version\_command. Defaults to empty string.
+| version\_command | string ? | Command to run to get the version. Defaults to `<command> --version`.
 
 The compiler and runner objects are intended for informational purposes. It is not expected that systems will synchronize compiler and runner settings via this interface.
 
@@ -1022,7 +1022,7 @@ Returned data:
       "command": "javac",
       "args": "-O {files}",
       "version": "javac 11.0.4",
-      "version-command": "javac --version"
+      "version_command": "javac --version"
    },
    "runner": {
       "command": "java",
