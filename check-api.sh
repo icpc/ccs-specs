@@ -13,7 +13,6 @@ problems
 groups
 organizations
 persons
-team-members
 accounts
 teams
 state
@@ -29,7 +28,6 @@ scoreboard
 # Note: event-feed is an NDJSON endpoint which is treated specially.
 
 ENDPOINTS_OPTIONAL='
-team-members
 persons
 accounts
 awards
