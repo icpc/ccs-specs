@@ -6,7 +6,6 @@
 
 	"type": "object",
 	"properties": {
-		"event_id": { "$ref": "common.json#/identifier" },
 		"time": { "$ref": "common.json#/abstime" },
 		"contest_time": { "$ref": "common.json#/reltime" },
 		"state": { "$ref": "state.json#" },
@@ -105,6 +104,6 @@
 			}
 		}
 	},
-	"required": ["event_id", "time", "contest_time", "state", "rows"],
+	"required": ["time", "contest_time", "state", "rows"],
 	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 }
