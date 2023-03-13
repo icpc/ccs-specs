@@ -103,7 +103,7 @@ setting the `Cache-Control` or `Expires` HTTP headers:
 
 The current version of this specification only requires support for the
 `GET` method, unless explicitly specified otherwise in an endpoint
-below (see e.g. [PATCH start\_time](#patch-starttime)). However,
+below (see e.g. [PATCH start\_time](#modifying-contests)). However,
 for future compatibility below are already listed other methods with
 their expected behavior, if implemented.
 
@@ -318,6 +318,7 @@ access to.
 | Capability                                | Description
 | :---------------------------------------- | :----------
 | [contest_start](#modifying-contests)      | Control the contest's start time
+| [contest_thaw](#modifying-contests)       | Control the contest's thaw time
 | [team_submit](#modifying-submissions)     | Submit as a team
 | [team_clar](#modifying-clarifications)    | Submit clarifications as a team
 | [proxy_submit](#modifying-submissions)    | Submit as a shared team proxy
@@ -325,7 +326,7 @@ access to.
 | [admin_submit](#modifying-submissions)    | Submit as an admin
 | [admin_clar](#modifying-clarifications)   | Submit clarifications as an admin
 
-TODO - add capabilities related to team view, awards, and freeze time.
+TODO - add capabilities related to team view and awards.
 
 ### Notification format
 
@@ -731,6 +732,7 @@ Properties of contest objects:
 | countdown\_pause\_time       | RELTIME ?       | The amount of seconds left when countdown to contest start is paused. At no time may both `start_time` and `countdown_pause_time` be non-`null`.
 | duration                     | RELTIME         | Length of the contest.
 | scoreboard\_freeze\_duration | RELTIME ?       | How long the scoreboard is frozen before the end of the contest. Defaults to `0:00:00`.
+| scoreboard\_thaw\_time       | TIME ?          | The scheduled thaw time of the contest, may be `null` if the thaw time is unknown or not set.
 | scoreboard\_type             | string          | What type of scoreboard is used for the contest. Must be either `pass-fail` or `score`.
 | penalty\_time                | integer         | Penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`.
 | banner                       | array of FILE ? | Banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime types are image/*.
@@ -751,14 +753,31 @@ Countdown is resumed by setting a new `start_time` and resetting
 Clients with the `contest_start` [capability](#capabilities) have the ability to
 set or clear the contest start time via a PATCH method.
 
-The PATCH must include a valid JSON object with only two or three
-properties allowed: the contest `id` (used for verification), a
+The PATCH must include a valid JSON object with two or three
+properties: the contest `id` (used for verification), a
 `start_time` (a `<TIME>` value or `null`), and an optional
 `countdown_pause_time` (`<RELTIME>`). As above, `countdown_pause_time`
 can only be non-null when start time is null.
 
 The request should fail with a 403 error code if the contest is started or within 30s of
 starting, or if the new start time is in the past or within 30s.
+
+Clients with the `contest_thaw` [capability](#capabilities) have the ability to
+set a time when the contest will be thawed via a PATCH method.
+
+The PATCH must include a valid JSON object with two properties:
+the contest `id` (used for verification) and a `contest_thaw_time`, a `<TIME>` value.
+
+The request should succeed with a 204 response code with no body if the server changed the
+thaw time to the time specified.
+
+The server may also thaw the contest at the current server time if the provided `contest_thaw_time`
+is in the past. In that case the server must reply with a 200 response code and the modified contest
+as body, so the client knows the server used a different thaw time.
+
+The request should fail with a 403 error code if the contest can't be thawed at the given
+time, for example because the thaw time is before the contest end, the contest is already thawed
+or the server does not support setting this specific thaw time.
 
 #### Examples
 
@@ -827,6 +846,19 @@ Request data:
 {
    "id": "wf2016",
    "start_time": null
+}
+```
+
+Request:
+
+` PATCH https://example.com/api/contests/wf2014`
+
+Request data:
+
+```json
+{
+   "id": "wf2014",
+   "contest_thaw_time": "2014-06-25T19:30:00+01"
 }
 ```
 
