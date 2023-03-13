@@ -753,8 +753,8 @@ Countdown is resumed by setting a new `start_time` and resetting
 Clients with the `contest_start` [capability](#capabilities) have the ability to
 set or clear the contest start time via a PATCH method.
 
-The PATCH must include a valid JSON object with only two or three
-properties allowed: the contest `id` (used for verification), a
+The PATCH must include a valid JSON object with two or three
+properties: the contest `id` (used for verification), a
 `start_time` (a `<TIME>` value or `null`), and an optional
 `countdown_pause_time` (`<RELTIME>`). As above, `countdown_pause_time`
 can only be non-null when start time is null.
@@ -765,7 +765,7 @@ starting, or if the new start time is in the past or within 30s.
 Clients with the `contest_thaw` [capability](#capabilities) have the ability to
 set a time when the contest will be thawed via a PATCH method.
 
-The PATCH must include a valid JSON object with exactly two properties:
+The PATCH must include a valid JSON object with two properties:
 the contest `id` (used for verification) and a `contest_thaw_time`, a `<TIME>` value.
 
 The request should succeed with a 204 response code with no body if the server changed the
