@@ -28,7 +28,7 @@ These are the main changes made since the `2022-07` version:
 * Added `twitter_account` to the Organization endpoint.
 * Changed `team_id` (of type `ID`) to `team_ids` (of type `array of ID`) in the Person endpoint.
 * Added `name` to the Account endpoint.
-* Added a `contest_thaw` capability to thaw a contest via a PUT request.
+* Added a `contest_thaw` capability to thaw a contest via a PATCH request.
 
 
 ## References
