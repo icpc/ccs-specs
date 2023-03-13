@@ -108,6 +108,7 @@ Options:
 
   -a ARGS  Arguments to pass to the API request URLs. Separate arguments
              with '&', do not add initial '?'. (default: $URL_ARGS)
+  -b       Bail out on first error detected.
   -C       Check internal consistency between REST endpoints and event feed.
   -c OPTS  Options to pass to curl to request API data (default: $CURL_OPTIONS)
   -d       Turn on shell script debugging.
@@ -132,9 +133,10 @@ URL_ARGS=''
 YAJSV_BINARY='yajsv'
 
 # Parse command-line options:
-while getopts 'a:Cc:dej:npt:qhv' OPT ; do
+while getopts 'a:bCc:dej:npt:qhv' OPT ; do
 	case "$OPT" in
 		a) URL_ARGS="$OPTARG" ;;
+		b) BAIL_OUT_ON_ERROR=1 ;;
 		C) CHECK_CONSISTENCY=1 ;;
 		c) CURL_OPTIONS="$OPTARG" ;;
 		d) export DEBUG=1 ;;
@@ -245,7 +247,9 @@ validate_schema()
 	if [ $EXITCODE -ge 4 ]; then
 		error "$YAJSV_BINARY detected usage or schema definiton errors"
 	fi
-	return $EXITCODE
+	if [ $EXITCODE -ne 0 -a -n "$BAIL_OUT_ON_ERROR" ]; then
+		exit $EXITCODE
+	fi
 }
 
 # Copy schema files so we can modify common.json for the non-empty option
