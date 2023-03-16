@@ -257,8 +257,8 @@ Properties for file reference objects:
 | filename | string    | POSIX compliant filename. Filenames must be unique within the endpoint object where they are used. I.e. an organization can have (multiple) `logo` and `country_flag` file references, they must all have a different filename, but different organizations may have files with the same filename.
 | hash     | string ?  | MD5 hash of the file referenced.
 | mime     | string    | Mime type of resource.
-| width    | integer ? | Width of the image. Required for files with mime type image/*.
-| height   | integer ? | Height of the image. Required for files with mime type image/*.
+| width    | integer ? | Width of the image. Required for files with mime type image/\*.
+| height   | integer ? | Height of the image. Required for files with mime type image/\*.
 
 The `href` property may be an [absolute or relative
 URL](https://tools.ietf.org/html/rfc3986); relative URLs must be
@@ -301,10 +301,10 @@ with JSON data
 The API specifies several
 capabilities that define behaviors that clients can expect and
 actions they can perform. For instance, a team account will typically
-have access to a "team_submit" capability that allows a team to perform
+have access to a "team\_submit" capability that allows a team to perform
 POST operations on the submissions endpoint, but doesn't allow it to
 set the submission id or timestamp; an administrator may have access
-to a "contest_start" capability that allows it to PATCH the start
+to a "contest\_start" capability that allows it to PATCH the start
 time of the contest. These coarse-grained capabilities allow more
 flexibility for contest administrators and tools to define capabilities
 that match the requirements of a specific contest, e.g. whether teams
@@ -315,16 +315,16 @@ inline with each endpoint. Clients can use
 the [Access](#access) endpoint to see which capabilities they have
 access to.
 
-| Capability                                | Description
-| :---------------------------------------- | :----------
-| [contest_start](#modifying-contests)      | Control the contest's start time
-| [contest_thaw](#modifying-contests)       | Control the contest's thaw time
-| [team_submit](#modifying-submissions)     | Submit as a team
-| [team_clar](#modifying-clarifications)    | Submit clarifications as a team
-| [proxy_submit](#modifying-submissions)    | Submit as a shared team proxy
-| [proxy_clar](#modifying-clarifications)   | Submit clarifications as a shared team proxy
-| [admin_submit](#modifying-submissions)    | Submit as an admin
-| [admin_clar](#modifying-clarifications)   | Submit clarifications as an admin
+| Capability                                 | Description
+| :----------------------------------------- | :----------
+| [contest\_start](#modifying-contests)      | Control the contest's start time
+| [contest\_thaw](#modifying-contests)       | Control the contest's thaw time
+| [team\_submit](#modifying-submissions)     | Submit as a team
+| [team\_clar](#modifying-clarifications)    | Submit clarifications as a team
+| [proxy\_submit](#modifying-submissions)    | Submit as a shared team proxy
+| [proxy\_clar](#modifying-clarifications)   | Submit clarifications as a shared team proxy
+| [admin\_submit](#modifying-submissions)    | Submit as an admin
+| [admin\_clar](#modifying-clarifications)   | Submit clarifications as an admin
 
 TODO - add capabilities related to team view and awards.
 
@@ -537,7 +537,7 @@ The only required endpoints are metadata: `api` and `access`.
 The only requirements for properties are that collections must have
 an `id` property.
 [Referential integrity](#referential-integrity) must also be kept
-(for example, if a submission has a team_id, then teams must be supported).
+(for example, if a submission has a team\_id, then teams must be supported).
 
 All other endpoints and properties are optional.
 `access` exists so that you can discover which endpoints and properties
@@ -600,12 +600,12 @@ The following endpoint is associated with API information:
 
 Properties of version object:
 
-| Name        | Type            | Description
-| :---------- | :-------------- | :----------
-| version     | string          | Version of the API. For this version must be the string `draft`. Will be of the form `<yyyy>-<mm>`, `<yyyy>-<mm>-draft`, or simply `draft`.
-| version_url | string          | Link to documentation for this version of the API.
-| name        | string ?        | Name of this data provider.
-| logo        | array of FILE ? | Logo for this data provider, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/*. The different files in the array should be different file formats and/or sizes of the same image.
+| Name         | Type            | Description
+| :----------- | :-------------- | :----------
+| version      | string          | Version of the API. For this version must be the string `draft`. Will be of the form `<yyyy>-<mm>`, `<yyyy>-<mm>-draft`, or simply `draft`.
+| version\_url | string          | Link to documentation for this version of the API.
+| name         | string ?        | Name of this data provider.
+| logo         | array of FILE ? | Logo for this data provider, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/\*. The different files in the array should be different file formats and/or sizes of the same image.
 
 #### Examples
 
@@ -671,7 +671,7 @@ This information is provided so that clients know what endpoints are available,
 what notifications may happen, and what capabilities they have, regardless
 of whether objects currently exist or the capability is currently active.
 For instance, a client logged in with a team account would see the problems type and
-team_submit capability before a contest starts, even through they cannot
+team\_submit capability before a contest starts, even through they cannot
 see any problems nor submit yet.
 Clients are not expected to call this endpoint more than once
 since the response should not normally change during a contest.
@@ -735,8 +735,8 @@ Properties of contest objects:
 | scoreboard\_thaw\_time       | TIME ?          | The scheduled thaw time of the contest, may be `null` if the thaw time is unknown or not set.
 | scoreboard\_type             | string          | What type of scoreboard is used for the contest. Must be either `pass-fail` or `score`.
 | penalty\_time                | integer         | Penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`.
-| banner                       | array of FILE ? | Banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime types are image/*.
-| logo                         | array of FILE ? | Logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/*.
+| banner                       | array of FILE ? | Banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime types are image/\*.
+| logo                         | array of FILE ? | Logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/\*.
 | location.latitude            | number ?        | Latitude in degrees. Required iff location.longitude is present.
 | location.longitude           | number ?        | Longitude in degrees. Required iff location.latitude is present.
 
@@ -981,15 +981,15 @@ The following endpoints are associated with languages:
 
 Properties of language objects:
 
-| Name                 | Type             | Description
-| :------------------- | :--------------- | :----------
-| id                   | ID               | Identifier of the language from table below.
-| name                 | string           | Name of the language (might not match table below, e.g. if localized).
-| entry_point_required | boolean          | Whether the language requires an entry point.
-| entry_point_name     | string ?         | The name of the type of entry point, such as "Main class" or "Main file"). Required iff entry_point_required is `true`.
-| extensions           | array of string  | File extensions for the language.
-| compiler             | Command object   | Command used for compiling submissions.
-| runner               | Command object   | Command used for running submissions. Relevant e.g. for interpreted languages and languages running on a VM.
+| Name                   | Type             | Description
+| :--------------------- | :--------------- | :----------
+| id                     | ID               | Identifier of the language from table below.
+| name                   | string           | Name of the language (might not match table below, e.g. if localized).
+| entry\_point\_required | boolean          | Whether the language requires an entry point.
+| entry\_point\_name     | string ?         | The name of the type of entry point, such as "Main class" or "Main file"). Required iff entry_point_required is `true`.
+| extensions             | array of string  | File extensions for the language.
+| compiler               | Command object   | Command used for compiling submissions.
+| runner                 | Command object   | Command used for running submissions. Relevant e.g. for interpreted languages and languages running on a VM.
 
 Properties of Command objects:
 
@@ -1103,7 +1103,7 @@ Properties of problem objects:
 | color             | string ?  | Human readable color description associated to the RGB value.
 | time\_limit       | number    | Time limit in seconds per test data set (i.e. per single run). Should be a non-negative integer multiple of `0.001`. The reason for this is to not have rounding ambiguities while still using the natural unit of seconds.
 | test\_data\_count | integer   | Number of test data sets.
-| max_score         | number    | Maximum expected score, although teams may score higher in some cases. Typically used to indicate scoreboard cell color in scoring contests. Required iff contest:scoreboard_type is `score`.
+| max\_score        | number    | Maximum expected score, although teams may score higher in some cases. Typically used to indicate scoreboard cell color in scoring contests. Required iff contest:scoreboard\_type is `score`.
 | package           | array of FILE ? | [Problem package](https://www.kattis.com/problem-package-format/). Expected mime type is application/zip. Only exactly one package is allowed. Not expected to actually contain href for package during the contest, but used for configuration and archiving.
 | statement         | array of FILE ? | Problem statement. Expected mime type is application/pdf. 
 
@@ -1234,13 +1234,13 @@ Properties of organization objects:
 | name               | string          | Short display name of the organization.
 | formal\_name       | string ?        | Full organization name if too long for normal display purposes.
 | country            | string ?        | [ISO 3166-1 alpha-3 code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) of the organization's country.
-| country_flag       | array of FILE ? | Flag of the country. A server is recommended to provide flags of size around 56x56 and 160x160. Only allowed mime types are image/*.
+| country\_flag      | array of FILE ? | Flag of the country. A server is recommended to provide flags of size around 56x56 and 160x160. Only allowed mime types are image/\*.
 | url                | string ?        | URL to organization's website.
 | twitter\_hashtag   | string ?        | Organization Twitter hashtag.
 | twitter\_account   | string ?        | Organization Twitter account.
 | location.latitude  | number ?        | Latitude in degrees. Required iff location.longitude is present.
 | location.longitude | number ?        | Longitude in degrees. Required iff location.latitude is present.
-| logo               | array of FILE ? | Logo of the organization. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well. Only allowed mime types are image/*.
+| logo               | array of FILE ? | Logo of the organization. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well. Only allowed mime types are image/\*.
 
 #### Examples
 
@@ -1284,13 +1284,13 @@ Properties of team objects:
 | location.x        | number ?        | Team's x position in meters. Required iff location.y or location.rotation is present.
 | location.y        | number ?        | Team's y position in meters. Required iff location.x or location.rotation is present.
 | location.rotation | number ?        | Team's rotation in degrees. Required iff location.x or location.y is present.
-| photo             | array of FILE ? | Registration photo of the team. Only allowed mime types are image/*.
-| video             | array of FILE ? | Registration video of the team. Only allowed mime types are video/*.
+| photo             | array of FILE ? | Registration photo of the team. Only allowed mime types are image/\*.
+| video             | array of FILE ? | Registration video of the team. Only allowed mime types are video/\*.
 | backup            | array of FILE ? | Latest file backup of the team machine. Only allowed mime type is application/zip.
 | key\_log          | array of FILE ? | Latest key log file from the team machine. Only allowed mime type is text/plain.
 | tool\_data        | array of FILE ? | Latest tool data usage file from the team machine. Only allowed mime type is text/plain.
-| desktop           | array of FILE ? | Streaming video of the team desktop. Only allowed mime types are video/*.
-| webcam            | array of FILE ? | Streaming video of the team webcam. Only allowed mime types are video/*.
+| desktop           | array of FILE ? | Streaming video of the team desktop. Only allowed mime types are video/\*.
+| webcam            | array of FILE ? | Streaming video of the team webcam. Only allowed mime types are video/\*.
 | audio             | array of FILE ? | Streaming team audio.
 
 #### Examples
@@ -1330,7 +1330,7 @@ Properties of person objects:
 | email       | string ?        | Email of the person.
 | sex         | string ?        | Either `male` or `female`, or possibly `null`.
 | role        | string          | One of `contestant`, `coach`, `staff`, or `other`.
-| photo       | array of FILE ? | Registration photo of the person. Only allowed mime types are image/*.
+| photo       | array of FILE ? | Registration photo of the person. Only allowed mime types are image/\*.
 
 #### Examples
 
@@ -1491,7 +1491,7 @@ Properties of submission objects:
 | contest\_time | RELTIME         | Contest relative time when the submission was made.
 | entry\_point  | string ?        | Code entry point for specific languages.
 | files         | array of FILE   | Submission files, contained at the root of the archive. Only allowed mime type is application/zip. Only exactly one archive is allowed.
-| reaction      | array of FILE ? | Reaction video from team's webcam. Only allowed mime types are video/*.
+| reaction      | array of FILE ? | Reaction video from team's webcam. Only allowed mime types are video/\*.
 
 The `entry_point` property must be included for submissions in
 languages which do not have a single, unambiguous entry point to run the
@@ -1514,11 +1514,11 @@ To add a submission, clients can use the `POST` method on the submissions endpoi
 `PUT` method directly on an object url. One of the following [capabilities](#capabilities)
 is required to add submissions, with descriptions below:
 
-| Name              | Description
-| :---------------- | :----------
-| team_submit       | POST a submission as a team
-| proxy_submit      | POST a submission as a proxy (able to submit on behalf of team(s))
-| admin_submit      | POST or PUT a submission as an admin
+| Name               | Description
+| :----------------- | :----------
+| team\_submit       | POST a submission as a team
+| proxy\_submit      | POST a submission as a proxy (able to submit on behalf of team(s))
+| admin\_submit      | POST or PUT a submission as an admin
 
 All requests must include a valid JSON object with the same properties as the submissions
 endpoint returns from a `GET` request with the following exceptions:
@@ -1682,11 +1682,11 @@ Properties of judgement objects:
 | id                   | ID        | Identifier of the judgement.
 | submission\_id       | ID        | Identifier of the [submission](#submissions) judged.
 | judgement\_type\_id  | ID ?      | The [verdict](#judgement-types) of this judgement. Required iff judgement has completed.
-| score                | number    | Score for this judgement. Required iff contest:scoreboard_type is `score`.
+| score                | number    | Score for this judgement. Required iff contest:scoreboard\_type is `score`.
 | start\_time          | TIME      | Absolute time when judgement started.
 | start\_contest\_time | RELTIME   | Contest relative time when judgement started.
-| end\_time            | TIME ?    | Absolute time when judgement completed. Required iff judgement_type_id is present.
-| end\_contest\_time   | RELTIME ? | Contest relative time when judgement completed. Required iff judgement_type_id is present.
+| end\_time            | TIME ?    | Absolute time when judgement completed. Required iff judgement\_type\_id is present.
+| end\_contest\_time   | RELTIME ? | Contest relative time when judgement completed. Required iff judgement\_type\_id is present.
 | max\_run\_time       | number ?  | Maximum run time in seconds for any test case. Should be a non-negative integer multiple of `0.001`. The reason for this is to not have rounding ambiguities while still using the natural unit of seconds.
 
 When a judgement is started, each of `judgement_type_id`, `end_time` and
@@ -1781,11 +1781,11 @@ To add a clarification, clients can use the `POST` method on the clarifications 
 `PUT` method directly on an object url. One of the following [capabilities](#capabilities)
 is required to add clarifications, with descriptions below:
 
-| Name              | Description
-| :---------------- | :----------
-| team_clar         | POST a clarification as a team
-| proxy_clar        | POST a clarification as a proxy (able to submit on behalf of team(s))
-| admin_clar        | POST or PUT a clarification as an admin
+| Name               | Description
+| :----------------- | :----------
+| team\_clar         | POST a clarification as a team
+| proxy\_clar        | POST a clarification as a proxy (able to submit on behalf of team(s))
+| admin\_clar        | POST or PUT a clarification as an admin
 
 All requests must include a valid JSON object with the same properties as the
 clarifications endpoint returns from a `GET` request with the following
@@ -1810,7 +1810,7 @@ The request must fail with a 4xx error code if any of the following happens:
 
 - A required property is missing.
 - A property that must not be provided is provided.
-- The supplied problem, from_team, to_team, or reply_to cannot be found or are
+- The supplied problem, from\_team, to\_team, or reply\_to cannot be found or are
   not visible to the client that's submitting.
 - The provided `id` already exists or is otherwise not acceptable.
 
@@ -2050,7 +2050,7 @@ Properties of commentary objects:
 | contest\_time   | RELTIME         | Contest time of the commentary message.
 | message         | string          | Commentary message text. May contain special tags referring to endpoint objects using the format `{<endpoint>:<object ID>}`. This is most commonly used for references to [teams](#teams) and [problems](#problems) as `{teams:<team ID>}` and `{problems:<problem ID>}` respectively.
 | tags            | array of string | JSON array of tags describing the message.
-| source_id       | ID ?            | Source [person](#persons) of the commentary message.
+| source\_id      | ID ?            | Source [person](#persons) of the commentary message.
 | team\_ids       | array of ID ?   | JSON array of [team](#teams) IDs the message is related to.
 | problem\_ids    | array of ID ?   | JSON array of [problem](#problems) IDs the message is related to.
 | submission\_ids | array of ID ?   | JSON array of [submission](#submissions) IDs the message is related to.
@@ -2151,9 +2151,9 @@ Properties of scoreboard row objects:
 | rank              | integer | Rank of this team, 1-based and duplicate in case of ties.
 | team\_id          | ID      | Identifier of the [ team](#teams).
 | score             | object  | JSON object as specified in the rows below (for possible extension to other scoring methods).
-| score.num\_solved | integer | Number of problems solved by the team. Required iff contest:scoreboard_type is `pass-fail`.
-| score.total\_time | integer | Total penalty time accrued by the team. Required iff contest:scoreboard_type is `pass-fail`.
-| score.score       | number  | Total score of problems by the team. Required iff contest:scoreboard_type is `score`.
+| score.num\_solved | integer | Number of problems solved by the team. Required iff contest:scoreboard\_type is `pass-fail`.
+| score.total\_time | integer | Total penalty time accrued by the team. Required iff contest:scoreboard\_type is `pass-fail`.
+| score.score       | number  | Total score of problems by the team. Required iff contest:scoreboard\_type is `score`.
 | score.time        | integer | Time of last score improvement used for tiebreaking purposes.
 | problems          | array of problem data objects ? | JSON array of problems with scoring data, see below for the specification of each object.
 
@@ -2164,8 +2164,8 @@ Properties of problem data objects:
 | problem\_id  | ID        | Identifier of the [ problem](#problems).
 | num\_judged  | integer   | Number of judged submissions (up to and including the first correct one),
 | num\_pending | integer   | Number of pending submissions (either queued or due to freeze).
-| solved       | boolean   | Required iff contest:scoreboard_type is `pass-fail`.
-| score        | number    | Required iff contest:scoreboard_type is `score`.
+| solved       | boolean   | Required iff contest:scoreboard\_type is `pass-fail`.
+| score        | number    | Required iff contest:scoreboard\_type is `score`.
 | time         | integer   | Minutes into the contest when this problem was solved by the team. Required iff `solved=true` or `score>0`.
 
 #### Examples
