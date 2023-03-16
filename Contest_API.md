@@ -2246,7 +2246,7 @@ state, but never an earlier state.
 ##### Reconnection
 
 If a client loses connection or needs to reconnect after a brief
-disconnect (e.g. client restart), it can use the 'since_token' parameter to
+disconnect (e.g. client restart), it can use the `since_token` parameter to
 specify the last notification token it received:
 
 `/event-feed?since_token=xx`
@@ -2254,7 +2254,7 @@ specify the last notification token it received:
 If specified, the server will attempt to start sending events since the
 given token to reduce the volume of events and required reconciliation.
 If the token is invalid, the time passed is too large (a server that
-supports since_token should support an expiry time of at least
+supports `since_token` should support an expiry time of at least
 15 minutes), or the server does not support this parameter, the
 request will fail with a 400 error.
 
