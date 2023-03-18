@@ -858,7 +858,7 @@ Request data:
 ```json
 {
    "id": "wf2014",
-   "contest_thaw_time": "2014-06-25T19:30:00+01"
+   "scoreboard_thaw_time": "2014-06-25T19:30:00+01"
 }
 ```
 
