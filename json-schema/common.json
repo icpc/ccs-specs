@@ -1,0 +1,252 @@
+{
+	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/common.json",
+	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"title": "CLICS Contest API - common definitions",
+	"description": "Common definitions of objects used in the API calls",
+
+	"endpoints": {
+		"enum": [
+			"contests",
+			"judgement-types",
+			"languages",
+			"problems",
+			"groups",
+			"organizations",
+			"persons",
+			"accounts",
+			"teams",
+			"state",
+			"submissions",
+			"judgements",
+			"runs",
+			"clarifications",
+			"awards",
+			"commentary",
+			"scoreboard",
+			"event-feed"
+		]
+	},
+
+	"endpointssingularcontest": {
+		"enum": [
+			"contest",
+			"judgement-types",
+			"languages",
+			"problems",
+			"groups",
+			"organizations",
+			"persons",
+			"accounts",
+			"teams",
+			"state",
+			"submissions",
+			"judgements",
+			"runs",
+			"clarifications",
+			"awards",
+			"commentary",
+			"scoreboard",
+			"event-feed"
+		]
+	},
+
+	"capabilities": {
+		"enum": [
+			"contest_start",
+			"team_submit",
+			"team_clar",
+			"proxy_submit",
+			"proxy_clar",
+			"admin_submit",
+			"admin_clar"
+		]
+	},
+
+	"abstime": {
+		"type": "string",
+		"pattern": "^[12][0-9]{3}-[01][0-9]-[0-3][0-9]T[0-2][0-9]:[0-6][0-9]:[0-6][0-9](\\.[0-9]{3})?([+-][0-1][0-9](:[0-5][0-9])?|Z)$"
+	},
+
+	"abstimeornull": {
+		"oneOf": [
+			{ "$ref": "#/abstime" },
+			{ "type": "null" }
+		]
+	},
+
+	"reltime": {
+		"type": "string",
+		"pattern": "^-?([1-9][0-9]*)?[0-9]:[0-5][0-9]:[0-5][0-9](\\.[0-9]{3})?$"
+	},
+
+	"reltimeornull": {
+		"oneOf": [
+			{ "$ref": "#/reltime" },
+			{ "type": "null" }
+		]
+	},
+
+	"posreltime": {
+		"type": "string",
+		"pattern": "^([1-9][0-9]*)?[0-9]:[0-5][0-9]:[0-5][0-9](\\.[0-9]{3})?$"
+	},
+
+	"posreltimeornull": {
+		"oneOf": [
+			{ "$ref": "#/posreltime" },
+			{ "type": "null" }
+		]
+	},
+
+	"identifier": {
+		"type": "string",
+		"pattern": "^[A-Za-z0-9_]([A-Za-z0-9_\\.-]{0,34}[A-Za-z0-9_-]|)"
+	},
+
+	"identifierornull": {
+		"oneOf": [
+			{ "$ref": "#/identifier" },
+			{ "type": "null" }
+		]
+	},
+
+	"identifiers": {
+		"type": "array",
+		"uniqueItems": true,
+		"items": { "$ref": "#/identifier" }
+	},
+
+	"identifiersornull": {
+		"oneOf": [
+			{ "$ref": "#/identifiers" },
+			{ "type": "null" }
+		]
+	},
+
+	"judgementtypeid": {
+		"enum": [
+			"AC", "RE", "WA", "TLE", "RTE", "CE", "APE", "OLE", "PE", "EO", "IO", "NO",
+			"WTL", "ILE", "TCO", "TWA", "TPE", "TEO", "TIO", "TNO", "MLE", "SV", "IF",
+			"RCO", "RWA", "RPE", "REO", "RIO", "RNO", "CTL", "JE", "SE", "CS"
+		]
+	},
+
+	"judgementtypeidornull": {
+		"oneOf": [
+			{ "$ref": "#/judgementtypeid" },
+			{ "type": "null" }
+		]
+	},
+
+	"fileref": {
+		"type": "object",
+		"properties": {
+			"href":     { "type": "string" },
+			"mime":     { "type": "string" },
+			"hash":     { "type": "string" },
+			"filename": { "type": "string" },
+			"width":    { "type": "integer", "minimum": 1 },
+			"height":   { "type": "integer", "minimum": 1 }
+		},
+		"required": ["href", "mime"],
+		"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+	},
+
+	"imageref": {
+		"allOf": [
+			{ "$ref": "#/fileref" },
+			{
+				"properties": {
+					"mime": { "enum": ["image/png", "image/jpeg", "image/svg+xml"] }
+				},
+				"required": ["width", "height"]
+			}
+		]
+	},
+
+	"filerefs": {
+		"type": "array",
+		"uniqueItems": true,
+		"items": {
+			"$ref": "#/fileref"
+		}
+	},
+
+	"filerefsornull": {
+		"oneOf": [
+			{
+				"type": "array",
+				"uniqueItems": true,
+				"items": {
+					"$ref": "#/fileref"
+				}
+			},
+			{ "type": "null" }
+		]
+	},
+
+	"imagerefsornull": {
+		"oneOf": [
+			{
+				"type": "array",
+				"uniqueItems": true,
+				"items": {
+					"$ref": "#/imageref"
+				}
+			},
+			{ "type": "null" }
+		]
+	},
+
+	"location": {
+		"type": "object",
+		"properties": {
+			"latitude": {
+				"type": "number",
+				"minimum": -90,
+				"maximum":  90
+			},
+			"longitude": {
+				"type": "number",
+				"minimum": -180,
+				"maximum":  180
+			}
+		},
+		"required": ["latitude", "longitude"],
+		"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+	},
+
+	"locationornull": {
+		"oneOf": [
+			{ "$ref": "#/location" },
+			{ "type": "null" }
+		]
+	},
+
+	"command": {
+		"type": "object",
+		"properties": {
+			"command": { "type": "string" },
+			"args": { "type": "string" },
+			"version": { "type": "string" },
+			"version-command": { "type": "string" }
+		},
+		"required": ["command"],
+		"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+	},
+
+	"commandornull": {
+		"oneOf": [
+			{ "$ref": "#/command" },
+			{ "type": "null" }
+		]
+	},
+
+	"$comment": "Inside here add '\"minItems\": 1' to require all collection endpoints to contain at least one element.",
+	"nonemptyarray": {
+	},
+
+	"$comment": "Inside here add '\"additionalProperties\": false' to force that no additional properties can be present beyond those defined in the API.",
+	"strictproperties": {
+	}
+}

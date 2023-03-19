@@ -1,0 +1,13 @@
+{
+	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/teams.json",
+	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"title": "CLICS Contest API: teams",
+	"description": "JSON response of this API call",
+
+	"type": "array",
+	"uniqueItems": true,
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_NONEMPTY_ENDPOINTS",
+	"items": {
+		"$ref": "team.json#"
+	}
+}
