@@ -766,12 +766,12 @@ Clients with the `contest_thaw` [capability](#capabilities) have the ability to
 set a time when the contest will be thawed via a PATCH method.
 
 The PATCH must include a valid JSON object with two properties:
-the contest `id` (used for verification) and a `contest_thaw_time`, a `<TIME>` value.
+the contest `id` (used for verification) and a `scoreboard_thaw_time`, a `<TIME>` value.
 
 The request should succeed with a 204 response code with no body if the server changed the
 thaw time to the time specified.
 
-The server may also thaw the contest at the current server time if the provided `contest_thaw_time`
+The server may also thaw the contest at the current server time if the provided `scoreboard_thaw_time`
 is in the past. In that case the server must reply with a 200 response code and the modified contest
 as body, so the client knows the server used a different thaw time.
 
@@ -858,7 +858,7 @@ Request data:
 ```json
 {
    "id": "wf2014",
-   "contest_thaw_time": "2014-06-25T19:30:00+01"
+   "scoreboard_thaw_time": "2014-06-25T19:30:00+01"
 }
 ```
 
