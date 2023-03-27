@@ -379,6 +379,7 @@ All event types correspond to an API endpoint, as specified in the table below.
 | runs            | `/contests/<id>/runs/<id>`
 | clarifications  | `/contests/<id>/clarifications/<id>`
 | awards          | `/contests/<id>/awards/<id>`
+| commentary      | `/contests/<id>/commentary/<id>`
 
 Each event is a notification that an object or a collection has changed
 (and hence the contents of the corresponding endpoint) to `data`.
