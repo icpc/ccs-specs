@@ -1276,7 +1276,7 @@ Properties of team objects:
 | :---------------- | :-------------- | :----------
 | id                | ID              | Identifier of the team.
 | icpc\_id          | string ?        | External identifier from ICPC CMS.
-| label             | string ?        | Label of the team, at WFs normally the team seat number.
+| label             | string          | Label of the team, at WFs normally the team seat number.
 | name              | string          | Name of the team.
 | display\_name     | string ?        | Display name of the team. If not set, a client should revert to using the name instead.
 | organization\_id  | ID ?            | Identifier of the [ organization](#organizations) (e.g. university or other entity) that this team is affiliated to.
