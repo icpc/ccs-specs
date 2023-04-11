@@ -1,0 +1,41 @@
+{
+	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/team.json",
+	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"title": "CLICS Contest API - team",
+	"description": "Definition of a single team object",
+
+	"type": "object",
+	"properties": {
+		"id": { "$ref": "common.json#/identifier" },
+		"icpc_id": { "type": [ "string", "null" ] },
+		"name": { "type": "string" },
+		"display_name": { "type": [ "string", "null" ] },
+		"organization_id": { "$ref": "common.json#/identifierornull" },
+		"group_ids": { "$ref": "common.json#/identifiersornull" },
+		"hidden": { "type": [ "boolean", "null" ] },
+		"location": {
+			"type": "object",
+			"properties": {
+				"x": { "type": "number" },
+				"y": { "type": "number" },
+				"rotation": {
+					"type": "number",
+					"minimum": 0,
+					"maximum": 360
+				}
+			},
+			"required": ["x", "y", "rotation"],
+			"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+		},
+		"photo": { "$ref": "common.json#/imagerefsornull" },
+		"video": { "$ref": "common.json#/filerefsornull" },
+		"backup": { "$ref": "common.json#/filerefsornull" },
+		"key_log": { "$ref": "common.json#/filerefsornull" },
+		"tool_data": { "$ref": "common.json#/filerefsornull" },
+		"desktop": { "$ref": "common.json#/filerefsornull" },
+		"webcam": { "$ref": "common.json#/filerefsornull" },
+		"audio": { "$ref": "common.json#/filerefsornull" }
+	},
+	"required": ["id", "name"],
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+}

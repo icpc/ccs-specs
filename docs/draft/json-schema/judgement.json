@@ -1,0 +1,29 @@
+{
+	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/judgement.json",
+	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"title": "CLICS Contest API - judgement",
+	"description": "Definition of a single judgement object",
+
+	"type": "object",
+	"properties": {
+		"id": { "$ref": "common.json#/identifier" },
+		"submission_id": { "$ref": "common.json#/identifier" },
+		"judgement_type_id": { "$ref": "common.json#/judgementtypeidornull" },
+		"start_time": { "$ref": "common.json#/abstime" },
+		"start_contest_time": { "$ref": "common.json#/reltime" },
+		"end_time": { "$ref": "common.json#/abstimeornull" },
+		"end_contest_time": { "$ref": "common.json#/reltimeornull" },
+		"max_run_time": {
+			"oneOf": [
+				{
+					"type": "number",
+					"multipleOf": 0.001,
+					"minimum": 0
+				},
+				{ "type": "null" }
+			]
+		}
+	},
+	"required": ["id", "submission_id", "start_time", "start_contest_time", "end_time", "end_contest_time"],
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+}

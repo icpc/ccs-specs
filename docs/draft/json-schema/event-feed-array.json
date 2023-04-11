@@ -1,0 +1,12 @@
+{
+	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/event-feed-array.json",
+	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"title": "CLICS Contest API: event-feed array",
+	"description": "JSON array of responses of this NDJSON API call",
+
+	"type": "array",
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_NONEMPTY_ENDPOINTS",
+	"items": {
+		"$ref": "event-feed.json#"
+	}
+}

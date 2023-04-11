@@ -1,0 +1,13 @@
+{
+	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/clarifications.json",
+	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"title": "CLICS Contest API: clarifications",
+	"description": "JSON response of this API call",
+
+	"type": "array",
+	"uniqueItems": true,
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_NONEMPTY_ENDPOINTS",
+	"items": {
+		"$ref": "clarification.json#"
+	}
+}
