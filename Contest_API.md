@@ -1268,14 +1268,15 @@ The following endpoints are associated with teams:
 | Endpoint                     | Mime-type        | Description
 | :--------------------------- | :--------------- | :----------
 | `/contests/<id>/teams`       | application/json | JSON array of all teams with properties as specified by `/access`.
-| `/contests/<id>/teams/<id>`   | application/json | JSON object representing a single team with properties as specified by `/access`.
+| `/contests/<id>/teams/<id>`  | application/json | JSON object representing a single team with properties as specified by `/access`.
 
 Properties of team objects:
 
 | Name              | Type            | Description
 | :---------------- | :-------------- | :----------
-| id                | ID              | Identifier of the team. Usable as a label, at WFs normally the team seat number.
+| id                | ID              | Identifier of the team.
 | icpc\_id          | string ?        | External identifier from ICPC CMS.
+| label             | string          | Label of the team, at WFs normally the team seat number.
 | name              | string          | Name of the team.
 | display\_name     | string ?        | Display name of the team. If not set, a client should revert to using the name instead.
 | organization\_id  | ID ?            | Identifier of the [ organization](#organizations) (e.g. university or other entity) that this team is affiliated to.
@@ -1302,8 +1303,8 @@ Request:
 Returned data:
 
 ```json
-[{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_ids":["asia-74324325532"]},
- {"id":"123","name":"CMU1","organization_id":"inst105","group_ids":["8","11"]}
+[{"id":"team11","icpc_id":"201433","label":"11","name":"Shanghai Tigers","organization_id":"inst123","group_ids":["asia-74324325532"]},
+ {"id":"team123","label":"123","name":"CMU1","organization_id":"inst105","group_ids":["8","11"]}
 ]
 ```
 
