@@ -242,12 +242,21 @@ absolute timestamps.
   communication (e.g. team "43", problem "A") and are as short as reasonable
   but not more than 10 characters. IDs not marked as labels may be random
   characters and cannot be assumed to be suitable for display purposes.
+- Geographic locations (type **`LOCATION`** in the specification) are
+  represented as a JSON object with properties as defined below.
 - File references (type **`FILE`** in the specification) are represented as a
   JSON object with properties as defined below.
 - Arrays (type **`array of <type>`** in the specification) are built-in JSON
   arrays of some type defined above.
 - Nullable types (type **`<type> ?`** in the specification) are either a value
   of a type defined above, or `null`.
+
+Properties for geographic location objects:
+
+| Name      | Type      | Description
+| --------- | --------- | -----------
+| latitude  | number    | Latitude in degrees with value between -90 and 90.
+| longitude | number    | Longitude in degrees with value between -180 and 180.
 
 Properties for file reference objects:
 
@@ -738,8 +747,7 @@ Properties of contest objects:
 | penalty\_time                | integer         | Penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`.
 | banner                       | array of FILE ? | Banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime types are image/\*.
 | logo                         | array of FILE ? | Logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/\*.
-| location.latitude            | number ?        | Latitude in degrees. Required iff location.longitude is present.
-| location.longitude           | number ?        | Longitude in degrees. Required iff location.latitude is present.
+| location                     | LOCATION ?      | Location where the contest is held.
 
 The expected/typical use of `countdown_pause_time` is that once a
 `start_time` is defined and close, the countdown may be paused due to
@@ -1164,14 +1172,13 @@ group\_ids).
 
 Properties of group objects:
 
-| Name               | Type     | Description
-| :----------------- | :------- | :----------
-| id                 | ID       | Identifier of the group.
-| icpc\_id           | string ? | External identifier from ICPC CMS.
-| name               | string   | Name of the group.
-| type               | string ? | Type of the group.
-| location.latitude  | number ? | Latitude in degrees. Required iff location.longitude is present.
-| location.longitude | number ? | Longitude in degrees. Required iff location.latitude is present.
+| Name      | Type       | Description
+| :-------- | :--------- | :----------
+| id        | ID         | Identifier of the group.
+| icpc\_id  | string ?   | External identifier from ICPC CMS.
+| name      | string     | Name of the group.
+| type      | string ?   | Type of the group.
+| location  | LOCATION ? | A center location of this group.
 
 #### Known group types
 
@@ -1239,8 +1246,7 @@ Properties of organization objects:
 | url                | string ?        | URL to organization's website.
 | twitter\_hashtag   | string ?        | Organization Twitter hashtag.
 | twitter\_account   | string ?        | Organization Twitter account.
-| location.latitude  | number ?        | Latitude in degrees. Required iff location.longitude is present.
-| location.longitude | number ?        | Longitude in degrees. Required iff location.latitude is present.
+| location           | LOCATION ?      | Location where this organization is based.
 | logo               | array of FILE ? | Logo of the organization. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well. Only allowed mime types are image/\*.
 
 #### Examples
@@ -1273,27 +1279,33 @@ The following endpoints are associated with teams:
 
 Properties of team objects:
 
-| Name              | Type            | Description
-| :---------------- | :-------------- | :----------
-| id                | ID              | Identifier of the team.
-| icpc\_id          | string ?        | External identifier from ICPC CMS.
-| label             | string          | Label of the team, at WFs normally the team seat number.
-| name              | string          | Name of the team.
-| display\_name     | string ?        | Display name of the team. If not set, a client should revert to using the name instead.
-| organization\_id  | ID ?            | Identifier of the [ organization](#organizations) (e.g. university or other entity) that this team is affiliated to.
-| group\_ids        | array of ID ?   | Identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty. Required iff groups endpoint is available.
-| hidden            | boolean ?       | If the team is to be excluded from the [scoreboard](#scoreboard). Defaults to `false`.
-| location.x        | number ?        | Team's x position in meters. Required iff location.y or location.rotation is present.
-| location.y        | number ?        | Team's y position in meters. Required iff location.x or location.rotation is present.
-| location.rotation | number ?        | Team's rotation in degrees. Required iff location.x or location.y is present.
-| photo             | array of FILE ? | Registration photo of the team. Only allowed mime types are image/\*.
-| video             | array of FILE ? | Registration video of the team. Only allowed mime types are video/\*.
-| backup            | array of FILE ? | Latest file backup of the team machine. Only allowed mime type is application/zip.
-| key\_log          | array of FILE ? | Latest key log file from the team machine. Only allowed mime type is text/plain.
-| tool\_data        | array of FILE ? | Latest tool data usage file from the team machine. Only allowed mime type is text/plain.
-| desktop           | array of FILE ? | Streaming video of the team desktop. Only allowed mime types are video/\*.
-| webcam            | array of FILE ? | Streaming video of the team webcam. Only allowed mime types are video/\*.
-| audio             | array of FILE ? | Streaming team audio.
+| Name             | Type                   | Description
+| :--------------- | :--------------------- | :----------
+| id               | ID                     | Identifier of the team. Usable as a label, at WFs normally the team seat number.
+| icpc\_id         | string ?               | External identifier from ICPC CMS.
+| name             | string                 | Name of the team.
+| label            | string                 | Label of the team, at WFs normally the team seat number.
+| display\_name    | string ?               | Display name of the team. If not set, a client should revert to using the name instead.
+| organization\_id | ID ?                   | Identifier of the [ organization](#organizations) (e.g. university or other entity) that this team is affiliated to.
+| group\_ids       | array of ID ?          | Identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty. Required iff groups endpoint is available.
+| hidden           | boolean ?              | If the team is to be excluded from the [scoreboard](#scoreboard). Defaults to `false`.
+| location         | team location object ? | Position of team on the contest floor. See below for the specification of this object.
+| photo            | array of FILE ?        | Registration photo of the team. Only allowed mime types are image/\*.
+| video            | array of FILE ?        | Registration video of the team. Only allowed mime types are video/\*.
+| backup           | array of FILE ?        | Latest file backup of the team machine. Only allowed mime type is application/zip.
+| key\_log         | array of FILE ?        | Latest key log file from the team machine. Only allowed mime type is text/plain.
+| tool\_data       | array of FILE ?        | Latest tool data usage file from the team machine. Only allowed mime type is text/plain.
+| desktop          | array of FILE ?        | Streaming video of the team desktop. Only allowed mime types are video/\*.
+| webcam           | array of FILE ?        | Streaming video of the team webcam. Only allowed mime types are video/\*.
+| audio            | array of FILE ?        | Streaming team audio.
+
+Properties of team location objects:
+
+| Name     | Type   | Description
+| :------- | :----- | :----------
+| x        | number | Team's x position in meters.
+| y        | number | Team's y position in meters.
+| rotation | number | Team's rotation in degrees.
 
 #### Examples
 
