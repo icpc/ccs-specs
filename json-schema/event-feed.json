@@ -1,0 +1,56 @@
+{
+	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/event-feed.json",
+	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"title": "CLICS Contest API: event-feed",
+	"description": "Single line response of this NDJSON API call",
+
+	"type": "object",
+	"properties": {
+		"type": { "$ref": "common.json#/endpointssingularcontest" },
+		"id": { "$ref": "common.json#/identifierornull" },
+		"data": {
+			"$comment": "Use anyOf since some types match others without strict attribute checking.",
+			"anyOf": [
+				{ "$ref": "contest.json#" },
+				{ "$ref": "judgement-type.json#" },
+				{ "$ref": "judgement-types.json#" },
+				{ "$ref": "language.json#" },
+				{ "$ref": "languages.json#" },
+				{ "$ref": "problem.json#" },
+				{ "$ref": "problems.json#" },
+				{ "$ref": "group.json#" },
+				{ "$ref": "groups.json#" },
+				{ "$ref": "organization.json#" },
+				{ "$ref": "organizations.json#" },
+				{ "$ref": "team.json#" },
+				{ "$ref": "teams.json#" },
+				{ "$ref": "person.json#" },
+				{ "$ref": "persons.json#" },
+				{ "$ref": "account.json#" },
+				{ "$ref": "accounts.json#" },
+				{ "$ref": "state.json#" },
+				{ "$ref": "submission.json#" },
+				{ "$ref": "submissions.json#" },
+				{ "$ref": "judgement.json#" },
+				{ "$ref": "judgements.json#" },
+				{ "$ref": "run.json#" },
+				{ "$ref": "runs.json#" },
+				{ "$ref": "clarification.json#" },
+				{ "$ref": "clarifications.json#" },
+				{ "$ref": "award.json#" },
+				{ "$ref": "awards.json#" },
+				{ "$ref": "commentary.json#" },
+				{ "$ref": "commentaries.json#" },
+				{ "type": "null" }
+			]
+		},
+		"token": {
+			"oneOf": [
+				{ "type": "string" },
+				{ "type": "null" }
+			]
+		}
+	},
+	"required": ["id", "type", "data"],
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+}

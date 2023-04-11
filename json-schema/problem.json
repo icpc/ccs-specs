@@ -1,0 +1,42 @@
+{
+	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/problem.json",
+	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"title": "CLICS Contest API - problem",
+	"description": "Definition of a single problem object",
+
+	"type": "object",
+	"properties": {
+		"id": { "$ref": "common.json#/identifier" },
+		"uuid": {
+			"oneOf": [
+				{
+					"type": "string",
+					"pattern": "^[A-Fa-f0-9]{8}-([A-Fa-f0-9]{4}-){3}[A-Fa-f0-9]{12}$"
+				},
+				{ "type": "null" }
+			]
+		},
+		"label": { "type": "string" },
+		"name": { "type": "string" },
+		"ordinal": { "type": "integer" },
+		"rgb": {
+			"type": "string",
+			"pattern": "^#[A-Fa-f0-9]{3}([A-Fa-f0-9]{3})?$"
+		},
+		"color": { "type": "string" },
+		"time_limit": {
+			"type": "number",
+			"multipleOf": 0.001,
+			"minimum": 0
+		},
+		"test_data_count": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"max_score": { "type": "number" },
+		"package": { "$ref": "common.json#/filerefsornull" },
+		"statement": { "$ref": "common.json#/filerefsornull" }
+	},
+	"required": ["id", "label", "name", "ordinal", "test_data_count"],
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+}

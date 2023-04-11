@@ -1,0 +1,31 @@
+{
+	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/organization.json",
+	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"title": "CLICS Contest API - organization",
+	"description": "Definition of a single organization object",
+
+	"type": "object",
+	"properties": {
+		"id": { "$ref": "common.json#/identifier" },
+		"icpc_id": { "type": [ "string", "null" ] },
+		"name": { "type": "string" },
+		"formal_name": { "type": [ "string", "null" ] },
+		"country":  {
+			"oneOf": [
+				{
+					"type": "string",
+					"pattern": "^[A-Z]{3}$"
+				},
+				{ "type": "null" }
+			]
+		},
+		"country_flag": { "$ref": "common.json#/imagerefsornull" },
+		"url": { "type": [ "string", "null" ] },
+		"twitter_hashtag": { "type": [ "string", "null" ] },
+		"twitter_account": { "type": [ "string", "null" ] },
+		"location": { "$ref": "common.json#/locationornull" },
+		"logo": { "$ref": "common.json#/imagerefsornull" }
+	},
+	"required": ["id", "name"],
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+}

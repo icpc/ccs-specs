@@ -1,0 +1,15 @@
+{
+	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/award.json",
+	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"title": "CLICS Contest API - award",
+	"description": "Definition of a single award object",
+
+	"type": "object",
+	"properties": {
+		"id": { "$ref": "common.json#/identifier" },
+		"citation": { "type": "string" },
+		"team_ids": { "$ref": "common.json#/identifiers" }
+	},
+	"required": ["id", "citation", "team_ids"],
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+}
