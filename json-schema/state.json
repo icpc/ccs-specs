@@ -1,0 +1,18 @@
+{
+	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/state.json",
+	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"title": "CLICS Contest API: state",
+	"description": "JSON response of this API call",
+
+	"type": "object",
+	"properties": {
+		"started":        { "$ref": "common.json#/abstimeornull" },
+		"ended":          { "$ref": "common.json#/abstimeornull" },
+		"frozen":         { "$ref": "common.json#/abstimeornull" },
+		"thawed":         { "$ref": "common.json#/abstimeornull" },
+		"finalized":      { "$ref": "common.json#/abstimeornull" },
+		"end_of_updates": { "$ref": "common.json#/abstimeornull" }
+	},
+	"required": ["started", "ended", "finalized", "end_of_updates"],
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+}

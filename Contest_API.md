@@ -388,6 +388,7 @@ All event types correspond to an API endpoint, as specified in the table below.
 | runs            | `/contests/<id>/runs/<id>`
 | clarifications  | `/contests/<id>/clarifications/<id>`
 | awards          | `/contests/<id>/awards/<id>`
+| commentary      | `/contests/<id>/commentary/<id>`
 
 Each event is a notification that an object or a collection has changed
 (and hence the contents of the corresponding endpoint) to `data`.
@@ -774,12 +775,12 @@ Clients with the `contest_thaw` [capability](#capabilities) have the ability to
 set a time when the contest will be thawed via a PATCH method.
 
 The PATCH must include a valid JSON object with two properties:
-the contest `id` (used for verification) and a `contest_thaw_time`, a `<TIME>` value.
+the contest `id` (used for verification) and a `scoreboard_thaw_time`, a `<TIME>` value.
 
 The request should succeed with a 204 response code with no body if the server changed the
 thaw time to the time specified.
 
-The server may also thaw the contest at the current server time if the provided `contest_thaw_time`
+The server may also thaw the contest at the current server time if the provided `scoreboard_thaw_time`
 is in the past. In that case the server must reply with a 200 response code and the modified contest
 as body, so the client knows the server used a different thaw time.
 
@@ -866,7 +867,7 @@ Request data:
 ```json
 {
    "id": "wf2014",
-   "contest_thaw_time": "2014-06-25T19:30:00+01"
+   "scoreboard_thaw_time": "2014-06-25T19:30:00+01"
 }
 ```
 
@@ -1274,7 +1275,7 @@ The following endpoints are associated with teams:
 | Endpoint                     | Mime-type        | Description
 | :--------------------------- | :--------------- | :----------
 | `/contests/<id>/teams`       | application/json | JSON array of all teams with properties as specified by `/access`.
-| `/contests/<id>/teams/<id>`   | application/json | JSON object representing a single team with properties as specified by `/access`.
+| `/contests/<id>/teams/<id>`  | application/json | JSON object representing a single team with properties as specified by `/access`.
 
 Properties of team objects:
 
@@ -1283,6 +1284,7 @@ Properties of team objects:
 | id               | ID                     | Identifier of the team. Usable as a label, at WFs normally the team seat number.
 | icpc\_id         | string ?               | External identifier from ICPC CMS.
 | name             | string                 | Name of the team.
+| label            | string                 | Label of the team, at WFs normally the team seat number.
 | display\_name    | string ?               | Display name of the team. If not set, a client should revert to using the name instead.
 | organization\_id | ID ?                   | Identifier of the [ organization](#organizations) (e.g. university or other entity) that this team is affiliated to.
 | group\_ids       | array of ID ?          | Identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty. Required iff groups endpoint is available.
@@ -1314,8 +1316,8 @@ Request:
 Returned data:
 
 ```json
-[{"id":"11","icpc_id":"201433","name":"Shanghai Tigers","organization_id":"inst123","group_ids":["asia-74324325532"]},
- {"id":"123","name":"CMU1","organization_id":"inst105","group_ids":["8","11"]}
+[{"id":"team11","icpc_id":"201433","label":"11","name":"Shanghai Tigers","organization_id":"inst123","group_ids":["asia-74324325532"]},
+ {"id":"team123","label":"123","name":"CMU1","organization_id":"inst105","group_ids":["8","11"]}
 ]
 ```
 

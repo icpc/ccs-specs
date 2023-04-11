@@ -1,0 +1,58 @@
+{
+	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/contest.json",
+	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"title": "CLICS Contest API: contest",
+	"description": "JSON response of this API call",
+
+	"type": "object",
+	"properties": {
+		"id": { "$ref": "common.json#/identifier" },
+		"name": { "type": "string" },
+		"formal_name": { "type": "string" },
+		"start_time": { "$ref": "common.json#/abstimeornull" },
+		"countdown_pause_time": { "$ref": "common.json#/posreltimeornull" },
+		"duration": { "$ref": "common.json#/posreltime" },
+		"scoreboard_freeze_duration": { "$ref": "common.json#/posreltimeornull" },
+		"scoreboard_type": { "enum": ["pass-fail", "score"] },
+		"penalty_time": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"banner": { "$ref": "common.json#/imagerefsornull" },
+		"logo": { "$ref": "common.json#/imagerefsornull" },
+		"location": { "$ref": "common.json#/locationornull" }
+	},
+	"not": {
+		"properties": {
+			"start_time": { "$ref": "common.json#/abstime" },
+			"countdown_pause_time": { "$ref": "common.json#/posreltime" }
+		},
+		"required": ["start_time", "countdown_pause_time"]
+	},
+	"allOf": [
+		{
+			"if": {
+				"properties": {
+					"scoreboard_type": { "const": "pass-fail" }
+				},
+				"required": ["scoreboard_type"]
+			},
+			"then": {
+				"required": ["penalty_time"]
+			}
+		},
+		{
+			"if": {
+				"properties": {
+					"scoreboard_type": { "const": "score" }
+				},
+				"required": ["scoreboard_type"]
+			},
+			"then": {
+				"not": { "required": ["penalty_time"] }
+			}
+		}
+	],
+	"required": ["id", "name", "duration", "scoreboard_type"],
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+}

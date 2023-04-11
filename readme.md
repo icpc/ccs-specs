@@ -15,6 +15,10 @@ The following specifications are present:
 - Contest Archive Format: a format closely related to the Contest API for
   storing a contest on disk for archival.
 
+Furthermore, a tool and JSON schema specifications are available to
+validate an implementation of the Contest API. Run `check-api.sh -h`
+from the root of the repository for usage information.
+
 There are multiple versions of the CCS specifications available on the
 [documentation pages](https://ccs-specs.icpc.io/).
 

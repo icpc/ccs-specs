@@ -1,0 +1,33 @@
+{
+	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/language.json",
+	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"title": "CLICS Contest API - language",
+	"description": "Definition of a single language object",
+
+	"type": "object",
+	"properties": {
+		"id": { "$ref": "common.json#/identifier" },
+		"name": { "type": "string" },
+		"entry_point_required": { "type": "boolean" },
+		"entry_point_name": { "type": [ "string", "null" ] },
+		"extensions": {
+			"type": "array",
+			"uniqueItems": true,
+			"items": { "type": "string" }
+		},
+		"compiler": { "$ref": "common.json#/commandornull" },
+		"runner": { "$ref": "common.json#/commandornull" }
+	},
+	"if": {
+		"properties": { "entry_point_required": { "const": true } },
+		"required": ["entry_point_required"]
+	},
+	"then": {
+		"required": ["entry_point_name"]
+	},
+	"else": {
+		"not": { "required": ["entry_point_name"] }
+	},
+	"required": ["id", "name", "entry_point_required", "extensions"],
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+}

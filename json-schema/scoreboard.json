@@ -1,0 +1,109 @@
+{
+	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/scoreboard.json",
+	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"title": "CLICS Contest API: scoreboard",
+	"description": "JSON response of this API call",
+
+	"type": "object",
+	"properties": {
+		"time": { "$ref": "common.json#/abstime" },
+		"contest_time": { "$ref": "common.json#/reltime" },
+		"state": { "$ref": "state.json#" },
+		"rows": {
+			"type": "array",
+			"uniqueItems": true,
+			"items": {
+				"type": "object",
+				"properties": {
+					"rank": {
+						"type": "integer",
+						"minimum": 1
+					},
+					"team_id": { "$ref": "common.json#/identifier" },
+					"score": {
+						"type": "object",
+						"properties": {
+							"num_solved": {
+								"type": "integer",
+								"minimum": 0
+							},
+							"total_time": {
+								"type": "integer",
+								"minimum": 0
+							},
+							"score": {
+								"type": "number"
+							},
+							"time": {
+								"type": "integer",
+								"minimum": 0
+							}
+						},
+						"oneOf": [
+							{
+								"required": ["num_solved", "total_time"],
+								"not": { "required": ["score"] }
+							},
+							{
+								"not": { "required": ["num_solved", "total_time"] },
+								"required": ["score"]
+							}
+						],
+						"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+					},
+					"problems": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"problem_id": { "$ref": "common.json#/identifier" },
+								"num_judged": {
+									"type": "integer",
+									"minimum": 0
+								},
+								"num_pending": {
+									"type": "integer",
+									"minimum": 0
+								},
+								"solved": { "type": "boolean" },
+								"score": {
+									"type": "number",
+									"minimum": 0
+								},
+								"time": { "type": "integer", "minimum": 0 }
+							},
+							"oneOf": [
+								{ "required": ["solved"] },
+								{ "required": ["score"] }
+							],
+							"if": {
+								"oneOf": [
+									{
+										"not": { "properties": { "solved": { "const": true } } },
+										"required": ["solved"]
+									},
+									{
+										"properties": { "score": { "const": 0 } },
+										"required": ["score"]
+									}
+								]
+							},
+							"then": {
+								"not": { "required": ["time"] }
+							},
+							"else": {
+								"required": ["time"]
+							},
+							"required": ["problem_id", "num_judged", "num_pending"],
+							"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+						}
+					}
+				},
+				"required": ["rank", "team_id", "score"],
+				"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+			}
+		}
+	},
+	"required": ["time", "contest_time", "state", "rows"],
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+}

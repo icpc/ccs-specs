@@ -955,8 +955,8 @@ return from the `/access` endpoint:
       { 
          "type": "teams", 
          "properties": [
-            "id", "icpc_id", "name", "display_name", "organization_id",
-            "group_ids"
+            "id", "icpc_id", "label", "name", "display_name",
+            "organization_id", "group_ids"
          ]
       },
       { 

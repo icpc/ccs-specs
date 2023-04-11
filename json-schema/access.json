@@ -1,0 +1,38 @@
+{
+	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/access.json",
+	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"title": "CLICS Contest API: access",
+	"description": "JSON response of this API call",
+
+	"type": "object",
+	"properties": {
+		"capabilities": {
+			"type": "array",
+			"uniqueItems": true,
+			"items": { "$ref": "common.json#/capabilities" }
+		},
+		"endpoints": {
+			"type": "array",
+			"uniqueItems": true,
+			"items": {
+				"type": "object",
+				"properties": {
+					"type": { "$ref": "common.json#/endpointssingularcontest" },
+					"properties": {
+						"type": "array",
+						"uniqueItems": true,
+						"minItems": 1,
+						"items": {
+							"type": "string",
+							"pattern": "^([a-z][a-z0-9_]*)(\\.[a-z][a-z0-9_]*)*$"
+						}
+					}
+				},
+				"required": ["type", "properties"],
+				"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+			}
+		}
+	},
+	"required": ["capabilities", "endpoints"],
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+}
