@@ -620,21 +620,11 @@ Properties of the provider object:
 
 | Name         | Type            | Description
 | :----------- | :-------------- | :----------
-| name         | string ?        | Name of this data provider.
+| name         | string          | Name of this data provider.
 | version      | string ?        | Provider's application version string
-| build\_date  | TIME ?          | TIME provider's application was built
-| type         | string ?        | See Known Provider Types table below
+| build\_date  | TIME ?          | Timestamp when the provider's application was built
 | doc\_url     | string ?        | Link to provider's documentation
 | logo         | array of FILE ? | Logo for this data provider, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/\*. The different files in the array should be different file formats and/or sizes of the same image.
-
-#### Known Provider Types
-
-The list below contains allowed provider types.
-
-| Type  | Description
-| :---- | :----------
-| CCS   | Contest Control System
-| CDS   | Contest Data Server
 
 #### Examples
 
@@ -652,7 +642,6 @@ Returned data:
       "name": "DOMjudge",
       "version" : "8.3.0DEV/4ac31de71",
       "build_date" : "2023-04-20T10:00:00+01"
-      "type" : "CCS",
       "doc_url" : "https://www.domjudge.org/demoweb/api/doc",
       "logo": [{
          "href": "/api/logo",
