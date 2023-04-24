@@ -828,7 +828,9 @@ Returned data:
    "name": "2016 ICPC World Finals Dress Rehearsal",
    "start_time": null,
    "countdown_pause_time": "0:03:38.749",
-   "duration": "2:30:00"
+   "duration": "2:30:00",
+   "scoreboard_type": "pass-fail",
+   "penalty_time": 20
 }
 ```
 
@@ -1355,8 +1357,8 @@ Request:
 Returned data:
 
 ```json
-[{"id":"john-smith","team_id":"43","icpc_id":"32442","name":"John Smith","email":"john.smith@kmail.com","sex":"male","role":"contestant"},
- {"id":"osten-umlautsen","team_id":"43","icpc_id":null,"name":"Östen Ümlautsen","sex":null,"role":"coach"},
+[{"id":"john-smith","team_ids":["43"],"icpc_id":"32442","name":"John Smith","email":"john.smith@kmail.com","sex":"male","role":"contestant"},
+ {"id":"osten-umlautsen","team_ids":["43","44"],"icpc_id":null,"name":"Östen Ümlautsen","sex":null,"role":"coach"},
  {"id":"bill","name":"Bill Farrell","sex":"male","title":"Executive Director","role":"staff"}
 ]
 ```
