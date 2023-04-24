@@ -40,15 +40,16 @@ Information in the API is always either in JSON format,
 - The NDJSON returned from the endpoint `/contests/<id>/<endpoint>` is stored as
   `<endpoint>.ndjson`. (The only such endpoint is `event-feed`.)
 
-Some of these API endpoints are often written by humans in a package. For this
-reason, those files can also be written in YAML instead of JSON in a Contest
-Package. This holds for the following files:
+When creating a Contest Package, some of the API endpoints are
+commonly written by humans. For this reason, those files can also be
+written in YAML instead of JSON in a Contest Package. This holds for
+the following files:
 
 - `contest.json`, which then becomes `contest.yaml`.
 - `problems.json`, which then becomes `problems.yaml`.
 - `accounts.json`, which then becomes `accounts.yaml`.
 
-The section [Example YAML files](#example-yaml-files) list example YAML files.
+The section [Example YAML files](#example-yaml-files) lists example YAML files.
 
 ### File references
 
