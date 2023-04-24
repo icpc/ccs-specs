@@ -600,7 +600,7 @@ array of ID, does not have to be supported.
 
 ### API information
 
-Provides information about the API.
+Provides information about the API and the data provider.
 
 The following endpoint is associated with API information:
 
@@ -610,12 +610,31 @@ The following endpoint is associated with API information:
 
 Properties of version object:
 
+| Name         | Type              | Description
+| :----------- | :---------------- | :----------
+| version      | string            | Version of the API. For this version must be the string `draft`. Will be of the form `<yyyy>-<mm>`, `<yyyy>-<mm>-draft`, or simply `draft`.
+| version\_url | string            | Link to documentation for this version of the API.
+| provider     | provider object ? | Information about the data provider
+
+Properties of the provider object:
+
 | Name         | Type            | Description
 | :----------- | :-------------- | :----------
-| version      | string          | Version of the API. For this version must be the string `draft`. Will be of the form `<yyyy>-<mm>`, `<yyyy>-<mm>-draft`, or simply `draft`.
-| version\_url | string          | Link to documentation for this version of the API.
 | name         | string ?        | Name of this data provider.
+| version      | string ?        | Provider's application version string
+| build\_date  | TIME ?          | TIME provider's application was built
+| type         | string ?        | See Known Provider Types table below
+| doc\_url     | string ?        | Link to provider's documentation
 | logo         | array of FILE ? | Logo for this data provider, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/\*. The different files in the array should be different file formats and/or sizes of the same image.
+
+#### Known Provider Types
+
+The list below contains allowed provider types.
+
+| Type  | Description
+| :---- | :----------
+| CCS   | Contest Control System
+| CDS   | Contest Data Server
 
 #### Examples
 
@@ -629,15 +648,21 @@ Returned data:
 {
    "version": "draft",
    "version_url": "https://ccs-specs.icpc.io/draft/contest_api",
-   "name": "Kattis",
-   "logo": [{
-      "href": "/api/logo",
-      "hash": "36dcf7975b179447783cdfc857ce9ae0",
-      "filename": "logo.png",
-      "mime": "image/png",
-      "width": 600,
-      "height": 600
-   }]
+   "provider" : {
+      "name": "DOMjudge",
+      "version" : "8.3.0DEV/4ac31de71",
+      "build_date" : "2023-04-20T10:00:00+01"
+      "type" : "CCS",
+      "doc_url" : "https://www.domjudge.org/demoweb/api/doc",
+      "logo": [{
+         "href": "/api/logo",
+         "hash": "36dcf7975b179447783cdfc857ce9ae0",
+         "filename": "logo.png",
+         "mime": "image/png",
+         "width": 600,
+         "height": 600
+      }]
+   }
 }
 ```
 
