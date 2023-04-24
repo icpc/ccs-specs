@@ -9,6 +9,7 @@
 		"id": { "$ref": "common.json#/identifier" },
 		"icpc_id": { "type": [ "string", "null" ] },
 		"name": { "type": "string" },
+		"label": { "type": "string" },
 		"display_name": { "type": [ "string", "null" ] },
 		"organization_id": { "$ref": "common.json#/identifierornull" },
 		"group_ids": { "$ref": "common.json#/identifiersornull" },
@@ -36,6 +37,6 @@
 		"webcam": { "$ref": "common.json#/filerefsornull" },
 		"audio": { "$ref": "common.json#/filerefsornull" }
 	},
-	"required": ["id", "name"],
+	"required": ["id", "name", "label"],
 	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 }
