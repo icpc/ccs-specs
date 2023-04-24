@@ -21,15 +21,15 @@ including:
 The package consists of a single directory containing files as described below,
 or alternatively, a ZIP compressed archive of the directory. It is strongly
 recommended that the name of the directory or the base name of the archive
-match the contest ID, if a contest ID is specified. 
+match the contest ID, if a contest ID is specified.
 
 A package contains information regarding a single contest (corresponding to the
 `/contests/<id>/*` endpoints of the API). The API can contain information for
 several contests, to store the information for multiple contests a package per
 contest would be needed.
 
-Information in the API is always either in JSON format, 
-[NDJSON](contest_api#event-feed) format, or linked using a 
+Information in the API is always either in JSON format,
+[NDJSON](contest_api#event-feed) format, or linked using a
 [file reference](contest_api#json-attribute-types) JSON object.
 
 - The JSON returned from the endpoint `/` is stored as `api.json`.
