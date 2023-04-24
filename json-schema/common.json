@@ -229,7 +229,7 @@
 			"command": { "type": "string" },
 			"args": { "type": "string" },
 			"version": { "type": "string" },
-			"version-command": { "type": "string" }
+			"version_command": { "type": "string" }
 		},
 		"required": ["command"],
 		"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
