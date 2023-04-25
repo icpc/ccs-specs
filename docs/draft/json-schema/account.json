@@ -9,6 +9,7 @@
 		"id": { "$ref": "common.json#/identifier" },
 		"username": { "type": "string" },
 		"password": { "type": ["string", "null"] },
+		"name": { "type": "string" },
 		"type": {
 			"oneOf": [
 				{ "enum": [ "team", "judge", "admin", "analyst", "staff" ] },
