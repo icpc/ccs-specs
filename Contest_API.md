@@ -622,8 +622,6 @@ Properties of the provider object:
 | :----------- | :-------------- | :----------
 | name         | string          | Name of this data provider.
 | version      | string ?        | Provider's application version string
-| build\_date  | TIME ?          | Timestamp when the provider's application was built
-| doc\_url     | string ?        | Link to provider's documentation
 | logo         | array of FILE ? | Logo for this data provider, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/\*. The different files in the array should be different file formats and/or sizes of the same image.
 
 #### Examples
@@ -641,8 +639,6 @@ Returned data:
    "provider" : {
       "name": "DOMjudge",
       "version" : "8.3.0DEV/4ac31de71",
-      "build_date" : "2023-04-20T10:00:00+01"
-      "doc_url" : "https://www.domjudge.org/demoweb/api/doc",
       "logo": [{
          "href": "/api/logo",
          "hash": "36dcf7975b179447783cdfc857ce9ae0",
