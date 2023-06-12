@@ -53,6 +53,7 @@
 	"capabilities": {
 		"enum": [
 			"contest_start",
+			"contest_thaw",
 			"team_submit",
 			"team_clar",
 			"proxy_submit",
