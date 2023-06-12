@@ -754,7 +754,7 @@ Properties of contest objects:
 | scoreboard\_freeze\_duration | RELTIME ?       | How long the scoreboard is frozen before the end of the contest. Defaults to `0:00:00`.
 | scoreboard\_thaw\_time       | TIME ?          | The scheduled thaw time of the contest, may be `null` if the thaw time is unknown or not set.
 | scoreboard\_type             | string          | What type of scoreboard is used for the contest. Must be either `pass-fail` or `score`.
-| penalty\_time                | integer         | Penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`.
+| penalty\_time                | RELTIME         | Penalty time for a wrong submission. Only relevant if scoreboard\_type is `pass-fail`.
 | banner                       | array of FILE ? | Banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime types are image/\*.
 | logo                         | array of FILE ? | Logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/\*.
 | location                     | LOCATION ?      | Location where the contest is held.
@@ -815,7 +815,7 @@ Returned data:
    "duration": "5:00:00",
    "scoreboard_freeze_duration": "1:00:00",
    "scoreboard_type": "pass-fail",
-   "penalty_time": 20,
+   "penalty_time": "0:20:00",
    "banner": [{
        "href": "https://example.com/api/contests/wf2014/banner",
        "filename": "banner.png",
@@ -840,7 +840,7 @@ Returned data:
    "countdown_pause_time": "0:03:38.749",
    "duration": "2:30:00",
    "scoreboard_type": "pass-fail",
-   "penalty_time": 20
+   "penalty_time": "0:20:00"
 }
 ```
 
