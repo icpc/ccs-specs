@@ -11,13 +11,16 @@
 			"const": "draft"
 		},
 		"version_url": { "type": "string" },
-		"name": {
-			"oneOf": [
-				{ "type": "string" },
-				{ "type": "null" }
-			]
-		},
-		"logo": { "$ref": "common.json#/imagerefsornull" }
+		"provider": {
+			"type": "object",
+			"properties": {
+				"name": { "type": "string" },
+				"version": { "type": "string" },
+				"logo": { "$ref": "common.json#/imagerefsornull" }
+			},
+			"required": ["name"],
+			"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+		}
 	},
 	"required": ["version", "version_url"],
 	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
