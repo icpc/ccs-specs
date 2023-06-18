@@ -107,6 +107,8 @@ foreach ($feed_data as $endpoint => $elements) {
 
 // Now check that each REST endpoint element appears in the feed.
 foreach ($endpoints as $endpoint) {
+    # TODO: decide whether access should be in the feed:
+    if ($endpoint==='access') continue;
     $endpoint_json = json_decode(file_get_contents($dir.'/'.$endpoint.'.json'), true);
     if (in_array($endpoint,['contests','state'])) $endpoint_json = [$endpoint_json];
     foreach ($endpoint_json as $element) {
