@@ -3,7 +3,7 @@ set -e -o pipefail
 
 # This should match the API version this script tests as found at the
 # URL https://ccs-specs.icpc.io/$API_VERSION/contest_api
-API_VERSION=draft
+API_VERSION=2023-06
 
 ENDPOINTS='
 contests
