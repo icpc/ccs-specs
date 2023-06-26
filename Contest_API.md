@@ -329,7 +329,8 @@ access to.
 | [contest\_start](#modifying-contests)      | Control the contest's start time
 | [contest\_thaw](#modifying-contests)       | Control the contest's thaw time
 | [team\_submit](#modifying-submissions)     | Submit as a team
-| [team\_clar](#modifying-clarifications)    | Submit clarifications as a team
+| [post\_clar](#modifying-clarifications)    | Submit clarifications
+| [post\_comment](#modifying-clarifications) | Submit commentary
 | [proxy\_submit](#modifying-submissions)    | Submit as a shared team proxy
 | [proxy\_clar](#modifying-clarifications)   | Submit clarifications as a shared team proxy
 | [admin\_submit](#modifying-submissions)    | Submit as an admin
@@ -1540,7 +1541,7 @@ zip archive. These must be stored directly from the root of the zip
 file, i.e. there must not be extra directories (or files) added unless
 these are explicitly part of the submission content.
 
-#### Modifying submissions 
+#### Modifying submissions
 
 To add a submission, clients can use the `POST` method on the submissions endpoint or the
 `PUT` method directly on an object url. One of the following [capabilities](#capabilities)
@@ -1816,7 +1817,7 @@ is required to add clarifications, with descriptions below:
 
 | Name               | Description
 | :----------------- | :----------
-| team\_clar         | POST a clarification as a team
+| post\_clar         | POST a clarification
 | proxy\_clar        | POST a clarification as a proxy (able to submit on behalf of team(s))
 | admin\_clar        | POST or PUT a clarification as an admin
 
@@ -1827,10 +1828,13 @@ exceptions:
 - When a property value would be null it is optional - you do not need to
   include it. e.g. if a clarification is not related to a problem you can
   choose to include or exclude the `problem_id`.
-- The `team_clar` capability only has access to `POST`. `id`, `to_team_id`,
-  `time`, and `contest_time` must not be provided. `from_team_id` may be
+- The `post_clar` capability only has access to `POST`. `id`, ,
+  `time`, and `contest_time` must not be provided. When submitting from a
+  team account, `to_team_id` must not be provided; `from_team_id` may be
   provided but then must match the ID of the team associated with the request.
-  The server will determine an `id` and the current `time` and `contest_time`.
+  When submitting from a judge account, `from_team_id` must not be provided.
+  In either case the server will determine an `id` and the current `time` and
+  `contest_time`.
 - The `proxy_clar` capability only has access to `POST`. `id`, `to_team_id`,
   `time`, and `contest_time` must not be provided. `from_team_id` must be
   provided. The server will determine an `id` and the current `time` and
@@ -2065,7 +2069,7 @@ Request:
 
 ### Commentary
 
-Commentary on events happening in the contest
+Commentary on events happening in the contest.
 
 The following endpoints are associated with commentary:
 
@@ -2114,6 +2118,32 @@ tags below are used.
 | accepted-bronze-medal   | A submission was accepted that changed the set of teams awarded a bronze medal.
 | accepted-winner         | A submission was accepted that changed the set of teams currently in the lead.
 | accepted-\<award>       | A submission was accepted that changed the set of teams awarded \<award>. Note that the above 4 are special cases of this.
+
+#### Modifying commentary 
+
+To add a commentary message, clients can use the `POST` method on the commentary endpoint.
+The following [capability](#capabilities) is required to add commentary,
+with description below:
+
+| Name               | Description
+| :----------------- | :----------
+| post\_comment      | POST a commentary message
+
+All requests must include a valid JSON object with the same properties as the commentary
+endpoint returns from a `GET` request with the following exceptions:
+
+- `id`, `time`, `contest\_time`, and `source\_id` must not be provided, and will be set by the server.
+
+The request must fail with a 4xx error code if any of the following happens:
+
+- A required property is missing.
+- A property that must not be provided is provided.
+- The supplied team, problem, or submission can not be found.
+
+The response will contain a `Location` header pointing to the newly created commentary
+and the response body will contain the initial state of the commentary.
+
+Performing a `POST` is not supported when this capability is not available.
 
 #### Examples
 
