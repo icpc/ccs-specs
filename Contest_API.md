@@ -2178,9 +2178,9 @@ Properties of scoreboard row objects:
 | team\_id          | ID        | Identifier of the [ team](#teams).
 | score             | object    | JSON object as specified in the rows below (for possible extension to other scoring methods).
 | score.num\_solved | integer   | Number of problems solved by the team. Required iff contest:scoreboard\_type is `pass-fail`.
-| score.total\_time | integer   | Total penalty time accrued by the team. Required iff contest:scoreboard\_type is `pass-fail`.
+| score.total\_time | RELTIME   | Total penalty time accrued by the team. Required iff contest:scoreboard\_type is `pass-fail`.
 | score.score       | number    | Total score of problems by the team. Required iff contest:scoreboard\_type is `score`.
-| score.time        | integer ? | Time of last score improvement used for tiebreaking purposes. Must be `null` iff `num\_solved=0`.
+| score.time        | RELTIME ? | Time of last score improvement, used for tiebreaking purposes. Must be `null` iff `num\_solved=0`.
 | problems          | array of problem data objects ? | JSON array of problems with scoring data, see below for the specification of each object.
 
 Properties of problem data objects:
@@ -2215,12 +2215,12 @@ Returned data:
     "end_of_updates": null
   },
   "rows": [
-    {"rank":1,"team_id":"123","score":{"num_solved":3,"total_time":340},"problems":[
+    {"rank":1,"team_id":"123","score":{"num_solved":3,"total_time":"5:40:00"},"problems":[
       {"problem_id":"1","num_judged":3,"num_pending":1,"solved":false},
-      {"problem_id":"2","num_judged":1,"num_pending":0,"solved":true,"time":20},
-      {"problem_id":"3","num_judged":2,"num_pending":0,"solved":true,"time":55},
+      {"problem_id":"2","num_judged":1,"num_pending":0,"solved":true,"time":"0:20:00"},
+      {"problem_id":"3","num_judged":2,"num_pending":0,"solved":true,"time":"0:55:00"},
       {"problem_id":"4","num_judged":0,"num_pending":0,"solved":false},
-      {"problem_id":"5","num_judged":3,"num_pending":0,"solved":true,"time":205}
+      {"problem_id":"5","num_judged":3,"num_pending":0,"solved":true,"time":"3:25:00"}
     ]}
   ]
 }
