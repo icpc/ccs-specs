@@ -1086,7 +1086,7 @@ Returned data:
    "name": "GNU C++",
    "compiler": {
       "command": "gcc",
-      "args": "-O2 -Wall -o a.out -static {files}",
+      "args": "-O2 -Wall -static {files}",
       "version": "gcc (Ubuntu 8.3.0-6ubuntu1) 8.3.0"
    },
    "entry_point_required": false,
