@@ -2172,15 +2172,15 @@ Algorithm](https://www.unicode.org/reports/tr10/), by default using the
 
 Properties of scoreboard row objects:
 
-| Name              | Type    | Description
-| :---------------- | :------ | :----------
-| rank              | integer | Rank of this team, 1-based and duplicate in case of ties.
-| team\_id          | ID      | Identifier of the [ team](#teams).
-| score             | object  | JSON object as specified in the rows below (for possible extension to other scoring methods).
-| score.num\_solved | integer | Number of problems solved by the team. Required iff contest:scoreboard\_type is `pass-fail`.
-| score.total\_time | integer | Total penalty time accrued by the team. Required iff contest:scoreboard\_type is `pass-fail`.
-| score.score       | number  | Total score of problems by the team. Required iff contest:scoreboard\_type is `score`.
-| score.time        | integer | Time of last score improvement used for tiebreaking purposes.
+| Name              | Type      | Description
+| :---------------- | :-------- | :----------
+| rank              | integer   | Rank of this team, 1-based and duplicate in case of ties.
+| team\_id          | ID        | Identifier of the [ team](#teams).
+| score             | object    | JSON object as specified in the rows below (for possible extension to other scoring methods).
+| score.num\_solved | integer   | Number of problems solved by the team. Required iff contest:scoreboard\_type is `pass-fail`.
+| score.total\_time | integer   | Total penalty time accrued by the team. Required iff contest:scoreboard\_type is `pass-fail`.
+| score.score       | number    | Total score of problems by the team. Required iff contest:scoreboard\_type is `score`.
+| score.time        | integer ? | Time of last score improvement used for tiebreaking purposes. Must be `null` iff `num\_solved=0`.
 | problems          | array of problem data objects ? | JSON array of problems with scoring data, see below for the specification of each object.
 
 Properties of problem data objects:
