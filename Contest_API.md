@@ -2192,7 +2192,7 @@ Properties of problem data objects:
 | num\_pending | integer   | Number of pending submissions (either queued or due to freeze).
 | solved       | boolean   | Required iff contest:scoreboard\_type is `pass-fail`.
 | score        | number    | Required iff contest:scoreboard\_type is `score`.
-| time         | integer   | Minutes into the contest when this problem was solved by the team. Required iff `solved=true` or `score>0`.
+| time         | RELTIME   | Minutes into the contest when this problem was solved by the team. Required iff `solved=true` or `score>0`.
 
 #### Examples
 
