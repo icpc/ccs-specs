@@ -1,0 +1,27 @@
+{
+	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/api_information.json",
+	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"title": "CLICS Contest API: API information",
+	"description": "JSON response of this API call",
+
+	"type": "object",
+	"properties": {
+		"version": {
+			"type": "string",
+			"const": "2023-06"
+		},
+		"version_url": { "type": "string" },
+		"provider": {
+			"type": "object",
+			"properties": {
+				"name": { "type": "string" },
+				"version": { "type": "string" },
+				"logo": { "$ref": "common.json#/imagerefsornull" }
+			},
+			"required": ["name"],
+			"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+		}
+	},
+	"required": ["version", "version_url"],
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+}

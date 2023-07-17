@@ -1,0 +1,49 @@
+{
+	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/submission.json",
+	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"title": "CLICS Contest API - submission",
+	"description": "Definition of a single submission object",
+
+	"type": "object",
+	"properties": {
+		"id": { "$ref": "common.json#/identifier" },
+		"language_id": { "$ref": "common.json#/identifier" },
+		"problem_id": { "$ref": "common.json#/identifier" },
+		"team_id": { "$ref": "common.json#/identifier" },
+		"time": { "$ref": "common.json#/abstime" },
+		"contest_time": { "$ref": "common.json#/reltime" },
+		"entry_point": { "type": [ "string", "null" ] },
+		"files": { "$ref": "common.json#/filerefs" },
+		"reaction": { "$ref": "common.json#/filerefsornull" }
+	},
+	"required": ["id", "language_id", "problem_id", "team_id", "time", "contest_time", "files"],
+	"oneOf": [
+		{
+			"properties": {
+				"language_id": { "enum": ["java"] }
+			},
+			"required": ["entry_point"]
+		},
+		{
+			"properties": {
+				"language_id": { "enum": ["c", "cpp"] }
+			},
+			"oneOf": [
+				{
+					"not": { "required": ["entry_point"] }
+				},
+				{
+					"properties": { "entry_point": { "type": "null" } }
+				}
+			]
+		},
+		{
+			"not": {
+				"properties": {
+					"language_id": { "enum": ["java", "c", "cpp"] }
+				}
+			}
+		}
+	],
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+}

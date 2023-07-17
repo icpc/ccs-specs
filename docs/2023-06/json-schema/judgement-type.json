@@ -1,0 +1,16 @@
+{
+	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/judgement-type.json",
+	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"title": "CLICS Contest API - judgement_type",
+	"description": "Definition of a single judgement-type object",
+
+	"type": "object",
+	"properties": {
+		"id": { "$ref": "common.json#/judgementtypeid" },
+		"name": { "type": "string" },
+		"penalty": { "type": "boolean" },
+		"solved": { "type": "boolean" }
+	},
+	"required": ["id", "name", "solved"],
+	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
+}
