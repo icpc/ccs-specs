@@ -754,7 +754,7 @@ Properties of contest objects:
 | scoreboard\_freeze\_duration | RELTIME ?       | How long the scoreboard is frozen before the end of the contest. Defaults to `0:00:00`.
 | scoreboard\_thaw\_time       | TIME ?          | The scheduled thaw time of the contest, may be `null` if the thaw time is unknown or not set.
 | scoreboard\_type             | string          | What type of scoreboard is used for the contest. Must be either `pass-fail` or `score`.
-| penalty\_time                | integer         | Penalty time for a wrong submission, in minutes. Only relevant if scoreboard\_type is `pass-fail`.
+| penalty\_time                | RELTIME         | Penalty time for a wrong submission. Only relevant if scoreboard\_type is `pass-fail`.
 | banner                       | array of FILE ? | Banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime types are image/\*.
 | logo                         | array of FILE ? | Logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/\*.
 | location                     | LOCATION ?      | Location where the contest is held.
@@ -815,7 +815,7 @@ Returned data:
    "duration": "5:00:00",
    "scoreboard_freeze_duration": "1:00:00",
    "scoreboard_type": "pass-fail",
-   "penalty_time": 20,
+   "penalty_time": "0:20:00",
    "banner": [{
        "href": "https://example.com/api/contests/wf2014/banner",
        "filename": "banner.png",
@@ -840,7 +840,7 @@ Returned data:
    "countdown_pause_time": "0:03:38.749",
    "duration": "2:30:00",
    "scoreboard_type": "pass-fail",
-   "penalty_time": 20
+   "penalty_time": "0:20:00"
 }
 ```
 
@@ -2178,9 +2178,9 @@ Properties of scoreboard row objects:
 | team\_id          | ID        | Identifier of the [ team](#teams).
 | score             | object    | JSON object as specified in the rows below (for possible extension to other scoring methods).
 | score.num\_solved | integer   | Number of problems solved by the team. Required iff contest:scoreboard\_type is `pass-fail`.
-| score.total\_time | integer   | Total penalty time accrued by the team. Required iff contest:scoreboard\_type is `pass-fail`.
+| score.total\_time | RELTIME   | Total penalty time accrued by the team. Required iff contest:scoreboard\_type is `pass-fail`.
 | score.score       | number    | Total score of problems by the team. Required iff contest:scoreboard\_type is `score`.
-| score.time        | integer ? | Time of last score improvement used for tiebreaking purposes. Must be `null` iff `num\_solved=0`.
+| score.time        | RELTIME ? | Time of last score improvement, used for tiebreaking purposes. Must be `null` iff `num\_solved=0`.
 | problems          | array of problem data objects ? | JSON array of problems with scoring data, see below for the specification of each object.
 
 Properties of problem data objects:
@@ -2192,7 +2192,7 @@ Properties of problem data objects:
 | num\_pending | integer   | Number of pending submissions (either queued or due to freeze).
 | solved       | boolean   | Required iff contest:scoreboard\_type is `pass-fail`.
 | score        | number    | Required iff contest:scoreboard\_type is `score`.
-| time         | integer   | Minutes into the contest when this problem was solved by the team. Required iff `solved=true` or `score>0`.
+| time         | RELTIME   | Minutes into the contest when this problem was solved by the team. Required iff `solved=true` or `score>0`.
 
 #### Examples
 
@@ -2215,12 +2215,12 @@ Returned data:
     "end_of_updates": null
   },
   "rows": [
-    {"rank":1,"team_id":"123","score":{"num_solved":3,"total_time":340},"problems":[
+    {"rank":1,"team_id":"123","score":{"num_solved":3,"total_time":"5:40:00"},"problems":[
       {"problem_id":"1","num_judged":3,"num_pending":1,"solved":false},
-      {"problem_id":"2","num_judged":1,"num_pending":0,"solved":true,"time":20},
-      {"problem_id":"3","num_judged":2,"num_pending":0,"solved":true,"time":55},
+      {"problem_id":"2","num_judged":1,"num_pending":0,"solved":true,"time":"0:20:00"},
+      {"problem_id":"3","num_judged":2,"num_pending":0,"solved":true,"time":"0:55:00"},
       {"problem_id":"4","num_judged":0,"num_pending":0,"solved":false},
-      {"problem_id":"5","num_judged":3,"num_pending":0,"solved":true,"time":205}
+      {"problem_id":"5","num_judged":3,"num_pending":0,"solved":true,"time":"3:25:00"}
     ]}
   ]
 }
