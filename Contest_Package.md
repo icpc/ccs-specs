@@ -21,15 +21,15 @@ including:
 The package consists of a single directory containing files as described below,
 or alternatively, a ZIP compressed archive of the directory. It is strongly
 recommended that the name of the directory or the base name of the archive
-match the contest ID, if a contest ID is specified. 
+match the contest ID, if a contest ID is specified.
 
 A package contains information regarding a single contest (corresponding to the
 `/contests/<id>/*` endpoints of the API). The API can contain information for
 several contests, to store the information for multiple contests a package per
 contest would be needed.
 
-Information in the API is always either in JSON format, 
-[NDJSON](contest_api#event-feed) format, or linked using a 
+Information in the API is always either in JSON format,
+[NDJSON](contest_api#event-feed) format, or linked using a
 [file reference](contest_api#json-attribute-types) JSON object.
 
 - The JSON returned from the endpoint `/` is stored as `api.json`.
@@ -40,6 +40,18 @@ Information in the API is always either in JSON format,
 - The NDJSON returned from the endpoint `/contests/<id>/<endpoint>` is stored as
   `<endpoint>.ndjson`. (The only such endpoint is `event-feed`.)
 
+When creating a Contest Package, some of the API endpoints are
+commonly written by humans. For this reason, those files can also be
+written in YAML instead of JSON in a Contest Package. This holds for
+the following files:
+
+- `contest.json`, which then becomes `contest.yaml`.
+- `problems.json`, which then becomes `problems.yaml`.
+- `accounts.json`, which then becomes `accounts.yaml`.
+
+The section [Example YAML files](#example-yaml-files) lists example YAML files.
+
+### File references
 
 Files referenced in `api.json` and `contest.json` are stored as `api/<filename>`
 and `contest/<filename>` respectively, and files referenced in
@@ -48,16 +60,6 @@ and `contest/<filename>` respectively, and files referenced in
 - `<id>` is the ID of the endpoint object the reference is in.
 - `<filename>` is the filename specified in the file reference object.
 
-Some of these API endpoints are often written by humans in a package. For this
-reason, those files can also be written in YAML instead of JSON. This holds for
-the following files:
-
-- `contest.json`, which then becomes `contest.yaml`.
-- `problems.json`, which then becomes `problems.yaml`.
-- `accounts.json`, which then becomes `accounts.yaml`.
-
-The section [Example YAML files](#example-yaml-files) list example YAML files.
-
 Note that the API specification requires that filenames are unique within
 endpoint objects, so this is always possible.
 
@@ -65,12 +67,13 @@ It is not required that a URL specified in an href is always valid.
 Specifically, in many cases the contest is running in a local network that is
 taken down after the contest, and in this case the URL would definitely not
 still be working. To keep the archiving process as simple as possible, stale
-URLs do not have to be removed from the data, but due to this the URLs should
-be ignored and the file stored as specified above should be used instead.
-
-Optionally one could create a Shallow Package by not storing the files, in which
-case the URLs must be valid. This could be useful in some cases where the size
-of the package matters.
+URLs do not have to be removed from the data.
+That is, if a file referenced by the `filename` property as described
+above is present, then that should be used and the original URL in
+`href` ignored. If no such file exists, then the original URL must be
+valid and should be used to retrieve the file. This option could be
+used to create a "shallow package", when the size of the package
+matters.
 
 ### Multiple systems
 
