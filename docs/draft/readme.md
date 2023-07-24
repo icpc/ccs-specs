@@ -24,16 +24,11 @@ There are multiple versions of the CCS specifications available on the
 
 This is the draft of some future version of the CCS specification.
 
-## Changes compared to the `2022-07` version
+## Changes compared to the `2023-06` version
 
-These are the main changes made since the `2022-07` version:
+These are the main changes made since the `2023-06` version:
 
-* Renamed `version-command` to `version_command` in the Language endpoint.
-* Added `twitter_account` to the Organization endpoint.
-* Changed `team_id` (of type `ID`) to `team_ids` (of type `array of ID`) in the Person endpoint.
-* Added `name` to the Account endpoint.
-* Added a `contest_thaw` capability to thaw a contest via a PATCH request.
-
+*Nothing yet*
 
 ## References
 
