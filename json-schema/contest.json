@@ -13,6 +13,7 @@
 		"countdown_pause_time": { "$ref": "common.json#/posreltimeornull" },
 		"duration": { "$ref": "common.json#/posreltime" },
 		"scoreboard_freeze_duration": { "$ref": "common.json#/posreltimeornull" },
+		"scoreboard_thaw_time": { "$ref": "common.json#/abstimeornull" },
 		"scoreboard_type": { "enum": ["pass-fail", "score"] },
 		"penalty_time": {
 			"type": "integer",
