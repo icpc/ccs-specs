@@ -27,22 +27,14 @@
 								"type": "integer",
 								"minimum": 0
 							},
-							"total_time": {
-								"type": "integer",
-								"minimum": 0
-							},
+							"total_time": { "$ref": "common.json#/reltime" },
 							"score": {
 								"type": "number"
 							},
 							"time": {
 								"oneOf": [
-									{
-										"type": "integer",
-										"minimum": 0
-									},
-									{
-										"type": "null"
-									}
+									{ "$ref": "common.json#/posreltime" },
+									{ "type": "null" }
 								]
 							}
 						},
@@ -100,7 +92,7 @@
 									"type": "number",
 									"minimum": 0
 								},
-								"time": { "type": "integer", "minimum": 0 }
+								"time": { "$ref": "common.json#/posreltime" }
 							},
 							"oneOf": [
 								{ "required": ["solved"] },
