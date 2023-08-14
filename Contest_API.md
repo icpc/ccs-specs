@@ -706,9 +706,9 @@ Returned data:
 
 ```json
 {
-   "capabilities": ["patch_time"],
+   "capabilities": ["contest_start"],
    "endpoints": [
-     { "type": "contests", "properties": ["id","name","formal_name",...]},
+     { "type": "contest", "properties": ["id","name","formal_name",...]},
      { "type": "problems", "properties": ["id","label",...]},
      { "type": "submissions", "properties": ["id","language_id","reaction",...]}
      ...
@@ -722,7 +722,7 @@ or:
 {
    "capabilities": ["team_submit"],
    "endpoints": [
-     { "type": "contests", "properties": ["id","name","formal_name",...]},
+     { "type": "contest", "properties": ["id","name","formal_name",...]},
      { "type": "problems", "properties": ["id","label",...]},
      { "type": "submissions", "properties": ["id","language_id",...]},
      ...
@@ -2215,7 +2215,7 @@ Returned data:
     "end_of_updates": null
   },
   "rows": [
-    {"rank":1,"team_id":"123","score":{"num_solved":3,"total_time":"5:40:00"},"problems":[
+    {"rank":1,"team_id":"123","score":{"num_solved":3,"total_time":"5:40:00","time":"3:25:00"},"problems":[
       {"problem_id":"1","num_judged":3,"num_pending":1,"solved":false},
       {"problem_id":"2","num_judged":1,"num_pending":0,"solved":true,"time":"0:20:00"},
       {"problem_id":"3","num_judged":2,"num_pending":0,"solved":true,"time":"0:55:00"},
