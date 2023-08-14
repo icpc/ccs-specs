@@ -35,8 +35,15 @@
 								"type": "number"
 							},
 							"time": {
-								"type": "integer",
-								"minimum": 0
+								"oneOf": [
+									{
+										"type": "integer",
+										"minimum": 0
+									},
+									{
+										"type": "null"
+									}
+								]
 							}
 						},
 						"oneOf": [
@@ -49,6 +56,29 @@
 								"required": ["score"]
 							}
 						],
+						"if": {
+							"properties": { "num_solved": { "const": 0 } }
+						},
+						"then": {
+							"oneOf": [
+								{
+									"not": { "required": ["time"] }
+								},
+								{
+									"time": { "type": "null" }
+								}
+							]
+						},
+						"else": {
+							"allOf": [
+								{
+									"required": ["time"]
+								},
+								{
+									"time": { "type": "integer" }
+								}
+							]
+						},
 						"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 					},
 					"problems": {
