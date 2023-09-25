@@ -2123,6 +2123,56 @@ Returned data:
 ]
 ```
 
+### Contest Pause
+
+A pause in content time.
+
+The following endpoints are associated with pauses:
+
+| Endpoint                     | Mime-type        | Description
+| :--------------------------- | :--------------- | :----------
+| `/contests/<id>/pauses`      | application/json | JSON array of all pauses with properties as specified by `/access`.
+| `/contests/<id>/pauses/<id>` | application/json | JSON object representing a single pause with properties as specified by `/access`.
+
+Properties of pauses objects:
+
+| Name       | Type          | Description
+| :--------- | :------------ | :----------
+| id         | ID            | Identifier of the pause.
+| start_time | TIME          | Start time of the contest pause.
+| end_time   | TIME?         | End of the pause, may be ommitted if the end time isn't known yet.
+| message    | string        | Message describing the reason for the pause.
+
+#### Semantics
+
+Some contests pause the contest clock during a lunch break. In rare cases, the clock may need to be
+stopped unexpectedly due to an unscheduled event like an internet connection failure.
+
+A pause allows the CCS to broadcast these events so that downstream clients can correctly show the
+current contest clock, e.g. for showing the current contest time or countdown to the end of the contest.
+
+This endpoint exists solely to keep downstream clocks in sync. If a CCS supports pauses then it is
+required to correctly handle the contest time of other objects (e.g. submissions or judgements) as per
+the rest of this specification.
+If a CCS can retroactively 'remove' time then it is required to update the contest time of any affected
+events and/or restart the event feed with new tokens in order to get back to a consistent state.
+
+Pauses must not overlap. 
+
+#### Examples
+
+Request:
+
+` GET https://example.com/api/contests/wf23/pauses`
+
+Returned data:
+
+```json
+[{"id": "p1", "start_time": "2023-03-06T19:00:00.000+00", "end_time": "2023-03-06T19:30:00.000+00", "message": "Scheduled stroopwafel break"}, 
+ {"id": "p2", "start_time": "2023-03-06T19:37:10.858+00", "message": "Fire alarm"}, 
+]
+```
+
 ### Scoreboard
 
 Scoreboard of the contest.
