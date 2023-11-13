@@ -749,7 +749,7 @@ Properties of contest objects:
 | name                         | string          | Short display name of the contest.
 | formal\_name                 | string ?        | Full name of the contest. Defaults to value of `name`.
 | start\_time                  | TIME ?          | The scheduled start time of the contest, may be `null` if the start time is unknown or the countdown is paused.
-| countdown\_pause\_time       | RELTIME ?       | The amount of seconds left when countdown to contest start is paused. At no time may both `start_time` and `countdown_pause_time` be non-`null`.
+| countdown\_pause\_time       | RELTIME ?       | The number of seconds left when the countdown to the contest start was paused. At no time may both `start_time` and `countdown_pause_time` be non-`null`.
 | duration                     | RELTIME         | Length of the contest.
 | scoreboard\_freeze\_duration | RELTIME ?       | How long the scoreboard is frozen before the end of the contest. Defaults to `0:00:00`.
 | scoreboard\_thaw\_time       | TIME ?          | The scheduled thaw time of the contest, may be `null` if the thaw time is unknown or not set.
@@ -759,11 +759,12 @@ Properties of contest objects:
 | logo                         | array of FILE ? | Logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/\*.
 | location                     | LOCATION ?      | Location where the contest is held.
 
-The expected/typical use of `countdown_pause_time` is that once a
-`start_time` is defined and close, the countdown may be paused due to
-unforeseen delays. In this case, `start_time` should be set to `null`
-and `countdown_pause_time` to the number of seconds left to count down.
-The `countdown_pause_time` may change to indicate approximate delay.
+The typical use of `countdown_pause_time` is when a contest director wishes to pause the countdown to the start of a contest.  For example, this may occur because of technical
+issues or to make an announcement.  When the contest countdown is paused, the value of `countdown_pause_time` should be set to the number of seconds remaining in the countdown at the
+time of the pause.
+In this case, the `start_time` must be set to `null`, thereby, setting an undefined `start_time` (the `start_time` is undefined since
+the length of the pause may be unknown).
+The `countdown_pause_time` may be changed to indicate the approximate delay until the contest starts.
 Countdown is resumed by setting a new `start_time` and resetting
 `countdown_pause_time` to `null`.
 
