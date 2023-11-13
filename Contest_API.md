@@ -706,7 +706,7 @@ Returned data:
 
 ```json
 {
-   "capabilities": ["patch_time"],
+   "capabilities": ["contest_start"],
    "endpoints": [
      { "type": "contests", "properties": ["id","name","formal_name",...]},
      { "type": "problems", "properties": ["id","label",...]},
