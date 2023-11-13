@@ -760,8 +760,7 @@ Properties of contest objects:
 | location                     | LOCATION ?      | Location where the contest is held.
 
 The typical use of `countdown_pause_time` is when a contest director wishes to pause the countdown to the start of a contest.  For example, this may occur because of technical
-issues or to make an announcement.  When the contest countdown is paused, the value of `countdown_pause_time` should be set to the number of seconds remaining in the countdown at the
-time of the pause.
+issues or to make an announcement.  When the contest countdown is paused, the value of `countdown_pause_time` should be set to the expected time remaining before the start of the contest after the pause is lifted.
 In this case, the `start_time` must be set to `null`, thereby, setting an undefined `start_time` (the `start_time` is undefined since
 the length of the pause may be unknown).
 The `countdown_pause_time` may be changed to indicate the approximate delay until the contest starts.
