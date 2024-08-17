@@ -27,16 +27,15 @@
 								"type": "integer",
 								"minimum": 0
 							},
-							"total_time": {
-								"type": "integer",
-								"minimum": 0
-							},
+							"total_time": { "$ref": "common.json#/reltime" },
 							"score": {
 								"type": "number"
 							},
 							"time": {
-								"type": "integer",
-								"minimum": 0
+								"oneOf": [
+									{ "$ref": "common.json#/posreltime" },
+									{ "type": "null" }
+								]
 							}
 						},
 						"oneOf": [
@@ -49,6 +48,29 @@
 								"required": ["score"]
 							}
 						],
+						"if": {
+							"properties": { "num_solved": { "const": 0 } }
+						},
+						"then": {
+							"oneOf": [
+								{
+									"not": { "required": ["time"] }
+								},
+								{
+									"time": { "type": "null" }
+								}
+							]
+						},
+						"else": {
+							"allOf": [
+								{
+									"required": ["time"]
+								},
+								{
+									"time": { "type": "integer" }
+								}
+							]
+						},
 						"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 					},
 					"problems": {
@@ -70,7 +92,7 @@
 									"type": "number",
 									"minimum": 0
 								},
-								"time": { "type": "integer", "minimum": 0 }
+								"time": { "$ref": "common.json#/posreltime" }
 							},
 							"oneOf": [
 								{ "required": ["solved"] },
