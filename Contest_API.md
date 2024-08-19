@@ -1576,7 +1576,7 @@ The request must fail with a 4xx error code if any of the following happens:
 - A required property is missing.
 - A property that must not be provided is provided.
 - The supplied problem, team or language can not be found.
-- An entrypoint is required for the given language, but not supplied.
+- An entry point is required for the given language, but not supplied.
 - The mime property in `files` is set but invalid.
 - Something is wrong with the submission file. For example it contains too many
   files, it is too big, etc.
