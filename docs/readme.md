@@ -15,7 +15,7 @@ Once a specification is released it uses the naming scheme `<yyyy>-<mm>`.
 These releases are stable and will not change except for trivial changes such
 as fixing spelling and grammar, or improving examples or explanations.
 
-* [2023-06](https://ccs-specs.icpc.io/2023-06) - Current stable release, used at the ICPC World Finals in Luxor
+* [2023-06](https://ccs-specs.icpc.io/2023-06) - Current stable release, used at the ICPC World Finals in Luxor and Astana
 * [2022-07](https://ccs-specs.icpc.io/2022-07) - Used at the ICPC World Finals in Dhaka
 * [2021-11](https://ccs-specs.icpc.io/2021-11) - Used at [NWERC 2021](https://2021.nwerc.eu) in Iceland
 * [2020-03](https://ccs-specs.icpc.io/2020-03) - Used at ICPC World Finals in Moscow
