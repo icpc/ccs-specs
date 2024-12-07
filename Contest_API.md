@@ -505,7 +505,7 @@ are mentioned below.
 
 ### Types of endpoints
 
-The endpoints can be categorized into 4 groups as follows:
+The endpoints can be categorized into 4 types as follows:
 
 - Metadata: api, access
 - Configuration: accounts, contests, judgement-types, languages, problems,
