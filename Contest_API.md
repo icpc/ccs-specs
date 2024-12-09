@@ -1273,7 +1273,11 @@ Returned data:
 
 ```json
 [{"id":"inst123","icpc_id":"433","name":"Shanghai Jiao Tong U.","formal_name":"Shanghai Jiao Tong University"},
- {"id":"inst105","name":"Carnegie Mellon University","country":"USA",
+ {"id":"inst105","name":"Carnegie Mellon University","country":"USA","country_subdivision":"US-PA",
+  "country_flag":[{"href":"http://example.com/api/contests/wf14/flags/USA/56px","filename":"56px.png","mime":"image/png","width":56,"height":56},
+          {"href":"http://example.com/api/contests/wf14/flags/USA/160px","filename":"160px.png","mime":"image/png","width":160,"height":160}],
+  "country_subdivision_flag":[{"href":"http://example.com/api/contests/wf14/flags/US-PA/56px","filename":"56px.png","mime":"image/png","width":56,"height":56},
+          {"href":"http://example.com/api/contests/wf14/flags/US-PA/160px","filename":"160px.png","mime":"image/png","width":160,"height":160}],
   "logo":[{"href":"http://example.com/api/contests/wf14/organizations/inst105/logo/56px","filename":"56px.png","mime":"image/png","width":56,"height":56},
           {"href":"http://example.com/api/contests/wf14/organizations/inst105/logo/160px","filename":"160px.png","mime":"image/png","width":160,"height":160}]
  }
