@@ -1247,21 +1247,21 @@ organizations (i.e. return any organization\_ids).
 
 Properties of organization objects:
 
-| Name               | Type            | Description
-| :----------------- | :-------------- | :----------
-| id                 | ID              | Identifier of the organization.
-| icpc\_id           | string ?        | External identifier from ICPC CMS.
-| name               | string          | Short display name of the organization.
-| formal\_name       | string ?        | Full organization name if too long for normal display purposes.
-| country            | string ?        | [ISO 3166-1 alpha-3 code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) of the organization's country.
-| country\_flag      | array of FILE ? | Flag of the country. A server is recommended to provide flags of size around 56x56 and 160x160. Only allowed mime types are image/\*.
-| country\_subdivision | string ? | [ISO 3166-2 code](https://en.wikipedia.org/wiki/ISO_3166-2) of the organization's country subdivision.
-| country\_subdivision\_flag | array of FILE | Flag of the country subdivision. A server is recommended to provide flags of size around 56x56 and 160x160. Only allowed mime types are image/\*.
-| url                | string ?        | URL to organization's website.
-| twitter\_hashtag   | string ?        | Organization Twitter hashtag.
-| twitter\_account   | string ?        | Organization Twitter account.
-| location           | LOCATION ?      | Location where this organization is based.
-| logo               | array of FILE ? | Logo of the organization. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well. Only allowed mime types are image/\*.
+| Name                       | Type            | Description
+| :------------------------- | :-------------- | :----------
+| id                         | ID              | Identifier of the organization.
+| icpc\_id                   | string ?        | External identifier from ICPC CMS.
+| name                       | string          | Short display name of the organization.
+| formal\_name               | string ?        | Full organization name if too long for normal display purposes.
+| country                    | string ?        | [ISO 3166-1 alpha-3 code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) of the organization's country.
+| country\_flag              | array of FILE ? | Flag of the country. A server is recommended to provide flags of size around 56x56 and 160x160. Only allowed mime types are image/\*.
+| country\_subdivision       | string ?        | [ISO 3166-2 code](https://en.wikipedia.org/wiki/ISO_3166-2) of the organization's country subdivision.
+| country\_subdivision\_flag | array of FILE   | Flag of the country subdivision. A server is recommended to provide flags of size around 56x56 and 160x160. Only allowed mime types are image/\*.
+| url                        | string ?        | URL to organization's website.
+| twitter\_hashtag           | string ?        | Organization Twitter hashtag.
+| twitter\_account           | string ?        | Organization Twitter account.
+| location                   | LOCATION ?      | Location where this organization is based.
+| logo                       | array of FILE ? | Logo of the organization. A server must provide logos of size 56x56 and 160x160 but may provide other sizes as well. Only allowed mime types are image/\*.
 
 #### Examples
 
