@@ -1255,7 +1255,7 @@ Properties of organization objects:
 | formal\_name               | string ?        | Full organization name if too long for normal display purposes.
 | country                    | string ?        | [ISO 3166-1 alpha-3 code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) of the organization's country.
 | country\_flag              | array of FILE ? | Flag of the country. A server is recommended to provide flags of size around 56x56 and 160x160. Only allowed mime types are image/\*.
-| country\_subdivision       | string ?        | [ISO 3166-2 code](https://en.wikipedia.org/wiki/ISO_3166-2) of the organization's country subdivision.
+| country\_subdivision       | string ?        | [ISO 3166-2 code](https://en.wikipedia.org/wiki/ISO_3166-2) of the organization's country subdivision (e.g. province or state).
 | country\_subdivision\_flag | array of FILE ? | Flag of the country subdivision. A server is recommended to provide flags of size around 56x56 and 160x160. Only allowed mime types are image/\*.
 | url                        | string ?        | URL to organization's website.
 | twitter\_hashtag           | string ?        | Organization Twitter hashtag.
