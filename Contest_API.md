@@ -230,6 +230,10 @@ absolute timestamps.
   containing human-readable time durations, given in a slight modification of
   the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) extended time format:
   `(-)?(h)*h:mm:ss(.uuu)?`
+- Time intervals (type **`INTERVAL`** in the specification) are strings 
+  containing human-readable time intervals, given in 
+  [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) "start and end" format with
+  a forward slash interval designator.
 - Identifiers (type **`ID`** in the specification) are given as string
   consisting of characters `[a-zA-Z0-9_.-]` of length at most 36 and not
   starting with a `-` (dash) or `.` (dot) or ending with a `.` (dot). IDs are
@@ -1465,6 +1469,7 @@ Properties of state objects:
 | thawed           | TIME ? | Time when the scoreboard was thawed (that is, unfrozen again), or `null` if the scoreboard has not been thawed. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint. Must not be set if frozen is `null`.
 | finalized        | TIME ? | Time when the results were finalized, or `null` if results have not been finalized. Must not be set if ended is `null`.
 | end\_of\_updates | TIME ? | Time after last update to the contest occurred, or `null` if more updates are still to come. Setting this to non-`null` must be the very last change in the contest.
+| removed\_intervals | array of INTERVAL ? | Array of [removed time intervals](ccs_system_requirements#removing-time-intervals).
 
 These state changes must occur in the order listed in the table above,
 as far as they do occur, except that `thawed` and `finalized` may occur
@@ -1497,6 +1502,10 @@ Returned data:
   "thawed": null,
   "finalized": null,
   "end_of_updates": null
+  "removed_intervals": [
+    "2014-06-25T10:30:00+01/10:45:00",
+    "2014-06-25T10:50:00+01/10:55:00"
+  ]
 }
 ```
 
