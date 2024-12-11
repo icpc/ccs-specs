@@ -505,7 +505,7 @@ are mentioned below.
 
 ### Types of endpoints
 
-The endpoints can be categorized into 4 groups as follows:
+The endpoints can be categorized into 4 types as follows:
 
 - Metadata: api, access
 - Configuration: accounts, contests, judgement-types, languages, problems,
@@ -706,9 +706,9 @@ Returned data:
 
 ```json
 {
-   "capabilities": ["patch_time"],
+   "capabilities": ["contest_start"],
    "endpoints": [
-     { "type": "contests", "properties": ["id","name","formal_name",...]},
+     { "type": "contest", "properties": ["id","name","formal_name",...]},
      { "type": "problems", "properties": ["id","label",...]},
      { "type": "submissions", "properties": ["id","language_id","reaction",...]}
      ...
@@ -722,7 +722,7 @@ or:
 {
    "capabilities": ["team_submit"],
    "endpoints": [
-     { "type": "contests", "properties": ["id","name","formal_name",...]},
+     { "type": "contest", "properties": ["id","name","formal_name",...]},
      { "type": "problems", "properties": ["id","label",...]},
      { "type": "submissions", "properties": ["id","language_id",...]},
      ...
@@ -1576,7 +1576,7 @@ The request must fail with a 4xx error code if any of the following happens:
 - A required property is missing.
 - A property that must not be provided is provided.
 - The supplied problem, team or language can not be found.
-- An entrypoint is required for the given language, but not supplied.
+- An entry point is required for the given language, but not supplied.
 - The mime property in `files` is set but invalid.
 - Something is wrong with the submission file. For example it contains too many
   files, it is too big, etc.
@@ -2172,15 +2172,15 @@ Algorithm](https://www.unicode.org/reports/tr10/), by default using the
 
 Properties of scoreboard row objects:
 
-| Name              | Type    | Description
-| :---------------- | :------ | :----------
-| rank              | integer | Rank of this team, 1-based and duplicate in case of ties.
-| team\_id          | ID      | Identifier of the [ team](#teams).
-| score             | object  | JSON object as specified in the rows below (for possible extension to other scoring methods).
-| score.num\_solved | integer | Number of problems solved by the team. Required iff contest:scoreboard\_type is `pass-fail`.
-| score.total\_time | integer | Total penalty time accrued by the team. Required iff contest:scoreboard\_type is `pass-fail`.
-| score.score       | number  | Total score of problems by the team. Required iff contest:scoreboard\_type is `score`.
-| score.time        | integer | Time of last score improvement used for tiebreaking purposes.
+| Name              | Type      | Description
+| :---------------- | :-------- | :----------
+| rank              | integer   | Rank of this team, 1-based and duplicate in case of ties.
+| team\_id          | ID        | Identifier of the [ team](#teams).
+| score             | object    | JSON object as specified in the rows below (for possible extension to other scoring methods).
+| score.num\_solved | integer   | Number of problems solved by the team. Required iff contest:scoreboard\_type is `pass-fail`.
+| score.total\_time | integer   | Total penalty time accrued by the team. Required iff contest:scoreboard\_type is `pass-fail`.
+| score.score       | number    | Total score of problems by the team. Required iff contest:scoreboard\_type is `score`.
+| score.time        | integer ? | Time of last score improvement used for tiebreaking purposes. Must be `null` iff `num\_solved=0`.
 | problems          | array of problem data objects ? | JSON array of problems with scoring data, see below for the specification of each object.
 
 Properties of problem data objects:
@@ -2215,7 +2215,7 @@ Returned data:
     "end_of_updates": null
   },
   "rows": [
-    {"rank":1,"team_id":"123","score":{"num_solved":3,"total_time":340},"problems":[
+    {"rank":1,"team_id":"123","score":{"num_solved":3,"total_time":340,"time":205},"problems":[
       {"problem_id":"1","num_judged":3,"num_pending":1,"solved":false},
       {"problem_id":"2","num_judged":1,"num_pending":0,"solved":true,"time":20},
       {"problem_id":"3","num_judged":2,"num_pending":0,"solved":true,"time":55},
