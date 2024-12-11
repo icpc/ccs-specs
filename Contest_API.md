@@ -531,7 +531,7 @@ Data is immutable though: only inserts, no updates or deletes of
 objects. It does have associated timestamp/contest time property.
 Inserts and deletes are notified via the event feed. **Note**:
 judgements are the exception to immutability in a weak sense: they get
-updated once with the final verdict.
+updated once with the final verdict, and the value for `current` may change.
 
 Aggregate data: Only `GET` makes sense. These are not included in the
 event feed, also note that these should not be considered proper REST
@@ -1709,6 +1709,7 @@ Properties of judgement objects:
 | submission\_id       | ID        | Identifier of the [submission](#submissions) judged.
 | judgement\_type\_id  | ID ?      | The [verdict](#judgement-types) of this judgement. Required iff judgement has completed.
 | score                | number    | Score for this judgement. Required iff contest:scoreboard\_type is `score`.
+| current              | boolean ? | `true` if this is the current judgement. Defaults to `true`. At most one judgement per submission can ever have this `true`.
 | start\_time          | TIME      | Absolute time when judgement started.
 | start\_contest\_time | RELTIME   | Contest relative time when judgement started.
 | end\_time            | TIME ?    | Absolute time when judgement completed. Required iff judgement\_type\_id is present.
