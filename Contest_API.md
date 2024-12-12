@@ -1709,7 +1709,7 @@ Properties of judgement objects:
 | submission\_id       | ID        | Identifier of the [submission](#submissions) judged.
 | judgement\_type\_id  | ID ?      | The [verdict](#judgement-types) of this judgement. Required iff judgement has completed.
 | score                | number    | Score for this judgement. Required iff contest:scoreboard\_type is `score`.
-| current              | boolean ? | `true` if this is the current judgement. Defaults to `true`. At most one judgement per submission can ever have this `true`.
+| current              | boolean ? | `true` if this is the current judgement. Defaults to `true`. At any time, there must be at most one judgement per submission for which this `true` or unset (and thus defaulting to `true`).
 | start\_time          | TIME      | Absolute time when judgement started.
 | start\_contest\_time | RELTIME   | Contest relative time when judgement started.
 | end\_time            | TIME ?    | Absolute time when judgement completed. Required iff judgement\_type\_id is present.
