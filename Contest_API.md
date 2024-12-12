@@ -1463,7 +1463,7 @@ Properties of state objects:
 These state changes must occur in the order listed in the table above,
 as far as they do occur, except that `thawed` and `finalized` may occur
 in any order. For example, the contest may never be frozen and hence not
-thawed either, or, it may be finalized before it is thawed. That, is the
+thawed either, or, it may be finalized before it is thawed. I.e., the
 following sequence of inequalities must hold:
 
 ```
@@ -1471,9 +1471,9 @@ started < frozen < ended < thawed    < end_of_updates,
                    ended < finalized < end_of_updates.
 ```
 
-A contest that has ended, has been thawed (or was never frozen) and is
-finalized must not change. Thus, `end_of_updates` can be set once both
-`finalized` is set and `thawed` is set if the contest was frozen.
+A contest that has ended, been thawed (or was never frozen) and is finalized 
+must not change. Thus, `end_of_updates` can be set once both `finalized` is set 
+and `thawed` is set if the contest was frozen.
 
 #### Examples
 
