@@ -300,28 +300,12 @@ compiler or interpreter's documentation.
 Problems (including judge data, validators, execution time limit, etc) are
 specified and configured using the 
 [Problem package format](https://icpc.io/problem-package-format/). The CCS must
-support this format with the following exceptions:
-
-- The CCS does not have to support the use of the following keys in
-  problem.yaml: type, libraries or languages. This means that the default value
-  will be used.
-- The CCS does only have to support the values "default" or "custom" for the key
-  validation in problem.yaml.
-- The CCS does not have to support sections 5 "Included Code", 9 "Graders" or 10 
-  "Generators".
-
-```note
-TODO: Drop the exceptions above?
-```
+support the [ICPC subset](https://icpc.io/problem-package-format/spec/legacy-icpc.html)
+but may support more.
 
 The CCS must report an error when importing problems that use any unsupported
 features. The CCS may report an error when unsupported keys are used, even if
 they are given the default value.
-
-The problem name is as defined in the *problemname* macro in the problem
-specification. Optionally, the *plainproblemname*, if present, may be used
-instead. If *problemname* is used then escaped parts of it must be handled
-properly. If *plainproblemname* is used it must be used verbatim.
 
 ### Configuration Change
 
