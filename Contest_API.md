@@ -749,7 +749,7 @@ Properties of contest objects:
 | name                         | string          | Short display name of the contest.
 | formal\_name                 | string ?        | Full name of the contest. Defaults to value of `name`.
 | start\_time                  | TIME ?          | The scheduled start time of the contest, may be `null` if the start time is unknown or the countdown is paused.
-| countdown\_pause\_time       | RELTIME ?       | The amount of time left when the countdown to the contest start was paused, if the contest is paused, otherwise `null`.
+| countdown\_pause\_time       | RELTIME ?       | The amount of time left when the countdown to the contest start was paused, if the contest countdown is paused, otherwise `null`.
 | duration                     | RELTIME         | Length of the contest.
 | scoreboard\_freeze\_duration | RELTIME ?       | How long the scoreboard is frozen before the end of the contest. Defaults to `0:00:00`.
 | scoreboard\_thaw\_time       | TIME ?          | The scheduled thaw time of the contest, may be `null` if the thaw time is unknown or not set.
