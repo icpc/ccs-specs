@@ -32,6 +32,7 @@ These are the main changes made since the `2023-06` version:
 - Changed type of time related properties in scoreboard endpoint from `integer` to `RELTIME`.
 - Added `current` to judgements endpoint.
 - Added `country_subdivision` and `country_subdivision_flag` to organizations endpoint.
+- Added `removed_intervals` to state endpoint.
 
 ## References
 
