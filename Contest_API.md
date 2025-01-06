@@ -1828,7 +1828,7 @@ exceptions:
 - When a property value would be null it is optional - you do not need to
   include it. e.g. if a clarification is not related to a problem you can
   choose to include or exclude the `problem_id`.
-- The `post_clar` capability only has access to `POST`. `id`, ,
+- The `post_clar` capability only has access to `POST`. `id`,
   `time`, and `contest_time` must not be provided. When submitting from a
   team account, `to_team_id` must not be provided; `from_team_id` may be
   provided but then must match the ID of the team associated with the request.
