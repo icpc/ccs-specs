@@ -336,7 +336,9 @@ access to.
 | [admin\_submit](#modifying-submissions)    | Submit as an admin
 | [admin\_clar](#modifying-clarifications)   | Submit clarifications as an admin
 
-TODO - add capabilities related to team view and awards.
+*Warning*: these capabilities are not well tested yet in practice and
+might change in a backwards-incompatible way in next versions of this
+specification.
 
 ### Notification format
 
