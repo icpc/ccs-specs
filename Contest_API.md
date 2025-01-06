@@ -330,7 +330,7 @@ access to.
 | [contest\_thaw](#modifying-contests)       | Control the contest's thaw time
 | [team\_submit](#modifying-submissions)     | Submit as a team
 | [post\_clar](#modifying-clarifications)    | Submit clarifications
-| [post\_comment](#modifying-clarifications) | Submit commentary
+| [post\_comment](#modifying-commentary)     | Submit commentary
 | [proxy\_submit](#modifying-submissions)    | Submit as a shared team proxy
 | [proxy\_clar](#modifying-clarifications)   | Submit clarifications as a shared team proxy
 | [admin\_submit](#modifying-submissions)    | Submit as an admin
