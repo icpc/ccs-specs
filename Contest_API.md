@@ -1803,19 +1803,21 @@ The following endpoints are associated with clarification messages:
 
 Properties of clarification message objects:
 
-| Name           | Type    | Description
-| :------------- | :------ | :----------
-| id             | ID      | Identifier of the clarification.
-| from\_team\_id | ID ?    | Identifier of [team](#teams) sending this clarification request, `null` iff a clarification sent by jury.
-| to\_team\_id   | ID ?    | Identifier of the [team](#teams) receiving this reply, `null` iff a reply to all teams or a request sent by a team.
-| reply\_to\_id  | ID ?    | Identifier of clarification this is in response to, otherwise `null`.
-| problem\_id    | ID ?    | Identifier of associated [problem](#problems), `null` iff not associated to a problem.
-| text           | string  | Question or reply text.
-| time           | TIME    | Time of the question/reply.
-| contest\_time  | RELTIME | Contest time of the question/reply.
+| Name           | Type             | Description
+| :------------- | :--------------- | :----------
+| id             | ID               | Identifier of the clarification.
+| from\_team\_id | ID ?             | Identifier of [team](#teams) sending this clarification request, `null` iff a clarification sent by jury.
+| to\_team\_ids  | array of ID ?    | Identifiers of the [team(s)](#teams) receiving this reply, `null` iff a reply to all teams or a request sent by a team.
+| to\_group\_ids | array of ID ?    | Identifiers of the [ group(s)](#groups) receiving this reply, `null` iff a reply to all teams or a request sent by a team.
+| reply\_to\_id  | ID ?             | Identifier of clarification this is in response to, otherwise `null`.
+| problem\_id    | ID ?             | Identifier of associated [problem](#problems), `null` iff not associated to a problem.
+| text           | string           | Question or reply text.
+| time           | TIME             | Time of the question/reply.
+| contest\_time  | RELTIME          | Contest time of the question/reply.
 
-Note that at least one of `from_team_id` and `to_team_id` has to be
-`null`. That is, teams cannot send messages to other teams.
+Note that at least one of `from_team_id` and `to_team_ids` or `to_group_ids` has to be
+`null`. That is, teams cannot send messages to other teams or groups.  In order to send a reply
+to all teams, both `to_team_ids` and `to_group_ids` must be `null`.
 
 #### Modifying clarifications
 
