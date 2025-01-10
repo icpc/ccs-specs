@@ -1809,7 +1809,7 @@ Properties of clarification message objects:
 | time           | TIME             | Time of the question/reply.
 | contest\_time  | RELTIME          | Contest time of the question/reply.
 
-Note that at least one of `from_team_id` and `to_team_ids` or `to_group_ids` has to be
+Note that at least one of `from_team_id` and (`to_team_ids` or `to_group_ids`) has to be
 `null`. That is, teams cannot send messages to other teams or groups.  In order to send a reply
 to all teams, both `to_team_ids` and `to_group_ids` must be `null`.
 
