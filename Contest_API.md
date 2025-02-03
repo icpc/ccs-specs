@@ -1802,7 +1802,7 @@ Properties of clarification message objects:
 | id             | ID               | Identifier of the clarification.
 | from\_team\_id | ID ?             | Identifier of the [team](#teams) sending this clarification request, `null` iff a clarification is sent by the jury.
 | to\_team\_ids  | array of ID ?    | Identifiers of the [team(s)](#teams) receiving this reply, `null` iff a reply to all teams or a request sent by a team.
-| to\_group\_ids | array of ID ?    | Identifiers of the [ group(s)](#groups) receiving this reply, `null` iff a reply to all teams or a request sent by a team.
+| to\_group\_ids | array of ID ?    | Identifiers of the [group(s)](#groups) receiving this reply, `null` iff a reply to all teams or a request sent by a team.
 | reply\_to\_id  | ID ?             | Identifier of clarification this is in response to, otherwise `null`.
 | problem\_id    | ID ?             | Identifier of associated [problem](#problems), `null` iff not associated to a problem.
 | text           | string           | Question or reply text.
@@ -1894,7 +1894,7 @@ Returned data:
 
 ```json
 [{"id":"1","from_team_id":"34","text":"May I ask a question?","time":"2017-06-25T11:59:27.543+01","contest_time":"1:59:27.543"},
- {"id":"2","to_team_ids":["34"],"reply_to_id":"1","text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}
+ {"id":"2","to_team_ids":["34","57","69"],"to_group_ids":["1336"], "reply_to_id":"1","text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}
 ]
 ```
 
