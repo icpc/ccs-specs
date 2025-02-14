@@ -1809,7 +1809,7 @@ Properties of clarification message objects:
 | time           | TIME             | Time of the question/reply.
 | contest\_time  | RELTIME          | Contest time of the question/reply.
 
-The recipients of a clarification are the union of `to_team_ids` and `to_group_ids`.  If `from_team_id` and both `to_team_ids` and `to_group_ids` are `null`, then the clarification is sent to all teams.  Note that if `from_team_id` is not `null`, then both `to_team_ids` and `to_group_ids` must be `null`. That is, teams cannot send messages to other teams or groups.
+The recipients of a clarification are the union of `to_team_ids` and `to_group_ids`.  A clarification is sent to all teams if `from_team_id` is null and the union of `to_team_ids` and `to_group_ids` is empty.  Note that if `from_team_id` is not `null`, then both `to_team_ids` and `to_group_ids` must be `null`. That is, teams cannot send messages to other teams or groups.
 
 #### Modifying clarifications
 
