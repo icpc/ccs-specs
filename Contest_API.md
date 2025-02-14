@@ -594,8 +594,8 @@ Note that all results returned from endpoints:
 Endpoints that return a JSON array must allow filtering on any
 property with type ID (except the `id` property) by passing it as a
 query argument. For example, clarifications can be filtered on the
-recipient by passing `to_team_id=X`. To filter on a `null` value,
-pass an empty string, i.e. `to_team_id=`. It must be possible to
+recipient by passing `to_team_ids=X,Y`. To filter on a `null` value,
+pass an empty string, i.e. `to_team_ids=`. It must be possible to
 filter on multiple different properties simultaneously, with the
 meaning that all conditions must be met (they are logically `AND`ed).
 Note that filtering on any other property, including property with the type
@@ -1797,19 +1797,19 @@ The following endpoints are associated with clarification messages:
 
 Properties of clarification message objects:
 
-| Name           | Type    | Description
-| :------------- | :------ | :----------
-| id             | ID      | Identifier of the clarification.
-| from\_team\_id | ID ?    | Identifier of [team](#teams) sending this clarification request, `null` iff a clarification sent by jury.
-| to\_team\_id   | ID ?    | Identifier of the [team](#teams) receiving this reply, `null` iff a reply to all teams or a request sent by a team.
-| reply\_to\_id  | ID ?    | Identifier of clarification this is in response to, otherwise `null`.
-| problem\_id    | ID ?    | Identifier of associated [problem](#problems), `null` iff not associated to a problem.
-| text           | string  | Question or reply text.
-| time           | TIME    | Time of the question/reply.
-| contest\_time  | RELTIME | Contest time of the question/reply.
+| Name           | Type             | Description
+| :------------- | :--------------- | :----------
+| id             | ID               | Identifier of the clarification.
+| from\_team\_id | ID ?             | Identifier of the [team](#teams) sending this clarification request, `null` iff a clarification is sent by the jury.
+| to\_team\_ids  | array of ID ?    | Identifiers of the [team(s)](#teams) receiving this reply, `null` iff a reply to all teams or a request sent by a team.
+| to\_group\_ids | array of ID ?    | Identifiers of the [group(s)](#groups) receiving this reply, `null` iff a reply to all teams or a request sent by a team.
+| reply\_to\_id  | ID ?             | Identifier of clarification this is in response to, otherwise `null`.
+| problem\_id    | ID ?             | Identifier of associated [problem](#problems), `null` iff not associated to a problem.
+| text           | string           | Question or reply text.
+| time           | TIME             | Time of the question/reply.
+| contest\_time  | RELTIME          | Contest time of the question/reply.
 
-Note that at least one of `from_team_id` and `to_team_id` has to be
-`null`. That is, teams cannot send messages to other teams.
+The recipients of a clarification are the union of `to_team_ids` and `to_group_ids`.  A clarification is sent to all teams if `from_team_id`, `to_team_ids` and `to_group_ids` are null.  Note that if `from_team_id` is not `null`, then both `to_team_ids` and `to_group_ids` must be `null`. That is, teams cannot send messages to other teams or groups.
 
 #### Modifying clarifications
 
@@ -1832,12 +1832,12 @@ exceptions:
   choose to include or exclude the `problem_id`.
 - The `post_clar` capability only has access to `POST`. `id`,
   `time`, and `contest_time` must not be provided. When submitting from a
-  team account, `to_team_id` must not be provided; `from_team_id` may be
+  team account, `to_team_ids` and `to_group_ids` must not be provided; `from_team_id` may be
   provided but then must match the ID of the team associated with the request.
   When submitting from a judge account, `from_team_id` must not be provided.
   In either case the server will determine an `id` and the current `time` and
   `contest_time`.
-- The `proxy_clar` capability only has access to `POST`. `id`, `to_team_id`,
+- The `proxy_clar` capability only has access to `POST`. `id`, `to_team_ids`, `to_group_ids`,
   `time`, and `contest_time` must not be provided. `from_team_id` must be
   provided. The server will determine an `id` and the current `time` and
   `contest_time`.
@@ -1849,7 +1849,7 @@ The request must fail with a 4xx error code if any of the following happens:
 
 - A required property is missing.
 - A property that must not be provided is provided.
-- The supplied problem, from\_team, to\_team, or reply\_to cannot be found or are
+- The supplied problem, `from_team`, `to_team_ids`, `to_group_ids`, or `reply_to` cannot be found or are
   not visible to the client that's submitting.
 - The provided `id` already exists or is otherwise not acceptable.
 
@@ -1867,7 +1867,7 @@ Request:
 Returned data:
 
 ```json
-[{"id":"wf2017-1","from_team_id":null,"to_team_id":null,"reply_to_id":null,"problem_id":null,
+[{"id":"wf2017-1","from_team_id":null,"to_team_ids":null,"to_group_ids":null,"reply_to_id":null,"problem_id":null,
   "text":"Do not touch anything before the contest starts!","time":"2014-06-25T11:59:27.543+01","contest_time":"-0:15:32.457"}
 ]
 ```
@@ -1879,9 +1879,9 @@ Request:
 Returned data:
 
 ```json
-[{"id":"1","from_team_id":"34","to_team_id":null,"reply_to_id":null,"problem_id":null,
+[{"id":"1","from_team_id":"34","to_team_ids":null,"to_group_ids":null,"reply_to_id":null,"problem_id":null,
   "text":"May I ask a question?","time":"2017-06-25T11:59:27.543+01","contest_time":"1:59:27.543"},
- {"id":"2","from_team_id":null,"to_team_id":"34","reply_to_id":"1","problem_id":null,
+ {"id":"2","from_team_id":null,"to_team_ids":["34"],"reply_to_id":"1","problem_id":null,
   "text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}
 ]
 ```
@@ -1894,7 +1894,7 @@ Returned data:
 
 ```json
 [{"id":"1","from_team_id":"34","text":"May I ask a question?","time":"2017-06-25T11:59:27.543+01","contest_time":"1:59:27.543"},
- {"id":"2","to_team_id":"34","reply_to_id":"1","text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}
+ {"id":"2","to_team_ids":["34","57","69"],"to_group_ids":["1336"], "reply_to_id":"1","text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}
 ]
 ```
 
