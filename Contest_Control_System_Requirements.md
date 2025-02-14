@@ -1010,7 +1010,7 @@ The following access restrictions must apply to GETs on the API endpoints:
   thawed.
 - For clients with the `public` role the `/clarifications` endpoint must only
   contain replies from the jury to all teams, that is, messages where both
-  `from_team_id` and `to_team_id` are `null`. For clients with the `team` role
+  `from_team_id`, `to_team_ids` and `to_group_ids` are `null`. For clients with the `team` role
   the `/clarifications` endpoint must only contain their own clarifications
   (sent or received) and public clarifications.
 - For clients with the `public` role the `/awards` and `/scoreboard` endpoints
