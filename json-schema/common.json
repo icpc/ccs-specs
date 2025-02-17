@@ -143,9 +143,9 @@
 		"type": "object",
 		"properties": {
 			"href":     { "type": "string" },
-			"mime":     { "type": "string" },
-			"hash":     { "type": "string" },
 			"filename": { "type": "string" },
+			"hash":     { "type": "string" },
+			"mime":     { "type": "string" },
 			"width":    { "type": "integer", "minimum": 1 },
 			"height":   { "type": "integer", "minimum": 1 }
 		},
