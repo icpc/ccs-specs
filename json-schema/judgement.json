@@ -13,6 +13,7 @@
 			"type": "number",
 			"minimum": 0
 		},
+		"current": { "type": [ "boolean", "null" ] },
 		"start_time": { "$ref": "common.json#/abstime" },
 		"start_contest_time": { "$ref": "common.json#/reltime" },
 		"end_time": { "$ref": "common.json#/abstimeornull" },
