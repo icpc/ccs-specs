@@ -20,6 +20,18 @@
 		"team_id": { "$ref": "common.json#/identifierornull" },
 		"person_id": { "$ref": "common.json#/identifierornull" }
 	},
+	"if": {
+		"properties": {
+			"type": { "enum": [ "team" ] }
+		},
+		"required": [ "type" ]
+	},
+	"then": {
+		"properties": {
+			"team_id": { "$ref": "common.json#/identifier" }
+		},
+		"required": [ "team_id" ]
+	},
 	"required": ["id", "username", "type"],
 	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 }
