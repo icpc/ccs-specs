@@ -9,6 +9,10 @@
 		"id": { "$ref": "common.json#/identifier" },
 		"submission_id": { "$ref": "common.json#/identifier" },
 		"judgement_type_id": { "$ref": "common.json#/judgementtypeidornull" },
+		"score": {
+			"type": "number",
+			"minimum": 0
+		},
 		"start_time": { "$ref": "common.json#/abstime" },
 		"start_contest_time": { "$ref": "common.json#/reltime" },
 		"end_time": { "$ref": "common.json#/abstimeornull" },
