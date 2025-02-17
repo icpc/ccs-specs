@@ -8,8 +8,8 @@
 	"properties": {
 		"id": { "$ref": "common.json#/identifier" },
 		"citation": { "type": "string" },
-		"team_ids": { "$ref": "common.json#/identifiers" }
+		"team_ids": { "$ref": "common.json#/identifiersornull" }
 	},
-	"required": ["id", "citation", "team_ids"],
+	"required": ["id", "citation"],
 	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 }
