@@ -7,8 +7,8 @@
 	"type": "object",
 	"properties": {
 		"id": { "$ref": "common.json#/identifier" },
-		"team_ids": { "$ref": "common.json#/identifiers" },
 		"icpc_id": { "type": [ "string", "null" ] },
+		"team_ids": { "$ref": "common.json#/identifiers" },
 		"name": { "type": "string" },
 		"title": { "type": [ "string", "null" ] },
 		"email": { "type": [ "string", "null" ] },

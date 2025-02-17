@@ -7,8 +7,8 @@
 	"type": "object",
 	"properties": {
 		"started":        { "$ref": "common.json#/abstimeornull" },
-		"ended":          { "$ref": "common.json#/abstimeornull" },
 		"frozen":         { "$ref": "common.json#/abstimeornull" },
+		"ended":          { "$ref": "common.json#/abstimeornull" },
 		"thawed":         { "$ref": "common.json#/abstimeornull" },
 		"finalized":      { "$ref": "common.json#/abstimeornull" },
 		"end_of_updates": { "$ref": "common.json#/abstimeornull" }
