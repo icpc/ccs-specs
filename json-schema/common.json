@@ -149,7 +149,7 @@
 			"width":    { "type": "integer", "minimum": 1 },
 			"height":   { "type": "integer", "minimum": 1 }
 		},
-		"required": ["href", "mime"],
+		"required": ["filename", "mime"],
 		"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 	},
 
