@@ -1,6 +1,6 @@
 {
 	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/common.json",
-	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "CLICS Contest API - common definitions",
 	"description": "Common definitions of objects used in the API calls",
 
