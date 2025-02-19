@@ -1,5 +1,5 @@
 {
-	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/commentaries.json",
+	"$id": "https://github.com/icpc/ccs-specs/raw/2023-06/json-schema/commentaries.json",
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "CLICS Contest API: commentary",
 	"description": "JSON response of this API call",

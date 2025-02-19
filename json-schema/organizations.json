@@ -1,5 +1,5 @@
 {
-	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/organizations.json",
+	"$id": "https://github.com/icpc/ccs-specs/raw/2023-06/json-schema/organizations.json",
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "CLICS Contest API: organizations",
 	"description": "JSON response of this API call",

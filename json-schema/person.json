@@ -1,5 +1,5 @@
 {
-	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/person.json",
+	"$id": "https://github.com/icpc/ccs-specs/raw/2023-06/json-schema/person.json",
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "CLICS Contest API - person",
 	"description": "Definition of a single person object",

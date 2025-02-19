@@ -1,5 +1,5 @@
 {
-	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/team.json",
+	"$id": "https://github.com/icpc/ccs-specs/raw/2023-06/json-schema/team.json",
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "CLICS Contest API - team",
 	"description": "Definition of a single team object",

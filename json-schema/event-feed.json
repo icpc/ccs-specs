@@ -1,5 +1,5 @@
 {
-	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/event-feed.json",
+	"$id": "https://github.com/icpc/ccs-specs/raw/2023-06/json-schema/event-feed.json",
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "CLICS Contest API: event-feed",
 	"description": "Single line response of this NDJSON API call",
