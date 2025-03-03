@@ -1,6 +1,6 @@
 {
-	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/accounts.json",
-	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"$id": "https://github.com/icpc/ccs-specs/raw/2023-06/json-schema/accounts.json",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "CLICS Contest API: accounts",
 	"description": "JSON response of this API call",
 

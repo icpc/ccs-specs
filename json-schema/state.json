@@ -1,14 +1,14 @@
 {
-	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/state.json",
-	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"$id": "https://github.com/icpc/ccs-specs/raw/2023-06/json-schema/state.json",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "CLICS Contest API: state",
 	"description": "JSON response of this API call",
 
 	"type": "object",
 	"properties": {
 		"started":        { "$ref": "common.json#/abstimeornull" },
-		"ended":          { "$ref": "common.json#/abstimeornull" },
 		"frozen":         { "$ref": "common.json#/abstimeornull" },
+		"ended":          { "$ref": "common.json#/abstimeornull" },
 		"thawed":         { "$ref": "common.json#/abstimeornull" },
 		"finalized":      { "$ref": "common.json#/abstimeornull" },
 		"end_of_updates": { "$ref": "common.json#/abstimeornull" }
