@@ -1,6 +1,6 @@
 {
 	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/organization.json",
-	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "CLICS Contest API - organization",
 	"description": "Definition of a single organization object",
 
@@ -20,6 +20,16 @@
 			]
 		},
 		"country_flag": { "$ref": "common.json#/imagerefsornull" },
+		"country_subdivision": {
+			"oneOf": [
+				{
+					"type": "string",
+					"pattern": "^[A-Z]{2}-[A-Z0-9]{1,3}$"
+				},
+				{ "type": "null" }
+			]
+		},
+		"country_subdivision_flag": { "$ref": "common.json#/imagerefsornull" },
 		"url": { "type": [ "string", "null" ] },
 		"twitter_hashtag": { "type": [ "string", "null" ] },
 		"twitter_account": { "type": [ "string", "null" ] },

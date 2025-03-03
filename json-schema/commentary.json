@@ -1,6 +1,6 @@
 {
 	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/commentary.json",
-	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "CLICS Contest API - commentary",
 	"description": "Definition of a single commentary object",
 
@@ -10,9 +10,16 @@
 		"time": { "$ref": "common.json#/abstime" },
 		"contest_time": { "$ref": "common.json#/reltime" },
 		"message": { "type": "string" },
+		"tags": {
+			"type": "array",
+			"uniqueItems": true,
+			"items": { "type": "string" }
+		},
+		"source_id": { "$ref": "common.json#/identifierornull" },
 		"team_ids": { "$ref": "common.json#/identifiersornull" },
-		"problem_ids": { "$ref": "common.json#/identifiersornull" }
+		"problem_ids": { "$ref": "common.json#/identifiersornull" },
+		"submission_ids": { "$ref": "common.json#/identifiersornull" }
 	},
-	"required": ["id", "time", "contest_time", "message", "team_ids", "problem_ids"],
+	"required": ["id", "time", "contest_time", "message", "tags"],
 	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 }

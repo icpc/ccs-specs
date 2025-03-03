@@ -1,6 +1,6 @@
 {
 	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/common.json",
-	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "CLICS Contest API - common definitions",
 	"description": "Common definitions of objects used in the API calls",
 
@@ -55,7 +55,8 @@
 			"contest_start",
 			"contest_thaw",
 			"team_submit",
-			"team_clar",
+			"post_clar",
+			"post_comment",
 			"proxy_submit",
 			"proxy_clar",
 			"admin_submit",
@@ -143,13 +144,13 @@
 		"type": "object",
 		"properties": {
 			"href":     { "type": "string" },
-			"mime":     { "type": "string" },
-			"hash":     { "type": "string" },
 			"filename": { "type": "string" },
+			"hash":     { "type": "string" },
+			"mime":     { "type": "string" },
 			"width":    { "type": "integer", "minimum": 1 },
 			"height":   { "type": "integer", "minimum": 1 }
 		},
-		"required": ["href", "mime"],
+		"required": ["filename", "mime"],
 		"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 	},
 
