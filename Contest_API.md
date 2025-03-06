@@ -230,6 +230,10 @@ absolute timestamps.
   containing human-readable time durations, given in a slight modification of
   the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) extended time format:
   `(-)?(h)*h:mm:ss(.uuu)?`
+- Time intervals (type **`INTERVAL`** in the specification) are strings 
+  containing human-readable time intervals, given in 
+  [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) "start and end" format with
+  a forward slash interval designator.
 - Identifiers (type **`ID`** in the specification) are given as string
   consisting of characters `[a-zA-Z0-9_.-]` of length at most 36 and not
   starting with a `-` (dash) or `.` (dot) or ending with a `.` (dot). IDs are
@@ -1460,20 +1464,22 @@ The following endpoints are associated with state:
 
 Properties of state objects:
 
-| Name             | Type   | Description
-| :--------------- | :----- | :----------
-| started          | TIME ? | Time when the contest actually started, or `null` if the contest has not started yet. When set, this time must be equal to the [contest](#contests) `start_time`.
-| frozen           | TIME ? | Time when the scoreboard was frozen, or `null` if the scoreboard has not been frozen. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint.
-| ended            | TIME ? | Time when the contest ended, or `null` if the contest has not ended. Must not be set if started is `null`.
-| thawed           | TIME ? | Time when the scoreboard was thawed (that is, unfrozen again), or `null` if the scoreboard has not been thawed. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint. Must not be set if frozen is `null`.
-| finalized        | TIME ? | Time when the results were finalized, or `null` if results have not been finalized. Must not be set if ended is `null`.
-| end\_of\_updates | TIME ? | Time after last update to the contest occurred, or `null` if more updates are still to come. Setting this to non-`null` must be the very last change in the contest.
+| Name               | Type                | Description
+| :----------------- | :------------------ | :----------
+| started            | TIME ?              | Time when the contest actually started, or `null` if the contest has not started yet. When set, this time must be equal to the [contest](#contests) `start_time`.
+| frozen             | TIME ?              | Time when the scoreboard was frozen, or `null` if the scoreboard has not been frozen. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint.
+| ended              | TIME ?              | Time when the contest ended, or `null` if the contest has not ended. Must not be set if started is `null`.
+| thawed             | TIME ?              | Time when the scoreboard was thawed (that is, unfrozen again), or `null` if the scoreboard has not been thawed. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint. Must not be set if frozen is `null`.
+| finalized          | TIME ?              | Time when the results were finalized, or `null` if results have not been finalized. Must not be set if ended is `null`.
+| end\_of\_updates   | TIME ?              | Time after last update to the contest occurred, or `null` if more updates are still to come. Setting this to non-`null` must be the very last change in the contest.
+| removed\_intervals | array of INTERVAL ? | Array of [removed time intervals](ccs_system_requirements#removing-time-intervals).
 
 These state changes must occur in the order listed in the table above,
 as far as they do occur, except that `thawed` and `finalized` may occur
-in any order. For example, the contest may never be frozen and hence not
-thawed either, or, it may be finalized before it is thawed. I.e., the
-following sequence of inequalities must hold:
+in any order. `removed_intervals` is not a state change, and so is not affected
+by this requirement. For example, the contest may never be frozen and hence not
+thawed either, or, it may be finalized before it is thawed. I.e., the following
+sequence of inequalities must hold:
 
 ```
 started < frozen < ended < thawed    < end_of_updates,
@@ -1500,6 +1506,10 @@ Returned data:
   "thawed": null,
   "finalized": null,
   "end_of_updates": null
+  "removed_intervals": [
+    "2014-06-25T10:30:00+01/10:45:00",
+    "2014-06-25T10:50:00+01/10:55:00"
+  ]
 }
 ```
 
