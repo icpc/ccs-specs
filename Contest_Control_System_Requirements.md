@@ -841,12 +841,15 @@ according to the following:
         all.
     3.  For the remaining teams, the rank is determined by sorting the teams by 
         number of problems solved (descending).
-8.  The *award* of a team is:
-    1.  *gold* if rank is 1 through 4.
-    2.  *silver* if rank is 5 through 8.
-    3.  *bronze* if rank is 9 through 12+B.
-    4.  *ranked* if rank is not 1 through 12+B but the team is ranked.
-    5.  *honorable* otherwise.
+8.  The *awards* of a team are:
+    1.  `gold-medal` if rank is 1 through 4.
+    2.  `silver-medal` if rank is 5 through 8.
+    3.  `bronze-medal` if rank is 9 through 12+B.
+    4.  `rank-\<rank>` if rank is not 1 through 12+B but the team is ranked.
+    5.  `highest-honors` if the team is ranked and the number of problems solved is at least as high as the team ranked 12+B.
+    6.  `high-honors` if the team is ranked and the number of problems solved is exactly one less than the team ranked 12+B.
+    7.  `honors` if the team is ranked and the number of problems solved is at least two less than the team ranked 12+B
+    8.  `honorable-mention` if the team is not ranked.
 
 When a number of teams are tied for the same position/rank, they all occupy the
 same position/rank and a suitable number of subsequent positions/ranks are left
