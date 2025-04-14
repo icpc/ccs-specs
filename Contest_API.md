@@ -230,18 +230,14 @@ absolute timestamps.
   containing human-readable time durations, given in a slight modification of
   the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) extended time format:
   `(-)?(h)*h:mm:ss(.uuu)?`
-- Identifiers (type **`ID`** in the specification) are given as string
+- Identifiers (type **`ID`** in the specification) are given as strings
   consisting of characters `[a-zA-Z0-9_.-]` of length at most 36 and not
   starting with a `-` (dash) or `.` (dot) or ending with a `.` (dot). IDs are
   unique within each endpoint. IDs are assigned by the person or system that is
   the source of the object, and must be maintained by downstream systems. For
   example, the person configuring a contest on disk will typically define the
   ID for each team, and any CCS or CDS that exposes the team must use the same
-  ID. Some IDs are also used as identifiable labels and are marked below along
-  with the recommended format. These IDs should be meaningful for human
-  communication (e.g. team "43", problem "A") and are as short as reasonable
-  but not more than 10 characters. IDs not marked as labels may be random
-  characters and cannot be assumed to be suitable for display purposes.
+  ID.
 - Geographic locations (type **`LOCATION`** in the specification) are
   represented as a JSON object with properties as defined below.
 - File references (type **`FILE`** in the specification) are represented as a
@@ -1302,7 +1298,7 @@ Properties of team objects:
 
 | Name             | Type                   | Description
 | :--------------- | :--------------------- | :----------
-| id               | ID                     | Identifier of the team. Usable as a label, at WFs normally the team seat number.
+| id               | ID                     | Identifier of the team.
 | icpc\_id         | string ?               | External identifier from ICPC CMS.
 | name             | string                 | Name of the team.
 | label            | string                 | Label of the team, at WFs normally the team seat number.
@@ -1518,7 +1514,7 @@ Properties of submission objects:
 
 | Name          | Type            | Description
 | :------------ | :-------------- | :----------
-| id            | ID              | Identifier of the submission. Usable as a label, typically a low incrementing number.
+| id            | ID              | Identifier of the submission. Usable as a label, typically a low incrementing number to make it easier to validate submissions or compare submissions with a Shadow CCS.
 | language\_id  | ID              | Identifier of the [language](#languages) submitted for.
 | problem\_id   | ID              | Identifier of the [problem](#problems) submitted for.
 | team\_id      | ID              | Identifier of the [team](#teams) that made the submission.
