@@ -8,6 +8,13 @@ MY_DIR=$(realpath $(dirname $0))
 mkdir -p "$REPO_DIR"
 rsync -a "$MY_DIR/" "$REPO_DIR/"
 
+cd "$MY_DIR"
+if [ -n "$(git status --porcelain)" ]; then
+	echo "Repository has local changes and/or untracked files."
+	echo "Commit or stash these before running this script."
+	exit 1
+fi
+
 rm -rf docs
 
 bundle exec jekyll build -d docs/
