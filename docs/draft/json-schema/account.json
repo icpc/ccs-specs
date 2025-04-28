@@ -1,6 +1,6 @@
 {
 	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/account.json",
-	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "CLICS Contest API - account",
 	"description": "Definition of a single account object",
 
@@ -19,6 +19,18 @@
 		"ip": { "type": ["string", "null"] },
 		"team_id": { "$ref": "common.json#/identifierornull" },
 		"person_id": { "$ref": "common.json#/identifierornull" }
+	},
+	"if": {
+		"properties": {
+			"type": { "enum": [ "team" ] }
+		},
+		"required": [ "type" ]
+	},
+	"then": {
+		"properties": {
+			"team_id": { "$ref": "common.json#/identifier" }
+		},
+		"required": [ "team_id" ]
 	},
 	"required": ["id", "username", "type"],
 	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"

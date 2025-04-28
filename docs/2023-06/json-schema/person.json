@@ -1,14 +1,14 @@
 {
-	"$id": "https://github.com/icpc/ccs-specs/raw/master/json-schema/person.json",
-	"$schema": "http://json-schema.org/draft/2020-12/schema",
+	"$id": "https://github.com/icpc/ccs-specs/raw/2023-06/json-schema/person.json",
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"title": "CLICS Contest API - person",
 	"description": "Definition of a single person object",
 
 	"type": "object",
 	"properties": {
 		"id": { "$ref": "common.json#/identifier" },
-		"team_ids": { "$ref": "common.json#/identifiers" },
 		"icpc_id": { "type": [ "string", "null" ] },
+		"team_ids": { "$ref": "common.json#/identifiers" },
 		"name": { "type": "string" },
 		"title": { "type": [ "string", "null" ] },
 		"email": { "type": [ "string", "null" ] },
