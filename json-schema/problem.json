@@ -29,6 +29,18 @@
 			"multipleOf": 0.001,
 			"minimum": 0
 		},
+		"memory_limit": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"output_limit": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"code_limit": {
+			"type": "integer",
+			"minimum": 0
+		},
 		"test_data_count": {
 			"type": "integer",
 			"minimum": 0
