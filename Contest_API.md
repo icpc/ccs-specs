@@ -1122,6 +1122,9 @@ Properties of problem objects:
 | rgb               | string ?  | Hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet), e.g. `#AC00FF` or `#fff`.
 | color             | string ?  | Human readable color description associated to the RGB value.
 | time\_limit       | number    | Time limit in seconds per test data set (i.e. per single run). Should be a non-negative integer multiple of `0.001`. The reason for this is to not have rounding ambiguities while still using the natural unit of seconds.
+| memory\_limit     | integer   | Memory limit in MiB enforced on a submission.
+| output\_limit     | integer   | Limit in MiB on what the submission can write both to `stdout` and `stderr`. If a submission produces more output, a CCS should fail the submission or ignore output beyond this limit.
+| code\_limit       | integer   | Limit in KiB on submissions for this problem. Submissions that are larger should be rejected by a CCS.
 | test\_data\_count | integer   | Number of test data sets.
 | max\_score        | number    | Maximum expected score, although teams may score higher in some cases. Typically used to indicate scoreboard cell color in scoring contests. Required iff contest:scoreboard\_type is `score`.
 | package           | array of FILE ? | [Problem package](https://www.kattis.com/problem-package-format/). Expected mime type is application/zip. Only exactly one package is allowed. Not expected to actually contain href for package during the contest, but used for configuration and archiving.
@@ -1136,8 +1139,8 @@ Request:
 Returned data:
 
 ```json
-[{"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},
- {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}
+[{"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"memory_limit":2048,"output_limit":8,"code_limit":128,"test_data_count":10},
+ {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"memory_limit":1024,"output_limit":8,"code_limit":128,"test_data_count":15}
 ]
 ```
 
@@ -1148,7 +1151,7 @@ Request:
 Returned data:
 
 ```json
-{"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10}
+{"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"memory_limit":2048,"output_limit":8,"code_limit":128,"test_data_count":10}
 ```
 
 ### Groups
