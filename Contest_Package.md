@@ -63,6 +63,37 @@ and `contest/<filename>` respectively, and files referenced in
 Note that the API specification requires that filenames are unique within
 endpoint objects, so this is always possible.
 
+#### Default filenames
+
+In some situations you may want file references to be found on disk
+without directly specifying them in a json file, for instance to keep
+json files simple or when providing organization logos or team photos
+manually or from different systems. Files that use the default
+filename pattern must be loaded in addition to any file references
+found in the json files.
+
+The default filename pattern is
+`<endpoint>/<id>/<property>(.variant).<extension>`, where:
+
+- `<id>` is the ID of the endpoint object the reference is in.
+- `<property>` is the property of the object, e.g. `logo`.
+- `(.<variant>)` is an optional variant. Must be used when there are
+  multiple files to avoid collisions.
+- `<extension>` is a file extension corresponding to the mime type.
+
+For images, the supported file extensions are:
+
+| Mime type     | Extension(s)
+| ------------- | ---------
+| image/png     | png
+| image/jpeg    | jpg, jpeg
+| image/svg+xml | svg
+
+For images, the variant should be the width x height of the image,
+e.g. logo.56x56.png.
+
+#### Hrefs
+
 It is not required that a URL specified in an href is always valid.
 Specifically, in many cases the contest is running in a local network that is
 taken down after the contest, and in this case the URL would definitely not
@@ -138,10 +169,10 @@ problems/problemB/problemB.pdf
 ...
 groups.json
 organizations.json
-organizations/kth.se/logo56x56.png
-organizations/kth.se/logo160x160.png
-organizations/baylor.edu/logo56x56.png
-organizations/baylor.edu/logo160x160.png
+organizations/kth.se/logo.56x56.png
+organizations/kth.se/logo.160x160.png
+organizations/baylor.edu/logo.56x55.png
+organizations/baylor.edu/logo.160x157.png
 ...
 teams.json
 teams/team-001/photo.jpg
@@ -172,10 +203,10 @@ Required endpoints:
 api.json
 api/logo.png
 organizations.json
-organizations/kth.se/logo56x56.png
-organizations/kth.se/logo160x160.png
-organizations/baylor.edu/logo56x56.png
-organizations/baylor.edu/logo160x160.png
+organizations/kth.se/logo.56x56.png
+organizations/kth.se/logo.160x160.png
+organizations/baylor.edu/logo.56x56.png
+organizations/baylor.edu/logo.160x160.png
 ...
 teams.json
 teams/team-001/photo.jpg
