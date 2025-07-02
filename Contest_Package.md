@@ -89,8 +89,8 @@ For images, the supported file extensions are:
 | image/jpeg    | jpg, jpeg
 | image/svg+xml | svg
 
-For images, the variant should be the width x height of the image,
-e.g. logo.56x56.png.
+For images, the variant should be `.<W>x<H>`, where W and H are the width and
+height of the image in pixels, e.g. logo.56x54.png.
 
 #### Hrefs
 
