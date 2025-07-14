@@ -595,8 +595,7 @@ Endpoints that return a JSON array must allow filtering on any
 property with type ID (except the `id` property) by passing it as a
 query argument. For example, clarifications can be filtered on the sender
 by passing `from_team_id=X`. To filter on a `null` value,
-pass an empty string, i.e. `from_team_id=`. Properties of type ID ? can only
-be filtered on if the property is present.  It must be possible to
+pass an empty string, i.e. `from_team_id=`. It must be possible to
 filter on multiple different properties simultaneously, with the
 meaning that all conditions must be met (they are logically `AND`ed).
 Note that filtering on any other property, including property with the type
