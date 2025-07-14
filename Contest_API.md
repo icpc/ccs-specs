@@ -689,7 +689,7 @@ The set of properties listed must always support
 [referential integrity](#referential-integrity), i.e. if a property with a ID 
 value referring to some type of object is present the endpoint representing
 that type of object (and its ID property) must also be present. E.g. if 
-`groups` is listed among the properties in the `team` endpoint object, that
+`group_ids` is listed among the properties in the `team` endpoint object, that
 means that there must be an endpoint object with type `groups` containing at 
 least `ID` in its properties.
 
