@@ -596,9 +596,10 @@ Note that all results returned from endpoints:
 
 Endpoints that return a JSON array must allow filtering on any
 property with type ID (except the `id` property) by passing it as a
-query argument. For example, clarifications can be filtered on the
-recipient by passing `to_team_ids=X,Y`. To filter on a `null` value,
-pass an empty string, i.e. `to_team_ids=`. It must be possible to
+query argument. For example, clarifications can be filtered on the sender
+by passing `from_team_id=X`. To filter on a `null` value,
+pass an empty string, i.e. `from_team_id=`. Properties of type ID ? can only
+be filtered on if the property is present.  It must be possible to
 filter on multiple different properties simultaneously, with the
 meaning that all conditions must be met (they are logically `AND`ed).
 Note that filtering on any other property, including property with the type
@@ -689,7 +690,7 @@ The set of properties listed must always support
 [referential integrity](#referential-integrity), i.e. if a property with a ID 
 value referring to some type of object is present the endpoint representing
 that type of object (and its ID property) must also be present. E.g. if 
-`group_ids` is listed among the properties in the `team` endpoint object, that
+`groups` is listed among the properties in the `team` endpoint object, that
 means that there must be an endpoint object with type `groups` containing at 
 least `ID` in its properties.
 
