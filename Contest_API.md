@@ -48,7 +48,15 @@ The specific base URL of this API will be dependent on the server (e.g.
 main CCS or CDS) providing the service; in the specification we only
 indicate the relative paths of API endpoints with respect to a
 **baseurl**. In all the examples below the baseurl is
-<https://example.com/api>.
+<https://example.com/api/>.
+
+The baseurl must end in a slash so that relative URLs are resolved
+correctly. If `baseurl` is <https://example.com/api/foobar>, then
+per [RFC 3986](https://tools.ietf.org/html/rfc3986) the relative URL
+`contests/wf14` resolves to `https://example.com/api/contests/wf14`,
+*just* as it would with `baseurl` set to <https://example.com/api/>.
+Below, any extra `/` between `baseurl` and the subsequent path is just
+for clarity.
 
 We follow standard REST practices so that a whole collection can be
 requested, e.g. at the URL path
@@ -268,12 +276,13 @@ Properties for file reference objects:
 The `href` property may be an [absolute or relative
 URL](https://tools.ietf.org/html/rfc3986); relative URLs must be
 interpreted relative to the `baseurl` of the API. For example, if
-`baseurl` is <https://example.com/api>, then the following are
+`baseurl` is <https://example.com/api/>, then the following are
 equivalent JSON response snippets pointing to the same location:
 
 ```json
   "href":"https://example.com/api/contests/wf14/submissions/187/files"
   "href":"contests/wf14/submissions/187/files"
+  "href":"/api/contests/wf14/submissions/187/files"
 ```
 
 For images, the supported mime types are image/png, image/jpeg, and image/svg+xml.
@@ -372,33 +381,33 @@ All event types correspond to an API endpoint, as specified in the table below.
 
 | Type            | API Endpoint
 | :-------------- | :-----------
-| contest         | `/contests/<id>`
-| judgement-types | `/contests/<id>/judgement-types/<id>`
-| languages       | `/contests/<id>/languages/<id>`
-| problems        | `/contests/<id>/problems/<id>`
-| groups          | `/contests/<id>/groups/<id>`
-| organizations   | `/contests/<id>/organizations/<id>`
-| teams           | `/contests/<id>/teams/<id>`
-| persons         | `/contests/<id>/persons/<id>`
-| accounts        | `/contests/<id>/accounts/<id>`
-| state           | `/contests/<id>/state`
-| submissions     | `/contests/<id>/submissions/<id>`
-| judgements      | `/contests/<id>/judgements/<id>`
-| runs            | `/contests/<id>/runs/<id>`
-| clarifications  | `/contests/<id>/clarifications/<id>`
-| awards          | `/contests/<id>/awards/<id>`
-| commentary      | `/contests/<id>/commentary/<id>`
+| contest         | `contests/<id>`
+| judgement-types | `contests/<id>/judgement-types/<id>`
+| languages       | `contests/<id>/languages/<id>`
+| problems        | `contests/<id>/problems/<id>`
+| groups          | `contests/<id>/groups/<id>`
+| organizations   | `contests/<id>/organizations/<id>`
+| teams           | `contests/<id>/teams/<id>`
+| persons         | `contests/<id>/persons/<id>`
+| accounts        | `contests/<id>/accounts/<id>`
+| state           | `contests/<id>/state`
+| submissions     | `contests/<id>/submissions/<id>`
+| judgements      | `contests/<id>/judgements/<id>`
+| runs            | `contests/<id>/runs/<id>`
+| clarifications  | `contests/<id>/clarifications/<id>`
+| awards          | `contests/<id>/awards/<id>`
+| commentary      | `contests/<id>/commentary/<id>`
 
 Each event is a notification that an object or a collection has changed
 (and hence the contents of the corresponding endpoint) to `data`.
 
 If `type` is `contest`, then `id` must be null and the endpoint
-`/contests/<id>` will return the contents of `data`.
+`contests/<id>` will return the contents of `data`.
 
-If `id` is not null, then the endpoint `/contests/<contest_id>/<type>/<id>`
+If `id` is not null, then the endpoint `contests/<contest_id>/<type>/<id>`
 will return the contents of `data`.
 
-If `id` is null, then the endpoint `/contests/<contest_id>/<type>` will return
+If `id` is null, then the endpoint `contests/<contest_id>/<type>` will return
 the contents of `data`.
 
 #### Examples
@@ -417,7 +426,7 @@ Event:
 }
 ```
 
-Means that endpoint `/contests/dress2016` has been updated to:
+Means that endpoint `contests/dress2016` has been updated to:
 ```json
 {
    "id": "dress2016",
@@ -439,14 +448,14 @@ Event:
 }
 ```
 
-Means that endpoint `/contests/<contest_id>/problems` has been updated to:
+Means that endpoint `contests/<contest_id>/problems` has been updated to:
 ```json
 [
    {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},
    {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}
 ]
 ```
-and the child endpoints `/contests/<contest_id>/problems/asteroids` and `/contests/<contest_id>/problems/bottles` are updated accordingly.
+and the child endpoints `contests/<contest_id>/problems/asteroids` and `contests/<contest_id>/problems/bottles` are updated accordingly.
 
 Event:
 ```json
@@ -466,7 +475,7 @@ Event:
 }
 ```
 
-Means that endpoint `/contests/<contest_id>/submissions/187` has been updated to:
+Means that endpoint `contests/<contest_id>/submissions/187` has been updated to:
 ```json
 {
    "id": "187",
@@ -605,7 +614,7 @@ The following endpoint is associated with API information:
 
 | Endpoint | Mime-type        | Description
 | :------- | :--------------- | :----------
-| `/`      | application/json | JSON object representing information about the API with all properties defined in the table below.
+| `.`      | application/json | JSON object representing information about the API with all properties defined in the table below.
 
 Properties of version object:
 
@@ -659,7 +668,7 @@ The following endpoint is associated with access:
 
 | Endpoint                | Mime-type        | Description
 | :---------------------- | :--------------- | :----------
-| `/contests/<id>/access` | application/json | JSON object representing the current client's access with all properties defined in the table below.
+| `contests/<id>/access`  | application/json | JSON object representing the current client's access with all properties defined in the table below.
 
 Properties of access objects:
 
@@ -735,10 +744,10 @@ Provides information on the current contest.
 
 The following endpoints are associated with contest:
 
-| Endpoint         | Mime-type        | Description
-| :--------------- | :--------------- | :----------
-| `/contests`      | application/json | JSON array of all contests with properties as specified by `/access`.
-| `/contests/<id>` | application/json | JSON object representing a single contest with properties as specified by `/access`.
+| Endpoint        | Mime-type        | Description
+| :-------------- | :--------------- | :----------
+| `contests`      | application/json | JSON array of all contests with properties as specified by [access](#access).
+| `contests/<id>` | application/json | JSON object representing a single contest with properties as specified by [access](#access).
 
 Properties of contest objects:
 
@@ -889,10 +898,10 @@ a submission.
 
 The following endpoints are associated with judgement types:
 
-| Endpoint                              | Mime-type        | Description
-| :------------------------------------ | :--------------- | :----------
-| `/contests/<id>/judgement-types`      | application/json | JSON array of all judgement types with properties as specified by `/access`.
-| `/contests/<id>/judgement-types/<id>` | application/json | JSON object representing a single judgement type with properties as specified by `/access`.
+| Endpoint                             | Mime-type        | Description
+| :----------------------------------- | :--------------- | :----------
+| `contests/<id>/judgement-types`      | application/json | JSON array of all judgement types with properties as specified by [access](#access).
+| `contests/<id>/judgement-types/<id>` | application/json | JSON object representing a single judgement type with properties as specified by [access](#access).
 
 Properties of judgement type objects:
 
@@ -994,10 +1003,10 @@ Languages that are available for submission at the contest.
 
 The following endpoints are associated with languages:
 
-| Endpoint                        | Mime-type        | Description
-| :------------------------------ | :--------------- | :----------
-| `/contests/<id>/languages`      | application/json | JSON array of all languages with properties as specified by `/access`.
-| `/contests/<id>/languages/<id>` | application/json | JSON object representing a single language with properties as specified by `/access`.
+| Endpoint                       | Mime-type        | Description
+| :----------------------------- | :--------------- | :----------
+| `contests/<id>/languages`      | application/json | JSON array of all languages with properties as specified by [access](#access).
+| `contests/<id>/languages/<id>` | application/json | JSON object representing a single language with properties as specified by [access](#access).
 
 Properties of language objects:
 
@@ -1105,10 +1114,10 @@ The problems to be solved in the contest.
 
 The following endpoints are associated with problems:
 
-| Endpoint                       | Mime-type        | Description
-| :----------------------------- | :--------------- | :----------
-| `/contests/<id>/problems`      | application/json | JSON array of all problems with properties as specified by `/access`.
-| `/contests/<id>/problems/<id>` | application/json | JSON object representing a single problem with properties as specified by `/access`.
+| Endpoint                      | Mime-type        | Description
+| :---------------------------- | :--------------- | :----------
+| `contests/<id>/problems`      | application/json | JSON array of all problems with properties as specified by [access](#access).
+| `contests/<id>/problems/<id>` | application/json | JSON object representing a single problem with properties as specified by [access](#access).
 
 Properties of problem objects:
 
@@ -1175,10 +1184,10 @@ divisions at every one of `S` sites, then in addition to the `D` + `S` groups th
 
 The following endpoints are associated with groups:
 
-| Endpoint                     | Mime-type        | Description
-| :--------------------------- | :--------------- | :----------
-| `/contests/<id>/groups`      | application/json | JSON array of all groups with properties as specified by `/access`.
-| `/contests/<id>/groups/<id>` | application/json | JSON object representing a single group with properties as specified by `/access`.
+| Endpoint                    | Mime-type        | Description
+| :-------------------------- | :--------------- | :----------
+| `contests/<id>/groups`      | application/json | JSON array of all groups with properties as specified by [access](#access).
+| `contests/<id>/groups/<id>` | application/json | JSON object representing a single group with properties as specified by [access](#access).
 
 Note that these endpoints must be provided if groups are used. If they
 are not provided no other endpoint may refer to groups (i.e. return any
@@ -1238,10 +1247,10 @@ universities.
 
 The following endpoints are associated with organizations:
 
-| Endpoint                            | Type             | Description
-| :---------------------------------- | :--------------- | :----------
-| `/contests/<id>/organizations`      | application/json | JSON array of all organizations with properties as specified by `/access`.
-| `/contests/<id>/organizations/<id>` | application/json | JSON object representing a single organization with properties as specified by `/access`.
+| Endpoint                           | Type             | Description
+| :--------------------------------- | :--------------- | :----------
+| `contests/<id>/organizations`      | application/json | JSON array of all organizations with properties as specified by [access](#access).
+| `contests/<id>/organizations/<id>` | application/json | JSON object representing a single organization with properties as specified by [access](#access).
 
 Note that the first two endpoints must be provided if organizations are
 used. If they are not provided no other endpoint may refer to
@@ -1292,10 +1301,10 @@ Teams competing in the contest.
 
 The following endpoints are associated with teams:
 
-| Endpoint                     | Mime-type        | Description
-| :--------------------------- | :--------------- | :----------
-| `/contests/<id>/teams`       | application/json | JSON array of all teams with properties as specified by `/access`.
-| `/contests/<id>/teams/<id>`  | application/json | JSON object representing a single team with properties as specified by `/access`.
+| Endpoint                    | Mime-type        | Description
+| :-------------------------- | :--------------- | :----------
+| `contests/<id>/teams`       | application/json | JSON array of all teams with properties as specified by [access](#access).
+| `contests/<id>/teams/<id>`  | application/json | JSON object representing a single team with properties as specified by [access](#access).
 
 Properties of team objects:
 
@@ -1347,10 +1356,10 @@ Persons involved in the contest.
 
 The following endpoints are associated with persons:
 
-| Endpoint                      | Mime-type        | Description
-| :---------------------------- | :--------------- | :----------
-| `/contests/<id>/persons`      | application/json | JSON array of all persons with properties as specified by `/access`.
-| `/contests/<id>/persons/<id>` | application/json | JSON object representing a single person with properties as specified by `/access`.
+| Endpoint                     | Mime-type        | Description
+| :--------------------------- | :--------------- | :----------
+| `contests/<id>/persons`      | application/json | JSON array of all persons with properties as specified by [access](#access).
+| `contests/<id>/persons/<id>` | application/json | JSON object representing a single person with properties as specified by [access](#access).
 
 Properties of person objects:
 
@@ -1387,11 +1396,11 @@ The accounts used for accessing the contest, as well as information about the ac
 
 The following endpoints are associated with accounts:
 
-| Endpoint                       | Mime-type        | Description
-| :----------------------------- | :--------------- | :----------
-| `/contests/<id>/accounts`      | application/json | JSON array of all accounts with properties as specified by `/access`.
-| `/contests/<id>/accounts/<id>` | application/json | JSON object representing a single account with properties as specified by `/access`.
-| `/contests/<id>/account`       | application/json | JSON object representing a single account of the client making the request, with properties as specified by `/access` for `/accounts`.
+| Endpoint                      | Mime-type        | Description
+| :---------------------------- | :--------------- | :----------
+| `contests/<id>/accounts`      | application/json | JSON array of all accounts with properties as specified by [access](#access).
+| `contests/<id>/accounts/<id>` | application/json | JSON object representing a single account with properties as specified by [access](#access).
+| `contests/<id>/account`       | application/json | JSON object representing a single account of the client making the request, with properties as specified by [access](#access) for the account used.
 
 Properties of account objects:
 
@@ -1453,9 +1462,9 @@ scoreboard is frozen or results are final.
 
 The following endpoints are associated with state:
 
-| Endpoint               | Type             | Description
-| :--------------------- | :--------------- | :----------
-| `/contests/<id>/state` | application/json | JSON object representing the current contest state with properties as specified by `/access`.
+| Endpoint              | Type             | Description
+| :-------------------- | :--------------- | :----------
+| `contests/<id>/state` | application/json | JSON object representing the current contest state with properties as specified by [access](#access).
 
 Properties of state objects:
 
@@ -1508,10 +1517,10 @@ Submissions, a.k.a. attempts to solve problems in the contest.
 
 The following endpoints are associated with submissions:
 
-| Endpoint                          | Type             | Description
-| :-------------------------------- | :--------------- | :----------
-| `/contests/<id>/submissions`      | application/json | JSON array of all submissions with properties as specified by `/access`.
-| `/contests/<id>/submissions/<id>` | application/json | JSON object representing a single submission with properties as specified by `/access`.
+| Endpoint                         | Type             | Description
+| :------------------------------- | :--------------- | :----------
+| `contests/<id>/submissions`      | application/json | JSON array of all submissions with properties as specified by [access](#access).
+| `contests/<id>/submissions/<id>` | application/json | JSON object representing a single submission with properties as specified by [access](#access).
 
 Properties of submission objects:
 
@@ -1664,7 +1673,7 @@ Returned data:
 
 Note that the relative link for `files` points to the location
 <https://example.com/api/contests/wf14/submissions/187/files> since the
-base URL for the API is <https://example.com/api>.
+base URL for the API is <https://example.com/api/>.
 
 Request:
 
@@ -1704,10 +1713,10 @@ Judgements for submissions in the contest.
 
 The following endpoints are associated with judgements:
 
-| Endpoint                         | Mime-type        | Description
-| :------------------------------- | :--------------- | :----------
-| `/contests/<id>/judgements`      | application/json | JSON array of all judgements with properties as specified by `/access`.
-| `/contests/<id>/judgements/<id>` | application/json | JSON object representing a single judgement with properties as specified by `/access`.
+| Endpoint                        | Mime-type        | Description
+| :------------------------------ | :--------------- | :----------
+| `contests/<id>/judgements`      | application/json | JSON array of all judgements with properties as specified by [access](#access).
+| `contests/<id>/judgements/<id>` | application/json | JSON object representing a single judgement with properties as specified by [access](#access).
 
 Properties of judgement objects:
 
@@ -1750,10 +1759,10 @@ Runs are judgements of individual test cases of a submission.
 
 The following endpoints are associated with runs:
 
-| Endpoint                   | Mime-type        | Description
-| :------------------------- | :--------------- | :----------
-| `/contests/<id>/runs`      | application/json | JSON array of all runs with properties as specified by `/access`.
-| `/contests/<id>/runs/<id>` | application/json | JSON object representing a single run with properties as specified by `/access`.
+| Endpoint                  | Mime-type        | Description
+| :------------------------ | :--------------- | :----------
+| `contests/<id>/runs`      | application/json | JSON array of all runs with properties as specified by [access](#access).
+| `contests/<id>/runs/<id>` | application/json | JSON object representing a single run with properties as specified by [access](#access).
 
 Properties of run objects:
 
@@ -1789,10 +1798,10 @@ clarification requests (questions from teams) and clarifications
 
 The following endpoints are associated with clarification messages:
 
-| Endpoint                             | Mime-type        | Description
-| :----------------------------------- | :--------------- | :----------
-| `/contests/<id>/clarifications`      | application/json | JSON array of all clarifications with properties as specified by `/access`.
-| `/contests/<id>/clarifications/<id>` | application/json | JSON object representing a single clarification with properties as specified by `/access`.
+| Endpoint                            | Mime-type        | Description
+| :---------------------------------- | :--------------- | :----------
+| `contests/<id>/clarifications`      | application/json | JSON array of all clarifications with properties as specified by [access](#access).
+| `contests/<id>/clarifications/<id>` | application/json | JSON object representing a single clarification with properties as specified by [access](#access).
 
 Properties of clarification message objects:
 
@@ -1929,10 +1938,10 @@ Awards such as medals, first to solve, etc.
 
 The following endpoints are associated with awards:
 
-| Endpoint                     | Mime-type        | Description
-| :--------------------------- | :--------------- | :----------
-| `/contests/<id>/awards`      | application/json | JSON array of all awards with properties as specified by `/access`.
-| `/contests/<id>/awards/<id>` | application/json | JSON object representing a single award with properties as specified by `/access`.
+| Endpoint                    | Mime-type        | Description
+| :-------------------------- | :--------------- | :----------
+| `contests/<id>/awards`      | application/json | JSON array of all awards with properties as specified by [access](#access).
+| `contests/<id>/awards/<id>` | application/json | JSON object representing a single award with properties as specified by [access](#access).
 
 Properties of award objects:
 
@@ -2077,10 +2086,10 @@ Commentary on events happening in the contest.
 
 The following endpoints are associated with commentary:
 
-| Endpoint                         | Mime-type        | Description
-| :------------------------------- | :--------------- | :----------
-| `/contests/<id>/commentary`      | application/json | JSON array of all commentary with properties as specified by `/access`.
-| `/contests/<id>/commentary/<id>` | application/json | JSON object representing a single commentary with properties as specified by `/access`.
+| Endpoint                        | Mime-type        | Description
+| :------------------------------ | :--------------- | :----------
+| `contests/<id>/commentary`      | application/json | JSON array of all commentary with properties as specified by [access](#access).
+| `contests/<id>/commentary/<id>` | application/json | JSON object representing a single commentary with properties as specified by [access](#access).
 
 Properties of commentary objects:
 
@@ -2173,9 +2182,9 @@ irrespective of role.
 
 The following endpoint is associated with the scoreboard:
 
-| Endpoint                    | Mime-type        | Description
-| :-------------------------- | :--------------- | :----------
-| `/contests/<id>/scoreboard` | application/json | JSON object with scoreboard data as defined in the table below.
+| Endpoint                   | Mime-type        | Description
+| :------------------------- | :--------------- | :----------
+| `contests/<id>/scoreboard` | application/json | JSON object with scoreboard data as defined in the table below.
 
 #### Scoreboard request options
 
@@ -2185,7 +2194,7 @@ The following options can be passed to the scoreboard endpoint.
 
 By passing `group_id` with a valid group ID a scoreboard can be requested for the teams in a particular group:
 
-`/scoreboard?group_id=site1`
+`contests/<id>/scoreboard?group_id=site1`
 
 Each group scoreboard is ranked independently and contains only the teams that belong to the
 specified group. If a client wants to know 'local' vs 'global' rank it can query both the group and primary scoreboards.
@@ -2274,9 +2283,9 @@ presented by the API.
 
 The following endpoint is associated with the event feed:
 
-| Endpoint                    | Mime-type            | Description
-| :-------------------------- | :------------------- | :----------
-| `/contests/<id>/event-feed` | application/x-ndjson | NDJSON feed of events as defined in [notification format](#notification-format).
+| Endpoint                   | Mime-type            | Description
+| :------------------------- | :------------------- | :----------
+| `contests/<id>/event-feed` | application/x-ndjson | NDJSON feed of events as defined in [notification format](#notification-format).
 
 The event feed is a streaming HTTP endpoint that allows connected
 clients to receive change notifications. The feed is a complete log of
@@ -2316,7 +2325,7 @@ If a client loses connection or needs to reconnect after a brief
 disconnect (e.g. client restart), it can use the `since_token` parameter to
 specify the last notification token it received:
 
-`/event-feed?since_token=xx`
+`contests/<id>/event-feed?since_token=xx`
 
 If specified, the server will attempt to start sending events since the
 given token to reduce the volume of events and required reconciliation.
@@ -2382,10 +2391,10 @@ of the data presented by the API.
 
 The following endpoints are associated with webhooks:
 
-| Endpoint         | Mime-type        | Description
-| ---------------- | ---------------- | :----------
-| `/webhooks`      | application/json | JSON array of all webhook callbacks with properties as defined in the table below. Also used to register new webhooks.
-| `/webhooks/<id>` | application/json | JSON object representing a single webhook callback with properties as defined in the table below.
+| Endpoint        | Mime-type        | Description
+| --------------- | ---------------- | :----------
+| `webhooks`      | application/json | JSON array of all webhook callbacks with properties as defined in the table below. Also used to register new webhooks.
+| `webhooks/<id>` | application/json | JSON object representing a single webhook callback with properties as defined in the table below.
 
 Properties of webhook callback objects:
 
@@ -2424,7 +2433,7 @@ automatically removed from future callbacks.
 
 To register a webhook, you need to post your server's callback URL. To
 do so, perform a `POST` request with a JSON body with the properties (except
-`id`) from the above table to the `/webhooks` endpoint together with one
+`id`) from the above table to the `webhooks` endpoint together with one
 additional property, called `token`. In this property put a client-generated
 token that can be used to verify that callbacks come from the CCS. If
 you don't supply `contest_ids` and/or `endpoints`, they will default to
