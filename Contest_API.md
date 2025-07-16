@@ -48,7 +48,13 @@ The specific base URL of this API will be dependent on the server (e.g.
 main CCS or CDS) providing the service; in the specification we only
 indicate the relative paths of API endpoints with respect to a
 **baseurl**. In all the examples below the baseurl is
-<https://example.com/api>.
+<https://example.com/api/>.
+
+The baseurl must end in a slash so that relative URLs are resolved
+correctly. If `baseurl` is <https://example.com/api/foobar>, then
+per [RFC 3986](https://tools.ietf.org/html/rfc3986) the relative URL
+`contests/wf14` resolves to `https://example.com/api/contests/wf14`,
+*just* as it would with `baseurl` set to <https://example.com/api/>.
 
 We follow standard REST practices so that a whole collection can be
 requested, e.g. at the URL path
@@ -268,12 +274,13 @@ Properties for file reference objects:
 The `href` property may be an [absolute or relative
 URL](https://tools.ietf.org/html/rfc3986); relative URLs must be
 interpreted relative to the `baseurl` of the API. For example, if
-`baseurl` is <https://example.com/api>, then the following are
+`baseurl` is <https://example.com/api/>, then the following are
 equivalent JSON response snippets pointing to the same location:
 
 ```json
   "href":"https://example.com/api/contests/wf14/submissions/187/files"
   "href":"contests/wf14/submissions/187/files"
+  "href":"/api/contests/wf14/submissions/187/files"
 ```
 
 For images, the supported mime types are image/png, image/jpeg, and image/svg+xml.
@@ -1664,7 +1671,7 @@ Returned data:
 
 Note that the relative link for `files` points to the location
 <https://example.com/api/contests/wf14/submissions/187/files> since the
-base URL for the API is <https://example.com/api>.
+base URL for the API is <https://example.com/api/>.
 
 Request:
 
