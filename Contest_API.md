@@ -749,21 +749,21 @@ The following endpoints are associated with contest:
 
 Properties of contest objects:
 
-| Name                         | Type            | Description
-| :--------------------------- | :-------------- | :----------
-| id                           | ID              | Identifier of the current contest.
-| name                         | string          | Short display name of the contest.
-| formal\_name                 | string ?        | Full name of the contest. Defaults to value of `name`.
-| start\_time                  | TIME ?          | The scheduled start time of the contest, may be `null` if the start time is unknown or the countdown is paused.
-| countdown\_pause\_time       | RELTIME ?       | The amount of time left when the countdown to the contest start was paused, if the contest countdown is paused, otherwise `null`.
-| duration                     | RELTIME         | Length of the contest.
-| scoreboard\_freeze\_duration | RELTIME ?       | How long the scoreboard is frozen before the end of the contest. Defaults to `0:00:00`.
-| scoreboard\_thaw\_time       | TIME ?          | The scheduled thaw time of the contest, may be `null` if the thaw time is unknown or not set.
-| scoreboard\_type             | string          | What type of scoreboard is used for the contest. Must be either `pass-fail` or `score`.
-| penalty\_time                | RELTIME         | Penalty time for a wrong submission. Only relevant if scoreboard\_type is `pass-fail`.
-| banner                       | array of FILE ? | Banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime types are image/\*.
-| logo                         | array of FILE ? | Logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/\*.
-| location                     | LOCATION ?      | Location where the contest is held.
+| Name                         | Type                      | Description
+| :--------------------------- |:--------------------------| :----------
+| id                           | ID                        | Identifier of the current contest.
+| name                         | string                    | Short display name of the contest.
+| formal\_name                 | string ?                  | Full name of the contest. Defaults to value of `name`.
+| start\_time                  | TIME ?                    | The scheduled start time of the contest, may be `null` if the start time is unknown or the countdown is paused.
+| countdown\_pause\_time       | RELTIME ?                 | The amount of time left when the countdown to the contest start was paused, if the contest countdown is paused, otherwise `null`.
+| duration                     | RELTIME                   | Length of the contest.
+| scoreboard\_freeze\_duration | RELTIME ?                 | How long the scoreboard is frozen before the end of the contest. Defaults to `0:00:00`.
+| scoreboard\_thaw\_time       | TIME ?                    | The scheduled thaw time of the contest, may be `null` if the thaw time is unknown or not set.
+| scoreboard\_type             | string                    | What type of scoreboard is used for the contest. Must be either `pass-fail` or `score`.
+| scoreboard\_rules            | Scoreboard Rules object ? | Describes how scoreboard is calculated. 
+| banner                       | array of FILE ?           | Banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime types are image/\*.
+| logo                         | array of FILE ?           | Logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/\*.
+| location                     | LOCATION ?                | Location where the contest is held.
 
 The typical use of `countdown_pause_time` is when a contest director wishes to pause the countdown to the start of a contest.  For example, this may occur because of technical
 issues or to make an announcement.  When the contest countdown is paused, the value of `countdown_pause_time` should be set to the expected time remaining before the start of the contest after the pause is lifted.
@@ -772,6 +772,65 @@ the length of the pause may be unknown).
 The `countdown_pause_time` may be changed to indicate the approximate delay until the contest starts.
 Countdown is resumed by setting a new `start_time` and resetting
 `countdown_pause_time` to `null`.
+
+In most cases downstream clients should use `/scoreboard` endpoint to get standings. If for some reason, it's not suitable, one
+can use `scoreboard_rules` property to ensure that calculated scoreboard would be the same, or at least report potential
+diverges. Scoreboard rule object must have a `string` property named `kind` and any additional properties, describing settings. 
+CCS should use one of the objects described in the [known scoring rules](#known-scoreboard-rules) section, when possible.  
+
+#### Known scoreboard rules
+
+##### ICPC scoreboard rules
+
+`ICPC` kind is set of scoreboard calculation rules, where each problem is either solved or not, teams
+are sorted based on number of solved problems, and penalty time as a tiebreaker. Can be used only with `pass-fail` 
+`scoreboard_type`.
+
+| Name                                  | Type     | Description
+|:--------------------------------------|:---------| :----
+| kind                                  | string   | Should be eqaul to ICPC
+| penalty\_time\_per\_wrong\_submission | RELTIME  | Penalty time team gets for a wrong submission on a problem solved after that. Defaults to `00:20:00`.
+| penalty\_mode                         | string   | One of values: `sum`, `last`, `ignore`. Defaults to `sum`
+| penalty\_precision                    | RELTIME  | Precision of penatly calculation. Typically 1 minute or 1 second. Defatuls to `00:01:00`.
+| penalty\_rounding                     | string   | One of values: `down`, `up`, `closest`. Defaults to `down`.
+| penalty\_rounding\_point              | string   | One of values: `each_submission`, `total`. Defaults to `each_submission`.
+
+`penalty_mode` describes how times of submissions results in final penalty:
+* `sum` means that penalty time is the sum of submission times
+* `last` means that penalty time is the time of the last submission
+* `ignore` means that times are not used in penalty calculation, only wrong attempts matter.
+* Additional values can be used, if none of the above fits, they should be interpreted in the same way as unknown rule kinds.
+
+`penalty_rounding` describes how submission times are rounded.
+`down/up/closet` means, that each penalty time is rounded down/up/to the closest multiple of `penalty_precision` correspondingly.
+
+`penalty_rounding_point` describes at which moment of penalty calculation rounding happens. 
+* `each_submission` means, that each submission time are first rounded according to `penalty_rounding` rules, and then total penalty is computed according to `penalty_mode` rules
+* `total` means, that penalty is first calculated according to `penalty_mode` rules as precise as given in `/submission` endpoint, and in the end total penalty is rounded according to `penalty_rounding` rules. 
+
+The default values correspond to most classic ICPC rules, used on ICPC World Finals. Other values can be provided to describe different rules
+deviations known to be used in the wild. 
+
+##### IOI scoreboard rules
+
+`IOI` kind is set of scoreboard calculation rules, where on each problem you get some score, and 
+your rank is defined with total score for all problems, potentially using some time-based tie-break. 
+Can be used 
+
+| Name                                  | Type      | Description
+|:--------------------------------------|:----------| :----
+| kind                                  | string    | Should be eqaul to IOI
+| use\_time\_tiebreak                   | boolean   | If time tiebreak is used, or teams with same score just divide a rank. Defaults to `false`
+| penalty\_time\_per\_wrong\_submission | RELTIME ? | Penalty time team gets for a wrong submission on a problem solved after that. Defaults to `00:00:00`.
+| penalty\_mode                         | string ?  | One of values: `sum`, `last`, `ignore`. Defaults to `last`
+| penalty\_precision                    | RELTIME ? | Precision of penatly calculation. Typically 1 minute or 1 second. Defatuls to `00:00:01`.
+| penalty\_rounding                     | string ?  | One of values: `down`, `up`, `closest`. Defaults to `closest`.
+| penalty\_rounding\_point              | string ?  | One of values: `each_submission`, `total`. Defaults to `total`.
+
+Penalty time properties have the same meaning as in ICPC rules above, except having different defaults.
+They are only useful in case if `use_time_tiebreak` is true. 
+
+The default values correspond to most classic IOI rules, used in most of the IOI school competitions.
 
 #### Modifying contests
 
