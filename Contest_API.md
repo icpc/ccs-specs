@@ -1135,7 +1135,7 @@ Properties of problem objects:
 | output\_limit     | integer   | Limit in MiB on what the submission can write both to `stdout` and `stderr`. If a submission produces more output, a CCS should fail the submission or ignore output beyond this limit.
 | code\_limit       | integer   | Limit in KiB on submissions for this problem. Submissions that are larger should be rejected by a CCS.
 | test\_data\_count | integer   | Number of test data sets.
-| max\_score        | number    | Maximum expected score, although teams may score higher in some cases. Typically used to indicate scoreboard cell color in scoring contests. Required iff contest:scoreboard\_type is `score`.
+| max\_score        | number    | Maximum score. Typically used to determine scoreboard cell color. Required iff contest:scoreboard\_type is `score`.
 | package           | array of FILE ? | [Problem package](https://www.kattis.com/problem-package-format/). Expected mime type is application/zip. Only exactly one package is allowed. Not expected to actually contain href for package during the contest, but used for configuration and archiving.
 | statement         | array of FILE ? | Problem statement. Expected mime type is application/pdf. 
 
