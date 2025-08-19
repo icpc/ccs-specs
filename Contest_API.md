@@ -1318,12 +1318,12 @@ Properties of team objects:
 | hidden           | boolean ?              | If the team is to be excluded from the [scoreboard](#scoreboard). Defaults to `false`.
 | location         | team location object ? | Position of team on the contest floor. See below for the specification of this object.
 | photo            | array of FILE ?        | Registration photo of the team. Only allowed mime types are image/\*.
-| video            | array of FILE ?        | Registration video of the team. Only allowed mime types are video/\*.
+| video            | array of FILE ?        | Registration video of the team. Only allowed mime types are video/\* or application/vnd.apple.mpegurl.
 | backup           | array of FILE ?        | Latest file backup of the team machine. Only allowed mime type is application/zip.
 | key\_log         | array of FILE ?        | Latest key log file from the team machine. Only allowed mime type is text/plain.
 | tool\_data       | array of FILE ?        | Latest tool data usage file from the team machine. Only allowed mime type is text/plain.
-| desktop          | array of FILE ?        | Streaming video of the team desktop. Only allowed mime types are video/\*.
-| webcam           | array of FILE ?        | Streaming video of the team webcam. Only allowed mime types are video/\*.
+| desktop          | array of FILE ?        | Streaming video of the team desktop. Only allowed mime types are video/\* or application/vnd.apple.mpegurl.
+| webcam           | array of FILE ?        | Streaming video of the team webcam. Only allowed mime types are video/\* or application/vnd.apple.mpegurl.
 | audio            | array of FILE ?        | Streaming team audio.
 
 Properties of team location objects:
@@ -1532,7 +1532,7 @@ Properties of submission objects:
 | contest\_time | RELTIME         | Contest relative time when the submission was made.
 | entry\_point  | string ?        | Code entry point for specific languages.
 | files         | array of FILE   | Submission files, contained at the root of the archive. Only allowed mime type is application/zip. Only exactly one archive is allowed.
-| reaction      | array of FILE ? | Reaction video from team's webcam. Only allowed mime types are video/\*.
+| reaction      | array of FILE ? | Reaction video from team's webcam. Only allowed mime types are video/\* or application/vnd.apple.mpegurl.
 
 The `entry_point` property must be included for submissions in
 languages which do not have a single, unambiguous entry point to run the
