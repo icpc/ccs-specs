@@ -34,11 +34,11 @@ interface as CRUD-style events and is meant to supersede the old XML
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
 document are to be interpreted as described in
-[RFC 2119](https://www.ietf.org/rfc/rfc2119.txt).
+[RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119).
 
 The interface is implemented as a HTTP REST interface that outputs
 information in [JSON](https://en.wikipedia.org/wiki/JSON) format
-([RFC 7159](https://tools.ietf.org/html/rfc7159)). All access to the API
+([RFC 7159](https://datatracker.ietf.org/doc/html/rfc7159)). All access to the API
 must be provided over HTTPS to guard against eavesdropping on
 sensitive contest data and [authentication](#authentication) credentials.
 
@@ -190,7 +190,7 @@ spectators and teams. If provided this must be read-only access
 All other access to the API must be controlled via
 authenticated accounts. The API provider must support [HTTP basic
 authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
-([RFC](https://tools.ietf.org/html/rfc7617)). This provides a standard
+([RFC](https://datatracker.ietf.org/doc/html/rfc7617)). This provides a standard
 and flexible method; besides HTTP basic auth, other forms of
 authentication can be offered as well.
 
@@ -274,7 +274,7 @@ Properties for file reference objects:
 | height   | integer ? | Height of the image. Required for files with mime type image/\*.
 
 The `href` property may be an [absolute or relative
-URL](https://tools.ietf.org/html/rfc3986); relative URLs must be
+URL](https://datatracker.ietf.org/doc/html/rfc3986); relative URLs must be
 interpreted relative to the `baseurl` of the API. For example, if
 `baseurl` is <https://example.com/api/>, then the following are
 equivalent JSON response snippets pointing to the same location:
