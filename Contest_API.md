@@ -597,9 +597,10 @@ Note that all results returned from endpoints:
 ### Filtering
 
 Endpoints that return a JSON array must allow filtering on any
-property with type ID (except the `id` property) by passing it as a
-query argument. For example, clarifications can be filtered on the sender
-by passing `from_team_id=X`. To filter on a `null` value,
+property specified in the [Access](#access) endpoint with type `ID` or
+`ID ?` (except the `id` property) by passing it as a query argument.
+For example, clarifications can be filtered on the
+sender by passing `from_team_id=X`. To filter on a `null` value,
 pass an empty string, i.e. `from_team_id=`. It must be possible to
 filter on multiple different properties simultaneously, with the
 meaning that all conditions must be met (they are logically `AND`ed).
