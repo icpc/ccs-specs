@@ -906,12 +906,13 @@ The following endpoints are associated with judgement types:
 
 Properties of judgement type objects:
 
-| Name    | Type      | Description
-| :------ | :-------- | :----------
-| id      | ID        | Identifier of the judgement type, a 2-3 letter capitalized shorthand, see table below.
-| name    | string    | Name of the judgement. (might not match table below, e.g. if localized).
-| penalty | boolean   | Whether this judgement causes penalty time. Required iff contest:penalty\_time is present.
-| solved  | boolean   | Whether this judgement is considered correct.
+| Name                             | Type      | Description
+| :------------------------------- | :-------- | :----------
+| id                               | ID        | Identifier of the judgement type, a 2-3 letter capitalized shorthand, see table below.
+| name                             | string    | Name of the judgement. (might not match table below, e.g. if localized).
+| penalty                          | boolean   | Whether this judgement causes penalty time. Required iff contest:penalty\_time is present.
+| solved                           | boolean   | Whether this judgement is considered correct.
+| simplified\_judgemment\_type\_id | ID?       | Identifier of this type's simplified judgement type, if one exists.
 
 #### Known judgement types
 
@@ -960,6 +961,18 @@ safely be translated to, if a system does not support it.
 | JE  | Judging Error                            |                                                          | \-    | \-                | Something went wrong with the system
 | SE  | Submission Error                         |                                                          | \-    | \-                | Something went wrong with the submission
 | CS  | Contact Staff                            | Other                                                    | \-    | \-                | Something went wrong
+
+#### Simplified judgement types
+
+In contests with limited visibility or access rules, a simplified judgement type id defines how each judgement type
+will be simplified for users without access.
+
+For instance, in a contest where teams cannot see the specific reason another team's submission was rejected, teams
+might see their own judgement types, but judgements from other teams would return the corresponding simplified judgement
+type instead.
+
+Simplified judgement types must not be chained and must not refer to their own id. They lead directly to the equivalent
+simplfied judgement type, if one exists.
 
 #### Examples
 
