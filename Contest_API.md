@@ -1139,6 +1139,7 @@ Properties of problem objects:
 | max\_score        | number    | Maximum score. Typically used to determine scoreboard cell color. Required iff contest:scoreboard\_type is `score`.
 | package           | array of FILE ? | [Problem package](https://www.kattis.com/problem-package-format/). Expected mime type is application/zip. Only exactly one package is allowed. Not expected to actually contain href for package during the contest, but used for configuration and archiving.
 | statement         | array of FILE ? | Problem statement. Expected mime type is application/pdf. 
+| attachments       | array of FILE ? | Problem attachments. Filenames are expected to match the filename from the problem package.
 
 #### Examples
 
@@ -1149,7 +1150,7 @@ Request:
 Returned data:
 
 ```json
-[{"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"memory_limit":2048,"output_limit":8,"code_limit":128,"test_data_count":10},
+[{"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"memory_limit":2048,"output_limit":8,"code_limit":128,"test_data_count":10,"statement":[{"href":"contests/wf14/problems/asteroids/statement","mime":"application/pdf","filename":"A.pdf"}],"attachments":[{"href":"contests/wf14/problems/asteroids/attachments/testing_tool.py","mime":"text/x-python","filename":"testing_tool.py"}]},
  {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"memory_limit":1024,"output_limit":8,"code_limit":128,"test_data_count":15}
 ]
 ```
@@ -1161,7 +1162,7 @@ Request:
 Returned data:
 
 ```json
-{"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"memory_limit":2048,"output_limit":8,"code_limit":128,"test_data_count":10}
+{"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"memory_limit":2048,"output_limit":8,"code_limit":128,"test_data_count":10,"statement":[{"href":"contests/wf14/problems/asteroids/statement","mime":"application/pdf","filename":"A.pdf"}],"attachments":[{"href":"contests/wf14/problems/asteroids/attachments/testing_tool.py","mime":"text/x-python","filename":"testing_tool.py"}}
 ```
 
 ### Groups
