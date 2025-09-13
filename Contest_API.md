@@ -971,7 +971,7 @@ For instance, in a contest where teams cannot see the specific reason another te
 might see their own judgement types, but judgements from other teams would return the corresponding simplified judgement
 type instead.
 
-Simplified judgement types must not be chained and must not refer to their own id. They lead directly to the equivalent
+Simplified judgement types must not be chained and must not refer to their own ID. They lead directly to the equivalent
 simplfied judgement type, if one exists.
 
 #### Examples
