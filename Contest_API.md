@@ -964,7 +964,7 @@ safely be translated to, if a system does not support it.
 
 #### Simplified judgement types
 
-In contests with limited visibility or access rules, a simplified judgement type id defines how each judgement type
+In contests with limited visibility or access rules, a simplified judgement type ID defines how each judgement type
 will be simplified for users without access.
 
 For instance, in a contest where teams cannot see the specific reason another team's submission was rejected, teams
