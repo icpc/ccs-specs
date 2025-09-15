@@ -1820,8 +1820,8 @@ Properties of clarification message objects:
 
 The recipients of a clarification are the union of `to_team_ids` and `to_group_ids`.  A clarification is sent to all teams if `from_team_id`, `to_team_ids` and `to_group_ids` are null.  Note that if `from_team_id` is not `null`, then both `to_team_ids` and `to_group_ids` must be `null`. That is, teams cannot send messages to other teams or groups.
 
-Clarifications between a team and the jury are typically private. If the jury responds with a broadcast to all teams, the
-reply_to_id should be removed for everyone who couldn't see the original message in order to preserve referrential integrity.
+Clarifications between a team and the jury are typically private. If the jury sends a response to others than just the original team, then the
+`reply_to_id` should be removed for everyone who couldn't see the original message in order to preserve referential integrity.
 
 #### Modifying clarifications
 
