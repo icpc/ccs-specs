@@ -1129,7 +1129,7 @@ Properties of problem objects:
 | label             | string    | Label of the problem on the scoreboard, typically a single capitalized letter.
 | name              | string    | Name of the problem.
 | ordinal           | integer   | A unique number that determines the order the problems, e.g. on the scoreboard.
-| rgb               | string ?  | Hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet), e.g. `#AC00FF` or `#fff`.
+| rgb               | string ?  | Hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet) with no alpha channel, e.g. `#AC00FF` or `#fff`.
 | color             | string ?  | Human readable color description associated to the RGB value.
 | time\_limit       | number    | Time limit in seconds per test data set (i.e. per single run). Should be a non-negative integer multiple of `0.001`. The reason for this is to not have rounding ambiguities while still using the natural unit of seconds.
 | memory\_limit     | integer   | Memory limit in MiB enforced on a submission.
