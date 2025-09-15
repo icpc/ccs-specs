@@ -272,6 +272,7 @@ Properties for file reference objects:
 | mime     | string    | Mime type of resource.
 | width    | integer ? | Width of the image. Required for files with mime type image/\*.
 | height   | integer ? | Height of the image. Required for files with mime type image/\*.
+| variant  | array of string | Intended usage hints (e.g. `light`, `dark` for images).
 
 The `href` property may be an [absolute or relative
 URL](https://datatracker.ietf.org/doc/html/rfc3986); relative URLs must be
@@ -291,6 +292,13 @@ For images in SVG format, i.e. those having a mime type of image/svg+xml,
 the values of `width` and `height` should be the viewport width and height in pixels
 when possible, but otherwise the actual values don't matter as long as they
 are positive and represent the correct aspect ratio.
+
+Known values of variant include:
+
+- `light`: an image intended for use on white or light backgrounds.
+- `dark`: an image intended for use on black or dark backgrounds.
+
+An image may list both values if it is suitable for multiple contexts.
 
 If implementing support for uploading files pointed to by resource
 links, substitute the href property with a data property with a base64
