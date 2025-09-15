@@ -997,7 +997,8 @@ Returned data:
    "id": "RE",
    "name": "Rejected",
    "penalty": true,
-   "solved": false
+   "solved": false,
+   "simplified_only": true
 }, {
    "id": "TLE",
    "name": "Time Limit Exceeded",
@@ -1005,15 +1006,24 @@ Returned data:
    "solved": false,
    "simplified_judgement_type_id": "RE"
 }, {
+   "id": "WA",
+   "name": "Wrong Answer",
+   "penalty": true,
+   "solved": false,
+   "simplified_judgement_type_id": "RE"
+}, {
    "id": "CE",
    "name": "Compiler Error",
    "penalty": false,
-   "solved": false
+   "solved": false,
+   "simplified_judgement_type_id": "CE"
 }, {
    "id": "AC",
    "name": "Accepted",
    "penalty": false,
-   "solved": true
+   "solved": true,
+   "simplified_judgement_type_id": "AC"
+   "simplified_only": false
 }]
 ```
 
@@ -1028,7 +1038,9 @@ Returned data:
    "id": "AC",
    "name": "Accepted",
    "penalty": false,
-   "solved": true
+   "solved": true,
+   "simplified_judgement_type_id": "AC"
+   "simplified_only": false
 }
 ```
 
