@@ -906,13 +906,13 @@ The following endpoints are associated with judgement types:
 
 Properties of judgement type objects:
 
-| Name                             | Type      | Description
-| :------------------------------- | :-------- | :----------
-| id                               | ID        | Identifier of the judgement type, a 2-3 letter capitalized shorthand, see table below.
-| name                             | string    | Name of the judgement. (might not match table below, e.g. if localized).
-| penalty                          | boolean   | Whether this judgement causes penalty time. Required iff contest:penalty\_time is present.
-| solved                           | boolean   | Whether this judgement is considered correct.
-| simplified\_judgemment\_type\_id | ID?       | Identifier of this type's simplified judgement type, if one exists.
+| Name                            | Type      | Description
+| :------------------------------ | :-------- | :----------
+| id                              | ID        | Identifier of the judgement type, a 2-3 letter capitalized shorthand, see table below.
+| name                            | string    | Name of the judgement. (might not match table below, e.g. if localized).
+| penalty                         | boolean   | Whether this judgement causes penalty time. Required iff contest:penalty\_time is present.
+| solved                          | boolean   | Whether this judgement is considered correct.
+| simplified\_judgement\_type\_id | ID?       | Identifier of this type's simplified judgement type, if one exists.
 
 #### Known judgement types
 
@@ -993,7 +993,7 @@ Returned data:
    "name": "Time Limit Exceeded",
    "penalty": true,
    "solved": false,
-   "simplified_judgemment_type_id": "RE"
+   "simplified_judgement_type_id": "RE"
 }, {
    "id": "CE",
    "name": "Compiler Error",
