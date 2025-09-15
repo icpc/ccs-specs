@@ -912,7 +912,8 @@ Properties of judgement type objects:
 | name                            | string    | Name of the judgement. (might not match table below, e.g. if localized).
 | penalty                         | boolean   | Whether this judgement causes penalty time. Required iff contest:penalty\_time is present.
 | solved                          | boolean   | Whether this judgement is considered correct.
-| simplified\_judgement\_type\_id | ID?       | Identifier of this type's simplified judgement type, if one exists.
+| simplified\_judgement\_type\_id | ID?       | Identifier of this type's simplified judgement type. When using simplified judgements, this is required iff simplified\_only is false.
+| simplified\_only                | boolean   | Whether this judgement is only used as simplified judgement type, never as normal judgement. Defaults to false.
 
 #### Known judgement types
 
@@ -971,8 +972,17 @@ For instance, in a contest where teams cannot see the specific reason another te
 might see their own judgement types, but judgements from other teams would return the corresponding simplified judgement
 type instead.
 
-Simplified judgement types must not be chained and must not refer to their own ID. They lead directly to the equivalent
-simplfied judgement type - with the same `penalty` and `solved` values - if one exists.
+If not using simplified judgements, the properties `simplified\_judgement\_type\_id` and `simplified\_only` must not be set.
+
+A judgement type may be used both as original and simplified judgement type, but must then simplify to itself and have
+`simplified\_judgement\_type\_id` equal to `id`.
+For example, `AC` (aka correct) would typically map to `AC` also as simplified judgement type.
+
+The property `simplified\_only` must be set to `true` if a judgement type is only used as simplified judgement type.
+In that case `simplified\_judgement\_type\_id` must not be set. A typical example would be `RE` aka rejected.
+If `simplified\_only` is (per default) `false` then `simplified\_judgement\_type\_id` must have a value,
+that is, all original judgement types must simplify to something (which may be itself).
+Furthermore, the simplified judgement type must have the same `penalty` and `solved` values as the original jugdement type.
 
 #### Examples
 
