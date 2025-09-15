@@ -972,7 +972,7 @@ might see their own judgement types, but judgements from other teams would retur
 type instead.
 
 Simplified judgement types must not be chained and must not refer to their own ID. They lead directly to the equivalent
-simplfied judgement type, if one exists.
+simplfied judgement type - with the same `penalty` and `solved` values - if one exists.
 
 #### Examples
 
@@ -984,6 +984,17 @@ Returned data:
 
 ```json
 [{
+   "id": "RE",
+   "name": "Rejected",
+   "penalty": true,
+   "solved": false
+}, {
+   "id": "TLE",
+   "name": "Time Limit Exceeded",
+   "penalty": true,
+   "solved": false,
+   "simplified_judgemment_type_id": "RE"
+}, {
    "id": "CE",
    "name": "Compiler Error",
    "penalty": false,
