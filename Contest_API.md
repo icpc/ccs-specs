@@ -1139,7 +1139,7 @@ Properties of problem objects:
 | max\_score        | number    | Maximum score. Typically used to determine scoreboard cell color. Required iff contest:scoreboard\_type is `score`.
 | package           | array of FILE ? | [Problem package](https://www.kattis.com/problem-package-format/). Expected mime type is application/zip. Only exactly one package is allowed. Not expected to actually contain href for package during the contest, but used for configuration and archiving.
 | statement         | array of FILE ? | Problem statement. Expected mime type is application/pdf. 
-| attachments       | array of FILE ? | Problem attachments. Filenames are expected to match the filename from the problem package.
+| attachments       | array of FILE ? | Problem attachments. These are files made available to teams other than the problem statement and sample test data. Filenames are expected to match the filename mentioned in the problem statement, if any.
 
 #### Examples
 
