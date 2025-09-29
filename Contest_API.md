@@ -1689,7 +1689,7 @@ Request data:
    "team_id":"123",
    "time":"2014-06-25T11:22:05.034+01",
    "entry_point":"Main",
-   "files":[{"data": "<base64 string>"}]
+   "files":[{"data": "<base64 encoded zip file>"}]
 }
 ```
 
