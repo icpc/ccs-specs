@@ -924,7 +924,8 @@ return from the `/access` endpoint:
          "type": "problems", 
          "properties": [
             "id", "label", "name", "ordinal", "rgb", "color", 
-            "time_limit", "test_data_count"
+            "time_limit", "test_data_count", "statement",
+            "attachments"
          ]
       },
       { 
