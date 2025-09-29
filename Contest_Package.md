@@ -208,6 +208,10 @@ organizations/kth.se/logo.56x56.png
 organizations/kth.se/logo.160x160.png
 organizations/baylor.edu/logo.56x56.png
 organizations/baylor.edu/logo.160x160.png
+organizations/tudelft.nl/logo.dark.56x56.png
+organizations/tudelft.nl/logo.light.56x56.png
+organizations/tudelft.nl/logo.dark.160x160.png
+organizations/tudelft.nl/logo.light.160x160.png
 ...
 teams.json
 teams/team-001/photo.jpg
