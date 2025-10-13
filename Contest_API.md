@@ -913,7 +913,6 @@ Properties of judgement type objects:
 | penalty                         | boolean   | Whether this judgement causes penalty time. Required iff contest:penalty\_time is present.
 | solved                          | boolean   | Whether this judgement is considered correct.
 | simplified\_judgement\_type\_id | ID?       | Identifier of this type's simplified judgement type. When using simplified judgements, this is required iff simplified\_only is false.
-| simplified\_only                | boolean   | Whether this judgement is only used as simplified judgement type, never as normal judgement. Defaults to false.
 
 #### Known judgement types
 
@@ -972,17 +971,21 @@ For instance, in a contest where teams cannot see the specific reason another te
 might see their own judgement types, but judgements from other teams would return the corresponding simplified judgement
 type instead.
 
-If not using simplified judgements, the properties `simplified\_judgement\_type\_id` and `simplified\_only` must not be set.
+If not using simplified judgements, the property `simplified\_judgement\_type\_id` must not be set.
 
 A judgement type may be used both as original and simplified judgement type, but must then simplify to itself and have
 `simplified\_judgement\_type\_id` equal to `id`.
 For example, `AC` (aka correct) would typically map to `AC` also as simplified judgement type.
 
-The property `simplified\_only` must be set to `true` if a judgement type is only used as simplified judgement type.
-In that case `simplified\_judgement\_type\_id` must not be set. A typical example would be `RE` aka rejected.
-If `simplified\_only` is (per default) `false` then `simplified\_judgement\_type\_id` must have a value,
-that is, all original judgement types must simplify to something (which may be itself).
-Furthermore, the simplified judgement type must have the same `penalty` and `solved` values as the original jugdement type.
+If a system is interested in finding the set of judgement types that are only original judgement types, only simplified
+judgement types or both, one can use this logic:
+
+- The set of original judgement types are the ones that have `simplified\_judgement\_type\_id` set.
+- The set of simplified judgement types are the ones that appear in `simplified\_judgement\_type\_id`.
+- The set judgement types that are both is the intersection of these two sets.
+
+This assumes the system is using simplified judgement types. If it is not (i.e. if `simplified\_judgement\_type\_id` is not set
+for any judgement type), all judgement types are original only.
 
 #### Examples
 
@@ -997,8 +1000,7 @@ Returned data:
    "id": "RE",
    "name": "Rejected",
    "penalty": true,
-   "solved": false,
-   "simplified_only": true
+   "solved": false
 }, {
    "id": "TLE",
    "name": "Time Limit Exceeded",
@@ -1023,7 +1025,6 @@ Returned data:
    "penalty": false,
    "solved": true,
    "simplified_judgement_type_id": "AC"
-   "simplified_only": false
 }]
 ```
 
