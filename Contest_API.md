@@ -912,7 +912,7 @@ Properties of judgement type objects:
 | name                            | string    | Name of the judgement. (might not match table below, e.g. if localized).
 | penalty                         | boolean   | Whether this judgement causes penalty time. Required iff contest:penalty\_time is present.
 | solved                          | boolean   | Whether this judgement is considered correct.
-| simplified\_judgement\_type\_id | ID?       | Identifier of this type's simplified judgement type. When using simplified judgements, this is required iff simplified\_only is false.
+| simplified\_judgement\_type\_id | ID?       | Identifier of this type's simplified judgement type.
 
 #### Known judgement types
 
@@ -1041,7 +1041,6 @@ Returned data:
    "penalty": false,
    "solved": true,
    "simplified_judgement_type_id": "AC"
-   "simplified_only": false
 }
 ```
 
