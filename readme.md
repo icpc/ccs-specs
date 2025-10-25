@@ -35,6 +35,7 @@ These are the main changes made since the `2023-06` version:
 - Added `memory_limit`, `output_limit`, `code_limit` to problems endpoint
 - Renamed `team_clar` capability to `post_clar`
 - Added `post_comment` capability
+- Added `simplified_judgement_type_id` to `judgement` and `judgement_type` endpoints
 
 ## References
 
