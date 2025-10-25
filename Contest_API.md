@@ -1738,7 +1738,7 @@ Properties of judgement objects:
 
 A judgement must have at least one of `judgement_type_id` or `simplified_judgement_type_id` specified iff it is completed.
 If both `judgement_type_id` and `simplified_judgement_type_id` are present, they should be consistent with
-simplification rules specified in `judgement_types` endpoint. 
+the simplification rules specified in the `judgement-types` endpoint. 
 
 When a judgement is started, each of `judgement_type_id`, `end_time` and
 `end_contest_time` will be `null` (or missing). These are set when the
