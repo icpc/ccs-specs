@@ -1736,7 +1736,7 @@ Properties of judgement objects:
 | end\_contest\_time              | RELTIME ? | Contest relative time when judgement completed. Required iff judgement\_type\_id is present.
 | max\_run\_time                  | number ?  | Maximum run time in seconds for any test case. Should be a non-negative integer multiple of `0.001`. The reason for this is to not have rounding ambiguities while still using the natural unit of seconds.
 
-Judgement must have at least one of `judgement_type_id` or `simplified_judgement_type_id` specified iff it is completed.
+A judgement must have at least one of `judgement_type_id` or `simplified_judgement_type_id` specified iff it is completed.
 If both `judgement_type_id` and `simplified_judgement_type_id` are present, they should be consistent with
 simplification rules specified in `judgement_types` endpoint. 
 
