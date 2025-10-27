@@ -906,12 +906,13 @@ The following endpoints are associated with judgement types:
 
 Properties of judgement type objects:
 
-| Name    | Type      | Description
-| :------ | :-------- | :----------
-| id      | ID        | Identifier of the judgement type, a 2-3 letter capitalized shorthand, see table below.
-| name    | string    | Name of the judgement. (might not match table below, e.g. if localized).
-| penalty | boolean   | Whether this judgement causes penalty time. Required iff contest:penalty\_time is present.
-| solved  | boolean   | Whether this judgement is considered correct.
+| Name                            | Type      | Description
+| :------------------------------ | :-------- | :----------
+| id                              | ID        | Identifier of the judgement type, a 2-3 letter capitalized shorthand, see table below.
+| name                            | string    | Name of the judgement. (might not match table below, e.g. if localized).
+| penalty                         | boolean   | Whether this judgement causes penalty time. Required iff contest:penalty\_time is present.
+| solved                          | boolean   | Whether this judgement is considered correct.
+| simplified\_judgement\_type\_id | ID?       | Identifier of this type's simplified judgement type.
 
 #### Known judgement types
 
@@ -961,6 +962,31 @@ safely be translated to, if a system does not support it.
 | SE  | Submission Error                         |                                                          | \-    | \-                | Something went wrong with the submission
 | CS  | Contact Staff                            | Other                                                    | \-    | \-                | Something went wrong
 
+#### Simplified judgement types
+
+In contests with limited visibility or access rules, a simplified judgement type ID defines how each judgement type
+will be simplified for users without access.
+
+For instance, in a contest where teams cannot see the specific reason another team's submission was rejected, teams
+might see their own judgement types, but judgements from other teams would return the corresponding simplified judgement
+type instead.
+
+If not using simplified judgements, the property `simplified\_judgement\_type\_id` must not be set.
+
+A judgement type may be used both as original and simplified judgement type, but must then simplify to itself and have
+`simplified\_judgement\_type\_id` equal to `id`.
+For example, `AC` (aka correct) would typically map to `AC` also as simplified judgement type.
+
+If a system is interested in finding the set of judgement types that are only original judgement types, only simplified
+judgement types or both, one can use this logic:
+
+- The set of original judgement types are the ones that have `simplified\_judgement\_type\_id` set.
+- The set of simplified judgement types are the ones that appear in `simplified\_judgement\_type\_id`.
+- The set judgement types that are both is the intersection of these two sets.
+
+This assumes the system is using simplified judgement types. If it is not (i.e. if `simplified\_judgement\_type\_id` is not set
+for any judgement type), all judgement types are original only.
+
 #### Examples
 
 Request:
@@ -971,15 +997,34 @@ Returned data:
 
 ```json
 [{
+   "id": "RE",
+   "name": "Rejected",
+   "penalty": true,
+   "solved": false
+}, {
+   "id": "TLE",
+   "name": "Time Limit Exceeded",
+   "penalty": true,
+   "solved": false,
+   "simplified_judgement_type_id": "RE"
+}, {
+   "id": "WA",
+   "name": "Wrong Answer",
+   "penalty": true,
+   "solved": false,
+   "simplified_judgement_type_id": "RE"
+}, {
    "id": "CE",
    "name": "Compiler Error",
    "penalty": false,
-   "solved": false
+   "solved": false,
+   "simplified_judgement_type_id": "CE"
 }, {
    "id": "AC",
    "name": "Accepted",
    "penalty": false,
-   "solved": true
+   "solved": true,
+   "simplified_judgement_type_id": "AC"
 }]
 ```
 
@@ -994,7 +1039,8 @@ Returned data:
    "id": "AC",
    "name": "Accepted",
    "penalty": false,
-   "solved": true
+   "solved": true,
+   "simplified_judgement_type_id": "AC"
 }
 ```
 
