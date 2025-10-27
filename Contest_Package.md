@@ -77,7 +77,7 @@ The default filename pattern is
 
 - `<id>` is the ID of the endpoint object the reference is in.
 - `<property>` is the property of the object, e.g. `logo`.
-- `(.<variant>)*` is one or several optional variant tags.
+- `(.<variant>)*` is zero or more variant tags.
 - `<extension>` is a file extension corresponding to the mime type.
 
 For images, the supported file extensions are:
@@ -91,7 +91,7 @@ For images, the supported file extensions are:
 For images, a variant of `.<W>x<H>`, is interpreted as the file reference object
 having the `width` property set to  `<W>` and the `height` property set to
 `<H>`. Every other variant is interpreted as the file reference object having
-the value its `variant` property array.
+the value in its `variant` property array.
 
 #### Hrefs
 
