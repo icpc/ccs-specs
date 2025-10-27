@@ -1867,6 +1867,9 @@ Properties of clarification message objects:
 
 The recipients of a clarification are the union of `to_team_ids` and `to_group_ids`.  A clarification is sent to all teams if `from_team_id`, `to_team_ids` and `to_group_ids` are null.  Note that if `from_team_id` is not `null`, then both `to_team_ids` and `to_group_ids` must be `null`. That is, teams cannot send messages to other teams or groups.
 
+Clarifications between a team and the jury are typically private. If the jury replies to a clarification and chooses to include additional recipients,
+then in order to preserve referential integrity the `reply_to_id` should be removed for everyone who couldn't see the original message.
+
 #### Modifying clarifications
 
 To add a clarification, clients can use the `POST` method on the clarifications endpoint or the

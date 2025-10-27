@@ -640,7 +640,11 @@ following operations:
 - Determine, for any specific clarification request, what answer was returned to
   the team if the clar has already been answered.
 - Compose an answer to the clar and send it, along with the text of the original
-  clarification request, to the team.
+  clarification request, to the team. The best practice is to include the
+  original clarification text in its entirety, prepending every line by `> `
+  (also known as internet-style quoting). This allows the judge
+  to respond to multiple points or edit it, and doesn't require the original
+  clarification text to understand the response.
 - Optionally choose to also send the clarification request text and answer to
   all teams in the contest.
 - Change the category of a clarification request.
