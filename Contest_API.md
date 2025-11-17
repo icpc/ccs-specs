@@ -251,7 +251,8 @@ absolute timestamps.
 - File references (type **`FILE`** in the specification) are represented as a
   JSON object with properties as defined below.
 - Arrays (type **`array of <type>`** in the specification) are built-in JSON
-  arrays of some type defined above.
+  arrays of some type defined above. Unless specifically mentioned, no meaning
+  is implied or can be inferred from the order of objects in an array.
 - Nullable types (type **`<type> ?`** in the specification) are either a value
   of a type defined above, or `null`.
 
@@ -1364,7 +1365,7 @@ Properties of team objects:
 | label            | string                 | Label of the team, at WFs normally the team seat number.
 | display\_name    | string ?               | Display name of the team. If not set, a client should revert to using the name instead.
 | organization\_id | ID ?                   | Identifier of the [ organization](#organizations) (e.g. university or other entity) that this team is affiliated to.
-| group\_ids       | array of ID ?          | Identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty. Required iff groups endpoint is available.
+| group\_ids       | array of ID ?          | Identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). The array may be empty. Required iff groups endpoint is available.
 | hidden           | boolean ?              | If the team is to be excluded from the [scoreboard](#scoreboard). Defaults to `false`.
 | location         | team location object ? | Position of team on the contest floor. See below for the specification of this object.
 | photo            | array of FILE ?        | Registration photo of the team. Only allowed mime types are image/\*.
@@ -2000,7 +2001,7 @@ Properties of award objects:
 | :-------- | :------------ | :----------
 | id        | ID            | Identifier of the award.
 | citation  | string        | Award citation, e.g. "Gold medal winner".
-| team\_ids | array of ID ? | JSON array of [team](#teams) ids receiving this award. No meaning must be implied or inferred from the order of IDs. If the value is null this means that the award is not currently being updated. If the value is the empty array this means that the award **is** being updated, but no team has been awarded the award at this time.
+| team\_ids | array of ID ? | JSON array of [team](#teams) ids receiving this award. If the value is null this means that the award is not currently being updated. If the value is the empty array this means that the award **is** being updated, but no team has been awarded the award at this time.
 
 #### Semantics
 
