@@ -1856,7 +1856,7 @@ Properties of clarification message objects:
 | Name           | Type             | Description
 | :------------- | :--------------- | :----------
 | id             | ID               | Identifier of the clarification.
-| from\_team\_id | ID ?             | Identifier of the [team](#teams) sending this clarification request, `null` iff a clarification is sent by the jury.
+| from\_team\_id | ID ?             | Identifier of the [team](#teams) sending this clarification request, `null` iff a clarification is sent by the judges.
 | to\_team\_ids  | array of ID ?    | Identifiers of the [team(s)](#teams) receiving this reply, `null` iff a reply to all teams or a request sent by a team.
 | to\_group\_ids | array of ID ?    | Identifiers of the [group(s)](#groups) receiving this reply, `null` iff a reply to all teams or a request sent by a team.
 | reply\_to\_id  | ID ?             | Identifier of clarification this is in response to, otherwise `null`.
@@ -1867,7 +1867,7 @@ Properties of clarification message objects:
 
 The recipients of a clarification are the union of `to_team_ids` and `to_group_ids`.  A clarification is sent to all teams if `from_team_id`, `to_team_ids` and `to_group_ids` are null.  Note that if `from_team_id` is not `null`, then both `to_team_ids` and `to_group_ids` must be `null`. That is, teams cannot send messages to other teams or groups.
 
-Clarifications between a team and the jury are typically private. If the jury replies to a clarification and chooses to include additional recipients,
+Clarifications between a team and the judges are typically private. If the judges replies to a clarification and chooses to include additional recipients,
 then in order to preserve referential integrity the `reply_to_id` should be removed for everyone who couldn't see the original message.
 
 #### Modifying clarifications
