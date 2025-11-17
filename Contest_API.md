@@ -251,7 +251,8 @@ absolute timestamps.
 - File references (type **`FILE`** in the specification) are represented as a
   JSON object with properties as defined below.
 - Arrays (type **`array of <type>`** in the specification) are built-in JSON
-  arrays of some type defined above.
+  arrays of some type defined above. Unless specifically mentioned, no meaning
+  is implied or can be inferred from the order of objects in an array.
 - Nullable types (type **`<type> ?`** in the specification) are either a value
   of a type defined above, or `null`.
 
@@ -906,12 +907,13 @@ The following endpoints are associated with judgement types:
 
 Properties of judgement type objects:
 
-| Name    | Type      | Description
-| :------ | :-------- | :----------
-| id      | ID        | Identifier of the judgement type, a 2-3 letter capitalized shorthand, see table below.
-| name    | string    | Name of the judgement. (might not match table below, e.g. if localized).
-| penalty | boolean   | Whether this judgement causes penalty time. Required iff contest:penalty\_time is present.
-| solved  | boolean   | Whether this judgement is considered correct.
+| Name                            | Type      | Description
+| :------------------------------ | :-------- | :----------
+| id                              | ID        | Identifier of the judgement type, a 2-3 letter capitalized shorthand, see table below.
+| name                            | string    | Name of the judgement. (might not match table below, e.g. if localized).
+| penalty                         | boolean   | Whether this judgement causes penalty time. Required iff contest:penalty\_time is present.
+| solved                          | boolean   | Whether this judgement is considered correct.
+| simplified\_judgement\_type\_id | ID?       | Identifier of this type's simplified judgement type.
 
 #### Known judgement types
 
@@ -961,6 +963,31 @@ safely be translated to, if a system does not support it.
 | SE  | Submission Error                         |                                                          | \-    | \-                | Something went wrong with the submission
 | CS  | Contact Staff                            | Other                                                    | \-    | \-                | Something went wrong
 
+#### Simplified judgement types
+
+In contests with limited visibility or access rules, a simplified judgement type ID defines how each judgement type
+will be simplified for users without access.
+
+For instance, in a contest where teams cannot see the specific reason another team's submission was rejected, teams
+might see their own judgement types, but judgements from other teams would return the corresponding simplified judgement
+type instead.
+
+If not using simplified judgements, the property `simplified\_judgement\_type\_id` must not be set.
+
+A judgement type may be used both as original and simplified judgement type, but must then simplify to itself and have
+`simplified\_judgement\_type\_id` equal to `id`.
+For example, `AC` (aka correct) would typically map to `AC` also as simplified judgement type.
+
+If a system is interested in finding the set of judgement types that are only original judgement types, only simplified
+judgement types or both, one can use this logic:
+
+- The set of original judgement types are the ones that have `simplified\_judgement\_type\_id` set.
+- The set of simplified judgement types are the ones that appear in `simplified\_judgement\_type\_id`.
+- The set judgement types that are both is the intersection of these two sets.
+
+This assumes the system is using simplified judgement types. If it is not (i.e. if `simplified\_judgement\_type\_id` is not set
+for any judgement type), all judgement types are original only.
+
 #### Examples
 
 Request:
@@ -971,15 +998,34 @@ Returned data:
 
 ```json
 [{
+   "id": "RE",
+   "name": "Rejected",
+   "penalty": true,
+   "solved": false
+}, {
+   "id": "TLE",
+   "name": "Time Limit Exceeded",
+   "penalty": true,
+   "solved": false,
+   "simplified_judgement_type_id": "RE"
+}, {
+   "id": "WA",
+   "name": "Wrong Answer",
+   "penalty": true,
+   "solved": false,
+   "simplified_judgement_type_id": "RE"
+}, {
    "id": "CE",
    "name": "Compiler Error",
    "penalty": false,
-   "solved": false
+   "solved": false,
+   "simplified_judgement_type_id": "CE"
 }, {
    "id": "AC",
    "name": "Accepted",
    "penalty": false,
-   "solved": true
+   "solved": true,
+   "simplified_judgement_type_id": "AC"
 }]
 ```
 
@@ -994,7 +1040,8 @@ Returned data:
    "id": "AC",
    "name": "Accepted",
    "penalty": false,
-   "solved": true
+   "solved": true,
+   "simplified_judgement_type_id": "AC"
 }
 ```
 
@@ -1162,7 +1209,7 @@ Request:
 Returned data:
 
 ```json
-{"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"memory_limit":2048,"output_limit":8,"code_limit":128,"test_data_count":10,"statement":[{"href":"contests/wf14/problems/asteroids/statement","mime":"application/pdf","filename":"A.pdf"}],"attachments":[{"href":"contests/wf14/problems/asteroids/attachments/testing_tool.py","mime":"text/x-python","filename":"testing_tool.py"}}
+{"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"memory_limit":2048,"output_limit":8,"code_limit":128,"test_data_count":10,"statement":[{"href":"contests/wf14/problems/asteroids/statement","mime":"application/pdf","filename":"A.pdf"}],"attachments":[{"href":"contests/wf14/problems/asteroids/attachments/testing_tool.py","mime":"text/x-python","filename":"testing_tool.py"}]}
 ```
 
 ### Groups
@@ -1318,7 +1365,7 @@ Properties of team objects:
 | label            | string                 | Label of the team, at WFs normally the team seat number.
 | display\_name    | string ?               | Display name of the team. If not set, a client should revert to using the name instead.
 | organization\_id | ID ?                   | Identifier of the [ organization](#organizations) (e.g. university or other entity) that this team is affiliated to.
-| group\_ids       | array of ID ?          | Identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). No meaning must be implied or inferred from the order of IDs. The array may be empty. Required iff groups endpoint is available.
+| group\_ids       | array of ID ?          | Identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). The array may be empty. Required iff groups endpoint is available.
 | hidden           | boolean ?              | If the team is to be excluded from the [scoreboard](#scoreboard). Defaults to `false`.
 | location         | team location object ? | Position of team on the contest floor. See below for the specification of this object.
 | photo            | array of FILE ?        | Registration photo of the team. Only allowed mime types are image/\*.
@@ -1815,7 +1862,7 @@ Properties of clarification message objects:
 | Name           | Type             | Description
 | :------------- | :--------------- | :----------
 | id             | ID               | Identifier of the clarification.
-| from\_team\_id | ID ?             | Identifier of the [team](#teams) sending this clarification request, `null` iff a clarification is sent by the jury.
+| from\_team\_id | ID ?             | Identifier of the [team](#teams) sending this clarification request, `null` iff a clarification is sent by the judges.
 | to\_team\_ids  | array of ID ?    | Identifiers of the [team(s)](#teams) receiving this reply, `null` iff a reply to all teams or a request sent by a team.
 | to\_group\_ids | array of ID ?    | Identifiers of the [group(s)](#groups) receiving this reply, `null` iff a reply to all teams or a request sent by a team.
 | reply\_to\_id  | ID ?             | Identifier of clarification this is in response to, otherwise `null`.
@@ -1825,6 +1872,9 @@ Properties of clarification message objects:
 | contest\_time  | RELTIME          | Contest time of the question/reply.
 
 The recipients of a clarification are the union of `to_team_ids` and `to_group_ids`.  A clarification is sent to all teams if `from_team_id`, `to_team_ids` and `to_group_ids` are null.  Note that if `from_team_id` is not `null`, then both `to_team_ids` and `to_group_ids` must be `null`. That is, teams cannot send messages to other teams or groups.
+
+Clarifications between a team and the judges are typically private. If the judges replies to a clarification and chooses to include additional recipients,
+then in order to preserve referential integrity the `reply_to_id` should be removed for everyone who couldn't see the original message.
 
 #### Modifying clarifications
 
@@ -1956,7 +2006,7 @@ Properties of award objects:
 | :-------- | :------------ | :----------
 | id        | ID            | Identifier of the award.
 | citation  | string        | Award citation, e.g. "Gold medal winner".
-| team\_ids | array of ID ? | JSON array of [team](#teams) ids receiving this award. No meaning must be implied or inferred from the order of IDs. If the value is null this means that the award is not currently being updated. If the value is the empty array this means that the award **is** being updated, but no team has been awarded the award at this time.
+| team\_ids | array of ID ? | JSON array of [team](#teams) ids receiving this award. If the value is null this means that the award is not currently being updated. If the value is the empty array this means that the award **is** being updated, but no team has been awarded the award at this time.
 
 #### Semantics
 
