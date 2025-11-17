@@ -1209,7 +1209,7 @@ Request:
 Returned data:
 
 ```json
-{"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"memory_limit":2048,"output_limit":8,"code_limit":128,"test_data_count":10,"statement":[{"href":"contests/wf14/problems/asteroids/statement","mime":"application/pdf","filename":"A.pdf"}],"attachments":[{"href":"contests/wf14/problems/asteroids/attachments/testing_tool.py","mime":"text/x-python","filename":"testing_tool.py"}}
+{"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"memory_limit":2048,"output_limit":8,"code_limit":128,"test_data_count":10,"statement":[{"href":"contests/wf14/problems/asteroids/statement","mime":"application/pdf","filename":"A.pdf"}],"attachments":[{"href":"contests/wf14/problems/asteroids/attachments/testing_tool.py","mime":"text/x-python","filename":"testing_tool.py"}]}
 ```
 
 ### Groups
