@@ -73,12 +73,11 @@ filename pattern must be loaded in addition to any file references
 found in the json files.
 
 The default filename pattern is
-`<endpoint>/<id>/<property>(.variant).<extension>`, where:
+`<endpoint>/<id>/<property>(.<tag>)*.<extension>`, where:
 
 - `<id>` is the ID of the endpoint object the reference is in.
 - `<property>` is the property of the object, e.g. `logo`.
-- `(.<variant>)` is an optional variant. Must be used when there are
-  multiple files to avoid collisions.
+- `(.<tag>)*` is zero or more tags.
 - `<extension>` is a file extension corresponding to the mime type.
 
 For images, the supported file extensions are:
@@ -89,8 +88,10 @@ For images, the supported file extensions are:
 | image/jpeg    | jpg, jpeg
 | image/svg+xml | svg
 
-For images, the variant should be `.<W>x<H>`, where W and H are the width and
-height of the image in pixels, e.g. logo.56x54.png.
+For images, a tag of `.<W>x<H>`, is interpreted as the file reference object
+having the `width` property set to  `<W>` and the `height` property set to
+`<H>`. Every other tag is interpreted as the file reference object having
+the value in its `tag` property array.
 
 #### Hrefs
 
@@ -207,6 +208,10 @@ organizations/kth.se/logo.56x56.png
 organizations/kth.se/logo.160x160.png
 organizations/baylor.edu/logo.56x56.png
 organizations/baylor.edu/logo.160x160.png
+organizations/tudelft.nl/logo.dark.56x56.png
+organizations/tudelft.nl/logo.light.56x56.png
+organizations/tudelft.nl/logo.dark.160x160.png
+organizations/tudelft.nl/logo.light.160x160.png
 ...
 teams.json
 teams/team-001/photo.jpg

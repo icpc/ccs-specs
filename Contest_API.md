@@ -265,14 +265,15 @@ Properties for geographic location objects:
 
 Properties for file reference objects:
 
-| Name     | Type      | Description
-| -------- | --------- | -----------
-| href     | string    | URL where the resource can be found. Relative URLs are relative to the `baseurl`. Must point to a file of intended mime-type. Resource must be accessible using the exact same (possibly none) authentication as the call that returned this data. (Note: this is actually optional inside a [Contest Package](contest_package)).
-| filename | string    | POSIX compliant filename. Filenames must be unique within the endpoint object where they are used. I.e. an organization can have (multiple) `logo` and `country_flag` file references, they must all have a different filename, but different organizations may have files with the same filename.
-| hash     | string ?  | MD5 hash of the file referenced.
-| mime     | string    | Mime type of resource.
-| width    | integer ? | Width of the image. Required for files with mime type image/\*.
-| height   | integer ? | Height of the image. Required for files with mime type image/\*.
+| Name     | Type            | Description
+| -------- | --------------- | -----------
+| href     | string          | URL where the resource can be found. Relative URLs are relative to the `baseurl`. Must point to a file of intended mime-type. Resource must be accessible using the exact same (possibly none) authentication as the call that returned this data. (Note: this is actually optional inside a [Contest Package](contest_package)).
+| filename | string          | POSIX compliant filename. Filenames must be unique within the endpoint object where they are used. I.e. an organization can have (multiple) `logo` and `country_flag` file references, they must all have a different filename, but different organizations may have files with the same filename.
+| hash     | string ?        | MD5 hash of the file referenced.
+| mime     | string          | Mime type of resource.
+| width    | integer ?       | Width of the image. Required for files with mime type image/\*.
+| height   | integer ?       | Height of the image. Required for files with mime type image/\*.
+| tag      | array of string | Intended usage hints (e.g. `light`, `dark` for images). No meaning must be implied or inferred from the order of the elements.
 
 The `href` property may be an [absolute or relative
 URL](https://datatracker.ietf.org/doc/html/rfc3986); relative URLs must be
@@ -292,6 +293,13 @@ For images in SVG format, i.e. those having a mime type of image/svg+xml,
 the values of `width` and `height` should be the viewport width and height in pixels
 when possible, but otherwise the actual values don't matter as long as they
 are positive and represent the correct aspect ratio.
+
+Known values of tags include:
+
+- `light`: an image suitable for use on white or light backgrounds.
+- `dark`: an image suitable for use on black or dark backgrounds.
+
+An image should list both values if it is suitable for multiple contexts.
 
 If implementing support for uploading files pointed to by resource
 links, substitute the href property with a data property with a base64
