@@ -295,10 +295,10 @@ are positive and represent the correct aspect ratio.
 
 Known values of tags include:
 
-- `light`: an image intended for use on white or light backgrounds.
-- `dark`: an image intended for use on black or dark backgrounds.
+- `light`: an image suitable for use on white or light backgrounds.
+- `dark`: an image suitable for use on black or dark backgrounds.
 
-An image may list both values if it is suitable for multiple contexts.
+An image should list both values if it is suitable for multiple contexts.
 
 If implementing support for uploading files pointed to by resource
 links, substitute the href property with a data property with a base64
