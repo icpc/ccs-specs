@@ -73,11 +73,11 @@ filename pattern must be loaded in addition to any file references
 found in the json files.
 
 The default filename pattern is
-`<endpoint>/<id>/<property>(.<variant>)*.<extension>`, where:
+`<endpoint>/<id>/<property>(.<tag>)*.<extension>`, where:
 
 - `<id>` is the ID of the endpoint object the reference is in.
 - `<property>` is the property of the object, e.g. `logo`.
-- `(.<variant>)*` is zero or more variant tags.
+- `(.<tag>)*` is zero or more tags.
 - `<extension>` is a file extension corresponding to the mime type.
 
 For images, the supported file extensions are:
@@ -88,10 +88,10 @@ For images, the supported file extensions are:
 | image/jpeg    | jpg, jpeg
 | image/svg+xml | svg
 
-For images, a variant of `.<W>x<H>`, is interpreted as the file reference object
+For images, a tag of `.<W>x<H>`, is interpreted as the file reference object
 having the `width` property set to  `<W>` and the `height` property set to
-`<H>`. Every other variant is interpreted as the file reference object having
-the value in its `variant` property array.
+`<H>`. Every other tag is interpreted as the file reference object having
+the value in its `tag` property array.
 
 #### Hrefs
 

@@ -272,7 +272,7 @@ Properties for file reference objects:
 | mime     | string          | Mime type of resource.
 | width    | integer ?       | Width of the image. Required for files with mime type image/\*.
 | height   | integer ?       | Height of the image. Required for files with mime type image/\*.
-| variant  | array of string | Intended usage hints (e.g. `light`, `dark` for images). No meaning must be implied or inferred from the order of the elements.
+| tag      | array of string | Intended usage hints (e.g. `light`, `dark` for images). No meaning must be implied or inferred from the order of the elements.
 
 The `href` property may be an [absolute or relative
 URL](https://datatracker.ietf.org/doc/html/rfc3986); relative URLs must be
@@ -293,7 +293,7 @@ the values of `width` and `height` should be the viewport width and height in pi
 when possible, but otherwise the actual values don't matter as long as they
 are positive and represent the correct aspect ratio.
 
-Known values of variant include:
+Known values of tags include:
 
 - `light`: an image intended for use on white or light backgrounds.
 - `dark`: an image intended for use on black or dark backgrounds.
