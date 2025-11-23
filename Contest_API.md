@@ -1578,7 +1578,7 @@ Properties of submission objects:
 | id            | ID              | Identifier of the submission. Usable as a label, typically a low incrementing number to make it easier to validate submissions or compare submissions with a Shadow CCS.
 | language\_id  | ID              | Identifier of the [language](#languages) submitted for.
 | problem\_id   | ID              | Identifier of the [problem](#problems) submitted for.
-| team\_id      | ID ?            | Identifier of the [team](#teams) that made the submission.
+| team\_id      | ID ?            | Identifier of the [team](#teams) that made the submission. Submissions without a `team_id` cannot affect the scoreboard.
 | account\_id   | ID ?            | Identifier of the [account](#account) that made the submission.
 | time          | TIME            | Timestamp of when the submission was made.
 | contest\_time | RELTIME         | Contest relative time when the submission was made.
