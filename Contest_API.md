@@ -1819,6 +1819,7 @@ Returned data:
 ### Runs
 
 Runs are judgements of individual test cases of a submission.
+This is intended to provide (among other things) live updates of judging progress.
 
 The following endpoints are associated with runs:
 

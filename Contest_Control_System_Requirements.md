@@ -990,6 +990,11 @@ return from the `/access` endpoint:
 }
 ```
 
+Furthermore, the CCS must satisfy the following:
+
+- It must publish [run](contest_api#runs) objects in real-time, so
+  that ICPC-Live can track and publish judging progress.
+
 
 #### Access Restrictions
 
