@@ -2252,6 +2252,8 @@ The following endpoint is associated with the scoreboard:
 | :------------------------- | :--------------- | :----------
 | `contests/<id>/scoreboard` | application/json | JSON object with scoreboard data as defined in the table below.
 
+The scoreboard includes all teams indicated by `main_scoreboard_group_id` in the `contest` endpoint.
+
 #### Scoreboard request options
 
 The following options can be passed to the scoreboard endpoint.
@@ -2261,8 +2263,6 @@ The following options can be passed to the scoreboard endpoint.
 By passing `group_id` with a valid group ID a scoreboard can be requested for the teams in a particular group:
 
 `contests/<id>/scoreboard?group_id=site1`
-
-Note that, when not passing a `group_id`, the teams indicated by `main_scoreboard_group` in the contest endpoint are used. 
 
 Each group scoreboard is ranked independently and contains only the teams that belong to the
 specified group. If a client wants to know 'local' vs 'global' rank it can query both the group and primary scoreboards.
