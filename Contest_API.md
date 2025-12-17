@@ -772,7 +772,7 @@ Properties of contest objects:
 | scoreboard\_freeze\_duration | RELTIME ?       | How long the scoreboard is frozen before the end of the contest. Defaults to `0:00:00`.
 | scoreboard\_thaw\_time       | TIME ?          | The scheduled thaw time of the contest, may be `null` if the thaw time is unknown or not set.
 | scoreboard\_type             | string          | What type of scoreboard is used for the contest. Must be either `pass-fail` or `score`.
-| default_scoreboard_group     | ID ?            | Identifier of the group that represents the default scoreboard. If `null`, the default scoreboard contains all teams (even if there is no group containing all teams).
+| main\_scoreboard\_group\_id  | ID ?            | Identifier of the group that represents the main scoreboard. If `null`, the main scoreboard contains all teams (even if there is no group containing all teams).
 | penalty\_time                | RELTIME         | Penalty time for a wrong submission. Only relevant if scoreboard\_type is `pass-fail`.
 | banner                       | array of FILE ? | Banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime types are image/\*.
 | logo                         | array of FILE ? | Logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/\*.
@@ -2262,7 +2262,7 @@ By passing `group_id` with a valid group ID a scoreboard can be requested for th
 
 `contests/<id>/scoreboard?group_id=site1`
 
-If no `group_id` is given, the group specified by `deafault_scoreboard_group` in the contest endpoint is used, or all teams if it is `null`. 
+Note that, when not passing a `group_id`, the teams indicated by `main_scoreboard_group` in the contest endpoint are used. 
 
 Each group scoreboard is ranked independently and contains only the teams that belong to the
 specified group. If a client wants to know 'local' vs 'global' rank it can query both the group and primary scoreboards.
