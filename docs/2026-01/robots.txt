@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: /2026-01/sitemap.xml

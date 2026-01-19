@@ -3,7 +3,7 @@
 This site contains multiple versions of the CCS specification. Each version of the specification contains a set of related specs for interoperability between different contest control systems and the tools that interact with them. These specifications have been designed and used in the context of the [ICPC World Finals](https://icpc.global) and various (sub)regionals, but they are meant to be useful outside the ICPC context as well.
 
 Select a version to browse from the left navigation bar.
-For the current stable release (2023-06), go [here](https://ccs-specs.icpc.io/2023-06).
+For the latest stable release (2026-01), go [here](https://ccs-specs.icpc.io/2026-01).
 
 Draft work on the next (future) version of the spec is done on the `master` branch in the
 repository and can be viewed [here](https://ccs-specs.icpc.io/draft).
@@ -15,7 +15,8 @@ Once a specification is released it uses the naming scheme `<yyyy>-<mm>`.
 These releases are stable and will not change except for trivial changes such
 as fixing spelling and grammar, or improving examples or explanations.
 
-* [2023-06](https://ccs-specs.icpc.io/2023-06) - Current stable release, used at the ICPC World Finals in Luxor and Astana
+* [2026-01](https://ccs-specs.icpc.io/2026-01) - New stable release
+* [2023-06](https://ccs-specs.icpc.io/2023-06) - Used at the ICPC World Finals in Luxor, Astana, and Baku; to be used at Dubai
 * [2022-07](https://ccs-specs.icpc.io/2022-07) - Used at the ICPC World Finals in Dhaka
 * [2021-11](https://ccs-specs.icpc.io/2021-11) - Used at [NWERC 2021](https://2021.nwerc.eu) in Iceland
 * [2020-03](https://ccs-specs.icpc.io/2020-03) - Used at ICPC World Finals in Moscow
