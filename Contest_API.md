@@ -772,6 +772,7 @@ Properties of contest objects:
 | scoreboard\_freeze\_duration | RELTIME ?       | How long the scoreboard is frozen before the end of the contest. Defaults to `0:00:00`.
 | scoreboard\_thaw\_time       | TIME ?          | The scheduled thaw time of the contest, may be `null` if the thaw time is unknown or not set.
 | scoreboard\_type             | string          | What type of scoreboard is used for the contest. Must be either `pass-fail` or `score`.
+| main\_scoreboard\_group\_id  | ID ?            | Identifier of the group that represents the main scoreboard. If `null`, the main scoreboard contains all teams (even if there is no group containing all teams).
 | penalty\_time                | RELTIME         | Penalty time for a wrong submission. Only relevant if scoreboard\_type is `pass-fail`.
 | banner                       | array of FILE ? | Banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime types are image/\*.
 | logo                         | array of FILE ? | Logo for this contest, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/\*.
@@ -1374,7 +1375,6 @@ Properties of team objects:
 | display\_name    | string ?               | Display name of the team. If not set, a client should revert to using the name instead.
 | organization\_id | ID ?                   | Identifier of the [ organization](#organizations) (e.g. university or other entity) that this team is affiliated to.
 | group\_ids       | array of ID ?          | Identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). The array may be empty. Required iff groups endpoint is available.
-| hidden           | boolean ?              | If the team is to be excluded from the [scoreboard](#scoreboard). Defaults to `false`.
 | location         | team location object ? | Position of team on the contest floor. See below for the specification of this object.
 | photo            | array of FILE ?        | Registration photo of the team. Only allowed mime types are image/\*.
 | video            | array of FILE ?        | Registration video of the team. Only allowed mime types are video/\* or application/vnd.apple.mpegurl.
@@ -2251,6 +2251,8 @@ The following endpoint is associated with the scoreboard:
 | Endpoint                   | Mime-type        | Description
 | :------------------------- | :--------------- | :----------
 | `contests/<id>/scoreboard` | application/json | JSON object with scoreboard data as defined in the table below.
+
+The scoreboard includes all teams indicated by `main_scoreboard_group_id` in the `contest` endpoint.
 
 #### Scoreboard request options
 
