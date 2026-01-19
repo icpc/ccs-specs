@@ -630,7 +630,7 @@ Properties of version object:
 
 | Name         | Type              | Description
 | :----------- | :---------------- | :----------
-| version      | string            | Version of the API. For this version must be the string `draft`. Will be of the form `<yyyy>-<mm>`, `<yyyy>-<mm>-draft`, or simply `draft`.
+| version      | string            | Version of the API. For this version must be the string `2026-01`. Will be of the form `<yyyy>-<mm>`, `<yyyy>-<mm>-draft`, or simply `draft`.
 | version\_url | string            | Link to documentation for this version of the API.
 | provider     | provider object ? | Information about the data provider
 
@@ -652,8 +652,8 @@ Returned data:
 
 ```json
 {
-   "version": "draft",
-   "version_url": "https://ccs-specs.icpc.io/draft/contest_api",
+   "version": "2026-01",
+   "version_url": "https://ccs-specs.icpc.io/2026-01/contest_api",
    "provider" : {
       "name": "DOMjudge",
       "version" : "8.3.0DEV/4ac31de71",

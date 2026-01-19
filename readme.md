@@ -19,10 +19,9 @@ Furthermore, a tool and JSON schema specifications are available to
 validate an implementation of the Contest API. Run `check-api.sh -h`
 from the root of the repository for usage information.
 
-There are multiple versions of the CCS specifications available on the
-[documentation pages](https://ccs-specs.icpc.io/).
-
-This is the draft of some future version of the CCS specification.
+This is the `2026-01` release of the CCS specification.
+Other versions of the CCS specifications are available
+[here](https://ccs-specs.icpc.io/).
 
 ## Changes compared to the `2023-06` version
 
