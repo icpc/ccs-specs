@@ -40,7 +40,7 @@ for version in $(cat versions.json | jq -r -c '.[]'); do
 	bundle exec jekyll build --config _config.yml,"$TMPDIR/version.yml" \
 		-b "/${version}" -s "$REPO_DIR" -d "docs/${version}/"
 
-	sleep 3600
+	sleep 1800
 done
 
 git add --all
