@@ -374,8 +374,8 @@ safely be translated to, if a system does not support it.
 | TIO | Time Limit Exceeded - Incomplete Output  |                                                          | TLE   | TWA, TLE, RE      | Too slow and also incomplete output
 | TNO | Time Limit Exceeded - No Output          |                                                          | TLE   | TIO, TWA, TLE, RE | Too slow and also no output
 | MLE | Memory Limit Exceeded                    |                                                          | RTE   | RTE, RE           | Uses too much memory
-| SV  | Security Violation                       | Illegal Function (IF), Restricted Function               | RTE   | RTE, RE           | Uses some functionality that is not allowed by the system
-| IF  | Illegal Function                         | Illegal Function (IF), Restricted Function               | RTE   | SV, RTE, RE       | Calls a function that is not allowed by the system
+| SV  | Security Violation                       |                                                          | RTE   | IF, RTE, RE       | Uses some functionality that is not allowed by the system
+| IF  | Illegal Function                         | Restricted Function                                      | RTE   | SV, RTE, RE       | Calls a function that is not allowed by the system
 | RCO | Run-Time Error - Correct Output          |                                                          | RTE   | RTE, RE           | Crashing but producing correct output
 | RWA | Run-Time Error - Wrong Answer            |                                                          | RTE   | RTE, RE           | Crashing and also incorrect output
 | RPE | Run-Time Error - Presentation Error      |                                                          | RTE   | RWA, RTE, RE      | Crashing and also presentation error
