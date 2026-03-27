@@ -45,8 +45,8 @@ describes API-level access rights that have no meaning on disk.
 
 Object definitions, property types, and the event format used in these files
 are specified in the [JSON Format](json_format) document. A valid package must
-satisfy all [referential integrity](json_format#referential-integrity) constraints 
-defined in the JSON Format object definitions.
+satisfy all [referential integrity](json_format#referential-integrity)
+requirements of the the JSON Format.
 
 When creating a Contest Package, some of the API endpoints are
 commonly written by humans. For this reason, those files can also be
