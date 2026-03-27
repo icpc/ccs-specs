@@ -310,24 +310,24 @@ Each notification is a [notification object](json_format#notification-object)
 as defined in JSON Format. The correspondence between notification types
 and API endpoints is:
 
-| Type            | API Endpoint
-| :-------------- | :-----------
-| contest         | `contests/<id>`
-| judgement-types | `contests/<id>/judgement-types/<id>`
-| languages       | `contests/<id>/languages/<id>`
-| problems        | `contests/<id>/problems/<id>`
-| groups          | `contests/<id>/groups/<id>`
-| organizations   | `contests/<id>/organizations/<id>`
-| teams           | `contests/<id>/teams/<id>`
-| persons         | `contests/<id>/persons/<id>`
-| accounts        | `contests/<id>/accounts/<id>`
-| state           | `contests/<id>/state`
-| submissions     | `contests/<id>/submissions/<id>`
-| judgements      | `contests/<id>/judgements/<id>`
-| runs            | `contests/<id>/runs/<id>`
-| clarifications  | `contests/<id>/clarifications/<id>`
-| awards          | `contests/<id>/awards/<id>`
-| commentary      | `contests/<id>/commentary/<id>`
+| Type            | API Endpoint                                                        | JSON object
+| :-------------- | :------------------------------------------------------------------ | :----------
+| contest         | [`contests/<id>`](#contests)                                        | [Contest](json_format#contests)
+| judgement-types | [`contests/<id>/judgement-types/<id>`](#judgement-types)            | [Judgement Type](json_format#judgement-types)
+| languages       | [`contests/<id>/languages/<id>`](#languages)                        | [Language](json_format#languages)
+| problems        | [`contests/<id>/problems/<id>`](#problems)                          | [Problem](json_format#problems)
+| groups          | [`contests/<id>/groups/<id>`](#groups)                              | [Group](json_format#groups)
+| organizations   | [`contests/<id>/organizations/<id>`](#organizations)                | [Organization](json_format#organizations)
+| teams           | [`contests/<id>/teams/<id>`](#teams)                                | [Team](json_format#teams)
+| persons         | [`contests/<id>/persons/<id>`](#persons)                            | [Person](json_format#persons)
+| accounts        | [`contests/<id>/accounts/<id>`](#accounts)                          | [Account](json_format#accounts)
+| state           | [`contests/<id>/state`](#contest-state)                             | [Contest state](json_format#contest-state)
+| submissions     | [`contests/<id>/submissions/<id>`](#submissions)                    | [Submission](json_format#submissions)
+| judgements      | [`contests/<id>/judgements/<id>`](#judgements)                      | [Judgement](json_format#judgements)
+| runs            | [`contests/<id>/runs/<id>`](#runs)                                  | [Run](json_format#runs)
+| clarifications  | [`contests/<id>/clarifications/<id>`](#clarifications)              | [Clarification](json_format#clarifications)
+| awards          | [`contests/<id>/awards/<id>`](#awards)                              | [Award](json_format#awards)
+| commentary      | [`contests/<id>/commentary/<id>`](#commentary)                      | [Commentary](json_format#commentary)
 
 ## Interface specification
 
@@ -339,12 +339,12 @@ are mentioned below.
 
 The endpoints can be categorized into 4 types as follows:
 
-- Metadata: api, access
-- Configuration: accounts, contests, judgement-types, languages, problems,
-  groups, organizations, persons, teams;
-- Live data: state, submissions, judgements, runs, clarifications, awards,
-  commentary;
-- Aggregate data: scoreboard, event-feed.
+- Metadata: [api](#api-information), [access](#access)
+- Configuration: [accounts](#accounts), [contests](#contests), [judgement-types](#judgement-types), [languages](#languages), [problems](#problems),
+  [groups](#groups), [organizations](#organizations), [persons](#persons), [teams](#teams);
+- Live data: [state](#contest-state), [submissions](#submissions), [judgements](#judgements), [runs](#runs), [clarifications](#clarifications), [awards](#awards),
+  [commentary](#commentary);
+- Aggregate data: [scoreboard](#scoreboard), [event-feed](#event-feed).
 
 The metadata endpoints contain data about the API, and are the only required API
 endpoints. They are not included in the event feed. The access endpoint
@@ -375,7 +375,7 @@ are singular nouns and indeed contain only a single object.
 
 ### Required and optional endpoints
 
-The only required endpoints are metadata: `api` and `access`.
+The only required endpoints are metadata: [api](#api-information) and [access](#access).
 The only requirements for properties are that collections must have
 an `id` property.
 [Referential integrity](#referential-integrity) must also be kept
@@ -387,11 +387,11 @@ are supported by a given provider.
 
 In practice there are different types of providers that will offer
 similar sets of endpoints. Some examples:
- - A contest management system will support at least contests and
-   teams, and may support other configuration endpoints.
- - A CCS will support at least submissions, judgements, and
-   dependencies of these. It will likely support a scoreboard, and
-   usually an event-feed.
+ - A contest management system will support at least [contests](#contests) and
+   [teams](#teams), and may support other configuration endpoints.
+ - A CCS will support at least [submissions](#submissions), [judgements](#judgements), and
+   dependencies of these. It will likely support a [scoreboard](#scoreboard), and
+   usually an [event-feed](#event-feed).
 
 Separate specifications (for example, the CCS System Requirements)
 will provide more information on which endpoints and properties
