@@ -147,19 +147,19 @@ listing which data would be required for that use case.
 Used for configuring a CCS (primary or shadow) before a contest. Suitable for
 download from a registration system or similar tool.
 
-Required endpoints:
-- api
-- contests
-- languages
-- problems
-- teams
-- accounts
+Required files:
+- [api](json_format#api-information) (`api.json`)
+- [contests](json_format#contests) (`contest.json`)
+- [languages](json_format#languages) (`languages.json`)
+- [problems](json_format#problems) (`problems.json`)
+- [teams](json_format#teams) (`teams.json`)
+- [accounts](json_format#accounts) (`accounts.json`)
 
-Optional endpoints:
-- judgement-types
-- groups
-- organizations
-- persons
+Optional files:
+- [judgement-types](json_format#judgement-types) (`judgement-types.json`)
+- [groups](json_format#groups) (`groups.json`)
+- [organizations](json_format#organizations) (`organizations.json`)
+- [persons](json_format#persons) (`persons.json`)
 
 #### Example file listing
 
@@ -201,11 +201,11 @@ accounts.json
 Used for uploading local registration data to a central registration system
 (such as the ICPC CMS).
 
-Required endpoints:
-- api
-- organizations
-- teams
-- persons
+Required files:
+- [api](json_format#api-information) (`api.json`)
+- [organizations](json_format#organizations) (`organizations.json`)
+- [teams](json_format#teams) (`teams.json`)
+- [persons](json_format#persons) (`persons.json`)
 
 #### Example file listing
 
@@ -238,13 +238,13 @@ persons/jane-doe/photo.jpg
 Used for uploading results from a finished contest to a central repository
 (such as the ICPC CMS).
 
-Required endpoints:
-- api
-- teams
-- scoreboard
+Required files:
+- [api](json_format#api-information) (`api.json`)
+- [teams](json_format#teams) (`teams.json`)
+- [scoreboard](json_format#scoreboard) (`scoreboard.json`)
 
-Optional endpoints:
-- awards
+Optional files:
+- [awards](json_format#awards) (`awards.json`)
 
 #### Example file listing
 
