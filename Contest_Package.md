@@ -40,6 +40,9 @@ Information in the API is always either in JSON format,
 - The NDJSON returned from the endpoint `/contests/<id>/<endpoint>` is stored as
   `<endpoint>.ndjson`. (The only such endpoint is `event-feed`.)
 
+Note that the `access` endpoint is not stored in a contest package, as it
+describes API-level access rights that have no meaning on disk.
+
 Object definitions, property types, and the event format used in these files
 are specified in the [JSON Format](json_format) document. A valid package must
 satisfy all [referential integrity](json_format#referential-integrity) constraints 
