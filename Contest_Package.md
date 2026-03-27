@@ -1,5 +1,5 @@
 ---
-sort: 3
+sort: 4
 permalink: /contest_package
 ---
 # Contest Package Format
@@ -30,7 +30,7 @@ contest would be needed.
 
 Information in the API is always either in JSON format,
 [NDJSON](contest_api#event-feed) format, or linked using a
-[file reference](contest_api#json-attribute-types) JSON object.
+[file reference](json_format#file) JSON object.
 
 - The JSON returned from the endpoint `/` is stored as `api.json`.
 - The JSON returned from the endpoint `/contests/<id>` is stored as
@@ -39,6 +39,11 @@ Information in the API is always either in JSON format,
   `<endpoint>.json`.
 - The NDJSON returned from the endpoint `/contests/<id>/<endpoint>` is stored as
   `<endpoint>.ndjson`. (The only such endpoint is `event-feed`.)
+
+Object definitions, property types, and the event format used in these files
+are specified in the [JSON Format](json_format) document. A valid package must
+satisfy all [referential integrity](json_format#referential-integrity) constraints 
+defined in the JSON Format object definitions.
 
 When creating a Contest Package, some of the API endpoints are
 commonly written by humans. For this reason, those files can also be
@@ -62,6 +67,21 @@ and `contest/<filename>` respectively, and files referenced in
 
 Note that the API specification requires that filenames are unique within
 endpoint objects, so this is always possible.
+
+The `href` property of [file reference objects](json_format#file) is optional
+in a contest package: if a file matching the `filename` property is present on
+disk (as described above), that file is used and `href` is ignored. If no such
+file exists, then `href` must be present and valid.
+
+It is not required that a URL specified in an `href` is always valid.
+Specifically, in many cases the contest is running in a local network that is
+taken down after the contest, and in this case the URL would definitely not
+still be working. To keep the archiving process as simple as possible, stale
+URLs do not have to be removed from the data, as long as the corresponding
+file is present on disk. Conversely, a package may intentionally omit large
+files and rely on valid `href` values to retrieve them on demand — this option
+can be used to create a "shallow package" when the size of the package
+matters.
 
 #### Default filenames
 
@@ -92,20 +112,6 @@ For images, a tag of `.<W>x<H>`, is interpreted as the file reference object
 having the `width` property set to  `<W>` and the `height` property set to
 `<H>`. Every other tag is interpreted as the file reference object having
 the value in its `tag` property array.
-
-#### Hrefs
-
-It is not required that a URL specified in an href is always valid.
-Specifically, in many cases the contest is running in a local network that is
-taken down after the contest, and in this case the URL would definitely not
-still be working. To keep the archiving process as simple as possible, stale
-URLs do not have to be removed from the data.
-That is, if a file referenced by the `filename` property as described
-above is present, then that should be used and the original URL in
-`href` ignored. If no such file exists, then the original URL must be
-valid and should be used to retrieve the file. This option could be
-used to create a "shallow package", when the size of the package
-matters.
 
 ### Multiple systems
 
