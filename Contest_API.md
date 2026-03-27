@@ -426,8 +426,6 @@ array of ID, does not have to be supported.
 ### API information
 
 Provides information about the API and the data provider.
-See [JSON Format](json_format#api-information) for the object definition and
-examples.
 
 The following endpoint is associated with API information:
 
@@ -517,8 +515,6 @@ or:
 ### Contests
 
 Provides information on the current contest.
-See [JSON Format](json_format#contests) for object properties and examples.
-
 The following endpoints are associated with contest:
 
 | Endpoint        | Mime-type        | Description
@@ -600,8 +596,6 @@ Request data:
 
 ### Judgement Types
 
-See [JSON Format](json_format#judgement-types) for object properties and examples.
-
 The following endpoints are associated with judgement types:
 
 | Endpoint                             | Mime-type        | Description
@@ -610,8 +604,6 @@ The following endpoints are associated with judgement types:
 | `contests/<id>/judgement-types/<id>` | application/json | A [judgement type object](json_format#judgement-types) with properties as specified by [access](#access).
 
 ### Languages
-
-See [JSON Format](json_format#languages) for object properties and examples.
 
 The following endpoints are associated with languages:
 
@@ -622,8 +614,6 @@ The following endpoints are associated with languages:
 
 ### Problems
 
-See [JSON Format](json_format#problems) for object properties and examples.
-
 The following endpoints are associated with problems:
 
 | Endpoint                      | Mime-type        | Description
@@ -632,8 +622,6 @@ The following endpoints are associated with problems:
 | `contests/<id>/problems/<id>` | application/json | A [problem object](json_format#problems) with properties as specified by [access](#access).
 
 ### Groups
-
-See [JSON Format](json_format#groups) for object properties and examples.
 
 The following endpoints are associated with groups:
 
@@ -648,8 +636,6 @@ group\_ids).
 
 ### Organizations
 
-See [JSON Format](json_format#organizations) for object properties and examples.
-
 The following endpoints are associated with organizations:
 
 | Endpoint                           | Type             | Description
@@ -663,8 +649,6 @@ organizations (i.e. return any organization\_ids).
 
 ### Teams
 
-See [JSON Format](json_format#teams) for object properties and examples.
-
 The following endpoints are associated with teams:
 
 | Endpoint                    | Mime-type        | Description
@@ -674,8 +658,6 @@ The following endpoints are associated with teams:
 
 ### Persons
 
-See [JSON Format](json_format#persons) for object properties and examples.
-
 The following endpoints are associated with persons:
 
 | Endpoint                     | Mime-type        | Description
@@ -684,8 +666,6 @@ The following endpoints are associated with persons:
 | `contests/<id>/persons/<id>` | application/json | A [person object](json_format#persons) with properties as specified by [access](#access).
 
 ### Accounts
-
-See [JSON Format](json_format#accounts) for object properties and examples.
 
 The following endpoints are associated with accounts:
 
@@ -699,8 +679,6 @@ The account endpoint exists so that the clients can tell which account (and henc
 
 ### Contest state
 
-See [JSON Format](json_format#contest-state) for object properties and examples.
-
 The following endpoints are associated with state:
 
 | Endpoint              | Type             | Description
@@ -708,8 +686,6 @@ The following endpoints are associated with state:
 | `contests/<id>/state` | application/json | The [contest state object](json_format#contest-state) with properties as specified by [access](#access).
 
 ### Submissions
-
-See [JSON Format](json_format#submissions) for object properties and examples.
 
 The following endpoints are associated with submissions:
 
@@ -876,8 +852,6 @@ Returned data:
 
 ### Judgements
 
-See [JSON Format](json_format#judgements) for object properties and examples.
-
 The following endpoints are associated with judgements:
 
 | Endpoint                        | Mime-type        | Description
@@ -887,8 +861,6 @@ The following endpoints are associated with judgements:
 
 ### Runs
 
-See [JSON Format](json_format#runs) for object properties and examples.
-
 The following endpoints are associated with runs:
 
 | Endpoint                  | Mime-type        | Description
@@ -897,8 +869,6 @@ The following endpoints are associated with runs:
 | `contests/<id>/runs/<id>` | application/json | A [run object](json_format#runs) with properties as specified by [access](#access).
 
 ### Clarifications
-
-See [JSON Format](json_format#clarifications) for object properties and examples.
 
 The following endpoints are associated with clarification messages:
 
@@ -984,8 +954,6 @@ Returned data:
 ```
 
 ### Awards
-
-See [JSON Format](json_format#awards) for object properties and examples.
 
 The following endpoints are associated with awards:
 
@@ -1091,8 +1059,6 @@ Request:
 
 ### Commentary
 
-See [JSON Format](json_format#commentary) for object properties and examples.
-
 The following endpoints are associated with commentary:
 
 | Endpoint                        | Mime-type        | Description
@@ -1129,8 +1095,6 @@ Performing a `POST` is not supported when this capability is not available.
 ### Scoreboard
 
 Scoreboard of the contest.
-See [JSON Format](json_format#scoreboard) for the scoreboard object format.
-
 Since this is generated data, only the `GET` method is allowed here,
 irrespective of role.
 
