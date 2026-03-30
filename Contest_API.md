@@ -1525,15 +1525,15 @@ The following endpoints are associated with state:
 
 Properties of state objects:
 
-| Name             | Type   | Description
-| :--------------- | :----- | :----------
-| started          | TIME ? | Time when the contest actually started, or `null` if the contest has not started yet. When set, this time must be equal to the [contest](#contests) `start_time`.
-| frozen           | TIME ? | Time when the scoreboard was frozen, or `null` if the scoreboard has not been frozen. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint.
-| ended            | TIME ? | Time when the contest ended, or `null` if the contest has not ended. Must not be set if started is `null`.
-| thawed           | TIME ? | Time when the scoreboard was thawed (that is, unfrozen again), or `null` if the scoreboard has not been thawed. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint. Must not be set if frozen is `null`.
-| finalized        | TIME ? | Time when the results were finalized, or `null` if results have not been finalized. Must not be set if ended is `null`.
-| end\_of\_updates | TIME ? | Time after last update to the contest occurred, or `null` if more updates are still to come. Setting this to non-`null` must be the very last change in the contest.
-| paused_intervals | array of state pause objects ? | One or more periods where the contest clock was suspended.
+| Name              | Type   | Description
+| :---------------- | :----- | :----------
+| started           | TIME ? | Time when the contest actually started, or `null` if the contest has not started yet. When set, this time must be equal to the [contest](#contests) `start_time`.
+| frozen            | TIME ? | Time when the scoreboard was frozen, or `null` if the scoreboard has not been frozen. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint.
+| ended             | TIME ? | Time when the contest ended, or `null` if the contest has not ended. Must not be set if started is `null`.
+| thawed            | TIME ? | Time when the scoreboard was thawed (that is, unfrozen again), or `null` if the scoreboard has not been thawed. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint. Must not be set if frozen is `null`.
+| finalized         | TIME ? | Time when the results were finalized, or `null` if results have not been finalized. Must not be set if ended is `null`.
+| end\_of\_updates  | TIME ? | Time after last update to the contest occurred, or `null` if more updates are still to come. Setting this to non-`null` must be the very last change in the contest.
+| paused\_intervals | array of state pause objects ? | One or more periods where the contest clock was suspended.
 
 These state changes must occur in the order listed in the table above,
 as far as they do occur, except that `thawed` and `finalized` may occur
@@ -1552,15 +1552,15 @@ and `thawed` is set if the contest was frozen.
 
 Properties of state pause objects:
 
-| Name         | Type     | Description
-| :----------- | :------- | :----------
-| start        | TIME     | The absolute time at which contest time was paused.
-| contest_time | REL_TIME | The contest time during the pause.
-| end          | TIME ?   | The time the pause ended and contest time resumed.
+| Name          | Type     | Description
+| :------------ | :------- | :----------
+| start\_time   | TIME     | The absolute time at which contest time was paused.
+| contest\_time | REL_TIME | The contest time during the pause.
+| end\_time     | TIME ?   | The time the pause ended and contest time resumed.
 
 The contest clock may be paused for a scheduled period like a lunch break (which could be shared before the
 contest starts), or an unexpected situation like a fire alarm (where the end time is not known yet).
-If pauses happen retrospectively, the API source is responsible for ensuring the contest time of any subsequent objects is consistent.
+If pauses happen retrospectively, the API source is responsible for ensuring the contest time of any affected objects is consistent.
 
 #### Examples
 
