@@ -646,10 +646,6 @@ The following endpoints are associated with groups:
 | `contests/<id>/groups`      | application/json | JSON array of [group objects](json_format#groups) with properties as specified by [access](#access).
 | `contests/<id>/groups/<id>` | application/json | A [group object](json_format#groups) with properties as specified by [access](#access).
 
-Note that these endpoints must be provided if groups are used. If they
-are not provided no other endpoint may refer to groups (i.e. return any
-group\_ids).
-
 ### Organizations
 
 The following endpoints are associated with organizations:
@@ -658,10 +654,6 @@ The following endpoints are associated with organizations:
 | :--------------------------------- | :--------------- | :----------
 | `contests/<id>/organizations`      | application/json | JSON array of [organization objects](json_format#organizations) with properties as specified by [access](#access).
 | `contests/<id>/organizations/<id>` | application/json | An [organization object](json_format#organizations) with properties as specified by [access](#access).
-
-Note that the first two endpoints must be provided if organizations are
-used. If they are not provided no other endpoint may refer to
-organizations (i.e. return any organization\_ids).
 
 ### Teams
 
