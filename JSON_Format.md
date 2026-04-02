@@ -82,21 +82,9 @@ In the tables below, the columns are:
 
 Some properties in objects are references to the `id` of other objects (type
 `ID` or `array of ID`). When such a property has a non-`null` value, the
-referenced object must exist. That is, any conforming set of contest data must
-at all times be referentially intact. This implies for example that before
-creating a [team](#teams) with an `organization_id`, the
-[organization](#organizations) must already exist. In reverse, that
-organization can only be deleted after the team is deleted, or alternatively,
-the team's `organization_id` is set to `null`.
-
-Furthermore, the `id` property of objects is not allowed to change. However,
-note that a particular ID might be reused by first deleting an object and then
-creating a new object with the same ID.
-
-How referential integrity is enforced in practice is context-specific: the
-[Contest API](contest_api#referential-integrity) describes server-side
-enforcement, and the [Contest Package Format](contest_package) describes
-validity requirements for packages on disk.
+referenced object must exist. How this constraint is enforced in practice is
+context-specific: see the [Contest API](contest_api#referential-integrity) and
+[Contest Package Format](contest_package) specifications.
 
 ### Location
 
