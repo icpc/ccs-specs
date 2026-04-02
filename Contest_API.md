@@ -201,6 +201,22 @@ Depending on the client account's access, the API provider may completely
 hide some objects from the client, may omit certain properties, or may embargo or
 omit objects based on the current state of the contest.
 
+## Extensibility
+
+This specification is meant to cover the basic data of contests, with
+the idea that server/client implementations can extend this with more
+endpoints, properties, and/or capabilities. The following requirements
+are meant to ease extensibility:
+
+- Clients should accept additional (unknown) event types in notifications.
+- Clients should accept additional (unknown) properties in endpoints.
+- Clients should accept additional (unknown) capabilities.
+- Servers should not expect clients to recognize more than the basic, required
+  specification.
+- In this specification and extensions, a property with value `null` may be left
+  out by the server (i.e. not be present). A client must treat a property with
+  value `null` equivalently as that property not being present.
+
 ### File references
 
 The `href` property of [file reference objects](json_format#file) must always
