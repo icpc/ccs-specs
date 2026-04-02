@@ -396,20 +396,20 @@ For instance, in a contest where teams cannot see the specific reason another te
 might see their own judgement types, but judgements from other teams would return the corresponding simplified judgement
 type instead.
 
-If not using simplified judgements, the property `simplified\_judgement\_type\_id` must not be set.
+If not using simplified judgements, the property `simplified_judgement_type_id` must not be set.
 
 A judgement type may be used both as original and simplified judgement type, but must then simplify to itself and have
-`simplified\_judgement\_type\_id` equal to `id`.
+`simplified_judgement_type_id` equal to `id`.
 For example, `AC` (aka correct) would typically map to `AC` also as simplified judgement type.
 
 If a system is interested in finding the set of judgement types that are only original judgement types, only simplified
 judgement types or both, one can use this logic:
 
-- The set of original judgement types are the ones that have `simplified\_judgement\_type\_id` set.
-- The set of simplified judgement types are the ones that appear in `simplified\_judgement\_type\_id`.
+- The set of original judgement types are the ones that have `simplified_judgement_type_id` set.
+- The set of simplified judgement types are the ones that appear in `simplified_judgement_type_id`.
 - The set judgement types that are both is the intersection of these two sets.
 
-This assumes the system is using simplified judgement types. If it is not (i.e. if `simplified\_judgement\_type\_id` is not set
+This assumes the system is using simplified judgement types. If it is not (i.e. if `simplified_judgement_type_id` is not set
 for any judgement type), all judgement types are original only.
 
 #### Examples
@@ -697,8 +697,8 @@ Properties of team objects:
 | name             | string                 | Name of the team.
 | label            | string                 | Label of the team, at WFs normally the team seat number.
 | display\_name    | string ?               | Display name of the team. If not set, a client should revert to using the name instead.
-| organization\_id | ID ?                   | Identifier of the [ organization](#organizations) (e.g. university or other entity) that this team is affiliated to.
-| group\_ids       | array of ID ?          | Identifiers of the [ group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). The array may be empty. Required iff groups endpoint is available.
+| organization\_id | ID ?                   | Identifier of the [organization](#organizations) (e.g. university or other entity) that this team is affiliated to.
+| group\_ids       | array of ID ?          | Identifiers of the [group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). The array may be empty. Required iff groups endpoint is available.
 | location         | team location object ? | Position of team on the contest floor. See below for the specification of this object.
 | photo            | array of FILE ?        | Registration photo of the team. Only allowed mime types are image/\*.
 | video            | array of FILE ?        | Registration video of the team. Only allowed mime types are video/\* or application/vnd.apple.mpegurl.
@@ -1071,8 +1071,8 @@ have the corresponding meaning. If the any of the meanings below are needed,
 the corresponding tag should be used. There is no requirement that any of the
 tags below are used.
 
-| Tag                     | Meaing
-| :---------------------- | :-----
+| Tag                     | Meaning
+| :---------------------- | :------
 | submission              | A submission was made.
 | submission-medal        | A submission was made that if accepted would change the set of teams awarded a medal.
 | submission-gold-medal   | A submission was made that if accepted would change the set of teams awarded a gold medal.
@@ -1111,7 +1111,7 @@ Properties of the scoreboard object.
 | :------------ | :------ | :----------
 | time          | TIME    | Time contained in the [event](#notification-object) after which this scoreboard was generated. Implementation defined if the event has no associated time.
 | contest\_time | RELTIME | Contest time contained in the associated event. Implementation defined if the event has no associated contest time.
-| state         | object  | Identical data as returned by the [ contest state](#contest-state) endpoint. This is provided here for ease of use and to guarantee the data is synchronized.
+| state         | object  | Identical data as returned by the [contest state](#contest-state) endpoint. This is provided here for ease of use and to guarantee the data is synchronized.
 | rows          | array of scoreboard row objects | A list of rows of team with their associated scores.
 
 The scoreboard `rows` array is sorted according to rank and alphabetical
@@ -1125,7 +1125,7 @@ Properties of scoreboard row objects:
 | Name              | Type      | Description
 | :---------------- | :-------- | :----------
 | rank              | integer   | Rank of this team, 1-based and duplicate in case of ties.
-| team\_id          | ID        | Identifier of the [ team](#teams).
+| team\_id          | ID        | Identifier of the [team](#teams).
 | score             | object    | JSON object as specified in the rows below (for possible extension to other scoring methods).
 | score.num\_solved | integer   | Number of problems solved by the team. Required iff contest:scoreboard\_type is `pass-fail`.
 | score.total\_time | RELTIME   | Total penalty time accrued by the team. Required iff contest:scoreboard\_type is `pass-fail`.
@@ -1137,7 +1137,7 @@ Properties of problem data objects:
 
 | Name         | Type      | Description
 | :----------- | :-------- | :----------
-| problem\_id  | ID        | Identifier of the [ problem](#problems).
+| problem\_id  | ID        | Identifier of the [problem](#problems).
 | num\_judged  | integer   | Number of judged submissions (up to and including the first correct one),
 | num\_pending | integer   | Number of pending submissions (either queued or due to freeze).
 | solved       | boolean   | Required iff contest:scoreboard\_type is `pass-fail`.
