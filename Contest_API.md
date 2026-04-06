@@ -39,7 +39,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 document are to be interpreted as described in
 [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119).
 
-The interface is implemented as a HTTP REST interface that outputs
+The interface is implemented as an HTTP REST interface that outputs
 information in [JSON](https://en.wikipedia.org/wiki/JSON) format
 ([RFC 7159](https://datatracker.ietf.org/doc/html/rfc7159)). All access to the API
 must be provided over HTTPS to guard against eavesdropping on
@@ -155,7 +155,7 @@ returned to indicate success or failure. If successful DELETE will have no respo
 GET on a collection will return the collection, and every other method will contain the
 current (updated) state of the object.
 
-If a POST, PUT, PATCH would cause any of the following issues it must fail, in addition to any endpoint or type-specific requirements:
+If a POST, PUT, or PATCH would cause any of the following issues it must fail, in addition to any endpoint or type-specific requirements:
 
 - A PATCH on an `id` that doesn't exist. Will return a 404 error code.
 - A PUT or PATCH containing an id that does not match the URL. Will return a 409
@@ -252,7 +252,7 @@ deleted, or alternatively, the team's `organization_id` is set to
 `null`.
 
 Furthermore, the ID property (see [JSON Format](json_format#json-property-types))
-of objects are not allowed to change. However, note that a particular ID might be
+of objects is not allowed to change. However, note that a particular ID might be
 reused by first deleting an object and then creating a new object with the same ID.
 
 ### Extensibility
@@ -295,7 +295,7 @@ and their properties listed in `access` must be provided (possibly with a
 `null` value when the property is optional), and only these endpoints and
 properties. 
 
-Configuration is normally set before contest start. Is not expected to,
+Configuration is normally set before contest start. It is not expected to,
 but could occasionally be updated during a contest. It does not have
 associated timestamp/contest time property. Updates are notified via
 the event feed.
@@ -405,7 +405,7 @@ This information is provided so that clients know what endpoints are available,
 what notifications may happen, and what capabilities they have, regardless
 of whether objects currently exist or the capability is currently active.
 For instance, a client logged in with a team account would see the problems type and
-team\_submit capability before a contest starts, even through they cannot
+team\_submit capability before a contest starts, even though they cannot
 see any problems nor submit yet.
 Clients are not expected to call this endpoint more than once
 since the response should not normally change during a contest.
@@ -449,8 +449,8 @@ set or clear the contest start time via a PATCH method.
 The PATCH must include a valid JSON object with two or three
 properties: the contest `id` (used for verification), a
 `start_time` (a `<TIME>` value or `null`), and an optional
-`countdown_pause_time` (`<RELTIME>`). As above, `countdown_pause_time`
-can only be non-null when start time is null.
+`countdown_pause_time` (`<RELTIME>`). Note that `countdown_pause_time`
+can only be non-null when `start_time` is null.
 
 The request should fail with a 403 error code if the contest is started or within 30s of
 starting, or if the new start time is in the past or within 30s.
@@ -591,7 +591,7 @@ A proxy server may receive submissions from team clients (like above)
 and forward these to a CCS. This might be useful, for example, in a
 multi-site contest setup, where each site runs a proxy that would
 still be reachable if connectivity with the central CCS is lost, or
-where the proxy forwards the submission to multiple CCS's that run in
+where the proxy forwards the submission to multiple CCSs that run in
 parallel (like the shadowing setup at the ICPC World Finals).
 
 In such a scenario, the proxy server would timestamp the submissions
@@ -842,7 +842,6 @@ Request:
 
 ### Modifying commentary
 
-
 To add a commentary message, clients can use the `POST` method on the commentary endpoint.
 The following [capability](#capabilities) is required to add commentary,
 with description below:
@@ -854,7 +853,7 @@ with description below:
 All requests must include a valid JSON object with the same properties as the commentary
 endpoint returns from a `GET` request with the following exceptions:
 
-- `id`, `time`, `contest\_time`, and `source\_id` must not be provided, and will be set by the server.
+- `id`, `time`, `contest_time`, and `source_id` must not be provided, and will be set by the server.
 
 The request must fail with a 4xx error code if any of the following happens:
 
@@ -1040,10 +1039,11 @@ Properties of webhook callback objects:
 
 | Name         | Type            | Description
 | :----------- | :-------------- | :----------
-| id           | ID              | identifier of the webhook.
+| id           | ID              | Identifier of the webhook.
 | url          | string          | The URL to post HTTP callbacks to.
 | endpoints    | array of string | Names of endpoints to receive callbacks for. Empty array means all endpoints.
-| contest\_ids | array of ID     | ID's of contests to receive callbacks for. Empty array means all configured contests.
+| contest\_ids | array of ID     | IDs of contests to receive callbacks for. Empty array means all configured contests.
+| active       | boolean         | Whether the webhook is currently active. Inactive webhooks do not receive callbacks.
 
 A webhook allows you to receive HTTP callbacks whenever there is a
 change to the contest. Clients are only notified of changes after
@@ -1069,7 +1069,7 @@ If the client fails to respond to multiple requests over a period of
 time (configured for each contest), it will be assumed deactivated and
 automatically removed from future callbacks.
 
-##### Adding a webhook
+#### Adding a webhook
 
 To register a webhook, you need to post your server's callback URL. To
 do so, perform a `POST` request with a JSON body with the properties (except
@@ -1079,7 +1079,7 @@ token that can be used to verify that callbacks come from the CCS. If
 you don't supply `contest_ids` and/or `endpoints`, they will default to
 `[]`.
 
-##### Examples
+#### Examples
 
 Request:
 
