@@ -201,21 +201,6 @@ Depending on the client account's access, the API provider may completely
 hide some objects from the client, may omit certain properties, or may embargo or
 omit objects based on the current state of the contest.
 
-## Extensibility
-
-This specification is meant to cover the basic data of contests, with
-the idea that server/client implementations can extend this with more
-endpoints, properties, and/or capabilities. The following requirements
-are meant to ease extensibility:
-
-- Clients should accept additional (unknown) event types in notifications.
-- Clients should accept additional (unknown) properties in endpoints.
-- Clients should accept additional (unknown) capabilities.
-- Servers should not expect clients to recognize more than the basic, required
-  specification.
-- In this specification and extensions, a property with value `null` may be left
-  out by the server (i.e. not be present). A client must treat a property with
-  value `null` equivalently as that property not being present.
 
 ### File references
 
@@ -270,80 +255,21 @@ Furthermore, the ID property (see [JSON Format](json_format#json-property-types)
 of objects are not allowed to change. However, note that a particular ID might be
 reused by first deleting an object and then creating a new object with the same ID.
 
-### Capabilities
+### Extensibility
 
-The API specifies several
-capabilities that define behaviors that clients can expect and
-actions they can perform. For instance, a team account will typically
-have access to a "team\_submit" capability that allows a team to perform
-POST operations on the submissions endpoint, but doesn't allow it to
-set the submission id or timestamp; an administrator may have access
-to a "contest\_start" capability that allows it to PATCH the start
-time of the contest. These coarse-grained capabilities allow more
-flexibility for contest administrators and tools to define capabilities
-that match the requirements of a specific contest, e.g. whether teams
-can submit clarifications or not.
+This specification is meant to cover the basic data of contests, with
+the idea that server/client implementations can extend this with more
+endpoints, properties, and/or capabilities. The following requirements
+are meant to ease extensibility:
 
-All capabilities are listed in the table below, and are defined
-inline with each endpoint. Clients can use
-the [Access](#access) endpoint to see which capabilities they have
-access to.
-
-| Capability                                 | Description
-| :----------------------------------------- | :----------
-| [contest\_start](#modifying-contests)      | Control the contest's start time
-| [contest\_thaw](#modifying-contests)       | Control the contest's thaw time
-| [team\_submit](#modifying-submissions)     | Submit as a team
-| [post\_clar](#modifying-clarifications)    | Submit clarifications
-| [post\_comment](#modifying-commentary)     | Submit commentary
-| [proxy\_submit](#modifying-submissions)    | Submit as a shared team proxy
-| [proxy\_clar](#modifying-clarifications)   | Submit clarifications as a shared team proxy
-| [admin\_submit](#modifying-submissions)    | Submit as an admin
-| [admin\_clar](#modifying-clarifications)   | Submit clarifications as an admin
-
-*Warning*: these capabilities are not well tested yet in practice and
-might change in a backwards-incompatible way in next versions of this
-specification.
-
-### Notification format
-
-There are two mechanisms that clients can use to receive notifications
-of API updates (events): a webhook and a streaming HTTP feed. Both
-mechanisms use the same payload format, but have different benefits,
-drawbacks, and ways to access. Webhooks are typically better for
-internet-scale, asynchronous processing, and disconnected systems; the
-HTTP feed, on the other hand, might be better for browser-based
-applications and onsite contests.
-
-The notifications are effectively a changelog of create, update, or
-delete events that have occurred in the REST endpoints. Some endpoints
-(specifically the [Scoreboard](#scoreboard) and the Event feed)
-are aggregated data, and so these will only ever update due to some
-other REST endpoint updating. For this reason there is no explicit event
-for these, since there will always be another event sent.
-
-Each notification is a [notification object](json_format#notification-object)
-as defined in JSON Format. The correspondence between notification types
-and API endpoints is:
-
-| Type            | API Endpoint                                                        | JSON object
-| :-------------- | :------------------------------------------------------------------ | :----------
-| contest         | [`contests/<id>`](#contests)                                        | [Contest](json_format#contests)
-| judgement-types | [`contests/<id>/judgement-types/<id>`](#judgement-types)            | [Judgement Type](json_format#judgement-types)
-| languages       | [`contests/<id>/languages/<id>`](#languages)                        | [Language](json_format#languages)
-| problems        | [`contests/<id>/problems/<id>`](#problems)                          | [Problem](json_format#problems)
-| groups          | [`contests/<id>/groups/<id>`](#groups)                              | [Group](json_format#groups)
-| organizations   | [`contests/<id>/organizations/<id>`](#organizations)                | [Organization](json_format#organizations)
-| teams           | [`contests/<id>/teams/<id>`](#teams)                                | [Team](json_format#teams)
-| persons         | [`contests/<id>/persons/<id>`](#persons)                            | [Person](json_format#persons)
-| accounts        | [`contests/<id>/accounts/<id>`](#accounts)                          | [Account](json_format#accounts)
-| state           | [`contests/<id>/state`](#contest-state)                             | [Contest state](json_format#contest-state)
-| submissions     | [`contests/<id>/submissions/<id>`](#submissions)                    | [Submission](json_format#submissions)
-| judgements      | [`contests/<id>/judgements/<id>`](#judgements)                      | [Judgement](json_format#judgements)
-| runs            | [`contests/<id>/runs/<id>`](#runs)                                  | [Run](json_format#runs)
-| clarifications  | [`contests/<id>/clarifications/<id>`](#clarifications)              | [Clarification](json_format#clarifications)
-| awards          | [`contests/<id>/awards/<id>`](#awards)                              | [Award](json_format#awards)
-| commentary      | [`contests/<id>/commentary/<id>`](#commentary)                      | [Commentary](json_format#commentary)
+- Clients should accept additional (unknown) event types in notifications.
+- Clients should accept additional (unknown) properties in endpoints.
+- Clients should accept additional (unknown) capabilities.
+- Servers should not expect clients to recognize more than the basic, required
+  specification.
+- In this specification and extensions, a property with value `null` may be left
+  out by the server (i.e. not be present). A client must treat a property with
+  value `null` equivalently as that property not being present.
 
 ## Interface specification
 
@@ -356,10 +282,10 @@ are mentioned below.
 The endpoints can be categorized into 4 types as follows:
 
 - Metadata: [api](#api-information), [access](#access)
-- Configuration: [accounts](#accounts), [contests](#contests), [judgement-types](#judgement-types), [languages](#languages), [problems](#problems),
-  [groups](#groups), [organizations](#organizations), [persons](#persons), [teams](#teams);
-- Live data: [state](#contest-state), [submissions](#submissions), [judgements](#judgements), [runs](#runs), [clarifications](#clarifications), [awards](#awards),
-  [commentary](#commentary);
+- Configuration: accounts, contests, judgement-types, languages, problems,
+  groups, organizations, persons, teams;
+- Live data: state, submissions, judgements, runs, clarifications, awards,
+  commentary;
 - Aggregate data: [scoreboard](#scoreboard), [event-feed](#event-feed).
 
 The metadata endpoints contain data about the API, and are the only required API
@@ -403,28 +329,15 @@ are supported by a given provider.
 
 In practice there are different types of providers that will offer
 similar sets of endpoints. Some examples:
- - A contest management system will support at least [contests](#contests) and
-   [teams](#teams), and may support other configuration endpoints.
- - A CCS will support at least [submissions](#submissions), [judgements](#judgements), and
+ - A contest management system will support at least contests and
+   teams, and may support other configuration endpoints.
+ - A CCS will support at least submissions, judgements, and
    dependencies of these. It will likely support a [scoreboard](#scoreboard), and
    usually an [event-feed](#event-feed).
 
 Separate specifications (for example, the CCS System Requirements)
 will provide more information on which endpoints and properties
 can be expected, often in the form of a minimal `access` response.
-
-### Table column description
-
-In the tables below, the columns are as described in
-[JSON Format](json_format#table-column-description).
-
-Note that all results returned from endpoints:
-
-- Must only have `null` values if the type of the property is `<type> ?`.
-- Must contain all properties specified in the [Access](#access) endpoint that
-  have non-`null` values.
-- Should not contain any properties not specified in the [Access](#access)
-  endpoint.
 
 ### Filtering
 
@@ -439,51 +352,54 @@ meaning that all conditions must be met (they are logically `AND`ed).
 Note that filtering on any other property, including property with the type
 array of ID, does not have to be supported.
 
-### API information
+### Endpoints
 
-Provides information about the API and the data provider.
+All endpoints return `application/json` and support `GET`. Collection endpoints
+(without a trailing `/<id>`) return a JSON array; single-object endpoints
+return a single JSON object. Properties returned are as specified by
+[access](#access). Some endpoints additionally support write methods; these are
+documented in dedicated sections below.
 
-The following endpoint is associated with API information:
-
-| Endpoint | Mime-type        | Description
-| :------- | :--------------- | :----------
-| `.`      | application/json | [API information object](json_format#api-information).
+| Endpoint                                 | JSON object                                                            | Notes
+| :--------------------------------------- | :--------------------------------------------------------------------- | :-----
+| `.`                                      | [API information](json_format#api-information)                         |
+| `contests/<id>/access`                   | [Access](#access)                                                      | API only; not in [Contest Package](contest_package)
+| `contests[/<id>]`                        | [Contest](json_format#contests)                                        | [Modifying contests](#modifying-contests) — PATCH
+| `contests/<id>/judgement-types[/<id>]`   | [Judgement Type](json_format#judgement-types)                          |
+| `contests/<id>/languages[/<id>]`         | [Language](json_format#languages)                                      |
+| `contests/<id>/problems[/<id>]`          | [Problem](json_format#problems)                                        |
+| `contests/<id>/groups[/<id>]`            | [Group](json_format#groups)                                            |
+| `contests/<id>/organizations[/<id>]`     | [Organization](json_format#organizations)                              |
+| `contests/<id>/teams[/<id>]`             | [Team](json_format#teams)                                              |
+| `contests/<id>/persons[/<id>]`           | [Person](json_format#persons)                                          |
+| `contests/<id>/accounts[/<id>]`          | [Account](json_format#accounts)                                        |
+| `contests/<id>/account`                  | [Account](json_format#accounts)                                        | API only; not in [Contest Package](contest_package)
+| `contests/<id>/state`                    | [Contest state](json_format#contest-state)                             |
+| `contests/<id>/submissions[/<id>]`       | [Submission](json_format#submissions)                                  | [Modifying submissions](#modifying-submissions) — POST/PUT
+| `contests/<id>/judgements[/<id>]`        | [Judgement](json_format#judgements)                                    |
+| `contests/<id>/runs[/<id>]`              | [Run](json_format#runs)                                                |
+| `contests/<id>/clarifications[/<id>]`    | [Clarification](json_format#clarifications)                            | [Modifying clarifications](#modifying-clarifications) — POST/PUT
+| `contests/<id>/awards[/<id>]`            | [Award](json_format#awards)                                            | [Modifying awards](#modifying-awards) — POST/PUT/PATCH/DELETE
+| `contests/<id>/commentary[/<id>]`        | [Commentary](json_format#commentary)                                   | [Modifying commentary](#modifying-commentary) — POST
+| `contests/<id>/scoreboard`               | [Scoreboard](json_format#scoreboard)                                   | See [Scoreboard](#scoreboard)
+| `contests/<id>/event-feed`               | [Notification object](json_format#notification-object)                 | See [Notifications](#notifications), [Event feed](#event-feed)
+| `webhooks[/<id>]`                        |                                                                        | See [Notifications](#notifications), [Webhooks](#webhooks)
 
 ### Access
 
-Information on which endpoints and properties are visible to the current client, and what [capabilities](#capabilities)
-this client has access to or can perform.
-
-The following endpoint is associated with access:
-
-| Endpoint                | Mime-type        | Description
-| :---------------------- | :--------------- | :----------
-| `contests/<id>/access`  | application/json | JSON object representing the current client's access with all properties defined in the table below.
-
-Properties of access objects:
-
-| Name         | Type                      | Description
-| :----------- | :------------------------ | :----------
-| capabilities | array of string           | An array of [capabilities](#capabilities) that the current client has. The array may be empty.
-| endpoints    | array of endpoint objects | An array of endpoint objects that are visible to the current client, as described below. The array may be empty.
-
-Properties of endpoint objects:
-
-| Name         | Type            | Description
-| :----------- | :-------------- | :----------
-| type         | string          | The type of the endpoint, e.g. "problems". See [JSON Format](json_format#notification-object) for the list of types.
-| properties   | array of string | An array of supported properties that the current client has visibility to. The array must not be empty. If the array would be empty, the endpoint object should instead not be included in the endpoints array.
+See [JSON Format](json_format#access) for object properties and examples.
 
 This endpoint provides information about what is accessible to a specific
-client in a live contest, and hence will not exist in a contest package.
+client in a live contest, and hence the corresponding file does not appear
+in a Contest Package.
 
-The set of properties listed must always support 
-[referential integrity](#referential-integrity), i.e. if a property with a ID 
-value referring to some type of object is present the endpoint representing
-that type of object (and its ID property) must also be present. E.g. if 
-`group_ids` is listed among the properties in the `team` endpoint object, that
-means that there must be an endpoint object with type `groups` containing at 
-least `ID` in its properties.
+The set of properties listed must always support
+[referential integrity](json_format#referential-integrity), i.e. if a property
+with an ID value referring to some type of object is present, the endpoint
+representing that type of object (and its `id` property) must also be present.
+E.g. if `group_ids` is listed among the properties in the `team` endpoint
+object, that means that there must be an endpoint object with type `groups`
+containing at least `id` in its properties.
 
 This information is provided so that clients know what endpoints are available,
 what notifications may happen, and what capabilities they have, regardless
@@ -494,51 +410,38 @@ see any problems nor submit yet.
 Clients are not expected to call this endpoint more than once
 since the response should not normally change during a contest.
 
-#### Examples
+#### Capabilities
 
-Request:
+The API specifies several capabilities that define behaviors that clients can
+expect and actions they can perform. For instance, a team account will typically
+have access to a `team_submit` capability that allows a team to perform
+POST operations on the submissions endpoint, but doesn't allow it to
+set the submission id or timestamp; an administrator may have access
+to a `contest_start` capability that allows it to PATCH the start
+time of the contest. These coarse-grained capabilities allow more
+flexibility for contest administrators and tools to define capabilities
+that match the requirements of a specific contest, e.g. whether teams
+can submit clarifications or not.
 
-`GET https://example.com/api/contests/wf14/access`
+All capabilities are listed in the table below.
 
-Returned data:
+| Capability                                 | Description
+| :----------------------------------------- | :----------
+| [contest\_start](#modifying-contests)      | Control the contest's start time
+| [contest\_thaw](#modifying-contests)       | Control the contest's thaw time
+| [team\_submit](#modifying-submissions)     | Submit as a team
+| [post\_clar](#modifying-clarifications)    | Submit clarifications
+| [post\_comment](#modifying-commentary)     | Submit commentary
+| [proxy\_submit](#modifying-submissions)    | Submit as a shared team proxy
+| [proxy\_clar](#modifying-clarifications)   | Submit clarifications as a shared team proxy
+| [admin\_submit](#modifying-submissions)    | Submit as an admin
+| [admin\_clar](#modifying-clarifications)   | Submit clarifications as an admin
 
-```json
-{
-   "capabilities": ["contest_start"],
-   "endpoints": [
-     { "type": "contest", "properties": ["id","name","formal_name",...]},
-     { "type": "problems", "properties": ["id","label",...]},
-     { "type": "submissions", "properties": ["id","language_id","reaction",...]}
-     ...
-   ]
-}
-```
+*Warning*: these capabilities are not well tested yet in practice and
+might change in a backwards-incompatible way in next versions of this
+specification.
 
-or:
-
-```json
-{
-   "capabilities": ["team_submit"],
-   "endpoints": [
-     { "type": "contest", "properties": ["id","name","formal_name",...]},
-     { "type": "problems", "properties": ["id","label",...]},
-     { "type": "submissions", "properties": ["id","language_id",...]},
-     ...
-   ]
-}
-```
-
-### Contests
-
-Provides information on the current contest.
-The following endpoints are associated with contest:
-
-| Endpoint        | Mime-type        | Description
-| :-------------- | :--------------- | :----------
-| `contests`      | application/json | JSON array of [contest objects](json_format#contests) with properties as specified by [access](#access).
-| `contests/<id>` | application/json | A [contest object](json_format#contests) with properties as specified by [access](#access).
-
-#### Modifying contests
+### Modifying contests
 
 Clients with the `contest_start` [capability](#capabilities) have the ability to
 set or clear the contest start time via a PATCH method.
@@ -610,99 +513,7 @@ Request data:
 }
 ```
 
-### Judgement Types
-
-The following endpoints are associated with judgement types:
-
-| Endpoint                             | Mime-type        | Description
-| :----------------------------------- | :--------------- | :----------
-| `contests/<id>/judgement-types`      | application/json | JSON array of [judgement type objects](json_format#judgement-types) with properties as specified by [access](#access).
-| `contests/<id>/judgement-types/<id>` | application/json | A [judgement type object](json_format#judgement-types) with properties as specified by [access](#access).
-
-### Languages
-
-The following endpoints are associated with languages:
-
-| Endpoint                       | Mime-type        | Description
-| :----------------------------- | :--------------- | :----------
-| `contests/<id>/languages`      | application/json | JSON array of [language objects](json_format#languages) with properties as specified by [access](#access).
-| `contests/<id>/languages/<id>` | application/json | A [language object](json_format#languages) with properties as specified by [access](#access).
-
-### Problems
-
-The following endpoints are associated with problems:
-
-| Endpoint                      | Mime-type        | Description
-| :---------------------------- | :--------------- | :----------
-| `contests/<id>/problems`      | application/json | JSON array of [problem objects](json_format#problems) with properties as specified by [access](#access).
-| `contests/<id>/problems/<id>` | application/json | A [problem object](json_format#problems) with properties as specified by [access](#access).
-
-### Groups
-
-The following endpoints are associated with groups:
-
-| Endpoint                    | Mime-type        | Description
-| :-------------------------- | :--------------- | :----------
-| `contests/<id>/groups`      | application/json | JSON array of [group objects](json_format#groups) with properties as specified by [access](#access).
-| `contests/<id>/groups/<id>` | application/json | A [group object](json_format#groups) with properties as specified by [access](#access).
-
-### Organizations
-
-The following endpoints are associated with organizations:
-
-| Endpoint                           | Type             | Description
-| :--------------------------------- | :--------------- | :----------
-| `contests/<id>/organizations`      | application/json | JSON array of [organization objects](json_format#organizations) with properties as specified by [access](#access).
-| `contests/<id>/organizations/<id>` | application/json | An [organization object](json_format#organizations) with properties as specified by [access](#access).
-
-### Teams
-
-The following endpoints are associated with teams:
-
-| Endpoint                    | Mime-type        | Description
-| :-------------------------- | :--------------- | :----------
-| `contests/<id>/teams`       | application/json | JSON array of [team objects](json_format#teams) with properties as specified by [access](#access).
-| `contests/<id>/teams/<id>`  | application/json | A [team object](json_format#teams) with properties as specified by [access](#access).
-
-### Persons
-
-The following endpoints are associated with persons:
-
-| Endpoint                     | Mime-type        | Description
-| :--------------------------- | :--------------- | :----------
-| `contests/<id>/persons`      | application/json | JSON array of [person objects](json_format#persons) with properties as specified by [access](#access).
-| `contests/<id>/persons/<id>` | application/json | A [person object](json_format#persons) with properties as specified by [access](#access).
-
-### Accounts
-
-The following endpoints are associated with accounts:
-
-| Endpoint                      | Mime-type        | Description
-| :---------------------------- | :--------------- | :----------
-| `contests/<id>/accounts`      | application/json | JSON array of [account objects](json_format#accounts) with properties as specified by [access](#access).
-| `contests/<id>/accounts/<id>` | application/json | An [account object](json_format#accounts) with properties as specified by [access](#access).
-| `contests/<id>/account`       | application/json | The [account object](json_format#accounts) of the client making the request, with properties as specified by [access](#access) for the account used.
-
-The account endpoint exists so that the clients can tell which account (and hence which person or team) they are logged in as. The corresponding JSON file does not appear in a Contest Package, and the endpoint will fail with a 404 error code if the client is not authenticated.
-
-### Contest state
-
-The following endpoints are associated with state:
-
-| Endpoint              | Type             | Description
-| :-------------------- | :--------------- | :----------
-| `contests/<id>/state` | application/json | The [contest state object](json_format#contest-state) with properties as specified by [access](#access).
-
-### Submissions
-
-The following endpoints are associated with submissions:
-
-| Endpoint                         | Type             | Description
-| :------------------------------- | :--------------- | :----------
-| `contests/<id>/submissions`      | application/json | JSON array of [submission objects](json_format#submissions) with properties as specified by [access](#access).
-| `contests/<id>/submissions/<id>` | application/json | A [submission object](json_format#submissions) with properties as specified by [access](#access).
-
-#### Modifying submissions
+### Modifying submissions
 
 To add a submission, clients can use the `POST` method on the submissions endpoint or the
 `PUT` method directly on an object url. One of the following [capabilities](#capabilities)
@@ -858,34 +669,7 @@ Returned data:
 }
 ```
 
-### Judgements
-
-The following endpoints are associated with judgements:
-
-| Endpoint                        | Mime-type        | Description
-| :------------------------------ | :--------------- | :----------
-| `contests/<id>/judgements`      | application/json | JSON array of [judgement objects](json_format#judgements) with properties as specified by [access](#access).
-| `contests/<id>/judgements/<id>` | application/json | A [judgement object](json_format#judgements) with properties as specified by [access](#access).
-
-### Runs
-
-The following endpoints are associated with runs:
-
-| Endpoint                  | Mime-type        | Description
-| :------------------------ | :--------------- | :----------
-| `contests/<id>/runs`      | application/json | JSON array of [run objects](json_format#runs) with properties as specified by [access](#access).
-| `contests/<id>/runs/<id>` | application/json | A [run object](json_format#runs) with properties as specified by [access](#access).
-
-### Clarifications
-
-The following endpoints are associated with clarification messages:
-
-| Endpoint                            | Mime-type        | Description
-| :---------------------------------- | :--------------- | :----------
-| `contests/<id>/clarifications`      | application/json | JSON array of [clarification objects](json_format#clarifications) with properties as specified by [access](#access).
-| `contests/<id>/clarifications/<id>` | application/json | A [clarification object](json_format#clarifications) with properties as specified by [access](#access).
-
-#### Modifying clarifications
+### Modifying clarifications
 
 To add a clarification, clients can use the `POST` method on the clarifications endpoint or the
 `PUT` method directly on an object url. One of the following [capabilities](#capabilities)
@@ -961,16 +745,7 @@ Returned data:
 }
 ```
 
-### Awards
-
-The following endpoints are associated with awards:
-
-| Endpoint                    | Mime-type        | Description
-| :-------------------------- | :--------------- | :----------
-| `contests/<id>/awards`      | application/json | JSON array of [award objects](json_format#awards) with properties as specified by [access](#access).
-| `contests/<id>/awards/<id>` | application/json | An [award object](json_format#awards) with properties as specified by [access](#access).
-
-#### POST, PUT, PATCH, and DELETE awards
+### Modifying awards
 
 Clients with the `admin` role may make changes to awards using the
 normal [HTTP methods](#http-methods) as specified above. Specifically,
@@ -1065,16 +840,8 @@ Request:
 
 ` DELETE https://example.com/api/contests/wf14/awards/best-costume`
 
-### Commentary
+### Modifying commentary
 
-The following endpoints are associated with commentary:
-
-| Endpoint                        | Mime-type        | Description
-| :------------------------------ | :--------------- | :----------
-| `contests/<id>/commentary`      | application/json | JSON array of [commentary objects](json_format#commentary) with properties as specified by [access](#access).
-| `contests/<id>/commentary/<id>` | application/json | A [commentary object](json_format#commentary) with properties as specified by [access](#access).
-
-#### Modifying commentary 
 
 To add a commentary message, clients can use the `POST` method on the commentary endpoint.
 The following [capability](#capabilities) is required to add commentary,
@@ -1102,15 +869,8 @@ Performing a `POST` is not supported when this capability is not available.
 
 ### Scoreboard
 
-Scoreboard of the contest.
 Since this is generated data, only the `GET` method is allowed here,
 irrespective of role.
-
-The following endpoint is associated with the scoreboard:
-
-| Endpoint                   | Mime-type        | Description
-| :------------------------- | :--------------- | :----------
-| `contests/<id>/scoreboard` | application/json | [Scoreboard object](json_format#scoreboard).
 
 The scoreboard includes all teams indicated by `main_scoreboard_group_id` in the `contest` endpoint.
 
@@ -1131,16 +891,48 @@ A 4xx error code will be returned if the group id is not valid. Groups
 that are not included in the groups endpoint for the role making the
 request are not valid.
 
+### Notifications
+
+There are two mechanisms that clients can use to receive notifications
+of API updates (events): a webhook and a streaming HTTP feed. Both
+mechanisms use the same payload format, but have different benefits,
+drawbacks, and ways to access. Webhooks are typically better for
+internet-scale, asynchronous processing, and disconnected systems; the
+HTTP feed, on the other hand, might be better for browser-based
+applications and onsite contests.
+
+The notifications are effectively a changelog of create, update, or
+delete events that have occurred in the REST endpoints. Some endpoints
+(specifically the [Scoreboard](#scoreboard) and the Event feed)
+are aggregated data, and so these will only ever update due to some
+other REST endpoint updating. For this reason there is no explicit event
+for these, since there will always be another event sent.
+
+Each notification is a [notification object](json_format#notification-object)
+as defined in JSON Format. The correspondence between notification types
+and API endpoints is:
+
+| Type            | API Endpoint                                     | JSON object
+| :-------------- | :----------------------------------------------- | :----------
+| contest         | `contests/<id>`                                  | [Contest](json_format#contests)
+| judgement-types | `contests/<id>/judgement-types/<id>`             | [Judgement Type](json_format#judgement-types)
+| languages       | `contests/<id>/languages/<id>`                   | [Language](json_format#languages)
+| problems        | `contests/<id>/problems/<id>`                    | [Problem](json_format#problems)
+| groups          | `contests/<id>/groups/<id>`                      | [Group](json_format#groups)
+| organizations   | `contests/<id>/organizations/<id>`               | [Organization](json_format#organizations)
+| teams           | `contests/<id>/teams/<id>`                       | [Team](json_format#teams)
+| persons         | `contests/<id>/persons/<id>`                     | [Person](json_format#persons)
+| accounts        | `contests/<id>/accounts/<id>`                    | [Account](json_format#accounts)
+| state           | `contests/<id>/state`                            | [Contest state](json_format#contest-state)
+| submissions     | `contests/<id>/submissions/<id>`                 | [Submission](json_format#submissions)
+| judgements      | `contests/<id>/judgements/<id>`                  | [Judgement](json_format#judgements)
+| runs            | `contests/<id>/runs/<id>`                        | [Run](json_format#runs)
+| clarifications  | `contests/<id>/clarifications/<id>`              | [Clarification](json_format#clarifications)
+| awards          | `contests/<id>/awards/<id>`                      | [Award](json_format#awards)
+| commentary      | `contests/<id>/commentary/<id>`                  | [Commentary](json_format#commentary)
+
+
 ### Event feed
-
-Change [notifications](json_format#notification-object) (events) of the data
-presented by the API.
-
-The following endpoint is associated with the event feed:
-
-| Endpoint                   | Mime-type            | Description
-| :------------------------- | :------------------- | :----------
-| `contests/<id>/event-feed` | application/x-ndjson | NDJSON feed of [notification objects](json_format#notification-object).
 
 The event feed is a streaming HTTP endpoint that allows connected
 clients to receive change notifications. The feed is a complete log of
@@ -1241,15 +1033,8 @@ The following are examples of contest events:
 
 ### Webhooks
 
-Webhooks receiving change [notifications](json_format#notification-object) (events)
+Webhooks receive change [notifications](json_format#notification-object) (events)
 of the data presented by the API.
-
-The following endpoints are associated with webhooks:
-
-| Endpoint        | Mime-type        | Description
-| --------------- | ---------------- | :----------
-| `webhooks`      | application/json | JSON array of all webhook callbacks with properties as defined in the table below. Also used to register new webhooks.
-| `webhooks/<id>` | application/json | JSON object representing a single webhook callback with properties as defined in the table below.
 
 Properties of webhook callback objects:
 
