@@ -788,6 +788,55 @@ expected that non-admin clients never see passwords, and typically do not see ac
 {"id":"nicky","username":"nicky","type":"admin"}
 ```
 
+### Access
+
+The access object describes which endpoints and properties are visible to the
+current client, and what [capabilities](contest_api#capabilities) the client
+has. It is only available via the Contest API; the corresponding file does not
+appear in a [Contest Package](contest_package).
+
+Properties of access objects:
+
+| Name         | Type                      | Description
+| :----------- | :------------------------ | :----------
+| capabilities | array of string           | An array of [capabilities](contest_api#capabilities) that the current client has. The array may be empty.
+| endpoints    | array of endpoint objects | An array of endpoint objects that are visible to the current client, as described below. The array may be empty.
+
+Properties of endpoint objects:
+
+| Name         | Type            | Description
+| :----------- | :-------------- | :----------
+| type         | string          | The type of the endpoint, e.g. "problems". See [Notification object](#notification-object) for the list of types.
+| properties   | array of string | An array of supported properties that the current client has visibility to. The array must not be empty. If the array would be empty, the endpoint object should instead not be included in the endpoints array.
+
+#### Examples
+
+```json
+{
+   "capabilities": ["contest_start"],
+   "endpoints": [
+     { "type": "contest", "properties": ["id","name","formal_name",...]},
+     { "type": "problems", "properties": ["id","label",...]},
+     { "type": "submissions", "properties": ["id","language_id","reaction",...]}
+     ...
+   ]
+}
+```
+
+or:
+
+```json
+{
+   "capabilities": ["team_submit"],
+   "endpoints": [
+     { "type": "contest", "properties": ["id","name","formal_name",...]},
+     { "type": "problems", "properties": ["id","label",...]},
+     { "type": "submissions", "properties": ["id","language_id",...]},
+     ...
+   ]
+}
+```
+
 ### Contest state
 
 Current state of the contest, specifying whether it's running, the
