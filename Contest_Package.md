@@ -242,10 +242,10 @@ Required files:
 - [api](json_format#api-information) (`api.json`)
 - [teams](json_format#teams) (`teams.json`)
 - [scoreboard](json_format#scoreboard) (`scoreboard.json`)
-- [event-feed](json_format#notification-object) (`event-feed.ndjson`)
 
 Optional files:
 - [awards](json_format#awards) (`awards.json`)
+- [event-feed](json_format#notification-object) (`event-feed.ndjson`)
 
 #### Example file listing
 
