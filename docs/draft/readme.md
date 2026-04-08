@@ -10,10 +10,12 @@ context as well.
 The following specifications are present:
 
 - Contest Control System requirements for the ICPC World Finals
+- JSON Format: the shared data model defining the JSON objects used
+  across these specifications.
 - Contest API: an API specification for accessing information provided by a
   CCS.
-- Contest Archive Format: a format closely related to the Contest API for
-  storing a contest on disk for archival.
+- Contest Package Format: a format closely related to the Contest API for
+  storing a contest on disk.
 
 Furthermore, a tool and JSON schema specifications are available to
 validate an implementation of the Contest API. Run `check-api.sh -h`
@@ -26,7 +28,11 @@ This is the draft of some future version of the CCS specification.
 
 ## Changes compared to the `2026-01` version
 
-*Nothing yet*
+- Extracted a new [JSON Format](json_format) specification containing
+  the shared data model (JSON property types, object definitions, and
+  notification object format) previously embedded in the [Contest API](contest_api). 
+  The Contest API and Contest Package Format now reference this document for
+  all shared object definitions.
 
 ## References
 
