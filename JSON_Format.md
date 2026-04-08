@@ -402,59 +402,11 @@ Properties of a judgement type object:
 
 | Name                            | Type      | Description
 | :------------------------------ | :-------- | :----------
-| id                              | ID        | Identifier of the judgement type, a 2-3 letter capitalized shorthand, see table below.
+| id                              | ID        | Identifier of the judgement type, a 2-3 letter capitalized shorthand, see list of [allowed values](reference_data#judgement-types).
 | name                            | string    | Name of the judgement. (might not match table below, e.g. if localized).
 | penalty                         | boolean   | Whether this judgement causes penalty time. Required iff contest:penalty\_time is present.
 | solved                          | boolean   | Whether this judgement is considered correct.
 | simplified\_judgement\_type\_id | ID ?      | Identifier of this type's simplified judgement type.
-
-#### Known judgement types
-
-The list below contains standardized identifiers for known judgement types.
-These identifiers should be used by a server. Please create a pull request at
-<https://github.com/icpc/ccs-specs> when there are judgement types missing.
-
-The column **Big 5** lists the "big 5" equivalents, if any. A `*` in
-the column means that the judgement is one of the "big 5".
-
-The **Translation** column lists other judgements the judgement can
-safely be translated to, if a system does not support it.
-
-| ID  | Name                                     | A.k.a.                                                   | Big 5 | Translation       | Description
-| :-- | :--------------------------------------- | :------------------------------------------------------- | :---- | :---------------- | :----------
-| AC  | Accepted                                 | Correct, Yes (YES)                                       | \*    | \-                | Solves the problem
-| RE  | Rejected                                 | Incorrect, No (NO)                                       | WA?   | \-                | Does not solve the problem
-| WA  | Wrong Answer                             |                                                          | \*    | RE                | Output is not correct
-| TLE | Time Limit Exceeded                      |                                                          | \*    | RE                | Too slow
-| RTE | Run-Time Error                           |                                                          | \*    | RE                | Crashes
-| CE  | Compile Error                            |                                                          | \*    | RE                | Does not compile
-| APE | Accepted - Presentation Error            | Presentation Error, also see AC, PE, and IOF             | AC    | AC                | Solves the problem, although formatting is wrong
-| OLE | Output Limit Exceeded                    |                                                          | WA    | WA, RE            | Output is larger than allowed
-| PE  | Presentation Error                       | Output Format Error (OFE), Incorrect Output Format (IOF) | WA    | WA, RE            | Data in output is correct, but formatting is wrong
-| EO  | Excessive Output                         |                                                          | WA    | WA, RE            | A correct output is produced, but also additional output
-| IO  | Incomplete Output                        |                                                          | WA    | WA, RE            | Parts, but not all, of a correct output is produced
-| NO  | No Output                                |                                                          | WA    | IO, WA, RE        | There is no output
-| WTL | Wallclock Time Limit Exceeded            |                                                          | TLE   | TLE, RE           | CPU time limit is not exceeded, but wallclock is
-| ILE | Idleness Limit Exceeded                  |                                                          | TLE   | WTL, TLE, RE      | No CPU time used for too long
-| TCO | Time Limit Exceeded - Correct Output     |                                                          | TLE   | TLE, RE           | Too slow but producing correct output
-| TWA | Time Limit Exceeded - Wrong Answer       |                                                          | TLE   | TLE, RE           | Too slow and also incorrect output
-| TPE | Time Limit Exceeded - Presentation Error |                                                          | TLE   | TWA, TLE, RE      | Too slow and also presentation error
-| TEO | Time Limit Exceeded - Excessive Output   |                                                          | TLE   | TWA, TLE, RE      | Too slow and also excessive output
-| TIO | Time Limit Exceeded - Incomplete Output  |                                                          | TLE   | TWA, TLE, RE      | Too slow and also incomplete output
-| TNO | Time Limit Exceeded - No Output          |                                                          | TLE   | TIO, TWA, TLE, RE | Too slow and also no output
-| MLE | Memory Limit Exceeded                    |                                                          | RTE   | RTE, RE           | Uses too much memory
-| SV  | Security Violation                       |                                                          | RTE   | IF, RTE, RE       | Uses some functionality that is not allowed by the system
-| IF  | Illegal Function                         | Restricted Function                                      | RTE   | SV, RTE, RE       | Calls a function that is not allowed by the system
-| RCO | Run-Time Error - Correct Output          |                                                          | RTE   | RTE, RE           | Crashing but producing correct output
-| RWA | Run-Time Error - Wrong Answer            |                                                          | RTE   | RTE, RE           | Crashing and also incorrect output
-| RPE | Run-Time Error - Presentation Error      |                                                          | RTE   | RWA, RTE, RE      | Crashing and also presentation error
-| REO | Run-Time Error - Excessive Output        |                                                          | RTE   | RWA, RTE, RE      | Crashing and also excessive output
-| RIO | Run-Time Error - Incomplete Output       |                                                          | RTE   | RWA, RTE, RE      | Crashing and also incomplete output
-| RNO | Run-Time Error - No Output               |                                                          | RTE   | RIO, RWA, RTE, RE | Crashing and also no output
-| CTL | Compile Time Limit Exceeded              |                                                          | CE    | CE, RE            | Compilation took too long
-| JE  | Judging Error                            |                                                          | \-    | \-                | Something went wrong with the system
-| SE  | Submission Error                         |                                                          | \-    | \-                | Something went wrong with the submission
-| CS  | Contact Staff                            | Other                                                    | \-    | \-                | Something went wrong
 
 #### Simplified judgement types
 
@@ -534,7 +486,7 @@ Properties of a language object:
 
 | Name                   | Type             | Description
 | :--------------------- | :--------------- | :----------
-| id                     | ID               | Identifier of the language from table below.
+| id                     | ID               | Identifier of the language, see list of [allowed values](reference_data#languages).
 | name                   | string           | Name of the language (might not match table below, e.g. if localized).
 | entry\_point\_required | boolean          | Whether the language requires an entry point.
 | entry\_point\_name     | string ?         | The name of the type of entry point, such as "Main class" or "Main file". Required iff entry_point_required is `true`.
@@ -552,39 +504,6 @@ Properties of a Command object:
 | version\_command | string ? | Command to run to get the version. Defaults to `<command> --version`.
 
 The compiler and runner objects are intended for informational purposes. It is not expected that systems will synchronize compiler and runner settings via this interface.
-
-#### Known languages
-
-Below is a list of standardized identifiers for known languages with their
-name, extensions and entry point name (if any). When providing one of these
-languages, the corresponding identifier should be used. The language name
-and entry point name may be adapted e.g. for localization or to
-indicate a particular version of the language. In case multiple versions
-of a language are provided, those must have separate, unique
-identifiers. It is recommended to choose new identifiers with a suffix
-appended to an existing one. For example `cpp17` to specify the ISO 2017
-version of C++.
-
-| ID         | Name        | Extensions           | Entry point name
-| :--------- | :---------- | :------------------- | :---------------
-| ada        | Ada         | adb, ads             |
-| c          | C           | c                    |
-| cpp        | C++         | cc, cpp, cxx, c++, C |
-| csharp     | C\#         | cs                   |
-| go         | Go          | go                   |
-| haskell    | Haskell     | hs                   |
-| java       | Java        | java                 | Main class
-| javascript | JavaScript  | js                   | Main file
-| kotlin     | Kotlin      | kt                   | Main class
-| objectivec | Objective-C | m                    |
-| pascal     | Pascal      | pas                  |
-| php        | PHP         | php                  | Main file
-| prolog     | Prolog      | pl                   |
-| python2    | Python 2    | py                   | Main file
-| python3    | Python 3    | py                   | Main file
-| ruby       | Ruby        | rb                   |
-| rust       | Rust        | rs                   |
-| scala      | Scala       | scala                |
 
 #### Examples
 

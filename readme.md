@@ -16,6 +16,7 @@ The following specifications are present:
   CCS.
 - Contest Package Format: a format closely related to the Contest API for
   storing a contest on disk.
+- Reference Data: lists of shared known values.
 
 Furthermore, a tool and JSON schema specifications are available to
 validate an implementation of the Contest API. Run `check-api.sh -h`
@@ -37,6 +38,8 @@ This is the draft of some future version of the CCS specification.
   "Problems" to "Problem"), renamed "File" to "File reference" and
   "Notification object" to "Notification", and updated all cross-references
   accordingly.
+- Extracted a new [Reference Data](reference_data) document containing
+  lists of known values shared between these and other standards.
 
 ## References
 
