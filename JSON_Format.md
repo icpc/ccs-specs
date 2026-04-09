@@ -804,20 +804,31 @@ Properties of a person object:
 | :---------- | :-------------- | :----------
 | id          | ID              | Identifier of the person.
 | icpc\_id    | string ?        | External identifier from ICPC CMS.
-| team\_ids   | array of ID ?   | [Team](#team) of this person. Required to be non-empty iff role is `contestant` or `coach`.
 | name        | string          | Name of the person.
-| title       | string ?        | Title of the person, e.g. "Technical director".
 | email       | string ?        | Email of the person.
 | sex         | string ?        | Either `male` or `female`, or possibly `null`.
-| role        | string          | One of `contestant`, `coach`, `staff`, or `other`.
+| roles       | array of ROLE   | Roles of this person in the contest. Must not be empty.
 | photo       | array of FILE ? | Registration photo of the person. Only allowed mime types are image/\*.
+
+Properties of role objects (ROLE):
+
+| Name        | Type     | Description
+| :---------- | :------- | :----------
+| type        | string   | One of `contestant`, `coach`, `staff`, or `other`.
+| title       | string ? | Title for this role, e.g. "Co-Coach" or "Technical director".
+| team\_id    | ID ?     | [Team](#teams) this role applies to. Required iff `type` is `contestant` or `coach`.
 
 #### Examples
 
 ```json
-[{"id":"john-smith","team_ids":["43"],"icpc_id":"32442","name":"John Smith","email":"john.smith@kmail.com","sex":"male","role":"contestant"},
- {"id":"osten-umlautsen","team_ids":["43","44"],"icpc_id":null,"name":"Östen Ümlautsen","sex":null,"role":"coach"},
- {"id":"bill","name":"Bill Farrell","sex":"male","title":"Executive Director","role":"staff"}
+[{"id":"john-smith","icpc_id":"32442","name":"John Smith","email":"john.smith@kmail.com","sex":"male",
+  "roles":[{"type":"contestant","team_id":"43"}]},
+ {"id":"osten-umlautsen","icpc_id":null,"name":"Östen Ümlautsen","sex":null,
+  "roles":[{"type":"coach","team_id":"43"},{"type":"coach","title":"Co-Coach","team_id":"44"}]},
+ {"id":"bill","name":"Bill Farrell","sex":"male",
+  "roles":[{"type":"staff","title":"Executive Director"}]},
+ {"id":"jane-doe","name":"Jane Doe",
+  "roles":[{"type":"coach","team_id":"44"},{"type":"staff"}]}
 ]
 ```
 
