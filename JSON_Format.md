@@ -779,6 +779,10 @@ Properties of a team object:
 | desktop          | array of FILE ?        | Streaming video of the team desktop. Only allowed mime types are video/\* or application/vnd.apple.mpegurl.
 | webcam           | array of FILE ?        | Streaming video of the team webcam. Only allowed mime types are video/\* or application/vnd.apple.mpegurl.
 | audio            | array of FILE ?        | Streaming team audio.
+| shirt\_rgb       | string ?               | Hexadecimal RGB value of the team's t-shirt body color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet) with no alpha channel, e.g. `#AC00FF` or `#fff`.
+| shirt\_color     | string ?               | Human readable body color description associated to the RGB value.
+| shirt\_text\_rgb | string ?               | Hexadecimal RGB value of the team's t-shirt text color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet) with no alpha channel, e.g. `#AC00FF` or `#fff`.
+| shirt\_text\_color | string ?             | Human readable text color description associated to the RGB value.
 
 Properties of a team location object:
 
@@ -791,7 +795,7 @@ Properties of a team location object:
 #### Examples
 
 ```json
-[{"id":"team11","icpc_id":"201433","label":"11","name":"Shanghai Tigers","organization_id":"inst123","group_ids":["asia-74324325532"]},
+[{"id":"team11","icpc_id":"201433","label":"11","name":"Shanghai Tigers","organization_id":"inst123","group_ids":["asia-74324325532"],"shirt_rgb":"#0033A0","shirt_color":"blue","shirt_text_rgb":"#FFFFFF","shirt_text_color":"white"},
  {"id":"team123","label":"123","name":"CMU1","organization_id":"inst105","group_ids":["8","11"]}
 ]
 ```
