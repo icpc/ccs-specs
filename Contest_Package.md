@@ -30,7 +30,7 @@ contest would be needed.
 
 Information in the API is always either in JSON format,
 [NDJSON](contest_api#event-feed) format, or linked using a
-[file reference](json_format#file) JSON object.
+[file reference](json_format#file-reference) JSON object.
 
 - The JSON returned from the endpoint `/` is stored as `api.json`.
 - The JSON returned from the endpoint `/contests/<id>` is stored as
@@ -71,7 +71,7 @@ and `contest/<filename>` respectively, and files referenced in
 Note that the API specification requires that filenames are unique within
 endpoint objects, so this is always possible.
 
-The `href` property of [file reference objects](json_format#file) is optional
+The `href` property of [file reference objects](json_format#file-reference) is optional
 in a contest package: if a file matching the `filename` property is present on
 disk (as described above), that file is used and `href` is ignored. If no such
 file exists, then `href` must be present and valid.
@@ -149,17 +149,17 @@ download from a registration system or similar tool.
 
 Required files:
 - [api](json_format#api-information) (`api.json`)
-- [contests](json_format#contests) (`contest.json`)
-- [languages](json_format#languages) (`languages.json`)
-- [problems](json_format#problems) (`problems.json`)
-- [teams](json_format#teams) (`teams.json`)
-- [accounts](json_format#accounts) (`accounts.json`)
+- [contests](json_format#contest) (`contest.json`)
+- [languages](json_format#language) (`languages.json`)
+- [problems](json_format#problem) (`problems.json`)
+- [teams](json_format#team) (`teams.json`)
+- [accounts](json_format#account) (`accounts.json`)
 
 Optional files:
-- [judgement-types](json_format#judgement-types) (`judgement-types.json`)
-- [groups](json_format#groups) (`groups.json`)
-- [organizations](json_format#organizations) (`organizations.json`)
-- [persons](json_format#persons) (`persons.json`)
+- [judgement-types](json_format#judgement-type) (`judgement-types.json`)
+- [groups](json_format#group) (`groups.json`)
+- [organizations](json_format#organization) (`organizations.json`)
+- [persons](json_format#person) (`persons.json`)
 
 #### Example file listing
 
@@ -203,9 +203,9 @@ Used for uploading local registration data to a central registration system
 
 Required files:
 - [api](json_format#api-information) (`api.json`)
-- [organizations](json_format#organizations) (`organizations.json`)
-- [teams](json_format#teams) (`teams.json`)
-- [persons](json_format#persons) (`persons.json`)
+- [organizations](json_format#organization) (`organizations.json`)
+- [teams](json_format#team) (`teams.json`)
+- [persons](json_format#person) (`persons.json`)
 
 #### Example file listing
 
@@ -240,11 +240,11 @@ Used for uploading results from a finished contest to a central repository
 
 Required files:
 - [api](json_format#api-information) (`api.json`)
-- [teams](json_format#teams) (`teams.json`)
+- [teams](json_format#team) (`teams.json`)
 - [scoreboard](json_format#scoreboard) (`scoreboard.json`)
 
 Optional files:
-- [awards](json_format#awards) (`awards.json`)
+- [awards](json_format#award) (`awards.json`)
 
 #### Example file listing
 
