@@ -886,6 +886,19 @@ Properties of a state object:
 | thawed           | TIME ? | Time when the scoreboard was thawed (that is, unfrozen again), or `null` if the scoreboard has not been thawed. Required iff `scoreboard_freeze_duration` is present in the [contest](#contest) endpoint. Must not be set if frozen is `null`.
 | finalized        | TIME ? | Time when the results were finalized, or `null` if results have not been finalized. Must not be set if ended is `null`.
 | end\_of\_updates | TIME ? | Time after last update to the contest occurred, or `null` if more updates are still to come. Setting this to non-`null` must be the very last change in the contest.
+| removed\_intervals   | array of removed interval objects ? | Time intervals that are disregarded for the purpose of scoring. See below.
+
+Properties of removed interval objects:
+
+| Name           | Type     | Description
+| :------------- | :------- | :----------
+| start          | TIME     | Wall-clock time when the interval starts.
+| end            | TIME ?   | Wall-clock time when the interval ends, or `null` if the interval is still ongoing.
+| contest\_time  | RELTIME  | Contest time at the start of the interval.
+
+The `removed_intervals` array must be sorted by `start` and intervals must not overlap.
+
+Events happening during a removed interval all receive the same contest time (equal to the `contest_time` of that interval). The contest time of all events after an interval is shifted back by the total duration of all removed intervals preceding them.
 
 These state changes must occur in the order listed in the table above,
 as far as they do occur, except that `thawed` and `finalized` may occur
@@ -911,7 +924,11 @@ and `thawed` is set if the contest was frozen.
   "frozen": "2014-06-25T14:00:00+01",
   "thawed": null,
   "finalized": null,
-  "end_of_updates": null
+  "end_of_updates": null,
+  "removed_intervals": [
+    {"start":"2014-06-25T11:30:00+01","end":"2014-06-25T11:45:00+01","contest_time":"1:30:00"},
+    {"start":"2014-06-25T13:00:00+01","end":null,"contest_time":"2:45:00"}
+  ]
 }
 ```
 
