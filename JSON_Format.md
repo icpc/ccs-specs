@@ -114,6 +114,20 @@ Known values of tags include:
 
 An image should list both values if it is suitable for multiple contexts.
 
+#### Examples
+
+```json
+{"href":"https://example.com/api/contests/wf14/organizations/inst105/logo/56px","filename":"logo.56x56.png","mime":"image/png","width":56,"height":56}
+```
+
+```json
+{"href":"contests/wf14/problems/asteroids/statement","filename":"A.pdf","mime":"application/pdf"}
+```
+
+```json
+{"filename":"logo.dark.svg","mime":"image/svg+xml","width":48,"height":48,"tag":["dark"]}
+```
+
 ### Location
 
 Geographic location objects have the following properties:
@@ -122,6 +136,12 @@ Geographic location objects have the following properties:
 | :-------- | :----- | :----------
 | latitude  | number | Latitude in degrees with value between -90 and 90.
 | longitude | number | Longitude in degrees with value between -180 and 180.
+
+#### Examples
+
+```json
+{"latitude":59.3471,"longitude":18.0721}
+```
 
 ### Notification
 
