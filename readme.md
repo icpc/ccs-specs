@@ -33,6 +33,10 @@ This is the draft of some future version of the CCS specification.
   notification object format) previously embedded in the [Contest API](contest_api). 
   The Contest API and Contest Package Format now reference this document for
   all shared object definitions.
+- Renamed object sections in JSON Format from plural to singular (e.g.
+  "Problems" to "Problem"), renamed "File" to "File reference" and
+  "Notification object" to "Notification", and updated all cross-references
+  accordingly.
 
 ## References
 
