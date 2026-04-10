@@ -204,7 +204,7 @@ omit objects based on the current state of the contest.
 
 ### File references
 
-The `href` property of [file reference objects](json_format#file) must always
+The `href` property of [file reference objects](json_format#file-reference) must always
 be present in responses from the API. Relative URLs must be interpreted
 relative to the `baseurl` of the API. For example, if
 `baseurl` is <https://example.com/api/>, then the following are
@@ -245,8 +245,8 @@ as defined in the [JSON Format](json_format#object-definitions) specification.
 When such a property has a non-`null` value, then the referenced
 object must exist. That is, the full set of data exposed by the API
 must at all times be referentially intact. This implies for example that
-before creating a [team](json_format#teams) with an `organization_id`,
-the [organization](json_format#organizations) must already exist. In
+before creating a [team](json_format#team) with an `organization_id`,
+the [organization](json_format#organization) must already exist. In
 reverse, that organization can only be deleted after the team is
 deleted, or alternatively, the team's `organization_id` is set to
 `null`.
@@ -364,25 +364,25 @@ documented in dedicated sections below.
 | :--------------------------------------- | :--------------------------------------------------------------------- | :-----
 | `.`                                      | [API information](json_format#api-information)                         |
 | `contests/<id>/access`                   | [Access](#access)                                                      | API only; not in [Contest Package](contest_package)
-| `contests[/<id>]`                        | [Contest](json_format#contests)                                        | [Modifying contests](#modifying-contests) — PATCH
-| `contests/<id>/judgement-types[/<id>]`   | [Judgement Type](json_format#judgement-types)                          |
-| `contests/<id>/languages[/<id>]`         | [Language](json_format#languages)                                      |
-| `contests/<id>/problems[/<id>]`          | [Problem](json_format#problems)                                        |
-| `contests/<id>/groups[/<id>]`            | [Group](json_format#groups)                                            |
-| `contests/<id>/organizations[/<id>]`     | [Organization](json_format#organizations)                              |
-| `contests/<id>/teams[/<id>]`             | [Team](json_format#teams)                                              |
-| `contests/<id>/persons[/<id>]`           | [Person](json_format#persons)                                          |
-| `contests/<id>/accounts[/<id>]`          | [Account](json_format#accounts)                                        |
-| `contests/<id>/account`                  | [Account](json_format#accounts)                                        | API only; not in [Contest Package](contest_package)
+| `contests[/<id>]`                        | [Contest](json_format#contest)                                        | [Modifying contests](#modifying-contests) — PATCH
+| `contests/<id>/judgement-types[/<id>]`   | [Judgement Type](json_format#judgement-type)                          |
+| `contests/<id>/languages[/<id>]`         | [Language](json_format#language)                                      |
+| `contests/<id>/problems[/<id>]`          | [Problem](json_format#problem)                                        |
+| `contests/<id>/groups[/<id>]`            | [Group](json_format#group)                                            |
+| `contests/<id>/organizations[/<id>]`     | [Organization](json_format#organization)                              |
+| `contests/<id>/teams[/<id>]`             | [Team](json_format#team)                                              |
+| `contests/<id>/persons[/<id>]`           | [Person](json_format#person)                                          |
+| `contests/<id>/accounts[/<id>]`          | [Account](json_format#account)                                        |
+| `contests/<id>/account`                  | [Account](json_format#account)                                        | API only; not in [Contest Package](contest_package)
 | `contests/<id>/state`                    | [Contest state](json_format#contest-state)                             |
-| `contests/<id>/submissions[/<id>]`       | [Submission](json_format#submissions)                                  | [Modifying submissions](#modifying-submissions) — POST/PUT
-| `contests/<id>/judgements[/<id>]`        | [Judgement](json_format#judgements)                                    |
-| `contests/<id>/runs[/<id>]`              | [Run](json_format#runs)                                                |
-| `contests/<id>/clarifications[/<id>]`    | [Clarification](json_format#clarifications)                            | [Modifying clarifications](#modifying-clarifications) — POST/PUT
-| `contests/<id>/awards[/<id>]`            | [Award](json_format#awards)                                            | [Modifying awards](#modifying-awards) — POST/PUT/PATCH/DELETE
+| `contests/<id>/submissions[/<id>]`       | [Submission](json_format#submission)                                  | [Modifying submissions](#modifying-submissions) — POST/PUT
+| `contests/<id>/judgements[/<id>]`        | [Judgement](json_format#judgement)                                    |
+| `contests/<id>/runs[/<id>]`              | [Run](json_format#run)                                                |
+| `contests/<id>/clarifications[/<id>]`    | [Clarification](json_format#clarification)                            | [Modifying clarifications](#modifying-clarifications) — POST/PUT
+| `contests/<id>/awards[/<id>]`            | [Award](json_format#award)                                            | [Modifying awards](#modifying-awards) — POST/PUT/PATCH/DELETE
 | `contests/<id>/commentary[/<id>]`        | [Commentary](json_format#commentary)                                   | [Modifying commentary](#modifying-commentary) — POST
 | `contests/<id>/scoreboard`               | [Scoreboard](json_format#scoreboard)                                   | See [Scoreboard](#scoreboard)
-| `contests/<id>/event-feed`               | [Notification object](json_format#notification-object)                 | See [Notifications](#notifications), [Event feed](#event-feed)
+| `contests/<id>/event-feed`               | [Notification object](json_format#notification)                 | See [Notifications](#notifications), [Event feed](#event-feed)
 | `webhooks[/<id>]`                        |                                                                        | See [Notifications](#notifications), [Webhooks](#webhooks)
 
 ### Access
@@ -907,27 +907,27 @@ are aggregated data, and so these will only ever update due to some
 other REST endpoint updating. For this reason there is no explicit event
 for these, since there will always be another event sent.
 
-Each notification is a [notification object](json_format#notification-object)
+Each notification is a [notification object](json_format#notification)
 as defined in JSON Format. The correspondence between notification types
 and API endpoints is:
 
 | Type            | API Endpoint                                     | JSON object
 | :-------------- | :----------------------------------------------- | :----------
-| contest         | `contests/<id>`                                  | [Contest](json_format#contests)
-| judgement-types | `contests/<id>/judgement-types/<id>`             | [Judgement Type](json_format#judgement-types)
-| languages       | `contests/<id>/languages/<id>`                   | [Language](json_format#languages)
-| problems        | `contests/<id>/problems/<id>`                    | [Problem](json_format#problems)
-| groups          | `contests/<id>/groups/<id>`                      | [Group](json_format#groups)
-| organizations   | `contests/<id>/organizations/<id>`               | [Organization](json_format#organizations)
-| teams           | `contests/<id>/teams/<id>`                       | [Team](json_format#teams)
-| persons         | `contests/<id>/persons/<id>`                     | [Person](json_format#persons)
-| accounts        | `contests/<id>/accounts/<id>`                    | [Account](json_format#accounts)
+| contest         | `contests/<id>`                                  | [Contest](json_format#contest)
+| judgement-types | `contests/<id>/judgement-types/<id>`             | [Judgement Type](json_format#judgement-type)
+| languages       | `contests/<id>/languages/<id>`                   | [Language](json_format#language)
+| problems        | `contests/<id>/problems/<id>`                    | [Problem](json_format#problem)
+| groups          | `contests/<id>/groups/<id>`                      | [Group](json_format#group)
+| organizations   | `contests/<id>/organizations/<id>`               | [Organization](json_format#organization)
+| teams           | `contests/<id>/teams/<id>`                       | [Team](json_format#team)
+| persons         | `contests/<id>/persons/<id>`                     | [Person](json_format#person)
+| accounts        | `contests/<id>/accounts/<id>`                    | [Account](json_format#account)
 | state           | `contests/<id>/state`                            | [Contest state](json_format#contest-state)
-| submissions     | `contests/<id>/submissions/<id>`                 | [Submission](json_format#submissions)
-| judgements      | `contests/<id>/judgements/<id>`                  | [Judgement](json_format#judgements)
-| runs            | `contests/<id>/runs/<id>`                        | [Run](json_format#runs)
-| clarifications  | `contests/<id>/clarifications/<id>`              | [Clarification](json_format#clarifications)
-| awards          | `contests/<id>/awards/<id>`                      | [Award](json_format#awards)
+| submissions     | `contests/<id>/submissions/<id>`                 | [Submission](json_format#submission)
+| judgements      | `contests/<id>/judgements/<id>`                  | [Judgement](json_format#judgement)
+| runs            | `contests/<id>/runs/<id>`                        | [Run](json_format#run)
+| clarifications  | `contests/<id>/clarifications/<id>`              | [Clarification](json_format#clarification)
+| awards          | `contests/<id>/awards/<id>`                      | [Award](json_format#award)
 | commentary      | `contests/<id>/commentary/<id>`                  | [Commentary](json_format#commentary)
 
 
@@ -1032,7 +1032,7 @@ The following are examples of contest events:
 
 ### Webhooks
 
-Webhooks receive change [notifications](json_format#notification-object) (events)
+Webhooks receive change [notifications](json_format#notification) (events)
 of the data presented by the API.
 
 Properties of webhook callback objects:
@@ -1050,7 +1050,7 @@ change to the contest. Clients are only notified of changes after
 signing up; they are expected to use other mechanisms if they need to
 determine the current state of the contest. Every callback will contain
 one JSON object containing the id of the contest that changed and any
-number of [notification objects](json_format#notification-object) as follows:
+number of [notification objects](json_format#notification) as follows:
 
 ```json
 {"contest_id": "<id>", "notifications":[ <JSON notification format>, <JSON notification format> ] }

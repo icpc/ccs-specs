@@ -53,7 +53,7 @@ absolute timestamps.
   represented as a JSON object; see [Location](#location) under Object
   definitions below.
 - File references (type **`FILE`** in the specification) are represented as a
-  JSON object; see [File](#file) under Object definitions below.
+  JSON object; see [File](#file-reference) under Object definitions below.
 - Arrays (type **`array of <type>`** in the specification) are built-in JSON
   arrays of some type defined above. Unless specifically mentioned, no meaning
   is implied or can be inferred from the order of objects in an array.
@@ -95,9 +95,9 @@ Geographic location objects have the following properties:
 | latitude  | number | Latitude in degrees with value between -90 and 90.
 | longitude | number | Longitude in degrees with value between -180 and 180.
 
-### File
+### File reference
 
-File reference objects have the following properties:
+A file reference object has the following properties:
 
 | Name     | Type            | Description
 | :------- | :-------------- | :----------
@@ -123,9 +123,9 @@ Known values of tags include:
 
 An image should list both values if it is suitable for multiple contexts.
 
-### Notification object
+### Notification
 
-Notification objects are used to communicate changes to contest data. They are
+A notification object is used to communicate changes to contest data. They are
 delivered via the [Contest API event feed and webhooks](contest_api#notification-format)
 and stored on disk in the [Contest Package Format](contest_package) as
 `event-feed.ndjson`.
@@ -224,7 +224,7 @@ data.
 The API information object provides metadata about the API and the data
 provider.
 
-Properties of API information objects:
+Properties of an API information object:
 
 | Name         | Type              | Description
 | :----------- | :---------------- | :----------
@@ -261,9 +261,9 @@ Properties of the provider object:
 }
 ```
 
-### Contests
+### Contest
 
-Properties of contest objects:
+Properties of a contest object:
 
 | Name                         | Type            | Description
 | :--------------------------- | :-------------- | :----------
@@ -324,12 +324,12 @@ Countdown is resumed by setting a new `start_time` and resetting
 }
 ```
 
-### Judgement Types
+### Judgement Type
 
-Judgement types are the possible responses from the system when judging
+A judgement type is one of the possible responses from the system when judging
 a submission.
 
-Properties of judgement type objects:
+Properties of a judgement type object:
 
 | Name                            | Type      | Description
 | :------------------------------ | :-------- | :----------
@@ -457,11 +457,11 @@ for any judgement type), all judgement types are original only.
 }
 ```
 
-### Languages
+### Language
 
-Languages that are available for submission at the contest.
+A language available for submission at the contest.
 
-Properties of language objects:
+Properties of a language object:
 
 | Name                   | Type             | Description
 | :--------------------- | :--------------- | :----------
@@ -473,7 +473,7 @@ Properties of language objects:
 | compiler               | Command object   | Command used for compiling submissions.
 | runner                 | Command object   | Command used for running submissions. Relevant e.g. for interpreted languages and languages running on a VM.
 
-Properties of Command objects:
+Properties of a Command object:
 
 | Name             | Type     | Description
 | :--------------- | :------- | :----------
@@ -555,11 +555,11 @@ version of C++.
 }]
 ```
 
-### Problems
+### Problem
 
-The problems to be solved in the contest.
+A problem to be solved in the contest.
 
-Properties of problem objects:
+Properties of a problem object:
 
 | Name              | Type            | Description
 | :---------------- | :-------------- | :----------
@@ -592,9 +592,9 @@ Properties of problem objects:
 {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"memory_limit":2048,"output_limit":8,"code_limit":128,"test_data_count":10,"statement":[{"href":"contests/wf14/problems/asteroids/statement","mime":"application/pdf","filename":"A.pdf"}],"attachments":[{"href":"contests/wf14/problems/asteroids/attachments/testing_tool.py","mime":"text/x-python","filename":"testing_tool.py"}]}
 ```
 
-### Groups
+### Group
 
-Grouping of teams. At the World Finals these are the super regions; at other contests these
+A grouping of teams. At the World Finals these are the super regions; at other contests these
 may be the different sites, divisions, or types of contestants.
 
 Teams may belong to multiple groups. For instance, there may be a group for each site, a group for
@@ -611,7 +611,7 @@ divisions at every one of `S` sites, then in addition to the `D` + `S` groups th
 `D`x`S` combined/product groups. It is recommended that these groups have a type like
 `"type":"<group1>-<group2>"`, e.g. `"type":"site-division"`.
 
-Properties of group objects:
+Properties of a group object:
 
 | Name      | Type       | Description
 | :-------- | :--------- | :----------
@@ -645,13 +645,13 @@ of a group matches.
 ]
 ```
 
-### Organizations
+### Organization
 
-Teams can be associated with organizations which will have some
+An organization that a team can be associated with, which may have
 associated information, e.g. a logo. Typically organizations will be
 universities.
 
-Properties of organization objects:
+Properties of an organization object:
 
 | Name                       | Type            | Description
 | :------------------------- | :-------------- | :----------
@@ -684,11 +684,11 @@ Properties of organization objects:
 ]
 ```
 
-### Teams
+### Team
 
-Teams competing in the contest.
+A team competing in the contest.
 
-Properties of team objects:
+Properties of a team object:
 
 | Name             | Type                   | Description
 | :--------------- | :--------------------- | :----------
@@ -697,8 +697,8 @@ Properties of team objects:
 | name             | string                 | Name of the team.
 | label            | string                 | Label of the team, at WFs normally the team seat number.
 | display\_name    | string ?               | Display name of the team. If not set, a client should revert to using the name instead.
-| organization\_id | ID ?                   | Identifier of the [organization](#organizations) (e.g. university or other entity) that this team is affiliated to.
-| group\_ids       | array of ID ?          | Identifiers of the [group(s)](#groups) this team is part of (at ICPC WFs these are the super-regions). The array may be empty. Required iff groups endpoint is available.
+| organization\_id | ID ?                   | Identifier of the [organization](#organization) (e.g. university or other entity) that this team is affiliated to.
+| group\_ids       | array of ID ?          | Identifiers of the [group(s)](#group) this team is part of (at ICPC WFs these are the super-regions). The array may be empty. Required iff groups endpoint is available.
 | location         | team location object ? | Position of team on the contest floor. See below for the specification of this object.
 | photo            | array of FILE ?        | Registration photo of the team. Only allowed mime types are image/\*.
 | video            | array of FILE ?        | Registration video of the team. Only allowed mime types are video/\* or application/vnd.apple.mpegurl.
@@ -709,7 +709,7 @@ Properties of team objects:
 | webcam           | array of FILE ?        | Streaming video of the team webcam. Only allowed mime types are video/\* or application/vnd.apple.mpegurl.
 | audio            | array of FILE ?        | Streaming team audio.
 
-Properties of team location objects:
+Properties of a team location object:
 
 | Name     | Type   | Description
 | :------- | :----- | :----------
@@ -725,17 +725,17 @@ Properties of team location objects:
 ]
 ```
 
-### Persons
+### Person
 
-Persons involved in the contest.
+A person involved in the contest.
 
-Properties of person objects:
+Properties of a person object:
 
 | Name        | Type            | Description
 | :---------- | :-------------- | :----------
 | id          | ID              | Identifier of the person.
 | icpc\_id    | string ?        | External identifier from ICPC CMS.
-| team\_ids   | array of ID ?   | [Team](#teams) of this person. Required to be non-empty iff role is `contestant` or `coach`.
+| team\_ids   | array of ID ?   | [Team](#team) of this person. Required to be non-empty iff role is `contestant` or `coach`.
 | name        | string          | Name of the person.
 | title       | string ?        | Title of the person, e.g. "Technical director".
 | email       | string ?        | Email of the person.
@@ -752,15 +752,15 @@ Properties of person objects:
 ]
 ```
 
-### Accounts
+### Account
 
-The accounts used for accessing the contest, as well as information about the
+An account used for accessing the contest, as well as information about the
 account currently accessing the API. Note that the
-[Contest API](contest_api#accounts) also provides a `contests/<id>/account`
+[Contest API](contest_api#account) also provides a `contests/<id>/account`
 endpoint (singular) which returns the account of the currently authenticated
 client; this endpoint does not appear in a Contest Package.
 
-Properties of account objects:
+Properties of an account object:
 
 | Name              | Type      | Description
 | :---------------- | :-------- | :----------
@@ -795,18 +795,18 @@ current client, and what [capabilities](contest_api#capabilities) the client
 has. It is only available via the Contest API; the corresponding file does not
 appear in a [Contest Package](contest_package).
 
-Properties of access objects:
+Properties of an access object:
 
 | Name         | Type                      | Description
 | :----------- | :------------------------ | :----------
 | capabilities | array of string           | An array of [capabilities](contest_api#capabilities) that the current client has. The array may be empty.
 | endpoints    | array of endpoint objects | An array of endpoint objects that are visible to the current client, as described below. The array may be empty.
 
-Properties of endpoint objects:
+Properties of an endpoint object:
 
 | Name         | Type            | Description
 | :----------- | :-------------- | :----------
-| type         | string          | The type of the endpoint, e.g. "problems". See [Notification object](#notification-object) for the list of types.
+| type         | string          | The type of the endpoint, e.g. "problems". See [Notification object](#notification) for the list of types.
 | properties   | array of string | An array of supported properties that the current client has visibility to. The array must not be empty. If the array would be empty, the endpoint object should instead not be included in the endpoints array.
 
 #### Examples
@@ -842,14 +842,14 @@ or:
 Current state of the contest, specifying whether it's running, the
 scoreboard is frozen or results are final.
 
-Properties of state objects:
+Properties of a state object:
 
 | Name             | Type   | Description
 | :--------------- | :----- | :----------
-| started          | TIME ? | Time when the contest actually started, or `null` if the contest has not started yet. When set, this time must be equal to the [contest](#contests) `start_time`.
-| frozen           | TIME ? | Time when the scoreboard was frozen, or `null` if the scoreboard has not been frozen. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint.
+| started          | TIME ? | Time when the contest actually started, or `null` if the contest has not started yet. When set, this time must be equal to the [contest](#contest) `start_time`.
+| frozen           | TIME ? | Time when the scoreboard was frozen, or `null` if the scoreboard has not been frozen. Required iff `scoreboard_freeze_duration` is present in the [contest](#contest) endpoint.
 | ended            | TIME ? | Time when the contest ended, or `null` if the contest has not ended. Must not be set if started is `null`.
-| thawed           | TIME ? | Time when the scoreboard was thawed (that is, unfrozen again), or `null` if the scoreboard has not been thawed. Required iff `scoreboard_freeze_duration` is present in the [contest](#contests) endpoint. Must not be set if frozen is `null`.
+| thawed           | TIME ? | Time when the scoreboard was thawed (that is, unfrozen again), or `null` if the scoreboard has not been thawed. Required iff `scoreboard_freeze_duration` is present in the [contest](#contest) endpoint. Must not be set if frozen is `null`.
 | finalized        | TIME ? | Time when the results were finalized, or `null` if results have not been finalized. Must not be set if ended is `null`.
 | end\_of\_updates | TIME ? | Time after last update to the contest occurred, or `null` if more updates are still to come. Setting this to non-`null` must be the very last change in the contest.
 
@@ -881,19 +881,19 @@ and `thawed` is set if the contest was frozen.
 }
 ```
 
-### Submissions
+### Submission
 
-Submissions, a.k.a. attempts to solve problems in the contest.
+A submission, a.k.a. an attempt to solve a problem in the contest.
 
-Properties of submission objects:
+Properties of a submission object:
 
 | Name          | Type            | Description
 | :------------ | :-------------- | :----------
 | id            | ID              | Identifier of the submission. Usable as a label, typically a low incrementing number to make it easier to validate submissions or compare submissions with a Shadow CCS.
-| language\_id  | ID              | Identifier of the [language](#languages) submitted for.
-| problem\_id   | ID              | Identifier of the [problem](#problems) submitted for.
-| team\_id      | ID ?            | Identifier of the [team](#teams) that made the submission. Submissions without a `team_id` cannot affect the scoreboard.
-| account\_id   | ID ?            | Identifier of the [account](#accounts) that made the submission.
+| language\_id  | ID              | Identifier of the [language](#language) submitted for.
+| problem\_id   | ID              | Identifier of the [problem](#problem) submitted for.
+| team\_id      | ID ?            | Identifier of the [team](#team) that made the submission. Submissions without a `team_id` cannot affect the scoreboard.
+| account\_id   | ID ?            | Identifier of the [account](#account) that made the submission.
 | time          | TIME            | Timestamp of when the submission was made.
 | contest\_time | RELTIME         | Contest relative time when the submission was made.
 | entry\_point  | string ?        | Code entry point for specific languages.
@@ -928,18 +928,18 @@ Note that the relative link for `files` points to the location
 <https://example.com/api/contests/wf14/submissions/187/files> since the
 base URL for the API is <https://example.com/api/>.
 
-### Judgements
+### Judgement
 
-Judgements for submissions in the contest.
+A judgement for a submission in the contest.
 
-Properties of judgement objects:
+Properties of a judgement object:
 
 | Name                            | Type      | Description
 |:--------------------------------| :-------- | :----------
 | id                              | ID        | Identifier of the judgement.
-| submission\_id                  | ID        | Identifier of the [submission](#submissions) judged.
-| judgement\_type\_id             | ID ?      | The [verdict](#judgement-types) of this judgement. 
-| simplified\_judgement\_type\_id | ID ?      | The [simplified verdict](#judgement-types) of this judgement. 
+| submission\_id                  | ID        | Identifier of the [submission](#submission) judged.
+| judgement\_type\_id             | ID ?      | The [verdict](#judgement-type) of this judgement. 
+| simplified\_judgement\_type\_id | ID ?      | The [simplified verdict](#judgement-type) of this judgement. 
 | score                           | number    | Score for this judgement, between `0` and the problem's `max_score`. Required iff contest:scoreboard\_type is `score`.
 | current                         | boolean ? | `true` if this is the current judgement. Defaults to `true`. At any time, there must be at most one judgement per submission for which this `true` or unset (and thus defaulting to `true`).
 | start\_time                     | TIME      | Absolute time when judgement started.
@@ -966,19 +966,19 @@ judgement is completed.
 ]
 ```
 
-### Runs
+### Run
 
-Runs are judgements of individual test cases of a submission.
+A run is a judgement of an individual test case of a submission.
 This is intended to provide (among other things) live updates of judging progress.
 
-Properties of run objects:
+Properties of a run object:
 
 | Name                | Type    | Description
 | :------------------ | :------ | :----------
 | id                  | ID      | Identifier of the run.
-| judgement\_id       | ID      | Identifier of the [judgement](#judgements) this is part of.
+| judgement\_id       | ID      | Identifier of the [judgement](#judgement) this is part of.
 | ordinal             | number  | Ordering of runs in the judgement. Must be different for every run in a judgement. Runs for the same test case must have the same ordinal. Must be between 1 and `problem:test_data_count`.
-| judgement\_type\_id | ID      | The [verdict](#judgement-types) of this run (i.e. a judgement type).
+| judgement\_type\_id | ID      | The [verdict](#judgement-type) of this run (i.e. a judgement type).
 | time                | TIME    | Absolute time when run completed.
 | contest\_time       | RELTIME | Contest relative time when run completed.
 | run\_time           | number  | Run time in seconds. Should be a non-negative integer multiple of `0.001`. The reason for this is to not have rounding ambiguities while still using the natural unit of seconds.
@@ -991,22 +991,22 @@ Properties of run objects:
 ]
 ```
 
-### Clarifications
+### Clarification
 
-Clarification message sent between teams and judges, a.k.a.
-clarification requests (questions from teams) and clarifications
-(answers from judges).
+A clarification message sent between teams and judges, a.k.a.
+a clarification request (question from a team) or clarification
+(answer from judges).
 
-Properties of clarification message objects:
+Properties of a clarification message object:
 
 | Name           | Type             | Description
 | :------------- | :--------------- | :----------
 | id             | ID               | Identifier of the clarification.
-| from\_team\_id | ID ?             | Identifier of the [team](#teams) sending this clarification request, `null` iff a clarification is sent by the judges.
-| to\_team\_ids  | array of ID ?    | Identifiers of the [team(s)](#teams) receiving this reply, `null` iff a reply to all teams or a request sent by a team.
-| to\_group\_ids | array of ID ?    | Identifiers of the [group(s)](#groups) receiving this reply, `null` iff a reply to all teams or a request sent by a team.
+| from\_team\_id | ID ?             | Identifier of the [team](#team) sending this clarification request, `null` iff a clarification is sent by the judges.
+| to\_team\_ids  | array of ID ?    | Identifiers of the [team(s)](#team) receiving this reply, `null` iff a reply to all teams or a request sent by a team.
+| to\_group\_ids | array of ID ?    | Identifiers of the [group(s)](#group) receiving this reply, `null` iff a reply to all teams or a request sent by a team.
 | reply\_to\_id  | ID ?             | Identifier of clarification this is in response to, otherwise `null`.
-| problem\_id    | ID ?             | Identifier of associated [problem](#problems), `null` iff not associated to a problem.
+| problem\_id    | ID ?             | Identifier of associated [problem](#problem), `null` iff not associated to a problem.
 | text           | string           | Question or reply text.
 | time           | TIME             | Time of the question/reply.
 | contest\_time  | RELTIME          | Contest time of the question/reply.
@@ -1038,17 +1038,17 @@ then in order to preserve referential integrity the `reply_to_id` should be remo
 ]
 ```
 
-### Awards
+### Award
 
-Awards such as medals, first to solve, etc.
+An award such as a medal, first to solve, etc.
 
-Properties of award objects:
+Properties of an award object:
 
 | Name      | Type          | Description
 | :-------- | :------------ | :----------
 | id        | ID            | Identifier of the award.
 | citation  | string        | Award citation, e.g. "Gold medal winner".
-| team\_ids | array of ID ? | JSON array of [team](#teams) ids receiving this award. If the value is null this means that the award is not currently being updated. If the value is the empty array this means that the award **is** being updated, but no team has been awarded the award at this time.
+| team\_ids | array of ID ? | JSON array of [team](#team) ids receiving this award. If the value is null this means that the award is not currently being updated. If the value is the empty array this means that the award **is** being updated, but no team has been awarded the award at this time.
 
 #### Semantics
 
@@ -1097,19 +1097,19 @@ For some common award cases the following IDs should be used.
 
 Commentary on events happening in the contest.
 
-Properties of commentary objects:
+Properties of a commentary object:
 
 | Name            | Type            | Description
 | :-------------- | :-------------- | :----------
 | id              | ID              | Identifier of the commentary.
 | time            | TIME            | Time of the commentary message.
 | contest\_time   | RELTIME         | Contest time of the commentary message.
-| message         | string          | Commentary message text. May contain special tags referring to endpoint objects using the format `{<endpoint>:<object ID>}`. This is most commonly used for references to [teams](#teams) and [problems](#problems) as `{teams:<team ID>}` and `{problems:<problem ID>}` respectively.
+| message         | string          | Commentary message text. May contain special tags referring to endpoint objects using the format `{<endpoint>:<object ID>}`. This is most commonly used for references to [teams](#team) and [problems](#problem) as `{teams:<team ID>}` and `{problems:<problem ID>}` respectively.
 | tags            | array of string | JSON array of tags describing the message.
-| source\_id      | ID ?            | Source [person](#persons) of the commentary message.
-| team\_ids       | array of ID ?   | JSON array of [team](#teams) IDs the message is related to.
-| problem\_ids    | array of ID ?   | JSON array of [problem](#problems) IDs the message is related to.
-| submission\_ids | array of ID ?   | JSON array of [submission](#submissions) IDs the message is related to.
+| source\_id      | ID ?            | Source [person](#person) of the commentary message.
+| team\_ids       | array of ID ?   | JSON array of [team](#team) IDs the message is related to.
+| problem\_ids    | array of ID ?   | JSON array of [problem](#problem) IDs the message is related to.
+| submission\_ids | array of ID ?   | JSON array of [submission](#submission) IDs the message is related to.
 
 For the message, if a literal `{` is needed, `\{` must be used. Similarly for a literal `\`, `\\` must be used.
 
@@ -1158,7 +1158,7 @@ Properties of the scoreboard object.
 
 | Name          | Type    | Description
 | :------------ | :------ | :----------
-| time          | TIME    | Time contained in the [event](#notification-object) after which this scoreboard was generated. Implementation defined if the event has no associated time.
+| time          | TIME    | Time contained in the [event](#notification) after which this scoreboard was generated. Implementation defined if the event has no associated time.
 | contest\_time | RELTIME | Contest time contained in the associated event. Implementation defined if the event has no associated contest time.
 | state         | object  | Identical data as returned by the [contest state](#contest-state) endpoint. This is provided here for ease of use and to guarantee the data is synchronized.
 | rows          | array of scoreboard row objects | A list of rows of team with their associated scores.
@@ -1169,12 +1169,12 @@ means according to the [Unicode Collation
 Algorithm](https://www.unicode.org/reports/tr10/), by default using the
 `en-US` locale.
 
-Properties of scoreboard row objects:
+Properties of a scoreboard row object:
 
 | Name              | Type      | Description
 | :---------------- | :-------- | :----------
 | rank              | integer   | Rank of this team, 1-based and duplicate in case of ties.
-| team\_id          | ID        | Identifier of the [team](#teams).
+| team\_id          | ID        | Identifier of the [team](#team).
 | score             | object    | JSON object as specified in the rows below (for possible extension to other scoring methods).
 | score.num\_solved | integer   | Number of problems solved by the team. Required iff contest:scoreboard\_type is `pass-fail`.
 | score.total\_time | RELTIME   | Total penalty time accrued by the team. Required iff contest:scoreboard\_type is `pass-fail`.
@@ -1182,11 +1182,11 @@ Properties of scoreboard row objects:
 | score.time        | RELTIME ? | Time of last score improvement, used for tiebreaking purposes. Must be `null` iff `num\_solved=0`.
 | problems          | array of problem data objects ? | JSON array of problems with scoring data, see below for the specification of each object.
 
-Properties of problem data objects:
+Properties of a problem data object:
 
 | Name         | Type      | Description
 | :----------- | :-------- | :----------
-| problem\_id  | ID        | Identifier of the [problem](#problems).
+| problem\_id  | ID        | Identifier of the [problem](#problem).
 | num\_judged  | integer   | Number of judged submissions (up to and including the first correct one),
 | num\_pending | integer   | Number of pending submissions (either queued or due to freeze).
 | solved       | boolean   | Required iff contest:scoreboard\_type is `pass-fail`.
