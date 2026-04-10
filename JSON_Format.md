@@ -145,7 +145,7 @@ Geographic location objects have the following properties:
 
 ### Notification
 
-A notification object is used to communicate changes to contest data. They are
+A notification object is used to communicate changes to contest data. It is
 delivered via the [Contest API event feed and webhooks](contest_api#notification-format)
 and stored on disk in the [Contest Package Format](contest_package) as
 `event-feed.ndjson`.
@@ -250,14 +250,14 @@ Properties of an API information object:
 | :----------- | :---------------- | :----------
 | version      | string            | Version of the API. For this version must be the string `draft`. Will be of the form `<yyyy>-<mm>`, `<yyyy>-<mm>-draft`, or simply `draft`.
 | version\_url | string            | Link to documentation for this version of the API.
-| provider     | provider object ? | Information about the data provider
+| provider     | provider object ? | Information about the data provider.
 
 Properties of the provider object:
 
 | Name         | Type            | Description
 | :----------- | :-------------- | :----------
 | name         | string          | Name of this data provider.
-| version      | string ?        | Provider's application version string
+| version      | string ?        | Provider's application version string.
 | logo         | array of FILE ? | Logo for this data provider, intended to be an image with aspect ratio near 1:1. Only allowed mime types are image/\*. The different files in the array should be different file formats and/or sizes of the same image.
 
 #### Examples
@@ -299,7 +299,7 @@ Properties of an endpoint object:
 
 | Name         | Type            | Description
 | :----------- | :-------------- | :----------
-| type         | string          | The type of the endpoint, e.g. "problems". See [Notification object](#notification) for the list of types.
+| type         | string          | The type of the endpoint, e.g. "problems". See [Notification](#notification) for the list of types.
 | properties   | array of string | An array of supported properties that the current client has visibility to. The array must not be empty. If the array would be empty, the endpoint object should instead not be included in the endpoints array.
 
 #### Examples
@@ -406,7 +406,7 @@ Properties of a judgement type object:
 | name                            | string    | Name of the judgement. (might not match table below, e.g. if localized).
 | penalty                         | boolean   | Whether this judgement causes penalty time. Required iff contest:penalty\_time is present.
 | solved                          | boolean   | Whether this judgement is considered correct.
-| simplified\_judgement\_type\_id | ID?       | Identifier of this type's simplified judgement type.
+| simplified\_judgement\_type\_id | ID ?      | Identifier of this type's simplified judgement type.
 
 #### Known judgement types
 
@@ -476,7 +476,7 @@ judgement types or both, one can use this logic:
 
 - The set of original judgement types are the ones that have `simplified_judgement_type_id` set.
 - The set of simplified judgement types are the ones that appear in `simplified_judgement_type_id`.
-- The set judgement types that are both is the intersection of these two sets.
+- The set of judgement types that are both is the intersection of these two sets.
 
 This assumes the system is using simplified judgement types. If it is not (i.e. if `simplified_judgement_type_id` is not set
 for any judgement type), all judgement types are original only.
@@ -537,7 +537,7 @@ Properties of a language object:
 | id                     | ID               | Identifier of the language from table below.
 | name                   | string           | Name of the language (might not match table below, e.g. if localized).
 | entry\_point\_required | boolean          | Whether the language requires an entry point.
-| entry\_point\_name     | string ?         | The name of the type of entry point, such as "Main class" or "Main file"). Required iff entry_point_required is `true`.
+| entry\_point\_name     | string ?         | The name of the type of entry point, such as "Main class" or "Main file". Required iff entry_point_required is `true`.
 | extensions             | array of string  | File extensions for the language.
 | compiler               | Command object   | Command used for compiling submissions.
 | runner                 | Command object   | Command used for running submissions. Relevant e.g. for interpreted languages and languages running on a VM.
@@ -636,7 +636,7 @@ Properties of a problem object:
 | uuid              | string ?        | UUID of the problem, as defined in the problem package.
 | label             | string          | Label of the problem on the scoreboard, typically a single capitalized letter.
 | name              | string          | Name of the problem.
-| ordinal           | integer         | A unique number that determines the order the problems, e.g. on the scoreboard.
+| ordinal           | integer         | A unique number that determines the order of the problems, e.g. on the scoreboard.
 | rgb               | string ?        | Hexadecimal RGB value of problem color as specified in [HTML hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors#Hex_triplet) with no alpha channel, e.g. `#AC00FF` or `#fff`.
 | color             | string ?        | Human readable color description associated to the RGB value.
 | time\_limit       | number          | Time limit in seconds per test data set (i.e. per single run). Should be a non-negative integer multiple of `0.001`. The reason for this is to not have rounding ambiguities while still using the natural unit of seconds.
@@ -955,13 +955,13 @@ A judgement for a submission in the contest.
 Properties of a judgement object:
 
 | Name                            | Type      | Description
-|:--------------------------------| :-------- | :----------
+| :------------------------------ | :-------- | :----------
 | id                              | ID        | Identifier of the judgement.
 | submission\_id                  | ID        | Identifier of the [submission](#submission) judged.
 | judgement\_type\_id             | ID ?      | The [verdict](#judgement-type) of this judgement. 
 | simplified\_judgement\_type\_id | ID ?      | The [simplified verdict](#judgement-type) of this judgement. 
 | score                           | number    | Score for this judgement, between `0` and the problem's `max_score`. Required iff contest:scoreboard\_type is `score`.
-| current                         | boolean ? | `true` if this is the current judgement. Defaults to `true`. At any time, there must be at most one judgement per submission for which this `true` or unset (and thus defaulting to `true`).
+| current                         | boolean ? | `true` if this is the current judgement. Defaults to `true`. At any time, there must be at most one judgement per submission for which this is `true` or unset (and thus defaulting to `true`).
 | start\_time                     | TIME      | Absolute time when judgement started.
 | start\_contest\_time            | RELTIME   | Contest relative time when judgement started.
 | end\_time                       | TIME ?    | Absolute time when judgement completed. Required iff judgement\_type\_id is present.
@@ -1136,7 +1136,7 @@ For the message, if a literal `{` is needed, `\{` must be used. Similarly for a 
 #### Known tags
 
 Below is a list of known tags. If any of the tags below are used, they must
-have the corresponding meaning. If the any of the meanings below are needed,
+have the corresponding meaning. If any of the meanings below are needed,
 the corresponding tag should be used. There is no requirement that any of the
 tags below are used.
 
@@ -1174,14 +1174,14 @@ Scoreboard of the contest.
 Since this is generated data, only the `GET` method is allowed in the
 [Contest API](contest_api#scoreboard), irrespective of role.
 
-Properties of the scoreboard object.
+Properties of the scoreboard object:
 
 | Name          | Type    | Description
 | :------------ | :------ | :----------
 | time          | TIME    | Time contained in the [event](#notification) after which this scoreboard was generated. Implementation defined if the event has no associated time.
 | contest\_time | RELTIME | Contest time contained in the associated event. Implementation defined if the event has no associated contest time.
 | state         | object  | Identical data as returned by the [contest state](#contest-state) endpoint. This is provided here for ease of use and to guarantee the data is synchronized.
-| rows          | array of scoreboard row objects | A list of rows of team with their associated scores.
+| rows          | array of scoreboard row objects | A list of rows of teams with their associated scores.
 
 The scoreboard `rows` array is sorted according to rank and alphabetical
 on team name within identically ranked teams. Here alphabetical ordering
