@@ -994,26 +994,24 @@ Properties of a judgement object:
 | score                           | number    | Score for this judgement, between `0` and the problem's `max_score`. Required iff contest:scoreboard\_type is `score`.
 | current                         | boolean ? | `true` if this is the current judgement. Defaults to `true`. At any time, there must be at most one judgement per submission for which this is `true` or unset (and thus defaulting to `true`).
 | start\_time                     | TIME      | Absolute time when judgement started.
-| start\_contest\_time            | RELTIME   | Contest relative time when judgement started.
 | end\_time                       | TIME ?    | Absolute time when judgement completed. Required iff judgement\_type\_id is present.
-| end\_contest\_time              | RELTIME ? | Contest relative time when judgement completed. Required iff judgement\_type\_id is present.
 | max\_run\_time                  | number ?  | Maximum run time in seconds for any test case. Should be a non-negative integer multiple of `0.001`. The reason for this is to not have rounding ambiguities while still using the natural unit of seconds.
 
 A judgement must have at least one of `judgement_type_id` or `simplified_judgement_type_id` specified iff it is completed.
 If both `judgement_type_id` and `simplified_judgement_type_id` are present, they should be consistent with
 the simplification rules specified in the `judgement-types` endpoint. 
 
-When a judgement is started, each of `judgement_type_id`, `end_time` and
-`end_contest_time` will be `null` (or missing). These are set when the
+When a judgement is started, each of `judgement_type_id` and `end_time`
+will be `null` (or missing). These are set when the
 judgement is completed.
 
 #### Examples
 
 ```json
 [{"id":"189549","submission_id":"wf2017-32163123xz3132yy","judgement_type_id":"CE","start_time":"2014-06-25T11:22:48.427+01",
-  "start_contest_time":"1:22:48.427","end_time":"2014-06-25T11:23:32.481+01","end_contest_time":"1:23:32.481"},
+  "end_time":"2014-06-25T11:23:32.481+01"},
  {"id":"189550","submission_id":"wf2017-32163123xz3133ub","judgement_type_id":null,"start_time":"2014-06-25T11:24:03.921+01",
-  "start_contest_time":"1:24:03.921","end_time":null,"end_contest_time":null}
+  "end_time":null}
 ]
 ```
 
@@ -1031,7 +1029,6 @@ Properties of a run object:
 | ordinal             | integer | Ordering of runs in the judgement. Must be different for every run in a judgement. Runs for the same test case must have the same ordinal. Must be between 1 and `problem:test_data_count`.
 | judgement\_type\_id | ID      | The [verdict](#judgement-type) of this run (i.e. a judgement type).
 | time                | TIME    | Absolute time when run completed.
-| contest\_time       | RELTIME | Contest relative time when run completed.
 | run\_time           | number  | Run time in seconds. Should be a non-negative integer multiple of `0.001`. The reason for this is to not have rounding ambiguities while still using the natural unit of seconds.
 | score               | number ?| Score for this run. Only applicable when contest:scoreboard\_type is `score`. The meaning of this score is problem dependent; do not assume the final submission score is the minimum, maximum, or sum of the run scores. Note that a per-run score is not well-defined for most runs of most problems. Servers should omit `score` when it is not meaningful for the given problem.
 
@@ -1039,9 +1036,9 @@ Properties of a run object:
 
 ```json
 [{"id":"1312","judgement_id":"189549","ordinal":28,"judgement_type_id":"TLE",
-  "time":"2014-06-25T11:22:42.420+01","contest_time":"1:22:42.420","run_time":0.123},
+  "time":"2014-06-25T11:22:42.420+01","run_time":0.123},
  {"id":"1313","judgement_id":"189550","ordinal":1,"judgement_type_id":"AC",
-  "time":"2014-06-25T11:23:10.000+01","contest_time":"1:23:10.000","run_time":0.456,"score":42.5}
+  "time":"2014-06-25T11:23:10.000+01","run_time":0.456,"score":42.5}
 ]
 ```
 
