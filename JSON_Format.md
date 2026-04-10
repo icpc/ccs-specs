@@ -997,7 +997,7 @@ Properties of a run object:
 | :------------------ | :------ | :----------
 | id                  | ID      | Identifier of the run.
 | judgement\_id       | ID      | Identifier of the [judgement](#judgement) this is part of.
-| ordinal             | number  | Ordering of runs in the judgement. Must be different for every run in a judgement. Runs for the same test case must have the same ordinal. Must be between 1 and `problem:test_data_count`.
+| ordinal             | integer | Ordering of runs in the judgement. Must be different for every run in a judgement. Runs for the same test case must have the same ordinal. Must be between 1 and `problem:test_data_count`.
 | judgement\_type\_id | ID      | The [verdict](#judgement-type) of this run (i.e. a judgement type).
 | time                | TIME    | Absolute time when run completed.
 | contest\_time       | RELTIME | Contest relative time when run completed.
