@@ -53,6 +53,10 @@ This is the draft of some future version of the CCS specification.
   [runs](json_format#runs), as these values are not meaningful for scoring
   and would require unnecessary resending of objects when removed intervals
   change.
+- Clarified the semantics of `max_score` on [problems](json_format#problems):
+  it represents the maximum score currently considered achievable, and for
+  problems with no known upper bound should be set to a reasonable initial
+  target and updated upward if exceeded during the contest.
 
 ## References
 
