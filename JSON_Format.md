@@ -111,8 +111,12 @@ Known values of tags include:
 
 - `light`: an image suitable for use on white or light backgrounds.
 - `dark`: an image suitable for use on black or dark backgrounds.
+- `desktop`: a screenshot or capture of a team's desktop.
+- `webcam`: a capture from a team's webcam.
 
 An image should list both values if it is suitable for multiple contexts.
+
+As a best practice, servers should list file references in order from most to least generally applicable, so that clients that do not process tags can pick the first and get a reasonable result.
 
 #### Examples
 
