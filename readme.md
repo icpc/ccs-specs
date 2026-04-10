@@ -46,6 +46,13 @@ This is the draft of some future version of the CCS specification.
 - Added `coach` as a supported [account](json_format#accounts) type.
 - Added `desktop` and `webcam` as known [file reference](json_format#file-reference)
   tags.
+- Added `removed_intervals` to the [contest state](json_format#contest-state)
+  object, allowing time intervals to be marked as disregarded for scoring
+  purposes. Intervals must be non-overlapping and sorted by start time.
+- Removed `contest_time` from [judgements](json_format#judgements) and
+  [runs](json_format#runs), as these values are not meaningful for scoring
+  and would require unnecessary resending of objects when removed intervals
+  change.
 
 ## References
 
