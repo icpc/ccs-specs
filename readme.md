@@ -53,6 +53,9 @@ This is the draft of some future version of the CCS specification.
   [runs](json_format#runs), as these values are not meaningful for scoring
   and would require unnecessary resending of objects when removed intervals
   change.
+- Added `team_output`, `judge_message`, and `diff` file reference fields
+  to [runs](json_format#runs), allowing run output and validator feedback
+  to be exposed via the API.
 
 ## References
 
