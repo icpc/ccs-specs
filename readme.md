@@ -28,6 +28,7 @@ This is the draft of some future version of the CCS specification.
 
 ## Changes compared to the `2026-01` version
 
+- Added a style guide to be used for all specifications.
 - Extracted a new [JSON Format](json_format) specification containing
   the shared data model (JSON property types, object definitions, and
   notification object format) previously embedded in the [Contest API](contest_api). 
@@ -37,7 +38,8 @@ This is the draft of some future version of the CCS specification.
   "Problems" to "Problem"), renamed "File" to "File reference" and
   "Notification object" to "Notification", and updated all cross-references
   accordingly.
-- Added a style guide to be used for all specifications.
+- Added `score` field to [runs](json_format#runs) for scoring contests,
+  with a note that per-run scores are not well-defined for most problems.
 
 ## References
 
