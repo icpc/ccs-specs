@@ -1002,12 +1002,15 @@ Properties of a run object:
 | time                | TIME    | Absolute time when run completed.
 | contest\_time       | RELTIME | Contest relative time when run completed.
 | run\_time           | number  | Run time in seconds. Should be a non-negative integer multiple of `0.001`. The reason for this is to not have rounding ambiguities while still using the natural unit of seconds.
+| score               | number ?| Score for this run. Only applicable when contest:scoreboard\_type is `score`. The meaning of this score is problem dependent; do not assume the final submission score is the minimum, maximum, or sum of the run scores.
 
 #### Examples
 
 ```json
 [{"id":"1312","judgement_id":"189549","ordinal":28,"judgement_type_id":"TLE",
-  "time":"2014-06-25T11:22:42.420+01","contest_time":"1:22:42.420","run_time":0.123}
+  "time":"2014-06-25T11:22:42.420+01","contest_time":"1:22:42.420","run_time":0.123},
+ {"id":"1313","judgement_id":"189550","ordinal":1,"judgement_type_id":"AC",
+  "time":"2014-06-25T11:23:10.000+01","contest_time":"1:23:10.000","run_time":0.456,"score":42.5}
 ]
 ```
 
