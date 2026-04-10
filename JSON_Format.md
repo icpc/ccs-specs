@@ -49,11 +49,11 @@ absolute timestamps.
   example, the person configuring a contest on disk will typically define the
   ID for each team, and any CCS or CDS that exposes the team must use the same
   ID.
+- File references (type **`FILE`** in the specification) are represented as a
+  JSON object; see [File](#file-reference) under Object definitions below.
 - Geographic locations (type **`LOCATION`** in the specification) are
   represented as a JSON object; see [Location](#location) under Object
   definitions below.
-- File references (type **`FILE`** in the specification) are represented as a
-  JSON object; see [File](#file-reference) under Object definitions below.
 - Arrays (type **`array of <type>`** in the specification) are built-in JSON
   arrays of some type defined above. Unless specifically mentioned, no meaning
   is implied or can be inferred from the order of objects in an array.
@@ -86,15 +86,6 @@ referenced object must exist. How this constraint is enforced in practice is
 context-specific: see the [Contest API](contest_api#referential-integrity) and
 [Contest Package Format](contest_package) specifications.
 
-### Location
-
-Geographic location objects have the following properties:
-
-| Name      | Type   | Description
-| :-------- | :----- | :----------
-| latitude  | number | Latitude in degrees with value between -90 and 90.
-| longitude | number | Longitude in degrees with value between -180 and 180.
-
 ### File reference
 
 A file reference object has the following properties:
@@ -122,6 +113,15 @@ Known values of tags include:
 - `dark`: an image suitable for use on black or dark backgrounds.
 
 An image should list both values if it is suitable for multiple contexts.
+
+### Location
+
+Geographic location objects have the following properties:
+
+| Name      | Type   | Description
+| :-------- | :----- | :----------
+| latitude  | number | Latitude in degrees with value between -90 and 90.
+| longitude | number | Longitude in degrees with value between -180 and 180.
 
 ### Notification
 
@@ -258,6 +258,55 @@ Properties of the provider object:
          "height": 600
       }]
    }
+}
+```
+
+### Access
+
+The access object describes which endpoints and properties are visible to the
+current client, and what [capabilities](contest_api#capabilities) the client
+has. It is only available via the Contest API; the corresponding file does not
+appear in a [Contest Package](contest_package).
+
+Properties of an access object:
+
+| Name         | Type                      | Description
+| :----------- | :------------------------ | :----------
+| capabilities | array of string           | An array of [capabilities](contest_api#capabilities) that the current client has. The array may be empty.
+| endpoints    | array of endpoint objects | An array of endpoint objects that are visible to the current client, as described below. The array may be empty.
+
+Properties of an endpoint object:
+
+| Name         | Type            | Description
+| :----------- | :-------------- | :----------
+| type         | string          | The type of the endpoint, e.g. "problems". See [Notification object](#notification) for the list of types.
+| properties   | array of string | An array of supported properties that the current client has visibility to. The array must not be empty. If the array would be empty, the endpoint object should instead not be included in the endpoints array.
+
+#### Examples
+
+```json
+{
+   "capabilities": ["contest_start"],
+   "endpoints": [
+     { "type": "contest", "properties": ["id","name","formal_name",...]},
+     { "type": "problems", "properties": ["id","label",...]},
+     { "type": "submissions", "properties": ["id","language_id","reaction",...]}
+     ...
+   ]
+}
+```
+
+or:
+
+```json
+{
+   "capabilities": ["team_submit"],
+   "endpoints": [
+     { "type": "contest", "properties": ["id","name","formal_name",...]},
+     { "type": "problems", "properties": ["id","label",...]},
+     { "type": "submissions", "properties": ["id","language_id",...]},
+     ...
+   ]
 }
 ```
 
@@ -786,55 +835,6 @@ expected that non-admin clients never see passwords, and typically do not see ac
 
 ```json
 {"id":"nicky","username":"nicky","type":"admin"}
-```
-
-### Access
-
-The access object describes which endpoints and properties are visible to the
-current client, and what [capabilities](contest_api#capabilities) the client
-has. It is only available via the Contest API; the corresponding file does not
-appear in a [Contest Package](contest_package).
-
-Properties of an access object:
-
-| Name         | Type                      | Description
-| :----------- | :------------------------ | :----------
-| capabilities | array of string           | An array of [capabilities](contest_api#capabilities) that the current client has. The array may be empty.
-| endpoints    | array of endpoint objects | An array of endpoint objects that are visible to the current client, as described below. The array may be empty.
-
-Properties of an endpoint object:
-
-| Name         | Type            | Description
-| :----------- | :-------------- | :----------
-| type         | string          | The type of the endpoint, e.g. "problems". See [Notification object](#notification) for the list of types.
-| properties   | array of string | An array of supported properties that the current client has visibility to. The array must not be empty. If the array would be empty, the endpoint object should instead not be included in the endpoints array.
-
-#### Examples
-
-```json
-{
-   "capabilities": ["contest_start"],
-   "endpoints": [
-     { "type": "contest", "properties": ["id","name","formal_name",...]},
-     { "type": "problems", "properties": ["id","label",...]},
-     { "type": "submissions", "properties": ["id","language_id","reaction",...]}
-     ...
-   ]
-}
-```
-
-or:
-
-```json
-{
-   "capabilities": ["team_submit"],
-   "endpoints": [
-     { "type": "contest", "properties": ["id","name","formal_name",...]},
-     { "type": "problems", "properties": ["id","label",...]},
-     { "type": "submissions", "properties": ["id","language_id",...]},
-     ...
-   ]
-}
 ```
 
 ### Contest state
