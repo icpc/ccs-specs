@@ -53,6 +53,8 @@ This is the draft of some future version of the CCS specification.
   [runs](json_format#runs), as these values are not meaningful for scoring
   and would require unnecessary resending of objects when removed intervals
   change.
+- Added `shirt_rgb`, `shirt_color`, `shirt_text_rgb`, and `shirt_text_color`
+  fields to [teams](json_format#teams) for t-shirt color information.
 
 ## References
 
