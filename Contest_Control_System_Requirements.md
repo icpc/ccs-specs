@@ -342,6 +342,7 @@ It must be possible to, potentially retroactively, specify time intervals that
 will be disregarded for the purpose of scoring. The time during all such
 intervals will not be counted towards a team's penalty time for solved
 problems. Beginning and end of time intervals are given in wall-clock time.
+Time intervals must not overlap.
 
 Note that removing a time interval changes the wall-clock time when the contest
 ends, as the duration of the contest in
