@@ -44,6 +44,9 @@ This is the draft of some future version of the CCS specification.
   `roles` array of objects, each with a `type`, optional `title`, and
   optional `team_id`, to support persons with multiple roles.
 - Added `coach` as a supported [account](json_format#accounts) type.
+- Added `desktop` and `webcam` as known [file reference](json_format#file-reference)
+  tags, and added a best practice recommendation for ordering file references
+  from most to least generally applicable.
 
 ## References
 
