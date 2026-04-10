@@ -40,6 +40,10 @@ This is the draft of some future version of the CCS specification.
   accordingly.
 - Added `score` field to [runs](json_format#runs) for scoring contests,
   with a note that per-run scores are not well-defined for most problems.
+- Restructured the `role` field on [persons](json_format#persons) into a
+  `roles` array of objects, each with a `type`, optional `title`, and
+  optional `team_id`, to support persons with multiple roles.
+- Added `coach` as a supported [account](json_format#accounts) type.
 
 ## References
 
