@@ -37,6 +37,7 @@ This is the draft of some future version of the CCS specification.
   "Problems" to "Problem"), renamed "File" to "File reference" and
   "Notification object" to "Notification", and updated all cross-references
   accordingly.
+- Added a style guide to be used for all specifications.
 
 ## References
 
