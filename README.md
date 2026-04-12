@@ -64,6 +64,8 @@ This is the draft of some future version of the CCS specification.
   fields to [teams](json_format#teams) for t-shirt color information.
 - Added [clarification category](#clarification-category) object and `category_id`
   property to the [clarifications](#clarification) object.
+- Allow `max_score` to be `null` to represent an unbounded or unknown max 
+  score
 
 ## References
 
