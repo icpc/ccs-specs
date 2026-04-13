@@ -1217,7 +1217,7 @@ Properties of the scoreboard object:
 | contest\_time | RELTIME | Contest time contained in the associated event. Implementation defined if the event has no associated contest time.
 | state         | object  | Identical data as returned by the [contest state](#contest-state) endpoint. This is provided here for ease of use and to guarantee the data is synchronized.
 | problems      | array of problem column objects ? | A list of columns of problems with their associated max scores. Required iff there are any required properties in it.
-| rows          | array of scoreboard row objects | A list of rows of teams with their associated scores.
+| rows          | array of scoreboard row objects   | A list of rows of teams with their associated scores.
 
 The scoreboard `rows` array is sorted according to rank and alphabetical
 on team name within identically ranked teams. Here alphabetical ordering
@@ -1247,14 +1247,14 @@ Properties of a scoreboard row object:
 
 Properties of a problem data object:
 
-| Name         | Type      | Description
-| :----------- | :-------- | :----------
-| problem\_id  | ID        | Identifier of the [problem](#problem).
-| num\_judged  | integer   | Number of judged submissions (up to and including the first correct one),
-| num\_pending | integer   | Number of pending submissions (either queued or due to freeze).
-| solved       | boolean   | Required iff contest:scoreboard\_type is `pass-fail`.
-| score        | number    | Required iff contest:scoreboard\_type is `score`.
-| time         | RELTIME   | Minutes into the contest when this problem was solved by the team. Required iff `solved=true` or `score>0`.
+| Name         | Type    | Description
+| :----------- | :------ | :----------
+| problem\_id  | ID      | Identifier of the [problem](#problem).
+| num\_judged  | integer | Number of judged submissions (up to and including the first correct one),
+| num\_pending | integer | Number of pending submissions (either queued or due to freeze).
+| solved       | boolean | Required iff contest:scoreboard\_type is `pass-fail`.
+| score        | number  | Required iff contest:scoreboard\_type is `score`.
+| time         | RELTIME | Minutes into the contest when this problem was solved by the team. Required iff `solved=true` or `score>0`.
 
 #### Examples
 
