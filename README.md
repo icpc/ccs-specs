@@ -66,6 +66,7 @@ This is the draft of some future version of the CCS specification.
   property to the [clarifications](#clarification) object.
 - Allow `max_score` to be `null` to represent an unbounded or unknown max 
   score
+- Require `max_score` in scoreboard when `max_score` is `null` in problem.
 
 ## References
 
