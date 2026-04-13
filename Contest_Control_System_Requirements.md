@@ -565,8 +565,8 @@ team, except as provided in the section [Judge Interface](#judge-interface).
 #### Team Viewing of Broadcast Messages
 
 The CCS must provide each team with a capability for viewing any broadcast
-messages sent by the judges (see [ Issuing Broadcast Messages]
-(#issuing-broadcast-messages) under Judging).
+messages sent by the judges (see [Issuing Broadcast Messages](#issuing-broadcast-messages)
+under Judging).
 
 ### Notifications
 
