@@ -116,8 +116,6 @@ Known values of tags include:
 
 An image should list both values if it is suitable for multiple contexts.
 
-As a best practice, servers should list file references in order from most to least generally applicable, so that clients that do not process tags can pick the first and get a reasonable result.
-
 #### Examples
 
 ```json
