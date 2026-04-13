@@ -1031,6 +1031,9 @@ Properties of a run object:
 | time                | TIME    | Absolute time when run completed.
 | run\_time           | number  | Run time in seconds. Should be a non-negative integer multiple of `0.001`. The reason for this is to not have rounding ambiguities while still using the natural unit of seconds.
 | score               | number ?| Score for this run. Only applicable when contest:scoreboard\_type is `score`. The meaning of this score is problem dependent; do not assume the final submission score is the minimum, maximum, or sum of the run scores. Note that a per-run score is not well-defined for most runs of most problems. Servers should omit `score` when it is not meaningful for the given problem.
+| team\_output        | array of FILE ? | The output produced by the team's submission for this run.
+| judge\_message      | array of FILE ? | The feedback message produced by the output validator for this run.
+| diff                | array of FILE ? | A diff between the team's output and the judge's answer for this run.
 
 #### Examples
 
@@ -1039,6 +1042,12 @@ Properties of a run object:
   "time":"2014-06-25T11:22:42.420+01","run_time":0.123},
  {"id":"1313","judgement_id":"189550","ordinal":1,"judgement_type_id":"AC",
   "time":"2014-06-25T11:23:10.000+01","run_time":0.456,"score":42.5}
+  "time":"2014-06-25T11:22:42.420+01","run_time":0.123},
+ {"id":"1313","judgement_id":"189550","ordinal":1,"judgement_type_id":"WA",
+  "time":"2014-06-25T11:23:10.000+01","run_time":0.456,
+  "team_output":[{"href":"contests/wf14/runs/1313/team_output","filename":"team_output.txt","mime":"text/plain"}],
+  "judge_message":[{"href":"contests/wf14/runs/1313/judge_message","filename":"judge_message.txt","mime":"text/plain"}],
+  "diff":[{"href":"contests/wf14/runs/1313/diff","filename":"diff.txt","mime":"text/x-diff"}]}
 ]
 ```
 
