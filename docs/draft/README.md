@@ -28,11 +28,31 @@ This is the draft of some future version of the CCS specification.
 
 ## Changes compared to the `2026-01` version
 
+- Added a style guide to be used for all specifications.
 - Extracted a new [JSON Format](json_format) specification containing
   the shared data model (JSON property types, object definitions, and
   notification object format) previously embedded in the [Contest API](contest_api). 
   The Contest API and Contest Package Format now reference this document for
   all shared object definitions.
+- Renamed object sections in JSON Format from plural to singular (e.g.
+  "Problems" to "Problem"), renamed "File" to "File reference" and
+  "Notification object" to "Notification", and updated all cross-references
+  accordingly.
+- Added `score` field to [runs](json_format#runs) for scoring contests,
+  with a note that per-run scores are not well-defined for most problems.
+- Restructured the `role` field on [persons](json_format#persons) into a
+  `roles` array of objects, each with a `type`, optional `title`, and
+  optional `team_id`, to support persons with multiple roles.
+- Added `coach` as a supported [account](json_format#accounts) type.
+- Added `desktop` and `webcam` as known [file reference](json_format#file-reference)
+  tags.
+- Added `removed_intervals` to the [contest state](json_format#contest-state)
+  object, allowing time intervals to be marked as disregarded for scoring
+  purposes. Intervals must be non-overlapping and sorted by start time.
+- Removed `contest_time` from [judgements](json_format#judgements) and
+  [runs](json_format#runs), as these values are not meaningful for scoring
+  and would require unnecessary resending of objects when removed intervals
+  change.
 
 ## References
 
