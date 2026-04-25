@@ -646,7 +646,7 @@ Properties of a problem object:
 | output\_limit     | integer         | Limit in MiB on what the submission can write both to `stdout` and `stderr`. If a submission produces more output, a CCS should fail the submission or ignore output beyond this limit.
 | code\_limit       | integer         | Limit in KiB on submissions for this problem. Submissions that are larger should be rejected by a CCS.
 | test\_data\_count | integer         | Number of test data sets.
-| max\_score        | number          | Maximum score. Typically used to determine scoreboard cell color. Required iff contest:scoreboard\_type is `score`.
+| max\_score        | number ?        | Maximum score. Typically used to determine scoreboard cell color. Only applicable when contest:scoreboard\_type is `score`; if `null`, the score is unbounded.
 | package           | array of FILE ? | [Problem package](https://www.kattis.com/problem-package-format/). Expected mime type is application/zip. Only exactly one package is allowed. Not expected to actually contain href for package during the contest, but used for configuration and archiving.
 | statement         | array of FILE ? | Problem statement. Expected mime type is application/pdf.
 | attachments       | array of FILE ? | Problem attachments. These are files made available to teams other than the problem statement and sample test data. Filenames are expected to match the filename mentioned in the problem statement, if any.
@@ -1216,13 +1216,21 @@ Properties of the scoreboard object:
 | time          | TIME    | Time contained in the [event](#notification) after which this scoreboard was generated. Implementation defined if the event has no associated time.
 | contest\_time | RELTIME | Contest time contained in the associated event. Implementation defined if the event has no associated contest time.
 | state         | object  | Identical data as returned by the [contest state](#contest-state) endpoint. This is provided here for ease of use and to guarantee the data is synchronized.
-| rows          | array of scoreboard row objects | A list of rows of teams with their associated scores.
+| problems      | array of problem column objects ? | A list of columns of problems with their associated max scores. Required iff there are any required properties in it.
+| rows          | array of scoreboard row objects   | A list of rows of teams with their associated scores.
 
 The scoreboard `rows` array is sorted according to rank and alphabetical
 on team name within identically ranked teams. Here alphabetical ordering
 means according to the [Unicode Collation
 Algorithm](https://www.unicode.org/reports/tr10/), by default using the
 `en-US` locale.
+
+Properties of a problem column object:
+
+| Name        | Type   | Description
+| :---------- | :----- | :----------
+| problem\_id | ID     | Identifier of the [problem](#problem).
+| max\_score  | number | Maximum score. Typically used to determine scoreboard cell color. Required iff contest:scoreboard_type is score and problem:max_score is `null` for the problem.
 
 Properties of a scoreboard row object:
 
@@ -1239,14 +1247,14 @@ Properties of a scoreboard row object:
 
 Properties of a problem data object:
 
-| Name         | Type      | Description
-| :----------- | :-------- | :----------
-| problem\_id  | ID        | Identifier of the [problem](#problem).
-| num\_judged  | integer   | Number of judged submissions (up to and including the first correct one),
-| num\_pending | integer   | Number of pending submissions (either queued or due to freeze).
-| solved       | boolean   | Required iff contest:scoreboard\_type is `pass-fail`.
-| score        | number    | Required iff contest:scoreboard\_type is `score`.
-| time         | RELTIME   | Minutes into the contest when this problem was solved by the team. Required iff `solved=true` or `score>0`.
+| Name         | Type    | Description
+| :----------- | :------ | :----------
+| problem\_id  | ID      | Identifier of the [problem](#problem).
+| num\_judged  | integer | Number of judged submissions (up to and including the first correct one),
+| num\_pending | integer | Number of pending submissions (either queued or due to freeze).
+| solved       | boolean | Required iff contest:scoreboard\_type is `pass-fail`.
+| score        | number  | Required iff contest:scoreboard\_type is `score`.
+| time         | RELTIME | Minutes into the contest when this problem was solved by the team. Required iff `solved=true` or `score>0`.
 
 #### Examples
 
@@ -1272,4 +1280,36 @@ Properties of a problem data object:
     ]}
   ]
 }
+```
+
+```json
+{
+  "time": "2014-06-25T14:13:07.832+01",
+  "contest_time": "4:13:07.832",
+  "state": {
+    "started": "2014-06-25T10:00:00+01",
+    "ended": null,
+    "frozen": "2014-06-25T14:00:00+01",
+    "thawed": null,
+    "finalized": null,
+    "end_of_updates": null
+  },
+  "problems": [
+    {"problem_id":"1","max_score":100}
+    {"problem_id":"2","max_score":100}
+    {"problem_id":"3","max_score":100}
+    {"problem_id":"4","max_score":100}
+    {"problem_id":"5","max_score":127.34}
+  ],
+  "rows": [
+    {"rank":1,"team_id":"123","score":{"score":277.34,"time":"3:25:00"},"problems":[
+      {"problem_id":"1","num_judged":3,"num_pending":1,"score":0},
+      {"problem_id":"2","num_judged":1,"num_pending":0,"score":100,"time":"0:20:00"},
+      {"problem_id":"3","num_judged":2,"num_pending":0,"score":50,"time":"0:55:00"},
+      {"problem_id":"4","num_judged":0,"num_pending":0,"score":0},
+      {"problem_id":"5","num_judged":3,"num_pending":0,"score":127.34,"time":"3:25:00"}
+    ]}
+  ]
+}
+
 ```
