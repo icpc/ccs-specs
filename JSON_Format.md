@@ -1234,7 +1234,7 @@ Properties of a scoreboard row object:
 | score.num\_solved | integer   | Number of problems solved by the team. Required iff contest:scoreboard\_type is `pass-fail`.
 | score.total\_time | RELTIME   | Total penalty time accrued by the team. Required iff contest:scoreboard\_type is `pass-fail`.
 | score.score       | number    | Total score of problems by the team. Required iff contest:scoreboard\_type is `score`.
-| score.time        | RELTIME ? | Time of last score improvement, used for tiebreaking purposes. Must be `null` iff `num_solved=0`.
+| score.time        | RELTIME ? | Time of last score improvement, used for tiebreaking purposes. Must be `null` iff `num_solved=0` or `score=0`.
 | problems          | array of problem data objects ? | JSON array of problems with scoring data, see below for the specification of each object.
 
 Properties of a problem data object:
