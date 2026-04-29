@@ -20,10 +20,10 @@
 		"name": { "type": "string" },
 		"ordinal": { "type": "integer" },
 		"rgb": {
-			"type": "string",
+			"type": [ "string", "null" ],
 			"pattern": "^#[A-Fa-f0-9]{3}([A-Fa-f0-9]{3})?$"
 		},
-		"color": { "type": "string" },
+		"color": { "type": [ "string", "null" ] },
 		"time_limit": {
 			"type": "number",
 			"multipleOf": 0.001,
