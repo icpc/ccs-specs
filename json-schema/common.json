@@ -148,7 +148,11 @@
 			"hash":     { "type": "string" },
 			"mime":     { "type": "string" },
 			"width":    { "type": "integer", "minimum": 1 },
-			"height":   { "type": "integer", "minimum": 1 }
+			"height":   { "type": "integer", "minimum": 1 },
+			"tag":      {
+				"type": "array",
+				"items": { "type": "string" }
+			}
 		},
 		"required": ["filename", "mime"],
 		"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
