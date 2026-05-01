@@ -1,5 +1,5 @@
 ---
-sort: 2
+sort: 1
 permalink: /json_format
 ---
 # JSON Format
