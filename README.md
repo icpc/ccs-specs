@@ -55,6 +55,8 @@ This is the draft of some future version of the CCS specification.
   change.
 - Added `primary_rgb`, `primary_color`, `secondary_rgb`, and `secondary_color`
   fields to [teams](json_format#teams) for t-shirt color information.
+- Allow `max_score` to be `null` to represent an unbounded or unknown max score.
+- Require `max_score` in scoreboard when `max_score` is `null` in problem.
 
 ## References
 
