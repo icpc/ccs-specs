@@ -211,21 +211,6 @@ arrived to the CCS. If submission S<sub>i</sub> arrived before submission
 S<sub>j</sub> during a removed interval, S<sub>i</sub> must still be considered
 by the CCS to have arrived strictly before S<sub>j</sub>.
 
-#### Changing contest length
-
-It must be possible to change the length of the contest at any time during the
-contest.
-
-#### Adding penalty time
-
-It must be possible to specify, for each team, an integer, potentially negative,
-amount of penalty time to be added into that team's total penalty time.
-
-#### Ignoring submissions
-
-It must be possible to remove, ignore or somehow mark a submission so that it in
-no way affects the scoring of the contest.
-
 ### Pausing Judging
 
 The CCS must provide some way to temporarily pause judging on a per problem
