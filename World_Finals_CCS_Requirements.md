@@ -49,7 +49,7 @@ provided the CCS meets all the requirements listed in this document.
 
 ### Overview
 
-A contest control system may be submitted to the Director of Operations for the
+A contest control system may be submitted to the Technical Director for the
 ICPC World Finals for consideration as a candidate to run the World Finals. The
 items which must be submitted in order to be considered are described under
 [Documentation Requirements](#documentation-requirements) in this document. Any
@@ -59,7 +59,7 @@ or failing to meet each requirement will be determined by a test specified by
 the Director of Operations and/or their designee.
 
 The choice of the CCS actually used to run the World Finals each year will be
-made by the Director of Operations from among those CCSs which have been
+made by the Technical Director from among those CCSs which have been
 accepted as candidates prior to the acceptance deadline.
 
 ## Required Capabilities
