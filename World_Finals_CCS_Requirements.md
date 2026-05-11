@@ -301,28 +301,10 @@ the Big 5 as well as SV and JE:
 
 ### Scoring Data Generation
 
-The CCS MUST be capable of automatically generating up-to-date scoring data
-according to the following:
+In addition to all base requirements in the
+[Contest Control System](ccs#scoring-data-generation) specification, a World Finals 
+CCS MUST also follow the following steps:
 
-1. For purposes of scoring, the *contest time of a submission* is the number of
-   minutes elapsed from the beginning of the contest when the submission was
-   made, skipping removed time intervals if specified (see
-   [Removing Time Intervals](ccs#removing-time-intervals)). This is rounded
-   *down* to the nearest minute, so 59.99 seconds is 0 minutes.
-2. The *contest time that a team solved a problem* is the contest time of the
-   team's first accepted submission to that problem.
-3. A team's *penalty time on a problem* is the contest time that the team
-   solved the problem, plus *penaltytime* (from
-   [contest.json](ccs#importing-contest-configuration)) minutes for each
-   previous submission rejected with a judgement that causes penalty time, by
-   that team on that problem, or 0 if the team has not solved the problem.
-4. A team's *total penalty time* is the sum of the penalty times for all
-   problems plus any judge added penalty time.
-5. A team's *last accepted submission* is the contest time of the problem that
-   the team solved last.
-6. The *position* of a team is determined by sorting the teams first by number
-   of problems solved (descending), then within that by total penalty time
-   (ascending), then within that by last accepted submission (ascending).
 7. The *rank* of a team is then determined as follows:
    1. For teams in positions up to and including 12+B, the rank equals the
       position (B is provided when
@@ -342,11 +324,6 @@ according to the following:
    7. `honors` if the team is ranked and the number of problems solved is at
       least two less than the team ranked 12+B.
    8. `honorable-mention` if the team is not ranked.
-
-When a number of teams are tied for the same position/rank, they all occupy the
-same position/rank and a suitable number of subsequent positions/ranks are left
-empty. For instance, if four teams are tied for 17th position, they are all in
-17th position and positions 18, 19 and 20 are unoccupied.
 
 ### Scoreboard
 
