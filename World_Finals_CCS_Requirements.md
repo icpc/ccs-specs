@@ -266,21 +266,7 @@ in [Judge Responses](#judge-responses).
 The CCS must require a separate authentication every time a judgment is changed
 manually and all such changes must be logged.
 
-### Scoreboard Display
-
-The CCS must provide a mechanism for judges to view the current scoreboard. The
-scoreboard must be updated in such a way that it's never more than 30 seconds
-out of date.
-
-During times when the scoreboard is frozen, administrators must be able to view
-the current (updated) scoreboard as well as the frozen scoreboard.
-
 ### Freezing the Scoreboard
-
-The scoreboard must automatically freeze when the configured scoreboard freeze
-time is reached. It must also be possible to manually freeze the scoreboard at
-the current time. All submissions received after the freeze time must be
-treated as pending on a frozen scoreboard.
 
 The exact phrase displayed on the frozen scoreboard must be:
 
