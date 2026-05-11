@@ -9,7 +9,7 @@ permalink: /wf_requirements
 This document specifies the requirements for a Contest Control System (CCS) to
 be considered for managing the operation of the
 [ICPC World Finals](https://icpc.global). It defines the specific capabilities
-and constraints that any candidate system must provide, beyond those required
+and constraints that a candidate system must provide, beyond those required
 for general CLICS compatibility.
 
 A candidate CCS MUST first satisfy all base requirements defined in the
