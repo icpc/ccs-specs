@@ -247,53 +247,6 @@ time.
 It MUST be possible to remove, ignore or otherwise mark a submission so that
 it in no way affects the scoring of the contest.
 
-### Pausing Judging
-
-The CCS MUST provide some way to temporarily pause judging on a per problem
-basis. While judging is paused teams SHOULD still be able to make submissions
-and these submissions SHOULD be shown on the scoreboard as usual.
-
-### Rejudging
-
-#### Automatic Rejudging
-
-The CCS MUST allow the ability to automatically rejudge a selected set of
-submissions. Each submission in the set of selected submissions is executed and
-judged in the same manner as for a newly arrived submission.
-
-#### Previewing Rejudgement Results
-
-There MUST be a way to preview the judgements which result from rejudging the
-set of selected submissions without committing the resulting judgements.
-
-#### Submission Selection
-
-The CCS MUST provide the ability to specify a filter defining the set of
-submissions to be rejudged. The CCS MUST support any combination of filters of
-the following types:
-
-- A specific (single) submission.
-- All submissions for a specific problem.
-- All submissions using a specific language.
-- All submissions by a specific team or set of teams.
-- All submissions between some time T<sub>0</sub> and some subsequent time T<sub>1</sub>.
-- All submissions which have been assigned any specific one of the allowable
-  submission judgments as defined in [Judge Responses](#judge-responses), or
-  all submissions that received any judgment other than "Accepted" (that is,
-  all rejected submissions).
-- All submissions which have been run on a specific computer (identified in
-  some reasonable way, e.g., IP address or hostname). This requirement is only
-  applicable if the CCS uses multiple machines to run submissions.
-
-### Manual Override of Judgments
-
-The CCS MUST support the ability to assign, to a single submission, an updated
-judgment chosen from among any of the allowed submission judgments as defined
-in [Judge Responses](#judge-responses).
-
-The CCS MUST require a separate authentication every time a judgment is changed
-manually and all such changes MUST be logged.
-
 ### Scoreboard Display
 
 The CCS MUST provide a mechanism for admins to view the current scoreboard. The
