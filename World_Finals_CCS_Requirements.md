@@ -180,16 +180,6 @@ human user or for another system), without the need for starting or stopping
 the contest. For example, this includes [team accounts]
 (#secure-authentication) and judge accounts.
 
-### Changes To Authentication Data
-
-The CCS must allow user authentication credential information to be changed
-dynamically by contest administration staff while the contest is running.
-
-### Starting the Contest
-
-The contest must automatically start when the configured start time is reached.
-It must also be possible to start the contest at the current time.
-
 ### Adjusting for Exceptional Circumstances
 
 #### Removing time intervals
