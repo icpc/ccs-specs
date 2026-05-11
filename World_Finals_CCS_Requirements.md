@@ -165,21 +165,6 @@ following categories MUST be supported:
 
 ## Admin Interface
 
-### Scoreboard Freeze Message
-
-As required by the [Contest Control System](ccs#freezing-the-scoreboard) base
-specification, the CCS MUST support freezing the scoreboard. When the
-scoreboard is frozen, the exact phrase displayed MUST be:
-
-` The scoreboard was frozen with XX minutes remaining - submissions in the last XX minutes of the contest are still shown as pending.`
-where XX is the number of minutes remaining in the contest at the time the
-scoreboard was frozen.
-
-The CCS must have a mechanism to disable any account (either an account for a
-human user or for another system), without the need for starting or stopping
-the contest. For example, this includes [team accounts]
-(#secure-authentication) and judge accounts.
-
 ### Adjusting for Exceptional Circumstances
 
 #### Removing time intervals
