@@ -614,7 +614,9 @@ according to the following:
    (ascending), then within that by last accepted submission (ascending).
 
 When a number of teams are tied for the same position, they all occupy the same
-position and a suitable number of subsequent positions are left empty.
+position and a suitable number of subsequent positions are left empty. For 
+instance, if four teams are tied for 17th position, they are all in 17th 
+position and positions 18, 19 and 20 are unoccupied.
 
 A submission is pending judgement if it has no judgement or if the judgement
 is **Judging Error**. Pending judgements have no effect on scoring.
