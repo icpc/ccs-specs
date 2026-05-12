@@ -29,6 +29,13 @@ This is the draft of some future version of the CCS specification.
 ## Changes compared to the `2026-01` version
 
 - Added a style guide to be used for all specifications.
+- Split the former "CCS System Requirements" document into two documents:
+  a generic [Contest Control System](ccs) specification defining what it
+  means to be a CLICS-compatible CCS, and a
+  [World Finals CCS Requirements](wf_requirements) document that defines
+  the specific requirements for running the ICPC World Finals by
+  referencing the former and mandating a specific subset of its optional
+  capabilities.
 - Extracted a new [JSON Format](json_format) specification containing
   the shared data model (JSON property types, object definitions, and
   notification object format) previously embedded in the [Contest API](contest_api). 
@@ -53,6 +60,8 @@ This is the draft of some future version of the CCS specification.
   [runs](json_format#runs), as these values are not meaningful for scoring
   and would require unnecessary resending of objects when removed intervals
   change.
+- Added `primary_rgb`, `primary_color`, `secondary_rgb`, and `secondary_color`
+  fields to [teams](json_format#teams) for t-shirt color information.
 
 ## References
 
