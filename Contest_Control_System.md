@@ -112,7 +112,7 @@ encrypted.
 
 ### Timestamps and IDs
 
-A timestamp and an integer sequence, called an ID, are assigned to submissions
+A timestamp and an integer, called an ID, are assigned to submissions
 and clarification requests at the time they enter the system. The following
 constraints must be enforced by the CCS:
 
@@ -748,10 +748,10 @@ its functions while communicating only with the Primary CCS.
 #### CCS Configuration
 
 A CCS running in shadow mode MUST be able to import a complete contest
-configuration as described in the [Importing Contest Configuration]
-(#importing-contest-configuration) section. In particular a shadow-mode CCS
-MUST be able to import a contest configuration from a
-[Contest Package](contest_package).
+configuration as described in the
+[Importing Contest Configuration](#importing-contest-configuration) section.
+In particular a shadow-mode CCS MUST be able to import a contest
+configuration from a [Contest Package](contest_package).
 
 #### Submissions
 
