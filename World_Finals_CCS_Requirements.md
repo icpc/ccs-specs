@@ -277,6 +277,12 @@ endpoints MUST be compared with the ones exposed by the
 [Shadow CCS](ccs#shadow-mode) and SHOULD also be manually sanity checked before
 finalizing.
 
+## Team Interface
+
+### Submissions
+
+The CCS must provide both a command line interface (CLI) submission utility as well as a graphical user interface (or web-based interface) to each team to make a submission to the judging system.  The CLI submission utility must provide the same [Submission Contents](ccs#submission-contents) as specified in the base specification.
+
 ## Judging
 
 ### Judge Responses
