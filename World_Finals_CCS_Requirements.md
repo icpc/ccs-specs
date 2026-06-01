@@ -281,7 +281,8 @@ finalizing.
 
 ### Submissions
 
-The CCS must provide both a command line interface (CLI) submission utility as well as a graphical user interface (or web-based interface) to each team to make a submission to the judging system.  The CLI submission utility must provide the same [Submission Contents](ccs#submission-contents) as specified in the base specification.
+The CCS must provide both a command line interface (CLI) submission utility as well as a graphical user interface (or web-based interface) to each team to make a submission to the judging system.
+The CLI submission utility must support providing the same [Submission Contents](ccs#submission-contents) as specified in the base specification.
 
 ## Judging
 
