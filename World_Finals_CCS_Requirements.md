@@ -266,14 +266,10 @@ As required by the [Contest Control System](ccs#finalizing-the-contest) base
 specification, the CCS MUST support finalizing the contest. In addition, the
 following World Finals-specific requirements apply.
 
-Before finalizing the contest the value B, as used in
-[Scoring Data Generation](#scoring-data-generation), MUST be provided. The
-default value for B MUST be 0.
-
-If, after providing the correct and final value of B, the
-[Scoreboard](contest_api#scoreboard) and [Awards](contest_api#awards) endpoints
-contain the correct results, the admin MAY finalize the contest. These
-endpoints MUST be compared with the ones exposed by the
+After validating that the [Scoreboard](contest_api#scoreboard) and
+[Awards](contest_api#awards) endpoints contain the correct results,
+the admin MAY finalize the contest.
+These endpoints MUST be compared with the ones exposed by the
 [Shadow CCS](ccs#shadow-mode) and SHOULD also be manually sanity checked before
 finalizing.
 
@@ -313,23 +309,22 @@ In addition to all base requirements in the
 CCS MUST also follow the following steps:
 
 7. The *rank* of a team is then determined as follows:
-   1. For teams in positions up to and including 12+B, the rank equals the
-      position (B is provided when
-      [finalizing the contest](#finalizing-the-contest); the default value is 0).
+   1. For teams in positions up to and including 12, the rank equals the
+      position.
    2. Teams that solved fewer problems than the median team are not ranked at all.
    3. For the remaining teams, the rank is determined by sorting the teams by
       number of problems solved (descending).
 8. The *awards* of a team are:
    1. `gold-medal` if rank is 1 through 4.
    2. `silver-medal` if rank is 5 through 8.
-   3. `bronze-medal` if rank is 9 through 12+B.
-   4. `rank-<rank>` if rank is not 1 through 12+B but the team is ranked.
+   3. `bronze-medal` if rank is 9 through 12.
+   4. `rank-<rank>` if rank is not 1 through 12 but the team is ranked.
    5. `highest-honors` if the team is ranked and the number of problems solved
-      is at least as high as the team ranked 12+B.
+      is at least as high as the team ranked 12.
    6. `high-honors` if the team is ranked and the number of problems solved is
-      exactly one less than the team ranked 12+B.
+      exactly one less than the team ranked 12.
    7. `honors` if the team is ranked and the number of problems solved is at
-      least two less than the team ranked 12+B.
+      least two less than the team ranked 12.
    8. `honorable-mention` if the team is not ranked.
 
 ### Scoreboard
