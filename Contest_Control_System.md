@@ -112,7 +112,7 @@ encrypted.
 
 ### Timestamps and IDs
 
-A timestamp and an integer, called an ID, are assigned to submissions
+A timestamp and an ID are assigned to submissions
 and clarification requests at the time they enter the system. The following
 constraints must be enforced by the CCS:
 
