@@ -1093,6 +1093,7 @@ Clarification categories provide a mechanism for [clarifications](#clarification
 ```json
 [{"id":"ops","description":"Operations"},
  {"id":"systems","description":"Systems"},
+ {"id":"judges", "description":"Judging"},
  {"id":"fnb","description":"Food & Beverage"}
 ]
 ```
