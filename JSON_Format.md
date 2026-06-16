@@ -1005,7 +1005,7 @@ A judgement must have at least one of `judgement_type_id` or `simplified_judgeme
 If both `judgement_type_id` and `simplified_judgement_type_id` are present, they should be consistent with
 the simplification rules specified in the `judgement-types` endpoint. 
 
-When a judgement is started, each of `judgement_type_id` and `end_time`
+When a judgement is started, each of `judgement_type_id`, `end_time` and `max_run_time`
 will be `null` (or missing). These are set when the
 judgement is completed.
 
