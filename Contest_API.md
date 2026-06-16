@@ -283,7 +283,7 @@ The endpoints can be categorized into 4 types as follows:
 
 - Metadata: [api](#api-information), [access](#access)
 - Configuration: accounts, contests, judgement-types, languages, problems,
-  groups, organizations, persons, teams;
+  groups, organizations, persons, teams, categories;
 - Live data: state, submissions, judgements, runs, clarifications, awards,
   commentary;
 - Aggregate data: [scoreboard](#scoreboard), [event-feed](#event-feed).
@@ -366,25 +366,26 @@ documented in dedicated sections below.
 | :--------------------------------------- | :--------------------------------------------------------------------- | :-----
 | `.`                                      | [API information](json_format#api-information)                         |
 | `contests/<id>/access`                   | [Access](#access)                                                      | API only; not in [Contest Package](contest_package)
-| `contests[/<id>]`                        | [Contest](json_format#contest)                                        | [Modifying contests](#modifying-contests) — PATCH
-| `contests/<id>/judgement-types[/<id>]`   | [Judgement Type](json_format#judgement-type)                          |
-| `contests/<id>/languages[/<id>]`         | [Language](json_format#language)                                      |
-| `contests/<id>/problems[/<id>]`          | [Problem](json_format#problem)                                        |
-| `contests/<id>/groups[/<id>]`            | [Group](json_format#group)                                            |
-| `contests/<id>/organizations[/<id>]`     | [Organization](json_format#organization)                              |
-| `contests/<id>/teams[/<id>]`             | [Team](json_format#team)                                              |
-| `contests/<id>/persons[/<id>]`           | [Person](json_format#person)                                          |
-| `contests/<id>/accounts[/<id>]`          | [Account](json_format#account)                                        |
-| `contests/<id>/account`                  | [Account](json_format#account)                                        | API only; not in [Contest Package](contest_package)
+| `contests[/<id>]`                        | [Contest](json_format#contest)                                         | [Modifying contests](#modifying-contests) — PATCH
+| `contests/<id>/judgement-types[/<id>]`   | [Judgement Type](json_format#judgement-type)                           |
+| `contests/<id>/languages[/<id>]`         | [Language](json_format#language)                                       |
+| `contests/<id>/problems[/<id>]`          | [Problem](json_format#problem)                                         |
+| `contests/<id>/groups[/<id>]`            | [Group](json_format#group)                                             |
+| `contests/<id>/organizations[/<id>]`     | [Organization](json_format#organization)                               |
+| `contests/<id>/teams[/<id>]`             | [Team](json_format#team)                                               |
+| `contests/<id>/persons[/<id>]`           | [Person](json_format#person)                                           |
+| `contests/<id>/accounts[/<id>]`          | [Account](json_format#account)                                         |
+| `contests/<id>/account`                  | [Account](json_format#account)                                         | API only; not in [Contest Package](contest_package)
 | `contests/<id>/state`                    | [Contest state](json_format#contest-state)                             |
-| `contests/<id>/submissions[/<id>]`       | [Submission](json_format#submission)                                  | [Modifying submissions](#modifying-submissions) — POST/PUT
-| `contests/<id>/judgements[/<id>]`        | [Judgement](json_format#judgement)                                    |
-| `contests/<id>/runs[/<id>]`              | [Run](json_format#run)                                                |
-| `contests/<id>/clarifications[/<id>]`    | [Clarification](json_format#clarification)                            | [Modifying clarifications](#modifying-clarifications) — POST/PUT
-| `contests/<id>/awards[/<id>]`            | [Award](json_format#award)                                            | [Modifying awards](#modifying-awards) — POST/PUT/PATCH/DELETE
+| `contests/<id>/submissions[/<id>]`       | [Submission](json_format#submission)                                   | [Modifying submissions](#modifying-submissions) — POST/PUT
+| `contests/<id>/judgements[/<id>]`        | [Judgement](json_format#judgement)                                     |
+| `contests/<id>/runs[/<id>]`              | [Run](json_format#run)                                                 |
+| `contests/<id>/categories[/<id>]`        | [Clarification Category](json_format#clarification-category)           |
+| `contests/<id>/clarifications[/<id>]`    | [Clarification](json_format#clarification)                             | [Modifying clarifications](#modifying-clarifications) — POST/PUT
+| `contests/<id>/awards[/<id>]`            | [Award](json_format#award)                                             | [Modifying awards](#modifying-awards) — POST/PUT/PATCH/DELETE
 | `contests/<id>/commentary[/<id>]`        | [Commentary](json_format#commentary)                                   | [Modifying commentary](#modifying-commentary) — POST
 | `contests/<id>/scoreboard`               | [Scoreboard](json_format#scoreboard)                                   | See [Scoreboard](#scoreboard)
-| `contests/<id>/event-feed`               | [Notification object](json_format#notification)                 | See [Notifications](#notifications), [Event feed](#event-feed)
+| `contests/<id>/event-feed`               | [Notification object](json_format#notification)                        | See [Notifications](#notifications), [Event feed](#event-feed)
 | `webhooks[/<id>]`                        |                                                                        | See [Notifications](#notifications), [Webhooks](#webhooks)
 
 ### Access
@@ -928,6 +929,7 @@ and API endpoints is:
 | submissions     | `contests/<id>/submissions/<id>`                 | [Submission](json_format#submission)
 | judgements      | `contests/<id>/judgements/<id>`                  | [Judgement](json_format#judgement)
 | runs            | `contests/<id>/runs/<id>`                        | [Run](json_format#run)
+| categories      | `contests/<id>/categories/<id>`                  | [Clarification Category](json_format#clarification-category)
 | clarifications  | `contests/<id>/clarifications/<id>`              | [Clarification](json_format#clarification)
 | awards          | `contests/<id>/awards/<id>`                      | [Award](json_format#award)
 | commentary      | `contests/<id>/commentary/<id>`                  | [Commentary](json_format#commentary)
