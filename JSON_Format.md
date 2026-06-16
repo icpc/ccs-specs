@@ -1012,10 +1012,11 @@ judgement is completed.
 #### Examples
 
 ```json
-[{"id":"189549","submission_id":"wf2017-32163123xz3132yy","judgement_type_id":"CE","start_time":"2014-06-25T11:22:48.427+01",
-  "end_time":"2014-06-25T11:23:32.481+01"},
- {"id":"189550","submission_id":"wf2017-32163123xz3133ub","judgement_type_id":null,"start_time":"2014-06-25T11:24:03.921+01",
-  "end_time":null}
+[{"id":"Run-3006499834222341010","submission_id":"s7","judgement_type_id":"CE","start_time":"2026-06-13T12:55:28.112-04",
+  "end_time":"2026-06-13T12:55:29.782-04","simplified_judgement_type_id":"CE"},
+ {"id":"Run-8806968035566460297","submission_id":"s8","start_time":"2026-06-13T12:56:38.033-04"},
+ {"id":"Run-8806968035566460297","submission_id":"s8","judgement_type_id":"TLE","start_time":"2026-06-13T12:56:38.033-04",
+  "end_time":"2026-06-13T12:56:59.715-04","max_run_time":2.006,"simplified_judgement_type_id":"RE"}
 ]
 ```
 
