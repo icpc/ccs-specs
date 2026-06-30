@@ -180,7 +180,7 @@ suitable for the client making the request, as per the following example:
 
 ```json
 {"code":403,
- "message":"Teams cannot send s to another team"}
+ "message":"Teams cannot send clarifications to another team"}
  ```
 
 ### Authentication
