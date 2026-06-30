@@ -180,13 +180,8 @@ suitable for the client making the request, as per the following example:
 
 ```json
 {"code":403,
-<<<<<<< HEAD
  "message":"Teams cannot send clarifications to another team"}
 ```
-=======
- "message":"Teams cannot send clarifications to another team"}
- ```
->>>>>>> f7f58ed (Change categories to clarification-categories)
 
 ### Authentication
 
