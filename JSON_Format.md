@@ -169,7 +169,7 @@ The general format for notification objects is:
 The known notification types are:
 `contest`, `judgement-types`, `languages`, `problems`, `groups`,
 `organizations`, `teams`, `persons`, `accounts`, `state`, `submissions`,
-`judgements`, `runs`, `categories`, `clarifications`, `awards`, `commentary`.
+`judgements`, `runs`, `clarification-categories`, `clarifications`, `awards`, `commentary`.
 
 Each notification object signals that an object or a collection has changed
 (and hence the contents of the corresponding endpoint) to `data`.
