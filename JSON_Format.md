@@ -1205,10 +1205,7 @@ tags below are used.
 
 ### Scoreboard
 
-Scoreboard of the contest.
-
-Since this is generated data, only the `GET` method is allowed in the
-[Contest API](contest_api#scoreboard), irrespective of role.
+Scoreboard of the contest, generated from the other contest objects.
 
 Properties of the scoreboard object:
 
