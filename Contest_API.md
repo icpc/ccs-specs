@@ -354,6 +354,8 @@ array of ID, does not have to be supported.
 
 ### Endpoints
 
+Contests are accessible at the `contests` endpoint, and objects within each
+contest are accessible at endpoints named `contests/<id>/<type-name>`.
 All endpoints return `application/json` and support `GET`. Collection endpoints
 (without a trailing `/<id>`) return a JSON array; single-object endpoints
 return a single JSON object. Properties returned are as specified by

@@ -63,7 +63,8 @@ absolute timestamps.
 ## Object definitions
 
 This section defines the contest data model — the JSON objects used throughout
-this suite of specifications.
+this suite of specifications. Type names are provided for consistent use when
+referring to the objects, e.g. for endpoints or filenames.
 
 ### Table column description
 
@@ -285,6 +286,8 @@ Properties of the provider object:
 
 ### Access
 
+Type name: `access`
+
 The access object describes which endpoints and properties are visible to the
 current client, and what [capabilities](contest_api#capabilities) the client
 has. It is only available via the Contest API; the corresponding file does not
@@ -333,6 +336,8 @@ or:
 ```
 
 ### Contest
+
+Type name: `contests`
 
 Properties of a contest object:
 
@@ -396,6 +401,8 @@ Countdown is resumed by setting a new `start_time` and resetting
 ```
 
 ### Judgement Type
+
+Type name: `judgement-types`
 
 A judgement type is one of the possible responses from the system when judging
 a submission.
@@ -530,6 +537,8 @@ for any judgement type), all judgement types are original only.
 
 ### Language
 
+Type name: `languages`
+
 A language available for submission at the contest.
 
 Properties of a language object:
@@ -628,6 +637,8 @@ version of C++.
 
 ### Problem
 
+Type name: `problems`
+
 A problem to be solved in the contest.
 
 Properties of a problem object:
@@ -664,6 +675,8 @@ Properties of a problem object:
 ```
 
 ### Group
+
+Type name: `groups`
 
 A grouping of teams. At the World Finals these are the super regions; at other contests these
 may be the different sites, divisions, or types of contestants.
@@ -718,6 +731,8 @@ of a group matches.
 
 ### Organization
 
+Type name: `organizations`
+
 An organization that a team can be associated with, which may have
 associated information, e.g. a logo. Typically organizations will be
 universities.
@@ -756,6 +771,8 @@ Properties of an organization object:
 ```
 
 ### Team
+
+Type name: `teams`
 
 A team competing in the contest.
 
@@ -802,6 +819,8 @@ Properties of a team location object:
 
 ### Person
 
+Type name: `persons`
+
 A person involved in the contest.
 
 Properties of a person object:
@@ -840,6 +859,8 @@ Properties of role objects (ROLE):
 
 ### Account
 
+Type name: `accounts`
+
 An account used for accessing the contest, as well as information about the
 account currently accessing the API. Note that the
 [Contest API](contest_api#account) also provides a `contests/<id>/account`
@@ -876,6 +897,8 @@ expected that non-admin clients never see passwords, and typically do not see ac
 ```
 
 ### Contest state
+
+Type name: `state`
 
 Current state of the contest, specifying whether it's running, the
 scoreboard is frozen or results are final.
@@ -938,6 +961,8 @@ and `thawed` is set if the contest was frozen.
 
 ### Submission
 
+Type name: `submissions`
+
 A submission, a.k.a. an attempt to solve a problem in the contest.
 
 Properties of a submission object:
@@ -985,6 +1010,8 @@ base URL for the API is <https://example.com/api/>.
 
 ### Judgement
 
+Type name: `judgements`
+
 A judgement for a submission in the contest.
 
 Properties of a judgement object:
@@ -1022,6 +1049,8 @@ judgement is completed.
 
 ### Run
 
+Type name: `runs`
+
 A run is a judgement of an individual test case of a submission.
 This is intended to provide (among other things) live updates of judging progress.
 
@@ -1048,6 +1077,8 @@ Properties of a run object:
 ```
 
 ### Clarification
+
+Type name: `clarifications`
 
 A clarification message sent between teams and judges, a.k.a.
 a clarification request (question from a team) or clarification
@@ -1095,6 +1126,8 @@ then in order to preserve referential integrity the `reply_to_id` should be remo
 ```
 
 ### Award
+
+Type name: `awards`
 
 An award such as a medal, first to solve, etc.
 
@@ -1151,6 +1184,8 @@ For some common award cases the following IDs should be used.
 
 ### Commentary
 
+Type name: `commentary`
+
 Commentary on events happening in the contest.
 
 Properties of a commentary object:
@@ -1204,6 +1239,8 @@ tags below are used.
 ```
 
 ### Scoreboard
+
+Type name: `scoreboard`
 
 Scoreboard of the contest, generated from the other contest objects.
 
