@@ -1,0 +1,13 @@
+/* Version switcher, styled for the MkDocs ReadTheDocs theme sidebar. */
+.wy-side-nav-search .md-version-switch { margin-top: 0.5rem; }
+.md-version-switch { display: flex; align-items: center; justify-content: center; }
+.md-version-switch select {
+  background: rgba(0, 0, 0, 0.15);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 2px;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.8rem;
+  width: 100%;
+}
+.md-version-switch select option { color: #000; }

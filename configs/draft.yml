@@ -1,0 +1,8 @@
+INHERIT: base.yml
+nav:
+- Contest Control System specifications: README.md
+- Contest Control System: Contest_Control_System.md
+- JSON Format: JSON_Format.md
+- Contest API: Contest_API.md
+- Contest Package Format: Contest_Package.md
+- World Finals CCS Requirements: World_Finals_CCS_Requirements.md
