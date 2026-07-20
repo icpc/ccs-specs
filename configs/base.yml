@@ -1,0 +1,20 @@
+site_name: CCS Specifications
+site_url: https://ccs-specs.icpc.io/
+docs_dir: docs
+use_directory_urls: false
+strict: false
+hooks:
+- hooks.py
+theme:
+  name: readthedocs
+extra_javascript:
+- assets/version-switch.js
+extra_css:
+- assets/version-switch.css
+- assets/theme.css
+markdown_extensions:
+- tables
+- smarty
+- toc
+- admonition
+- fenced_code

@@ -2,11 +2,7 @@
 
 TMPDIR=$(mktemp -d -t 'gen-gh-pages-XXXXXX')
 
-REPO_DIR="$TMPDIR/ccs-specs"
-MY_DIR=$(realpath $(dirname $0))
-
-mkdir -p "$REPO_DIR"
-rsync -a "$MY_DIR/" "$REPO_DIR/"
+MY_DIR=$(realpath "$(dirname "$0")")
 
 cd "$MY_DIR"
 if [ -n "$(git status --porcelain)" ]; then
@@ -15,32 +11,41 @@ if [ -n "$(git status --porcelain)" ]; then
 	exit 1
 fi
 
-rm -rf docs
+# Build a tree laid out as $TMPDIR/<name>/{mkdocs.yml,docs/}.
+# The markdown must already be present in .../docs/; this adds the
+# config and shared assets and builds.
+#   $1 = tree name under $TMPDIR
+#   $2 = config file
+#   $3 = output directory
+build_tree() {
+	cp "$2" "$TMPDIR/$1/mkdocs.yml"
+	cp "$MY_DIR/configs/base.yml" "$TMPDIR/$1/base.yml"
+	cp "$MY_DIR/configs/hooks.py" "$TMPDIR/$1/hooks.py"
+	cp -r "$MY_DIR/assets" "$TMPDIR/$1/docs/assets"
+	mkdocs build -q -f "$TMPDIR/$1/mkdocs.yml" -d "$3"
+}
 
-bundle exec jekyll build -d docs/
+rm -rf docs/
+
+# Home page at the site root.
+mkdir -p "$TMPDIR/home/docs"
+cp "$MY_DIR/README.md" "$TMPDIR/home/docs/index.md"
+cp "$MY_DIR/dev-notes.md" "$TMPDIR/home/docs/dev-notes.md"
+build_tree home "$MY_DIR/configs/home.yml" "$MY_DIR/docs"
+cp "$MY_DIR/CNAME" "$MY_DIR/versions.json" "$MY_DIR/docs/"
 
 commits=''
 for version in $(cat versions.json | jq -r -c '.[]'); do
 	branch="${version}"
-	if [ "${version}" = "draft" ];
-	then
-		branch="master"
-	fi
-	cd "$REPO_DIR"
-	git checkout "${branch}"
-	commitsha=$(git rev-parse --short=10 HEAD)
+	[ "$version" = "draft" ] && branch="master"
+
+	commitsha=$(git rev-parse --short=10 "$branch")
 	commits="${commits}
 - ${version} generated from ${commitsha}"
-	cd -
 
-	ln -sf "$MY_DIR/_layouts" "$REPO_DIR"
-	# Needs to be a copy since symlinks are outside the project
-	cp -Rf "$MY_DIR/_includes" "$REPO_DIR"
-	echo "version: ${version}" > "$TMPDIR/version.yml"
-	bundle exec jekyll build --config _config.yml,"$TMPDIR/version.yml" \
-		-b "/${version}" -s "$REPO_DIR" -d "docs/${version}/"
-
-	sleep 1800
+	mkdir -p "$TMPDIR/$version/docs"
+	git archive "$branch" | tar -x -C "$TMPDIR/$version/docs"
+	build_tree "$version" "$MY_DIR/configs/$version.yml" "$MY_DIR/docs/$version"
 done
 
 git add --all

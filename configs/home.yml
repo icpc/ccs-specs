@@ -1,0 +1,4 @@
+INHERIT: base.yml
+nav:
+- Contest Control System (CCS) Specifications: index.md
+- Development notes: dev-notes.md

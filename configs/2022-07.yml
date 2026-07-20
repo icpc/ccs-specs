@@ -1,0 +1,7 @@
+INHERIT: base.yml
+site_name: CCS Specifications (2022-07)
+nav:
+- 2022-07 Contest Control System (CCS) specification: readme.md
+- CCS System Requirements: Contest_Control_System_Requirements.md
+- Contest API: Contest_API.md
+- Contest Package Format: Contest_Package.md
