@@ -1,1 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?> <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url> <loc>/2020-03/</loc> <priority>0.6</priority> <lastmod>2026-05-12T15:20:47+02:00</lastmod> </url><url> <loc>/2020-03/ccs_system_requirements</loc> <priority>1.0</priority> <lastmod>2026-05-12T15:20:47+02:00</lastmod> </url><url> <loc>/2020-03/contest_api</loc> <priority>1.0</priority> <lastmod>2026-05-12T15:20:47+02:00</lastmod> </url><url> <loc>/2020-03/contest_archive_format</loc> <priority>1.0</priority> <lastmod>2026-05-12T15:20:47+02:00</lastmod> </url> </urlset>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://ccs-specs.icpc.io/contest_api.html</loc>
+         <lastmod>2026-07-23</lastmod>
+    </url>
+    <url>
+         <loc>https://ccs-specs.icpc.io/contest_archive_format.html</loc>
+         <lastmod>2026-07-23</lastmod>
+    </url>
+    <url>
+         <loc>https://ccs-specs.icpc.io/ccs_system_requirements.html</loc>
+         <lastmod>2026-07-23</lastmod>
+    </url>
+    <url>
+         <loc>https://ccs-specs.icpc.io/index.html</loc>
+         <lastmod>2026-07-23</lastmod>
+    </url>
+</urlset>

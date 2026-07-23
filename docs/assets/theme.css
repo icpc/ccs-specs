@@ -1,0 +1,7 @@
+/* Widen the main content area (ReadTheDocs theme defaults to 800px). */
+.wy-nav-content { max-width: 65em; }
+
+/* Wrap table cells instead of overflowing with a horizontal scrollbar. */
+.wy-table-responsive { overflow: visible; }
+.wy-table-responsive table td,
+.wy-table-responsive table th { white-space: normal; }
