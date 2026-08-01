@@ -1077,6 +1077,8 @@ Properties of a run object:
 ```
 ### Clarification Category
 
+Type name: `clarification-categories`
+
 A descriptive category for a [clarification](#clarification) that is not related to a [problem](#problem).
 
 Properties of the clarification category object:
