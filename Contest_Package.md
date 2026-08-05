@@ -148,6 +148,7 @@ Used for configuring a CCS (primary or shadow) before a contest. Suitable for
 download from a registration system or similar tool.
 
 Required files:
+
 - [api](json_format#api-information) (`api.json`)
 - [contests](json_format#contest) (`contest.json`)
 - [languages](json_format#language) (`languages.json`)
@@ -156,6 +157,7 @@ Required files:
 - [accounts](json_format#account) (`accounts.json`)
 
 Optional files:
+
 - [judgement-types](json_format#judgement-type) (`judgement-types.json`)
 - [groups](json_format#group) (`groups.json`)
 - [organizations](json_format#organization) (`organizations.json`)
@@ -202,6 +204,7 @@ Used for uploading local registration data to a central registration system
 (such as the ICPC CMS).
 
 Required files:
+
 - [api](json_format#api-information) (`api.json`)
 - [organizations](json_format#organization) (`organizations.json`)
 - [teams](json_format#team) (`teams.json`)
@@ -239,11 +242,13 @@ Used for uploading results from a finished contest to a central repository
 (such as the ICPC CMS).
 
 Required files:
+
 - [api](json_format#api-information) (`api.json`)
 - [teams](json_format#team) (`teams.json`)
 - [scoreboard](json_format#scoreboard) (`scoreboard.json`)
 
 Optional files:
+
 - [awards](json_format#award) (`awards.json`)
 
 #### Example file listing

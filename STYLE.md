@@ -60,6 +60,7 @@ Use angle brackets for placeholders in endpoint paths and file patterns.
 Placeholder names should be lowercase and use hyphens, matching the style of the surrounding prose.
 
 **Examples:**
+
 - `/contests/<id>/<endpoint>`
 - `<endpoint>/<id>/<filename>`
 - `other-systems/<system>`
@@ -71,6 +72,7 @@ Wrap the entire path in backticks, including any placeholder tokens.
 When referencing another document in this repository, use a relative Markdown link whose href matches the target document's `permalink`.
 
 **Examples:**
+
 - `[JSON Format](json_format)`
 - `[Contest API](contest_api)`
 - `[file reference](json_format#file)`
@@ -128,6 +130,7 @@ Capitalize headers like normal sentences (sentence case),
 that is, only capitalize the first word and proper nouns.
 
 **Examples:**
+
 - ✅ "Example YAML files"
 - ✅ "CCS configuration"
 - ❌ "Example Yaml Files"
