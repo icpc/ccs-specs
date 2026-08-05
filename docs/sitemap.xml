@@ -1,1 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?> <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url> <loc>/</loc> <priority>0.9</priority> <lastmod>2026-05-12T12:49:35+02:00</lastmod> </url><url> <loc>/dev-notes.html</loc> <priority>0.4</priority> <lastmod>2026-05-12T12:49:35+02:00</lastmod> </url> </urlset>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://ccs-specs.icpc.io/index.html</loc>
+         <lastmod>2026-08-05</lastmod>
+    </url>
+    <url>
+         <loc>https://ccs-specs.icpc.io/dev-notes.html</loc>
+         <lastmod>2026-08-05</lastmod>
+    </url>
+</urlset>

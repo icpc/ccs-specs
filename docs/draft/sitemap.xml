@@ -1,1 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?> <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url> <loc>/draft/</loc> <priority>1.0</priority> <lastmod>2026-05-12T12:49:56+02:00</lastmod> </url><url> <loc>/draft/RELEASE.html</loc> <priority>1.0</priority> <lastmod>2026-05-12T12:49:56+02:00</lastmod> </url><url> <loc>/draft/STYLE.html</loc> <priority>1.0</priority> <lastmod>2026-05-12T12:49:56+02:00</lastmod> </url><url> <loc>/draft/ccs</loc> <priority>1.0</priority> <lastmod>2026-05-12T12:49:56+02:00</lastmod> </url><url> <loc>/draft/json_format</loc> <priority>1.0</priority> <lastmod>2026-05-12T12:49:56+02:00</lastmod> </url><url> <loc>/draft/contest_api</loc> <priority>1.0</priority> <lastmod>2026-05-12T12:49:56+02:00</lastmod> </url><url> <loc>/draft/contest_package</loc> <priority>1.0</priority> <lastmod>2026-05-12T12:49:56+02:00</lastmod> </url><url> <loc>/draft/wf_requirements</loc> <priority>1.0</priority> <lastmod>2026-05-12T12:49:56+02:00</lastmod> </url> </urlset>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://ccs-specs.icpc.io/index.html</loc>
+         <lastmod>2026-08-05</lastmod>
+    </url>
+    <url>
+         <loc>https://ccs-specs.icpc.io/contest_api.html</loc>
+         <lastmod>2026-08-05</lastmod>
+    </url>
+    <url>
+         <loc>https://ccs-specs.icpc.io/ccs.html</loc>
+         <lastmod>2026-08-05</lastmod>
+    </url>
+    <url>
+         <loc>https://ccs-specs.icpc.io/contest_package.html</loc>
+         <lastmod>2026-08-05</lastmod>
+    </url>
+    <url>
+         <loc>https://ccs-specs.icpc.io/json_format.html</loc>
+         <lastmod>2026-08-05</lastmod>
+    </url>
+    <url>
+         <loc>https://ccs-specs.icpc.io/RELEASE.html</loc>
+         <lastmod>2026-08-05</lastmod>
+    </url>
+    <url>
+         <loc>https://ccs-specs.icpc.io/STYLE.html</loc>
+         <lastmod>2026-08-05</lastmod>
+    </url>
+    <url>
+         <loc>https://ccs-specs.icpc.io/wf_requirements.html</loc>
+         <lastmod>2026-08-05</lastmod>
+    </url>
+</urlset>
