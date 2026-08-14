@@ -15,7 +15,7 @@ Once a specification is released it uses the naming scheme `<yyyy>-<mm>`.
 These releases are stable and will not change except for trivial changes such
 as fixing spelling and grammar, or improving examples or explanations.
 
-* [2026-01](/2026-01) - New stable release
+* [2026-01](/2026-01) - New stable release (minor republish to fix FileReference tags property)
 * [2023-06](/2023-06) - Used at the ICPC World Finals in Luxor, Astana, and Baku; to be used at Dubai
 * [2022-07](/2022-07) - Used at the ICPC World Finals in Dhaka
 * [2021-11](/2021-11) - Used at [NWERC 2021](https://2021.nwerc.eu) in Iceland
