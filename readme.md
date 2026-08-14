@@ -28,7 +28,7 @@ Other versions of the CCS specifications are available
 These are the main changes made since the `2023-06` version:
 
    1. Add support for **post\_comment** capability (posting commentary)
-   2. Add property **tags** (array of string) to file reference objects (FILE) along with a description of how it may be used. (eg. hints such as light or dark for images)
+   2. Add property **tags** (array of string) to file reference objects (FILE) along with a description of how it may be used. (eg. hints such as light or dark for images) **This property was initially mis-published as 'tag'**
    3. contests endpoint
       1. Change **penalty\_time** from integer minutes to **RELTIME** (breaking change)
    4. judgement-types endpoint
