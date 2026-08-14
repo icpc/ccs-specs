@@ -99,7 +99,7 @@ A file reference object has the following properties:
 | mime     | string          | Mime type of resource.
 | width    | integer ?       | Width of the image. Required for files with mime type image/\*.
 | height   | integer ?       | Height of the image. Required for files with mime type image/\*.
-| tag      | array of string | Intended usage hints (e.g. `light`, `dark` for images). No meaning must be implied or inferred from the order of the elements.
+| tags     | array of string | Intended usage hints (e.g. `light`, `dark` for images). No meaning must be implied or inferred from the order of the elements.
 
 For images, the supported mime types are image/png, image/jpeg, and image/svg+xml.
 
@@ -128,7 +128,7 @@ An image should list both values if it is suitable for multiple contexts.
 ```
 
 ```json
-{"filename":"logo.dark.svg","mime":"image/svg+xml","width":48,"height":48,"tag":["dark"]}
+{"filename":"logo.dark.svg","mime":"image/svg+xml","width":48,"height":48,"tags":["dark"]}
 ```
 
 ### Location

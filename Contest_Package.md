@@ -114,7 +114,7 @@ For images, the supported file extensions are:
 For images, a tag of `.<W>x<H>`, is interpreted as the file reference object
 having the `width` property set to  `<W>` and the `height` property set to
 `<H>`. Every other tag is interpreted as the file reference object having
-the value in its `tag` property array.
+the value in its `tags` property array.
 
 ### Multiple systems
 
