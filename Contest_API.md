@@ -168,7 +168,7 @@ following example:
 ```json
 {"code":403,
  "message":"Teams cannot send clarifications to another team"}
- ```
+```
 
 ### Roles
 
@@ -1917,10 +1917,12 @@ the same order or set of events. The only guarantees are:
 - the latest notification sent for any object is the correct and current
 state of that object. E.g. if an object was created and deleted the
 delete notification will be sent last.
+
 - when a notification is sent the change it describes must already have
 happened. I.e. if a client receives an update for a certain endpoint a
 `GET` from that endpoint will return that state or possible some later
 state, but never an earlier state.
+
 - the notification for the [state endpoint](#contest-state) setting
 `end_of_updates` must be the last event in the feed.
 
