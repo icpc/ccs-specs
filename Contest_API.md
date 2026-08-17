@@ -148,7 +148,7 @@ response message body must include a JSON element that contains the attributes '
 ```json
 {"code":403,
  "message":"Teams cannot send clarifications to another team"}
- ```
+```
 
 ### Roles
 
