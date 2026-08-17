@@ -104,6 +104,7 @@ Used for configuring a CCS (primary or shadow) before a contest. Suitable for
 download from a registration system or similar tool.
 
 Required endpoints:
+
 - api
 - contests
 - languages
@@ -112,6 +113,7 @@ Required endpoints:
 - accounts
 
 Optional endpoints:
+
 - judgement-types
 - groups
 - organizations
@@ -158,6 +160,7 @@ Used for uploading local registration data to a central registration system
 (such as the ICPC CMS).
 
 Required endpoints:
+
 - api
 - organizations
 - teams
@@ -191,11 +194,13 @@ Used for uploading results from a finished contest to a central repository
 (such as the ICPC CMS).
 
 Required endpoints:
+
 - api
 - teams
 - scoreboard
 
 Optional endpoints:
+
 - awards
 
 #### Example file listing
