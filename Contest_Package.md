@@ -46,6 +46,7 @@ JSON object.
 Files referenced in `api.json` and `contest.json` are stored as
 `api/<filename>` and `contest/<filename>` respectively, and files referenced
 in `<endpoint>.json` are stored as `<endpoint>/<id>/<filename>`, where:
+
 - `<id>` is the ID of the endpoint object the reference is in.
 - `<filename>` is the filename specified in the file reference object.
 
@@ -106,6 +107,7 @@ Used for configuring a CCS (primary or shadow) before a contest. Suitable for
 download from a registration system or similar tool.
 
 Required endpoints:
+
 - api
 - contests
 - languages
@@ -114,6 +116,7 @@ Required endpoints:
 - accounts
 
 Optional endpoints:
+
 - judgement-types
 - groups
 - organizations
@@ -160,6 +163,7 @@ Used for uploading local registration data to a central registration system
 (such as the ICPC CMS).
 
 Required endpoints:
+
 - api
 - organizations
 - teams
@@ -193,11 +197,13 @@ Used for uploading results from a finished contest to a central repository
 (such as the ICPC CMS).
 
 Required endpoints:
+
 - api
 - teams
 - scoreboard
 
 Optional endpoints:
+
 - awards
 
 #### Example file listing
