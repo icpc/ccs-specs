@@ -169,7 +169,7 @@ The general format for notification objects is:
 The known notification types are:
 `contest`, `judgement-types`, `languages`, `problems`, `groups`,
 `organizations`, `teams`, `persons`, `accounts`, `state`, `submissions`,
-`judgements`, `runs`, `clarifications`, `awards`, `commentary`.
+`judgements`, `runs`, `clarification-categories`, `clarifications`, `awards`, `commentary`.
 
 Each notification object signals that an object or a collection has changed
 (and hence the contents of the corresponding endpoint) to `data`.
@@ -1075,6 +1075,30 @@ Properties of a run object:
   "time":"2014-06-25T11:23:10.000+01","run_time":0.456,"score":42.5}
 ]
 ```
+### Clarification Category
+
+Type name: `clarification-categories`
+
+A descriptive category for a [clarification](#clarification) that is not related to a [problem](#problem).
+
+Properties of the clarification category object:
+
+| Name         | Type          | Description
+| :----------- | :------------ | :----------
+| id           | ID            | Identifier of the clarification category.
+| description  | string        | Description of the clarification category, e.g. "Systems"
+
+Clarification categories provide a mechanism for [clarifications](#clarification) to be directed to and answered by the appropriate group of people.
+
+#### Examples
+
+```json
+[{"id":"ops","description":"Operations"},
+ {"id":"systems","description":"Systems"},
+ {"id":"judges", "description":"Judging"},
+ {"id":"fnb","description":"Food & Beverage"}
+]
+```
 
 ### Clarification
 
@@ -1094,6 +1118,7 @@ Properties of a clarification message object:
 | to\_group\_ids | array of ID ?    | Identifiers of the [group(s)](#group) receiving this reply, `null` iff a reply to all teams or a request sent by a team.
 | reply\_to\_id  | ID ?             | Identifier of clarification this is in response to, otherwise `null`.
 | problem\_id    | ID ?             | Identifier of associated [problem](#problem), `null` iff not associated to a problem.
+| category\_id   | ID ?             | Identifier of the associated [clarification category][#clarification-category], `null` iff associated to a problem
 | text           | string           | Question or reply text.
 | time           | TIME             | Time of the question/reply.
 | contest\_time  | RELTIME          | Contest time of the question/reply.
@@ -1103,25 +1128,27 @@ The recipients of a clarification are the union of `to_team_ids` and `to_group_i
 Clarifications between a team and the judges are typically private. If the judges replies to a clarification and chooses to include additional recipients,
 then in order to preserve referential integrity the `reply_to_id` should be removed for everyone who couldn't see the original message.
 
+At least one of `problem_id` or `category_id` must be `null` or missing.  If both are `null` or missing, then the clarification is assumed to be a general clarification.
+
 #### Examples
 
 ```json
-[{"id":"wf2017-1","from_team_id":null,"to_team_ids":null,"to_group_ids":null,"reply_to_id":null,"problem_id":null,
-  "text":"Do not touch anything before the contest starts!","time":"2014-06-25T11:59:27.543+01","contest_time":"-0:15:32.457"}
+[{"id":"clar-1","from_team_id":null,"to_team_ids":null,"to_group_ids":null,"reply_to_id":null,
+  "text":"Do not touch anything before the contest starts!","time":"2026-06-16T11:12:45.167-04","contest_time":"-0:15:32.457"}
 ]
 ```
 
 ```json
-[{"id":"1","from_team_id":"34","to_team_ids":null,"to_group_ids":null,"reply_to_id":null,"problem_id":null,
-  "text":"May I ask a question?","time":"2017-06-25T11:59:27.543+01","contest_time":"1:59:27.543"},
+[{"id":"1","from_team_id":"34","to_team_ids":null,"to_group_ids":null,"reply_to_id":null,"problem_id":null,"category_id":"judges",
+  "text":"May I ask a question?","time":"2026-06-16T11:14:10.100-04","contest_time":"1:59:27.543"},
  {"id":"2","from_team_id":null,"to_team_ids":["34"],"reply_to_id":"1","problem_id":null,
-  "text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}
+  "text":"Yes you may!","time":"2026-06-16T11:14:30.100-04","contest_time":"1:59:47.543"}
 ]
 ```
 
 ```json
-[{"id":"1","from_team_id":"34","text":"May I ask a question?","time":"2017-06-25T11:59:27.543+01","contest_time":"1:59:27.543"},
- {"id":"2","to_team_ids":["34","57","69"],"to_group_ids":["1336"], "reply_to_id":"1","text":"Yes you may!","time":"2017-06-25T11:59:47.543+01","contest_time":"1:59:47.543"}
+[{"id":"1","from_team_id":"34","text":"May I ask a question?","time":"2026-06-16T11:20:00.067-04","contest_time":"1:59:27.543"},
+ {"id":"2","to_team_ids":["34","57","69"],"to_group_ids":["1336"], "reply_to_id":"1","text":"Yes you may!","time":"2026-06-16T11:20:30.267-04","contest_time":"1:59:47.543"}
 ]
 ```
 
