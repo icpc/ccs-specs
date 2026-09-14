@@ -1086,7 +1086,7 @@ Properties of the clarification category object:
 | Name         | Type          | Description
 | :----------- | :------------ | :----------
 | id           | ID            | Identifier of the clarification category.
-| description  | string        | Description of the clarification category, e.g. "Systems"
+| name         | string        | Name of the clarification category, e.g. "Systems"
 
 Clarification categories provide a mechanism for [clarifications](#clarification) to be directed to and answered by the appropriate group of people.
 
@@ -1127,8 +1127,6 @@ The recipients of a clarification are the union of `to_team_ids` and `to_group_i
 
 Clarifications between a team and the judges are typically private. If the judges replies to a clarification and chooses to include additional recipients,
 then in order to preserve referential integrity the `reply_to_id` should be removed for everyone who couldn't see the original message.
-
-`category_id` may be non-null and apply to either clarifications associated to a problem or clarifications not associated to a problem.
 
 #### Examples
 
