@@ -749,6 +749,34 @@ Returned data:
 }
 ```
 
+Request:
+
+` PUT https://example.com/api/contests/wf14/clarifications`
+
+Request data:
+
+```json
+{
+   "id":"clar-10",
+   "from_team_id":"34",
+   "text":"Can someone fix my mouse? It is not working.",
+   "category_id":"operations"
+}
+```
+
+Returned data:
+
+```json
+{
+   "id":"clar-10",
+   "from_team_id":"34",
+   "text":"Can someone fix my mouse? It is not working.",
+   "category_id":"operations",
+   "time":"2026-09-02T13:02:23.104-04",
+   "contest_time":"0:03:11.009"
+}
+```
+
 ### Modifying awards
 
 Clients with the `admin` role may make changes to awards using the

@@ -1118,7 +1118,7 @@ Properties of a clarification message object:
 | to\_group\_ids | array of ID ?    | Identifiers of the [group(s)](#group) receiving this reply, `null` iff a reply to all teams or a request sent by a team.
 | reply\_to\_id  | ID ?             | Identifier of clarification this is in response to, otherwise `null`.
 | problem\_id    | ID ?             | Identifier of associated [problem](#problem), `null` iff not associated to a problem.
-| category\_id   | ID ?             | Identifier of the associated [clarification category][#clarification-category], `null` iff associated to a problem
+| category\_id   | ID ?             | Identifier of the associated [clarification category](#clarification-category)
 | text           | string           | Question or reply text.
 | time           | TIME             | Time of the question/reply.
 | contest\_time  | RELTIME          | Contest time of the question/reply.
@@ -1128,13 +1128,19 @@ The recipients of a clarification are the union of `to_team_ids` and `to_group_i
 Clarifications between a team and the judges are typically private. If the judges replies to a clarification and chooses to include additional recipients,
 then in order to preserve referential integrity the `reply_to_id` should be removed for everyone who couldn't see the original message.
 
-At least one of `problem_id` or `category_id` must be `null` or missing.  If both are `null` or missing, then the clarification is assumed to be a general clarification.
+`category_id` may be non-null and apply to either clarifications associated to a problem or clarifications not associated to a problem.
 
 #### Examples
 
 ```json
 [{"id":"clar-1","from_team_id":null,"to_team_ids":null,"to_group_ids":null,"reply_to_id":null,
   "text":"Do not touch anything before the contest starts!","time":"2026-06-16T11:12:45.167-04","contest_time":"-0:15:32.457"}
+]
+```
+
+```json
+[{"id":"clar-2","from_team_id":"34","problem_id":"10-asteroids",
+  "text":"Can you verify the sample data is correct?","time":"2026-06-16T12:22:22.221-04","contest_time":"1:10:01.100"}
 ]
 ```
 
