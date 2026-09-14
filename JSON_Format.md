@@ -1093,10 +1093,10 @@ Clarification categories provide a mechanism for [clarifications](#clarification
 #### Examples
 
 ```json
-[{"id":"ops","description":"Operations"},
- {"id":"systems","description":"Systems"},
- {"id":"judges", "description":"Judging"},
- {"id":"fnb","description":"Food & Beverage"}
+[{"id":"ops","name":"Operations"},
+ {"id":"systems","name":"Systems"},
+ {"id":"judges", "name":"Judging"},
+ {"id":"fnb","name":"Food & Beverage"}
 ]
 ```
 
