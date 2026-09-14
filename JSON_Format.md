@@ -251,7 +251,7 @@ Properties of an API information object:
 
 | Name         | Type              | Description
 | :----------- | :---------------- | :----------
-| version      | string            | Version of the API. For this version must be the string `draft`. Will be of the form `<yyyy>-<mm>`, `<yyyy>-<mm>-draft`, or simply `draft`.
+| version      | string            | Version of the API. For this version must be the string `2026-01-next`. Will be of the form `<yyyy>-<mm>` for releases, `<yyyy>-<mm>-next` for draft work following a release, or `<yyyy>-<mm>-draft` for final review before a new release.
 | version\_url | string            | Link to documentation for this version of the API.
 | provider     | provider object ? | Information about the data provider.
 
@@ -267,7 +267,7 @@ Properties of the provider object:
 
 ```json
 {
-   "version": "draft",
+   "version": "2026-01-next",
    "version_url": "https://ccs-specs.icpc.io/draft/contest_api",
    "provider" : {
       "name": "DOMjudge",
