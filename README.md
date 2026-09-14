@@ -62,6 +62,8 @@ This is the draft of some future version of the CCS specification.
   change.
 - Added `primary_rgb`, `primary_color`, `secondary_rgb`, and `secondary_color`
   fields to [teams](json_format#teams) for t-shirt color information.
+- Added [clarification category](#clarification-category) object and `category_id`
+  property to the [clarifications](#clarification) object.
 
 ## References
 
