@@ -234,7 +234,7 @@ Event:
       "time": "2014-06-25T11:22:05.034+01",
       "contest_time": "1:22:05.034",
       "entry_point": "Main",
-      "files": [{"href":"contests/wf14/submissions/187/files","filename":"files.zip","mime":"application/zip"}]   
+      "files": [{"href":"contests/wf14/submissions/187/files","filename":"files.zip","mime":"application/zip"}]
    }
 }
 ```
@@ -938,8 +938,8 @@ started < frozen < ended < thawed    < end_of_updates,
                    ended < finalized < end_of_updates.
 ```
 
-A contest that has ended, been thawed (or was never frozen) and is finalized 
-must not change. Thus, `end_of_updates` can be set once both `finalized` is set 
+A contest that has ended, been thawed (or was never frozen) and is finalized
+must not change. Thus, `end_of_updates` can be set once both `finalized` is set
 and `thawed` is set if the contest was frozen.
 
 #### Examples
@@ -1020,8 +1020,8 @@ Properties of a judgement object:
 | :------------------------------ | :-------- | :----------
 | id                              | ID        | Identifier of the judgement.
 | submission\_id                  | ID        | Identifier of the [submission](#submission) judged.
-| judgement\_type\_id             | ID ?      | The [verdict](#judgement-type) of this judgement. 
-| simplified\_judgement\_type\_id | ID ?      | The [simplified verdict](#judgement-type) of this judgement. 
+| judgement\_type\_id             | ID ?      | The [verdict](#judgement-type) of this judgement.
+| simplified\_judgement\_type\_id | ID ?      | The [simplified verdict](#judgement-type) of this judgement.
 | score                           | number    | Score for this judgement, between `0` and the problem's `max_score`. Required iff contest:scoreboard\_type is `score`.
 | current                         | boolean ? | `true` if this is the current judgement. Defaults to `true`. At any time, there must be at most one judgement per submission for which this is `true` or unset (and thus defaulting to `true`).
 | start\_time                     | TIME      | Absolute time when judgement started.
@@ -1030,7 +1030,7 @@ Properties of a judgement object:
 
 A judgement must have at least one of `judgement_type_id` or `simplified_judgement_type_id` specified iff it is completed.
 If both `judgement_type_id` and `simplified_judgement_type_id` are present, they should be consistent with
-the simplification rules specified in the `judgement-types` endpoint. 
+the simplification rules specified in the `judgement-types` endpoint.
 
 When a judgement is started, each of `judgement_type_id`, `end_time` and `max_run_time`
 will be `null` (or missing). These are set when the
@@ -1263,8 +1263,8 @@ tags below are used.
 #### Examples
 
 ```json
-[{"id":"143730", "time":"2021-03-06T19:02:02.328+00", "contest_time":"0:02:02.328", "message": "{t:314089} made a submission for {p:anttyping}. If correct, they will solve the first problem and take the lead", "team_ids": ["314089"], "problem_ids": ["anttyping"]}, 
- {"id": "143736", "time": "2021-03-06T19:02:10.858+00", "contest_time": "0:02:10.858", "message": "{t:314089} fails its first attempt on {p:anttyping} due to WA", "team_ids": ["314089"], "problem_ids": ["anttyping"]}, 
+[{"id":"143730", "time":"2021-03-06T19:02:02.328+00", "contest_time":"0:02:02.328", "message": "{t:314089} made a submission for {p:anttyping}. If correct, they will solve the first problem and take the lead", "team_ids": ["314089"], "problem_ids": ["anttyping"]},
+ {"id": "143736", "time": "2021-03-06T19:02:10.858+00", "contest_time": "0:02:10.858", "message": "{t:314089} fails its first attempt on {p:anttyping} due to WA", "team_ids": ["314089"], "problem_ids": ["anttyping"]},
  {"id": "143764", "time": "2021-03-06T19:03:07.517+00", "contest_time": "0:03:07.517", "message": "{t:314115} made a submission for {p:march6}. If correct, they will solve the first problem and take the lead", "team_ids": ["314115"], "problem_ids": ["march6"]}
 ]
 ```
