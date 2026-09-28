@@ -1195,14 +1195,14 @@ For some common award cases the following IDs should be used.
 | gold-medal                | Teams currently placed to receive a gold medal. Empty if no team has scored.                                               | Teams being awarded gold medals.             |
 | silver-medal              | Teams currently placed to receive a silver medal. Empty if no team has scored.                                             | Teams being awarded silver medals.           |
 | bronze-medal              | Teams currently placed to receive a bronze medal, assuming no extra bronze are awarded. Empty if no team has scored.       | Teams being awarded bronze medals.           |
-| rank-\<rank>              | Teams currently placed to receive rank \<rank>. Empty if no team has scored.                                               | Teams being awarded rank \<rank>.            | Only useful in contests where the final ranking awarded is different from the default ranking of the scoreboard. E.g. at the WF teams *not* getting medals are only ranked based on number of problems solved, and not total penalty time accrued nor time of last score improvement, and teams solving strictly fewer problems than the median team are not ranked at all.  
+| rank-&lt;rank&gt;               | Teams currently placed to receive rank &lt;rank&gt;. Empty if no team has scored.                                               | Teams being awarded rank &lt;rank&gt;.            | Only useful in contests where the final ranking awarded is different from the default ranking of the scoreboard. E.g. at the WF teams *not* getting medals are only ranked based on number of problems solved, and not total penalty time accrued nor time of last score improvement, and teams solving strictly fewer problems than the median team are not ranked at all.
 | honorable-mention         | Teams currently placed to receive an honorable mention.                                                                    | Teams being awarded an honorable mention.    |
 | honors                    | Teams currently placed to receive an honors award.                                                                         | Teams being awarded an honors award.         |
 | high-honors               | Teams currently placed to receive an high honors award.                                                                    | Teams being awarded an high honors award.    |
 | highest-honors            | Teams currently placed to receive an highest honors award.                                                                 | Teams being awarded an highest honors award. |
-| first-to-solve-\<id>      | The team(s), if any, that was first to solve problem \<id>. This implies that no unjudged submission made earlier remains. | Same.                                        | Must never change once set, except if there are rejudgements.
-| group-winner-\<id>        | Current leader(s) in group \<id>. Empty if no team has scored.                                                             | Winner(s) of group \<id>.                    |
-| organization-winner-\<id> | Current leader(s) of organization \<id>. Empty if no team has scored.                                                      | Winner(s) of organization \<id>.             | Not useful in contest with only one team per organization (e.g. the WF).
+| first-to-solve-&lt;id&gt;       | The team(s), if any, that was first to solve problem &lt;id&gt;. This implies that no unjudged submission made earlier remains. | Same.                                        | Must never change once set, except if there are rejudgements.
+| group-winner-&lt;id&gt;        | Current leader(s) in group &lt;id&gt;. Empty if no team has scored.                                                             | Winner(s) of group &lt;id&gt;.                    |
+| organization-winner-&lt;id&gt; | Current leader(s) of organization &lt;id&gt;. Empty if no team has scored.                                                      | Winner(s) of organization &lt;id&gt;.             | Not useful in contest with only one team per organization (e.g. the WF).
 
 #### Examples
 
@@ -1250,7 +1250,7 @@ tags below are used.
 | submission-silver-medal | A submission was made that if accepted would change the set of teams awarded a silver medal.
 | submission-bronze-medal | A submission was made that if accepted would change the set of teams awarded a bronze medal.
 | submission-winner       | A submission was made that if accepted would change the set of teams currently in the lead.
-| submission-\<award>     | A submission was made that if accepted would change the set of teams awarded \<award>. Note that the above 4 are special cases of this.
+| submission-&lt;award&gt;| A submission was made that if accepted would change the set of teams awarded &lt;award&gt;. Note that the above 4 are special cases of this.
 | rejected                | A submission was rejected.
 | accepted                | A submission was accepted.
 | accepted-medal          | A submission was accepted that changed the set of teams awarded a medal.
@@ -1258,7 +1258,7 @@ tags below are used.
 | accepted-silver-medal   | A submission was accepted that changed the set of teams awarded a silver medal.
 | accepted-bronze-medal   | A submission was accepted that changed the set of teams awarded a bronze medal.
 | accepted-winner         | A submission was accepted that changed the set of teams currently in the lead.
-| accepted-\<award>       | A submission was accepted that changed the set of teams awarded \<award>. Note that the above 4 are special cases of this.
+| accepted-&lt;award&gt;  | A submission was accepted that changed the set of teams awarded &lt;award&gt;. Note that the above 4 are special cases of this.
 
 #### Examples
 
