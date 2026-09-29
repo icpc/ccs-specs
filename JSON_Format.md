@@ -212,14 +212,14 @@ Event:
 }
 ```
 
-Means that **** `contests/<contest_id>/problems` has been updated to:
+Means that `problems` has been updated to:
 ```json
 [
    {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},
    {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}
 ]
 ```
-and the child objects `contests/<contest_id>/problems/asteroids` and `contests/<contest_id>/problems/bottles` are updated accordingly.
+and the child problem objects `asteroids` and `bottles` are updated accordingly, and no other problems exist.
 
 Event:
 ```json
