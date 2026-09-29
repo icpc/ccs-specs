@@ -44,7 +44,7 @@ absolute timestamps.
 - Identifiers (type **`ID`** in the specification) are given as strings
   consisting of characters `[a-zA-Z0-9_.-]` of length at most 36 and not
   starting with a `-` (dash) or `.` (dot) or ending with a `.` (dot). IDs are
-  unique within each endpoint. IDs are assigned by the person or system that is
+  unique within each object type. IDs are assigned by the person or system that is
   the source of the object, and must be maintained by downstream systems. For
   example, the person configuring a contest on disk will typically define the
   ID for each team, and any CCS or CDS that exposes the team must use the same
@@ -94,7 +94,7 @@ A file reference object has the following properties:
 | Name     | Type            | Description
 | :------- | :-------------- | :----------
 | href     | string ?        | URL where the resource can or could be found. Must point to a file of the intended mime-type. In Contest API responses `href` is required; in Contest Packages `href` may be omitted when the file is stored locally. See the [Contest API](contest_api#file-references) and [Contest Package Format](contest_package#file-references) for details.
-| filename | string          | POSIX compliant filename. Filenames must be unique within the endpoint object where they are used. I.e. an organization can have (multiple) `logo` and `country_flag` file references, they must all have a different filename, but different organizations may have files with the same filename.
+| filename | string          | POSIX compliant filename. Filenames must be unique within the object where they are used. I.e. an organization can have (multiple) `logo` and `country_flag` file references, they must all have a different filename, but different organizations may have files with the same filename.
 | hash     | string ?        | MD5 hash of the file referenced.
 | mime     | string          | Mime type of resource.
 | width    | integer ?       | Width of the image. Required for files with mime type image/\*.
@@ -163,7 +163,7 @@ The general format for notification objects is:
 | :---------- | :---------------- | :----------
 | type        | string            | The type of contest object that changed. Can be used for filtering.
 | id          | ID ?              | The id of the object that changed, or null for the entire collection/singleton.
-| data        | array or object ? | The updated value, i.e. what would be returned if calling the corresponding API endpoint at this time: an array, object, or null for deletions.
+| data        | array or object ? | The updated value, i.e. what would be returned if requesting the corresponding object at this time: an array, object, or null for deletions.
 | token       | string ?          | An optional token used to identify this notification. For one use see event feed [Reconnection](contest_api#reconnection).
 
 The known notification types are:
@@ -172,7 +172,7 @@ The known notification types are:
 `judgements`, `runs`, `clarification-categories`, `clarifications`, `awards`, `commentary`.
 
 Each notification object signals that an object or a collection has changed
-(and hence the contents of the corresponding endpoint) to `data`.
+(and hence the contents of the corresponding object) to `data`.
 
 If `type` is `contest`, then `id` must be null.
 
@@ -212,14 +212,14 @@ Event:
 }
 ```
 
-Means that endpoint `contests/<contest_id>/problems` has been updated to:
+Means that `problems` has been updated to:
 ```json
 [
    {"id":"asteroids","label":"A","name":"Asteroid Rangers","ordinal":1,"color":"blue","rgb":"#00f","time_limit":2,"test_data_count":10},
    {"id":"bottles","label":"B","name":"Curvy Little Bottles","ordinal":2,"color":"gray","rgb":"#808080","time_limit":3.5,"test_data_count":15}
 ]
 ```
-and the child endpoints `contests/<contest_id>/problems/asteroids` and `contests/<contest_id>/problems/bottles` are updated accordingly.
+and the child problem objects `asteroids` and `bottles` are updated accordingly, and no other problems exist.
 
 Event:
 ```json
@@ -288,7 +288,7 @@ Properties of the provider object:
 
 Type name: `access`
 
-The access object describes which endpoints and properties are visible to the
+The access object describes which objects and properties are visible to the
 current client, and what [capabilities](contest_api#capabilities) the client
 has. It is only available via the Contest API; the corresponding file does not
 appear in a [Contest Package](contest_package).
@@ -298,14 +298,14 @@ Properties of an access object:
 | Name         | Type                      | Description
 | :----------- | :------------------------ | :----------
 | capabilities | array of string           | An array of [capabilities](contest_api#capabilities) that the current client has. The array may be empty.
-| endpoints    | array of endpoint objects | An array of endpoint objects that are visible to the current client, as described below. The array may be empty.
+| endpoints    | array of endpoint objects | An array of objects that are visible to the current client, as described below. The array may be empty.
 
 Properties of an endpoint object:
 
 | Name         | Type            | Description
 | :----------- | :-------------- | :----------
-| type         | string          | The type of the endpoint, e.g. "problems". See [Notification](#notification) for the list of types.
-| properties   | array of string | An array of supported properties that the current client has visibility to. The array must not be empty. If the array would be empty, the endpoint object should instead not be included in the endpoints array.
+| type         | string          | The type of the object, e.g. "problems". See [Notification](#notification) for the list of types.
+| properties   | array of string | An array of supported properties that the current client has visibility to. The array must not be empty. If the array would be empty, the object should instead not be included in the endpoints array.
 
 #### Examples
 
@@ -786,7 +786,7 @@ Properties of a team object:
 | label            | string                 | Label of the team, at WFs normally the team seat number.
 | display\_name    | string ?               | Display name of the team. If not set, a client should revert to using the name instead.
 | organization\_id | ID ?                   | Identifier of the [organization](#organization) (e.g. university or other entity) that this team is affiliated to.
-| group\_ids       | array of ID ?          | Identifiers of the [group(s)](#group) this team is part of (at ICPC WFs these are the super-regions). The array may be empty. Required iff groups endpoint is available.
+| group\_ids       | array of ID ?          | Identifiers of the [group(s)](#group) this team is part of (at ICPC WFs these are the super-regions). The array may be empty. Required iff groups are available.
 | location         | team location object ? | Position of team on the contest floor. See below for the specification of this object.
 | photo            | array of FILE ?        | Registration photo of the team. Only allowed mime types are image/\*.
 | video            | array of FILE ?        | Registration video of the team. Only allowed mime types are video/\* or application/vnd.apple.mpegurl.
@@ -865,7 +865,7 @@ An account used for accessing the contest, as well as information about the
 account currently accessing the API. Note that the
 [Contest API](contest_api#account) also provides a `contests/<id>/account`
 endpoint (singular) which returns the account of the currently authenticated
-client; this endpoint does not appear in a Contest Package.
+client; this object does not appear in a Contest Package.
 
 Properties of an account object:
 
@@ -908,9 +908,9 @@ Properties of a state object:
 | Name                 | Type   | Description
 | :------------------- | :----- | :----------
 | started              | TIME ? | Time when the contest actually started, or `null` if the contest has not started yet. When set, this time must be equal to the [contest](#contest) `start_time`.
-| frozen               | TIME ? | Time when the scoreboard was frozen, or `null` if the scoreboard has not been frozen. Required iff `scoreboard_freeze_duration` is present in the [contest](#contest) endpoint.
+| frozen               | TIME ? | Time when the scoreboard was frozen, or `null` if the scoreboard has not been frozen. Required iff `scoreboard_freeze_duration` is present in the [contest](#contest).
 | ended                | TIME ? | Time when the contest ended, or `null` if the contest has not ended. Must not be set if started is `null`.
-| thawed               | TIME ? | Time when the scoreboard was thawed (that is, unfrozen again), or `null` if the scoreboard has not been thawed. Required iff `scoreboard_freeze_duration` is present in the [contest](#contest) endpoint. Must not be set if frozen is `null`.
+| thawed               | TIME ? | Time when the scoreboard was thawed (that is, unfrozen again), or `null` if the scoreboard has not been thawed. Required iff `scoreboard_freeze_duration` is present in the [contest](#contest). Must not be set if frozen is `null`.
 | finalized            | TIME ? | Time when the results were finalized, or `null` if results have not been finalized. Must not be set if ended is `null`.
 | end\_of\_updates     | TIME ? | Time after last update to the contest occurred, or `null` if more updates are still to come. Setting this to non-`null` must be the very last change in the contest.
 | removed\_intervals   | array of removed interval objects ? | Time intervals that are disregarded for the purpose of scoring. See below.
@@ -1030,7 +1030,7 @@ Properties of a judgement object:
 
 A judgement must have at least one of `judgement_type_id` or `simplified_judgement_type_id` specified iff it is completed.
 If both `judgement_type_id` and `simplified_judgement_type_id` are present, they should be consistent with
-the simplification rules specified in the `judgement-types` endpoint.
+the simplification rules specified in the `judgement-types`. 
 
 When a judgement is started, each of `judgement_type_id`, `end_time` and `max_run_time`
 will be `null` (or missing). These are set when the
@@ -1226,7 +1226,7 @@ Properties of a commentary object:
 | id              | ID              | Identifier of the commentary.
 | time            | TIME            | Time of the commentary message.
 | contest\_time   | RELTIME         | Contest time of the commentary message.
-| message         | string          | Commentary message text. May contain special tags referring to endpoint objects using the format `{<endpoint>:<object ID>}`. This is most commonly used for references to [teams](#team) and [problems](#problem) as `{teams:<team ID>}` and `{problems:<problem ID>}` respectively.
+| message         | string          | Commentary message text. May contain special tags referring to objects using the format `{<type-name>:<object ID>}`. This is most commonly used for references to [teams](#team) and [problems](#problem) as `{teams:<team ID>}` and `{problems:<problem ID>}` respectively.
 | tags            | array of string | JSON array of tags describing the message.
 | source\_id      | ID ?            | Source [person](#person) of the commentary message.
 | team\_ids       | array of ID ?   | JSON array of [team](#team) IDs the message is related to.
@@ -1281,7 +1281,7 @@ Properties of the scoreboard object:
 | :------------ | :------ | :----------
 | time          | TIME    | Time contained in the [event](#notification) after which this scoreboard was generated. Implementation defined if the event has no associated time.
 | contest\_time | RELTIME | Contest time contained in the associated event. Implementation defined if the event has no associated contest time.
-| state         | object  | Identical data as returned by the [contest state](#contest-state) endpoint. This is provided here for ease of use and to guarantee the data is synchronized.
+| state         | object  | Identical data as returned by the [contest state](#contest-state). This is provided here for ease of use and to guarantee the data is synchronized.
 | rows          | array of scoreboard row objects | A list of rows of teams with their associated scores.
 
 The scoreboard `rows` array is sorted according to rank and alphabetical

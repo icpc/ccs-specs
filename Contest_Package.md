@@ -4,14 +4,14 @@ permalink: /contest_package
 ---
 # Contest Package Format
 
-This page describes the format of a contest package. It describes how to store
-the information available through the [Contest API](contest_api) on disk.
+This page describes the format of a contest package. It describes how contest
+information is stored on disk using the [JSON Format](json_format).
 
 There are several reasons that contest information will be stored on disk,
 including:
 
 - As configuration used to initialize a CCS
-- As an archive of what happened in a contest
+- As an archive of what happened in a contest (serializing the [Contest API](contest_api))
 - As an archive for replaying a contest, either for testing contest tools or for
   teams to compete against live data
 - As a base for offline analysis
@@ -28,28 +28,16 @@ A package contains information regarding a single contest (corresponding to the
 several contests, to store the information for multiple contests a package per
 contest would be needed.
 
-Information in the API is always either in JSON format,
-[NDJSON](contest_api#event-feed) format, or linked using a
-[file reference](json_format#file-reference) JSON object.
-
-- The JSON returned from the endpoint `/` is stored as `api.json`.
-- The JSON returned from the endpoint `/contests/<id>` is stored as
-  `contest.json`. (Notice the singular form).
-- The JSON returned from the endpoint `/contests/<id>/<endpoint>` is stored as
-  `<endpoint>.json`.
-- The NDJSON returned from the endpoint `/contests/<id>/<endpoint>` is stored as
-  `<endpoint>.ndjson`. (The only such endpoint is `event-feed`.)
-
-Note that the `access` endpoint is not stored in a contest package, as it
-describes API-level access rights that have no meaning on disk.
-
-Object definitions, property types, and the event format used in these files
-are specified in the [JSON Format](json_format) document. A valid package must
+Object definitions, property types, and the event format specified in the
+[JSON Format](json_format) document are stored in a corresponding
+`<type-name>.json` files.
+Objects can refer to related files using [File references](#file_references)
+are stored in the package as described below.
+A valid package must
 satisfy all [referential integrity](json_format#referential-integrity)
 requirements of the JSON Format.
 
-When creating a Contest Package, some of the API endpoints are
-commonly written by humans. For this reason, those files can also be
+Some files are commonly written by humans. For this reason, these files can be
 written in YAML instead of JSON in a Contest Package. This holds for
 the following files:
 
@@ -59,17 +47,36 @@ the following files:
 
 The section [Example YAML files](#example-yaml-files) lists example YAML files.
 
+### Relationship to Contest API
+
+A contest package can be used to configure tools that support the
+[Contest API](contest_api), and can also be used to archive these
+tools' results. These tools may write contest objects directly
+to the package format on disk, or the endpoints can be serialized
+using the following rules:
+
+- The JSON returned from the endpoint `/` is stored as `api.json`.
+- The JSON returned from the endpoint `/contests/<id>` is stored as
+  `contest.json`. (Notice the singular form).
+- The JSON returned from the endpoint `/contests/<id>/<type-name>` is stored as
+  `<type-name>.json`.
+- The NDJSON returned from the endpoint `/contests/<id>/<type-name>` is stored as
+  `<type-name>.ndjson`. (The only such endpoint is `event-feed`.)
+
+Note that the `access` and `account` (singular) endpoints are not stored in a contest package,
+as they describe API-level access rights and the logged-in user account that have no meaning on disk.
+
 ### File references
 
 Files referenced in `api.json` and `contest.json` are stored as `api/<filename>`
 and `contest/<filename>` respectively, and files referenced in
-`<endpoint>.json` are stored as `<endpoint>/<id>/<filename>`, where:
+`<type-name>.json` are stored as `<type-name>/<id>/<filename>`, where:
 
-- `<id>` is the ID of the endpoint object the reference is in.
+- `<id>` is the ID of the object the reference is in.
 - `<filename>` is the filename specified in the file reference object.
 
 Note that the API specification requires that filenames are unique within
-endpoint objects, so this is always possible.
+an object, so this is always possible.
 
 The `href` property of [file reference objects](json_format#file-reference) is optional
 in a contest package: if a file matching the `filename` property is present on
@@ -96,9 +103,9 @@ filename pattern must be loaded in addition to any file references
 found in the json files.
 
 The default filename pattern is
-`<endpoint>/<id>/<property>(.<tag>)*.<extension>`, where:
+`<type-name>/<id>/<property>(.<tag>)*.<extension>`, where:
 
-- `<id>` is the ID of the endpoint object the reference is in.
+- `<id>` is the ID of the object the reference is in.
 - `<property>` is the property of the object, e.g. `logo`.
 - `(.<tag>)*` is zero or more tags.
 - `<extension>` is a file extension corresponding to the mime type.
