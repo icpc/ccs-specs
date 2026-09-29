@@ -25,9 +25,6 @@
 	"then": {
 		"required": ["entry_point_name"]
 	},
-	"else": {
-		"not": { "required": ["entry_point_name"] }
-	},
 	"required": ["id", "name", "entry_point_required", "extensions"],
 	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 }
