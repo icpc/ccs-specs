@@ -51,7 +51,7 @@ The section [Example YAML files](#example-yaml-files) lists example YAML files.
 
 A contest package can be used to configure tools that support the
 [Contest API](contest_api), and can also be used to archive these
-tool's results. These tools may write contest objects directly
+tools' results. These tools may write contest objects directly
 to the package format on disk, or the endpoints can be serialized
 using the following rules:
 
@@ -64,7 +64,7 @@ using the following rules:
   `<type-name>.ndjson`. (The only such endpoint is `event-feed`.)
 
 Note that the `access` and `account` (singular) endpoints are not stored in a contest package,
-as they describe API-level access rights and user account that have no meaning on disk.
+as they describe API-level access rights and the logged-in user account that have no meaning on disk.
 
 ### File references
 
