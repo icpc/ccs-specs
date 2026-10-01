@@ -12,7 +12,7 @@
 		"name": { "type": "string" },
 		"type": {
 			"oneOf": [
-				{ "enum": [ "team", "judge", "admin", "analyst", "staff" ] },
+				{ "enum": [ "team", "coach", "judge", "admin", "analyst", "staff" ] },
 				{ "type": "null" }
 			]
 		},
