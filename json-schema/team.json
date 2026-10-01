@@ -35,7 +35,17 @@
 		"tool_data": { "$ref": "common.json#/filerefsornull" },
 		"desktop": { "$ref": "common.json#/filerefsornull" },
 		"webcam": { "$ref": "common.json#/filerefsornull" },
-		"audio": { "$ref": "common.json#/filerefsornull" }
+		"audio": { "$ref": "common.json#/filerefsornull" },
+		"primary_rgb": {
+			"type": [ "string", "null" ],
+			"pattern": "^#[A-Fa-f0-9]{3}([A-Fa-f0-9]{3})?$"
+		},
+		"primary_color": { "type": [ "string", "null" ] },
+		"secondary_rgb": {
+			"type": [ "string", "null" ],
+			"pattern": "^#[A-Fa-f0-9]{3}([A-Fa-f0-9]{3})?$"
+		},
+		"secondary_color": { "type": [ "string", "null" ] }
 	},
 	"required": ["id", "name", "label"],
 	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
