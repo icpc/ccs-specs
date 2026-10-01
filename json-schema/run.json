@@ -16,8 +16,12 @@
 			"type": "number",
 			"multipleOf": 0.001,
 			"minimum": 0
+		},
+		"score": {
+			"type": "number",
+			"minimum": 0
 		}
 	},
-	"required": ["id", "judgement_id", "ordinal", "judgement_type_id", "time", "contest_time"],
+	"required": ["id", "judgement_id", "ordinal", "judgement_type_id", "time"],
 	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 }
