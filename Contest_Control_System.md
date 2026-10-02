@@ -583,9 +583,6 @@ Reasons for such misbehaviour of the validator program could be for instance a
 security bug in the validator program, enabling malicious submissions to
 produce feedback files of their own choosing.
 
-The content of *stdout* and *stderr* of the output validator MAY be ignored by
-the contest control system.
-
 ## Scoring
 
 ### Scoring Data Generation
