@@ -512,7 +512,7 @@ World Finals contest, the following documents must be submitted.
 ### Requirements Compliance Document
 
 The CCS MUST include a *Requirements Compliance Document* in PDF format, that
-for each requirement (referenced by section number) in this document and in the
+for each requirement (referenced by section heading) in this document and in the
 [Contest Control System](ccs) specification confirms that the CCS conforms and
 explains how it does so. In the event that a configuration item is provided by
 using services of the underlying operating system rather than facilities
