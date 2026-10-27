@@ -408,7 +408,7 @@ are mentioned below.</p>
 <ul>
 <li>Metadata: <a href="#api-information">api</a>, <a href="#access">access</a></li>
 <li>Configuration: accounts, contests, judgement-types, languages, problems,
-  groups, organizations, persons, teams;</li>
+  groups, organizations, persons, teams, clarification-categories;</li>
 <li>Live data: state, submissions, judgements, runs, clarifications, awards,
   commentary;</li>
 <li>Aggregate data: <a href="#scoreboard">scoreboard</a>, <a href="#event-feed">event-feed</a>.</li>
@@ -562,6 +562,11 @@ documented in dedicated sections below.</p>
 <tr>
 <td style="text-align: left;"><code>contests/&lt;id&gt;/runs[/&lt;id&gt;]</code></td>
 <td style="text-align: left;"><a href="json_format.html#run">Run</a></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>contests/&lt;id&gt;/clarification-categories[/&lt;id&gt;]</code></td>
+<td style="text-align: left;"><a href="json_format.html#clarification-category">Clarification Category</a></td>
 <td style="text-align: left;"></td>
 </tr>
 <tr>
@@ -946,6 +951,26 @@ and the response body will contain the initial state of the clarification.</p>
    &quot;contest_time&quot;:&quot;1:59:47.543&quot;
 }
 </code></pre>
+<p>Request:</p>
+<p><code>PUT https://example.com/api/contests/wf14/clarifications</code></p>
+<p>Request data:</p>
+<pre><code class="language-json">{
+   &quot;id&quot;:&quot;clar-10&quot;,
+   &quot;from_team_id&quot;:&quot;34&quot;,
+   &quot;text&quot;:&quot;Can someone fix my mouse? It is not working.&quot;,
+   &quot;category_id&quot;:&quot;operations&quot;
+}
+</code></pre>
+<p>Returned data:</p>
+<pre><code class="language-json">{
+   &quot;id&quot;:&quot;clar-10&quot;,
+   &quot;from_team_id&quot;:&quot;34&quot;,
+   &quot;text&quot;:&quot;Can someone fix my mouse? It is not working.&quot;,
+   &quot;category_id&quot;:&quot;operations&quot;,
+   &quot;time&quot;:&quot;2026-09-02T13:02:23.104-04&quot;,
+   &quot;contest_time&quot;:&quot;0:03:11.009&quot;
+}
+</code></pre>
 <h3 id="modifying-awards">Modifying awards</h3>
 <p>Clients with the <code>admin</code> role may make changes to awards using the
 normal <a href="#http-methods">HTTP methods</a> as specified above. Specifically,
@@ -1146,6 +1171,11 @@ and API endpoints is:</p>
 <td style="text-align: left;">runs</td>
 <td style="text-align: left;"><code>contests/&lt;id&gt;/runs/&lt;id&gt;</code></td>
 <td style="text-align: left;"><a href="json_format.html#run">Run</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">clarification-categories</td>
+<td style="text-align: left;"><code>contests/&lt;id&gt;/clarification-categories/&lt;id&gt;</code></td>
+<td style="text-align: left;"><a href="json_format.html#clarification-category">Clarification Category</a></td>
 </tr>
 <tr>
 <td style="text-align: left;">clarifications</td>

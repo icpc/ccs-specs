@@ -180,9 +180,15 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#clarification">Clarification</a>
+    <li class="toctree-l3"><a class="reference internal" href="#clarification-category">Clarification Category</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#examples_18">Examples</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#clarification">Clarification</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#examples_19">Examples</a>
     </li>
         </ul>
     </li>
@@ -192,7 +198,7 @@
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#known-awards">Known awards</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#examples_19">Examples</a>
+    <li class="toctree-l4"><a class="reference internal" href="#examples_20">Examples</a>
     </li>
         </ul>
     </li>
@@ -200,13 +206,13 @@
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#known-tags">Known tags</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#examples_20">Examples</a>
+    <li class="toctree-l4"><a class="reference internal" href="#examples_21">Examples</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#scoreboard">Scoreboard</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#examples_21">Examples</a>
+    <li class="toctree-l4"><a class="reference internal" href="#examples_22">Examples</a>
     </li>
         </ul>
     </li>
@@ -286,7 +292,7 @@ absolute timestamps.</p>
 <li>Identifiers (type <strong><code>ID</code></strong> in the specification) are given as strings
   consisting of characters <code>[a-zA-Z0-9_.-]</code> of length at most 36 and not
   starting with a <code>-</code> (dash) or <code>.</code> (dot) or ending with a <code>.</code> (dot). IDs are
-  unique within each endpoint. IDs are assigned by the person or system that is
+  unique within each object type. IDs are assigned by the person or system that is
   the source of the object, and must be maintained by downstream systems. For
   example, the person configuring a contest on disk will typically define the
   ID for each team, and any CCS or CDS that exposes the team must use the same
@@ -343,7 +349,7 @@ context-specific: see the <a href="contest_api.html#referential-integrity">Conte
 <tr>
 <td style="text-align: left;">filename</td>
 <td style="text-align: left;">string</td>
-<td style="text-align: left;">POSIX compliant filename. Filenames must be unique within the endpoint object where they are used. I.e. an organization can have (multiple) <code>logo</code> and <code>country_flag</code> file references, they must all have a different filename, but different organizations may have files with the same filename.</td>
+<td style="text-align: left;">POSIX compliant filename. Filenames must be unique within the object where they are used. I.e. an organization can have (multiple) <code>logo</code> and <code>country_flag</code> file references, they must all have a different filename, but different organizations may have files with the same filename.</td>
 </tr>
 <tr>
 <td style="text-align: left;">hash</td>
@@ -448,7 +454,7 @@ and stored on disk in the <a href="contest_package.html">Contest Package Format<
 <tr>
 <td style="text-align: left;">data</td>
 <td style="text-align: left;">array or object ?</td>
-<td style="text-align: left;">The updated value, i.e. what would be returned if calling the corresponding API endpoint at this time: an array, object, or null for deletions.</td>
+<td style="text-align: left;">The updated value, i.e. what would be returned if requesting the corresponding object at this time: an array, object, or null for deletions.</td>
 </tr>
 <tr>
 <td style="text-align: left;">token</td>
@@ -460,9 +466,9 @@ and stored on disk in the <a href="contest_package.html">Contest Package Format<
 <p>The known notification types are:
 <code>contest</code>, <code>judgement-types</code>, <code>languages</code>, <code>problems</code>, <code>groups</code>,
 <code>organizations</code>, <code>teams</code>, <code>persons</code>, <code>accounts</code>, <code>state</code>, <code>submissions</code>,
-<code>judgements</code>, <code>runs</code>, <code>clarifications</code>, <code>awards</code>, <code>commentary</code>.</p>
+<code>judgements</code>, <code>runs</code>, <code>clarification-categories</code>, <code>clarifications</code>, <code>awards</code>, <code>commentary</code>.</p>
 <p>Each notification object signals that an object or a collection has changed
-(and hence the contents of the corresponding endpoint) to <code>data</code>.</p>
+(and hence the contents of the corresponding object) to <code>data</code>.</p>
 <p>If <code>type</code> is <code>contest</code>, then <code>id</code> must be null.</p>
 <p>If <code>id</code> is not null, then the notification concerns the object of the given
 type with that id.</p>
@@ -492,13 +498,13 @@ given data.</p>
    ]
 }
 </code></pre>
-<p>Means that endpoint <code>contests/&lt;contest_id&gt;/problems</code> has been updated to:</p>
+<p>Means that <code>problems</code> has been updated to:</p>
 <pre><code class="language-json">[
    {&quot;id&quot;:&quot;asteroids&quot;,&quot;label&quot;:&quot;A&quot;,&quot;name&quot;:&quot;Asteroid Rangers&quot;,&quot;ordinal&quot;:1,&quot;color&quot;:&quot;blue&quot;,&quot;rgb&quot;:&quot;#00f&quot;,&quot;time_limit&quot;:2,&quot;test_data_count&quot;:10},
    {&quot;id&quot;:&quot;bottles&quot;,&quot;label&quot;:&quot;B&quot;,&quot;name&quot;:&quot;Curvy Little Bottles&quot;,&quot;ordinal&quot;:2,&quot;color&quot;:&quot;gray&quot;,&quot;rgb&quot;:&quot;#808080&quot;,&quot;time_limit&quot;:3.5,&quot;test_data_count&quot;:15}
 ]
 </code></pre>
-<p>and the child endpoints <code>contests/&lt;contest_id&gt;/problems/asteroids</code> and <code>contests/&lt;contest_id&gt;/problems/bottles</code> are updated accordingly.</p>
+<p>and the child problem objects <code>asteroids</code> and <code>bottles</code> are updated accordingly, and no other problems exist.</p>
 <p>Event:</p>
 <pre><code class="language-json">{
    &quot;type&quot;: &quot;submissions&quot;,
@@ -511,7 +517,7 @@ given data.</p>
       &quot;time&quot;: &quot;2014-06-25T11:22:05.034+01&quot;,
       &quot;contest_time&quot;: &quot;1:22:05.034&quot;,
       &quot;entry_point&quot;: &quot;Main&quot;,
-      &quot;files&quot;: [{&quot;href&quot;:&quot;contests/wf14/submissions/187/files&quot;,&quot;filename&quot;:&quot;files.zip&quot;,&quot;mime&quot;:&quot;application/zip&quot;}]   
+      &quot;files&quot;: [{&quot;href&quot;:&quot;contests/wf14/submissions/187/files&quot;,&quot;filename&quot;:&quot;files.zip&quot;,&quot;mime&quot;:&quot;application/zip&quot;}]
    }
 }
 </code></pre>
@@ -533,7 +539,7 @@ provider.</p>
 <tr>
 <td style="text-align: left;">version</td>
 <td style="text-align: left;">string</td>
-<td style="text-align: left;">Version of the API. For this version must be the string <code>draft</code>. Will be of the form <code>&lt;yyyy&gt;-&lt;mm&gt;</code>, <code>&lt;yyyy&gt;-&lt;mm&gt;-draft</code>, or simply <code>draft</code>.</td>
+<td style="text-align: left;">Version of the API. For this version must be the string <code>2026-01-next</code>. Will be of the form <code>&lt;yyyy&gt;-&lt;mm&gt;</code> for releases, <code>&lt;yyyy&gt;-&lt;mm&gt;-next</code> for draft work following a release, or <code>&lt;yyyy&gt;-&lt;mm&gt;-draft</code> for final review before a new release.</td>
 </tr>
 <tr>
 <td style="text-align: left;">version_url</td>
@@ -576,7 +582,7 @@ provider.</p>
 </table>
 <h4 id="examples_3">Examples</h4>
 <pre><code class="language-json">{
-   &quot;version&quot;: &quot;draft&quot;,
+   &quot;version&quot;: &quot;2026-01-next&quot;,
    &quot;version_url&quot;: &quot;https://ccs-specs.icpc.io/draft/contest_api&quot;,
    &quot;provider&quot; : {
       &quot;name&quot;: &quot;DOMjudge&quot;,
@@ -594,7 +600,7 @@ provider.</p>
 </code></pre>
 <h3 id="access">Access</h3>
 <p>Type name: <code>access</code></p>
-<p>The access object describes which endpoints and properties are visible to the
+<p>The access object describes which objects and properties are visible to the
 current client, and what <a href="contest_api.html#capabilities">capabilities</a> the client
 has. It is only available via the Contest API; the corresponding file does not
 appear in a <a href="contest_package.html">Contest Package</a>.</p>
@@ -616,7 +622,7 @@ appear in a <a href="contest_package.html">Contest Package</a>.</p>
 <tr>
 <td style="text-align: left;">endpoints</td>
 <td style="text-align: left;">array of endpoint objects</td>
-<td style="text-align: left;">An array of endpoint objects that are visible to the current client, as described below. The array may be empty.</td>
+<td style="text-align: left;">An array of objects that are visible to the current client, as described below. The array may be empty.</td>
 </tr>
 </tbody>
 </table>
@@ -633,12 +639,12 @@ appear in a <a href="contest_package.html">Contest Package</a>.</p>
 <tr>
 <td style="text-align: left;">type</td>
 <td style="text-align: left;">string</td>
-<td style="text-align: left;">The type of the endpoint, e.g. &ldquo;problems&rdquo;. See <a href="#notification">Notification</a> for the list of types.</td>
+<td style="text-align: left;">The type of the object, e.g. &ldquo;problems&rdquo;. See <a href="#notification">Notification</a> for the list of types.</td>
 </tr>
 <tr>
 <td style="text-align: left;">properties</td>
 <td style="text-align: left;">array of string</td>
-<td style="text-align: left;">An array of supported properties that the current client has visibility to. The array must not be empty. If the array would be empty, the endpoint object should instead not be included in the endpoints array.</td>
+<td style="text-align: left;">An array of supported properties that the current client has visibility to. The array must not be empty. If the array would be empty, the object should instead not be included in the endpoints array.</td>
 </tr>
 </tbody>
 </table>
@@ -1740,7 +1746,7 @@ universities.</p>
 <tr>
 <td style="text-align: left;">group_ids</td>
 <td style="text-align: left;">array of ID ?</td>
-<td style="text-align: left;">Identifiers of the <a href="#group">group(s)</a> this team is part of (at ICPC WFs these are the super-regions). The array may be empty. Required iff groups endpoint is available.</td>
+<td style="text-align: left;">Identifiers of the <a href="#group">group(s)</a> this team is part of (at ICPC WFs these are the super-regions). The array may be empty. Required iff groups are available.</td>
 </tr>
 <tr>
 <td style="text-align: left;">location</td>
@@ -1935,7 +1941,7 @@ universities.</p>
 account currently accessing the API. Note that the
 <a href="contest_api.html#account">Contest API</a> also provides a <code>contests/&lt;id&gt;/account</code>
 endpoint (singular) which returns the account of the currently authenticated
-client; this endpoint does not appear in a Contest Package.</p>
+client; this object does not appear in a Contest Package.</p>
 <p>Properties of an account object:</p>
 <table>
 <thead>
@@ -2020,7 +2026,7 @@ scoreboard is frozen or results are final.</p>
 <tr>
 <td style="text-align: left;">frozen</td>
 <td style="text-align: left;">TIME ?</td>
-<td style="text-align: left;">Time when the scoreboard was frozen, or <code>null</code> if the scoreboard has not been frozen. Required iff <code>scoreboard_freeze_duration</code> is present in the <a href="#contest">contest</a> endpoint.</td>
+<td style="text-align: left;">Time when the scoreboard was frozen, or <code>null</code> if the scoreboard has not been frozen. Required iff <code>scoreboard_freeze_duration</code> is present in the <a href="#contest">contest</a>.</td>
 </tr>
 <tr>
 <td style="text-align: left;">ended</td>
@@ -2030,7 +2036,7 @@ scoreboard is frozen or results are final.</p>
 <tr>
 <td style="text-align: left;">thawed</td>
 <td style="text-align: left;">TIME ?</td>
-<td style="text-align: left;">Time when the scoreboard was thawed (that is, unfrozen again), or <code>null</code> if the scoreboard has not been thawed. Required iff <code>scoreboard_freeze_duration</code> is present in the <a href="#contest">contest</a> endpoint. Must not be set if frozen is <code>null</code>.</td>
+<td style="text-align: left;">Time when the scoreboard was thawed (that is, unfrozen again), or <code>null</code> if the scoreboard has not been thawed. Required iff <code>scoreboard_freeze_duration</code> is present in the <a href="#contest">contest</a>. Must not be set if frozen is <code>null</code>.</td>
 </tr>
 <tr>
 <td style="text-align: left;">finalized</td>
@@ -2086,8 +2092,8 @@ following sequence of inequalities must hold:</p>
 <pre><code>started &lt; frozen &lt; ended &lt; thawed    &lt; end_of_updates,
                    ended &lt; finalized &lt; end_of_updates.
 </code></pre>
-<p>A contest that has ended, been thawed (or was never frozen) and is finalized 
-must not change. Thus, <code>end_of_updates</code> can be set once both <code>finalized</code> is set 
+<p>A contest that has ended, been thawed (or was never frozen) and is finalized
+must not change. Thus, <code>end_of_updates</code> can be set once both <code>finalized</code> is set
 and <code>thawed</code> is set if the contest was frozen.</p>
 <h4 id="examples_14">Examples</h4>
 <pre><code class="language-json">{
@@ -2252,7 +2258,7 @@ base URL for the API is <a href="https://example.com/api/">https://example.com/a
 </table>
 <p>A judgement must have at least one of <code>judgement_type_id</code> or <code>simplified_judgement_type_id</code> specified iff it is completed.
 If both <code>judgement_type_id</code> and <code>simplified_judgement_type_id</code> are present, they should be consistent with
-the simplification rules specified in the <code>judgement-types</code> endpoint. </p>
+the simplification rules specified in the <code>judgement-types</code>. </p>
 <p>When a judgement is started, each of <code>judgement_type_id</code>, <code>end_time</code> and <code>max_run_time</code>
 will be <code>null</code> (or missing). These are set when the
 judgement is completed.</p>
@@ -2322,6 +2328,39 @@ This is intended to provide (among other things) live updates of judging progres
   &quot;time&quot;:&quot;2014-06-25T11:23:10.000+01&quot;,&quot;run_time&quot;:0.456,&quot;score&quot;:42.5}
 ]
 </code></pre>
+<h3 id="clarification-category">Clarification Category</h3>
+<p>Type name: <code>clarification-categories</code></p>
+<p>A descriptive category for a <a href="#clarification">clarification</a> that is not related to a <a href="#problem">problem</a>.</p>
+<p>Properties of the clarification category object:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">ID</td>
+<td style="text-align: left;">Identifier of the clarification category.</td>
+</tr>
+<tr>
+<td style="text-align: left;">name</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">Name of the clarification category, e.g. &ldquo;Systems&rdquo;</td>
+</tr>
+</tbody>
+</table>
+<p>Clarification categories provide a mechanism for <a href="#clarification">clarifications</a> to be directed to and answered by the appropriate group of people.</p>
+<h4 id="examples_18">Examples</h4>
+<pre><code class="language-json">[{&quot;id&quot;:&quot;ops&quot;,&quot;name&quot;:&quot;Operations&quot;},
+ {&quot;id&quot;:&quot;systems&quot;,&quot;name&quot;:&quot;Systems&quot;},
+ {&quot;id&quot;:&quot;judges&quot;, &quot;name&quot;:&quot;Judging&quot;},
+ {&quot;id&quot;:&quot;fnb&quot;,&quot;name&quot;:&quot;Food &amp; Beverage&quot;}
+]
+</code></pre>
 <h3 id="clarification">Clarification</h3>
 <p>Type name: <code>clarifications</code></p>
 <p>A clarification message sent between teams and judges, a.k.a.
@@ -2368,6 +2407,11 @@ a clarification request (question from a team) or clarification
 <td style="text-align: left;">Identifier of associated <a href="#problem">problem</a>, <code>null</code> iff not associated to a problem.</td>
 </tr>
 <tr>
+<td style="text-align: left;">category_id</td>
+<td style="text-align: left;">ID ?</td>
+<td style="text-align: left;">Identifier of the associated <a href="#clarification-category">clarification category</a></td>
+</tr>
+<tr>
 <td style="text-align: left;">text</td>
 <td style="text-align: left;">string</td>
 <td style="text-align: left;">Question or reply text.</td>
@@ -2387,19 +2431,23 @@ a clarification request (question from a team) or clarification
 <p>The recipients of a clarification are the union of <code>to_team_ids</code> and <code>to_group_ids</code>.  A clarification is sent to all teams if <code>from_team_id</code>, <code>to_team_ids</code> and <code>to_group_ids</code> are null.  Note that if <code>from_team_id</code> is not <code>null</code>, then both <code>to_team_ids</code> and <code>to_group_ids</code> must be <code>null</code>. That is, teams cannot send messages to other teams or groups.</p>
 <p>Clarifications between a team and the judges are typically private. If the judges replies to a clarification and chooses to include additional recipients,
 then in order to preserve referential integrity the <code>reply_to_id</code> should be removed for everyone who couldn&rsquo;t see the original message.</p>
-<h4 id="examples_18">Examples</h4>
-<pre><code class="language-json">[{&quot;id&quot;:&quot;wf2017-1&quot;,&quot;from_team_id&quot;:null,&quot;to_team_ids&quot;:null,&quot;to_group_ids&quot;:null,&quot;reply_to_id&quot;:null,&quot;problem_id&quot;:null,
-  &quot;text&quot;:&quot;Do not touch anything before the contest starts!&quot;,&quot;time&quot;:&quot;2014-06-25T11:59:27.543+01&quot;,&quot;contest_time&quot;:&quot;-0:15:32.457&quot;}
+<h4 id="examples_19">Examples</h4>
+<pre><code class="language-json">[{&quot;id&quot;:&quot;clar-1&quot;,&quot;from_team_id&quot;:null,&quot;to_team_ids&quot;:null,&quot;to_group_ids&quot;:null,&quot;reply_to_id&quot;:null,
+  &quot;text&quot;:&quot;Do not touch anything before the contest starts!&quot;,&quot;time&quot;:&quot;2026-06-16T11:12:45.167-04&quot;,&quot;contest_time&quot;:&quot;-0:15:32.457&quot;}
 ]
 </code></pre>
-<pre><code class="language-json">[{&quot;id&quot;:&quot;1&quot;,&quot;from_team_id&quot;:&quot;34&quot;,&quot;to_team_ids&quot;:null,&quot;to_group_ids&quot;:null,&quot;reply_to_id&quot;:null,&quot;problem_id&quot;:null,
-  &quot;text&quot;:&quot;May I ask a question?&quot;,&quot;time&quot;:&quot;2017-06-25T11:59:27.543+01&quot;,&quot;contest_time&quot;:&quot;1:59:27.543&quot;},
+<pre><code class="language-json">[{&quot;id&quot;:&quot;clar-2&quot;,&quot;from_team_id&quot;:&quot;34&quot;,&quot;problem_id&quot;:&quot;10-asteroids&quot;,
+  &quot;text&quot;:&quot;Can you verify the sample data is correct?&quot;,&quot;time&quot;:&quot;2026-06-16T12:22:22.221-04&quot;,&quot;contest_time&quot;:&quot;1:10:01.100&quot;}
+]
+</code></pre>
+<pre><code class="language-json">[{&quot;id&quot;:&quot;1&quot;,&quot;from_team_id&quot;:&quot;34&quot;,&quot;to_team_ids&quot;:null,&quot;to_group_ids&quot;:null,&quot;reply_to_id&quot;:null,&quot;problem_id&quot;:null,&quot;category_id&quot;:&quot;judges&quot;,
+  &quot;text&quot;:&quot;May I ask a question?&quot;,&quot;time&quot;:&quot;2026-06-16T11:14:10.100-04&quot;,&quot;contest_time&quot;:&quot;1:59:27.543&quot;},
  {&quot;id&quot;:&quot;2&quot;,&quot;from_team_id&quot;:null,&quot;to_team_ids&quot;:[&quot;34&quot;],&quot;reply_to_id&quot;:&quot;1&quot;,&quot;problem_id&quot;:null,
-  &quot;text&quot;:&quot;Yes you may!&quot;,&quot;time&quot;:&quot;2017-06-25T11:59:47.543+01&quot;,&quot;contest_time&quot;:&quot;1:59:47.543&quot;}
+  &quot;text&quot;:&quot;Yes you may!&quot;,&quot;time&quot;:&quot;2026-06-16T11:14:30.100-04&quot;,&quot;contest_time&quot;:&quot;1:59:47.543&quot;}
 ]
 </code></pre>
-<pre><code class="language-json">[{&quot;id&quot;:&quot;1&quot;,&quot;from_team_id&quot;:&quot;34&quot;,&quot;text&quot;:&quot;May I ask a question?&quot;,&quot;time&quot;:&quot;2017-06-25T11:59:27.543+01&quot;,&quot;contest_time&quot;:&quot;1:59:27.543&quot;},
- {&quot;id&quot;:&quot;2&quot;,&quot;to_team_ids&quot;:[&quot;34&quot;,&quot;57&quot;,&quot;69&quot;],&quot;to_group_ids&quot;:[&quot;1336&quot;], &quot;reply_to_id&quot;:&quot;1&quot;,&quot;text&quot;:&quot;Yes you may!&quot;,&quot;time&quot;:&quot;2017-06-25T11:59:47.543+01&quot;,&quot;contest_time&quot;:&quot;1:59:47.543&quot;}
+<pre><code class="language-json">[{&quot;id&quot;:&quot;1&quot;,&quot;from_team_id&quot;:&quot;34&quot;,&quot;text&quot;:&quot;May I ask a question?&quot;,&quot;time&quot;:&quot;2026-06-16T11:20:00.067-04&quot;,&quot;contest_time&quot;:&quot;1:59:27.543&quot;},
+ {&quot;id&quot;:&quot;2&quot;,&quot;to_team_ids&quot;:[&quot;34&quot;,&quot;57&quot;,&quot;69&quot;],&quot;to_group_ids&quot;:[&quot;1336&quot;], &quot;reply_to_id&quot;:&quot;1&quot;,&quot;text&quot;:&quot;Yes you may!&quot;,&quot;time&quot;:&quot;2026-06-16T11:20:30.267-04&quot;,&quot;contest_time&quot;:&quot;1:59:47.543&quot;}
 ]
 </code></pre>
 <h3 id="award">Award</h3>
@@ -2484,9 +2532,9 @@ then in order to preserve referential integrity the <code>reply_to_id</code> sho
 <td style="text-align: left;"></td>
 </tr>
 <tr>
-<td style="text-align: left;">rank-\<rank></td>
-<td style="text-align: left;">Teams currently placed to receive rank \<rank>. Empty if no team has scored.</td>
-<td style="text-align: left;">Teams being awarded rank \<rank>.</td>
+<td style="text-align: left;">rank-&lt;rank&gt;</td>
+<td style="text-align: left;">Teams currently placed to receive rank &lt;rank&gt;. Empty if no team has scored.</td>
+<td style="text-align: left;">Teams being awarded rank &lt;rank&gt;.</td>
 <td style="text-align: left;">Only useful in contests where the final ranking awarded is different from the default ranking of the scoreboard. E.g. at the WF teams <em>not</em> getting medals are only ranked based on number of problems solved, and not total penalty time accrued nor time of last score improvement, and teams solving strictly fewer problems than the median team are not ranked at all.</td>
 </tr>
 <tr>
@@ -2514,26 +2562,26 @@ then in order to preserve referential integrity the <code>reply_to_id</code> sho
 <td style="text-align: left;"></td>
 </tr>
 <tr>
-<td style="text-align: left;">first-to-solve-\<id></td>
-<td style="text-align: left;">The team(s), if any, that was first to solve problem \<id>. This implies that no unjudged submission made earlier remains.</td>
+<td style="text-align: left;">first-to-solve-&lt;id&gt;</td>
+<td style="text-align: left;">The team(s), if any, that was first to solve problem &lt;id&gt;. This implies that no unjudged submission made earlier remains.</td>
 <td style="text-align: left;">Same.</td>
 <td style="text-align: left;">Must never change once set, except if there are rejudgements.</td>
 </tr>
 <tr>
-<td style="text-align: left;">group-winner-\<id></td>
-<td style="text-align: left;">Current leader(s) in group \<id>. Empty if no team has scored.</td>
-<td style="text-align: left;">Winner(s) of group \<id>.</td>
+<td style="text-align: left;">group-winner-&lt;id&gt;</td>
+<td style="text-align: left;">Current leader(s) in group &lt;id&gt;. Empty if no team has scored.</td>
+<td style="text-align: left;">Winner(s) of group &lt;id&gt;.</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr>
-<td style="text-align: left;">organization-winner-\<id></td>
-<td style="text-align: left;">Current leader(s) of organization \<id>. Empty if no team has scored.</td>
-<td style="text-align: left;">Winner(s) of organization \<id>.</td>
+<td style="text-align: left;">organization-winner-&lt;id&gt;</td>
+<td style="text-align: left;">Current leader(s) of organization &lt;id&gt;. Empty if no team has scored.</td>
+<td style="text-align: left;">Winner(s) of organization &lt;id&gt;.</td>
 <td style="text-align: left;">Not useful in contest with only one team per organization (e.g. the WF).</td>
 </tr>
 </tbody>
 </table>
-<h4 id="examples_19">Examples</h4>
+<h4 id="examples_20">Examples</h4>
 <pre><code class="language-json">[{&quot;id&quot;:&quot;gold-medal&quot;,&quot;citation&quot;:&quot;Gold medal winner&quot;,&quot;team_ids&quot;:[&quot;54&quot;,&quot;23&quot;,&quot;1&quot;,&quot;45&quot;]},
  {&quot;id&quot;:&quot;first-to-solve-a&quot;,&quot;citation&quot;:&quot;First to solve problem A&quot;,&quot;team_ids&quot;:[&quot;45&quot;]},
  {&quot;id&quot;:&quot;first-to-solve-b&quot;,&quot;citation&quot;:&quot;First to solve problem B&quot;,&quot;team_ids&quot;:[]}
@@ -2570,7 +2618,7 @@ then in order to preserve referential integrity the <code>reply_to_id</code> sho
 <tr>
 <td style="text-align: left;">message</td>
 <td style="text-align: left;">string</td>
-<td style="text-align: left;">Commentary message text. May contain special tags referring to endpoint objects using the format <code>{&lt;endpoint&gt;:&lt;object ID&gt;}</code>. This is most commonly used for references to <a href="#team">teams</a> and <a href="#problem">problems</a> as <code>{teams:&lt;team ID&gt;}</code> and <code>{problems:&lt;problem ID&gt;}</code> respectively.</td>
+<td style="text-align: left;">Commentary message text. May contain special tags referring to objects using the format <code>{&lt;type-name&gt;:&lt;object ID&gt;}</code>. This is most commonly used for references to <a href="#team">teams</a> and <a href="#problem">problems</a> as <code>{teams:&lt;team ID&gt;}</code> and <code>{problems:&lt;problem ID&gt;}</code> respectively.</td>
 </tr>
 <tr>
 <td style="text-align: left;">tags</td>
@@ -2638,8 +2686,8 @@ tags below are used.</p>
 <td style="text-align: left;">A submission was made that if accepted would change the set of teams currently in the lead.</td>
 </tr>
 <tr>
-<td style="text-align: left;">submission-\<award></td>
-<td style="text-align: left;">A submission was made that if accepted would change the set of teams awarded \<award>. Note that the above 4 are special cases of this.</td>
+<td style="text-align: left;">submission-&lt;award&gt;</td>
+<td style="text-align: left;">A submission was made that if accepted would change the set of teams awarded &lt;award&gt;. Note that the above 4 are special cases of this.</td>
 </tr>
 <tr>
 <td style="text-align: left;">rejected</td>
@@ -2670,14 +2718,14 @@ tags below are used.</p>
 <td style="text-align: left;">A submission was accepted that changed the set of teams currently in the lead.</td>
 </tr>
 <tr>
-<td style="text-align: left;">accepted-\<award></td>
-<td style="text-align: left;">A submission was accepted that changed the set of teams awarded \<award>. Note that the above 4 are special cases of this.</td>
+<td style="text-align: left;">accepted-&lt;award&gt;</td>
+<td style="text-align: left;">A submission was accepted that changed the set of teams awarded &lt;award&gt;. Note that the above 4 are special cases of this.</td>
 </tr>
 </tbody>
 </table>
-<h4 id="examples_20">Examples</h4>
-<pre><code class="language-json">[{&quot;id&quot;:&quot;143730&quot;, &quot;time&quot;:&quot;2021-03-06T19:02:02.328+00&quot;, &quot;contest_time&quot;:&quot;0:02:02.328&quot;, &quot;message&quot;: &quot;{t:314089} made a submission for {p:anttyping}. If correct, they will solve the first problem and take the lead&quot;, &quot;team_ids&quot;: [&quot;314089&quot;], &quot;problem_ids&quot;: [&quot;anttyping&quot;]}, 
- {&quot;id&quot;: &quot;143736&quot;, &quot;time&quot;: &quot;2021-03-06T19:02:10.858+00&quot;, &quot;contest_time&quot;: &quot;0:02:10.858&quot;, &quot;message&quot;: &quot;{t:314089} fails its first attempt on {p:anttyping} due to WA&quot;, &quot;team_ids&quot;: [&quot;314089&quot;], &quot;problem_ids&quot;: [&quot;anttyping&quot;]}, 
+<h4 id="examples_21">Examples</h4>
+<pre><code class="language-json">[{&quot;id&quot;:&quot;143730&quot;, &quot;time&quot;:&quot;2021-03-06T19:02:02.328+00&quot;, &quot;contest_time&quot;:&quot;0:02:02.328&quot;, &quot;message&quot;: &quot;{t:314089} made a submission for {p:anttyping}. If correct, they will solve the first problem and take the lead&quot;, &quot;team_ids&quot;: [&quot;314089&quot;], &quot;problem_ids&quot;: [&quot;anttyping&quot;]},
+ {&quot;id&quot;: &quot;143736&quot;, &quot;time&quot;: &quot;2021-03-06T19:02:10.858+00&quot;, &quot;contest_time&quot;: &quot;0:02:10.858&quot;, &quot;message&quot;: &quot;{t:314089} fails its first attempt on {p:anttyping} due to WA&quot;, &quot;team_ids&quot;: [&quot;314089&quot;], &quot;problem_ids&quot;: [&quot;anttyping&quot;]},
  {&quot;id&quot;: &quot;143764&quot;, &quot;time&quot;: &quot;2021-03-06T19:03:07.517+00&quot;, &quot;contest_time&quot;: &quot;0:03:07.517&quot;, &quot;message&quot;: &quot;{t:314115} made a submission for {p:march6}. If correct, they will solve the first problem and take the lead&quot;, &quot;team_ids&quot;: [&quot;314115&quot;], &quot;problem_ids&quot;: [&quot;march6&quot;]}
 ]
 </code></pre>
@@ -2707,7 +2755,7 @@ tags below are used.</p>
 <tr>
 <td style="text-align: left;">state</td>
 <td style="text-align: left;">object</td>
-<td style="text-align: left;">Identical data as returned by the <a href="#contest-state">contest state</a> endpoint. This is provided here for ease of use and to guarantee the data is synchronized.</td>
+<td style="text-align: left;">Identical data as returned by the <a href="#contest-state">contest state</a>. This is provided here for ease of use and to guarantee the data is synchronized.</td>
 </tr>
 <tr>
 <td style="text-align: left;">rows</td>
@@ -2815,7 +2863,7 @@ Algorithm</a>, by default using the
 </tr>
 </tbody>
 </table>
-<h4 id="examples_21">Examples</h4>
+<h4 id="examples_22">Examples</h4>
 <pre><code class="language-json">{
   &quot;time&quot;: &quot;2014-06-25T14:13:07.832+01&quot;,
   &quot;contest_time&quot;: &quot;4:13:07.832&quot;,
