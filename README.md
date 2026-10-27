@@ -6,7 +6,7 @@ Select a version to browse from the left navigation bar.
 For the latest stable release (2026-01), go [here](/2026-01).
 
 Draft work on the next (future) version of the spec is done on the
-`master` branch in the repository and can be viewed [here](/draft).
+`master` branch in the repository and can be viewed [here](/2026-01-next).
 These drafts can change in any way at any time.
 
 ### Stable/Released Versions

@@ -78,7 +78,9 @@ cp "$MY_DIR/CNAME" "$MY_DIR/versions.json" "$MY_DIR/docs/"
 commits=''
 for version in $(cat versions.json | jq -r -c '.[]'); do
 	branch="${version}"
-	[ "$version" = "draft" ] && branch="master"
+	if [ "$version" = "draft" ] || [ "${version%-next}" != "$version" ]; then
+		branch="master"
+	fi
 
 	commitsha=$(git rev-parse --short=10 "$branch")
 	commits="${commits}
