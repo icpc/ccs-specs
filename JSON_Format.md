@@ -1263,9 +1263,9 @@ tags below are used.
 #### Examples
 
 ```json
-[{"id":"143730", "time":"2021-03-06T19:02:02.328+00", "contest_time":"0:02:02.328", "message": "{t:314089} made a submission for {p:anttyping}. If correct, they will solve the first problem and take the lead", "team_ids": ["314089"], "problem_ids": ["anttyping"]},
- {"id": "143736", "time": "2021-03-06T19:02:10.858+00", "contest_time": "0:02:10.858", "message": "{t:314089} fails its first attempt on {p:anttyping} due to WA", "team_ids": ["314089"], "problem_ids": ["anttyping"]},
- {"id": "143764", "time": "2021-03-06T19:03:07.517+00", "contest_time": "0:03:07.517", "message": "{t:314115} made a submission for {p:march6}. If correct, they will solve the first problem and take the lead", "team_ids": ["314115"], "problem_ids": ["march6"]}
+[{"id":"143730", "time":"2021-03-06T19:02:02.328+00", "contest_time":"0:02:02.328", "message": "{t:314089} made a submission for {p:anttyping}. If correct, they will solve the first problem and take the lead", "team_ids": ["314089"], "problem_ids": ["anttyping"], "tags": ["submission", "submission-winner"]},
+ {"id": "143736", "time": "2021-03-06T19:02:10.858+00", "contest_time": "0:02:10.858", "message": "{t:314089} fails its first attempt on {p:anttyping} due to WA", "team_ids": ["314089"], "problem_ids": ["anttyping"], "tags": ["rejected"]},
+ {"id": "143764", "time": "2021-03-06T19:03:07.517+00", "contest_time": "0:03:07.517", "message": "{t:314115} made a submission for {p:march6}. If correct, they will solve the fifth problem and move to 6th place", "team_ids": ["314115"], "problem_ids": ["march6"], "tags": ["submission", "submission-silver-medal"]}
 ]
 ```
 
