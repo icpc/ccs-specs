@@ -96,6 +96,7 @@ A file reference object has the following properties:
 | href     | string ?        | URL where the resource can or could be found. Must point to a file of the intended mime-type. In Contest API responses `href` is required; in Contest Packages `href` may be omitted when the file is stored locally. See the [Contest API](contest_api#file-references) and [Contest Package Format](contest_package#file-references) for details.
 | filename | string          | POSIX compliant filename. Filenames must be unique within the object where they are used. I.e. an organization can have (multiple) `logo` and `country_flag` file references, they must all have a different filename, but different organizations may have files with the same filename.
 | hash     | string ?        | MD5 hash of the file referenced.
+| size     | integer ?       | Size of the file referenced, in bytes.
 | mime     | string          | Mime type of resource.
 | width    | integer ?       | Width of the image. Required for files with mime type image/\*.
 | height   | integer ?       | Height of the image. Required for files with mime type image/\*.
@@ -114,6 +115,8 @@ Known values of tags include:
 - `dark`: an image suitable for use on black or dark backgrounds.
 - `desktop`: a screenshot or capture of a team's desktop.
 - `webcam`: a capture from a team's webcam.
+- `truncated`: the file referenced is a truncated version of the original
+  file. `size`, if present, is the size of the truncated file.
 
 An image should list both values if it is suitable for multiple contexts.
 
@@ -1065,6 +1068,9 @@ Properties of a run object:
 | time                | TIME    | Absolute time when run completed.
 | run\_time           | number  | Run time in seconds. Should be a non-negative integer multiple of `0.001`. The reason for this is to not have rounding ambiguities while still using the natural unit of seconds.
 | score               | number ?| Score for this run. Only applicable when contest:scoreboard\_type is `score`. The meaning of this score is problem dependent; do not assume the final submission score is the minimum, maximum, or sum of the run scores. Note that a per-run score is not well-defined for most runs of most problems. Servers should omit `score` when it is not meaningful for the given problem.
+| team\_output        | array of FILE ? | Output produced by the team's submission for this run. Standard output has filename `stdout` and standard error has filename `stderr`; any other file written by the submission has the filename it was written as.
+| judge\_message      | array of FILE ? | Feedback message produced by the output validator for this run. At most one file.
+| diff                | array of FILE ? | A representation of the differences between the team's output and the expected output for this run, intended for human consumption. At most one file. The format is not specified, but should be indicated by the mime type, e.g. `text/x-diff` for a unified diff.
 
 #### Examples
 
@@ -1072,7 +1078,16 @@ Properties of a run object:
 [{"id":"1312","judgement_id":"189549","ordinal":28,"judgement_type_id":"TLE",
   "time":"2014-06-25T11:22:42.420+01","run_time":0.123},
  {"id":"1313","judgement_id":"189550","ordinal":1,"judgement_type_id":"AC",
-  "time":"2014-06-25T11:23:10.000+01","run_time":0.456,"score":42.5}
+  "time":"2014-06-25T11:23:10.000+01","run_time":0.456,"score":42.5},
+ {"id":"1314","judgement_id":"189551","ordinal":3,"judgement_type_id":"WA",
+  "time":"2014-06-25T11:24:03.112+01","run_time":0.789,
+  "team_output":[
+   {"href":"contests/wf14/runs/1314/stdout","filename":"stdout","mime":"text/plain","size":65536,"tags":["truncated"]},
+   {"href":"contests/wf14/runs/1314/stderr","filename":"stderr","mime":"text/plain","size":120}],
+  "judge_message":[
+   {"href":"contests/wf14/runs/1314/judgemessage","filename":"judgemessage.txt","mime":"text/plain","size":42}],
+  "diff":[
+   {"href":"contests/wf14/runs/1314/diff","filename":"output.diff","mime":"text/x-diff","size":2048}]}
 ]
 ```
 ### Clarification Category

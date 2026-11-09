@@ -64,6 +64,11 @@ This is the draft of some future version of the CCS specification.
   fields to [teams](json_format#teams) for t-shirt color information.
 - Added [clarification category](#clarification-category) object and `category_id`
   property to the [clarifications](#clarification) object.
+- Added `team_output`, `judge_message`, and `diff` file reference fields
+  to [runs](json_format#runs), allowing run output and validator feedback
+  to be exposed via the API.
+- Added `size` to [file references](json_format#file-reference), and the
+  `truncated` tag for files that have been truncated.
 
 ## References
 
