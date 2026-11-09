@@ -8,9 +8,7 @@
 	"properties": {
 		"id": { "$ref": "common.json#/identifier" },
 		"icpc_id": { "type": [ "string", "null" ] },
-		"team_ids": { "$ref": "common.json#/identifiers" },
 		"name": { "type": "string" },
-		"title": { "type": [ "string", "null" ] },
 		"email": { "type": [ "string", "null" ] },
 		"sex": {
 			"oneOf": [
@@ -18,24 +16,34 @@
 				{ "type": "null" }
 			]
 		},
-		"role": { "enum": [ "contestant", "coach", "staff", "other" ] },
-		"photo": { "$ref": "common.json#/imagerefsornull" }
-	},
-	"if": {
-		"properties": {
-			"role": { "enum": [ "contestant", "coach" ] }
-		},
-		"required": [ "role" ]
-	},
-	"then": {
-		"properties": {
-			"team_ids": {
-				"type": "array",
-				"minItems": 1
+		"roles": {
+			"type": "array",
+			"minItems": 1,
+			"items": {
+				"type": "object",
+				"properties": {
+					"type": { "enum": [ "contestant", "coach", "staff", "other" ] },
+					"title": { "type": [ "string", "null" ] },
+					"team_id": { "$ref": "common.json#/identifierornull" }
+				},
+				"if": {
+					"properties": {
+						"type": { "enum": [ "contestant", "coach" ] }
+					},
+					"required": [ "type" ]
+				},
+				"then": {
+					"properties": {
+						"team_id": { "$ref": "common.json#/identifier" }
+					},
+					"required": [ "team_id" ]
+				},
+				"required": [ "type" ],
+				"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 			}
 		},
-		"required": [ "team_ids" ]
+		"photo": { "$ref": "common.json#/imagerefsornull" }
 	},
-	"required": ["id", "name", "role"],
+	"required": ["id", "name", "roles"],
 	"$comment": "ANCHOR_TO_INSERT_REQUIRE_STRICT_PROPERTIES"
 }
