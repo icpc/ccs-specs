@@ -64,8 +64,10 @@ This is the draft of some future version of the CCS specification.
   fields to [teams](json_format#teams) for t-shirt color information.
 - Added [clarification category](#clarification-category) object and `category_id`
   property to the [clarifications](#clarification) object.
-- Allow `max_score` to be `null` to represent an unbounded or unknown max score.
-- Require `max_score` in scoreboard when `max_score` is `null` in problem.
+- Allow `max_score` in [problems](json_format#problems) to be `null` to represent an
+  unbounded max score.
+- Added `problems` to [scoreboard](json_format#scoreboard), giving the current
+  `max_score` of each problem. Required for `score` contests.
 
 ## References
 

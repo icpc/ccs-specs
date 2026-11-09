@@ -657,7 +657,7 @@ Properties of a problem object:
 | output\_limit     | integer         | Limit in MiB on what the submission can write both to `stdout` and `stderr`. If a submission produces more output, a CCS should fail the submission or ignore output beyond this limit.
 | code\_limit       | integer         | Limit in KiB on submissions for this problem. Submissions that are larger should be rejected by a CCS.
 | test\_data\_count | integer         | Number of test data sets.
-| max\_score        | number ?        | Maximum score. Typically used to determine scoreboard cell color. Only applicable when contest:scoreboard\_type is `score`; if `null`, the score is unbounded.
+| max\_score        | number ?        | Maximum possible score, or `null` if the score is unbounded. This value is static; see [scoreboard](#scoreboard) for the current maximum. Required iff contest:scoreboard\_type is `score`.
 | package           | array of FILE ? | [Problem package](https://www.kattis.com/problem-package-format/). Expected mime type is application/zip. Only exactly one package is allowed. Not expected to actually contain href for package during the contest, but used for configuration and archiving.
 | statement         | array of FILE ? | Problem statement. Expected mime type is application/pdf.
 | attachments       | array of FILE ? | Problem attachments. These are files made available to teams other than the problem statement and sample test data. Filenames are expected to match the filename mentioned in the problem statement, if any.
@@ -1022,7 +1022,7 @@ Properties of a judgement object:
 | submission\_id                  | ID        | Identifier of the [submission](#submission) judged.
 | judgement\_type\_id             | ID ?      | The [verdict](#judgement-type) of this judgement.
 | simplified\_judgement\_type\_id | ID ?      | The [simplified verdict](#judgement-type) of this judgement.
-| score                           | number    | Score for this judgement, between `0` and the problem's `max_score`. Required iff contest:scoreboard\_type is `score`.
+| score                           | number    | Score for this judgement. At least `0` and, if the problem's `max_score` is not `null`, at most `max_score`. Required iff contest:scoreboard\_type is `score`.
 | current                         | boolean ? | `true` if this is the current judgement. Defaults to `true`. At any time, there must be at most one judgement per submission for which this is `true` or unset (and thus defaulting to `true`).
 | start\_time                     | TIME      | Absolute time when judgement started.
 | end\_time                       | TIME ?    | Absolute time when judgement completed. Required iff judgement\_type\_id is present.
@@ -1282,7 +1282,7 @@ Properties of the scoreboard object:
 | time          | TIME    | Time contained in the [event](#notification) after which this scoreboard was generated. Implementation defined if the event has no associated time.
 | contest\_time | RELTIME | Contest time contained in the associated event. Implementation defined if the event has no associated contest time.
 | state         | object  | Identical data as returned by the [contest state](#contest-state). This is provided here for ease of use and to guarantee the data is synchronized.
-| problems      | array of problem column objects ? | A list of columns of problems with their associated max scores. Required iff there are any required properties in it.
+| problems      | array of problem column objects ? | A list of columns of problems with their associated max scores, one per problem, in the same order as the problems in each row. Required iff contest:scoreboard\_type is `score`.
 | rows          | array of scoreboard row objects   | A list of rows of teams with their associated scores.
 
 The scoreboard `rows` array is sorted according to rank and alphabetical
@@ -1296,7 +1296,7 @@ Properties of a problem column object:
 | Name        | Type   | Description
 | :---------- | :----- | :----------
 | problem\_id | ID     | Identifier of the [problem](#problem).
-| max\_score  | number | Maximum score. Typically used to determine scoreboard cell color. Required iff contest:scoreboard_type is score and problem:max_score is `null` for the problem.
+| max\_score  | number | Maximum score for the problem at the time of this scoreboard. Typically used to determine scoreboard cell color. Must be equal to problem:max\_score if that is not `null`; otherwise implementation defined, but must be at least the highest score any team has for the problem in this scoreboard.
 
 Properties of a scoreboard row object:
 
@@ -1361,10 +1361,10 @@ Properties of a problem data object:
     "end_of_updates": null
   },
   "problems": [
-    {"problem_id":"1","max_score":100}
-    {"problem_id":"2","max_score":100}
-    {"problem_id":"3","max_score":100}
-    {"problem_id":"4","max_score":100}
+    {"problem_id":"1","max_score":100},
+    {"problem_id":"2","max_score":100},
+    {"problem_id":"3","max_score":100},
+    {"problem_id":"4","max_score":100},
     {"problem_id":"5","max_score":127.34}
   ],
   "rows": [
@@ -1377,5 +1377,4 @@ Properties of a problem data object:
     ]}
   ]
 }
-
 ```
