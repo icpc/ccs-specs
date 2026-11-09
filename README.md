@@ -67,6 +67,8 @@ This is the draft of some future version of the CCS specification.
 - Added `team_output`, `judge_message`, and `diff` file reference fields
   to [runs](json_format#runs), allowing run output and validator feedback
   to be exposed via the API.
+- Added `size` to [file references](json_format#file-reference), and the
+  `truncated` tag for files that have been truncated.
 
 ## References
 
