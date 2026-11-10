@@ -94,34 +94,28 @@ new version of the <a href="contest_api.html">Contest API</a> and related specif
 <ol>
 <li>Create a new branch named <code>&lt;yyyy&gt;-&lt;mm&gt;</code>, using the (approximate) current
    year and month to version this release.</li>
-<li>On this branch, replace the version <code>draft</code> by <code>&lt;yyyy&gt;-&lt;mm&gt;</code> in all relevant places.
-   This includes at least:</li>
+<li>On this branch, replace the draft version <code>&lt;xxxx&gt;-&lt;ll&gt;-next</code> by
+   <code>&lt;yyyy&gt;-&lt;mm&gt;</code> in all relevant places. This includes at least:</li>
 <li>The default in the <a href="json_format.html#api-information">API information</a> object and the example.</li>
 <li>The <code>API_VERSION</code> variable in the <code>check_api.sh</code> script.</li>
-<li>The constant in <code>json-schema/api_information.json</code>.</li>
-<li>The version mentioned in <code>README.md</code>.
-   See for example <a href="https://github.com/icpc/ccs-specs/commit/3f2a5a15cc4ce1089d291fff7bf13e550f92b7a1">this commit</a>.</li>
+<li>The constant in <code>json-schema/api_information.json</code>.
+   See for example <a href="https://github.com/icpc/ccs-specs/commit/3f2a5a15cc4ce1089d291fff7bf13e550f92b7a1">this commit</a>,
+   but note that this from was before the renaming of <code>draft</code> to <code>&lt;yyyy&gt;-&lt;mm&gt;-next</code>.</li>
 <li>Push this branch with these changes.
    To do so, either temporarily disable <a href="https://github.com/icpc/ccs-specs/settings/branches">branch protection</a>
    or create a PR targeting this new branch <code>&lt;yyyy&gt;-&lt;mm&gt;</code>.</li>
 <li>On the <code>master</code> branch, empty the &ldquo;Changes compared to&rdquo; section in <code>README.md</code>
    and update the version to <code>&lt;yyyy&gt;-&lt;mm&gt;</code>.
    See for example <a href="https://github.com/icpc/ccs-specs/commit/f839b1a4e4334515fd9b28bb804bb572fa96df7b">this commit</a>.</li>
-<li>Switch to the <code>gh-pages</code> branch and update <code>README.md</code> and <code>versions.json</code>.
+<li>Switch to the <code>gh-pages</code> branch and update <code>README.md</code>, <code>versions.json</code>
+   and the relevant files <code>configs/*.yml</code>.
    See for example <a href="https://github.com/icpc/ccs-specs/commit/70574e091fab5b9e5897c5a14b8f58f12208fef1">this commit</a>.</li>
 <li>publish the changes to <a href="https://ccs-specs.icpc.io/">https://ccs-specs.icpc.io/</a> by running
    <code>bash
-   export JEKYLL_GITHUB_TOKEN=github_pat_&lt;long_private_token_string...&gt;
    ./update-docs.sh</code>
    and then verify and push the commit the script made.
    See also <code>dev-notes.md</code> in this branch for a <em>few</em> more details.</li>
 </ol>
-<p>This currently takes a few hours, since the script pauses 30 minutes
-   in between each version to not hit Github API rate limits.</p>
-<h2 id="todo">TODO</h2>
-<ul>
-<li>Replace the obsolete Jekyll setup with something more modern and easier to use.</li>
-</ul>
               
             </div>
           </div><footer>
