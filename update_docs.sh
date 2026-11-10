@@ -78,8 +78,9 @@ cp "$MY_DIR/CNAME" "$MY_DIR/versions.json" "$MY_DIR/docs/"
 commits=''
 for version in $(cat versions.json | jq -r -c '.[]'); do
 	branch="${version}"
-	if [ "$version" = "draft" ] || [ "${version%-next}" != "$version" ]; then
+	if [ "${version%-next}" != "$version" ]; then
 		branch="master"
+		draft_version="$version"
 	fi
 
 	commitsha=$(git rev-parse --short=10 "$branch")
@@ -89,6 +90,29 @@ for version in $(cat versions.json | jq -r -c '.[]'); do
 	mkdir -p "$TMPDIR/$version/docs"
 	git archive "$branch" | tar -x -C "$TMPDIR/$version/docs"
 	build_tree "$version" "$MY_DIR/configs/$version.yml" "$MY_DIR/docs/$version"
+done
+
+# Make draft/ redirect to the (assumed unique) <yyyy>-<mm>-next version.
+(cd "docs/$draft_version" && find . -name '*.html') | sed 's#^\./##' | \
+while read -r page; do
+	up=$(echo "$page" | sed 's#[^/]*/#../#g; s#[^/]*$#../#')
+	target="$up$draft_version/$page"
+	mkdir -p "docs/draft/$(dirname "$page")"
+	cat > "docs/draft/$page" <<EOF
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Redirecting to $draft_version</title>
+<link rel="canonical" href="$target">
+<meta http-equiv="refresh" content="0; url=$target">
+<script>location.replace("$target" + location.hash);</script>
+</head>
+<body>
+<p>The current draft is <a href="$target">$draft_version</a>.</p>
+</body>
+</html>
+EOF
 done
 
 git add --all
