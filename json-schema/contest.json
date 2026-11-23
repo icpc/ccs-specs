@@ -14,7 +14,8 @@
 		"duration": { "$ref": "common.json#/posreltime" },
 		"scoreboard_freeze_duration": { "$ref": "common.json#/posreltimeornull" },
 		"scoreboard_thaw_time": { "$ref": "common.json#/abstimeornull" },
-		"scoreboard_type": { "enum": ["pass-fail", "score"] },
+		"scoreboard_type": { "enum": ["pass-fail", "score", "score-time"] },
+		"ruleset": { "type": [ "string", "null" ] },
 		"penalty_time":	{ "$ref": "common.json#/posreltime" },
 		"banner": { "$ref": "common.json#/imagerefsornull" },
 		"logo": { "$ref": "common.json#/imagerefsornull" },
@@ -42,7 +43,7 @@
 		{
 			"if": {
 				"properties": {
-					"scoreboard_type": { "const": "score" }
+					"scoreboard_type": { "enum": ["score", "score-time"] }
 				},
 				"required": ["scoreboard_type"]
 			},

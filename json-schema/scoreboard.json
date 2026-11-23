@@ -52,7 +52,7 @@
 							"properties": { "num_solved": { "const": 0 } }
 						},
 						"then": {
-							"oneOf": [
+							"anyOf": [
 								{
 									"not": { "required": ["time"] }
 								},
