@@ -351,7 +351,7 @@ Properties of a contest object:
 | duration                     | RELTIME         | Length of the contest.
 | scoreboard\_freeze\_duration | RELTIME ?       | How long the scoreboard is frozen before the end of the contest. Defaults to `0:00:00`.
 | scoreboard\_thaw\_time       | TIME ?          | The scheduled thaw time of the contest, may be `null` if the thaw time is unknown or not set.
-| scoreboard\_type             | string          | What type of scoreboard is used for the contest. Must be either `pass-fail` or `score`.
+| scoreboard\_type             | string          | What type of [scoreboard](#scoreboard) is used for the contest. Must be one of `pass-fail`, `score` or `score-time`.
 | main\_scoreboard\_group\_id  | ID ?            | Identifier of the group that represents the main scoreboard. If `null`, the main scoreboard contains all teams (even if there is no group containing all teams).
 | penalty\_time                | RELTIME         | Penalty time for a wrong submission. Only relevant if scoreboard\_type is `pass-fail`.
 | banner                       | array of FILE ? | Banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime types are image/\*.
@@ -657,7 +657,7 @@ Properties of a problem object:
 | output\_limit     | integer         | Limit in MiB on what the submission can write both to `stdout` and `stderr`. If a submission produces more output, a CCS should fail the submission or ignore output beyond this limit.
 | code\_limit       | integer         | Limit in KiB on submissions for this problem. Submissions that are larger should be rejected by a CCS.
 | test\_data\_count | integer         | Number of test data sets.
-| max\_score        | number          | Maximum score. Typically used to determine scoreboard cell color. Required iff contest:scoreboard\_type is `score`.
+| max\_score        | number          | Maximum score. Typically used to determine scoreboard cell color. Required iff contest:scoreboard\_type is `score` or `score-time`.
 | package           | array of FILE ? | [Problem package](https://www.kattis.com/problem-package-format/). Expected mime type is application/zip. Only exactly one package is allowed. Not expected to actually contain href for package during the contest, but used for configuration and archiving.
 | statement         | array of FILE ? | Problem statement. Expected mime type is application/pdf.
 | attachments       | array of FILE ? | Problem attachments. These are files made available to teams other than the problem statement and sample test data. Filenames are expected to match the filename mentioned in the problem statement, if any.
@@ -1022,7 +1022,7 @@ Properties of a judgement object:
 | submission\_id                  | ID        | Identifier of the [submission](#submission) judged.
 | judgement\_type\_id             | ID ?      | The [verdict](#judgement-type) of this judgement.
 | simplified\_judgement\_type\_id | ID ?      | The [simplified verdict](#judgement-type) of this judgement.
-| score                           | number    | Score for this judgement, between `0` and the problem's `max_score`. Required iff contest:scoreboard\_type is `score`.
+| score                           | number    | Score for this judgement, between `0` and the problem's `max_score`. Required iff contest:scoreboard\_type is `score` or `score-time`.
 | current                         | boolean ? | `true` if this is the current judgement. Defaults to `true`. At any time, there must be at most one judgement per submission for which this is `true` or unset (and thus defaulting to `true`).
 | start\_time                     | TIME      | Absolute time when judgement started.
 | end\_time                       | TIME ?    | Absolute time when judgement completed. Required iff judgement\_type\_id is present.
@@ -1064,7 +1064,7 @@ Properties of a run object:
 | judgement\_type\_id | ID      | The [verdict](#judgement-type) of this run (i.e. a judgement type).
 | time                | TIME    | Absolute time when run completed.
 | run\_time           | number  | Run time in seconds. Should be a non-negative integer multiple of `0.001`. The reason for this is to not have rounding ambiguities while still using the natural unit of seconds.
-| score               | number ?| Score for this run. Only applicable when contest:scoreboard\_type is `score`. The meaning of this score is problem dependent; do not assume the final submission score is the minimum, maximum, or sum of the run scores. Note that a per-run score is not well-defined for most runs of most problems. Servers should omit `score` when it is not meaningful for the given problem.
+| score               | number ?| Score for this run. Only applicable when contest:scoreboard\_type is `score` or `score-time`. The meaning of this score is problem dependent; do not assume the final submission score is the minimum, maximum, or sum of the run scores. Note that a per-run score is not well-defined for most runs of most problems. Servers should omit `score` when it is not meaningful for the given problem.
 
 #### Examples
 
@@ -1299,9 +1299,18 @@ Properties of a scoreboard row object:
 | score             | object    | JSON object as specified in the rows below (for possible extension to other scoring methods).
 | score.num\_solved | integer   | Number of problems solved by the team. Required iff contest:scoreboard\_type is `pass-fail`.
 | score.total\_time | RELTIME   | Total penalty time accrued by the team. Required iff contest:scoreboard\_type is `pass-fail`.
-| score.score       | number    | Total score of problems by the team. Required iff contest:scoreboard\_type is `score`.
-| score.time        | RELTIME ? | Time of last score improvement, used for tiebreaking purposes. Must be `null` iff `num_solved=0` or `score=0`.
+| score.score       | number    | Total score of problems by the team. Required iff contest:scoreboard\_type is `score` or `score-time`.
+| score.time        | RELTIME ? | Time of last score improvement, used for tiebreaking purposes. Required iff contest:scoreboard\_type is `pass-fail` or `score-time`. Must be `null` iff `num_solved=0` or `score=0`.
 | problems          | array of problem data objects ? | JSON array of problems with scoring data, see below for the specification of each object.
+
+The rank of a team is determined by comparing the properties of `score` in the order given below for the `scoreboard_type` of the [contest](#contest).
+Teams that are equal on all of these properties have the same rank.
+
+| Scoreboard type | Properties of score, in order of comparison
+| :-------------- | :------------------------------------------
+| pass-fail       | `num_solved` (descending), `total_time` (ascending), `time` (ascending)
+| score           | `score` (descending)
+| score-time      | `score` (descending), `time` (ascending)
 
 Properties of a problem data object:
 
@@ -1311,7 +1320,7 @@ Properties of a problem data object:
 | num\_judged  | integer   | Number of judged submissions (up to and including the first correct one),
 | num\_pending | integer   | Number of pending submissions (either queued or due to freeze).
 | solved       | boolean   | Required iff contest:scoreboard\_type is `pass-fail`.
-| score        | number    | Required iff contest:scoreboard\_type is `score`.
+| score        | number    | Required iff contest:scoreboard\_type is `score` or `score-time`.
 | time         | RELTIME   | Minutes into the contest when this problem was solved by the team. Required iff `solved=true` or `score>0`.
 
 #### Examples
