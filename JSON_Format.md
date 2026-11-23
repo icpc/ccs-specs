@@ -352,6 +352,7 @@ Properties of a contest object:
 | scoreboard\_freeze\_duration | RELTIME ?       | How long the scoreboard is frozen before the end of the contest. Defaults to `0:00:00`.
 | scoreboard\_thaw\_time       | TIME ?          | The scheduled thaw time of the contest, may be `null` if the thaw time is unknown or not set.
 | scoreboard\_type             | string          | What type of [scoreboard](#scoreboard) is used for the contest. Must be one of `pass-fail`, `score` or `score-time`.
+| ruleset                      | string ?        | Identifier of the ruleset that defines how the scoreboard is computed, see [known rulesets](#known-rulesets).
 | main\_scoreboard\_group\_id  | ID ?            | Identifier of the group that represents the main scoreboard. If `null`, the main scoreboard contains all teams (even if there is no group containing all teams).
 | penalty\_time                | RELTIME         | Penalty time for a wrong submission. Only relevant if scoreboard\_type is `pass-fail`.
 | banner                       | array of FILE ? | Banner for this contest, intended to be an image with a large aspect ratio around 8:1. Only allowed mime types are image/\*.
@@ -365,6 +366,18 @@ the length of the pause may be unknown).
 The `countdown_pause_time` may be changed to indicate the approximate delay until the contest starts.
 Countdown is resumed by setting a new `start_time` and resetting
 `countdown_pause_time` to `null`.
+
+#### Known rulesets
+
+The list below contains standardized identifiers for known rulesets.
+A ruleset defines how the [scoreboard](#scoreboard) is computed from the submissions and judgements of the contest.
+These identifiers should be used when the rules of the contest match.
+
+| ID          | Scoreboard type | Description
+| :---------- | :-------------- | :----------
+| icpc        | pass-fail       | As specified in [Scoring Data Generation](ccs#scoring-data-generation).
+| best        | score           | The score of a team on a problem is the highest score of its submissions on that problem. The score of a team is the sum of its scores on all problems.
+| best-latest | score-time      | As `best`. The time of a team is the contest time of its last submission that increased its score.
 
 #### Examples
 

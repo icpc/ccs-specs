@@ -621,6 +621,8 @@ position and positions 18, 19 and 20 are unoccupied.
 A submission is pending judgement if it has no judgement or if the judgement
 is **Judging Error**. Pending judgements have no effect on scoring.
 
+These rules are identified by the `icpc` [ruleset](json_format#known-rulesets).
+
 ### Scoreboard
 
 The *current scoreboard* lists the teams sorted by position. A CCS MUST
