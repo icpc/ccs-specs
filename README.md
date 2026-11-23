@@ -64,6 +64,14 @@ This is the draft of some future version of the CCS specification.
   fields to [teams](json_format#teams) for t-shirt color information.
 - Added [clarification category](#clarification-category) object and `category_id`
   property to the [clarifications](#clarification) object.
+- Added `score-time` as a `scoreboard_type` for
+  [contests](json_format#contest) where ties in score are broken by time,
+  and specified how teams are ranked for each scoreboard type. The
+  `score.time` property of the [scoreboard](json_format#scoreboard) is now
+  only used in `pass-fail` and `score-time` contests.
+- Added `ruleset` to [contests](json_format#contest), identifying how the
+  scoreboard is computed, with a list of
+  [known rulesets](json_format#known-rulesets).
 
 ## References
 
